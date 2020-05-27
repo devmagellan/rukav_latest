@@ -2,5 +2,12 @@
   "name": "apiato/adminpanel",
   "description": "AdminPanel Container for apiato.",
   "require": {
+    "yajra/laravel-datatables-oracle": "~9.10.0"
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+      "@php artisan vendor:publish --tag=datatables"
+    ]
   }
 }

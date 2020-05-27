@@ -94,15 +94,17 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     }
 
 </script>
+@yield('theme_scripts')
 <!-- BEGIN Page Wrapper -->
 <div class="page-wrapper">
     <div class="page-inner">
         <!-- BEGIN Left Aside -->
 @include('adminpanel::layouts.aside')
+
         <!-- END Left Aside -->
         <div class="page-content-wrapper">
             <!-- BEGIN Page Header -->
-         @include('adminpanel::layouts.header')
+        @include('adminpanel::layouts.header')
             <!-- END Page Header -->
             <!-- BEGIN Page Content -->
             <!-- the #js-page-content id is needed for some plugins to initialize -->
@@ -838,6 +840,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 						+ src/../jquery-snippets.js (core) -->
 <script src="/templates/smartadmin/js/vendors.bundle.js"></script>
 <script src="/templates/smartadmin/js/app.bundle.js"></script>
+<script src="/templates/smartadmin/js/formplugins/select2/select2.bundle.js"></script>
 
 
 

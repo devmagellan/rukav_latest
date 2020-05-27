@@ -90,4 +90,42 @@ class User extends UserModel implements ChargeableInterface
         return $this->hasMany(PaymentAccount::class);
     }
 
+
+    public function getCompany(){
+        return $this->hasManyThrough('App\Domain\Company\Models\Company', 'App\AdminCompany','admin_id','id','id','company_id');
+
+    }
+
+    public function getCustomersCompany(){
+        return $this->hasOne(\App\Containers\Customer\Models\Customer::class);
+
+    }
+
+    public function getCompanyBadges(){
+        return $this->hasMany('App\Domain\Company\Models\CompanyBadge', 'company_id','company_id');
+
+    }
+
+    public function collegues(){
+        return $this->hasMany('App\User', 'company_id','company_id');
+    }
+
+
+    public function manager(){
+
+        return $this->hasOneThrough('App\Domain\Manager\Models\Manager', 'App\Domain\Customer\Models\Customer','user_id','id','id','manager_id');
+
+    }
+
+    public function messagesSent(){
+        return $this->hasMany('App\Domain\Customer\Models\Message', 'sender','id');
+    }
+
+
+    public function messagesReceived(){
+        return $this->hasMany('App\Domain\Customer\Models\Message', 'addressant','id');
+    }
+
+
+
 }

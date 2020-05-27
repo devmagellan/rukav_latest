@@ -3,7 +3,6 @@
 namespace App\Containers\AdminPanel\Providers;
 
 use App\Ship\Parents\Providers\MainProvider;
-
 /**
  * Class MainServiceProvider.
  *
@@ -19,6 +18,7 @@ class MainServiceProvider extends MainProvider
      */
     public $serviceProviders = [
         // InternalServiceProviderExample::class,
+        \Yajra\Datatables\DatatablesServiceProvider::class
     ];
 
     /**

@@ -8,3 +8,4 @@ $router->get('/dashboard', [
         'auth:web'
     ],
 ]);
+
