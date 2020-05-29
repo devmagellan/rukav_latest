@@ -63,9 +63,9 @@
               <img src="{{$category->photo}}" alt="">
             </div>
             @foreach($category->childrenCategories->take(7) as $childCategory)
-              <a href="/category{{$childCategory->link}}">{{$childCategory->name}}</a>
+              <a href="/category{{$childCategory->link}}/{{$childCategory->id}}">{{$childCategory->name}}</a>
             @endforeach
-            <a href="/category{{$category->link}}" class="search_all">Показать еще</a>
+            <a href="/category{{$category->link}}/{{$category->id}}" class="search_all">Показать еще</a>
           </div>
         </div>
       @endforeach
@@ -190,7 +190,7 @@
     <div class="row">
       <div class="col-sm-12">
         <p class="copy">
-          RUKAV - сайт бесплатных объявлений в UK. © Copyright 2019 - 2020 Rukav Adverts Ltd. All rights reserved.
+          RUKAV - сайт бесплатных объявлений в UK. © Copyright 2019 - {{now()->format('Y')}} Rukav Adverts Ltd. All rights reserved.
         </p>
       </div>
     </div>

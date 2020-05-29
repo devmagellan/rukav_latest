@@ -19,85 +19,85 @@ use Apiato\Core\Foundation\Facades\Apiato;
  */
 class Controller extends WebController
 {
-    /**
-     * Show all entities
-     *
-     * @param GetAllCategoriesRequest $request
-     */
-    public function index(GetAllCategoriesRequest $request, $link)
-    {
-        //$categories = Apiato::call('Category@GetAllCategoriesAction', [$request]);
+  /**
+   * Show all entities
+   *
+   * @param GetAllCategoriesRequest $request
+   */
+  public function index(GetAllCategoriesRequest $request, $link, $id)
+  {
+    //$categories = Apiato::call('Category@GetAllCategoriesAction', [$request]);
 
-        return $link;
-    }
+    return $link . ' ' . $id;
+  }
 
-    /**
-     * Show one entity
-     *
-     * @param FindCategoryByIdRequest $request
-     */
-    public function show(FindCategoryByIdRequest $request)
-    {
-        $category = Apiato::call('Category@FindCategoryByIdAction', [$request]);
+  /**
+   * Show one entity
+   *
+   * @param FindCategoryByIdRequest $request
+   */
+  public function show(FindCategoryByIdRequest $request)
+  {
+    $category = Apiato::call('Category@FindCategoryByIdAction', [$request]);
 
-        // ..
-    }
+    // ..
+  }
 
-    /**
-     * Create entity (show UI)
-     *
-     * @param CreateCategoryRequest $request
-     */
-    public function create(CreateCategoryRequest $request)
-    {
-        // ..
-    }
+  /**
+   * Create entity (show UI)
+   *
+   * @param CreateCategoryRequest $request
+   */
+  public function create(CreateCategoryRequest $request)
+  {
+    // ..
+  }
 
-    /**
-     * Add a new entity
-     *
-     * @param StoreCategoryRequest $request
-     */
-    public function store(StoreCategoryRequest $request)
-    {
-        $category = Apiato::call('Category@CreateCategoryAction', [$request]);
+  /**
+   * Add a new entity
+   *
+   * @param StoreCategoryRequest $request
+   */
+  public function store(StoreCategoryRequest $request)
+  {
+    $category = Apiato::call('Category@CreateCategoryAction', [$request]);
 
-        // ..
-    }
+    // ..
+  }
 
-    /**
-     * Edit entity (show UI)
-     *
-     * @param EditCategoryRequest $request
-     */
-    public function edit(EditCategoryRequest $request)
-    {
-        $category = Apiato::call('Category@GetCategoryByIdAction', [$request]);
+  /**
+   * Edit entity (show UI)
+   *
+   * @param EditCategoryRequest $request
+   */
+  public function edit(EditCategoryRequest $request)
+  {
+    $category = Apiato::call('Category@GetCategoryByIdAction', [$request]);
 
-        // ..
-    }
+    // ..
+  }
 
-    /**
-     * Update a given entity
-     *
-     * @param UpdateCategoryRequest $request
-     */
-    public function update(UpdateCategoryRequest $request)
-    {
-        $category = Apiato::call('Category@UpdateCategoryAction', [$request]);
+  /**
+   * Update a given entity
+   *
+   * @param UpdateCategoryRequest $request
+   */
+  public function update(UpdateCategoryRequest $request)
+  {
+    $category = Apiato::call('Category@UpdateCategoryAction', [$request]);
 
-        // ..
-    }
+    // ..
+  }
 
-    /**
-     * Delete a given entity
-     *
-     * @param DeleteCategoryRequest $request
-     */
-    public function delete(DeleteCategoryRequest $request)
-    {
-         $result = Apiato::call('Category@DeleteCategoryAction', [$request]);
+  /**
+   * Delete a given entity
+   *
+   * @param DeleteCategoryRequest $request
+   */
+  public function delete(DeleteCategoryRequest $request)
+  {
+    $result = Apiato::call('Category@DeleteCategoryAction', [$request]);
 
-         // ..
-    }
+    // ..
+  }
 }
