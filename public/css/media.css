@@ -33,6 +33,17 @@
     .link_footer{
         margin-bottom: 5px;
     }
+    .btn_category span {
+        right: -24%;
+    }
+    ul.category_dropdown_sub_list{
+        padding: 10px 50px 15px 20px;
+        width: 370px;
+    }
+    ul.category_dropdown_sub_list li ul{
+        margin-left: 340px;
+        width: 360px;
+    }
 }
 @media (max-width: 990px) {
     .btn_category{

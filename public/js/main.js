@@ -83,5 +83,31 @@ $(document).ready(function(){
             $('.input_password').attr('type', 'password');
         }
     });
+    $('.category_dropdown').css('min-height', $('.category_dropdown_main_list').outerHeight());
+    $('.category_dropdown_main_list li p').on('click', function(){
+        $('.category_dropdown_main_list li').removeClass('category_link_active');
+        $('.category_dropdown_main_list ul').hide();
+        $(this).closest("ul").show();
+        $(this).parent().addClass('category_link_active');
+        $(this).closest(".category_dropdown_main_list-li").addClass('category_link_active');
+        $(this).next().show();
+        $('.category_dropdown').innerHeight($(this).next('.category_dropdown_sub_list').height());
+    });
+
+    $('.btn_category').on('click', function(e){
+        e.preventDefault();
+        $('.category_dropdown').toggle();
+        $('.dropDownHide').toggle();
+        $('.dropDownShow').toggle();
+        $('.btn_category span').toggle();
+        if($(".category_dropdown").is(":hidden"))
+        {
+            console.log('yes');
+        }
+        else
+        {
+            console.log('no');
+        }
+    });
 
 });

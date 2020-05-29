@@ -23,7 +23,9 @@
       </div>
       <div class="col-md-1 d-none d-md-block">
         <a href="#" class="btn_category">
-          <img src="{{asset('img/btnCategoryIcon.svg')}}" alt="">
+          <img src="img/btnCategoryIcon.svg" alt="" class="dropDownHide">
+          <img src="img/close_white.svg" alt="" class="dropDownShow" style="display: none;">
+          <span style="display: none;"></span>
           Категории
         </a>
       </div>
@@ -51,11 +53,91 @@
       </div>
     </div>
   </div>
+  @php
+
+    class Recursion
+    {
+        public $level;
+        public $lang = 'en';
+        public function get_cat($menu=null)
+        {
+
+            if (!$menu) {
+                return NULL;
+            }
+            $arr_cat = array();
+            if (count($menu) != 0) {
+
+                //В цикле формируем массив
+
+                foreach ($menu as $key => $row) {
+                    //Формируем массив где ключами являются адишники на родительские категории
+                    if (empty($arr_cat[$row->parent_id])) {
+                        $arr_cat[$row->parent_id] = array();
+                    }
+                    $arr_cat[$row->parent_id][] = $row;
+                }
+                //возвращаем массив
+                return $arr_cat;
+            }
+        }
+
+
+        //вывод каталогa с помощью рекурсии
+
+                  public function view_cat($arr, $parent_id = 0, $level, $nameSection=null) {
+
+                      //Условия выхода из рекурсии
+                      if (empty($arr[$parent_id])) {
+                          return;
+                      }
+                      if($parent_id !== 0) {
+                          echo '<ul class="category_dropdown_sub_list" >';
+                          echo '<h6>'.$nameSection.'</h6>';
+                      }
+                      //перебираем в цикле массив и выводим на экран
+                      for ($i = 0; $i < count($arr[$parent_id]); $i++) {
+                          if($parent_id == 0){
+                               echo '<li class="category_dropdown_main_list-li"> <p>'.$arr[$parent_id][$i]->name.'</p>';
+                          }else{
+                                echo '<li><p>'.$arr[$parent_id][$i]->name.'</p>';
+                          }
+                          //рекурсия - проверяем нет ли дочерних категорий
+                          $this->view_cat($arr, $arr[$parent_id][$i]->id, 1, $arr[$parent_id][$i]->name);
+                          echo '</li> ';
+                      }
+                      if($parent_id !== 0) {
+                          echo '</ul>';
+                      }
+                  }
+    }
+    if(isset($categories)){
+     $rec= new Recursion;
+     $result = $rec->get_cat($categories);
+    //Выводи каталог на экран с помощью рекурсивной функции
+    }
+  @endphp
+  <div class="category_dropdown" style="display: none;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="category_dropdown_main_list">
+          {{ $rec->view_cat($result,0,0)}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </header>
 <main class="main">
+  <ul class="category_dropdown_main_list">
+
+
+  </ul>
   <div class="container">
     <div class="row">
-      @foreach($categories as $category)
+      @foreach($categoriesOnlyRoot  as $category)
         <div class="col-md-4 col-lg-3">
           <div class="cart_item">
             <h6>{{$category->name}}</h6>
@@ -190,7 +272,8 @@
     <div class="row">
       <div class="col-sm-12">
         <p class="copy">
-          RUKAV - сайт бесплатных объявлений в UK. © Copyright 2019 - {{now()->format('Y')}} Rukav Adverts Ltd. All rights reserved.
+          RUKAV - сайт бесплатных объявлений в UK. © Copyright 2019 - {{now()->format('Y')}} Rukav Adverts Ltd. All
+          rights reserved.
         </p>
       </div>
     </div>

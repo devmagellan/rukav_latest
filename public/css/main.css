@@ -41,6 +41,16 @@ li{
     margin-top: 1px;
     margin-left: -14px;
 }
+.btn_category span{
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: #A269F7;
+    transform: rotate(45deg);
+    position: absolute;
+    bottom: -9px;
+    right: 18%;
+}
 .btn_category img{
     margin-right: 5px;
     margin-top: -1px;
@@ -49,7 +59,10 @@ li{
     text-decoration: none;
     color: #fff;
     box-shadow: 0 0.22rem 0.525rem rgba(162,105,247,.4), 0 0.0625rem 0.385rem rgba(162,105,247,.54);
-    transform: translateY(-2px);
+
+}
+.btn_category:hover .btn_category:after{
+    right: 38%;
 }
 
 .form_category{
@@ -65,7 +78,7 @@ li{
     font-size: 14px;
     color: #808080;
     padding-left: 48px;
-    width: 240px;
+    width: 238px;
 }
 .form_category_search::placeholder, .form_category_search-city::placeholder{
     color: #C4C4C4;
@@ -242,7 +255,7 @@ a.search_all:hover{
     top: -64px;
     width: 35px;
     height: 35px;
-    background: url("../../../../../../../public/img/arrow_left.svg") center top no-repeat;
+    background: url("../img/arrow_left.svg") center top no-repeat;
     transition: all .2s ease-out;
 }
 .slick_prev{
@@ -251,17 +264,17 @@ a.search_all:hover{
     top: -64px;
     width: 35px;
     height: 35px;
-    background: url("../../../../../../../public/img/arrow_right.svg") center top no-repeat;
+    background: url("../img/arrow_right.svg") center top no-repeat;
     transition: all .2s ease-out;
 }
 .slick_left:hover, .slick_prev:hover{
     cursor: pointer;
 }
 .slick_left:hover {
-    background: url("../../../../../../../public/img/arrow_left_active.svg") center top no-repeat;
+    background: url("../img/arrow_left_active.svg") center top no-repeat;
 }
 .slick_prev:hover {
-    background: url("../../../../../../../public/img/arrow_right_active.svg") center top no-repeat;
+    background: url("../img/arrow_right_active.svg") center top no-repeat;
 }
 
 footer{
@@ -417,7 +430,7 @@ input[type="checkbox"]{
 }
 .formModal input[type="checkbox"]:checked + label:after{
     display: block;
-    background: url("../../../../../../../public/img/tick.svg")  center top no-repeat;
+    background: url("../img/tick.svg")  center top no-repeat;
  }
 
 .modal a{
@@ -688,4 +701,88 @@ p.input_text_top + input{
     position: absolute;
     right: 18px;
     top: -13px;
+}
+
+.category_dropdown{
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+.category_dropdown_main_list{
+    position: relative;
+    margin-top: 20px;
+
+}
+.category_dropdown_main_list li ul{
+    display: none;
+}
+
+.category_dropdown_main_list > li{
+    display: block;
+    padding: 0 14px;
+    line-height: 30px;
+    width: 244px;
+    margin-bottom: 5px;
+}
+.category_dropdown_main_list p{
+    margin-bottom: 0;
+    font-size: 14px;
+    display: inline-block;
+    transition: all .2s ease-out;
+}
+.category_dropdown_main_list p:hover{
+    cursor: pointer;
+    color: #A269F7;
+}
+.category_dropdown_main_list p img{
+    margin-right: 10px;
+}
+ul.category_dropdown_sub_list{
+    position: absolute;
+    top: 0;
+    left: 300px;
+    border-left: 1px solid #E4E4E4;
+    border-right: 1px solid #E4E4E4;
+    padding: 10px 100px 15px 20px;
+    width: 400px;
+}
+ul.category_dropdown_sub_list li{
+    display: block;
+    padding: 0 20px;
+    line-height: 30px;
+}
+ul.category_dropdown_sub_list li ul{
+    position: absolute;
+    top: 0;
+    margin-left: 400px;
+    width: 400px;
+    padding-top: 10px;
+}
+ul.category_dropdown_sub_list h6{
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 23px;
+    color: #000000;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+ul.category_dropdown_sub_list li ul a{
+    display: inline-block;
+    color: #A269F7;
+    font-size: 14px;
+    margin-bottom: 5px;
+    transition: all .2s ease-out;
+}
+ul.category_dropdown_sub_list li ul a:hover{
+    text-decoration: underline;
+}
+.category_link_active{
+    background: #A269F7;
+    border-radius: 30px;
+}
+.category_link_active > p{
+    color: #fff;
+}
+.category_link_active > p:hover{
+    color: #fff;
 }
