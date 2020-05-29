@@ -26,9 +26,8 @@ class Controller extends WebController
      */
     public function index(GetAllHomePagesRequest $request)
     {
-        //$homepages = Apiato::call('HomePage@GetAllHomePagesAction', [$request]);
-
-        return view('homepage::index');
+      $categories = Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
+      return view('homepage::index', compact('categories'));
     }
 
     /**
@@ -38,8 +37,7 @@ class Controller extends WebController
      */
     public function show(FindHomePageByIdRequest $request)
     {
-        $homepage = Apiato::call('HomePage@FindHomePageByIdAction', [$request]);
-
+        $category= Apiato::call('Category@GetAllCategoriesAction', [$request]);
         // ..
     }
 

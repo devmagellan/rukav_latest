@@ -10,7 +10,7 @@ class GetAllProductCategoriesAction extends Action
 {
     public function run(Request $request)
     {
-       $rubrics = Apiato::call('Site@GetAllProductCategoriesTask', [], ['addRequestCriteria']);
+       $rubrics = Apiato::call('Site@GetAllProductCategoriesTask', [], ['CreatedTodayCriteria']);
        return $rubrics;
     }
 }

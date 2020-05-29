@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <title>Rukav</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" type = "text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@ 1.8.1/slick/slick.css"/>
-  <link rel="stylesheet" type ="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@ 1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
   <link href="{{asset('css/intlTelInput.css')}}" rel="stylesheet">
   <link href="{{asset('css/main.css')}}" rel="stylesheet">
   <link href="{{asset('css/media.css')}}" rel="stylesheet">
@@ -34,7 +35,8 @@
           <input type="text" name="search_city" class="form_category_search-city" placeholder="Город или посткод">
           <button class="form_category_btn">Поиск</button>
         </form>
-        <a href="#" class="btn_search_m"><img src="{{asset('img/loupe.svg')}}" alt="" class="form_category_imp-loupe"></a>
+        <a href="#" class="btn_search_m"><img src="{{asset('img/loupe.svg')}}" alt=""
+                                              class="form_category_imp-loupe"></a>
       </div>
       <div class="col-md-2 col-2">
         <a href="#" class="add_ad" data-toggle="modal" data-target="#confirmEmailPhone">
@@ -53,283 +55,22 @@
 <main class="main">
   <div class="container">
     <div class="row">
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Детский мир</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon1.png')}}" alt="">
+      @foreach($categories as $category)
+        <div class="col-md-4 col-lg-3">
+          <div class="cart_item">
+            <h6>{{$category->name}}</h6>
+            <div class="cart_item_wrapper">
+              <img src="{{$category->photo}}" alt="">
+            </div>
+            @foreach($category->childrenCategories->take(7) as $childCategory)
+              <a href="/category{{$childCategory->link}}">{{$childCategory->name}}</a>
+            @endforeach
+            <a href="/category{{$category->link}}" class="search_all">Показать еще</a>
           </div>
-          <a href="#">Детская одежда</a>
-          <a href="#">Детская обувь</a>
-          <a href="#">Детские коляски</a>
-          <a href="#">Детские автокресла</a>
-          <a href="#">Детская мебель</a>
-          <a href="#">Игрушки</a>
-          <a href="#">Детский транспорт</a>
-
-          <a href="#" class="search_all">Показать еще</a>
         </div>
-      </div>
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Недвижимость</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon2.png')}}" alt="">
-          </div>
-          <a href="#">Квартиры и комнаты</a>
-          <a href="#">Дома</a>
-          <a href="#">Земля</a>
-          <a href="#">Коммерческая недвижимость</a>
-          <a href="#">Гаражи парковки</a>
-          <a href="#">Посуточная аренда жилья</a>
-          <a href="#">Предложения от застройщиков</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Транспорт</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon3.png')}}" alt="">
-          </div>
-          <a href="#">Легковые автомобили</a>
-          <a href="#">Грузовые автомобили</a>
-          <a href="#">Автобусы</a>
-          <a href="#">Мото</a>
-          <a href="#">Спецтехника</a>
-          <a href="#">Сельхозтехника</a>
-          <a href="#">Водный транспорт</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Запчасти для транспорта</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon4.png')}}" alt="">
-          </div>
-          <a href="#">Всё запчасти для транспорта</a>
-          <a href="#">Автозапчасти и аксессуары</a>
-          <a href="#">Шины, диски и колеса</a>
-          <a href="#">Запчасти для спец/с.х. техники</a>
-          <a href="#">Мотозапчасти и аксессуары</a>
-          <a href="#">Прочие запчасти</a>
-          <a href="#">Транспорт</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Работа</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon5.png')}}" alt="">
-          </div>
-          <a href="#">Всё в рубрике Работа</a>
-          <a href="#">Безопасность</a>
-          <a href="#">Бытовые услуги и клининг</a>
-          <a href="#">Высший менеджмент</a>
-          <a href="#">Госслужба</a>
-          <a href="#">Добыча сырья, энергетика</a>
-          <a href="#">Домашний персонал</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Животные</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon6.png')}}" alt="">
-          </div>
-          <a href="#">Всё в рубрике Животные</a>
-          <a href="#">Бесплатно (животные и вязка)</a>
-          <a href="#">Собаки</a>
-          <a href="#">Кошки</a>
-          <a href="#">Аквариумистика</a>
-          <a href="#">Птицы</a>
-          <a href="#">Грызуны</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Дом и Сад</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon7.png')}}" alt="">
-          </div>
-          <a href="#">Всё в рубрике Дом и сад</a>
-          <a href="#">Канцтовары/расходные материалы</a>
-          <a href="#">Мебель</a>
-          <a href="#">Продукты питания/напитки</a>
-          <a href="#">Сад/огород</a>
-          <a href="#">Предметы интерьера</a>
-          <a href="#">Строительство/ремонт</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Электроника</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon8.png')}}" alt="">
-          </div>
-          <a href="#">Всё в рубрике Электроника</a>
-          <a href="#">Телефоны и аксессуары</a>
-          <a href="#">Компьютеры и комплектующие</a>
-          <a href="#">Фото/видео</a>
-          <a href="#">Тв/видеотехника</a>
-          <a href="#">Аудиотехника</a>
-          <a href="#">Игры и игровые приставки</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Бизнес и услуги</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon9.png')}}" alt="">
-          </div>
-          <a href="#">Всё в рубрике Работа</a>
-          <a href="#">Безопасность</a>
-          <a href="#">Бытовые услуги и клининг</a>
-          <a href="#">Высший менеджмент</a>
-          <a href="#">Госслужба</a>
-          <a href="#">Добыча сырья, энергетика</a>
-          <a href="#">Домашний персонал</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Мода и стиль</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon10.png')}}" alt="">
-          </div>
-          <a href="#">Всё в рубрике Электроника</a>
-          <a href="#">Телефоны и аксессуары</a>
-          <a href="#">Компьютеры и комплектующие</a>
-          <a href="#">Фото/видео</a>
-          <a href="#">Тв/видеотехника</a>
-          <a href="#">Аудиотехника</a>
-          <a href="#">Игры и игровые приставки</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Хобби отдых и спорт</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon11.png')}}" alt="">
-          </div>
-          <a href="#">Всё в рубрике Дом и сад</a>
-          <a href="#">Канцтовары/расходные материалы</a>
-          <a href="#">Мебель</a>
-          <a href="#">Продукты питания/напитки</a>
-          <a href="#">Сад/огород</a>
-          <a href="#">Предметы интерьера</a>
-          <a href="#">Строительство/ремонт</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Электроника</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon8.png')}}" alt="">
-          </div>
-          <a href="#">Всё в рубрике Электроника</a>
-          <a href="#">Телефоны и аксессуары</a>
-          <a href="#">Компьютеры и комплектующие</a>
-          <a href="#">Фото/видео</a>
-          <a href="#">Тв/видеотехника</a>
-          <a href="#">Аудиотехника</a>
-          <a href="#">Игры и игровые приставки</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Детский мир</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon1.png')}}" alt="">
-          </div>
-          <a href="#">Детская одежда</a>
-          <a href="#">Детская обувь</a>
-          <a href="#">Детские коляски</a>
-          <a href="#">Детские автокресла</a>
-          <a href="#">Детская мебель</a>
-          <a href="#">Игрушки</a>
-          <a href="#">Детский транспорт</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Недвижимость</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon2.png')}}" alt="">
-          </div>
-          <a href="#">Квартиры и комнаты</a>
-          <a href="#">Дома</a>
-          <a href="#">Земля</a>
-          <a href="#">Коммерческая недвижимость</a>
-          <a href="#">Гаражи парковки</a>
-          <a href="#">Посуточная аренда жилья</a>
-          <a href="#">Предложения от застройщиков</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Транспорт</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon3.png')}}" alt="">
-          </div>
-          <a href="#">Легковые автомобили</a>
-          <a href="#">Грузовые автомобили</a>
-          <a href="#">Автобусы</a>
-          <a href="#">Мото</a>
-          <a href="#">Спецтехника</a>
-          <a href="#">Сельхозтехника</a>
-          <a href="#">Водный транспорт</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-3">
-        <div class="cart_item">
-          <h6>Запчасти для транспорта</h6>
-          <div class="cart_item_wrapper">
-            <img src="{{asset('img/cart_icon4.png')}}" alt="">
-          </div>
-          <a href="#">Всё запчасти для транспорта</a>
-          <a href="#">Автозапчасти и аксессуары</a>
-          <a href="#">Шины, диски и колеса</a>
-          <a href="#">Запчасти для спец/с.х. техники</a>
-          <a href="#">Мотозапчасти и аксессуары</a>
-          <a href="#">Прочие запчасти</a>
-          <a href="#">Транспорт</a>
-
-          <a href="#" class="search_all">Показать еще</a>
-        </div>
-      </div>
-
+      @endforeach
     </div>
+  </div>
   </div>
 </main>
 <section class="buisnes_user">
@@ -457,8 +198,8 @@
 </footer>
 
 
-
-<div class="modal fade" id="ModalIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+<div class="modal fade" id="ModalIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
 
@@ -480,7 +221,8 @@
             <label for="rememberMe" class="rememberMe">Запомнить меня</label>
           </div>
           <div class="col-6">
-            <a href="#" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#passwordRecovery">Забыли пароль?</a>
+            <a href="#" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#passwordRecovery">Забыли
+              пароль?</a>
           </div>
         </div>
         <div class="row">
@@ -518,14 +260,16 @@
       </ul>
 
       <p class="privatpolitica">
-        Авторизуясь на сайте, Вы принимаете <a href="#">Пользовательское соглашение,</a> <a href="#">Политику конфеденциальности</a> и <a href="#">Политику “Cookie”</a> сайта RUKAV
+        Авторизуясь на сайте, Вы принимаете <a href="#">Пользовательское соглашение,</a> <a href="#">Политику
+          конфеденциальности</a> и <a href="#">Политику “Cookie”</a> сайта RUKAV
       </p>
 
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="ModalReg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+<div class="modal fade" id="ModalReg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
 
@@ -552,7 +296,8 @@
           <div class="col-sm-6">
             <p>Страна резиденции</p>
             <div class="selectWrapper">
-              <select class="form-control select_form custom-select" id="address-country"></select><span class="required">*</span>
+              <select class="form-control select_form custom-select" id="address-country"></select><span
+                class="required">*</span>
             </div>
           </div>
           <div class="col-sm-6">
@@ -588,21 +333,26 @@
             </div>
             <div class="col-sm-6">
               <input type="text" name="" placeholder="Название компании" class="input-name-company">
-              <input type="text" name="" placeholder="Название бизнеса" class="input-name-buisnes" style="display: none"><span class="required">*</span>
+              <input type="text" name="" placeholder="Название бизнеса" class="input-name-buisnes"
+                     style="display: none"><span class="required">*</span>
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-6">
               <input type="text" name="" placeholder="Юридический адрес" class="input-yur-addres">
-              <input type="text" name="" placeholder="Адрес" class="input-addres" style="display: none;"><span class="required">*</span>
+              <input type="text" name="" placeholder="Адрес" class="input-addres" style="display: none;"><span
+                class="required">*</span>
             </div>
-            <div class="col-sm-6"><input type="text" name="" placeholder="Postcode" class="input-postcode"><span class="required">*</span></div>
+            <div class="col-sm-6"><input type="text" name="" placeholder="Postcode" class="input-postcode"><span
+                class="required">*</span></div>
           </div>
 
           <div class="row">
-            <div class="col-sm-6"><input type="text" name="" placeholder="Рег.номер" class="input-reg-number"><span class="required">*</span></div>
-            <div class="col-sm-6"><input type="text" name="" placeholder="VAT номер" class="input-vat-number"><span class="required">*</span></div>
+            <div class="col-sm-6"><input type="text" name="" placeholder="Рег.номер" class="input-reg-number"><span
+                class="required">*</span></div>
+            <div class="col-sm-6"><input type="text" name="" placeholder="VAT номер" class="input-vat-number"><span
+                class="required">*</span></div>
           </div>
         </div>
 
@@ -623,7 +373,7 @@
       <div class="socials_reg" style="display: none;">
         <p class="textform">или войти через</p>
 
-        <ul class="socials socials_reg" >
+        <ul class="socials socials_reg">
           <li>
             <a href="#">
               <i class="fab fa-facebook-f"></i>
@@ -648,14 +398,16 @@
       </div>
 
       <p class="privatpolitica">
-        Авторизуясь на сайте, Вы принимаете <a href="#">Пользовательское соглашение,</a> <a href="#">Политику конфеденциальности</a> и <a href="#">Политику “Cookie”</a> сайта RUKAV
+        Авторизуясь на сайте, Вы принимаете <a href="#">Пользовательское соглашение,</a> <a href="#">Политику
+          конфеденциальности</a> и <a href="#">Политику “Cookie”</a> сайта RUKAV
       </p>
 
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="passwordRecovery" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+<div class="modal fade" id="passwordRecovery" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
 
@@ -666,7 +418,6 @@
       <form class="formModal">
 
 
-
         <div class="row">
           <div class="col-sm-12">
             <input type="text" name="" placeholder="Телефон или email">
@@ -675,7 +426,9 @@
 
         <div class="row">
           <div class="col-sm-6">
-            <button type="submit" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#passwordRecoveryKod">востановить пароль</button>
+            <button type="submit" data-dismiss="modal" aria-label="Close" data-toggle="modal"
+                    data-target="#passwordRecoveryKod">востановить пароль
+            </button>
           </div>
           <div class="col-sm-6">
             <button type="button" class="buttonHref">вернуться</button>
@@ -684,12 +437,12 @@
       </form>
 
 
-
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="passwordRecoveryKod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+<div class="modal fade" id="passwordRecoveryKod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
 
@@ -698,7 +451,6 @@
       </button>
       <h6 class="modalTitle">Код для завершения регистрации</h6>
       <form class="formModal">
-
 
 
         <div class="row">
@@ -720,7 +472,8 @@
   </div>
 </div>
 
-<div class="modal fade" id="confirmPhone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+<div class="modal fade" id="confirmPhone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
 
@@ -748,12 +501,12 @@
       </form>
 
 
-
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="confirmEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+<div class="modal fade" id="confirmEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
 
@@ -784,7 +537,8 @@
   </div>
 </div>
 
-<div class="modal modal_confirm_email_phone fade" id="confirmEmailPhone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+<div class="modal modal_confirm_email_phone fade" id="confirmEmailPhone" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel2" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
 
@@ -826,8 +580,12 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 <script type="text/javascript" src="js/intlTelInput.min.js"></script>
