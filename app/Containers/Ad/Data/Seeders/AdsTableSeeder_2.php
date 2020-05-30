@@ -181,84 +181,70 @@ class AdsTableSeeder_2 extends Seeder
 
        ]);
 
+
         \DB::table('pictures')->insert([
             /*1*/
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 1,
+                'message_id' => 1,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 2,
+                'message_id' => 2,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 3,
+                'message_id' => 3,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 4,
+                'message_id' => 4,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 5,
+                'message_id' => 5,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 6,
+                'message_id' => 6,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 7,
+                'message_id' => 7,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 8,
+                'message_id' => 8,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 9,
+                'message_id' => 9,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 10,
+                'message_id' => 10,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 11,
+                'message_id' => 11,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 12,
+                'message_id' => 12,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 13,
+                'message_id' => 13,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 14,
+                'message_id' => 14,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'entity_model' => 'App\Containers\Ad\Models\Ad',
-                'entity_id' => 15,
+                'message_id' => 15,
                 'photo'=>'tshort.jpg'
             ]
-            ]);
+        ]);
 
         \DB::table('ad_statuses')->insert([
             /*1*/

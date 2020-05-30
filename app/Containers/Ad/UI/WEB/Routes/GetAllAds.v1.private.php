@@ -18,3 +18,11 @@ $router->post('ads/data', [
 ]);
 
 $router->get('serverSide',  ['as' => 'serverSide','uses'=>'Controller@adsByGroupDatatables']);
+
+$router->post('/ads/showPhotoAdsModal', [
+    'as' => 'ads_showPhotoAdsModal',
+    'uses'  => 'Controller@showPhotoAdsModal',
+    /* 'middleware' => [
+       'auth:web',
+     ],*/
+]);

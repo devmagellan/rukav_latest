@@ -23,7 +23,7 @@
         #dt-basic-example > thead > tr:nth-child(1) > th.dt-center.sorting_asc::after{
             display:none;
         }
-        #dt-basic-example > thead > tr:nth-child(1) > th.dt-center.sorting_asc{ width:1px !important;padding:0px !important;}
+        #dt-basic-example > thead > tr:nth-child(1) > th.dt-center.sorting_asc{ width:17px !important;}
 
     </style>
 @endsection
@@ -168,6 +168,26 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="ad_edit_rest_submit btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="default-example-modal-photos" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Фотографии объявления</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body photoAdsModal">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="ad_edit_submit btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
@@ -887,7 +907,32 @@ var new_rubric=$(this).parent().find('.hidden_rubric').val()
                 }
             });
 
-        })
+        });
+
+        $( "table" ).delegate( ".photoAdsModalOpen", "click", function() {
+          console.log('delegate')
+
+            var add_id =  $(this).parent().find('.ad_id').val()
+            console.log('photoAdsModalOpen',add_id)
+               $.ajax({
+             method: 'POST',
+             dataType: 'html',
+             async:false,
+             url: '/ads/showPhotoAdsModal',
+             data: {add_id: add_id },
+             beforeSend: function() {
+             },
+             complete: function() {
+
+             },
+             success: function (data) {
+                 $('.photoAdsModal').html(data)
+                 $('#default-example-modal-photos').modal('show');
+
+             }
+             });
+        });
+
     </script>
 
 @endsection

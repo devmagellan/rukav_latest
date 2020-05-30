@@ -242,7 +242,8 @@ class Controller extends WebController
             }
             $rubrik=\App\Containers\Site\Models\ProductCategory::where('id',$ad->category_id)->first();
             $nestedData = array ();
-            $nestedData [0] = '<div></div><input type="hidden" class="ad_id" value="'.$ad->id.'"><input class="ad_check" type="checkbox" value="0"></div>';
+            $nestedData [0] = '<div><div style="display:inline-block;"><input type="hidden" class="ad_id" value="'.$ad->id.'"><input class="ad_check" type="checkbox" value="0"></div>
+ <span class="photoAdsModalOpen" style="display:inline-block;cursor:pointer" ><i class="fal fa-image"></i></span></div>';
             $nestedData [1] = $status;
             $nestedData [2] = $ad->title;
             $nestedData [3] = '<span style="font-size:9px">'.mb_strimwidth($ad->message, 0, 30, "...").'</span>';
@@ -298,6 +299,13 @@ class Controller extends WebController
     }
 
 
+
+    public function showPhotoAdsModal(GetAllAdsDataTableRequest $request){
+       // var_dump($request->input('add_id'));
+        $result['ads']=\App\Containers\Ad\Models\Ad::where('id',$request->input('add_id'))->with('pictures')->first();
+        return view('ad::modal_photo',$result);
+
+    }
 
 
 }

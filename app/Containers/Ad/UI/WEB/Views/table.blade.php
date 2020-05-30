@@ -41,7 +41,10 @@
 
                         @foreach($messages as $message)
                                 <tr>
-                                    <td>Tickbox</td>
+                                    <td>Tickbox
+
+
+                                    </td>
                                     <td>Статус</td>
                                     <td>{{$message->title}}</td>
                                     <td>Текст</td>
@@ -227,6 +230,8 @@
                 }
             });
         })
+
+
 
 
 
