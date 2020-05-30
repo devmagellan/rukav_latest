@@ -1,0 +1,179 @@
+@media (max-width: 1200px) {
+    .form_category_search-city, .form_category_imp-pin{
+        display: none;
+    }
+    .form_category{
+        margin-left: 82px;
+    }
+    .btn_category{
+        margin-left: 10px;
+    }
+    .add_ad{
+        margin-left: -30px;
+    }
+    .cart_item .cart_item_wrapper{
+        margin-left: 3%;
+    }
+    .cart_item h6{
+        font-size: 16px;
+    }
+    .cart_item a{
+        font-size: 12px;
+        line-height: 24px;
+    }
+    .cart_item{
+        margin-bottom: 10px;
+    }
+    footer p{
+        font-size: 12px;
+    }
+    footer ul li a{
+        font-size: 12px;
+    }
+    .link_footer{
+        margin-bottom: 5px;
+    }
+    .btn_category span {
+        right: -24%;
+    }
+    ul.category_dropdown_sub_list{
+        padding: 10px 50px 15px 20px;
+        width: 370px;
+    }
+    ul.category_dropdown_sub_list li ul{
+        margin-left: 340px;
+        width: 360px;
+    }
+}
+@media (max-width: 990px) {
+    .btn_category{
+        display: none;
+    }
+    .form_category{
+        margin-left: 0;
+    }
+    .add_ad{
+        width: 148px;
+        font-size: 12px;
+        margin-left: -38px;
+    }
+    .add_ad span.plus{
+        font-size: 24px;
+        margin-right: 5px;
+    }
+    footer ul li a {
+        font-size: 10px;
+    }
+}
+@media (max-width: 768px) {
+    .btn_category, .form_category_search-city, .form_category_imp-pin{
+        display: none;
+    }
+    .add_ad span{
+        display: none;
+    }
+    .add_ad{
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        margin-left: 0;
+    }
+    .add_ad span.plus{
+        display: block;
+        margin-right: 0;
+        line-height: 36px;
+        height: 36px;
+    }
+    .btn_search_m{
+        display: block;
+        background: #F0F0F0;
+        border-radius: 34px;
+        width: 36px;
+        height: 36px;
+        text-align: center;
+    }
+    .btn_search_m img{
+        position: static;
+        width: 14px;
+        margin-top: 8px;
+    }
+    .form_category{
+        display: none;
+    }
+    .header{
+        padding: 15px 0;
+    }
+    .cart_item{
+        margin-bottom: 12px;
+    }
+    .main{
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+    .cart_item a{
+        font-size: 14px;
+    }
+    .cart_item h6{
+        width: 70%;
+    }
+    .cart_item .cart_item_wrapper{
+        width: 20%;
+    }
+    .buisnes_user h3{
+        margin-bottom: 56px;
+        text-align: center;
+        font-size: 19px;
+    }
+    .slick_left{
+        left: 50%;
+        right: auto;
+        margin-left: -50px;
+        top: -52px;
+    }
+    .slick_prev{
+        right: 50%;
+        margin-right: -50px;
+        top: -52px;
+    }
+    .footer{
+        padding-top: 48px;
+        text-align: center;
+    }
+    .footer ul.socials{
+        margin-bottom: 24px;
+    }
+    .footer h5{
+        margin-top: 22px;
+        margin-bottom: 18px;
+    }
+    .footer .copy{
+        font-size: 12px;
+    }
+    .footer hr{
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+    footer ul li a{
+        font-size: 14px;
+    }
+    .modal-dialog .modal-content{
+        padding: 30px 20px 40px 20px;
+    }
+    .modalTitle{
+        font-size: 20px;
+        margin-bottom: 18px;
+    }
+    .modal_confirm_email_phone .formModal h6.modalTitle{
+        font-size: 15px;
+        margin-left: 4px;
+    }
+    .formModal input{
+        font-size: 12px;
+    }
+    .modal_confirm_email_phone .formModal button.buttonHref{
+        margin-top: 10px;
+    }
+    .required{
+        right: 5px;
+    }
+}

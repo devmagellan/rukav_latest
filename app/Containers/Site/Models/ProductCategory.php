@@ -6,30 +6,35 @@ use App\Ship\Parents\Models\Model;
 
 class ProductCategory extends Model
 {
-    protected $fillable = [
-        'parent_id','name','icon','link','photo'
+  protected $fillable = [
+    'parent_id', 'name', 'icon', 'link', 'photo'
 
-    ];
+  ];
 
-    protected $attributes = [
+  protected $attributes = [
 
-    ];
+  ];
 
-    protected $hidden = [
+  protected $hidden = [
 
-    ];
+  ];
 
-    protected $casts = [
+  protected $casts = [
 
-    ];
+  ];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-    ];
+  protected $dates = [
+    'created_at',
+    'updated_at',
+  ];
 
-    /**
-     * A resource key to be used by the the JSON API Serializer responses.
-     */
-    protected $resourceKey = 'product_categories';
+  /**
+   * A resource key to be used by the the JSON API Serializer responses.
+   */
+  protected $resourceKey = 'product_categories';
+
+  public function childrenCategories()
+  {
+    return $this->hasMany(ProductCategory::class, 'parent_id', 'id');
+  }
 }
