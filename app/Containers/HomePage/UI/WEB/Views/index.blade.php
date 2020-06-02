@@ -360,7 +360,7 @@
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
       <h6 class="modalTitle">Регистрация</h6>
-      <form class="formModal">
+      <form class="formModal" action="{{route('register_user_web')}}" method="post" id="registerForm">
 
         <input type="radio" name="vid_user" value="Частная" id="private" class="radio_input">
         <label for="private">Частная</label>
@@ -369,17 +369,17 @@
 
         <div class="row">
           <div class="col-sm-6">
-            <input type="text" name="" placeholder="Имя"> <span class="required">*</span>
+            <input type="text" name="firstName" placeholder="Имя"> <span class="required">*</span>
           </div>
           <div class="col-sm-6">
-            <input type="text" name="" placeholder="Фамилия"> <span class="required">*</span>
+            <input type="text" name="secondName" placeholder="Фамилия"> <span class="required">*</span>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
             <p>Страна резиденции</p>
             <div class="selectWrapper">
-              <select class="form-control select_form custom-select" id="address-country"></select><span
+              <select class="form-control select_form custom-select" id="address-country" name="country"></select><span
                 class="required">*</span>
             </div>
           </div>
@@ -390,16 +390,16 @@
               <input type="radio" name="hide_phone" value="Не показывать" id="no_hide_phone">
               <label for="no_hide_phone">Не показывать</label>
             </div>
-            <input type="tel" id="telphone"><span class="required">*</span>
+            <input type="tel" name="phone" id="telphone"><span class="required">*</span>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
-            <input type="text" class="modal_pass" name="" placeholder="Пароль"><span class="required">*</span>
+            <input type="text" class="modal_pass" name="password" placeholder="Пароль"><span class="required">*</span>
           </div>
           <div class="col-sm-6">
             <p class="input_text_top">Не виден пользователю</p>
-            <input type="text" name="" placeholder="Контактный email"><span class="required">*</span>
+            <input type="text" name="email" placeholder="Контактный email"><span class="required">*</span>
           </div>
         </div>
 
@@ -408,43 +408,43 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="selectWrapper select_company">
-                <select class="form-control select_form custom-select">
+                <select class="form-control select_form custom-select" name="optionUser">
                   <option value="Компания">Компания</option>
                   <option value="Само-занятый">Само-занятый</option>
                 </select><span class="required">*</span>
               </div>
             </div>
             <div class="col-sm-6">
-              <input type="text" name="" placeholder="Название компании" class="input-name-company">
-              <input type="text" name="" placeholder="Название бизнеса" class="input-name-buisnes"
+              <input type="text" name="nameCompany" placeholder="Название компании" class="input-name-company">
+              <input type="text" name="nameBuisnes" placeholder="Название бизнеса" class="input-name-buisnes"
                      style="display: none"><span class="required">*</span>
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-6">
-              <input type="text" name="" placeholder="Юридический адрес" class="input-yur-addres">
-              <input type="text" name="" placeholder="Адрес" class="input-addres" style="display: none;"><span
+              <input type="text" name="addressUr" placeholder="Юридический адрес" class="input-yur-addres">
+              <input type="text" name="address" placeholder="Адрес" class="input-addres" style="display: none;"><span
                 class="required">*</span>
             </div>
-            <div class="col-sm-6"><input type="text" name="" placeholder="Postcode" class="input-postcode"><span
+            <div class="col-sm-6"><input type="text" name="postCode" placeholder="Postcode" class="input-postcode"><span
                 class="required">*</span></div>
           </div>
 
           <div class="row">
-            <div class="col-sm-6"><input type="text" name="" placeholder="Рег.номер" class="input-reg-number"><span
+            <div class="col-sm-6"><input type="text" name="reqNumber" placeholder="Рег.номер" class="input-reg-number"><span
                 class="required">*</span></div>
-            <div class="col-sm-6"><input type="text" name="" placeholder="VAT номер" class="input-vat-number"><span
+            <div class="col-sm-6"><input type="text" name="vatNumber" placeholder="VAT номер" class="input-vat-number"><span
                 class="required">*</span></div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-sm-6">
-            <button type="submit">Зарегистрироваться</button>
+            <button type="submit" id="registerButton">Зарегистрироваться</button>
           </div>
           <div class="col-sm-6">
-            <button type="button" class="buttonHref">Вход</button>
+            <button type="button" class="buttonHref" id="enterButton">Вход</button>
           </div>
         </div>
       </form>
@@ -673,6 +673,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 <script type="text/javascript" src="js/intlTelInput.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/register_user.js"></script>
 
 </body>
 </html>

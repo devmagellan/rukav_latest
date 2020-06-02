@@ -5,4 +5,9 @@ $router->get('/user', [
     'uses' => 'Controller@sayWelcome',
 ]);
 
+$router->post('/register', [
+  'as'   => 'register_user_web',
+  'uses' => 'Controller@registerUser',
+]);
+
 

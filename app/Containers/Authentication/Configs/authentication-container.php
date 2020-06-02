@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'require_email_confirmation' => false,
+    'require_email_confirmation' => true,
 
     /*
     |--------------------------------------------------------------------------
