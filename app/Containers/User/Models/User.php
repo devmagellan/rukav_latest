@@ -54,6 +54,9 @@ class User extends UserModel implements ChargeableInterface
         'social_nickname',
         'confirmed',
         'is_client',
+        'sername',
+      'country',
+      'phone'
     ];
 
     protected $casts = [

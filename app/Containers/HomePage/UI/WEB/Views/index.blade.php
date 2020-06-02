@@ -290,10 +290,11 @@
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
       <h6 class="modalTitle">Вход</h6>
-      <form class="formModal">
-        <input type="text" name="" placeholder="Телефон или email">
+      <form class="formModal" action="{{route('login_user')}}" method="post" id="loginForm">
+        <div id="loginErrorsBlock"></div>
+        <input type="text" name="email" placeholder="Телефон или email">
         <div class="input_password_wrapper">
-          <input type="password" name="" placeholder="Пароль" class="input_password">
+          <input type="password" name="password" placeholder="Пароль" class="input_password">
 
           <input type="checkbox" name="" id="show_password">
           <label for="show_password" class="show_password"><img src="{{asset('img/hide_password.svg')}}" alt=""></label>
@@ -310,7 +311,7 @@
         </div>
         <div class="row">
           <div class="col-sm-6">
-            <button type="submit">Войти</button>
+            <button type="submit" id="loginButton">Войти</button>
           </div>
           <div class="col-sm-6">
             <button type="button" class="buttonHref button_show_reg">Регистрация</button>
@@ -674,6 +675,7 @@
 <script type="text/javascript" src="js/intlTelInput.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/register_user.js"></script>
+<script type="text/javascript" src="js/login_user.js"></script>
 
 </body>
 </html>

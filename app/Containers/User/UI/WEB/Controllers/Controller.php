@@ -155,7 +155,8 @@ class Controller extends WebController
 
   public function registerUser(RegisterUserRequest $request)
   {
-    dd($request->all());
+   $resultCreated = Apiato::call('User@CreateUserAccountAction', [$request]);
+   return $resultCreated;
   }
 
 }
