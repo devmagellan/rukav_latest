@@ -8,7 +8,7 @@
             <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
         </a>
     </div>
-    <!-- DOC: nav menu layout change shortcut -->
+    <!-- DOC: nav menu layouts change shortcut -->
     <div class="hidden-md-down dropdown-icon-menu position-relative">
         <a href="#" class="header-btn btn js-waves-off" data-action="toggle" data-class="nav-function-hidden" title="Hide Navigation">
             <i class="ni ni-menu"></i>

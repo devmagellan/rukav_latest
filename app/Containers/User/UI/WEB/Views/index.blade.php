@@ -251,7 +251,7 @@
                 });
 
 
-            // input group layout
+            // input group layouts
             $('#datepicker-2').datepicker(
                 {
                     todayHighlight: true,
@@ -259,7 +259,7 @@
                     templates: controls
                 });
 
-            // input group layout for modal demo
+            // input group layouts for modal demo
             $('#datepicker-modal-2').datepicker(
                 {
                     todayHighlight: true,
