@@ -10,6 +10,7 @@ use App\Containers\Authentication\UI\WEB\Requests\LogoutRequest;
 use App\Ship\Parents\Controllers\WebController;
 use App\Ship\Transporters\DataTransporter;
 use Exception;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -54,8 +55,9 @@ class Controller extends WebController
 
   public function loginUser(LoginUserRequest $request)
   {
-    if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password])){
-      return 1;
+    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+      return response(['message' => true], Response::HTTP_OK);
     }
+    return response(['Не правильный логин или пароль'], Response::HTTP_CONFLICT);
   }
 }

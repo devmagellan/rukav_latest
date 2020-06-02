@@ -6,8 +6,8 @@ $(document).ready(function () {
       method: 'post',
       url: '/register',
       data: formData,
-      success: function () {
-
+      success: function (data) {
+        location.reload();
       },
       error: function (errors) {
         var response = JSON.parse(errors.responseText);

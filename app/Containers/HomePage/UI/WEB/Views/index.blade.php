@@ -1,5 +1,4 @@
 @extends('homepage::layouts.layout')
-
 @section('content')
   <main class="main">
     <ul class="category_dropdown_main_list">

@@ -1,22 +1,26 @@
 $(document).ready(function () {
   $('#loginButton').on('click', function (e) {
     e.preventDefault();
-    var formData = $('#registerForm').serialize();
+    var formData = $('#loginForm').serialize();
     $.ajax({
       method: 'post',
       url: '/loginUser',
       data: formData,
-      success: function () {
-        alert('user залогинен')
+      success: function (data) {
+        location.reload();
       },
       error: function (errors) {
         var response = JSON.parse(errors.responseText);
-        var errorString = '<ul>';
-        $.each( response.errors, function( key, value) {
-          errorString += '<li>' + value + '</li>';
-        });
-        errorString += '</ul>';
-       $('#loginErrorsBlock').html(errorString);
+        if(errors.status===409){
+          $('#loginErrorsBlock').html(response);
+        }else{
+          var errorString = '<ul>';
+          $.each( response.errors, function( key, value) {
+            errorString += '<li>' + value + '</li>';
+          });
+          errorString += '</ul>';
+          $('#loginErrorsBlock').html(errorString);
+        }
       }
     });
   })

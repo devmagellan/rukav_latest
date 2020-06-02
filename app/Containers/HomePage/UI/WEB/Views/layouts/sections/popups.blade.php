@@ -12,7 +12,6 @@
         <input type="text" name="email" placeholder="Телефон или email">
         <div class="input_password_wrapper">
           <input type="password" name="password" placeholder="Пароль" class="input_password">
-
           <input type="checkbox" name="" id="show_password">
           <label for="show_password" class="show_password"><img src="{{asset('img/hide_password.svg')}}" alt=""></label>
         </div>
