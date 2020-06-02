@@ -190,5 +190,12 @@ return [
     'time'                  => 'Время',
     'available'             => 'Доступно',
     'size'                  => 'Размер',
+    'firstName'             => 'Имя',
+    'lastName'              => 'Фамилия',
+    'nameJob'               => 'Название компании/бизнеса',
+    'postCode'              => 'Postcode',
+    'regNumber'             => 'Рег.номер',
+    'vatNumber'             => 'VAT.номер',
+    'vid_user'              => 'форма регистрации'
   ],
 ];

@@ -16,9 +16,8 @@ $(document).ready(function () {
           errorString += '<li>' + value + '</li>';
         });
         errorString += '</ul>';
-        console.log(errorString);
+       $('#errorsBlock').html(errorString);
       }
-
     });
   })
 });

@@ -361,7 +361,7 @@
       </button>
       <h6 class="modalTitle">Регистрация</h6>
       <form class="formModal" action="{{route('register_user_web')}}" method="post" id="registerForm">
-
+        <div id="errorsBlock"></div>
         <input type="radio" name="vid_user" value="Частная" id="private" class="radio_input">
         <label for="private">Частная</label>
         <input type="radio" name="vid_user" value="Бизнес" id="buisnes" class="radio_input" checked>
@@ -372,7 +372,7 @@
             <input type="text" name="firstName" placeholder="Имя"> <span class="required">*</span>
           </div>
           <div class="col-sm-6">
-            <input type="text" name="secondName" placeholder="Фамилия"> <span class="required">*</span>
+            <input type="text" name="lastName" placeholder="Фамилия"> <span class="required">*</span>
           </div>
         </div>
         <div class="row">
@@ -415,24 +415,24 @@
               </div>
             </div>
             <div class="col-sm-6">
-              <input type="text" name="nameCompany" placeholder="Название компании" class="input-name-company">
-              <input type="text" name="nameBuisnes" placeholder="Название бизнеса" class="input-name-buisnes"
-                     style="display: none"><span class="required">*</span>
+              <input type="text" name="nameJob" placeholder="Название компании" class="input-name-job">
+{{--              <input type="text" name="nameBuisnes" placeholder="Название бизнеса" class="input-name-buisnes"--}}
+{{--                     style="display: none"><span class="required">*</span>--}}
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-6">
-              <input type="text" name="addressUr" placeholder="Юридический адрес" class="input-yur-addres">
-              <input type="text" name="address" placeholder="Адрес" class="input-addres" style="display: none;"><span
-                class="required">*</span>
+              <input type="text" name="address" placeholder="Юридический адрес" class="input-address">
+{{--              <input type="text" name="address" placeholder="Адрес" class="input-address" style="display: none;"><span--}}
+{{--                class="required">*</span>--}}
             </div>
             <div class="col-sm-6"><input type="text" name="postCode" placeholder="Postcode" class="input-postcode"><span
                 class="required">*</span></div>
           </div>
 
           <div class="row">
-            <div class="col-sm-6"><input type="text" name="reqNumber" placeholder="Рег.номер" class="input-reg-number"><span
+            <div class="col-sm-6"><input type="text" name="regNumber" placeholder="Рег.номер" class="input-reg-number"><span
                 class="required">*</span></div>
             <div class="col-sm-6"><input type="text" name="vatNumber" placeholder="VAT номер" class="input-vat-number"><span
                 class="required">*</span></div>

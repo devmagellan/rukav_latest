@@ -18,16 +18,16 @@ $(document).ready(function(){
 
     $('.select_company select').on('change', function () {
         if($('.select_company select').val() == "Само-занятый"){
-            $('.input-name-company').hide();
-            $('.input-yur-addres').hide();
+            $('.input-name-job').attr('placeholder','Название бизнеса');
+            $('.input-address').attr('placeholder','Адресс');
             $('.input-reg-number').hide();
             $('.input-vat-number').hide();
 
             $('.input-name-buisnes').show();
             $('.input-addres').show();
         }else{
-            $('.input-name-company').show();
-            $('.input-yur-addres').show();
+          $('.input-name-job').attr('placeholder','Название компании');
+            $('.input-address').attr('placeholder','Юридический адрес');
             $('.input-reg-number').show();
             $('.input-vat-number').show();
 

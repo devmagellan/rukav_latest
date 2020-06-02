@@ -42,19 +42,27 @@ class RegisterUserRequest extends Request
    */
   public function rules()
   {
-    return [
+    $majorRules = [
       'firstName' => 'required|between:2,30',
-      'secondName' => 'required|between:2,30',
+      'lastName' => 'required|between:2,30',
       'country' => 'required|max:30',
       'phone' => 'required|max:30',
       'password' => 'required|between:6,30',
       'email' => 'required|email',
-      'nameCompany' => 'required_if:vid_user,Бизнес',
+      'nameJob' => 'required_if:vid_user,Бизнес',
       'address' => 'required_if:vid_user,Бизнес',
       'postCode' => 'required_if:vid_user,Бизнес',
-      'regNumber' => 'required_if:optionUser,Компания',
-      'vatNumber' => 'required_if:optionUser,Компания',
     ];
+
+    $optionalRules = [
+      'regNumber' => 'required',
+      'vatNumber' => 'required',
+    ];
+    //если в форме юзер выбрал компания тогда смержить правила для компании
+    if ($this->vid_user == 'Бизнес' && $this->optionUser == 'Компания') {
+      return array_merge($majorRules, $optionalRules);
+    }
+    return $majorRules;
   }
 
   /**
