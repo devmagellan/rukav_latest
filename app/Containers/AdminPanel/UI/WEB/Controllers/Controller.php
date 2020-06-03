@@ -9,9 +9,13 @@ use App\Containers\AdminPanel\UI\WEB\Requests\FindAdminPanelByIdRequest;
 use App\Containers\AdminPanel\UI\WEB\Requests\UpdateAdminPanelRequest;
 use App\Containers\AdminPanel\UI\WEB\Requests\StoreAdminPanelRequest;
 use App\Containers\AdminPanel\UI\WEB\Requests\EditAdminPanelRequest;
+use App\Containers\Authentication\UI\WEB\Requests\LoginUserRequest;
+use App\Containers\User\Services\UserService;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
 use App\Containers\AdminPanel\UI\WEB\Requests\ViewDashboardRequest;
+use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class Controller
@@ -20,6 +24,13 @@ use App\Containers\AdminPanel\UI\WEB\Requests\ViewDashboardRequest;
  */
 class Controller extends WebController
 {
+  private $service;
+
+  public function __construct(UserService $service)
+  {
+    $this->service = $service;
+  }
+
   /**
    * Show all entities
    *
@@ -117,6 +128,16 @@ class Controller extends WebController
 
   public function getLoginFormToAdminPage()
   {
+    return view('adminpanel::login.login-form');
+  }
 
+  public function loginAdmin(LoginUserRequest $request)
+  {
+    if($this->service->authenticate($request)){
+      if (Auth::user()->hasRole('admin')){
+        return redirect(route('get_admin_dashboard_page'));
+      }
+    }
+    return redirect('/');
   }
 }

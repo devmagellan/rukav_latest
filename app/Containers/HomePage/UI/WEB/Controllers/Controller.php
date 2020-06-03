@@ -11,6 +11,8 @@ use App\Containers\HomePage\UI\WEB\Requests\StoreHomePageRequest;
 use App\Containers\HomePage\UI\WEB\Requests\EditHomePageRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 /**
  * Class Controller

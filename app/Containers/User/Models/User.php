@@ -9,6 +9,7 @@ use App\Containers\Payment\Models\PaymentAccount;
 use App\Containers\Payment\Traits\ChargeableTrait;
 use App\Ship\Parents\Models\UserModel;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class User.
@@ -22,6 +23,7 @@ class User extends UserModel implements ChargeableInterface
     use AuthorizationTrait;
     use AuthenticationTrait;
     use Notifiable;
+    use HasRoles;
 
     /**
      * The database table used by the model.

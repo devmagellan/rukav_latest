@@ -19,11 +19,11 @@ class UserService
     ]);
   }
 
-  public function authenticate($data)
+  public function authenticate($data): bool
   {
     if (Auth::attempt(['email' => $data->email, 'password' => $data->password])) {
-      // Authentication passed...
-
+      return true;
     }
+    return false;
   }
 }
