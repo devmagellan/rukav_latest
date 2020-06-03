@@ -11,12 +11,10 @@ $(document).ready(function () {
       },
       error: function (errors) {
         var response = JSON.parse(errors.responseText);
-        var errorString = '<ul>';
-        $.each( response.errors, function( key, value) {
-          errorString += '<li>' + value + '</li>';
+        $('.errorBlock').html('');
+        $.each(response.errors, function (key, value) {
+          $('#' + key).html(value)
         });
-        errorString += '</ul>';
-       $('#errorsBlock').html(errorString);
       }
     });
   })

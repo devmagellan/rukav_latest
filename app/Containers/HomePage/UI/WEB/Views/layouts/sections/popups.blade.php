@@ -10,14 +10,16 @@
       <form class="formModal" action="{{route('login_user')}}" method="post" id="loginForm">
         <div id="loginErrorsBlock"></div>
         <input type="text" name="email" placeholder="Телефон или email">
+          <span id="emailLogin" class="errorBlock"></span>
         <div class="input_password_wrapper">
           <input type="password" name="password" placeholder="Пароль" class="input_password">
+          <span id="passwordLogin" class="errorBlock"></span>
           <input type="checkbox" name="" id="show_password">
           <label for="show_password" class="show_password"><img src="{{asset('img/hide_password.svg')}}" alt=""></label>
         </div>
         <div class="row">
           <div class="col-6">
-            <input type="checkbox" name="" id="rememberMe" checked>
+            <input type="checkbox" name="rememberMe" id="rememberMe" checked>
             <label for="rememberMe" class="rememberMe">Запомнить меня</label>
           </div>
           <div class="col-6">
@@ -78,18 +80,18 @@
       </button>
       <h6 class="modalTitle">Регистрация</h6>
       <form class="formModal" action="{{route('register_user_web')}}" method="post" id="registerForm">
-        <div id="errorsBlock"></div>
         <input type="radio" name="vid_user" value="Частная" id="private" class="radio_input">
         <label for="private">Частная</label>
         <input type="radio" name="vid_user" value="Бизнес" id="buisnes" class="radio_input" checked>
         <label for="buisnes">Бизнес</label>
-
         <div class="row">
           <div class="col-sm-6">
             <input type="text" name="firstName" placeholder="Имя"> <span class="required">*</span>
+            <span id="firstName" class="errorBlock"></span>
           </div>
           <div class="col-sm-6">
             <input type="text" name="lastName" placeholder="Фамилия"> <span class="required">*</span>
+            <span id="lastName" class="errorBlock"></span>
           </div>
         </div>
         <div class="row">
@@ -108,15 +110,18 @@
               <label for="no_hide_phone">Не показывать</label>
             </div>
             <input type="tel" name="phone" id="telphone"><span class="required">*</span>
+            <span id="phone" class="errorBlock"></span>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
             <input type="text" class="modal_pass" name="password" placeholder="Пароль"><span class="required">*</span>
+            <span id="password" class="errorBlock"></span>
           </div>
           <div class="col-sm-6">
             <p class="input_text_top">Не виден пользователю</p>
             <input type="text" name="email" placeholder="Контактный email"><span class="required">*</span>
+            <span id="email" class="errorBlock"></span>
           </div>
         </div>
 
@@ -132,7 +137,8 @@
               </div>
             </div>
             <div class="col-sm-6">
-              <input type="text" name="nameJob" placeholder="Название компании" class="input-name-job">
+              <input type="text" name="nameJob" placeholder="Название компании" class="input-name-job"><span class="required">*</span>
+              <span id="nameJob" class="errorBlock"></span>
               {{--              <input type="text" name="nameBuisnes" placeholder="Название бизнеса" class="input-name-buisnes"--}}
               {{--                     style="display: none"><span class="required">*</span>--}}
             </div>
@@ -142,20 +148,30 @@
             <div class="col-sm-6">
               <input type="text" name="address" placeholder="Юридический адрес" class="input-address">
               {{--              <input type="text" name="address" placeholder="Адрес" class="input-address" style="display: none;"><span--}}
-              {{--                class="required">*</span>--}}
+              {{--               --}}
+              <span class="required">*</span>
+              <span id="address" class="errorBlock"></span>
             </div>
             <div class="col-sm-6"><input type="text" name="postCode" placeholder="Postcode" class="input-postcode"><span
-                class="required">*</span></div>
+                class="required">*</span>
+              <span id="postCode" class="errorBlock"></span>
+            </div>
           </div>
 
           <div class="row">
-            <div class="col-sm-6"><input type="text" name="regNumber" placeholder="Рег.номер" class="input-reg-number"><span
-                class="required">*</span></div>
-            <div class="col-sm-6"><input type="text" name="vatNumber" placeholder="VAT номер" class="input-vat-number"><span
-                class="required">*</span></div>
+            <div class="col-sm-6">
+              <input type="text" name="regNumber" placeholder="Рег.номер"
+                                         class="input-reg-number">
+              <span class="required">*</span>
+              <span id="regNumber" class="errorBlock"></span>
+            </div>
+            <div class="col-sm-6"><input type="text" name="vatNumber" placeholder="VAT номер"
+                                         class="input-vat-number"><span
+                class="required">*</span>
+              <span id="vatNumber" class="errorBlock"></span>
+            </div>
           </div>
         </div>
-
         <div class="row">
           <div class="col-sm-6">
             <button type="submit" id="registerButton">Зарегистрироваться</button>

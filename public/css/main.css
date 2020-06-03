@@ -786,9 +786,13 @@ ul.category_dropdown_sub_list li ul a:hover{
 .category_link_active > p:hover{
     color: #fff;
 }
-#errorsBlock, #loginErrorsBlock{
+#errorsBlock, #loginErrorsBlock, .errorBlock{
   color: red;
 }
 .logout{
   width: 100px;
+}
+.errorBlock {
+  font-size: 15px;
+  font-weight: 300;
 }

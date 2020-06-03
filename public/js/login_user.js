@@ -11,15 +11,14 @@ $(document).ready(function () {
       },
       error: function (errors) {
         var response = JSON.parse(errors.responseText);
-        if(errors.status===409){
+        $('#loginErrorsBlock').html('');
+        $('.errorBlock').html('');
+        if (errors.status === 409) {
           $('#loginErrorsBlock').html(response);
-        }else{
-          var errorString = '<ul>';
-          $.each( response.errors, function( key, value) {
-            errorString += '<li>' + value + '</li>';
+        } else {
+          $.each(response.errors, function (key, value) {
+            $('#' + key + 'Login').html(value)
           });
-          errorString += '</ul>';
-          $('#loginErrorsBlock').html(errorString);
         }
       }
     });
