@@ -8,7 +8,7 @@
       </button>
       <h6 class="modalTitle">Вход</h6>
       <form class="formModal" action="{{route('login_user')}}" method="post" id="loginForm">
-        <div id="loginErrorsBlock"></div>
+        <div id="loginErrorsBlock" class="errorBlock"></div>
         <input type="text" name="email" placeholder="Телефон или email">
           <span id="emailLogin" class="errorBlock"></span>
         <div class="input_password_wrapper">
