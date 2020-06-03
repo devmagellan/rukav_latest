@@ -11,7 +11,42 @@
   <link href="{{asset('/css/intlTelInput.css')}}" rel="stylesheet">
   <link href="{{asset('/css/main.css')}}" rel="stylesheet">
   <link href="{{asset('/css/media.css')}}" rel="stylesheet">
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaZXMHQgJkoXZkkBbtelY8SLAwMOasg0Y&libraries=places&language=en"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaZXMHQgJkoXZkkBbtelY8SLAwMOasg0Y&libraries=places&language=en" async defer></script>
+  <style>
+    .cropper-container{
+      width:600px !important;
+      height:400px !important;
+    }
+    .pac-container {
+      background-color: #FFF;
+      z-index: 20;
+      position: fixed;
+      display: inline-block;
+      float: left;
+    }
+
+    .pac-container {
+      z-index: 10519 !important;
+    }
+
+    .ui-autocomplete {
+      z-index: 10519 !important;
+    }
+    .modal{
+      z-index: 9999 !important;
+    }
+    .modal-backdrop{
+      z-index: 10;
+    }​
+
+    @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+    body {margin:10%;font-family:'Montserrat',sans-serif;background:#eee;color:#666;}
+    h1 {font-size:1.3em;text-transform:uppercase;}
+
+    span.zip {margin:1em 0;display:block;text-transform:uppercase;font-size:0.9em;color:#999;} span.zip:before {content:'ZIP code: '}
+
+  </style>
 </head>
 <body>
 <header class="header">
@@ -19,26 +54,26 @@
     <div class="row">
       <div class="col-md-2 col-6">
         <a href="#" class="logo">
-          <img src="{{asset('img/logo.svg')}}" alt="">
+          <img src="{{asset('/img/logo.svg')}}" alt="">
         </a>
       </div>
       <div class="col-md-1 d-none d-md-block">
         <a href="#" class="btn_category">
-          <img src="img/btnCategoryIcon.svg" alt="" class="dropDownHide">
-          <img src="img/close_white.svg" alt="" class="dropDownShow" style="display: none;">
+          <img src="/img/btnCategoryIcon.svg" alt="" class="dropDownHide">
+          <img src="/img/close_white.svg" alt="" class="dropDownShow" style="display: none;">
           <span style="display: none;"></span>
           Категории
         </a>
       </div>
       <div class="col-md-6 col-2">
         <form class="form_category">
-          <img src="{{asset('img/loupe.svg')}}" alt="" class="form_category_imp-loupe">
-          <img src="{{asset('img/pin.svg')}}" alt="" class="form_category_imp-pin">
+          <img src="{{asset('/img/loupe.svg')}}" alt="" class="form_category_imp-loupe">
+          <img src="{{asset('/img/pin.svg')}}" alt="" class="form_category_imp-pin">
           <input type="text" name="search" class="form_category_search" placeholder="Я ищу...">
-          <input type="text" name="search_city" class="form_category_search-city" placeholder="Город или посткод">
+          <input type="text" name="search_city" class="form_category_search-city" id="location_search" placeholder="Город или посткод">
           <button class="form_category_btn">Поиск</button>
         </form>
-        <a href="#" class="btn_search_m"><img src="{{asset('img/loupe.svg')}}" alt=""
+        <a href="#" class="btn_search_m"><img src="{{asset('/img/loupe.svg')}}" alt=""
                                               class="form_category_imp-loupe"></a>
       </div>
       @if(!\Illuminate\Support\Facades\Auth::user())
@@ -59,7 +94,7 @@
       @if(!\Illuminate\Support\Facades\Auth::user())
         <div class="col-md-1 col-2">
           <a href="#" class="user_cabinet" data-toggle="modal" data-target="#ModalIn">
-            <img src="{{asset('img/user_icon.svg')}}" alt="">
+            <img src="{{asset('/img/user_icon.svg')}}" alt="">
           </a>
         </div>
       @else

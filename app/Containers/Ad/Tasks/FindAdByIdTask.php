@@ -20,7 +20,7 @@ class FindAdByIdTask extends Task
     public function run($id)
     {
         try {
-            return $this->repository->find($id);
+            return $this->repository->with('pictures')->find($id);
         }
         catch (Exception $exception) {
             throw new NotFoundException();

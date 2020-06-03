@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-md-12">
           <ul class="breadcrumbs">
-            <li><a href="index.html"><img src="img/home_icon.svg" alt=""></a><img src="img/back_Icon.svg" alt=""></li>
+            <li><a href="index.html"><img src="/img/home_icon.svg" alt=""></a><img src="/img/back_Icon.svg" alt=""></li>
             <li>Подать новое обьявление</li>
           </ul>
         </div>
@@ -35,7 +35,7 @@
             </div>
             <div class="add_advert_block_input1">
               <input type="text" name="category_ads" placeholder="Выберите категорию" class="select_category" required readonly>
-              <img src="img/ipagination_right.svg" alt="">
+              <img src="/img/ipagination_right.svg" alt="">
               <span class="required">*</span>
               @error('category_ads')
                 <div class="alert errorBlock">{{ $message }}</div>
@@ -87,7 +87,7 @@
                   </ul>
                 </div>
                 <div class="col-md-3 catalogBlock2">
-                  <img src="img/arrow_left.svg" alt="" class="arrow_left d-md-none">
+                  <img src="/img/arrow_left.svg" alt="" class="arrow_left d-md-none">
                   <div class="number_block_category d-md-none">2/4</div>
                   <ul class="listCatalog listCatalog2">
                     <li>Албания</li>
@@ -101,7 +101,7 @@
                   </ul>
                 </div>
                 <div class="col-md-3 catalogBlock3">
-                  <img src="img/arrow_left.svg" alt="" class="arrow_left d-md-none">
+                  <img src="/img/arrow_left.svg" alt="" class="arrow_left d-md-none">
                   <div class="number_block_category d-md-none">3/4</div>
                   <ul class="listCatalog listCatalog3">
                     <li>Бельгия</li>
@@ -116,7 +116,7 @@
                   </ul>
                 </div>
                 <div class="col-md-3 catalogBlock4">
-                  <img src="img/arrow_left.svg" alt="" class="arrow_left d-md-none">
+                  <img src="/img/arrow_left.svg" alt="" class="arrow_left d-md-none">
                   <div class="number_block_category d-md-none">4/4</div>
                   <ul class="listCatalog listCatalog4 listCatalogEnd">
                     <li>Бельгия</li>
@@ -180,17 +180,17 @@
                 <div class="upload-file-container-text">
 
                   <label for="imgInput" class="add_foto_file_item_load">
-                    <img src="img/photo-camera-icon.svg" alt="">
+                    <img src="/img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
                   </label>
                   <div class="add_foto_file_img_wrapper">
                     <img  src="#" alt="" class="add_foto_file_img" />
                     <div class="add_foto_file_block_hover">
                       <label for="imgInput" class="add_foto_file_item_load2">
-                        <img src="img/refresh_icon.svg" alt="">
+                        <img src="/img/refresh_icon.svg" alt="">
                       </label>
                       <div class="add_foto_file_delete">
-                        <img src="img/delete-icon.svg" alt="">
+                        <img src="/img/delete-icon.svg" alt="">
                       </div>
                     </div>
                   </div>
@@ -201,17 +201,17 @@
                 <div class="upload-file-container-text">
 
                   <label for="imgInput2" class="add_foto_file_item_load">
-                    <img src="img/photo-camera-icon.svg" alt="">
+                    <img src="/img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
                   </label>
                   <div class="add_foto_file_img_wrapper">
                     <img  src="#" alt="" class="add_foto_file_img" />
                     <div class="add_foto_file_block_hover">
                       <label for="imgInput2" class="add_foto_file_item_load2">
-                        <img src="img/refresh_icon.svg" alt="">
+                        <img src="/img/refresh_icon.svg" alt="">
                       </label>
                       <div class="add_foto_file_delete">
-                        <img src="img/delete-icon.svg" alt="">
+                        <img src="/img/delete-icon.svg" alt="">
                       </div>
                     </div>
                   </div>
@@ -222,17 +222,17 @@
                 <div class="upload-file-container-text">
 
                   <label for="imgInput3" class="add_foto_file_item_load">
-                    <img src="img/photo-camera-icon.svg" alt="">
+                    <img src="/img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
                   </label>
                   <div class="add_foto_file_img_wrapper">
                     <img  src="#" alt="" class="add_foto_file_img" />
                     <div class="add_foto_file_block_hover">
                       <label for="imgInput3" class="add_foto_file_item_load2">
-                        <img src="img/refresh_icon.svg" alt="">
+                        <img src="/img/refresh_icon.svg" alt="">
                       </label>
                       <div class="add_foto_file_delete">
-                        <img src="img/delete-icon.svg" alt="">
+                        <img src="/img/delete-icon.svg" alt="">
                       </div>
                     </div>
                   </div>
@@ -242,17 +242,17 @@
               <div class="add_foto_file_item">
                 <div class="upload-file-container-text">
                   <label for="imgInput4" class="add_foto_file_item_load">
-                    <img src="img/photo-camera-icon.svg" alt="">
+                    <img src="/img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
                   </label>
                   <div class="add_foto_file_img_wrapper">
                     <img  src="#" alt="" class="add_foto_file_img" />
                     <div class="add_foto_file_block_hover">
                       <label for="imgInput4" class="add_foto_file_item_load2">
-                        <img src="img/refresh_icon.svg" alt="">
+                        <img src="/img/refresh_icon.svg" alt="">
                       </label>
                       <div class="add_foto_file_delete">
-                        <img src="img/delete-icon.svg" alt="">
+                        <img src="/img/delete-icon.svg" alt="">
                       </div>
                     </div>
                   </div>
@@ -262,17 +262,17 @@
               <div class="add_foto_file_item">
                 <div class="upload-file-container-text">
                   <label for="imgInput5" class="add_foto_file_item_load">
-                    <img src="img/photo-camera-icon.svg" alt="">
+                    <img src="/img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
                   </label>
                   <div class="add_foto_file_img_wrapper">
                     <img  src="#" alt="" class="add_foto_file_img" />
                     <div class="add_foto_file_block_hover">
                       <label for="imgInput5" class="add_foto_file_item_load2">
-                        <img src="img/refresh_icon.svg" alt="">
+                        <img src="/img/refresh_icon.svg" alt="">
                       </label>
                       <div class="add_foto_file_delete">
-                        <img src="img/delete-icon.svg" alt="">
+                        <img src="/img/delete-icon.svg" alt="">
                       </div>
                     </div>
                   </div>
@@ -282,17 +282,17 @@
               <div class="add_foto_file_item">
                 <div class="upload-file-container-text">
                   <label for="imgInput6" class="add_foto_file_item_load">
-                    <img src="img/photo-camera-icon.svg" alt="">
+                    <img src="/img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
                   </label>
                   <div class="add_foto_file_img_wrapper">
                     <img  src="#" alt="" class="add_foto_file_img" />
                     <div class="add_foto_file_block_hover">
                       <label for="imgInput6" class="add_foto_file_item_load2">
-                        <img src="img/refresh_icon.svg" alt="">
+                        <img src="/img/refresh_icon.svg" alt="">
                       </label>
                       <div class="add_foto_file_delete">
-                        <img src="img/delete-icon.svg" alt="">
+                        <img src="/img/delete-icon.svg" alt="">
                       </div>
                     </div>
                   </div>
@@ -302,17 +302,17 @@
               <div class="add_foto_file_item">
                 <div class="upload-file-container-text">
                   <label for="imgInput7" class="add_foto_file_item_load">
-                    <img src="img/photo-camera-icon.svg" alt="">
+                    <img src="/img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
                   </label>
                   <div class="add_foto_file_img_wrapper">
                     <img  src="#" alt="" class="add_foto_file_img" />
                     <div class="add_foto_file_block_hover">
                       <label for="imgInput2" class="add_foto_file_item_load2">
-                        <img src="img/refresh_icon.svg" alt="">
+                        <img src="/img/refresh_icon.svg" alt="">
                       </label>
                       <div class="add_foto_file_delete">
-                        <img src="img/delete-icon.svg" alt="">
+                        <img src="/img/delete-icon.svg" alt="">
                       </div>
                     </div>
                   </div>
@@ -322,17 +322,17 @@
               <div class="add_foto_file_item">
                 <div class="upload-file-container-text">
                   <label for="imgInput8" class="add_foto_file_item_load">
-                    <img src="img/photo-camera-icon.svg" alt="">
+                    <img src="/img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
                   </label>
                   <div class="add_foto_file_img_wrapper">
                     <img  src="#" alt="" class="add_foto_file_img" />
                     <div class="add_foto_file_block_hover">
                       <label for="imgInput8" class="add_foto_file_item_load2">
-                        <img src="img/refresh_icon.svg" alt="">
+                        <img src="/img/refresh_icon.svg" alt="">
                       </label>
                       <div class="add_foto_file_delete">
-                        <img src="img/delete-icon.svg" alt="">
+                        <img src="/img/delete-icon.svg" alt="">
                       </div>
                     </div>
                   </div>
@@ -343,17 +343,17 @@
                 <div class="upload-file-container-text">
 
                   <label for="imgInput9" class="add_foto_file_item_load">
-                    <img src="img/photo-camera-icon.svg" alt="">
+                    <img src="/img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
                   </label>
                   <div class="add_foto_file_img_wrapper">
                     <img  src="#" alt="" class="add_foto_file_img" />
                     <div class="add_foto_file_block_hover">
                       <label for="imgInput9" class="add_foto_file_item_load2">
-                        <img src="img/refresh_icon.svg" alt="">
+                        <img src="/img/refresh_icon.svg" alt="">
                       </label>
                       <div class="add_foto_file_delete">
-                        <img src="img/delete-icon.svg" alt="">
+                        <img src="/img/delete-icon.svg" alt="">
                       </div>
                     </div>
                   </div>
@@ -364,17 +364,17 @@
                 <div class="upload-file-container-text">
 
                   <label for="imgInput10" class="add_foto_file_item_load">
-                    <img src="img/photo-camera-icon.svg" alt="">
+                    <img src="/img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
                   </label>
                   <div class="add_foto_file_img_wrapper">
                     <img  src="#" alt="" class="add_foto_file_img" />
                     <div class="add_foto_file_block_hover">
                       <label for="imgInput10" class="add_foto_file_item_load2">
-                        <img src="img/refresh_icon.svg" alt="">
+                        <img src="/img/refresh_icon.svg" alt="">
                       </label>
                       <div class="add_foto_file_delete">
-                        <img src="img/delete-icon.svg" alt="">
+                        <img src="/img/delete-icon.svg" alt="">
                       </div>
                     </div>
                   </div>
@@ -409,5 +409,63 @@
     </div>
   </form>
   </article>
+
+  <div class="modal fade modalCatalog" id="mainCatalog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <img src="/img/close-icon.svg" alt="">
+        </button>
+
+        <div class="row">
+          <div class="col-md-4 catalogBlock1">
+            <div class="number_block_category d-md-none">1/3</div>
+            <h5>Категория</h5>
+            <ul class="listCatalog listCatalog1">
+              <li>Детский мир</li>
+              <li>Недвижимость</li>
+              <li>Транспорт</li>
+              <li>Запчасти для транспорта</li>
+              <li>Работа</li>
+              <li>Животные</li>
+              <li>Электроника</li>
+              <li>Бизнес и услуги</li>
+
+              <li>Детский мир</li>
+              <li>Недвижимость</li>
+              <li>Транспорт</li>
+            </ul>
+          </div>
+          <div class="col-md-4 catalogBlock2">
+            <img src="/img/arrow_left.svg" alt="" class="arrow_left d-md-none">
+            <div class="number_block_category d-md-none">2/3</div>
+            <h5>Рубрика</h5>
+            <ul class="listCatalog listCatalog2">
+              <li>Детский мир</li>
+              <li>Недвижимость</li>
+              <li>Транспорт</li>
+              <li>Запчасти для транспорта</li>
+              <li>Работа</li>
+              <li>Животные</li>
+              <li>Электроника</li>
+              <li>Бизнес и услуги</li>
+            </ul>
+          </div>
+          <div class="col-md-4 catalogBlock3">
+            <img src="/img/arrow_left.svg" alt="" class="arrow_left d-md-none">
+            <div class="number_block_category d-md-none">3/3</div>
+            <h5>Подрубрика</h5>
+            <ul class="listCatalog listCatalog3 listCatalogEnd">
+              <li>Аренда гаражей, парковок</li>
+              <li>Продажа гаражей, парковок</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 @endsection
 

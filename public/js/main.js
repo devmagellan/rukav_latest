@@ -54,7 +54,7 @@ $(document).ready(function(){
     telInput.intlTelInput({
 
         nationalMode: true,
-        utilsScript: "js/utils.js" //для форматирования/плейсхолдера и т.д.
+        utilsScript: "/js/utils.js" //для форматирования/плейсхолдера и т.д.
     });
 
     $.each(countryData, function(i, country) {
@@ -115,8 +115,8 @@ $(document).ready(function(){
         slidesToScroll: 1,
         infinite: true,
         fade: true,
-        prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="img/slide_icon2.svg" alt=""></a>',
-        nextArrow: '<a class="product_slider_icon product_slider_next"><img src="img/slide_icon1.svg" alt=""></a>',
+        prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="/img/slide_icon2.svg" alt=""></a>',
+        nextArrow: '<a class="product_slider_icon product_slider_next"><img src="/img/slide_icon1.svg" alt=""></a>',
         asNavFor: '.product_slider_nav',
         responsive: [{
             breakpoint: 768,
@@ -152,7 +152,7 @@ $(document).ready(function(){
 
     $('#telphone2').intlTelInput({
         nationalMode: true,
-        utilsScript: "js/utils.js" //для форматирования/плейсхолдера и т.д.
+        utilsScript: "/js/utils.js" //для форматирования/плейсхолдера и т.д.
     });
 
     function readURL(input) {

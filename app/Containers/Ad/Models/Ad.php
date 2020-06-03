@@ -57,7 +57,7 @@ class Ad extends Model
     }
 
     public function pictures(){
-        return $this->hasMany(\App\Containers\Ad\Models\Picture::class);
+        return $this->hasMany(\App\Containers\Ad\Models\Picture::class, 'ads_id', 'id');
 
     }
 
