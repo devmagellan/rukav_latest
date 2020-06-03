@@ -12,6 +12,7 @@ use App\Containers\Ad\UI\WEB\Requests\StoreAdRequest;
 use App\Containers\Ad\UI\WEB\Requests\EditAdRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
+use MongoDB\Driver\Session;
 
 
 /**
@@ -42,8 +43,9 @@ class Controller extends WebController
   public function show(FindAdByIdRequest $request)
   {
     $ad = Apiato::call('Ad@FindAdByIdAction', [$request]);
+    dd($ad->name);
     //TODO эту переменную сделать в сервис провайдере
-    $categories= Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
+    $categories = Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
     return view('ad::ads.single-ads', compact('categories'));
   }
 
@@ -55,7 +57,7 @@ class Controller extends WebController
   public function create(CreateAdRequest $request)
   {
     //TODO эту переменную сделать в сервис провайдере
-    $categories= Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
+    $categories = Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
     return view('ad::ads.form-add-ads', compact('categories'));
   }
 
@@ -67,8 +69,15 @@ class Controller extends WebController
   public function store(StoreAdRequest $request)
   {
     $ad = Apiato::call('Ad@CreateAdAction', [$request]);
+    if ($ad) {
+      $request->session()->flash('infoAd', true);
+    }
+    return back();
+  }
 
-    // ..
+  public function showSuccessPage()
+  {
+    return view('ad::success-page');
   }
 
   /**

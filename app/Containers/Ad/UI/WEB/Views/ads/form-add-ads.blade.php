@@ -1,6 +1,8 @@
 @extends('ad::layouts.layout')
 @section('content')
   <article class="add_advert_block">
+    <span data-status_created="{{session('infoAd')}}" id="statusAd"></span>
+    <form action="{{route('web_ad_store')}}" method="post" enctype="multipart/form-data">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -24,14 +26,20 @@
               Заголовок
             </h6>
             <div class="add_advert_block_input1">
-              <input type="text" name="name_ad" maxlength="70" placeholder="Название объявления" required>
+              <input type="text" name="name_ad" maxlength="70" placeholder="Название объявления" required value="{{old('name_ad')}}">
               <span class="required">*</span>
+              @error('name_ad')
+              <div class="alert errorBlock">{{ $message }}</div>
+              @enderror
               <p class="number_of_signs"><span>70</span> знаков остается</p>
             </div>
             <div class="add_advert_block_input1">
-              <input type="text" name="" placeholder="Выберите категорию" class="select_category" required readonly>
+              <input type="text" name="category_ads" placeholder="Выберите категорию" class="select_category" required readonly>
               <img src="img/ipagination_right.svg" alt="">
               <span class="required">*</span>
+              @error('category_ads')
+                <div class="alert errorBlock">{{ $message }}</div>
+              @enderror
             </div>
           </div>
         </div>
@@ -57,8 +65,14 @@
               <label for="out_uk">Вне UK</label>
             </div>
             <div class="all_user_block">
-              <input type="text" name="" placeholder="Адрес" class="add_advert_input_location">
-              <input type="text" name="" placeholder="Postcode" class="add_advert_input_location">
+              <input type="text" name="address" placeholder="Адрес" class="add_advert_input_location" id="location_search" required value="{{old('address')}}">
+              @error('address')
+              <div class="alert errorBlock">{{ $message }}</div>
+              @enderror
+              <input type="text" name="post_code" placeholder="Postcode" class="add_advert_input_location postcode" id="location" required value="{{old('post_code')}}">
+              @error('post_code')
+              <div class="alert errorBlock">{{ $message }}</div>
+              @enderror
             </div>
             <div class="outUk" style="display:none;">
               <div class="row">
@@ -121,7 +135,10 @@
             </h6><br>
             <div class="contact_info_wrapper">
               <p>Email для сообщений (скрыт)</p>
-              <input type="email" name="" placeholder="Email">
+              <input type="email" name="email" placeholder="Email" required value="{{old('email')}}">
+              @error('email')
+              <div class="alert errorBlock">{{ $message }}</div>
+              @enderror
             </div>
             <div class="contact_info_wrapper contact_info_wrapper2">
               <div class="hide_phone_radio">
@@ -130,7 +147,10 @@
                 <input type="radio" name="hide_phone" value="Не показывать" id="no_hide_phone1">
                 <label for="no_hide_phone1">Не показывать</label>
               </div>
-              <input type="tel" id="telphone2" name="">
+              <input type="tel" id="telphone2" name="phone" required value="{{old('phone')}}">
+              @error('email')
+              <div class="alert errorBlock">{{ $message }}</div>
+              @enderror
             </div>
             <div class="contact_info_wrapper">
               <div class="hide_phone_radio">
@@ -139,10 +159,13 @@
                 <input type="radio" name="hide_name" value="Не показывать" id="no_hide_name">
                 <label for="no_hide_name">Не показывать</label>
               </div>
-              <input type="text" name="" placeholder="Имя">
+              <input type="text" name="name" placeholder="Имя" required value="{{old('name')}}">
+              @error('name')
+              <div class="alert errorBlock">{{ $message }}</div>
+              @enderror
             </div>
             <div class="contact_info_wrapper">
-              <div class="input_price_icon">£</div><input type="text" name="" placeholder="Цена (необезательно)">
+              <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (необезательно)" value="{{old('price')}}">
             </div>
           </div>
         </div>
@@ -171,7 +194,7 @@
                       </div>
                     </div>
                   </div>
-                  <input type="file" name="pic1" class="photo" id="imgInput"/>
+                  <input type="file" name="files[]" class="photo" id="imgInput"/>
                 </div>
               </div>
               <div class="add_foto_file_item">
@@ -192,7 +215,7 @@
                       </div>
                     </div>
                   </div>
-                  <input type="file" name="pic2" class="photo" id="imgInput2"/>
+                  <input type="file" name="files[]" class="photo" id="imgInput2"/>
                 </div>
               </div>
               <div class="add_foto_file_item">
@@ -213,15 +236,11 @@
                       </div>
                     </div>
                   </div>
-                  <input type="file" name="pic3" class="photo" id="imgInput3"/>
+                  <input type="file" name="files[]" class="photo" id="imgInput3"/>
                 </div>
-
-
-
               </div>
               <div class="add_foto_file_item">
                 <div class="upload-file-container-text">
-
                   <label for="imgInput4" class="add_foto_file_item_load">
                     <img src="img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
@@ -237,12 +256,11 @@
                       </div>
                     </div>
                   </div>
-                  <input type="file" name="pic4" class="photo" id="imgInput4"/>
+                  <input type="file" name="files[]" class="photo" id="imgInput4"/>
                 </div>
               </div>
               <div class="add_foto_file_item">
                 <div class="upload-file-container-text">
-
                   <label for="imgInput5" class="add_foto_file_item_load">
                     <img src="img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
@@ -258,17 +276,11 @@
                       </div>
                     </div>
                   </div>
-                  <input type="file" name="pic5" class="photo" id="imgInput5"/>
+                  <input type="file" name="files[]" class="photo" id="imgInput5"/>
                 </div>
-
-
-
               </div>
-
               <div class="add_foto_file_item">
-
                 <div class="upload-file-container-text">
-
                   <label for="imgInput6" class="add_foto_file_item_load">
                     <img src="img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
@@ -284,12 +296,11 @@
                       </div>
                     </div>
                   </div>
-                  <input type="file" name="pic6" class="photo" id="imgInput6"/>
+                  <input type="file" name="files[]" class="photo" id="imgInput6"/>
                 </div>
               </div>
               <div class="add_foto_file_item">
                 <div class="upload-file-container-text">
-
                   <label for="imgInput7" class="add_foto_file_item_load">
                     <img src="img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
@@ -305,12 +316,11 @@
                       </div>
                     </div>
                   </div>
-                  <input type="file" name="pic7" class="photo" id="imgInput7"/>
+                  <input type="file" name="files[]" class="photo" id="imgInput7"/>
                 </div>
               </div>
               <div class="add_foto_file_item">
                 <div class="upload-file-container-text">
-
                   <label for="imgInput8" class="add_foto_file_item_load">
                     <img src="img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
@@ -326,11 +336,8 @@
                       </div>
                     </div>
                   </div>
-                  <input type="file" name="pic8" class="photo" id="imgInput8"/>
+                  <input type="file" name="files[]" class="photo" id="imgInput8"/>
                 </div>
-
-
-
               </div>
               <div class="add_foto_file_item">
                 <div class="upload-file-container-text">
@@ -350,7 +357,7 @@
                       </div>
                     </div>
                   </div>
-                  <input type="file" name="pic9" class="photo" id="imgInput9"/>
+                  <input type="file" name="files[]" class="photo" id="imgInput9"/>
                 </div>
               </div>
               <div class="add_foto_file_item">
@@ -371,14 +378,14 @@
                       </div>
                     </div>
                   </div>
-                  <input type="file" name="pic10" class="photo" id="imgInput10"/>
+                  <input type="file" name="files[]" class="photo" id="imgInput10"/>
                 </div>
-
-
-
               </div>
             </div>
             <a href="#" class="add_advert_rolls_foto">Привила добавления фото</a>
+            @error('files')
+            <div class="alert errorBlock">{{ $message }}</div>
+            @enderror
           </div>
         </div>
         <div class="col-sm-12">
@@ -389,13 +396,18 @@
             <div class="add_advert_desc">
               <p>Текст объявления: на русском языке. Допустимое использование английского не более 20%(термины, названия).</p>
               <p class="end">Транслит не допускается.</p>
-              <textarea name="" placeholder="Текст обьявления"></textarea>
-              <button type="submit">Подать обьявление</button>
+              <textarea name="description" placeholder="Текст обьявления" required>{{old('description')}}</textarea>
+              @error('description')
+              <div class="alert errorBlock">{{ $message }}</div>
+              @enderror
+              <button type="submit" id="saveAdsButton">Подать обьявление</button>
               <button type="button" class="buttonHref">Предварительный просмотр</button>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </form>
   </article>
 @endsection
+

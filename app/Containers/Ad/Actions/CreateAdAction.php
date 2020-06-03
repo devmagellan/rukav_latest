@@ -10,11 +10,8 @@ class CreateAdAction extends Action
 {
     public function run(Request $request)
     {
-        $data = $request->sanitizeInput([
-            // add your request data here
-        ]);
 
-        $ad = Apiato::call('Ad@CreateAdTask', [$data]);
+        $ad = Apiato::call('Ad@CreateAdTask', [$request]);
 
         return $ad;
     }

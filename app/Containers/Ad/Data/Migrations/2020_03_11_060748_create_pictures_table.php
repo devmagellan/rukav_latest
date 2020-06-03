@@ -15,8 +15,10 @@ class CreatePicturesTable extends Migration
     {
         Schema::create('pictures', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('message_id');
+            $table->unsignedBigInteger('ads_id');
             $table->string('photo');
+            $table->softDeletes();
+            $table->foreign('ads_id')->references('id')->on('ads')->onDelete('cascade');
         });
     }
 

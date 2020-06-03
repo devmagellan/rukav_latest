@@ -11,7 +11,6 @@ class FindAdByIdAction extends Action
     public function run(Request $request)
     {
         $ad = Apiato::call('Ad@FindAdByIdTask', [$request->id]);
-
         return $ad;
     }
 }

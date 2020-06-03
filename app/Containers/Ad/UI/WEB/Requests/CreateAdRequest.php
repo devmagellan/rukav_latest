@@ -52,8 +52,7 @@ class CreateAdRequest extends Request
     public function rules()
     {
         return [
-            // 'id' => 'required',
-            // '{user-input}' => 'required|max:255',
+
         ];
     }
 
@@ -62,8 +61,6 @@ class CreateAdRequest extends Request
      */
     public function authorize()
     {
-        return $this->check([
-            'hasAccess',
-        ]);
+        return true;
     }
 }

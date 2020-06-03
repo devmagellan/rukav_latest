@@ -185,63 +185,63 @@ class AdsTableSeeder_2 extends Seeder
         \DB::table('pictures')->insert([
             /*1*/
             [
-                'message_id' => 1,
+                'ads_id' => 1,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'message_id' => 2,
+                'ads_id' => 2,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'message_id' => 3,
+                'ads_id' => 3,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'message_id' => 4,
+                'ads_id' => 4,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'message_id' => 5,
+                'ads_id' => 5,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'message_id' => 6,
+                'ads_id' => 6,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'message_id' => 7,
+                'ads_id' => 7,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'message_id' => 8,
+                'ads_id' => 8,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'message_id' => 9,
+                'ads_id' => 9,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'message_id' => 10,
+                'ads_id' => 10,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'message_id' => 11,
+                'ads_id' => 11,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'message_id' => 12,
+                'ads_id' => 12,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'message_id' => 13,
+                'ads_id' => 13,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'message_id' => 14,
+                'ads_id' => 14,
                 'photo'=>'tshort.jpg'
             ],
             [
-                'message_id' => 15,
+                'ads_id' => 15,
                 'photo'=>'tshort.jpg'
             ]
         ]);

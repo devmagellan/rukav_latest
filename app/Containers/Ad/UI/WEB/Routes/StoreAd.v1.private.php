@@ -8,3 +8,11 @@ $router->post('ads/store', [
       'auth:web',
     ],
 ]);
+
+$router->get('ads/success-created', [
+  'as' => 'web_ad_success',
+  'uses'  => 'Controller@showSuccessPage',
+  'middleware' => [
+    'auth:web',
+  ],
+]);

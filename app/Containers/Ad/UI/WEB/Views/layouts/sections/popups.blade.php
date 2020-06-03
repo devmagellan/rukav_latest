@@ -353,6 +353,19 @@
   </div>
 </div>
 
+<div class="modal fade" id="adCreated" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <img src="{{asset('img/close-icon.svg')}}" alt="">
+      </button>
+      <h1>Успех</h1>
+      <p>Ваше обьявление создано</p>
+    </div>
+  </div>
+</div>
+
 <div class="modal modal_confirm_email_phone fade" id="confirmEmailPhone" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel2" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

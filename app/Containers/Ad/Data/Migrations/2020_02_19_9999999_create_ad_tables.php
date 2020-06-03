@@ -27,7 +27,7 @@ class CreateAdTables extends Migration
             $table->float('price')->nullable();
             $table->integer('visibility');
             $table->boolean('active')->default(true);
-
+            $table->string('name')->nullable();
             $table->timestamps();
             //$table->softDeletes();
 

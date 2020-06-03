@@ -11,6 +11,7 @@
   <link href="{{asset('/css/intlTelInput.css')}}" rel="stylesheet">
   <link href="{{asset('/css/main.css')}}" rel="stylesheet">
   <link href="{{asset('/css/media.css')}}" rel="stylesheet">
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaZXMHQgJkoXZkkBbtelY8SLAwMOasg0Y&libraries=places&language=en"></script>
 </head>
 <body>
 <header class="header">
