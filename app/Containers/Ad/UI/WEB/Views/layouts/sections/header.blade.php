@@ -8,9 +8,9 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@ 1.8.1/slick/slick.css"/>
   <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-  <link href="{{asset('css/intlTelInput.css')}}" rel="stylesheet">
-  <link href="{{asset('css/main.css')}}" rel="stylesheet">
-  <link href="{{asset('css/media.css')}}" rel="stylesheet">
+  <link href="{{asset('/css/intlTelInput.css')}}" rel="stylesheet">
+  <link href="{{asset('/css/main.css')}}" rel="stylesheet">
+  <link href="{{asset('/css/media.css')}}" rel="stylesheet">
 </head>
 <body>
 <header class="header">
@@ -41,12 +41,12 @@
                                               class="form_category_imp-loupe"></a>
       </div>
       @if(!\Illuminate\Support\Facades\Auth::user())
-      <div class="col-md-2 col-2">
-        <a href="#" class="add_ad" data-toggle="modal" data-target="#confirmEmailPhone">
-          <span class="plus">+</span>
-          <span>Подать объявление</span>
-        </a>
-      </div>
+        <div class="col-md-2 col-2">
+          <a href="#" class="add_ad" data-toggle="modal" data-target="#confirmEmailPhone">
+            <span class="plus">+</span>
+            <span>Подать объявление</span>
+          </a>
+        </div>
       @else
         <div class="col-md-2 col-2">
           <a href="{{route('web_ad_create')}}" class="add_ad">
@@ -138,7 +138,7 @@
       <div class="row">
         <div class="col-md-12">
           <ul class="category_dropdown_main_list">
-            {{ $rec->view_cat($result,0,0)}}
+            {{$rec->view_cat($result,0,0)}}
           </ul>
         </div>
       </div>

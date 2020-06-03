@@ -1,0 +1,5 @@
+@include('ad::layouts.sections.header')
+@yield('content')
+@include('ad::layouts.sections.footer')
+@include('ad::layouts.sections.popups')
+@include('ad::layouts.sections.scripts')
