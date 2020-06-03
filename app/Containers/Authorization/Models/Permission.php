@@ -17,8 +17,11 @@ class Permission extends SpatiePermission
     use HashIdTrait;
     use HasResourceKeyTrait;
 
-    protected $guard_name = 'web';
+    protected $guard_name = 'admin';
 
+ /*   protected $casts = [
+        'roles'      => 'array'
+    ];*/
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +31,7 @@ class Permission extends SpatiePermission
     protected $fillable = [
         'name',
         'guard_name',
+        'process_name',
         'display_name',
         'description',
     ];

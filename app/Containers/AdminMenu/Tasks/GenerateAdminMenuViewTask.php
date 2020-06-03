@@ -63,9 +63,10 @@ class GenerateAdminMenuViewTask extends Task
         //перебираем в цикле массив и выводим на экран
         for ($i = 0; $i < count($arr[$parent_id]); $i++) {
             //Если пермишен присутствуют у текущего юзера выводить нулевой уровень
-
-            //dump($arr[$parent_id][$i]->permission,\Auth::user(),\Auth::user()->can($arr[$parent_id][$i]->permission));
-        /*    if(($arr[$parent_id][$i]['permission']!=null && \Auth::user()->can($arr[$parent_id][$i]['permission'])) ||
+dump(auth()->user()->hasPermissionTo('view_customer_interface','admin'));
+dd(\Auth::guard('web')->check(),\Auth::guard('admin')->check());
+            dump($arr[$parent_id][$i]['permission'],\Auth::guard('admin')->user(),\Auth::guard('admin')->user()->can($arr[$parent_id][$i]['permission']));
+     /*      if(($arr[$parent_id][$i]['permission']!=null && \Auth::user()->can($arr[$parent_id][$i]['permission'])) ||
                 ($arr[$parent_id][$i]['permission']==null && in_array($arr[$parent_id][$i]['parent_id'],$parents_approved))){
 
                 if($arr[$parent_id][$i]['permission']!=null && \Auth::user()->can($arr[$parent_id][$i]['permission'])){
