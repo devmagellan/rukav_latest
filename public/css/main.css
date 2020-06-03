@@ -789,3 +789,6 @@ ul.category_dropdown_sub_list li ul a:hover{
 #errorsBlock, #loginErrorsBlock{
   color: red;
 }
+.logout{
+  width: 100px;
+}

@@ -60,4 +60,10 @@ class Controller extends WebController
     }
     return response(['Не правильный логин или пароль'], Response::HTTP_CONFLICT);
   }
+
+  public function logoutUser()
+  {
+    Auth::logout();
+    return redirect('/');
+  }
 }

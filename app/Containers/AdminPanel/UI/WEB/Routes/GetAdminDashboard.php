@@ -9,3 +9,11 @@ $router->get('/dashboard', [
     ],
 ]);
 
+$router->get('/admin/login', [
+  'as'   => 'get_admin_login',
+  'uses'       => 'Controller@viewDashboardPage',
+  'middleware' => [
+    'auth:web'
+  ],
+]);
+

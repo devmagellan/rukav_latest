@@ -20,98 +20,103 @@ use App\Containers\AdminPanel\UI\WEB\Requests\ViewDashboardRequest;
  */
 class Controller extends WebController
 {
-    /**
-     * Show all entities
-     *
-     * @param GetAllAdminPanelsRequest $request
-     */
-    public function index(GetAllAdminPanelsRequest $request)
-    {
-        $adminpanels = Apiato::call('AdminPanel@GetAllAdminPanelsAction', [$request]);
+  /**
+   * Show all entities
+   *
+   * @param GetAllAdminPanelsRequest $request
+   */
+  public function index(GetAllAdminPanelsRequest $request)
+  {
+    $adminpanels = Apiato::call('AdminPanel@GetAllAdminPanelsAction', [$request]);
 
-        // ..
-    }
+    // ..
+  }
 
-    /**
-     * Show one entity
-     *
-     * @param FindAdminPanelByIdRequest $request
-     */
-    public function show(FindAdminPanelByIdRequest $request)
-    {
-        $adminpanel = Apiato::call('AdminPanel@FindAdminPanelByIdAction', [$request]);
+  /**
+   * Show one entity
+   *
+   * @param FindAdminPanelByIdRequest $request
+   */
+  public function show(FindAdminPanelByIdRequest $request)
+  {
+    $adminpanel = Apiato::call('AdminPanel@FindAdminPanelByIdAction', [$request]);
 
-        // ..
-    }
+    // ..
+  }
 
-    /**
-     * Create entity (show UI)
-     *
-     * @param CreateAdminPanelRequest $request
-     */
-    public function create(CreateAdminPanelRequest $request)
-    {
-        // ..
-    }
+  /**
+   * Create entity (show UI)
+   *
+   * @param CreateAdminPanelRequest $request
+   */
+  public function create(CreateAdminPanelRequest $request)
+  {
+    // ..
+  }
 
-    /**
-     * Add a new entity
-     *
-     * @param StoreAdminPanelRequest $request
-     */
-    public function store(StoreAdminPanelRequest $request)
-    {
-        $adminpanel = Apiato::call('AdminPanel@CreateAdminPanelAction', [$request]);
+  /**
+   * Add a new entity
+   *
+   * @param StoreAdminPanelRequest $request
+   */
+  public function store(StoreAdminPanelRequest $request)
+  {
+    $adminpanel = Apiato::call('AdminPanel@CreateAdminPanelAction', [$request]);
 
-        // ..
-    }
+    // ..
+  }
 
-    /**
-     * Edit entity (show UI)
-     *
-     * @param EditAdminPanelRequest $request
-     */
-    public function edit(EditAdminPanelRequest $request)
-    {
-        $adminpanel = Apiato::call('AdminPanel@GetAdminPanelByIdAction', [$request]);
+  /**
+   * Edit entity (show UI)
+   *
+   * @param EditAdminPanelRequest $request
+   */
+  public function edit(EditAdminPanelRequest $request)
+  {
+    $adminpanel = Apiato::call('AdminPanel@GetAdminPanelByIdAction', [$request]);
 
-        // ..
-    }
+    // ..
+  }
 
-    /**
-     * Update a given entity
-     *
-     * @param UpdateAdminPanelRequest $request
-     */
-    public function update(UpdateAdminPanelRequest $request)
-    {
-        $adminpanel = Apiato::call('AdminPanel@UpdateAdminPanelAction', [$request]);
+  /**
+   * Update a given entity
+   *
+   * @param UpdateAdminPanelRequest $request
+   */
+  public function update(UpdateAdminPanelRequest $request)
+  {
+    $adminpanel = Apiato::call('AdminPanel@UpdateAdminPanelAction', [$request]);
 
-        // ..
-    }
+    // ..
+  }
 
-    /**
-     * Delete a given entity
-     *
-     * @param DeleteAdminPanelRequest $request
-     */
-    public function delete(DeleteAdminPanelRequest $request)
-    {
-         $result = Apiato::call('AdminPanel@DeleteAdminPanelAction', [$request]);
+  /**
+   * Delete a given entity
+   *
+   * @param DeleteAdminPanelRequest $request
+   */
+  public function delete(DeleteAdminPanelRequest $request)
+  {
+    $result = Apiato::call('AdminPanel@DeleteAdminPanelAction', [$request]);
 
-         // ..
-    }
+    // ..
+  }
 
 
-    /**
-     * @param \App\Containers\Authentication\UI\WEB\Requests\ViewDashboardRequest $request
-     *
-     * @return  \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function viewDashboardPage(ViewDashboardRequest $request)
-    {
-        $result['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
+  /**
+   * @param \App\Containers\Authentication\UI\WEB\Requests\ViewDashboardRequest $request
+   *
+   * @return  \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+   */
+  public function viewDashboardPage(ViewDashboardRequest $request)
+  {
+    $result['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
 
-        return view('adminpanel::dashboard.dashboard',$result);
-    }
+    return view('adminpanel::dashboard.dashboard', $result);
+  }
+
+  public function getLoginFormToAdminPage()
+  {
+
+  }
 }

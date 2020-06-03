@@ -46,11 +46,18 @@
           <span>Подать объявление</span>
         </a>
       </div>
-      <div class="col-md-1 col-2">
-        <a href="#" class="user_cabinet" data-toggle="modal" data-target="#ModalIn">
-          <img src="{{asset('img/user_icon.svg')}}" alt="">
-        </a>
-      </div>
+      @if(!\Illuminate\Support\Facades\Auth::user())
+        <div class="col-md-1 col-2">
+          <a href="#" class="user_cabinet" data-toggle="modal" data-target="#ModalIn">
+            <img src="{{asset('img/user_icon.svg')}}" alt="">
+          </a>
+        </div>
+      @else
+        <div class="col-md-1 col-2">
+          <a href="{{route('logout_user')}}" class="user_cabinet logout">Выйти
+          </a>
+        </div>
+        @endif
     </div>
   </div>
   @php
