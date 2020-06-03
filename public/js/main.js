@@ -134,7 +134,7 @@ $(document).ready(function(){
         infinite: true
     });
 
-    // $('.product_slider_main_item').zoom({ on:'click' });
+    $('.product_slider_main_item').zoom({ on:'click' });
 
 
     $('.product_slider_advantage_slider').slick({

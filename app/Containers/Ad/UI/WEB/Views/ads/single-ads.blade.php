@@ -17,7 +17,7 @@
       <div class="row">
         <div class="col-md-8 justify-content-between product_title_block" style="display: flex;">
           <h3 class="product_title">
-            Mercedes-Benz C 220 AVANTGARDE 2010
+            {{$ad->title}}
           </h3>
           <a href="#" class="add_to_favourites">
             <span>Добавить в <br> Избранное</span>
@@ -26,54 +26,25 @@
         </div>
         <div class="col-md-4">
           <p class="product_price">
-            £ 10 900
+            £ {{$ad->price}}
           </p>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-8">
           <div class="product_slider_main">
+            @foreach($ad->pictures as $picture)
             <div class="product_slider_main_item">
-              <img src="img/product_slider_img1.png" alt="">
+              <img src="{{asset('/storage/'.$picture->photo)}}" alt="">
             </div>
-            <div class="product_slider_main_item">
-              <img src="img/product_slider_img2.png" alt="">
-            </div>
-            <div class="product_slider_main_item">
-              <img src="img/product_slider_img3.png" alt="">
-            </div>
-            <div class="product_slider_main_item">
-              <img src="img/product_slider_img4.png" alt="">
-            </div>
-            <div class="product_slider_main_item">
-              <img src="img/product_slider_img5.png" alt="">
-            </div>
-            <div class="product_slider_main_item">
-              <img src="img/product_slider_img6.png" alt="">
-            </div>
+            @endforeach
           </div>
           <div class="product_slider_nav">
-            <div class="product_slider_nav_item">
-              <img src="img/product_slider_img1.png" alt="">
-            </div>
-            <div class="product_slider_nav_item">
-              <img src="img/product_slider_img2.png" alt="">
-            </div>
-            <div class="product_slider_nav_item">
-              <img src="img/product_slider_img3.png" alt="">
-            </div>
-            <div class="product_slider_nav_item">
-              <img src="img/product_slider_img4.png" alt="">
-            </div>
-            <div class="product_slider_nav_item">
-              <img src="img/product_slider_img5.png" alt="">
-            </div>
-            <div class="product_slider_nav_item">
-              <img src="img/product_slider_img6.png" alt="">
-            </div>
-            <div class="product_slider_nav_item">
-              <img src="img/product_slider_img1.png" alt="">
-            </div>
+            @foreach($ad->pictures as $picture)
+              <div class="product_slider_main_item">
+                <img src="{{asset('/storage/'.$picture->photo)}}" alt="">
+              </div>
+            @endforeach
           </div>
         </div>
         <div class="col-lg-4">
@@ -137,30 +108,7 @@
         <div class="col-sm-12">
           <h4>Описание</h4>
           <p>
-            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-          </p>
-          <h5>Характеристика</h5>
-          <p>
-            Максимальна комплектація AVANTGARDE. <br>
-            Другий власник (не перекуп!), машина була куплена в Німеччині, обслуговувалася лише на Мерседес центрі, є вся історія.<br>
-            Вся ціла, в рідній фарбі!!!<br>
-            Всі вікна рідні.<br>
-            Салон доглянутий, як новий.<br>
-            АКПП і мотор працює ідеально, на 190 тис. замінено масло і фільтра в двигуні і коробці, ГРМ.<br>
-            Ходова в відмінному стані.<br>
-            НІЯКИХ вкладень не потребує!!!<br>
-            ТОРГ! На обмін 12500$<br>
-            <strong>Пакет комплектації AVANTGARDE:</strong><br>
-            - 2-х зон. клима,<br>
-            - круїз, темпомат,<br>
-            - парктроніки,<br>
-            - датчики світла, дощу, тиску шин,<br>
-            - підігрів склоомивача<br>
-            - охолодження бардачка,<br>
-            - висувний монітор з навігацією, Bluetooth, гучний зв'язок, голосове керування,<br>
-            - комбінована шкіра, і багато ін.<br>
-            - зимова і літня гума.<br>
-            - 2 ключа.
+           {{$ad->message}}
           </p>
         </div>
       </div>
@@ -206,9 +154,9 @@
 
       <div class="row product_indicators_block">
         <div class="col-md-9">
-          <p>Добавлено в <span>17:23, 25 мая 2020</span></p>
-          <p>Номер объявления: <span>632885363</span></p>
-          <p>Просмотры: <span>238</span></p>
+          <p>Добавлено в <span>{{$ad->created_at->format('H:i')}}, {{$ad->created_at->format('d-m-Y')}}</span></p>
+          <p>Номер объявления: <span>{{$ad->id}}</span></p>
+          <p>Просмотры: <span>{{rand(1, 100)}}</span></p>
         </div>
         <div class="col-md-3">
           <div class="product_indicators_complain">

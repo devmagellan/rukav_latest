@@ -43,10 +43,9 @@ class Controller extends WebController
   public function show(FindAdByIdRequest $request)
   {
     $ad = Apiato::call('Ad@FindAdByIdAction', [$request]);
-    dd($ad->name);
     //TODO эту переменную сделать в сервис провайдере
     $categories = Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
-    return view('ad::ads.single-ads', compact('categories'));
+    return view('ad::ads.single-ads', compact('categories', 'ad'));
   }
 
   /**
