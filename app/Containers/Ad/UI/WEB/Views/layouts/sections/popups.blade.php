@@ -406,3 +406,59 @@
     </div>
   </div>
 </div>
+    <div class="modal fade modalCatalog" id="mainCatalog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="img/close-icon.svg" alt="">
+                </button>
+
+                <div class="row">
+                    <div class="col-md-4 catalogBlock1">
+                        <div class="number_block_category d-md-none">1/3</div>
+                        <h5>Категория</h5>
+                        <ul class="listCatalog listCatalog1">
+                            <li>Детский мир</li>
+                            <li>Недвижимость</li>
+                            <li>Транспорт</li>
+                            <li>Запчасти для транспорта</li>
+                            <li>Работа</li>
+                            <li>Животные</li>
+                            <li>Электроника</li>
+                            <li>Бизнес и услуги</li>
+
+                            <li>Детский мир</li>
+                            <li>Недвижимость</li>
+                            <li>Транспорт</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 catalogBlock2">
+                        <img src="img/arrow_left.svg" alt="" class="arrow_left d-md-none">
+                        <div class="number_block_category d-md-none">2/3</div>
+                        <h5>Рубрика</h5>
+                        <ul class="listCatalog listCatalog2">
+                            <li>Детский мир</li>
+                            <li>Недвижимость</li>
+                            <li>Транспорт</li>
+                            <li>Запчасти для транспорта</li>
+                            <li>Работа</li>
+                            <li>Животные</li>
+                            <li>Электроника</li>
+                            <li>Бизнес и услуги</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 catalogBlock3">
+                        <img src="img/arrow_left.svg" alt="" class="arrow_left d-md-none">
+                        <div class="number_block_category d-md-none">3/3</div>
+                        <h5>Подрубрика</h5>
+                        <ul class="listCatalog listCatalog3 listCatalogEnd">
+                            <li>Аренда гаражей, парковок</li>
+                            <li>Продажа гаражей, парковок</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>

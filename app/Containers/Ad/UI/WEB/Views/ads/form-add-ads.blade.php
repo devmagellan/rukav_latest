@@ -34,7 +34,8 @@
               <p class="number_of_signs"><span>70</span> знаков остается</p>
             </div>
             <div class="add_advert_block_input1">
-              <input type="text" name="category_ads" placeholder="Выберите категорию" class="select_category" required readonly>
+              <input type="text" name="category_ads" placeholder="Выберите категорию" class="select_category" required readonly value="{{old('category_ads')}}">
+              <input type="hidden" name="category_id" value="{{old('category_id')}}" id="category_id">
               <img src="img/ipagination_right.svg" alt="">
               <span class="required">*</span>
               @error('category_ads')
@@ -409,5 +410,46 @@
     </div>
   </form>
   </article>
+  </div>
+    <div class="modal fade modalCatalog" id="mainCatalog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="img/close-icon.svg" alt="">
+                </button>
+
+                <div class="row">
+                    <div class="col-md-4 catalogBlock1">
+                        <div class="number_block_category d-md-none">1/3</div>
+                        <h5>Категория</h5>
+                        <ul class="listCatalog listCatalog1">
+                          @foreach($categoriesOnlyRoot as $category)
+                            <li data-category_id="{{$category->id}}">{{$category->name}}</li>
+                          @endforeach
+                        </ul>
+                    </div>
+                    <div class="col-md-4 catalogBlock2">
+                        <img src="img/arrow_left.svg" alt="" class="arrow_left d-md-none">
+                        <div class="number_block_category d-md-none">2/3</div>
+                        <h5>Рубрика</h5>
+                        <ul class="listCatalog listCatalog2">
+
+                        </ul>
+                    </div>
+                    <div class="col-md-4 catalogBlock3">
+                        <img src="img/arrow_left.svg" alt="" class="arrow_left d-md-none">
+                        <div class="number_block_category d-md-none">3/3</div>
+                        <h5>Подрубрика</h5>
+                        <ul class="listCatalog listCatalog3 listCatalogEnd">
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 @endsection
 

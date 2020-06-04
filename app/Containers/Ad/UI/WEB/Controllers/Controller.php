@@ -12,7 +12,9 @@ use App\Containers\Ad\UI\WEB\Requests\StoreAdRequest;
 use App\Containers\Ad\UI\WEB\Requests\EditAdRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
+use Illuminate\Http\Response;
 use MongoDB\Driver\Session;
+use App\Ship\Parents\Requests\Request;
 
 
 /**
@@ -45,6 +47,7 @@ class Controller extends WebController
     $ad = Apiato::call('Ad@FindAdByIdAction', [$request]);
     //TODO эту переменную сделать в сервис провайдере
     $categories = Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
+
     return view('ad::ads.single-ads', compact('categories', 'ad'));
   }
 
@@ -57,7 +60,21 @@ class Controller extends WebController
   {
     //TODO эту переменную сделать в сервис провайдере
     $categories = Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
-    return view('ad::ads.form-add-ads', compact('categories'));
+    $categoriesOnlyRoot = $categories->where('parent_id', 0);
+    return view('ad::ads.form-add-ads', compact('categories', 'categoriesOnlyRoot'));
+  }
+
+  public function searchRubrics(FindAdByIdRequest $request)
+  {
+    $categories = Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
+    $category = $categories->where('id', $request->categoryId)->first();
+    if($category->childrenCategories->count()){
+      foreach ($category->childrenCategories as $categoryChild){
+        echo '<li data-category_id="'.$categoryChild->id.'">'.$categoryChild->name.'</li>';
+      }
+    }else{
+      return response(['message'=>'not child category'], Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
   }
 
   /**
@@ -74,10 +91,6 @@ class Controller extends WebController
     return back();
   }
 
-  public function showSuccessPage()
-  {
-    return view('ad::success-page');
-  }
 
   /**
    * Edit entity (show UI)

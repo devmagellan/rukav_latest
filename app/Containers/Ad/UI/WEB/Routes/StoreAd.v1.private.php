@@ -9,9 +9,9 @@ $router->post('ads/store', [
     ],
 ]);
 
-$router->get('ads/success-created', [
-  'as' => 'web_ad_success',
-  'uses'  => 'Controller@showSuccessPage',
+$router->post('ads/search-rubrics', [
+  'as' => 'search-rubrics',
+  'uses'  => 'Controller@searchRubrics',
   'middleware' => [
     'auth:web',
   ],

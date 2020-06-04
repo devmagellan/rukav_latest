@@ -14,3 +14,4 @@
 <script type="text/javascript" src="{{asset('/js/login_user.js')}}"></script>
 <script type="text/javascript" src="{{asset('/js/search_place.js')}}"></script>
 <script type="text/javascript" src="{{asset('/js/show_status_ads.js')}}"></script>
+<script type="text/javascript" src="{{asset('/js/search_rubricks.js')}}"></script>
