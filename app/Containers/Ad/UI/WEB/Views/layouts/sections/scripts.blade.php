@@ -69,3 +69,5 @@ function initMap(){}
 
 </script>
 <script type="text/javascript" src="{{asset('/js/search_place.js')}}"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaZXMHQgJkoXZkkBbtelY8SLAwMOasg0Y&libraries=places&language=en&callback=initEditClntInfoAutoComplete" async defer></script>

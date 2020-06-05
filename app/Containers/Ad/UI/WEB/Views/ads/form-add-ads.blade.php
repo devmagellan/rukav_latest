@@ -1,5 +1,6 @@
 @extends('ad::layouts.layout')
 @section('content')
+
   <article class="add_advert_block">
     <span data-status_created="{{session('infoAd')}}" id="statusAd"></span>
     <form action="{{route('web_ad_store')}}" method="post" enctype="multipart/form-data">
@@ -66,11 +67,11 @@
               <label for="out_uk">Вне UK</label>
             </div>
             <div class="all_user_block">
-              <input type="text" name="address" placeholder="Адрес" class="add_advert_input_location" id="location_search_form" required value="{{old('address')}}">
+              <input type="text" name="address" placeholder="Адрес" class="add_advert_input_location InputControl" id="clntInfoEditAddr1" required value="{{old('address')}}">
               @error('address')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-              <input type="text" name="post_code" placeholder="Postcode" class="add_advert_input_location postcode" id="location" required value="{{old('post_code')}}">
+              <input type="text" name="post_code" placeholder="Postcode" class="add_advert_input_location postcode InputControl" id="clntInfoEditZip" required value="{{old('post_code')}}">
               @error('post_code')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror

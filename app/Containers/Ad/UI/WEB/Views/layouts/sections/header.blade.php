@@ -12,7 +12,7 @@
   <link href="{{asset('/css/main.css')}}" rel="stylesheet">
   <link href="{{asset('/css/media.css')}}" rel="stylesheet">
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaZXMHQgJkoXZkkBbtelY8SLAwMOasg0Y&libraries=places&language=en" async defer></script>
+
   <style>
     .cropper-container{
       width:600px !important;
