@@ -37,19 +37,20 @@
               <input type="text" name="category_ads" placeholder="Выберите категорию" class="select_category" required readonly>
               <img src="/img/ipagination_right.svg" alt="">
               <span class="required">*</span>
-              @error('category_ads')
+              @error('category_id')
                 <div class="alert errorBlock">{{ $message }}</div>
               @enderror
             </div>
           </div>
         </div>
+        <input type="hidden" id="category_id" name="category_id" value="{{old('category_id')}}">
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
               Местополежение
             </h6>
             <div class="hide_location_radio">
-              <input type="radio" name="hide_location" value="Показывать" id="hide_location" checked="">
+              <input type="radio" name="hide_location" value="1" id="hide_location" checked="">
               <label for="hide_location">Показывать</label>
               <input type="radio" name="hide_location" value="Не показывать" id="no_hide_location">
               <label for="no_hide_location">Не показывать</label>
@@ -65,7 +66,7 @@
               <label for="out_uk">Вне UK</label>
             </div>
             <div class="all_user_block">
-              <input type="text" name="address" placeholder="Адрес" class="add_advert_input_location" id="location_search" required value="{{old('address')}}">
+              <input type="text" name="address" placeholder="Адрес" class="add_advert_input_location" id="location_search_form" required value="{{old('address')}}">
               @error('address')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
@@ -154,7 +155,7 @@
             </div>
             <div class="contact_info_wrapper">
               <div class="hide_phone_radio">
-                <input type="radio" name="hide_name" value="Показывать" id="hide_name" checked>
+                <input type="radio" name="hide_name" value="1" id="hide_name" checked>
                 <label for="hide_name">Показывать</label>
                 <input type="radio" name="hide_name" value="Не показывать" id="no_hide_name">
                 <label for="no_hide_name">Не показывать</label>

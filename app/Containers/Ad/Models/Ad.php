@@ -33,7 +33,7 @@ class Ad extends Model
 
     protected $fillable = [
         'id', 'category_id','sender','status','company_id','title','message','active','badge_id','visibility','place_id','city','administrative'
-        ,'phone','email','price'
+        ,'phone','email','price', 'show_name', 'name'
 
     ];
 

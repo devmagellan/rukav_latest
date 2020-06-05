@@ -20,11 +20,12 @@ class AdService
       'city' => $data->address,
       'place_id' => $data->post_code,
       'name' => $data->name,
-      'category_id' => rand(1, 10),
+      'category_id' => $data->category_id,
       'sender' => Auth::user()->id,
       //TODO не забыть узнать что с этим делать
       'administrative' => false,
-      'visibility' => false
+      'visibility' => false,
+      'show_name' => $data->hide_name
     ]);
   }
 

@@ -7,8 +7,8 @@ $(document).ready(function () {
     getChildCategory($(this).data('category_id'), '.listCatalog2', true);
   });
   $(document).on('click', '.listCatalog2 li', function () {
-    $(".listCatalog2 li").removeClass('active');
-    $(this).addClass('active');
+    // $(".listCatalog2 li").removeClass('active');
+    // $(this).addClass('active');
     var category = $(".listCatalog1").find('.active').html();
     $(".select_category").val(category + '/' + $(this).html());
     $('#category_id').val($(this).data('category_id'));

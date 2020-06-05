@@ -55,14 +55,16 @@
               </div>
             </div>
             <div class="product_info_block_right">
-              <p class="product_info_user_name">Александр <span>Часное лицо</span></p>
+              @if($ad->show_name)
+                <p class="product_info_user_name">{{$ad->name}} <span>Часное лицо</span></p>
+              @endif
               <p class="product_info_user_date">на RUKAVe з 22.05.2019</p>
               <a href="#" class="product_info_all_add">смотреть все обьевления</a>
               <p class="product_info_city">12 John Street, Manchester, UA (MN3 2ER)</p>
             </div>
             <a href="#" class="product_info_btn_phone">
               <img src="/img/info_phone.svg" alt="">
-              <span>(+44) 7541 *** ***</span>
+              <span>{{$ad->phone}}</span>
             </a>
             <a href="#" class="product_info_send_message"><img src="/img/telegramm_icon.svg" alt="">отправить сообщение</a>
             <p class="product_info_text_down">
