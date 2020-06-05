@@ -32,6 +32,9 @@ class MiddlewareServiceProvider extends MiddlewareProvider
         'api' => [
 
         ],
+        'admin' => [
+
+        ],
     ];
 
     protected $routeMiddleware = [

@@ -23,8 +23,8 @@ class GetAllPermissionsRequest extends Request
      * @var  array
      */
     protected $access = [
-        'permissions' => '',
-        'roles'       => '',
+        'permissions' => 'manage-roles',
+        'roles'       => 'admin',
     ];
 
     /**

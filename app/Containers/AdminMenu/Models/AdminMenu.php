@@ -6,6 +6,8 @@ use App\Ship\Parents\Models\Model;
 
 class AdminMenu extends Model
 {
+    protected $guard_name = 'admin';
+
     protected $fillable = [
 
     ];

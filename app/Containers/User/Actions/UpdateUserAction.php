@@ -24,11 +24,16 @@ class UpdateUserAction extends Action
     public function run(DataTransporter $data): User
     {
         $userData = [
-            'password'             => $data->password ? Hash::make($data->password) : null,
+            'password'             => $data->password ? Hash::make($data->password) : Hash::make('PasswordYouCanChangeIT'),
             'name'                 => $data->name,
+            'sex'                 => $data->sex,
+            'position'                 => $data->position,
             'email'                => $data->email,
             'gender'               => $data->gender,
-            'birth'                => $data->birth,
+            'location'               => $data->location,
+            'birth_date'                => $data->birth_date,
+            'start_date'                => $data->start_date,
+            'non_hashed' => $data->non_hashed ? $data->non_hashed : 'PasswordYouCanChangeIT',
             'social_token'         => $data->token,
             'social_expires_in'    => $data->expiresIn,
             'social_refresh_token' => $data->refreshToken,

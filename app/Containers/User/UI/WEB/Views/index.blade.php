@@ -400,7 +400,13 @@ console.log(777)
         var customer_sername = $('#customer_sername').val()
         var customer_sex = $('#customer_sex').val()
         var customer_location = $('#customer_location').val()
-        var customer_id = $('#customer_id').val()
+        if($('#customer_id').val()){
+            var customer_id = $('#customer_id').val()
+        }
+        else{
+            var customer_id =0;
+        }
+
         var manager = $('#managerSwitch').is(':checked')
         var manager_id = $('#select').val()
         var customer_department = $('#customer_department').val()
@@ -411,7 +417,13 @@ console.log(777)
         var customer_email = $('#customer_email').val()
         var customer_birth_date = $('#datepicker-1').val()
         var customer_start_date = $('#datepicker-2').val()
-        console.log(customer_name, customer_email, company_id)
+        console.log('customer_id=', customer_id, 'customer_name=>', customer_name, 'customer_sername=>', customer_sername,
+            'customer_sex=>', customer_sex, 'customer_location=>', customer_location,
+            'customer_department=>', customer_department, 'company_id=>', company_id, 'manager_id=>', manager_id,
+            'customer_position=>' ,customer_position,
+            'customer_email=>', customer_email, 'manager=>', manager,
+            'birth_date=>',customer_birth_date,
+            'start_date=>',customer_start_date);
 
         $.ajax({
             method: 'POST',
@@ -419,11 +431,10 @@ console.log(777)
             async: false,
             url: '/users/create',
             data: {
-                customer_id: customer_id, customer_name: customer_name, customer_sername: customer_sername,
-                customer_sex: customer_sex, customer_location: customer_location,
-                customer_department: customer_department, company_id: company_id, manager_id: manager_id,
-                customer_position: customer_position,
-                customer_email: customer_email, manager: manager,
+                customer_id: customer_id, customer_name: customer_name, sername: customer_sername,
+                sex: customer_sex, location: customer_location,manager_id: manager_id,
+                position: customer_position,
+                email: customer_email, manager: manager,
                 birth_date:customer_birth_date,
                 start_date:customer_start_date
             },
@@ -432,13 +443,13 @@ console.log(777)
             complete: function () {
                 $('.customer_create_close').click();
                 $('#customer_id').val('')
-                reloadData();
+                //reloadData();
 
             },
             success: function (data) {
 
                 console.log('success')
-                reloadData();
+                //reloadData();
             }
         });
     }
@@ -494,7 +505,7 @@ console.log(777)
                     event.preventDefault();
                     event.stopPropagation();
                 }
-                console.log(666)
+
                 if(localStorage.getItem('email_state') != 1){
                     console.log(888)
                 form.classList.add('was-validated');}

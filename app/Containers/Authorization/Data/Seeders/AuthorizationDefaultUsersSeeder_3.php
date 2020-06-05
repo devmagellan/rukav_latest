@@ -26,6 +26,7 @@ class AuthorizationDefaultUsersSeeder_3 extends Seeder
             'admin@admin.com',
             'admin',
             'admin',
+            true,
         ])->assignRole(Apiato::call('Authorization@FindRoleTask', ['admin']))->assignRole(Apiato::call('Authorization@FindRoleTask', ['Administrator']));
 
         Apiato::call('User@CreateUserByCredentialsTask', [
@@ -33,6 +34,7 @@ class AuthorizationDefaultUsersSeeder_3 extends Seeder
             'senior.backend.php@gmail.com',
             'sunimedia',
             'admin',
+            true,
         ])->assignRole(Apiato::call('Authorization@FindRoleTask', ['admin']));
         // ...
 
