@@ -3,6 +3,23 @@
   "description": "apiato Container.",
   "type": "apiato-container",
   "require": {
-    "laravel/socialite": "^4.3.2"
+    "laravel/socialite": "^4.3.2",
+	"socialiteproviders/vkontakte":"4.1.0"
+
+
+  },  
+  "scripts": {
+  
+ 	"post-install-cmd": [
+	"@php artisan vendor:publish --provider 'SocialiteProviders\\Manager\\ServiceProvider'"
+    ],
+
+  
+   "post-update-cmd": [
+	"@php artisan vendor:publish --provider 'SocialiteProviders\\Manager\\ServiceProvider'"
+    ]
+   
   }
+
+  
 }

@@ -40,12 +40,12 @@
       <p class="textform">или войти через</p>
       <ul class="socials">
         <li>
-          <a href="#">
+          <a href="{{ route('login.provider', 'facebook') }}">
             <i class="fab fa-facebook-f"></i>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ route('login.provider', 'google') }}">
             <i class="fab fa-google-plus-g"></i>
           </a>
         </li>

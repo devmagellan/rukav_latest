@@ -1,7 +1,6 @@
 <?php
 
 // provider login redirect (WEB)
-$router->get('auth/{provider}', [
-    'as' => 'web_socialauth_redirect',
-    'uses' => 'Controller@redirectAll',
-]);
+$router->get('redirect/{driver}', 'Controller@redirectAll')
+    ->name('login.provider')
+    ->where('driver', implode('|', config('auth.socialite.drivers')));

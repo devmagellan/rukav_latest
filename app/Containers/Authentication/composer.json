@@ -4,5 +4,7 @@
   "type": "apiato-container",
   "require": {
     "laravel/passport": "~8.4.3"
-  }
+
+  } 
+
 }

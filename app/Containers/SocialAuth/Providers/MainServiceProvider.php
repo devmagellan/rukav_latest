@@ -22,7 +22,9 @@ class MainServiceProvider extends MainProvider
      * @var array
      */
     public $serviceProviders = [
-        SocialiteServiceProvider::class
+        SocialiteServiceProvider::class,
+		\SocialiteProviders\Manager\ServiceProvider::class,
+
     ];
 
     /**

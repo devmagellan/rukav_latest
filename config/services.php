@@ -33,7 +33,18 @@ return [
   'facebook' => [
     'client_id' => '242771253750028',
     'client_secret' => 'c33c2e109a77dc30e1d9738441206889',
-    'redirect' => 'http://rukav.host/callback/facebook',
+    'redirect' => 'https://rukav.uk/callback/facebook',
   ],
+  
+  'google' => [
+    'client_id'     => env('AUTH_GOOGLE_CLIENT_ID'),
+    'client_secret' => env('AUTH_GOOGLE_CLIENT_SECRET'),
+    'redirect'      => env('AUTH_GOOGLE_CLIENT_REDIRECT'),
+],
+'vkontakte' => [
+    'client_id' => env('VKONTAKTE_KEY'),
+    'client_secret' => env('VKONTAKTE_SECRET'),
+    'redirect' => env('VKONTAKTE_REDIRECT_URI')
+],
 
 ];

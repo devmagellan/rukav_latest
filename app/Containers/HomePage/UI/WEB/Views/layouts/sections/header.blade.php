@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@ 1.8.1/slick/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-  <link href="{{asset('css/intlTelInput.css')}}" rel="stylesheet">
-  <link href="{{asset('css/main.css')}}" rel="stylesheet">
-  <link href="{{asset('css/media.css')}}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@ 1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <link href="{{asset('/css/intlTelInput.css')}}" rel="stylesheet">
+  <link href="{{asset('/css/main.css')}}" rel="stylesheet">
+  <link href="{{asset('/css/media.css')}}" rel="stylesheet">
 </head>
 <body>
 <header class="header">
@@ -18,26 +18,26 @@
     <div class="row">
       <div class="col-md-2 col-6">
         <a href="#" class="logo">
-          <img src="{{asset('img/logo.svg')}}" alt="">
+          <img src="{{asset('/img/logo.svg')}}" alt="">
         </a>
       </div>
       <div class="col-md-1 d-none d-md-block">
         <a href="#" class="btn_category">
-          <img src="img/btnCategoryIcon.svg" alt="" class="dropDownHide">
-          <img src="img/close_white.svg" alt="" class="dropDownShow" style="display: none;">
+          <img src="/img/btnCategoryIcon.svg" alt="" class="dropDownHide">
+          <img src="/img/close_white.svg" alt="" class="dropDownShow" style="display: none;">
           <span style="display: none;"></span>
           Категории
         </a>
       </div>
       <div class="col-md-6 col-2">
         <form class="form_category">
-          <img src="{{asset('img/loupe.svg')}}" alt="" class="form_category_imp-loupe">
-          <img src="{{asset('img/pin.svg')}}" alt="" class="form_category_imp-pin">
+          <img src="{{asset('/img/loupe.svg')}}" alt="" class="form_category_imp-loupe">
+          <img src="{{asset('/img/pin.svg')}}" alt="" class="form_category_imp-pin">
           <input type="text" name="search" class="form_category_search" placeholder="Я ищу...">
           <input type="text" name="search_city" class="form_category_search-city" placeholder="Город или посткод">
           <button class="form_category_btn">Поиск</button>
         </form>
-        <a href="#" class="btn_search_m"><img src="{{asset('img/loupe.svg')}}" alt=""
+        <a href="#" class="btn_search_m"><img src="{{asset('/img/loupe.svg')}}" alt=""
                                               class="form_category_imp-loupe"></a>
       </div>
       @if(!\Illuminate\Support\Facades\Auth::user())
@@ -58,7 +58,7 @@
       @if(!\Illuminate\Support\Facades\Auth::user())
         <div class="col-md-1 col-2">
           <a href="#" class="user_cabinet" data-toggle="modal" data-target="#ModalIn">
-            <img src="{{asset('img/user_icon.svg')}}" alt="">
+            <img src="{{asset('/img/user_icon.svg')}}" alt="">
           </a>
         </div>
       @else

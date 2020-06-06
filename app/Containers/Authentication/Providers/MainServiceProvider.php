@@ -24,6 +24,8 @@ class MainServiceProvider extends MainProvider
         PassportServiceProvider::class,
         AuthProvider::class,
         MiddlewareServiceProvider::class,
+		\SocialiteProviders\Manager\ServiceProvider::class,
+		\Prettus\Repository\Providers\RepositoryServiceProvider::class,
     ];
 
     /**
@@ -34,5 +36,12 @@ class MainServiceProvider extends MainProvider
     public $aliases = [
 
     ];
+	
+	protected $listen = [
+    \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+        // add your listeners (aka providers) here
+        'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
+    ],
+];
 
 }

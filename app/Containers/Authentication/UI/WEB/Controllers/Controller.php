@@ -12,6 +12,8 @@ use App\Ship\Transporters\DataTransporter;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
+use App\Containers\User\Models\User;
 
 /**
  * Class Controller
@@ -20,6 +22,8 @@ use Illuminate\Support\Facades\Auth;
  */
 class Controller extends WebController
 {
+	
+
   /**
    * @return  \Illuminate\Contracts\View\Factory|\Illuminate\View\View
    */
@@ -66,4 +70,7 @@ class Controller extends WebController
     Auth::logout();
     return redirect('/');
   }
+  
+  
+  
 }

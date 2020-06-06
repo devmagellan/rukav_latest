@@ -23,7 +23,7 @@ class MainServiceProvider extends MainProvider
     public $serviceProviders = [
         PermissionServiceProvider::class,
         MiddlewareServiceProvider::class,
-        StaffServiceProvider::class,
+		\Spatie\Fractal\FractalServiceProvider::class,
     ];
 
     /**
