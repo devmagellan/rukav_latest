@@ -84,26 +84,30 @@ class Controller extends WebController
     }
   }
 
-  public function postSave(Request $request)
+  public function postSave(GetAllUsersRequest $request)
   {
-    $user['values'] = ['name' => $request->input('customer_name'),
+    /*$user['values'] = ['name' => $request->input('customer_name'),
       'sername' => $request->input('customer_sername'),
       'email' => $request->input('customer_email'),
-      'company_id' => $request->input('company_id'),
+      'company_id' => 1,
       'password' => Hash::make('PasswordYouCanChangeIT'),
       'non_hashed' => 'PasswordYouCanChangeIT',
       'active' => 1,
-      'remember_token' => Str::random(60)];
+      'remember_token' => Str::random(60)];*/
     $user['attributes']['id'] = ($request->input('customer_id') != 0) ? $request->input('customer_id') : null;
     $changeRole = $user['attributes']['id'];
-    $user = UserFacade::updateUser($user);
+if($request->input('customer_id') != 0){
+    $user = Apiato::call('User@UpdateUserAccountAction', [$request]);}
+    else{$user = Apiato::call('User@CreateUserAccountAction', [$request]);}
+var_dump($user);
+   // $user = UserFacade::updateUser($user);
     if ($changeRole == null) {
       $role_data = [
         'role_id' => 5,
         'model_type' => 'App\User',
         'model_id' => $user->id
       ];
-      \App\ModelHasRole::insert($role_data);
+        \App\Containers\Authorization\Models\ModelHasRole::insert($role_data);
     }
     $string = $request->input('birth_date') . ' 16:34:00';
     $birth_date = \Carbon\Carbon::createFromFormat('m/d/Y H:i:s', $string, 'Europe/London');
@@ -112,7 +116,7 @@ class Controller extends WebController
     $start_date = \Carbon\Carbon::createFromFormat('m/d/Y H:i:s', $start_string, 'Europe/London');
     $start_date->setTimezone('UTC');
     $customer_tmp = \App\Containers\Customer\Models\Customer::where('user_id', $request->input('customer_id'))->first();
-    $customer['values'] = [
+/*    $customer['values'] = [
       'user_id' => $user->id,
       'start_date' => $start_date,
       'birth_date' => $birth_date,
@@ -148,7 +152,7 @@ class Controller extends WebController
       }
     } else {
       \App\Containers\Manager\Models\Manager::where('user_id', $user->id)->delete();
-    }
+    }*/
 
 
   }

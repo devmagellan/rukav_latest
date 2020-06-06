@@ -49,7 +49,7 @@ class CreateRoleTask extends Task
                 'name'         => strtolower($name),
                 'description'  => $description,
                 'display_name' => $displayName,
-                'guard_name'   => 'web',
+                'guard_name'   => 'admin',
                 'level'        => $level,
             ]);
         } catch (Exception $exception) {

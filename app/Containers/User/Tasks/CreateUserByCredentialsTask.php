@@ -40,8 +40,10 @@ class CreateUserByCredentialsTask extends Task
         string $email,
         string $password,
         string $name = null,
+        bool $isConfirmed = false,
         string $gender = null,
         string $birth = null
+
     ): User {
 
         try {
@@ -53,6 +55,7 @@ class CreateUserByCredentialsTask extends Task
                 'gender'    => $gender,
                 'birth'     => $birth,
                 'is_client' => $isClient,
+                'confirmed'=>$isConfirmed
             ]);
 
         } catch (Exception $e) {

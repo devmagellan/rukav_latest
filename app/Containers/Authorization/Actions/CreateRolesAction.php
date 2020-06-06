@@ -13,7 +13,7 @@ use function is_null;
  *
  * @author  Mahmoud Zalt  <mahmoud@zalt.me>
  */
-class CreateRoleAction extends Action
+class CreateRolesAction extends Action
 {
 
     /**
@@ -26,7 +26,7 @@ class CreateRoleAction extends Action
         $level = is_null($data->level) ? 0 : $data->level ;
 
         $role = Apiato::call('Authorization@CreateRoleTask',
-            [$data->name, $data->description, $data->display_name, $level]
+            [$data->name, $data->description, null/*$data->display_name*/, $level]
         );
 
         return $role;

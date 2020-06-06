@@ -20,11 +20,11 @@ class UserPermissionsSeeder_1 extends Seeder
     public function run()
     {
         // Default Permissions ----------------------------------------------------------
-        Apiato::call('Authorization@CreatePermissionTask', ['search-users', 'Find a User in the DB.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['list-users', 'Get All Users.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['update-users', 'Update a User.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['delete-users', 'Delete a User.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['refresh-users', 'Refresh User data.']);
+        Apiato::call('Authorization@CreatePermissionTask', ['search-users', 'Find a User in the DB.','search']);
+        Apiato::call('Authorization@CreatePermissionTask', ['list-users', 'Get All Users.','list']);
+        Apiato::call('Authorization@CreatePermissionTask', ['update-users', 'Update a User.','update']);
+        Apiato::call('Authorization@CreatePermissionTask', ['delete-users', 'Delete a User.','delete']);
+        Apiato::call('Authorization@CreatePermissionTask', ['refresh-users', 'Refresh User data.','refresh']);
 
         // ...
 

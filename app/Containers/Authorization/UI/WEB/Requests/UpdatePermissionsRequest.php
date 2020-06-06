@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Containers\User\UI\WEB\Requests;
+namespace App\Containers\Authorization\UI\WEB\Requests;
 
 use App\Ship\Parents\Requests\Request;
 
 /**
- * Class GetAllAdminPanelsRequest.
+ * Class UpdatePermissionsRequest.
  */
-class GetAllUsersRequest extends Request
+class UpdatePermissionsRequest extends Request
 {
 
     /**
@@ -15,7 +15,7 @@ class GetAllUsersRequest extends Request
      *
      * @var string
      */
-    protected $transporter = \App\Containers\AdminPanel\Data\Transporters\GetAllAdminPanelsTransporter::class;
+    //protected $transporter = \App\Containers\Permissions\Data\Transporters\UpdatePermissionsTransporter::class;
 
     /**
      * Define which Roles and/or Permissions has access to this request.
@@ -24,7 +24,7 @@ class GetAllUsersRequest extends Request
      */
     protected $access = [
         'permissions' => '',
-        'roles'       => 'admin',
+        'roles'       => '',
     ];
 
     /**

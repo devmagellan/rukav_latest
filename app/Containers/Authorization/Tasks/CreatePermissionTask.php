@@ -39,7 +39,7 @@ class CreatePermissionTask extends Task
      * @return Permission
      * @throws CreateResourceFailedException
      */
-    public function run(string $name, string $description = null, string $displayName = null): Permission
+    public function run(string $name, string $description = null, string $typeName = null, string $displayName = null): Permission
     {
         app()['cache']->forget('spatie.permission.cache');
 
@@ -48,7 +48,8 @@ class CreatePermissionTask extends Task
                 'name'         => $name,
                 'description'  => $description,
                 'display_name' => $displayName,
-                'guard_name'   => 'web',
+                'type_name' => $typeName,
+                'guard_name'   => 'admin',
             ]);
         } catch (Exception $exception) {
             throw new CreateResourceFailedException();

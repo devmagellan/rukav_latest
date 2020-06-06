@@ -20,37 +20,33 @@ class AuthorizationPermissionsSeeder_1 extends Seeder
     public function run()
     {
         // Default Permissions ----------------------------------------------------------
-        Apiato::call('Authorization@CreatePermissionTask', ['manage-roles', 'Create, Update, Delete, Get All, Attach/detach permissions to Roles and Get All Permissions.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['create-admins', 'Create new Users (Admins) from the dashboard.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['manage-admins-access', 'Assign users to Roles.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['access-dashboard', 'Access the admins dashboard.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['access-opt-dashboard', 'Access the wholesalers dashboard.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['access-import-wholesalers', 'Access the wholesalers import page.']);
+        Apiato::call('Authorization@CreatePermissionTask', ['manage-roles', 'Управление ролями и пермишенами','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['create-admins', 'Создавать админов','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['manage-admins-access', 'Управление доступом админов','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['access-dashboard', 'Доступ к дашборду','menu']);
 
-
-
-        Apiato::call('Authorization@CreatePermissionTask', ['view_slider', 'view_slider.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_ads', 'view_ads.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['edit_viewable_interfaces', 'edit_viewable_interfaces.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_customer_interface', 'view_customer_interface.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_main_admin_badges', 'view_main_admin_badges.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_admin_profile', 'view_admin_profile.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_company_managers_menu', 'view_company_managers_menu.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_companies_menu', 'view_companies_menu.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_clients_analytics_menu', 'view_clients_analytics_menu.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_admins_accesses_menu', 'view_admins_accesses_menu.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_manager_statistics_menu', 'view_manager_statistics_menu.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_company_statistics_menu', 'view_company_statistics_menu.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_company_users_menu', 'view_company_users_menu.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_company_managment_menu', 'view_company_managment_menu.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_roles_and_permissions_menu', 'view_roles_and_permissions_menu.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_companies_managment_menu', 'view_companies_managment_menu.']);
-        Apiato::call('Authorization@CreatePermissionTask', ['view_static_pages', 'view_static_pages.']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_slider', 'Просмотр редактирование слайдера','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_ads', 'Просмотр редактирование объявлений','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['edit_viewable_interfaces', 'Редактировать видимые интерфейсы','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_customer_interface', 'Редактировать пользовательские интерфейсы','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_main_admin_badges', 'Просмотр главных админ бейджей','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_admin_profile', 'Просмотр профиля администратора','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_company_managers_menu', 'Просмотр меню менеджеров компании','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_companies_menu', 'Просмотр меню компаний','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_clients_analytics_menu', 'Просмотр меню клиентской аналитики','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_admins_accesses_menu', 'Просмотр меню доступа админов','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_manager_statistics_menu', 'Просмотр меню статистики менеджеров','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_company_statistics_menu', 'Просмотр меню статистики компаний','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_company_users_menu', 'Просмотр меню пользователей компаний','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_company_managment_menu', 'Просмотр меню менеджеров компаний','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_roles_and_permissions_menu', 'Просмотр меню ролей и пермишенов','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_companies_managment_menu', 'Просмотр меню менеджеров компаний','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_static_pages', 'Просмотр страниц статистики','menu']);
 
 
 
 
-        // ...
+
 
     }
 }

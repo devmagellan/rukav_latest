@@ -28,4 +28,11 @@ class RoleRepository extends Repository
         'description'  => 'like',
     ];
 
+
+    public function updateOrCreateRole($attributes,$values)
+    {
+        $this->entityClass= Role::class;
+        return $this->updateOrCreate($attributes,$values);
+    }
+
 }
