@@ -66,6 +66,12 @@
               <input type="radio" name="select_addres" value="Вне UK" id="out_uk">
               <label for="out_uk">Вне UK</label>
             </div>
+            <div class="postcode_block" style="display:none">
+              <input type="text" name="post_code" placeholder="Postcode" class="add_advert_input_location postcode InputControl" id="clntInfoEditZip" required value="{{old('post_code')}}">
+              @error('post_code')
+              <div class="alert errorBlock">{{ $message }}</div>
+              @enderror
+            </div>
             <div class="all_user_block">
               <input type="text" name="address" placeholder="Адрес" class="add_advert_input_location InputControl" id="clntInfoEditAddr1" required value="{{old('address')}}">
               @error('address')
@@ -76,57 +82,15 @@
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
             </div>
-            <div class="outUk" style="display:none;">
-              <div class="row">
-                <div class="col-md-3 catalogBlock1">
-                  <div class="number_block_category d-md-none">1/4</div>
-                  <ul class="listCatalog listCatalog1">
-                    <li>Вне UK</li>
-                    <li>England</li>
-                    <li>England_1</li>
-                    <li>England_22</li>
-                    <li>England_344</li>
-                  </ul>
-                </div>
-                <div class="col-md-3 catalogBlock2">
-                  <img src="/img/arrow_left.svg" alt="" class="arrow_left d-md-none">
-                  <div class="number_block_category d-md-none">2/4</div>
-                  <ul class="listCatalog listCatalog2">
-                    <li>Албания</li>
-                    <li>Багамские Острова</li>
-                    <li>Алжир</li>
-                    <li>Ангола</li>
-                    <li>Андорра</li>
-                    <li>Животные</li>
-                    <li>Антигуа</li>
-                    <li>Ангола</li>
-                  </ul>
-                </div>
-                <div class="col-md-3 catalogBlock3">
-                  <img src="/img/arrow_left.svg" alt="" class="arrow_left d-md-none">
-                  <div class="number_block_category d-md-none">3/4</div>
-                  <ul class="listCatalog listCatalog3">
-                    <li>Бельгия</li>
-                    <li>Бенин</li>
-                    <li>Беларусь</li>
-                    <li>Болгария</li>
-                    <li>Боливия</li>
-                    <li>Босниякои</li>
-                    <li>Ботсвана</li>
-                    <li>Бразилия</li>
-                    <li>Ботсвана</li>
-                  </ul>
-                </div>
-                <div class="col-md-3 catalogBlock4">
-                  <img src="/img/arrow_left.svg" alt="" class="arrow_left d-md-none">
-                  <div class="number_block_category d-md-none">4/4</div>
-                  <ul class="listCatalog listCatalog4 listCatalogEnd">
-                    <li>Бельгия</li>
-                    <li>Бенин Бенин</li>
-                    <li>Беларусь Беларусь</li>
-                  </ul>
-                </div>
-              </div>
+            <div class="outUk" style="display:none">
+              <input type="text" name="address" placeholder="Страна" class="add_advert_input_location InputControl" id="clntInfoEditAddrOutUk1" required value="{{old('address')}}">
+              @error('address')
+              <div class="alert errorBlock">{{ $message }}</div>
+              @enderror
+              <input type="text" name="post_code" placeholder="Город" class="add_advert_input_location postcode InputControl" id="clntInfoEditOutUk" required value="{{old('post_code')}}">
+              @error('post_code')
+              <div class="alert errorBlock">{{ $message }}</div>
+              @enderror
             </div>
           </div>
         </div>

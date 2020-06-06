@@ -1678,10 +1678,10 @@ input[type="radio"] + label:hover{
 }
 
 .outUk{
-  background: #FFFFFF;
+  /*background: #FFFFFF;*/
   border-radius: 7px;
-  margin-top: 14px;
-  padding: 20px 10px;
+  /*margin-top: 14px;*/
+  /*padding: 20px 10px;*/
   margin-right: 32px;
 }
 

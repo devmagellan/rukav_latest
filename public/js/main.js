@@ -286,12 +286,20 @@ $(document).ready(function(){
     });
 
     $('#out_uk').on('click', function () {
+        $('.postcode_block').hide();
             $('.all_user_block').hide();
             $('.outUk').show();
     });
 
     $('#all_adress').on('click', function () {
+        $('.postcode_block').hide();
         $('.all_user_block').show();
+        $('.outUk').hide();
+    });
+
+    $('#postcode').on('click', function () {
+        $('.postcode_block').show();
+        $('.all_user_block').hide();
         $('.outUk').hide();
     });
 
