@@ -26,3 +26,13 @@ $router->post('/ads/showPhotoAdsModal', [
        'auth:web',
      ],*/
 ]);
+
+$router->post('/add/wishList', [
+    'as' => 'ads_wishlist_update',
+    'uses'  => 'Controller@setWishListStatus',
+    /* 'middleware' => [
+       'auth:web',
+     ],*/
+]);
+
+

@@ -10,5 +10,8 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 <script type="text/javascript" src="/js/intlTelInput.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/jquery.zoom.min.js"></script>
 <script type="text/javascript" src="/js/register_user.js"></script>
 <script type="text/javascript" src="/js/login_user.js"></script>
+
+@yield('scripts')

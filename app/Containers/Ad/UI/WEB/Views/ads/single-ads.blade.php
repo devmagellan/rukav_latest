@@ -4,12 +4,17 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+          <?
+
+          ?>
           <ul class="breadcrumbs">
-            <li><a href="index.html"><img src="/img/home_icon.svg" alt=""></a><img src="{{asset('/img/back_Icon.svg')}}" alt=""></li>
-            <li><a href="#">Транспорт</a><img src="{{asset('/img/back_Icon.svg')}}" alt=""></li>
-            <li><a href="#">Легковые автомобили</a><img src="{{asset('/img/back_Icon.svg')}}" alt=""></li>
-            <li><a href="#">Продажа Mercedes-Benz</a><img src="{{asset('/img/back_Icon.svg')}}" alt=""></li>
-            <li>Продаж Mercedes C класу</li>
+            <li><a href="/"><img src="/img/home_icon.svg" alt=""></a><img src="{{asset('/img/back_Icon.svg')}}" alt=""></li>
+
+            @foreach(array_reverse($breadcrumbsArray) as $crumb)
+            <li><a href="/category/{{$crumb['id']}}">{{$crumb['name']}}</a><img src="{{asset('/img/back_Icon.svg')}}" alt=""></li>
+
+            @endforeach
+            <li>{{$ad->title}}</li>
           </ul>
         </div>
       </div>
@@ -18,10 +23,20 @@
         <div class="col-md-8 justify-content-between product_title_block" style="display: flex;">
           <h3 class="product_title">
             {{$ad->title}}
-          </h3>
-          <a href="#" class="add_to_favourites">
-            <span>Добавить в <br> Избранное</span>
-            <img src="/img/heart_icon.svg" alt="">
+          </h3><input type="hidden" class="wishInputId" value="{{$ad->id}}">
+          <a href="#" class="add_to_favourites" onclick="wishList(this)">
+
+
+              <?
+                  if(\Auth::user()){
+              $wishlist=App\Containers\Ad\Models\Wishlist::where('message_id',$ad->id)->where('user_id',\Auth::user()->id)->first();
+              echo '<span>Добавить в <br> Избранное</span>';
+
+              ?>
+            <img class="@if($wishlist && $wishlist->active==1) active @endif " @if($wishlist && $wishlist->active==1) src="/img/heart_icon_filed.svg" @else src="/img/heart_icon.svg" @endif  alt="">
+            <? }
+
+            ?>
           </a>
         </div>
         <div class="col-md-4">
@@ -169,3 +184,47 @@
     </div>
   </article>
 @endsection
+
+<script>
+
+    function wishList(event){
+        var id = $(event).parent('div').find('.wishInputId').val()
+        console.log(id)
+        if($(event).hasClass('active')){
+            console.log('not_active')
+            var active = 0;
+        }
+        else{
+            console.log('active')
+            var active =1;
+        }
+
+        $.ajax({
+            method: 'POST',
+            dataType: 'json',
+            async:false,
+            url: '/add/wishList',
+            data: {id:id,active:active
+            },
+            beforeSend: function() {
+            },
+            complete: function() {
+                //$('.company_create_close').trigger('click')
+                $('#badges_modal').modal("hide");
+            },
+            success: function (data) {
+
+                $('#badges_modal').modal("hide");
+                //$(".modal-backdrop").remove();
+                //$('.categoryModalClose').trigger('click')
+                //$('.company_create_close').trigger('click')
+                //$('.modal-backdrop').removeClass('show').addClass('hide')
+
+
+
+                console.log('success')
+
+            }
+        });
+    }
+</script>
