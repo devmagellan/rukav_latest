@@ -119,10 +119,12 @@ return [
 
     'password_timeout' => 10800,
 	
-	'socialite' => [
+ 	'socialite' => [
     'drivers' => [
         'google',
 		'facebook',
+		'vkontakte',
+		'odnoklassniki'
     ],
 ],
 

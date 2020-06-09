@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Ship\Parents\Providers;
+namespace App\Containers\SocialAuth\Providers;
 
-use Apiato\Core\Abstracts\Providers\EventsProvider as AbstractEventsProvider;
+use App\Ship\Parents\Providers\MainProvider;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 /**
  * Class EventsProvider
@@ -11,7 +12,7 @@ use Apiato\Core\Abstracts\Providers\EventsProvider as AbstractEventsProvider;
  *
  * @author  Mahmoud Zalt  <mahmoud@zalt.me>
  */
-class EventsProvider extends AbstractEventsProvider
+class EventsProvider extends ServiceProvider
 {
 
     /**
@@ -23,7 +24,9 @@ class EventsProvider extends AbstractEventsProvider
     \SocialiteProviders\Manager\SocialiteWasCalled::class => [
         // add your listeners (aka providers) here
         'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
+		'SocialiteProviders\\Odnoklassniki\\OdnoklassnikiExtendSocialite@handle',
     ],
+
 ];
 
 

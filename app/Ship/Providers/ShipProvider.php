@@ -17,7 +17,10 @@ class ShipProvider extends MainProvider
      *
      * @var array
      */
-    public $serviceProviders = [];
+    public $serviceProviders = [
+	EventServiceProvider::class,
+	\SocialiteProviders\Manager\ServiceProvider::class,
+	];
 
     /**
      * Register any Alias on the Ship layer (including third party packages).
@@ -67,5 +70,7 @@ class ShipProvider extends MainProvider
 
         parent::register();
     }
+	
+
     
 }

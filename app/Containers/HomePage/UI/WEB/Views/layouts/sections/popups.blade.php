@@ -50,12 +50,12 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ route('login.provider', 'vkontakte') }}">
             <i class="fab fa-vk"></i>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ route('login.provider', 'odnoklassniki') }}">
             <i class="fab fa-odnoklassniki"></i>
           </a>
         </li>

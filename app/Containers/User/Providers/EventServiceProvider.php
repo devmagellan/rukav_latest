@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Containers\SocialAuth\Providers;
+namespace App\Containers\User\Providers;
 
 use App\Ship\Parents\Providers\MainProvider;
-use Laravel\Socialite\Facades\Socialite;
-use Laravel\Socialite\SocialiteServiceProvider;
 
 /**
  * Class MainServiceProvider.
@@ -13,9 +11,8 @@ use Laravel\Socialite\SocialiteServiceProvider;
  *
  * @author  Mahmoud Zalt <mahmoud@zalt.me>
  */
-class MainServiceProvider extends MainProvider
+class EventServiceProvider extends MainProvider
 {
-	
 
     /**
      * Container Service Providers.
@@ -23,9 +20,9 @@ class MainServiceProvider extends MainProvider
      * @var array
      */
     public $serviceProviders = [
-		EventsProvider::class,
+        // InternalServiceProviderExample::class,
+        // ...
 		\SocialiteProviders\Manager\ServiceProvider::class,
-
     ];
 
     /**
@@ -33,10 +30,10 @@ class MainServiceProvider extends MainProvider
      *
      * @var  array
      */
-/*     public $aliases = [
-        'Socialite' => Socialite::class,
+    public $aliases = [
+
     ];
- */
+
     /**
      * Register anything in the container.
      */
@@ -45,5 +42,13 @@ class MainServiceProvider extends MainProvider
         parent::register();
 
         // do your binding here..
+        // $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
     }
+	
+	protected $listen = [
+    \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+        // add your listeners (aka providers) here
+        'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
+    ],
+];
 }

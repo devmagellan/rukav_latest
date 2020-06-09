@@ -21,7 +21,20 @@ class Controller extends WebController
      */
     public function redirectAll($provider)
     {
-        return Socialite::driver($provider)->redirect();
+        //return Socialite::driver($provider)->redirect();
+		return Socialite::with('vkontakte')->redirect();
+    }
+	
+	public function redirectVkontakte()
+    {
+        //return Socialite::driver($provider)->redirect();
+		return Socialite::with('vkontakte')->redirect();
+    }
+	
+	public function redirectOklassniki()
+    {
+        //return Socialite::driver($provider)->redirect();
+		return Socialite::with('odnoklassniki')->stateless()->redirect();
     }
 
     /**
@@ -40,6 +53,87 @@ class Controller extends WebController
      *
      * @return \Illuminate\Http\Response
      */
+	 
+	 
+	 	  public function handleProviderCallbackOk()
+    {
+		$provider='odnoklassniki';
+
+        try {
+            $user = Socialite::driver('odnoklassniki')->stateless()->user();
+			$accessTokenResponseBody = $user->accessTokenResponseBody;
+			
+        } catch (\Exception $e) {
+			
+            return redirect('/login');
+        }
+        // only allow people with @company.com to login
+     /*   if(explode("@", $user->email)[1] !== 'company.com'){
+            return redirect()->to('/');
+        }*/
+        // check if they're an existing user
+        $existingUser = User::where('email', $user->email)->first();
+        if($existingUser){
+            // log them in
+            auth()->login($existingUser, true);
+        } else {
+			  $newUser                  = new User;
+            $newUser->name            = $user->user['given_name'];
+            $newUser->sername            = $user->user['family_name'];
+            $newUser->email           = $user->user['email'];
+            $newUser->google_id       = $user->id;
+            $newUser->avatar          = $user->avatar;
+            $newUser->avatar_original = $user->avatar_original;
+            $newUser->login = $user->user['email'];
+            $newUser->department = 'none';
+            $newUser->active = 1;
+            $newUser->company_id          = 1;
+            $newUser->save();
+			$user = $this->createUser($user,$provider);
+			auth()->login($newUser, true);
+			
+        }
+        return redirect()->to('/');
+    }
+	 
+	  public function handleProviderCallbackVk()
+    {
+		$provider='vk';
+
+        try {
+            $user = Socialite::driver('vkontakte')->user();
+        } catch (\Exception $e) {
+            return redirect('/login');
+        }
+        // only allow people with @company.com to login
+     /*   if(explode("@", $user->email)[1] !== 'company.com'){
+            return redirect()->to('/');
+        }*/
+        // check if they're an existing user
+        $existingUser = User::where('email', $user->email)->first();
+        if($existingUser){
+            // log them in
+            auth()->login($existingUser, true);
+        } else {
+			  $newUser                  = new User;
+            $newUser->name            = $user->user['given_name'];
+            $newUser->sername            = $user->user['family_name'];
+            $newUser->email           = $user->user['email'];
+            $newUser->google_id       = $user->id;
+            $newUser->avatar          = $user->avatar;
+            $newUser->avatar_original = $user->avatar_original;
+            $newUser->login = $user->user['email'];
+            $newUser->department = 'none';
+            $newUser->active = 1;
+            $newUser->company_id          = 1;
+            $newUser->save();
+			$user = $this->createUser($user,$provider);
+			auth()->login($newUser, true);
+			
+        }
+        return redirect()->to('/');
+    }
+	 
     public function handleProviderCallback($provider)
     {
 
@@ -55,6 +149,7 @@ class Controller extends WebController
             return redirect()->to('/');
         }*/
         // check if they're an existing user
+		
         $existingUser = User::where('email', $user->email)->first();
         if($existingUser){
             // log them in

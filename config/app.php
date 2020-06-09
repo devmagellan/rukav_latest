@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'ru',
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -172,7 +172,8 @@ return [
         Apiato\Core\Providers\ApiatoProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 		Spatie\Fractal\FractalServiceProvider::class,
-		Yajra\Datatables\DatatablesServiceProvider::class
+		Yajra\Datatables\DatatablesServiceProvider::class,
+		\SocialiteProviders\Manager\ServiceProvider::class
     ],
 
     /*
