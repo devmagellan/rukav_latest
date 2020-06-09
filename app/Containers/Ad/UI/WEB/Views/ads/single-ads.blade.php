@@ -23,21 +23,25 @@
         <div class="col-md-8 justify-content-between product_title_block" style="display: flex;">
           <h3 class="product_title">
             {{$ad->title}}
-          </h3><input type="hidden" class="wishInputId" value="{{$ad->id}}">
-          <a href="#" class="add_to_favourites" onclick="wishList(this)">
-
+          </h3>
 
               <?
                   if(\Auth::user()){
               $wishlist=App\Containers\Ad\Models\Wishlist::where('message_id',$ad->id)->where('user_id',\Auth::user()->id)->first();
-              echo '<span>Добавить в <br> Избранное</span>';
-
               ?>
-            <img class="@if($wishlist && $wishlist->active==1) active @endif " @if($wishlist && $wishlist->active==1) src="/img/heart_icon_filed.svg" @else src="/img/heart_icon.svg" @endif  alt="">
-            <? }
+
+                <div class="add_to_favourites">
+                  <input type="hidden" class="wishInputId" value="{{$ad->id}}">
+                  <span>Добавить в <br> Избранное</span>
+                  <button onclick="wishList(this)" class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist">
+                    <img src="/img/heart_icon.svg" alt="" class="heart_icon" @if($wishlist && $wishlist->active==1) style="display: none"  @else style="display: block !important" @endif>
+                    <img src="/img/hert_icon_filed.svg" alt="" class="hert_icon_filed" @if($wishlist && $wishlist->active!=1) style="display: none" @else style="display: block !important" @endif>
+                  </button>
+                </div>
+                  <? }
 
             ?>
-          </a>
+
         </div>
         <div class="col-md-4">
           <p class="product_price">
@@ -192,10 +196,15 @@
         console.log(id)
         if($(event).hasClass('active')){
             console.log('not_active')
+            $('.hert_icon_filed').hide()
+            $('.heart_icon').show()
             var active = 0;
         }
         else{
             console.log('active')
+            $('.heart_icon').hide()
+            $('.hert_icon_filed').show()
+
             var active =1;
         }
 

@@ -914,6 +914,11 @@
           });
 
       });
+      $("input[type='tel']").on("blur", function () {
+          $(this).val("+" + $(".country[class*='active']").attr("data-dial-code") + $(this).val());
+      });
+
+
   </script>
 
 @endsection

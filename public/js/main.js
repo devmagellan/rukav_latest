@@ -208,16 +208,6 @@ $(document).ready(function(){
             $('.input_password').attr('type', 'password');
         }
     });
-
-    $('#show_new_password').on('click', function(){
-
-        if ($(this).is(':checked')){
-            $('.input_new_password').attr('type', 'text');
-
-        } else {
-            $('.input_new_password').attr('type', 'password');
-        }
-    });
     $('.category_dropdown').css('min-height', $('.category_dropdown_main_list').outerHeight());
     $('.category_dropdown_main_list li p').on('click', function(){
         $('.category_dropdown_main_list li').removeClass('category_link_active');
@@ -438,6 +428,12 @@ $(document).ready(function(){
     $('#all_adress').on('click', function () {
         $('.all_user_block').show();
         $('.outUk').hide();
+    });
+
+    $('.btn-wishlist').on('click', function () {
+        console.log($(this).find('img'))
+
+        $(this).toggleClass('active');
     });
 
 

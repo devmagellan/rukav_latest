@@ -12,6 +12,8 @@ use App\Containers\PrivateCabinet\UI\WEB\Requests\EditPrivateCabinetRequest;
 use App\Containers\User\UI\WEB\Requests\GetAllUsersRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
+use Image;
+
 
 /**
  * Class Controller
@@ -135,6 +137,22 @@ class Controller extends WebController
     }
 
     public function uploadProfileImageAjax(GetAllPrivateCabinetsRequest $request){
-        var_dump($request->input());
+        var_dump($request->hasFile('image'));
+        var_dump($_FILES);
+
+        if ($request->hasFile('image')) {
+            $image      = $request->file('image');
+            $fileName   = time() . '.' . $image->getClientOriginalExtension();
+
+            $img = Image::make($image->getRealPath());
+         /*   $img->resize(120, 120, function ($constraint) {
+                $constraint->aspectRatio();
+            });*/
+
+            $img->stream(); // <-- Key point
+
+            //dd();
+            \Storage::disk('local')->put('profile_images'.'/'.$fileName, $img, 'public');
+        }
     }
 }
