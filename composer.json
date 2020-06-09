@@ -48,7 +48,10 @@
     "spatie/laravel-fractal": "5.7.0",
     "vinkla/hashids": "8.1.0",
     "wikimedia/composer-merge-plugin": "^1.3.1",
-    "yajra/laravel-datatables-oracle": "~9.10.0"
+	"spatie/laravel-fractal":"5.7.0",
+	"yajra/laravel-datatables-oracle": "~9.10.0",
+	 "laravel/passport": "~8.4.3",
+    "socialiteproviders/vkontakte":"4.1.0"
   },
   "require-dev": {
     "facade/ignition": "^2.0",
@@ -88,10 +91,19 @@
       "merge-scripts": true
     }
   },
+
+
+
   "scripts": {
  	"post-install-cmd": [
 	"@php artisan vendor:publish --provider 'Prettus\\Repository\\Providers\\RepositoryServiceProvider'",
-		"@php artisan vendor:publish --provider='Spatie\\Fractal\\FractalServiceProvider'"
+		"@php artisan vendor:publish --provider='Spatie\\Fractal\\FractalServiceProvider'",
+      "@php artisan vendor:publish --provider 'SocialiteProviders\\Manager\\ServiceProvider'"
+    ],
+    "post-update-cmd": [
+      "@php artisan vendor:publish --provider 'Prettus\\Repository\\Providers\\RepositoryServiceProvider'",
+      "@php artisan vendor:publish --provider='Spatie\\Fractal\\FractalServiceProvider'",
+      "@php artisan vendor:publish --provider 'SocialiteProviders\\Manager\\ServiceProvider'"
     ],
 
   

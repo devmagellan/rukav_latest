@@ -15,7 +15,7 @@ class GetAllUsersRequest extends Request
      *
      * @var string
      */
-    protected $transporter = \App\Containers\AdminPanel\Data\Transporters\GetAllAdminPanelsTransporter::class;
+   // protected $transporter = \App\Containers\User\Data\Transporters\GetAllAdminPanelsTransporter::class;
 
     /**
      * Define which Roles and/or Permissions has access to this request.
@@ -24,7 +24,7 @@ class GetAllUsersRequest extends Request
      */
     protected $access = [
         'permissions' => '',
-        'roles'       => 'admin',
+        'roles'       => '',
     ];
 
     /**

@@ -15,8 +15,11 @@ class CreateUsersTable extends Migration
       $table->bigIncrements('id');
 
       $table->string('name')->nullable();
+       $table->boolean('show_name')->default(true);
       $table->string('sername')->nullable();
+        $table->boolean('show_sername')->default(false);
       $table->string('email')->unique()->nullable();
+        $table->boolean('show_email')->default(false);
       $table->string('password')->nullable();
       $table->boolean('active')->default(true);
       $table->boolean('confirmed')->default(false);
@@ -27,6 +30,19 @@ class CreateUsersTable extends Migration
       $table->boolean('is_client')->default(false);
       $table->string('country')->nullable();
       $table->string('phone')->nullable();
+        $table->string('additional_phone')->nullable();
+        $table->boolean('show_phone')->default(false);
+        $table->boolean('show_additional_phone')->default(false);
+        $table->string('skype')->nullable();
+        $table->boolean('show_skype')->default(false);
+        $table->string('facebook')->nullable();
+        $table->boolean('show_facebook')->default(false);
+        $table->string('instagram')->nullable();
+        $table->boolean('show_instagram')->default(false);
+        $table->string('www')->nullable();
+        $table->boolean('show_www')->default(false);
+        $table->string('photo')->nullable();
+        $table->boolean('show_photo')->default(true);
 
       $table->rememberToken();
       $table->timestamps();

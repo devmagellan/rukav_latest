@@ -131,6 +131,11 @@ class User extends UserModel implements ChargeableInterface
         return $this->hasMany('App\Domain\Customer\Models\Message', 'addressant','id');
     }
 
+    public function getBusinessAccount(){
+        return $this->hasOne(\App\Containers\User\Models\BusinessAccount::class);
+
+    }
+
 
 
 }

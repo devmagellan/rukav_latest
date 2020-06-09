@@ -47,8 +47,8 @@ class Controller extends WebController
     $ad = Apiato::call('Ad@FindAdByIdAction', [$request]);
     //TODO эту переменную сделать в сервис провайдере
     $categories = Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
-
-    return view('ad::ads.single-ads', compact('categories', 'ad'));
+    $breadcrumbsArray=\App\Containers\Site\Services\ProductCategoryService::BreadCrumbs($ad->category_id);
+    return view('ad::ads.single-ads', compact('categories', 'ad','breadcrumbsArray'));
   }
 
   /**
@@ -329,4 +329,20 @@ class Controller extends WebController
     return view('ad::modal_photo', $result);
 
   }
+
+
+    public function setWishListStatus(GetAllAdsDataTableRequest $request){
+      var_dump($request->input('active'));
+        $result=\App\Containers\Ad\Models\Wishlist::where('message_id',$request->input('id'))->where('user_id',\Auth::user()->id)->first();
+        $message=[
+            'active'=>$request->input('active'),
+            'user_id'=>\Auth::user()->id,
+            'message_id'=>$request->input('id'),
+        ];
+        if(null!=$result ){
+            \App\Containers\Ad\Models\Wishlist::where('message_id',$request->input('id'))->where('user_id',\Auth::user()->id)->update($message);
+        }else{
+            \App\Containers\Ad\Models\Wishlist::where('message_id',$request->input('id'))->where('user_id',\Auth::user()->id)->insert($message);
+        }
+    }
 }
