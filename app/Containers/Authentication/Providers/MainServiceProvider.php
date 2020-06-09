@@ -21,6 +21,7 @@ class MainServiceProvider extends MainProvider
      * @var array
      */
     public $serviceProviders = [
+        \Laravolt\Avatar\ServiceProvider::class,
         PassportServiceProvider::class,
         AuthProvider::class,
         MiddlewareServiceProvider::class,

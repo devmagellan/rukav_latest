@@ -436,6 +436,11 @@ $(document).ready(function(){
         $(this).toggleClass('active');
     });
 
+    $("input[type='tel']").on("blur", function () {
+        console.log('DataDiAlCode=>',$(".country[class*='active']").attr("data-dial-code"))
+        $(this).parent().find('.phone_code').val($(".country[class*='active']").attr("data-dial-code"))
+    });
+
 
    
     

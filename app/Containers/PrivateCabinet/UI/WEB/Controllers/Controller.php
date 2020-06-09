@@ -38,7 +38,9 @@ class Controller extends WebController
         foreach($result as $res){
             $favorits[]=\App\Containers\Ad\Models\Ad::where('id',$res->message_id)->with('pictures')->first();
         }
-        $user=\App\Containers\User\Models\User::where('id',\Auth::user()->id)->with('getBusinessAccount')->first();
+        $user=null;
+        if(\Auth::user()){
+        $user=\App\Containers\User\Models\User::where('id',\Auth::user()->id)->with('getBusinessAccount')->first();}
 
 
         return view('privatecabinet::index',compact('categoriesOnlyRoot', 'categories', 'ads','favorits','user' ) );
@@ -152,7 +154,7 @@ class Controller extends WebController
             $img->stream(); // <-- Key point
 
             //dd();
-            \Storage::disk('local')->put('profile_images'.'/'.$fileName, $img, 'public');
+            \Storage::disk('local')->put('/public/avatars'.'/'.$fileName, $img, 'public');
         }
     }
 }

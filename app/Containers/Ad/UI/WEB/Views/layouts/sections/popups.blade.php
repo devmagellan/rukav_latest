@@ -462,3 +462,48 @@
             </div>
         </div>
     </div>
+
+<div class="modal fade" id="ModalSendMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel8"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <img src="{{asset('img/close-icon.svg')}}" alt="">
+      </button>
+      <h6 class="modalTitle">Сообщение</h6>
+      <form class="formModal">
+
+        <div class="row">
+          <div class="col-sm-12">
+            <input type="text" name="name" placeholder="Ваше Имя"> <span class="required">*</span>
+            <span id="firstName" class="errorBlock"></span>
+          </div>
+          <div class="col-sm-12">
+            <input type="text" name="email" placeholder="Ваш email"> <span class="required">*</span>
+            <span id="lastName" class="errorBlock"></span>
+          </div>
+
+          <div class="col-sm-12">
+            <textarea name="text" placeholder="Текст сообщения"> </textarea>
+            <span id="lastName" class="errorBlock"></span>
+          </div>
+        </div>
+        <p class="form_modal_text_bottom">
+          Оригинал объявления автоматически будет приложен к этому сообщению
+        </p>
+        <div class="row">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6">
+            <button type="submit" data-dismiss="modal" aria-label="Close" data-toggle="modal"
+                    data-target="#passwordRecoveryKod">Отправить сообщение
+            </button>
+          </div>
+
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+</div>

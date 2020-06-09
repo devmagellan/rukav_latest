@@ -173,7 +173,8 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
 		Spatie\Fractal\FractalServiceProvider::class,
 		Yajra\Datatables\DatatablesServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+        Laravolt\Avatar\ServiceProvider::class,
     ],
 
     /*
@@ -226,6 +227,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Image' => Intervention\Image\ImageManagerStatic::class,
+        'Avatar'    => Laravolt\Avatar\Facade::class,
         // NOTE: all packages aliases must be registered inside their containers service providers
     ],
 

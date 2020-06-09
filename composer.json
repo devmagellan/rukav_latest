@@ -8,8 +8,8 @@
   },
   "authors": [
     {
-      "name": "Mahmoud Zalt",
-      "email": "mahmoud@zalt.me"
+      "name": "Andrey Lopushansky",
+      "email": "dev.magellan@gmail.com"
     }
   ],
   "keywords": [
@@ -72,6 +72,11 @@
   "extra": {
     "laravel": {
       "dont-discover": []
+    },
+    "apiato": {
+      "container": {
+        "name": "Authentication"
+      }
     },
     "merge-plugin": {
       "include": [

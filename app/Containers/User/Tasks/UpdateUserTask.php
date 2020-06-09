@@ -39,6 +39,7 @@ class UpdateUserTask extends Task
      */
     public function run($userData, $userId): User
     {
+
         if (empty($userData)) {
             throw new UpdateResourceFailedException('Inputs are empty.');
         }

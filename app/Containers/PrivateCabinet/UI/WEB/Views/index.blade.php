@@ -151,13 +151,40 @@
                       <input class="checkbox_hidden"  type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" name="country" value="{{$user->country}}">
+                    <input type="text" disabled class="prophile_main_input" name="country" value="{{$user->country}}">
                     <!--a href="#" class="prophile_change_country" >
                       Сменить
                     </a-->
                   </div>
                 </div>
+
                 <div class="col-sm-12 col-md-5">
+                  <label for="imgInputakk" class="prophile_photo_picked_wrapper">
+                    <img class="prophile_photo_picked" for="imgInputakk" src="img/slide_img1.png" alt="">
+                  </label>
+                  <label class="prophile_photo_wrapper" for="imgInputakk">
+                    <div class="prophile_photo_img">
+                      <img src="img/prophile_camera.png" alt="">
+                    </div>
+
+                    <a class="prophile_photo_change">
+                      Добавить фото или логотип
+                    </a>
+                  </label>
+                  <input type="file" name="loadphoto" id="imgInputakk">
+                  <div class="prophile_show_input-wrapper prophile_photo_input-wrapper d-flex align-items-center">
+                    <label class="checkbox_container">
+                      <input class="checkbox_hidden" type="checkbox" checked="checked">
+                      <span class="checkmark"></span>
+                    </label>
+                    <p class="prophile_show_input_text">
+                      Публиковать в объявлениях
+                    </p>
+                  </div>
+                </div>
+
+
+                <!--div class="col-sm-12 col-md-5">
                   <img class="prophile_photo_picked" src="/img/slide_img1.png" alt="">
                   <label class="prophile_photo_wrapper" for="loadphoto">
                     <div class="prophile_photo_img">
@@ -178,7 +205,7 @@
                       Публиковать в объявлениях
                     </p>
                   </div>
-                </div>
+                </div-->
               </div>
 
               @if($user->getBusinessAccount)
@@ -234,11 +261,12 @@
                     Телефон мобильный <span>*</span>
                   </p>
                   <div class="prophile_show_input-wrapper d-flex align-items-center">
+                    <input type="hidden" class="phone_code" value="{{$user->phone_code}}">
                     <label class="checkbox_container">
                       <input class="checkbox_hidden" name="show_phone" type="checkbox" @if($user->show_phone) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="tel" id="telphone5" class="prophile_main_input" value="{{$user->phone}}">
+                    <input type="tel" id="telphone5" name="phone" class="prophile_main_input" value="{{$user->phone}}">
 
                     <!--a href="#" class="prophile_change_country">
                       Сменить
@@ -252,7 +280,7 @@
                       <input class="checkbox_hidden"  name="show_additional_phone" type="checkbox" @if($user->show_additional_phone) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="tel" id="telphone6" class="prophile_main_input">
+                    <input type="tel" id="telphone6" name="additional_phone" class="prophile_main_input" value="{{$user->additional_phone}}">
                     <!--a href="#" class="prophile_change_country">
                       Сменить
                     </a-->
@@ -914,10 +942,13 @@
           });
 
       });
-      $("input[type='tel']").on("blur", function () {
-          $(this).val("+" + $(".country[class*='active']").attr("data-dial-code") + $(this).val());
-      });
 
+$('#telphone5,#telphone6').intlTelInput(
+    {
+    onlyCountries:['{{$user->country}}'],
+        preferredCountries:""
+    }
+)
 
   </script>
 

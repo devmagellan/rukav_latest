@@ -30,7 +30,10 @@ class Controller extends WebController
     {
       $categories= Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
       $categoriesOnlyRoot = $categories->where('parent_id', 0);
-      return view('homepage::index', compact('categoriesOnlyRoot', 'categories'));
+      $user=null;
+      if(\Auth::user()){
+      $user=\App\Containers\User\Models\User::where('id',\Auth::user()->id)->first();}
+      return view('homepage::index', compact('categoriesOnlyRoot', 'categories','user'));
     }
 
     /**
