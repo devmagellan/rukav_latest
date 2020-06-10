@@ -7,7 +7,13 @@ use App\Ship\Parents\Models\Model;
 class Connect extends Model
 {
     protected $fillable = [
-
+        'receiver_id',
+        'message_id',
+        'sender_id',
+        'sender_name',
+        'sender_email',
+        'sender_phone',
+        'text',
     ];
 
     protected $attributes = [

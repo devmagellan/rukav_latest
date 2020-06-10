@@ -472,22 +472,28 @@
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
       <h6 class="modalTitle">Сообщение</h6>
-      <form class="formModal needs-validation" action="/connects/create" method="get" id="contact"  novalidate >
-        <input type="hidden" name="ad_id" value="{{\Request::segment(2)}}">
+      <form class="formModal needs-validation" action="/connects/store" method="get" id="contact"  novalidate >
+        <input type="hidden" name="message_id" value="{{\Request::segment(2)}}">
+       @if(isset($receiver))
+        <input type="hidden" name="receiver_id" value="{{$receiver}}">
+        @endif
         <div class="row">
           @if(!\Auth::user())
+            <input type="hidden" name="sender_id" value="0">
           <div class="col-sm-12">
-            <input type="text" name="name" placeholder="Ваше Имя"> <span class="required">*</span>
+            <input type="text" name="sender_name" placeholder="Ваше Имя"> <span class="required">*</span>
             <span id="firstName" class="errorBlock"></span>
           </div>
           <div class="col-sm-12">
-            <input type="text" name="email" placeholder="Ваш email"> <span class="required">*</span>
+            <input type="text" name="sender_email" placeholder="Ваш email"> <span class="required">*</span>
             <span id="lastName" class="errorBlock"></span>
           </div>
           <div class="col-sm-12" style="margin-top:15px">
-            <input type="tel" name="phone" id="telphone5"><span class="required">*</span>
+            <input type="tel" name="sender_phone" id="telphone5"><span class="required">*</span>
             <span id="phone" class="errorBlock"></span>
           </div>
+            @else
+            <input type="hidden" name="sender_id" value="{{Auth::user()->id}}">
           @endif
           <div class="col-sm-12">
             <textarea name="text" id="msgr_input" placeholder="Текст сообщения"> </textarea>

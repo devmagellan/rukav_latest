@@ -50,15 +50,7 @@ class Controller extends WebController
      */
     public function create(CreateConnectRequest $request)
     {
-        $user=\App\Containers\User\Models\User::where('id',$request->input('client_id'))->first();
-        if (preg_match('/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/si', $request->input('text')))
-        {
-            dd("Contains an email");}
-        else{
 
-            Apiato::call('Connect@CreateConnectAction', [$request]);
-        }
-        return json_encode(['message'=>'success']);
 
 
     }
@@ -70,9 +62,18 @@ class Controller extends WebController
      */
     public function store(StoreConnectRequest $request)
     {
-        $connect = Apiato::call('Connect@CreateConnectAction', [$request]);
 
-        // ..
+        $user=\App\Containers\User\Models\User::where('id',$request->input('client_id'))->first();
+        if (preg_match('/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/si', $request->input('text')))
+        {
+            return json_encode(['message'=>'Contains an email']);
+        }
+        else{
+            Apiato::call('Connect@CreateConnectAction', [$request]);
+            return redirect('/ads/'.$request->input('message_id').'')->withErrors(['Ваше сообщение было успешно доставлено!', 'The Message']);
+        }
+
+
     }
 
     /**

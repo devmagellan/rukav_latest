@@ -10,6 +10,9 @@ class FindAdByIdAction extends Action
 {
     public function run(Request $request)
     {
+        if($request->has('message_id')){
+            $request->id=$request->input('message_id');
+        }
         $ad = Apiato::call('Ad@FindAdByIdTask', [$request->id]);
         return $ad;
     }

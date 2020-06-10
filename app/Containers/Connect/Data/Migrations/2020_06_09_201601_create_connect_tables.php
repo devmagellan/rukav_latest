@@ -13,17 +13,20 @@ class CreateConnectTables extends Migration
     {
         Schema::create('connects', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('sender_id')->unsigned();
-            $table->bigInteger('receiver_id')->unsigned();
+            $table->bigInteger('sender_id');
+            $table->bigInteger('receiver_id')->nullable()->unsigned();
             $table->string('text');
             $table->bigInteger('message_id')->unsigned();
+            $table->string('sender_name')->nullable();
+            $table->string('sender_email')->nullable();
+            $table->string('sender_phone')->nullable();
             $table->timestamps();
 
 
         });
 
         Schema::table('connects', function($table) {
-            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
+            //$table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('message_id')->references('id')->on('ads')->onDelete('cascade');
         });

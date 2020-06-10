@@ -1,5 +1,5 @@
 
-@extends('ad::layouts.layout')
+@extends('homepage::layouts.layout')
 @section('content')
   <article class="product_main_block">
     <div class="container">
@@ -19,7 +19,9 @@
           </ul>
         </div>
       </div>
-
+        @if($errors->any())
+            <h4 class="success_message" style="color:green">{{$errors->first()}}</h4>
+        @endif
       <div class="row">
         <div class="col-md-8 justify-content-between product_title_block" style="display: flex;">
           <h3 class="product_title">
@@ -36,7 +38,7 @@
                   <span>Добавить в <br> Избранное</span>
                   <button onclick="wishList(this)" class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist">
                     <img src="/img/heart_icon.svg" alt="" class="heart_icon" @if($wishlist && $wishlist->active==1) style="display: none"  @else style="display: block !important" @endif>
-                    <img src="/img/hert_icon_filed.svg" alt="" class="hert_icon_filed" @if($wishlist && $wishlist->active!=1) style="display: none" @else style="display: block !important" @endif>
+                    <img src="/img/hert_icon_filed.svg" alt="" class="hert_icon_filed" @if(($wishlist && $wishlist->active!=1) || !$wishlist) style="display: none" @else style="display: block !important" @endif>
                   </button>
                 </div>
                   <? }
@@ -71,14 +73,16 @@
           <div class="product_info_block">
             <div class="product_info_block_left">
               <div class="product_info_block_avatar">
-                <img src="/img/info_user_icon.svg" alt="">
+                <img src="/storage/avatars/{{$ad->getSender->avatar}}" alt="">
               </div>
             </div>
             <div class="product_info_block_right">
+              <p class="product_info_user_name">{{$ad->name}} <span>Часное лицо</span></p>
               @if($ad->show_name)
-                <p class="product_info_user_name">{{$ad->name}} <span>Часное лицо</span></p>
+
               @endif
-              <p class="product_info_user_date">на RUKAVe з 22.05.2019</p>
+
+              <p class="product_info_user_date">на RUKAVe с {{$ad->getSender->created_at}}</p>
               <a href="#" class="product_info_all_add">смотреть все обьевления</a>
               <p class="product_info_city">12 John Street, Manchester, UA (MN3 2ER)</p>
             </div>
@@ -191,6 +195,7 @@
 @endsection
 
 <script>
+
 
     function wishList(event){
         var id = $(event).parent('div').find('.wishInputId').val()

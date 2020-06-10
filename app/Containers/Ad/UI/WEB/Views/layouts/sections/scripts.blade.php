@@ -19,6 +19,14 @@
 
 
 <script>
+
+
+    $(document).ready(function(){
+        setTimeout(function () {
+            $('.success_message').hide()
+        }, 5000)
+
+    })
 function initMap(){}
     function codeLatLng(latlng,ajax) {
         geocoder.geocode({'latLng': latlng}, function (results) {

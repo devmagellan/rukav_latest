@@ -1,10 +1,10 @@
 <?php
 
 /** @var Route $router */
-$router->get('connects/create', [
-    'as' => 'web_connect_create',
-    'uses'  => 'Controller@create',
-    'middleware' => [
+$router->get('connects/store', [
+    'as' => 'web_connect_store',
+    'uses'  => 'Controller@store',
+  /*  'middleware' => [
       'auth:web',
-    ],
+    ],*/
 ]);

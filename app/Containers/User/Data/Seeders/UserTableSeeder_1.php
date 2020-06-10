@@ -30,6 +30,7 @@ class UserTableSeeder_1 extends Seeder
                 'active'=>true,
                 'confirmed'=>true,
                 'is_client'=>true,
+                'avatar'=>'avatar-admin-lg.png'
 
             ],
             /*2*/
@@ -42,6 +43,7 @@ class UserTableSeeder_1 extends Seeder
                 'active'=>true,
                 'confirmed'=>true,
                 'is_client'=>true,
+                'avatar'=>'avatar-admin-lg.png'
 
             ],
             /*3*/
@@ -53,6 +55,7 @@ class UserTableSeeder_1 extends Seeder
                 'active'=>true,
                 'confirmed'=>true,
                 'is_client'=>true,
+                'avatar'=>'avatar-admin-lg.png'
             ],
             /*4*/
             [
@@ -63,6 +66,7 @@ class UserTableSeeder_1 extends Seeder
                 'active'=>true,
                 'confirmed'=>true,
                 'is_client'=>true,
+                'avatar'=>'avatar-admin-lg.png'
             ],
             /*5*/
             [
@@ -73,6 +77,7 @@ class UserTableSeeder_1 extends Seeder
                 'active'=>true,
                 'confirmed'=>true,
                 'is_client'=>true,
+                'avatar'=>'avatar-admin-lg.png'
 
             ],
 
