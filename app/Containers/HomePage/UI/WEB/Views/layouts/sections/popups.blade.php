@@ -40,8 +40,8 @@
       <p class="textform">или войти через</p>
       <ul class="socials">
         <li>
-          <a href="{{ route('login.provider', 'facebook') }}">
-            <i class="fab fa-facebook-f"></i>
+          <a  href="{{ route('login.provider', 'facebook') }}">
+            <i class="fab fa-facebook-f "></i>
           </a>
         </li>
         <li>
@@ -57,6 +57,11 @@
         <li>
           <a href="{{ route('login.provider', 'odnoklassniki') }}">
             <i class="fab fa-odnoklassniki"></i>
+          </a>
+        </li>
+		<li>
+          <a href="{{ route('login.provider', 'pinterest') }}">
+            <i class="fab fa-pinterest"></i>
           </a>
         </li>
       </ul>
@@ -393,53 +398,3 @@
     </div>
   </div>
 </div>
-
-
-
-<div class="modal fade" id="passwordUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <img src="{{asset('img/close-icon.svg')}}" alt="">
-      </button>
-      <h6 class="modalTitle">Смена пароля</h6>
-      <form id="idForm" class="formModal" action="/change_password" method="post">
-
-      <input type="hidden" name="id" value="@if(\Auth::user()) {{\Auth::user()->id}} @endif">
-        <div class="row">
-          <div class="input_password_wrapper col-md-8" style="margin:0 auto">
-            <input type="password"  placeholder="Текущий Пароль" class="input_password" name="old_password">
-            <span id="passwordLogin" class="errorBlock"></span>
-            <input type="checkbox" id="show_password" >
-            <label for="show_password" class="show_password"><img src="{{asset('img/hide_password.svg')}}" alt=""></label>
-            <span id="oldPassword" class="errorBlock"></span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input_password_wrapper col-md-8" style="margin:0 auto">
-            <input type="password"  placeholder="Новый Пароль" class="input_new_password" name="password" >
-            <span id="passwordNewLogin" class="errorBlock"></span>
-            <input type="checkbox" id="show_new_password" >
-            <label for="show_new_password" class="show_new_password"><img src="{{asset('img/hide_password.svg')}}" alt=""></label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-6">
-            <button type="submit" data-toggle="modal">Изменить пароль
-            </button>
-          </div>
-          <div class="col-sm-6">
-            <button type="button" class="buttonHref">вернуться</button>
-          </div>
-        </div>
-      </form>
-
-
-    </div>
-  </div>
-</div>
-
-
