@@ -243,6 +243,30 @@ class AdsTableSeeder_2 extends Seeder
             [
                 'ads_id' => 15,
                 'photo'=>'tshort.jpg'
+            ],
+            [
+                'ads_id' => 2,
+                'photo'=>'car1.png'
+            ],
+            [
+                'ads_id' => 2,
+                'photo'=>'car2.png'
+            ],
+            [
+                'ads_id' => 2,
+                'photo'=>'car3.png'
+            ],
+            [
+                'ads_id' => 2,
+                'photo'=>'car4.png'
+            ],
+            [
+                'ads_id' => 2,
+                'photo'=>'car5.png'
+            ],
+            [
+                'ads_id' => 2,
+                'photo'=>'car6.png'
             ]
         ]);
 

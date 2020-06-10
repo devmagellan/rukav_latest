@@ -46,5 +46,11 @@ return [
     'client_secret' => env('VKONTAKTE_SECRET'),
     'redirect' => env('VKONTAKTE_REDIRECT_URI')
 ],
+'odnoklassniki' => [
+    'client_id' => env('ODNOKLASSNIKI_KEY'),
+    'client_secret' => env('ODNOKLASSNIKI_SECRET'),
+	'client_public' => env('ODNOKLASSNIKI_PUBLIC'),
+    'redirect' => env('ODNOKLASSNIKI_REDIRECT_URI')
+],
 
 ];

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36c30cba8fdf049f8166c7cf96cecf5c",
+    "content-hash": "55013561fb029f34cbea2e18ad7d14e8",
     "packages": [
         {
             "name": "apiato/containers-installer",
@@ -4729,6 +4729,43 @@
             ],
             "description": "Easily add new or override built-in providers in Laravel Socialite.",
             "time": "2020-03-08T16:54:44+00:00"
+        },
+        {
+            "name": "socialiteproviders/odnoklassniki",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Odnoklassniki.git",
+                "reference": "9ce7638b04c4ee61b83414487c0b126d6879364f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Odnoklassniki/zipball/9ce7638b04c4ee61b83414487c0b126d6879364f",
+                "reference": "9ce7638b04c4ee61b83414487c0b126d6879364f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "socialiteproviders/manager": "~2.0 || ~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Odnoklassniki\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Talgat Zheldibaev",
+                    "email": "talgat06585@gmail.com"
+                }
+            ],
+            "description": "Odnoklassniki OAuth2 Provider for Laravel Socialite",
+            "time": "2018-06-21T10:01:20+00:00"
         },
         {
             "name": "socialiteproviders/vkontakte",

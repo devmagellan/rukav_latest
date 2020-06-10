@@ -411,7 +411,7 @@
             <div class="modal-content">
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <img src="img/close-icon.svg" alt="">
+                    <img src="/img/close-icon.svg" alt="">
                 </button>
 
                 <div class="row">
@@ -434,7 +434,7 @@
                         </ul>
                     </div>
                     <div class="col-md-4 catalogBlock2">
-                        <img src="img/arrow_left.svg" alt="" class="arrow_left d-md-none">
+                        <img src="/img/arrow_left.svg" alt="" class="arrow_left d-md-none">
                         <div class="number_block_category d-md-none">2/3</div>
                         <h5>Рубрика</h5>
                         <ul class="listCatalog listCatalog2">
@@ -449,7 +449,7 @@
                         </ul>
                     </div>
                     <div class="col-md-4 catalogBlock3">
-                        <img src="img/arrow_left.svg" alt="" class="arrow_left d-md-none">
+                        <img src="/img/arrow_left.svg" alt="" class="arrow_left d-md-none">
                         <div class="number_block_category d-md-none">3/3</div>
                         <h5>Подрубрика</h5>
                         <ul class="listCatalog listCatalog3 listCatalogEnd">
@@ -472,9 +472,10 @@
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
       <h6 class="modalTitle">Сообщение</h6>
-      <form class="formModal">
-
+      <form class="formModal needs-validation" action="/connects/create" method="get" id="contact"  novalidate >
+        <input type="hidden" name="ad_id" value="{{\Request::segment(2)}}">
         <div class="row">
+          @if(!\Auth::user())
           <div class="col-sm-12">
             <input type="text" name="name" placeholder="Ваше Имя"> <span class="required">*</span>
             <span id="firstName" class="errorBlock"></span>
@@ -483,9 +484,13 @@
             <input type="text" name="email" placeholder="Ваш email"> <span class="required">*</span>
             <span id="lastName" class="errorBlock"></span>
           </div>
-
+          <div class="col-sm-12" style="margin-top:15px">
+            <input type="tel" name="phone" id="telphone5"><span class="required">*</span>
+            <span id="phone" class="errorBlock"></span>
+          </div>
+          @endif
           <div class="col-sm-12">
-            <textarea name="text" placeholder="Текст сообщения"> </textarea>
+            <textarea name="text" id="msgr_input" placeholder="Текст сообщения"> </textarea>
             <span id="lastName" class="errorBlock"></span>
           </div>
         </div>
@@ -495,8 +500,7 @@
         <div class="row">
           <div class="col-sm-3"></div>
           <div class="col-sm-6">
-            <button type="submit" data-dismiss="modal" aria-label="Close" data-toggle="modal"
-                    data-target="#passwordRecoveryKod">Отправить сообщение
+            <button type="submit"  >Отправить сообщение
             </button>
           </div>
 

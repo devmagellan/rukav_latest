@@ -381,7 +381,7 @@
             <div class="modal-content">
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <img src="img/close-icon.svg" alt="">
+                    <img src="/img/close-icon.svg" alt="">
                 </button>
 
                 <div class="row">
@@ -395,7 +395,7 @@
                         </ul>
                     </div>
                     <div class="col-md-4 catalogBlock2">
-                        <img src="img/arrow_left.svg" alt="" class="arrow_left d-md-none">
+                        <img src="/img/arrow_left.svg" alt="" class="arrow_left d-md-none">
                         <div class="number_block_category d-md-none">2/3</div>
                         <h5>Рубрика</h5>
                         <ul class="listCatalog listCatalog2">
@@ -403,7 +403,7 @@
                         </ul>
                     </div>
                     <div class="col-md-4 catalogBlock3">
-                        <img src="img/arrow_left.svg" alt="" class="arrow_left d-md-none">
+                        <img src="/img/arrow_left.svg" alt="" class="arrow_left d-md-none">
                         <div class="number_block_category d-md-none">3/3</div>
                         <h5>Подрубрика</h5>
                         <ul class="listCatalog listCatalog3 listCatalogEnd">

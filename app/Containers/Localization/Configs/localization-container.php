@@ -14,7 +14,7 @@ return [
   */
 
   'supported_languages' => [
-    'ru',
+    'ru','en'
   ],
 
 ];

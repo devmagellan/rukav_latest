@@ -15,6 +15,7 @@ use Laravel\Socialite\SocialiteServiceProvider;
  */
 class MainServiceProvider extends MainProvider
 {
+	
 
     /**
      * Container Service Providers.
@@ -22,7 +23,7 @@ class MainServiceProvider extends MainProvider
      * @var array
      */
     public $serviceProviders = [
-        SocialiteServiceProvider::class,
+		EventsProvider::class,
 		\SocialiteProviders\Manager\ServiceProvider::class,
 
     ];
@@ -32,10 +33,10 @@ class MainServiceProvider extends MainProvider
      *
      * @var  array
      */
-    public $aliases = [
+/*     public $aliases = [
         'Socialite' => Socialite::class,
     ];
-
+ */
     /**
      * Register anything in the container.
      */

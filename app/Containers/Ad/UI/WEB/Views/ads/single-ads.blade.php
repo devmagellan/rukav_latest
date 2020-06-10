@@ -1,3 +1,4 @@
+
 @extends('ad::layouts.layout')
 @section('content')
   <article class="product_main_block">
@@ -236,4 +237,6 @@
             }
         });
     }
+
+
 </script>

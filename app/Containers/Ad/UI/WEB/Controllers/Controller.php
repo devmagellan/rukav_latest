@@ -15,7 +15,7 @@ use Apiato\Core\Foundation\Facades\Apiato;
 use Illuminate\Http\Response;
 use MongoDB\Driver\Session;
 use App\Ship\Parents\Requests\Request;
-
+use App\Containers\Connect\UI\WEB\Requests\CreateConnectRequest;
 
 /**
  * Class Controller
@@ -345,4 +345,5 @@ class Controller extends WebController
             \App\Containers\Ad\Models\Wishlist::where('message_id',$request->input('id'))->where('user_id',\Auth::user()->id)->insert($message);
         }
     }
+
 }

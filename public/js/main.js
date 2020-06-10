@@ -53,7 +53,7 @@ $(document).ready(function(){
         $('.modal_password').removeClass('modal_password-unactive');
     });
 
-    $('<div class="quantity-nav"><div class="quantity-button quantity-up"><img src="img/more_arrow.png" alt=""></div><div class="quantity-button quantity-down"><img src="img/less_arrow.png" alt=""></div></div>').insertAfter('.quantity input');
+    $('<div class="quantity-nav"><div class="quantity-button quantity-up"><img src="img/more_arrow.png" alt=""></div><div class="quantity-button quantity-down"><img src="/img/less_arrow.png" alt=""></div></div>').insertAfter('.quantity input');
     $('.quantity').each(function() {
       var spinner = $(this),
         input = spinner.find('input[type="number"]'),
@@ -240,8 +240,8 @@ $(document).ready(function(){
         slidesToScroll: 1,
         infinite: true,
         fade: true,
-        prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="img/slide_icon2.svg" alt=""></a>',
-        nextArrow: '<a class="product_slider_icon product_slider_next"><img src="img/slide_icon1.svg" alt=""></a>',
+        prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="/img/slide_icon2.svg" alt=""></a>',
+        nextArrow: '<a class="product_slider_icon product_slider_next"><img src="/img/slide_icon1.svg" alt=""></a>',
         asNavFor: '.product_slider_nav',
         responsive: [{
             breakpoint: 768,
