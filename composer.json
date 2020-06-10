@@ -8,8 +8,8 @@
   },
   "authors": [
     {
-      "name": "Mahmoud Zalt",
-      "email": "mahmoud@zalt.me"
+      "name": "Andrey Lopushansky",
+      "email": "dev.magellan@gmail.com"
     }
   ],
   "keywords": [
@@ -37,6 +37,7 @@
     "fideloper/proxy": "^4.2",
     "fruitcake/laravel-cors": "^1.0",
     "guzzlehttp/guzzle": "^6.3",
+    "intervention/image": "^2.5",
     "laravel/framework": "^7.0",
     "laravel/passport": "~8.4.3",
     "laravel/socialite": "^4.4",
@@ -74,6 +75,11 @@
     "laravel": {
       "dont-discover": []
     },
+    "apiato": {
+      "container": {
+        "name": "Authentication"
+      }
+    },
     "merge-plugin": {
       "include": [
         "app/Ship/composer.json",
@@ -96,12 +102,15 @@
  	"post-install-cmd": [
 	"@php artisan vendor:publish --provider 'Prettus\\Repository\\Providers\\RepositoryServiceProvider'",
 		"@php artisan vendor:publish --provider='Spatie\\Fractal\\FractalServiceProvider'",
-      "@php artisan vendor:publish --provider 'SocialiteProviders\\Manager\\ServiceProvider'"
+      "@php artisan vendor:publish --provider 'SocialiteProviders\\Manager\\ServiceProvider'",
+      "@php artisan vendor:publish --provider='Intervention\\Image\\ImageServiceProviderLaravelRecent'"
+
     ],
     "post-update-cmd": [
       "@php artisan vendor:publish --provider 'Prettus\\Repository\\Providers\\RepositoryServiceProvider'",
       "@php artisan vendor:publish --provider='Spatie\\Fractal\\FractalServiceProvider'",
-      "@php artisan vendor:publish --provider 'SocialiteProviders\\Manager\\ServiceProvider'"
+      "@php artisan vendor:publish --provider 'SocialiteProviders\\Manager\\ServiceProvider'",
+      "@php artisan vendor:publish --provider='Intervention\\Image\\ImageServiceProviderLaravelRecent'"
     ],
 
   

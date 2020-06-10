@@ -53,7 +53,7 @@ $(document).ready(function(){
         $('.modal_password').removeClass('modal_password-unactive');
     });
 
-    $('<div class="quantity-nav"><div class="quantity-button quantity-up"><img src="img/more_arrow.png" alt=""></div><div class="quantity-button quantity-down"><img src="img/less_arrow.png" alt=""></div></div>').insertAfter('.quantity input');
+    $('<div class="quantity-nav"><div class="quantity-button quantity-up"><img src="img/more_arrow.png" alt=""></div><div class="quantity-button quantity-down"><img src="/img/less_arrow.png" alt=""></div></div>').insertAfter('.quantity input');
     $('.quantity').each(function() {
       var spinner = $(this),
         input = spinner.find('input[type="number"]'),
@@ -208,16 +208,6 @@ $(document).ready(function(){
             $('.input_password').attr('type', 'password');
         }
     });
-
-    $('#show_new_password').on('click', function(){
-
-        if ($(this).is(':checked')){
-            $('.input_new_password').attr('type', 'text');
-
-        } else {
-            $('.input_new_password').attr('type', 'password');
-        }
-    });
     $('.category_dropdown').css('min-height', $('.category_dropdown_main_list').outerHeight());
     $('.category_dropdown_main_list li p').on('click', function(){
         $('.category_dropdown_main_list li').removeClass('category_link_active');
@@ -250,8 +240,8 @@ $(document).ready(function(){
         slidesToScroll: 1,
         infinite: true,
         fade: true,
-        prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="img/slide_icon2.svg" alt=""></a>',
-        nextArrow: '<a class="product_slider_icon product_slider_next"><img src="img/slide_icon1.svg" alt=""></a>',
+        prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="/img/slide_icon2.svg" alt=""></a>',
+        nextArrow: '<a class="product_slider_icon product_slider_next"><img src="/img/slide_icon1.svg" alt=""></a>',
         asNavFor: '.product_slider_nav',
         responsive: [{
             breakpoint: 768,
@@ -438,6 +428,17 @@ $(document).ready(function(){
     $('#all_adress').on('click', function () {
         $('.all_user_block').show();
         $('.outUk').hide();
+    });
+
+    $('.btn-wishlist').on('click', function () {
+        console.log($(this).find('img'))
+
+        $(this).toggleClass('active');
+    });
+
+    $("input[type='tel']").on("blur", function () {
+        console.log('DataDiAlCode=>',$(".country[class*='active']").attr("data-dial-code"))
+        $(this).parent().find('.phone_code').val($(".country[class*='active']").attr("data-dial-code"))
     });
 
 

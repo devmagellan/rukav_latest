@@ -48,7 +48,7 @@ $router->post('/change_password', [
 
 $router->post('/upload-profile-image-ajax', [
     'as' => 'upload-profile-image-ajax',
-    'uses'  => 'Controller@/uploadProfileImageAjax',
+    'uses'  => 'Controller@uploadProfileImageAjax',
     /*'middleware' => [
       'auth:web',
     ],*/

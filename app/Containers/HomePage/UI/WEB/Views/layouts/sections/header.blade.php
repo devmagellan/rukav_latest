@@ -64,12 +64,16 @@
       @else
         <div class="col-md-1 col-2">
           <a href="#" class="user_cabinet_login" >
+            @if($user && $user->avatar)
             <img src="/img/user_login.png" alt="">
+              @else
+              <img style="height:40px" src="{{ \Avatar::create($user->name.' '.$user->sername)->toBase64() }}" />
+            @endif
           </a>
           <div class="user_cabinet_dropdown">
             <img class="user_cabinet_dropdown_bg" src="/img/cabinet_dropdownbg.png" alt="">
             <p class="user_cabinet_name">
-              Виктория Иванова
+              {{$user->name}} {{$user->sername}}
             </p>
             <a href="/private_cabinet#myads" class="user_cabinet_item">
               <div class="user_cabinet_icon">

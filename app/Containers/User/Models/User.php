@@ -39,6 +39,7 @@ class User extends UserModel implements ChargeableInterface
      */
     protected $fillable = [
         'name',
+        'sername',
         'email',
         'password',
         'device',
@@ -58,7 +59,11 @@ class User extends UserModel implements ChargeableInterface
         'is_client',
         'sername',
       'country',
-      'phone'
+      'phone',
+        'additional_phone',
+        'show_phone',
+        'show_additional_phone',
+        'avatar'
     ];
 
     protected $casts = [

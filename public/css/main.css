@@ -250,6 +250,7 @@ a.search_all:hover{
 }
 .buisnes_user{
     position: relative;
+    margin-top: 70px;
 }
 .slick_left{
     position: absolute;
@@ -707,16 +708,20 @@ p.input_text_top + input{
     top: -13px;
 }
 
-.formModal input[type="checkbox"] + label.show_new_password:before{
-    content: none;
-}
-.formModal input[type="checkbox"] + label.show_new_password:after{
-    content: none;
-}
-.formModal input[type="checkbox"] + label.show_new_password{
-    position: absolute;
-    right: 18px;
-    top: -13px;
+.formModal textarea {
+    display: block;
+    width: 100%;
+    border: 1px solid #C4C4C4;
+    line-height: 34px;
+    border-radius: 20px;
+    padding-left: 20px;
+    font-size: 14px;
+    margin-top: 18px;
+    transition: all .2s ease-out;}
+
+.formModal textarea:focus{
+    border: 1px solid #A269F7;
+    box-shadow: 0 0.313rem 0.719rem rgba(122,123,151,.1), 0 0.156rem 0.125rem rgba(122,123,151,.06);
 }
 
 .category_dropdown{
@@ -851,12 +856,39 @@ ul.category_dropdown_sub_list li ul a:hover{
     transition: all .2s ease-out;
     height: 40px;
 }
-.add_to_favourites img{
+.add_to_favourites button.btn-wishlist{
+    background: none;
+    border: 0;
+    display: inline-block;
     margin-left: 8px;
+}
+.add_to_favourites button.btn-wishlist img.hert_icon_filed{
+    display: none;
+}
+.add_to_favourites button.btn-wishlist.active img.heart_icon{
+    display: none;
+}
+.add_to_favourites button.btn-wishlist.active img.hert_icon_filed{
+    display: block !important;
+}
+.add_to_favourites button.btn-wishlist:focus {
+    box-shadow: none;
+}
+.add_to_favourites .btn-outline-secondary:not(:disabled):not(.disabled).active:focus {
+    box-shadow: none;
+}
+.add_to_favourites .btn-outline-secondary:not(:disabled):not(.disabled).active{
+    background-color: initial;
+    border-color: initial;
+}
+.add_to_favourites .btn-outline-secondary:not(:disabled):not(.disabled):active{
+    background-color: initial;
+}
+.add_to_favourites .btn-outline-secondary:not(:disabled):not(.disabled):active:focus{
+    box-shadow: none;
 }
 .add_to_favourites:hover{
     color: #808080;
-    transform: scale(1.05);
 }
 .product_price{
     font-weight: bold;
