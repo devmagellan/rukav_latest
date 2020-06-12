@@ -10,7 +10,7 @@ class Picture extends Model
   use SoftDeletes;
 
   protected $fillable = [
-    'photo', 'message_id', 'ads_id'
+    'photo', 'ads_id'
 
   ];
 

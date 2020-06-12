@@ -28,7 +28,7 @@ class WebLoginTask extends Task
             throw new LoginFailedException();
         }
 
-        return Auth::user();
+        return Auth::guard('admin')->user();
     }
 
 }

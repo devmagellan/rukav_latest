@@ -8,6 +8,7 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@ 1.8.1/slick/slick.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link href="{{asset('/css/intlTelInput.css')}}" rel="stylesheet">
   <link href="{{asset('/css/main.css')}}" rel="stylesheet">
   <link href="{{asset('/css/media.css')}}" rel="stylesheet">
@@ -62,11 +63,13 @@
           </a>
         </div>
       @else
+        @if(isset($user) )
         <div class="col-md-1 col-2">
           <a href="#" class="user_cabinet_login" >
-            @if($user && $user->avatar)
+            @if(isset($user) && $user->avatar)
             <img src="/img/user_login.png" alt="">
-              @else
+              @elseif(isset($user) && $user->name )
+              <? dd($user->name);?>
               <img style="height:40px" src="{{ \Avatar::create($user->name.' '.$user->sername)->toBase64() }}" />
             @endif
           </a>
@@ -183,6 +186,9 @@
             </a>
           </div>
         </div>
+          @endif
+
+
         @endif
     </div>
   </div>

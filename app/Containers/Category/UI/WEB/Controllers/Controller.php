@@ -24,11 +24,64 @@ class Controller extends WebController
    *
    * @param GetAllCategoriesRequest $request
    */
-  public function index(GetAllCategoriesRequest $request, $link, $id)
+  public function index(GetAllCategoriesRequest $request, $id)
   {
     //$categories = Apiato::call('Category@GetAllCategoriesAction', [$request]);
+      $categories= Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
+      $categoriesOnlyRoot = $categories->where('parent_id', 0);
+      $user=null;
+      if(\Auth::user()){
+          $user=\App\Containers\User\Models\User::where('id',\Auth::user()->id)->first();}
 
-    return $link . ' ' . $id;
+
+      $currentPage = $request->input('page');
+      $from=$request->input('price_start');
+      $to=$request->input('price_end');
+      $sort_by_date=$request->input('sort_by_date');
+      // Make sure that you call the static method currentPageResolver()
+      // before querying users
+      \Illuminate\Pagination\Paginator::currentPageResolver(function () use ($currentPage) {
+          return $currentPage;
+      });
+
+      '';
+      $q= \App\Containers\Ad\Models\Ad::where('category_id',$id)->with('pictures')->where(function ($query) use($request) {
+          $query->where('message', 'like', '%' . $request->input('search_string') . '%')
+              ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
+      })
+          ->where(function ($query) use($request) {
+              $query->where('message', 'like', '%' . $request->input('rubric_search') . '%')
+                  ->orWhere('title', 'like', '%' . $request->input('rubric_search') . '%');
+          })
+
+
+          ->where('active',1);
+
+      if($request->input('sort_by_date')=='low_to_high'){
+          dump('low_to_high');
+          $q->orderBy('created_at');
+      }
+      if($request->input('sort_by_date')=='high_to_low'){
+          dump('high_to_low');
+          $q->orderByDesc('created_at');
+      }
+
+
+
+      $qr=clone($q);
+$pricesLimits=$qr->select( \DB::raw("MAX(ads.price) AS max_price"), \DB::raw("MIN(ads.price) AS min_price"))->get()->toArray();
+      $products=$q->where(function ($query) use($from,$to) {
+      if(!empty($from) && !empty($to)){
+          $query->where('price','>=',$from)
+              ->where('price','<=',$to);
+      }
+  })
+          /*->where('city',$request->input('city'))->where('administrative',$request->input('administrative'))*/
+
+          ->paginate(300);
+    //$products=\App\Containers\Ad\Models\Ad::where('category_id',$id)->with('pictures')->paginate(4);
+      return view('category::catalog',  compact('products','categoriesOnlyRoot', 'categories','user','pricesLimits'));
+   // return $link . ' ' . $id;
   }
 
   /**

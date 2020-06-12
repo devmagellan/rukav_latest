@@ -1,6 +1,18 @@
 @extends('ad::layouts.layout')
 @section('content')
+<style>
 
+  .block_main_categories {
+    width: 24%;
+    height: 350px;
+    border: 1px solid #0000cc;
+    overflow-y: auto;
+    display: inline-block;
+  }
+  .cat_block {
+    padding: 10px 15px;
+  }
+</style>
   <article class="add_advert_block">
     <span data-status_created="{{session('infoAd')}}" id="statusAd"></span>
     <form action="{{route('web_ad_store')}}" method="post" enctype="multipart/form-data">
@@ -83,6 +95,74 @@
               @enderror
             </div>
             <div class="outUk" style="display:none">
+              <input type="text" name="address" placeholder="Страна" class="add_advert_input_location InputControl" id="clntInfoEditAddrOutUk1" required value="{{old('address')}}">
+              @error('address')
+              <div class="alert errorBlock">{{ $message }}</div>
+              @enderror
+              <input type="text" name="post_code" placeholder="Город" class="add_advert_input_location postcode InputControl" id="clntInfoEditOutUk" required value="{{old('post_code')}}">
+              @error('post_code')
+              <div class="alert errorBlock">{{ $message }}</div>
+              @enderror
+            </div>
+
+            <div class="Places" style="display:none">
+
+              <div class="form-group col-sm-12">
+
+                <label class="control-label" style="display:block;">Категория в
+                  каталоге*</label>
+                <input type="hidden" name="id_cat">
+                <input type="hidden" name="model_id" value="{{null}}">
+                <input type="text" class="col-sm-11 control-label cat_name required"
+                       style="font-size:17px;">
+
+              </div>
+
+
+              <div class="form-group col-sm-12 categories">
+
+                @if($locations!==null)
+                  <div class="block_main_categories cat_block_1" style="">
+                    @foreach ($locations as $key=>$location)
+                      @if($location->parent_id==0)
+                        <a>
+                          <div class="cat_block">
+                            <input type="hidden" value="{{$location->id}}">
+                            {{$location->name}}
+
+                            <span class="fa arrow"
+                                  style="float:right"></span>
+                          </div>
+                        </a>
+                      @endif
+                    @endforeach
+
+                  </div>
+                  <div class="block_main_categories cat_block_2">
+
+
+                  </div>
+                  <div class="block_main_categories cat_block_3">
+
+
+                  </div>
+                  <div class="block_main_categories cat_block_4">
+
+
+                  </div>
+
+                @else
+                  <div style="width:100%;height:100px;color:#fff;background:red;text-align:center">
+
+                    <h3>У вас не выбраны категории товаров для использования в вашем
+                      интернет магазине </h3>
+                    <a href="/admin/menu_areas">Перейти для выбора категорий</a>
+                  </div>
+                @endif
+              </div>
+
+            </div>
+            <div class="place_in_UK" style="display:none">
               <input type="text" name="address" placeholder="Страна" class="add_advert_input_location InputControl" id="clntInfoEditAddrOutUk1" required value="{{old('address')}}">
               @error('address')
               <div class="alert errorBlock">{{ $message }}</div>
@@ -417,4 +497,109 @@
     </div>
 
 @endsection
+@section('scripts')
+<script>
+
+    $('.categories').delegate('.cat_block','click',function(){
+console.log()
+        var id_cat = $(this).parent('a').find('input').val()
+        var cl=$(this).parent('a').parent().attr('class');
+        cl=cl.split(' ')[1]
+        var simbol=parseInt(cl.slice(10))+1
+        new_block_cl=cl.slice(0, 10)+simbol
+
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            async: false,
+            url: '/show_subcat',
+            data: {id_cat: id_cat,is_user:1}, // serializes the form's elements.
+            success: function (data) {
+                if(data.message=='null'){
+                    //проверить чтобы соседние последующие блоки были пусты
+
+                    $('input[name="id_cat"]').val(data.value.id)
+                    $('.cat_name').val(data.value.info.name)
+                    alert('меняется категория')
+                    //достать все свойства категории и отобразить в блоке #properties Временно заремлена
+                  /*                   $.ajax({
+                   type: "POST",
+                   dataType: 'json',
+                   async: false,
+                   url: '/show_property_by_category',
+                   data: {id_cat: data.value.id},
+                   success: function (dataprop) {
+                   if(dataprop=='no_properties'){
+
+
+                   }
+                   else{
+                   console.log(dataprop);
+                   $('#properties').empty();
+                   $.each( dataprop, function( k, prop ) {
+                   $('#properties').append(' <div style="border-right:1px solid #000;border-left:1px solid #000" class="prop col-md-3" >' +
+                   '<input type="hidden" value="'+prop.id+'">' +
+                   ' <div><h3 style="text-align:center;margin-top:10px;">'+prop.name+'</h3></div>'
+                   +'<div id="prop_datas_'+k+'" class=""></div>'+
+                   '</div>')
+
+                   $.each( prop.data, function( v, dat ) {
+                   $('#prop_datas_'+k).append('<div><div class="i-checks"><label><input type="radio" value="'+dat.id+'" name="property['+prop.id+'][]"> <i></i> '+dat.data+'</label></div></div>');
+                   });
+
+
+                   $('.i-checks').iCheck({
+                   checkboxClass: 'icheckbox_square-green',
+                   radioClass: 'iradio_square-green',
+                   });
+                   });
+                   }
+                   }
+
+                   });*/
+
+
+                    //если (data.value.info.parent_num) ==2
+                    //удалить 3,4
+                    // если (data.value.info.parent_num) ==3
+                    //4
+                    if(data.value.info.parent_num==2){
+                        $('.cat_block_3').empty();
+                        $('.cat_block_4').empty();
+                    }
+                    else if(data.value.info.parent_num==3){
+                        $('.cat_block_4').empty();
+                    }
+
+                }
+                else{
+                    $('.'+new_block_cl+'').empty();
+                    switch(new_block_cl){
+                        case 'cat_block_2':
+                            $('.cat_block_3').empty();
+                            $('.cat_block_4').empty();
+                            break;
+                        case 'cat_block_3':
+                            $('.cat_block_4').empty();
+                            break;
+
+                    }
+                    $.each( data.value, function( key, value ) {
+                        $('.'+new_block_cl+'').append(' <a ><div class="cat_block" >' +
+                            '<input type="hidden" value="'+value.id+'">' +
+                            value.name+
+                            '<span class="fa arrow" style="float:right"></span>' +
+                            '</div></a>')
+                    });
+
+                }}
+
+        });
+
+
+
+
+    });
+</script>
+  @endsection
 
