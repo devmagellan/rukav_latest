@@ -14,6 +14,11 @@ $(document).ready(function(){
         $('.choosen').addClass('page_hidden');
         $('#favorites').removeClass('page_hidden');
     }
+    if (hash == 'messages') {
+        $('.choosen').addClass('page_hidden');
+        $('#message').removeClass('page_hidden');
+    }
+
 
     $('.tab_my_announcements').on('click', function () {
         $('.choosen').addClass('page_hidden');
@@ -28,6 +33,11 @@ $(document).ready(function(){
     $('.tab_favorites').on('click', function () {
         $('.choosen').addClass('page_hidden');
         $('#favorites').removeClass('page_hidden');
+    });
+
+    $('.tab_message').on('click', function () {
+        $('.choosen').addClass('page_hidden');
+        $('#message').removeClass('page_hidden');
     });
 
     $('.user_cabinet_login').on('click', function () {
@@ -87,6 +97,7 @@ $(document).ready(function(){
         });
 
     });
+
     function readURL2(input) {
 
         if (input.files && input.files[0]) {
@@ -427,10 +438,18 @@ $(document).ready(function(){
         $(this).toggleClass('active');
     });
 
+    $('.btn-outline-secondary').on('click', function () {
+        $(this).toggleClass('active');
+    });
+
     $("input[type='tel']").on("blur", function () {
         $(this).val("+" + $(".country[class*='active']").attr("data-dial-code") + $(this).val());
     });
 	
 
+    $('.message_sidebar_theme_head p').on('click', function () {
+        $('.message_sidebar_theme_body').hide();
+        $(this).parent().next().slideDown();
+    });
 
 });
