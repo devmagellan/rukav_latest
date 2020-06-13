@@ -48,7 +48,7 @@ li{
     background: #A269F7;
     transform: rotate(45deg);
     position: absolute;
-    bottom: -9px;
+    top: 27px;
     right: 18%;
 }
 .btn_category img{
@@ -1014,7 +1014,7 @@ ul.category_dropdown_sub_list li ul a:hover{
 }
 
 .product_slider_main{
-    height: 535px;
+    /*height: 535px;*/
     position: relative;
 }
 
@@ -2693,6 +2693,7 @@ padding-left: 30px;
   .page_hidden{
     display: none!important;
   }
-
-
+.product_slider_advantage .slick-slide{
+    height: auto!important;
+}
   

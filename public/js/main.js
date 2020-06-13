@@ -37,90 +37,77 @@ $(document).ready(function(){
     $(document).on('click', function (e) {
         var div = $('.user_cabinet_login');
         if(!div.is(e.target) && div.has(e.target).length === 0){
-        $('.user_cabinet_dropdown').removeClass('user_cabinet_dropdown-active');
-    }
+            $('.user_cabinet_dropdown').removeClass('user_cabinet_dropdown-active');
+        }
     });
 
     $('.modal_password_close').on('click', function () {
         $('.modal_password').addClass('modal_password-unactive');
     });
 
-    $('.prophile_photo_wrapper').on('click', function () {
-        $('#imgInputakk').click();
-    });
-
     $('.prophile_change_pass').on('click', function () {
         $('.modal_password').removeClass('modal_password-unactive');
     });
 
-    $('<div class="quantity-nav"><div class="quantity-button quantity-up"><img src="img/more_arrow.png" alt=""></div><div class="quantity-button quantity-down"><img src="/img/less_arrow.png" alt=""></div></div>').insertAfter('.quantity input');
+    $('<div class="quantity-nav"><div class="quantity-button quantity-up"><img src="img/more_arrow.png" alt=""></div><div class="quantity-button quantity-down"><img src="img/less_arrow.png" alt=""></div></div>').insertAfter('.quantity input');
     $('.quantity').each(function() {
-      var spinner = $(this),
-        input = spinner.find('input[type="number"]'),
-        btnUp = spinner.find('.quantity-up'),
-        btnDown = spinner.find('.quantity-down'),
-        min = input.attr('min'),
-        max = input.attr('max');
+        var spinner = $(this),
+            input = spinner.find('input[type="number"]'),
+            btnUp = spinner.find('.quantity-up'),
+            btnDown = spinner.find('.quantity-down'),
+            min = input.attr('min'),
+            max = input.attr('max');
 
-      btnUp.click(function() {
-        var oldValue = parseFloat(input.val());
-        if (oldValue >= max) {
-          var newVal = oldValue;
-        } else if (spinner.hasClass('quantity2')) {
-          var newVal = oldValue + 5;
-        }
-        else{
-          var newVal = oldValue + 1; 
-        }
-        spinner.find("input").val(newVal);
-        spinner.find("input").trigger("change");
-      });
+        btnUp.click(function() {
+            var oldValue = parseFloat(input.val());
+            if (oldValue >= max) {
+                var newVal = oldValue;
+            } else if (spinner.hasClass('quantity2')) {
+                var newVal = oldValue + 5;
+            }
+            else{
+                var newVal = oldValue + 1;
+            }
+            spinner.find("input").val(newVal);
+            spinner.find("input").trigger("change");
+        });
 
-      btnDown.click(function() {
-        var oldValue = parseFloat(input.val());
-        if (oldValue <= min) {
-          var newVal = oldValue;
-        } else if (spinner.hasClass('quantity2')) {
-            var newVal = oldValue - 5;
-          }
-          else{
-            var newVal = oldValue - 1; 
-          }
-        spinner.find("input").val(newVal);
-        spinner.find("input").trigger("change");
-      });
+        btnDown.click(function() {
+            var oldValue = parseFloat(input.val());
+            if (oldValue <= min) {
+                var newVal = oldValue;
+            } else if (spinner.hasClass('quantity2')) {
+                var newVal = oldValue - 5;
+            }
+            else{
+                var newVal = oldValue - 1;
+            }
+            spinner.find("input").val(newVal);
+            spinner.find("input").trigger("change");
+        });
 
     });
     function readURL2(input) {
 
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-    
+
             reader.onload = function (e) {
-    
+
                 $(input).closest(".prophile_main_wrapper").find('.prophile_photo_picked').attr('src', e.target.result);
                 $(input).closest(".prophile_main_wrapper").find('.prophile_photo_wrapper').hide();
-                
+
                 $(input).closest(".prophile_main_wrapper ").find('.prophile_photo_picked').show();
                 $(input).closest(".prophile_main_wrapper ").find('.prophile_photo_picked').addClass('working');
             };
-    
+
             reader.readAsDataURL(input.files[0]);
         }
     }
-    
+
     $("#imgInputakk").change(function(){
         readURL2(this);
     });
-
-
-
-
-
-
-
-
-
 
 
 
@@ -179,7 +166,8 @@ $(document).ready(function(){
     telInput.intlTelInput({
 
         nationalMode: true,
-        utilsScript: "/js/utils.js" //для форматирования/плейсхолдера и т.д.
+        defaultCountry: "ua",
+        utilsScript: "js/utils.js" //для форматирования/плейсхолдера и т.д.
     });
 
     $.each(countryData, function(i, country) {
@@ -238,10 +226,11 @@ $(document).ready(function(){
     $('.product_slider_main').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
+        adaptiveHeight: true,
         infinite: true,
         fade: true,
-        prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="/img/slide_icon2.svg" alt=""></a>',
-        nextArrow: '<a class="product_slider_icon product_slider_next"><img src="/img/slide_icon1.svg" alt=""></a>',
+        prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="img/slide_icon2.svg" alt=""></a>',
+        nextArrow: '<a class="product_slider_icon product_slider_next"><img src="img/slide_icon1.svg" alt=""></a>',
         asNavFor: '.product_slider_nav',
         responsive: [{
             breakpoint: 768,
@@ -259,11 +248,12 @@ $(document).ready(function(){
         infinite: true
     });
 
-    $('.product_slider_main_item').zoom({ on:'click' });
+    //$('.product_slider_main_item').zoom({ on:'click' });
 
     $('.product_slider_advantage_slider').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
+        adaptiveHeight: true,
         prevArrow: '<div class="slick_left product_slider_advantage_arrow"></div>',
         nextArrow: '<div class="slick_prev product_slider_advantage_arrow"></div>',
         responsive: [{
@@ -276,17 +266,20 @@ $(document).ready(function(){
 
     $('#telphone2').intlTelInput({
         nationalMode: true,
-        utilsScript: "/js/utils.js" //для форматирования/плейсхолдера и т.д.
+        defaultCountry: "ua",
+        utilsScript: "js/utils.js" //для форматирования/плейсхолдера и т.д.
     });
 
     $('#telphone5').intlTelInput({
         nationalMode: true,
-        utilsScript: "/js/utils.js" //для форматирования/плейсхолдера и т.д.
+        defaultCountry: "ua",
+        utilsScript: "js/utils.js" //для форматирования/плейсхолдера и т.д.
     });
 
     $('#telphone6').intlTelInput({
         nationalMode: true,
-        utilsScript: "/js/utils.js" //для форматирования/плейсхолдера и т.д.
+        defaultCountry: "ua",
+        utilsScript: "js/utils.js" //для форматирования/плейсхолдера и т.д.
     });
 
     function readURL(input) {
@@ -306,7 +299,7 @@ $(document).ready(function(){
     }
 
     $("#imgInput").change(function(){
-         readURL(this);
+        readURL(this);
     });
     $("#imgInput2").change(function(){
         readURL(this);
@@ -349,7 +342,7 @@ $(document).ready(function(){
     $('input[name="name_ad"]').on('input', function () {
         console.log(70 - $(this).val().length);
         if(70 - $(this).val().length)
-        $('.number_of_signs span').html(70 - $(this).val().length)
+            $('.number_of_signs span').html(70 - $(this).val().length)
     });
 
     $(".select_category").on('click', function(){
@@ -421,8 +414,8 @@ $(document).ready(function(){
     });
 
     $('#out_uk').on('click', function () {
-            $('.all_user_block').hide();
-            $('.outUk').show();
+        $('.all_user_block').hide();
+        $('.outUk').show();
     });
 
     $('#all_adress').on('click', function () {
@@ -431,17 +424,11 @@ $(document).ready(function(){
     });
 
     $('.btn-wishlist').on('click', function () {
-        console.log($(this).find('img'))
-
         $(this).toggleClass('active');
     });
 
     $("input[type='tel']").on("blur", function () {
-        console.log('DataDiAlCode=>',$(".country[class*='active']").attr("data-dial-code"))
-        $(this).parent().find('.phone_code').val($(".country[class*='active']").attr("data-dial-code"))
+        $(this).val("+" + $(".country[class*='active']").attr("data-dial-code") + $(this).val());
     });
 
-
-   
-    
 });
