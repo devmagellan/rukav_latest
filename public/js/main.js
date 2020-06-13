@@ -122,7 +122,7 @@ $(document).ready(function(){
                 slidesToShow: 1
             }
         }]
-    }); 
+    });
 
     $('.button_show_reg').on('click', function () {
         $('#ModalReg').modal('show');
@@ -223,14 +223,14 @@ $(document).ready(function(){
         }
     });
 
-     $('.product_slider_main').slick({
+    $('.product_slider_main').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
-        adaptiveHeight: true,
         infinite: true,
+        adaptiveHeight: true,
         fade: true,
-        prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="img/slide_icon2.svg" alt=""></a>',
-        nextArrow: '<a class="product_slider_icon product_slider_next"><img src="img/slide_icon1.svg" alt=""></a>',
+        prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="/img/slide_icon2.svg" alt=""></a>',
+        nextArrow: '<a class="product_slider_icon product_slider_next"><img src="/img/slide_icon1.svg" alt=""></a>',
         asNavFor: '.product_slider_nav',
         responsive: [{
             breakpoint: 768,
@@ -246,9 +246,9 @@ $(document).ready(function(){
         asNavFor: '.product_slider_main',
         focusOnSelect: true,
         infinite: true
-    }); 
+    });
 
-    //$('.product_slider_main_item').zoom({ on:'click' });
+    $('.product_slider_main_item').zoom({ on:'click' });
 
     $('.product_slider_advantage_slider').slick({
         slidesToShow: 1,
@@ -430,7 +430,7 @@ $(document).ready(function(){
     $("input[type='tel']").on("blur", function () {
         $(this).val("+" + $(".country[class*='active']").attr("data-dial-code") + $(this).val());
     });
-	
+
 
 
 });
