@@ -147,14 +147,19 @@ class Controller extends WebController
             $fileName   = time() . '.' . $image->getClientOriginalExtension();
 
             $img = Image::make($image->getRealPath());
-         /*   $img->resize(120, 120, function ($constraint) {
+            $img->fit(220);
+            $img->resize(120, 120, function ($constraint) {
                 $constraint->aspectRatio();
-            });*/
+            });
 
             $img->stream(); // <-- Key point
 
             //dd();
             \Storage::disk('local')->put('/public/avatars'.'/'.$fileName, $img, 'public');
+
+            \App\Containers\User\Models\User::where('id',\Auth::user()->id)->update(['avatar'=>$fileName]);
+
+
         }
     }
 }

@@ -164,12 +164,19 @@
                   </label>
                   <label class="prophile_photo_wrapper" for="imgInputakk">
                     <div class="prophile_photo_img">
-                      <img src="img/prophile_camera.png" alt="">
-                    </div>
+                      @if($user->avatar)
+                        <img src="/storage/avatars/{{$user->avatar}}" alt="">
 
-                    <a class="prophile_photo_change">
-                      Добавить фото или логотип
-                    </a>
+                      @else
+                      <img src="img/prophile_camera.png" alt="">@endif
+                    </div>
+                    @if(!$user->avatar)
+
+                      <a class="prophile_photo_change">
+                        Добавить фото или логотип
+                      </a>
+                    @endif
+
                   </label>
                   <input type="file" name="loadphoto" id="imgInputakk">
                   <div class="prophile_show_input-wrapper prophile_photo_input-wrapper d-flex align-items-center">
