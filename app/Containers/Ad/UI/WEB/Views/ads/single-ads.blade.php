@@ -63,7 +63,7 @@
           </div>
           <div class="product_slider_nav">
             @foreach($ad->pictures as $picture)
-              <div class="product_slider_main_item">
+              <div class="product_slider_nav_item">
                 <img src="{{asset('/storage/messages/'.$picture->photo)}}" alt="">
               </div>
             @endforeach

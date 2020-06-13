@@ -58,60 +58,60 @@ $(document).ready(function(){
 
     $('<div class="quantity-nav"><div class="quantity-button quantity-up"><img src="img/more_arrow.png" alt=""></div><div class="quantity-button quantity-down"><img src="img/less_arrow.png" alt=""></div></div>').insertAfter('.quantity input');
     $('.quantity').each(function() {
-      var spinner = $(this),
-        input = spinner.find('input[type="number"]'),
-        btnUp = spinner.find('.quantity-up'),
-        btnDown = spinner.find('.quantity-down'),
-        min = input.attr('min'),
-        max = input.attr('max');
+        var spinner = $(this),
+            input = spinner.find('input[type="number"]'),
+            btnUp = spinner.find('.quantity-up'),
+            btnDown = spinner.find('.quantity-down'),
+            min = input.attr('min'),
+            max = input.attr('max');
 
-      btnUp.click(function() {
-        var oldValue = parseFloat(input.val());
-        if (oldValue >= max) {
-          var newVal = oldValue;
-        } else if (spinner.hasClass('quantity2')) {
-          var newVal = oldValue + 5;
-        }
-        else{
-          var newVal = oldValue + 1; 
-        }
-        spinner.find("input").val(newVal);
-        spinner.find("input").trigger("change");
-      });
+        btnUp.click(function() {
+            var oldValue = parseFloat(input.val());
+            if (oldValue >= max) {
+                var newVal = oldValue;
+            } else if (spinner.hasClass('quantity2')) {
+                var newVal = oldValue + 5;
+            }
+            else{
+                var newVal = oldValue + 1;
+            }
+            spinner.find("input").val(newVal);
+            spinner.find("input").trigger("change");
+        });
 
-      btnDown.click(function() {
-        var oldValue = parseFloat(input.val());
-        if (oldValue <= min) {
-          var newVal = oldValue;
-        } else if (spinner.hasClass('quantity2')) {
-            var newVal = oldValue - 5;
-          }
-          else{
-            var newVal = oldValue - 1; 
-          }
-        spinner.find("input").val(newVal);
-        spinner.find("input").trigger("change");
-      });
+        btnDown.click(function() {
+            var oldValue = parseFloat(input.val());
+            if (oldValue <= min) {
+                var newVal = oldValue;
+            } else if (spinner.hasClass('quantity2')) {
+                var newVal = oldValue - 5;
+            }
+            else{
+                var newVal = oldValue - 1;
+            }
+            spinner.find("input").val(newVal);
+            spinner.find("input").trigger("change");
+        });
 
     });
     function readURL2(input) {
 
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-    
+
             reader.onload = function (e) {
-    
+
                 $(input).closest(".prophile_main_wrapper").find('.prophile_photo_picked').attr('src', e.target.result);
                 $(input).closest(".prophile_main_wrapper").find('.prophile_photo_wrapper').hide();
-                
+
                 $(input).closest(".prophile_main_wrapper ").find('.prophile_photo_picked').show();
                 $(input).closest(".prophile_main_wrapper ").find('.prophile_photo_picked').addClass('working');
             };
-    
+
             reader.readAsDataURL(input.files[0]);
         }
     }
-    
+
     $("#imgInputakk").change(function(){
         readURL2(this);
     });
@@ -242,6 +242,7 @@ $(document).ready(function(){
     $('.product_slider_main').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
+        adaptiveHeight: true,
         infinite: true,
         fade: true,
         prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="img/slide_icon2.svg" alt=""></a>',
@@ -263,11 +264,12 @@ $(document).ready(function(){
         infinite: true
     });
 
-    $('.product_slider_main_item').zoom({ on:'click' });
+    //$('.product_slider_main_item').zoom({ on:'click' });
 
     $('.product_slider_advantage_slider').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
+        adaptiveHeight: true,
         prevArrow: '<div class="slick_left product_slider_advantage_arrow"></div>',
         nextArrow: '<div class="slick_prev product_slider_advantage_arrow"></div>',
         responsive: [{
@@ -313,7 +315,7 @@ $(document).ready(function(){
     }
 
     $("#imgInput").change(function(){
-         readURL(this);
+        readURL(this);
     });
     $("#imgInput2").change(function(){
         readURL(this);
@@ -356,7 +358,7 @@ $(document).ready(function(){
     $('input[name="name_ad"]').on('input', function () {
         console.log(70 - $(this).val().length);
         if(70 - $(this).val().length)
-        $('.number_of_signs span').html(70 - $(this).val().length)
+            $('.number_of_signs span').html(70 - $(this).val().length)
     });
 
     $(".select_category").on('click', function(){
@@ -428,8 +430,8 @@ $(document).ready(function(){
     });
 
     $('#out_uk').on('click', function () {
-            $('.all_user_block').hide();
-            $('.outUk').show();
+        $('.all_user_block').hide();
+        $('.outUk').show();
     });
 
     $('#all_adress').on('click', function () {
@@ -443,7 +445,9 @@ $(document).ready(function(){
 
     $("input[type='tel']").on("blur", function () {
         $(this).val("+" + $(".country[class*='active']").attr("data-dial-code") + $(this).val());
-    });$(document).ready(function(){
+    });
+	
+	$(document).ready(function(){
 
         var hash = location.hash.replace('#','');
         console.log(hash);
@@ -866,5 +870,5 @@ $(document).ready(function(){
 
 
     });
-    
+
 });

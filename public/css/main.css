@@ -2697,6 +2697,7 @@ input[type=number]
 
 .page_hidden{
     display: none!important;
+
 }
 .product_slider_advantage .slick-slide{
     height: auto!important;
@@ -2937,3 +2938,4 @@ input[type=number]
     line-height: 29px;
     color: #000000;
 }
+

@@ -40,8 +40,8 @@
       <p class="textform">или войти через</p>
       <ul class="socials">
         <li>
-          <a href="{{ route('login.provider', 'facebook') }}">
-            <i class="fab fa-facebook-f"></i>
+          <a  href="{{ route('login.provider', 'facebook') }}">
+            <i class="fab fa-facebook-f "></i>
           </a>
         </li>
         <li>
@@ -57,6 +57,11 @@
         <li>
           <a href="{{ route('login.provider', 'odnoklassniki') }}">
             <i class="fab fa-odnoklassniki"></i>
+          </a>
+        </li>
+		<li>
+          <a href="{{ route('login.provider', 'pinterest') }}">
+            <i class="fab fa-pinterest"></i>
           </a>
         </li>
       </ul>
@@ -441,14 +446,5 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-<script>
-
-
-</script>
 
 
