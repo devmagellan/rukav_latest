@@ -95,7 +95,6 @@
 
 
           <div class="col-sm-5 d-none d-sm-block"><button>Объявления </button></div>
-          <?dump(Request::get('sort_by_date'));?>
           <div class="col-4 col-sm-3" style="text-align: center"><button class="data_sort   @if( Request::get('sort_by_date')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_date')=='high_to_low') high_to_low @else low_to_high @endif">Дата @if( Request::get('sort_by_date')=='lo_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_date')=='high_to_low') <img src="/img/play_button_img.svg" alt=""> @else <img src="/img/play_button_img.svg" alt=""> @endif</button></div>
           <div class="col-4 col-sm-2" style="text-align: center"><button>Марка <img src="/img/play_button_img.svg" alt=""></button></div>
           <div class="col-4 col-sm-2" style="text-align: center"><button>Цена <img src="/img/play_button_img.svg" alt=""></button></div>
@@ -354,6 +353,10 @@ console.log('final=>',url+param)
       console.log(url)
       return url.href
   }
+
+  $('.product_filter_clear').click(function(){
+      window.location = window.location.href.split("?")[0];
+  })
 </script>
 @endsection
 

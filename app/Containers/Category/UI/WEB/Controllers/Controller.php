@@ -70,6 +70,9 @@ class Controller extends WebController
 
       $qr=clone($q);
 $pricesLimits=$qr->select( \DB::raw("MAX(ads.price) AS max_price"), \DB::raw("MIN(ads.price) AS min_price"))->get()->toArray();
+if($pricesLimits[0]['max_price']==$pricesLimits[0]['min_price']){
+    $pricesLimits[0]['min_price']=0;
+}
       $products=$q->where(function ($query) use($from,$to) {
       if(!empty($from) && !empty($to)){
           $query->where('price','>=',$from)
@@ -78,7 +81,7 @@ $pricesLimits=$qr->select( \DB::raw("MAX(ads.price) AS max_price"), \DB::raw("MI
   })
           /*->where('city',$request->input('city'))->where('administrative',$request->input('administrative'))*/
 
-          ->paginate(300);
+          ->paginate(5);
     //$products=\App\Containers\Ad\Models\Ad::where('category_id',$id)->with('pictures')->paginate(4);
       return view('category::catalog',  compact('products','categoriesOnlyRoot', 'categories','user','pricesLimits'));
    // return $link . ' ' . $id;
