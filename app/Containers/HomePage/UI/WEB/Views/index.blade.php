@@ -10,7 +10,7 @@
             <div class="cart_item">
               <h6>{{$category->name}}</h6>
               <div class="cart_item_wrapper">
-                <img src="{{$category->photo}}" alt="">
+                <img style="border-radius: 50%;" src="{{$category->photo}}" alt="">
               </div>
               @foreach($category->childrenCategories->take(7) as $childCategory)
                 <a href="/category{{$childCategory->link}}/{{$childCategory->id}}">{{$childCategory->name}}</a>

@@ -67,13 +67,13 @@
         <div class="col-md-1 col-2">
           <a href="#" class="user_cabinet_login" >
             @if(isset($user) && $user->avatar)
-            <img src="/img/user_login.png" alt="">
+              <img style="height:40px;border-radius: 50%;" src="/storage/avatars/{{ $user->avatar }}" />
               @elseif(isset($user) && $user->name )
-              <? dd($user->name);?>
-              <img style="height:40px" src="{{ \Avatar::create($user->name.' '.$user->sername)->toBase64() }}" />
+             <img style="height:40px" src="{{ \Avatar::create($user->name.' '.$user->sername)->toBase64() }}" />
             @endif
           </a>
           <div class="user_cabinet_dropdown">
+
             <img class="user_cabinet_dropdown_bg" src="/img/cabinet_dropdownbg.png" alt="">
             <p class="user_cabinet_name">
               {{$user->name}} {{$user->sername}}
