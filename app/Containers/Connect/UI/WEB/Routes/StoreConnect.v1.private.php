@@ -1,10 +1,10 @@
 <?php
 
 /** @var Route $router */
-$router->post('connects/store', [
+$router->get('connects/store', [
     'as' => 'web_connect_store',
     'uses'  => 'Controller@store',
-    'middleware' => [
+ /*  'middleware' => [
       'auth:web',
-    ],
+    ],*/
 ]);

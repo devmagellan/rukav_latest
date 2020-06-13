@@ -22,6 +22,20 @@ class CreateAdShowNameTables extends Migration
      */
     public function down()
     {
-        Schema::dropColumn('show_name');
+
+        if (Schema::hasColumn('ads','show_name'))
+
+        {
+
+            Schema::table('ads', function (Blueprint $table)
+
+            {
+
+                $table->dropColumn('show_name');
+
+            });
+
+        }
+
     }
 }

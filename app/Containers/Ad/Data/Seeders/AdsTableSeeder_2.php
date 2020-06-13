@@ -31,7 +31,8 @@ class AdsTableSeeder_2 extends Seeder
                'created_at'=>\Carbon\Carbon::now(),
                'visibility'=>3,
                'city'=>'London',
-               'active'=>1,'administrative'=>'England'
+               'active'=>1,'administrative'=>'England',
+               'price'=>1000.00
            ],
            /*2*/
            [
@@ -43,6 +44,7 @@ class AdsTableSeeder_2 extends Seeder
                'created_at'=>\Carbon\Carbon::now(),
                'visibility'=>3,'active'=>1,'city'=>'London','administrative'=>'England',
                'status' => 1,
+               'price'=>1000.00
            ],
            /*3*/
            [
@@ -54,6 +56,7 @@ class AdsTableSeeder_2 extends Seeder
                'created_at'=>\Carbon\Carbon::now(),
                'visibility'=>3,'active'=>1,'city'=>'London','administrative'=>'England',
                'status' => 1,
+               'price'=>1000.00
            ],
            /*4*/
            [
@@ -64,6 +67,7 @@ class AdsTableSeeder_2 extends Seeder
                 'place_id'=>'ChIJdd4hrwug2EcRmSrV3Vo6llI',
                'created_at'=>\Carbon\Carbon::now(),
                'visibility'=>3,'active'=>1,'city'=>'London','administrative'=>'England','status' => 1,
+               'price'=>1000.00
            ],
            /*5*/
            [
@@ -74,6 +78,7 @@ class AdsTableSeeder_2 extends Seeder
               'place_id'=>'ChIJdd4hrwug2EcRmSrV3Vo6llI',
                'created_at'=>\Carbon\Carbon::now(),
                'visibility'=>3,'active'=>1,'city'=>'London','administrative'=>'England','status' => 1,
+               'price'=>1000.00
 
            ],
            /*6*/
@@ -85,6 +90,7 @@ class AdsTableSeeder_2 extends Seeder
                'place_id'=>'ChIJdd4hrwug2EcRmSrV3Vo6llI',
                'created_at'=>\Carbon\Carbon::now(),
                'visibility'=>3,'active'=>1,'city'=>'London','administrative'=>'England','status' => 1,
+               'price'=>1000.00
            ],
            /*7*/
            [
@@ -95,6 +101,7 @@ class AdsTableSeeder_2 extends Seeder
                'place_id'=>'ChIJdd4hrwug2EcRmSrV3Vo6llI',
                'created_at'=>\Carbon\Carbon::now(),
                'visibility'=>3,'active'=>1,'city'=>'London','administrative'=>'England','status' => 1,
+               'price'=>1000.00
            ],
            /*8*/
            [
@@ -105,6 +112,7 @@ class AdsTableSeeder_2 extends Seeder
                'place_id'=>'ChIJdd4hrwug2EcRmSrV3Vo6llI',
                'created_at'=>\Carbon\Carbon::now(),
                'visibility'=>3,'active'=>1,'city'=>'London','administrative'=>'England','status' => 1,
+               'price'=>1000.00
            ],
 
            /*9*/
@@ -116,6 +124,7 @@ class AdsTableSeeder_2 extends Seeder
                'place_id'=>'ChIJdd4hrwug2EcRmSrV3Vo6llI',
                'created_at'=>\Carbon\Carbon::now(),
                'visibility'=>3,'active'=>1,'city'=>'London','administrative'=>'England','status' => 1,
+               'price'=>1000.00
            ],
            /*10*/
            [
@@ -126,6 +135,7 @@ class AdsTableSeeder_2 extends Seeder
                'place_id'=>'ChIJdd4hrwug2EcRmSrV3Vo6llI',
                'created_at'=>\Carbon\Carbon::now(),
                'visibility'=>3,'active'=>1,'city'=>'London','administrative'=>'England','status' => 1,
+               'price'=>1000.00
            ],
            /*11*/
            [
@@ -136,6 +146,7 @@ class AdsTableSeeder_2 extends Seeder
                'place_id'=>'ChIJdd4hrwug2EcRmSrV3Vo6llI',
                'created_at'=>\Carbon\Carbon::now(),
                'visibility'=>3,'active'=>1,'city'=>'London','administrative'=>'England','status' => 1,
+               'price'=>1000.00
            ],
            /*12*/
            [
@@ -146,26 +157,29 @@ class AdsTableSeeder_2 extends Seeder
                'place_id'=>'ChIJdd4hrwug2EcRmSrV3Vo6llI',
                'created_at'=>\Carbon\Carbon::now(),
                'visibility'=>3,'active'=>1,'city'=>'London','administrative'=>'England','status' => 1,
+               'price'=>1000.00
            ],
            /*13*/
            [
                'category_id' => 14,
                'sender' => 1,
-               'title' => 'Детские футболочки',
+               'title' => 'Женские футболочки',
                'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                'place_id'=>'ChIJdd4hrwug2EcRmSrV3Vo6llI',
-               'created_at'=>\Carbon\Carbon::now(),
+               'created_at'=>\Carbon\Carbon::tomorrow('Europe/London'),
                'visibility'=>3,'active'=>1,'city'=>'London','administrative'=>'England','status' => 1,
+               'price'=>130.00
            ],
            /*14*/
            [
                'category_id' => 14,
                'sender' => 1,
-               'title' => 'Детские футболочки',
-               'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+               'title' => 'Взрослые футболочки',
+               'message' => 'Lorem ipsum dolor sit amet, measure adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                'place_id'=>'ChIJdd4hrwug2EcRmSrV3Vo6llI',
-               'created_at'=>\Carbon\Carbon::now(),
+               'created_at'=>\Carbon\Carbon::yesterday(),
                'visibility'=>3,'active'=>1,'city'=>'London','administrative'=>'England','status' => 1,
+               'price'=>1000.00
            ],
            /*15*/
            [
@@ -176,6 +190,7 @@ class AdsTableSeeder_2 extends Seeder
                'place_id'=>'ChIJdd4hrwug2EcRmSrV3Vo6llI',
                'created_at'=>\Carbon\Carbon::now(),
                'visibility'=>3,'active'=>1,'city'=>'Manchester','administrative'=>'Scotland','status' => 2,
+               'price'=>1000.00
            ],
 
 

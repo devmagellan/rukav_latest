@@ -19,11 +19,11 @@ class CreateConnectTask extends Task
 
     public function run(array $data)
     {
-        dd($data);
         try {
             return $this->repository->create($data);
         }
         catch (Exception $exception) {
+            dd($exception);
             throw new CreateResourceFailedException();
         }
     }

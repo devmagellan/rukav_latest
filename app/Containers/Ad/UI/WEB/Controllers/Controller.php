@@ -31,6 +31,7 @@ class Controller extends WebController
    */
   public function index(GetAllAdsDataTableRequest $request)
   {
+
     $result['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
     //$users = Apiato::call('Ad@GetAllAdsDataTableAction', [$request]);
     $result['main_rubrics'] = Apiato::call('Site@GetProductCategoriesByParentIdAction', [0], [0]);
@@ -44,11 +45,15 @@ class Controller extends WebController
    */
   public function show(FindAdByIdRequest $request)
   {
+    $user=null;
+    if(\Auth::user()){
+          $user=\App\Containers\User\Models\User::where('id',\Auth::user()->id)->first();}
     $ad = Apiato::call('Ad@FindAdByIdAction', [$request]);
+    $receiver=$ad->sender;
     //TODO эту переменную сделать в сервис провайдере
     $categories = Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
     $breadcrumbsArray=\App\Containers\Site\Services\ProductCategoryService::BreadCrumbs($ad->category_id);
-    return view('ad::ads.single-ads', compact('categories', 'ad','breadcrumbsArray'));
+    return view('ad::ads.single-ads', compact('categories', 'ad','breadcrumbsArray','receiver','user'));
   }
 
   /**
@@ -61,7 +66,8 @@ class Controller extends WebController
     //TODO эту переменную сделать в сервис провайдере
     $categories = Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
     $categoriesOnlyRoot = $categories->where('parent_id', 0);
-    return view('ad::ads.form-add-ads', compact('categories', 'categoriesOnlyRoot'));
+    $locations=\App\Containers\Settings\Models\Places::where('parent_id',0)->get();
+    return view('ad::ads.form-add-ads', compact('categories', 'categoriesOnlyRoot','locations'));
   }
 
   public function searchRubrics(FindAdByIdRequest $request)

@@ -15,7 +15,7 @@ class CreateConnectRequest extends Request
      *
      * @var string
      */
-    // protected $transporter = \App\Ship\Transporters\DataTransporter::class;
+     //protected $transporter = \App\Ship\Transporters\DataTransporter::class;
 
     /**
      * Define which Roles and/or Permissions has access to this request.
@@ -62,8 +62,6 @@ class CreateConnectRequest extends Request
      */
     public function authorize()
     {
-        return $this->check([
-            'hasAccess',
-        ]);
+        return true;
     }
 }
