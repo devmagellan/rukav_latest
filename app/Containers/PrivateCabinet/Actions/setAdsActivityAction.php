@@ -21,6 +21,8 @@ class setAdsActivityAction extends Action
                 'active'=>false
             ];
         }
+
+        var_dump($message_data);
         $activity = \App\Containers\Ad\Models\Ad::where('id',$request->input('message'))->update($message_data);
 
         return $activity;

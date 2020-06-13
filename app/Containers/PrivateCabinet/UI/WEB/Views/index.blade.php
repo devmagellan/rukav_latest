@@ -740,7 +740,7 @@
         <div class="row">
           <div class="col-md-12">
             @foreach($favorits as $favorit)
-            <div class="choosen_item-wrapper d-flex">
+            <div class="choosen_item-wrapper d-flex" id="favorite_{{$favorit->id}}">
               <div class="choosen_item_img">
                 <img src="/storage/messages/{{$favorit->pictures->first()->photo}}" alt="">
               </div>
@@ -847,13 +847,13 @@
               method: 'POST',
               dataType: 'html',
               async:false,
-              url: '/cabinet/deleteFromFavorites',
-              data: {id:message_id,active:0
+              url: '/add/wishList',
+              data: {id: message_id,active:0
               },
               beforeSend: function() {
               },
               complete: function() {
-                  reloadFavorits();
+                  $('#favorite_'+message_id).remove()
               },
               success: function (data) {
 
