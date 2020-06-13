@@ -749,7 +749,7 @@
             <div class="message_sidebar">
               <div class="message_sidebar_scroll">
                 <p class="message_sidebar_my_info">
-                  <img src="img/email-icon.svg" alt="">
+                  <img src="/img/email-icon.svg" alt="">
                   <span>Alexander@gmail.com</span>
                 </p>
                 <hr>
@@ -757,17 +757,17 @@
                 <button class="message_sidebar_add_them">+</button>
                 <div class="message_sidebar_theme">
                   <div class="message_sidebar_theme_head">
-                    <img src="img/right_icon_black.svg" alt="">
+                    <img src="/img/right_icon_black.svg" alt="">
                     <p>Такси аэропорт Ливерпуля</p>
-                    <button class="message_item_remove"><img src="img/delete-icon-red.svg" alt=""></button>
+                    <button class="message_item_remove"><img src="/img/delete-icon-red.svg" alt=""></button>
                   </div>
                   <div class="message_sidebar_theme_body" style="display: none;">
                     <div class="message_sidebar_theme_item message_sidebar_theme_item-new">
                       <div class="message_sidebar_theme_left">
                         <div class="massage_user_avatar massage_user_avatar_online">
-                          <img src="img/Avatar.png" alt="">
+                          <img src="/img/Avatar.png" alt="">
                         </div>
-                        <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                       </div>
                       <div class="message_sidebar_theme_right">
                         <p class="message_sidebar_theme_name">
@@ -787,9 +787,9 @@
                     <div class="message_sidebar_theme_item message_sidebar_theme_item-remove">
                       <div class="message_sidebar_theme_left">
                         <div class="massage_user_avatar massage_user_avatar_online">
-                          <img src="img/Avatar.png" alt="">
+                          <img src="/img/Avatar.png" alt="">
                         </div>
-                        <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                       </div>
                       <div class="message_sidebar_theme_right">
                         <p class="message_sidebar_theme_name">
@@ -809,9 +809,9 @@
                     <div class="message_sidebar_theme_item">
                       <div class="message_sidebar_theme_left">
                         <div class="massage_user_avatar massage_user_avatar_online">
-                          <img src="img/Avatar.png" alt="">
+                          <img src="/img/Avatar.png" alt="">
                         </div>
-                        <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                       </div>
                       <div class="message_sidebar_theme_right">
                         <p class="message_sidebar_theme_name">
@@ -832,17 +832,17 @@
                 </div>
                 <div class="message_sidebar_theme">
                   <div class="message_sidebar_theme_head">
-                    <img src="img/right_icon_black.svg" alt="">
+                    <img src="/img/right_icon_black.svg" alt="">
                     <p><b>Такси Манчестера (2)</b></p>
-                    <button class="message_item_remove"><img src="img/delete-icon-red.svg" alt=""></button>
+                    <button class="message_item_remove"><img src="/img/delete-icon-red.svg" alt=""></button>
                   </div>
                   <div class="message_sidebar_theme_body" style="display: none;">
                     <div class="message_sidebar_theme_item message_sidebar_theme_item-new">
                       <div class="message_sidebar_theme_left">
                         <div class="massage_user_avatar massage_user_avatar_online">
-                          <img src="img/Avatar.png" alt="">
+                          <img src="/img/Avatar.png" alt="">
                         </div>
-                        <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                       </div>
                       <div class="message_sidebar_theme_right">
                         <p class="message_sidebar_theme_name">
@@ -862,9 +862,9 @@
                     <div class="message_sidebar_theme_item message_sidebar_theme_item-remove">
                       <div class="message_sidebar_theme_left">
                         <div class="massage_user_avatar massage_user_avatar_online">
-                          <img src="img/Avatar.png" alt="">
+                          <img src="/img/Avatar.png" alt="">
                         </div>
-                        <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                       </div>
                       <div class="message_sidebar_theme_right">
                         <p class="message_sidebar_theme_name">
@@ -884,9 +884,9 @@
                     <div class="message_sidebar_theme_item">
                       <div class="message_sidebar_theme_left">
                         <div class="massage_user_avatar massage_user_avatar_online">
-                          <img src="img/Avatar.png" alt="">
+                          <img src="/img/Avatar.png" alt="">
                         </div>
-                        <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                       </div>
                       <div class="message_sidebar_theme_right">
                         <p class="message_sidebar_theme_name">
@@ -908,15 +908,15 @@
                 <hr>
                 <div class="message_sidebar_theme">
                   <div class="message_sidebar_theme_head">
-                    <img src="img/right_icon_f.svg" alt="">
+                    <img src="/img/right_icon_f.svg" alt="">
                     <p class="theme_main_text"><b>Основное (1)</b></p></div>
                   <div class="message_sidebar_theme_body">
                     <div class="message_sidebar_theme_item message_sidebar_theme_item-new">
                       <div class="message_sidebar_theme_left">
                         <div class="massage_user_avatar massage_user_avatar_online">
-                          <img src="img/Avatar.png" alt="">
+                          <img src="/img/Avatar.png" alt="">
                         </div>
-                        <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                       </div>
                       <div class="message_sidebar_theme_right">
                         <p class="message_sidebar_theme_name">
@@ -936,9 +936,9 @@
                     <div class="message_sidebar_theme_item message_sidebar_theme_item-remove">
                       <div class="message_sidebar_theme_left">
                         <div class="massage_user_avatar">
-                          <img src="img/Avatar.png" alt="">
+                          <img src="/img/Avatar.png" alt="">
                         </div>
-                        <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                       </div>
                       <div class="message_sidebar_theme_right">
                         <p class="message_sidebar_theme_name">
@@ -958,9 +958,9 @@
                     <div class="message_sidebar_theme_item">
                       <div class="message_sidebar_theme_left">
                         <div class="massage_user_avatar">
-                          <img src="img/Avatar.png" alt="">
+                          <img src="/img/Avatar.png" alt="">
                         </div>
-                        <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                       </div>
                       <div class="message_sidebar_theme_right">
                         <p class="message_sidebar_theme_name">
@@ -980,9 +980,9 @@
                     <div class="message_sidebar_theme_item">
                       <div class="message_sidebar_theme_left">
                         <div class="massage_user_avatar">
-                          <img src="img/Avatar.png" alt="">
+                          <img src="/img/Avatar.png" alt="">
                         </div>
-                        <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                       </div>
                       <div class="message_sidebar_theme_right">
                         <p class="message_sidebar_theme_name">
@@ -1002,9 +1002,9 @@
                     <div class="message_sidebar_theme_item">
                       <div class="message_sidebar_theme_left">
                         <div class="massage_user_avatar">
-                          <img src="img/Avatar.png" alt="">
+                          <img src="/img/Avatar.png" alt="">
                         </div>
-                        <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                       </div>
                       <div class="message_sidebar_theme_right">
                         <p class="message_sidebar_theme_name">
@@ -1024,9 +1024,9 @@
                     <div class="message_sidebar_theme_item">
                       <div class="message_sidebar_theme_left">
                         <div class="massage_user_avatar">
-                          <img src="img/Avatar.png" alt="">
+                          <img src="/img/Avatar.png" alt="">
                         </div>
-                        <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                       </div>
                       <div class="message_sidebar_theme_right">
                         <p class="message_sidebar_theme_name">
@@ -1052,7 +1052,7 @@
             <div class="wrapper_header_message">
               <div class="wrapper_header_message_left">
                 <div class="massage_user_avatar massage_user_avatar_online">
-                  <img src="img/messeg_img.svg" alt="">
+                  <img src="/img/messeg_img.svg" alt="">
                 </div>
               </div>
               <div class="wrapper_header_message_right">
@@ -1061,7 +1061,7 @@
                 <p class="wrapper_header_add_price">£ 10 900</p>
                 <p class="wrapper_header_date">Опубликовано: <span>05-10-2020 07:00</span></p>
                 <div class="wrapper_header_setting">
-                  <img src="img/settings-icon.svg" alt="">
+                  <img src="/img/settings-icon.svg" alt="">
                 </div>
               </div>
             </div>
@@ -1102,11 +1102,11 @@
             <div class="wrapper_footer_messege">
               <form class="send_message_form">
                 <label for="send_message_foto">
-                  <img src="img/photo-camera-icon-black.svg" alt="">
+                  <img src="/img/photo-camera-icon-black.svg" alt="">
                 </label>
                 <input type="file" id="send_message_foto" name="send_message_foto" style="display: none;">
                 <input type="text" name="" placeholder="Текст сообщения..." required="">
-                <button><img src="img/paper-plane-icon.svg" alt=""></button>
+                <button><img src="/img/paper-plane-icon.svg" alt=""></button>
               </form>
               <p>RUKAV оставляет за собой право проверять сообщения посланные через наш сервер для того чтобы защитить вас от мошенничества и подозрительных действий.</p>
             </div>
