@@ -25,10 +25,28 @@ class Controller extends WebController
 		return Socialite::with('vkontakte')->redirect();
     }
 	
+	public function redirectPinterest()
+    {
+        //return Socialite::driver($provider)->redirect();
+		return Socialite::with('pinterest')->redirect();
+    }
+	
 	public function redirectVkontakte()
     {
         //return Socialite::driver($provider)->redirect();
 		return Socialite::with('vkontakte')->redirect();
+    }
+	
+	public function redirectFacebook()
+    {
+        //return Socialite::driver($provider)->redirect();
+		return Socialite::with('facebook')->redirect();
+    }
+	
+	public function redirectGoogle()
+    {
+        //return Socialite::driver($provider)->redirect();
+		return Socialite::with('googlek')->redirect();
     }
 	
 	public function redirectOklassniki()

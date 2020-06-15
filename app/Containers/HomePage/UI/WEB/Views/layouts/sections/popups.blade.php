@@ -37,30 +37,30 @@
         </div>
       </form>
 
-      <p class="textform">или войти через</p>
+      <p class="textform">или войти через r</p>
       <ul class="socials">
         <li>
-          <a  href="{{ route('login.provider', 'facebook') }}">
+          <a  href="{{ route('login.provider.fb', 'facebook') }}">
             <i class="fab fa-facebook-f "></i>
           </a>
         </li>
         <li>
-          <a href="{{ route('login.provider', 'google') }}">
+          <a href="{{ route('login.provider,google', 'google') }}">
             <i class="fab fa-google-plus-g"></i>
           </a>
         </li>
         <li>
-          <a href="{{ route('login.provider', 'vkontakte') }}">
+          <a href="{{ route('login.provider.vk', 'vkontakte') }}">
             <i class="fab fa-vk"></i>
           </a>
         </li>
         <li>
-          <a href="{{ route('login.provider', 'odnoklassniki') }}">
+          <a href="{{ route('login.provider.ok', 'odnoklassniki') }}">
             <i class="fab fa-odnoklassniki"></i>
           </a>
         </li>
 		<li>
-          <a href="{{ route('login.provider', 'pinterest') }}">
+          <a href="{{ route('login.provider.pi', 'pinterest') }}">
             <i class="fab fa-pinterest"></i>
           </a>
         </li>
@@ -192,7 +192,7 @@
       </p>
 
       <div class="socials_reg" style="display: none;">
-        <p class="textform">или войти через</p>
+        <p class="textform">или войти через l</p>
 
         <ul class="socials socials_reg">
           <li>

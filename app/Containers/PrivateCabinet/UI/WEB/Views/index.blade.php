@@ -40,7 +40,7 @@
               </div>
               <p>Мои объявления</p>
             </a>
-            <a href="#messages" class="choosen_tab_title">
+            <a href="#messages" class="choosen_tab_title tab_message">
               <div class="choosen_tab_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">
@@ -516,7 +516,7 @@
         </div>
         <div class="row">
           <div class="col-sm-12 d-flex">
-            <a href="#" class="choosen_tab_title tab_active tab_my_announcements">
+            <a href="#myads" class="choosen_tab_title tab_active tab_my_announcements">
               <div class="choosen_tab_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path class="svg_tab_path" d="M16.4482 14.6094C16.2325 14.6094 16.0576 14.7843 16.0576 15V18.8281C16.0576 19.0435 15.8824 19.2188 15.667 19.2188H2.23047C2.01508 19.2188 1.83985 19.0435 1.83985 18.8281V11.7578C1.83985 11.5421 1.66496 11.3672 1.44922 11.3672C1.23348 11.3672 1.05859 11.5421 1.05859 11.7578V18.8281C1.05859 19.4743 1.5843 20 2.23047 20H15.667C16.3132 20 16.8389 19.4743 16.8389 18.8281V15C16.8389 14.7843 16.664 14.6094 16.4482 14.6094Z" fill="#808080"/>
@@ -528,7 +528,7 @@
               </div>
               <p>Мои объявления</p>
             </a>
-            <a href="#" class="choosen_tab_title">
+            <a href="#messages" class="choosen_tab_title tab_message">
               <div class="choosen_tab_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">
@@ -660,7 +660,7 @@
         </div>
       </div>
     </div>
-    <div class="choosen page_hidden" id="message">
+    <div class="choosen page_hidden" id="messages">
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
@@ -1125,7 +1125,8 @@
         </div>
         <div class="row">
           <div class="col-sm-12 d-flex prophile_tab_column">
-            <a href="#" class="choosen_tab_title tab_my_announcements">
+
+            <a href="#myads" class="choosen_tab_title tab_my_announcements">
               <div class="choosen_tab_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path class="svg_tab_path" d="M16.4482 14.6094C16.2325 14.6094 16.0576 14.7843 16.0576 15V18.8281C16.0576 19.0435 15.8824 19.2188 15.667 19.2188H2.23047C2.01508 19.2188 1.83985 19.0435 1.83985 18.8281V11.7578C1.83985 11.5421 1.66496 11.3672 1.44922 11.3672C1.23348 11.3672 1.05859 11.5421 1.05859 11.7578V18.8281C1.05859 19.4743 1.5843 20 2.23047 20H15.667C16.3132 20 16.8389 19.4743 16.8389 18.8281V15C16.8389 14.7843 16.664 14.6094 16.4482 14.6094Z" fill="#808080"/>
@@ -1137,7 +1138,7 @@
               </div>
               <p>Мои объявления</p>
             </a>
-            <a href="#" class="choosen_tab_title">
+            <a href="#messages" class="choosen_tab_title tab_message">
               <div class="choosen_tab_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">

@@ -37,7 +37,7 @@
         </div>
       </form>
 
-      <p class="textform">или войти через</p>
+      <p class="textform">или войти через m</p>
       <ul class="socials">
         <li>
           <a href="#">
