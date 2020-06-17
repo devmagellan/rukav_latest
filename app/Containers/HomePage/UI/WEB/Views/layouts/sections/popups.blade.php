@@ -37,7 +37,7 @@
         </div>
       </form>
 
-      <p class="textform">или войти через r</p>
+      <p class="textform">или войти через </p>
       <ul class="socials">
         <li>
           <a  href="{{ route('login.provider.fb', 'facebook') }}">
@@ -45,7 +45,7 @@
           </a>
         </li>
         <li>
-          <a href="{{ route('login.provider,google', 'google') }}">
+          <a href="{{ route('login.provider.google', 'google') }}">
             <i class="fab fa-google-plus-g"></i>
           </a>
         </li>
