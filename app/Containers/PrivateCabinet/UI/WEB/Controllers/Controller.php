@@ -46,11 +46,30 @@ class Controller extends WebController
         return view('privatecabinet::index',compact('categoriesOnlyRoot', 'categories', 'ads','favorits','user' ) );
     }
 
+
+
+    public function messagesData(GetAllPrivateCabinetsRequest $request){
+
+        $data['title']="Staff postData";
+        $data['conversations']=\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->orWhere('sender_id',\Auth::user()->id)
+            ->with('sender')->with('message')->with('pictures')
+            /*->groupBy('message_id','receiver_id')*/->distinct()->orderBy('created_at')->get();
+        return view('privatecabinet::messages',$data);
+    }
+
+
+
+
     /**
      * Show one entity
      *
      * @param FindPrivateCabinetByIdRequest $request
      */
+
+
+
+
+
     public function show(FindPrivateCabinetByIdRequest $request)
     {
         $privatecabinet = Apiato::call('PrivateCabinet@FindPrivateCabinetByIdAction', [$request]);
@@ -161,5 +180,20 @@ class Controller extends WebController
 
 
         }
+    }
+
+
+
+    public function conversationData(GetAllPrivateCabinetsRequest $request){
+        $example=\App\Containers\Connect\Models\Connect::where('id',$request->input('conversation'))->with('author')->first();
+        //Если хозяин объявления я то тянуть все конекты в которых receiver_id я и sender_id $example->sender_id
+        //Иначе тянуть все коннекты в которых receiver_id $example->receiver_id и sender_id я
+//dump($example);
+        $recepients=[$example->sender_id,$example->receiver_id];
+        $q=\App\Containers\Connect\Models\Connect::where('message_id',$example->message_id)->whereIn('receiver_id',$recepients)->whereIn('sender_id',$recepients)->with('message')->with('author');
+
+        $data['conversation']=$q->orderBy('created_at')->get();
+        //dump($data['conversation']);
+        return view('privatecabinet::messageList',$data);
     }
 }

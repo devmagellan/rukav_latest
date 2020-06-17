@@ -744,373 +744,9 @@
             </a>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="message_sidebar">
-              <div class="message_sidebar_scroll">
-                <p class="message_sidebar_my_info">
-                  <img src="/img/email-icon.svg" alt="">
-                  <span>Alexander@gmail.com</span>
-                </p>
-                <hr>
-                <input type="text" class="message_sidebar_input_search" name="" placeholder="Выберите тему для поиска">
-                <button class="message_sidebar_add_them">+</button>
-                <div class="message_sidebar_theme">
-                  <div class="message_sidebar_theme_head">
-                    <img src="/img/right_icon_black.svg" alt="">
-                    <p>Такси аэропорт Ливерпуля</p>
-                    <button class="message_item_remove"><img src="/img/delete-icon-red.svg" alt=""></button>
-                  </div>
-                  <div class="message_sidebar_theme_body" style="display: none;">
-                    <div class="message_sidebar_theme_item message_sidebar_theme_item-new">
-                      <div class="message_sidebar_theme_left">
-                        <div class="massage_user_avatar massage_user_avatar_online">
-                          <img src="/img/Avatar.png" alt="">
-                        </div>
-                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
-                      </div>
-                      <div class="message_sidebar_theme_right">
-                        <p class="message_sidebar_theme_name">
-                          Сергей
-                        </p>
-                        <p class="message_sidebar_theme_add">
-                          Mercedes-Benz e220 w210! 2.2disel...
-                        </p>
-                        <p class="message_sidebar_theme_date">
-                          30 Мая 13:09
-                        </p>
-                        <p class="message_sidebar_theme_message">
-                          Привет! Никаких дефект...
-                        </p>
-                      </div>
-                    </div>
-                    <div class="message_sidebar_theme_item message_sidebar_theme_item-remove">
-                      <div class="message_sidebar_theme_left">
-                        <div class="massage_user_avatar massage_user_avatar_online">
-                          <img src="/img/Avatar.png" alt="">
-                        </div>
-                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
-                      </div>
-                      <div class="message_sidebar_theme_right">
-                        <p class="message_sidebar_theme_name">
-                          Сергей
-                        </p>
-                        <p class="message_sidebar_theme_add">
-                          Mercedes-Benz e220 w210! 2.2disel...
-                        </p>
-                        <p class="message_sidebar_theme_date">
-                          30 Мая 13:09
-                        </p>
-                        <p class="message_sidebar_theme_message">
-                          Привет! Никаких дефект...
-                        </p>
-                      </div>
-                    </div>
-                    <div class="message_sidebar_theme_item">
-                      <div class="message_sidebar_theme_left">
-                        <div class="massage_user_avatar massage_user_avatar_online">
-                          <img src="/img/Avatar.png" alt="">
-                        </div>
-                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
-                      </div>
-                      <div class="message_sidebar_theme_right">
-                        <p class="message_sidebar_theme_name">
-                          Сергей
-                        </p>
-                        <p class="message_sidebar_theme_add">
-                          Mercedes-Benz e220 w210! 2.2disel...
-                        </p>
-                        <p class="message_sidebar_theme_date">
-                          30 Мая 13:09
-                        </p>
-                        <p class="message_sidebar_theme_message">
-                          Привет! Никаких дефект...
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="message_sidebar_theme">
-                  <div class="message_sidebar_theme_head">
-                    <img src="/img/right_icon_black.svg" alt="">
-                    <p><b>Такси Манчестера (2)</b></p>
-                    <button class="message_item_remove"><img src="/img/delete-icon-red.svg" alt=""></button>
-                  </div>
-                  <div class="message_sidebar_theme_body" style="display: none;">
-                    <div class="message_sidebar_theme_item message_sidebar_theme_item-new">
-                      <div class="message_sidebar_theme_left">
-                        <div class="massage_user_avatar massage_user_avatar_online">
-                          <img src="/img/Avatar.png" alt="">
-                        </div>
-                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
-                      </div>
-                      <div class="message_sidebar_theme_right">
-                        <p class="message_sidebar_theme_name">
-                          Сергей
-                        </p>
-                        <p class="message_sidebar_theme_add">
-                          Mercedes-Benz e220 w210! 2.2disel...
-                        </p>
-                        <p class="message_sidebar_theme_date">
-                          30 Мая 13:09
-                        </p>
-                        <p class="message_sidebar_theme_message">
-                          Привет! Никаких дефект...
-                        </p>
-                      </div>
-                    </div>
-                    <div class="message_sidebar_theme_item message_sidebar_theme_item-remove">
-                      <div class="message_sidebar_theme_left">
-                        <div class="massage_user_avatar massage_user_avatar_online">
-                          <img src="/img/Avatar.png" alt="">
-                        </div>
-                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
-                      </div>
-                      <div class="message_sidebar_theme_right">
-                        <p class="message_sidebar_theme_name">
-                          Сергей
-                        </p>
-                        <p class="message_sidebar_theme_add">
-                          Mercedes-Benz e220 w210! 2.2disel...
-                        </p>
-                        <p class="message_sidebar_theme_date">
-                          30 Мая 13:09
-                        </p>
-                        <p class="message_sidebar_theme_message">
-                          Привет! Никаких дефект...
-                        </p>
-                      </div>
-                    </div>
-                    <div class="message_sidebar_theme_item">
-                      <div class="message_sidebar_theme_left">
-                        <div class="massage_user_avatar massage_user_avatar_online">
-                          <img src="/img/Avatar.png" alt="">
-                        </div>
-                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
-                      </div>
-                      <div class="message_sidebar_theme_right">
-                        <p class="message_sidebar_theme_name">
-                          Сергей
-                        </p>
-                        <p class="message_sidebar_theme_add">
-                          Mercedes-Benz e220 w210! 2.2disel...
-                        </p>
-                        <p class="message_sidebar_theme_date">
-                          30 Мая 13:09
-                        </p>
-                        <p class="message_sidebar_theme_message">
-                          Привет! Никаких дефект...
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr>
-                <div class="message_sidebar_theme">
-                  <div class="message_sidebar_theme_head">
-                    <img src="/img/right_icon_f.svg" alt="">
-                    <p class="theme_main_text"><b>Основное (1)</b></p></div>
-                  <div class="message_sidebar_theme_body">
-                    <div class="message_sidebar_theme_item message_sidebar_theme_item-new">
-                      <div class="message_sidebar_theme_left">
-                        <div class="massage_user_avatar massage_user_avatar_online">
-                          <img src="/img/Avatar.png" alt="">
-                        </div>
-                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
-                      </div>
-                      <div class="message_sidebar_theme_right">
-                        <p class="message_sidebar_theme_name">
-                          Сергей
-                        </p>
-                        <p class="message_sidebar_theme_add">
-                          Mercedes-Benz e220 w210! 2.2disel...
-                        </p>
-                        <p class="message_sidebar_theme_date">
-                          30 Мая 13:09
-                        </p>
-                        <p class="message_sidebar_theme_message">
-                          <span class="new_messege">1</span>Привет! Никаких дефект...
-                        </p>
-                      </div>
-                    </div>
-                    <div class="message_sidebar_theme_item message_sidebar_theme_item-remove">
-                      <div class="message_sidebar_theme_left">
-                        <div class="massage_user_avatar">
-                          <img src="/img/Avatar.png" alt="">
-                        </div>
-                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
-                      </div>
-                      <div class="message_sidebar_theme_right">
-                        <p class="message_sidebar_theme_name">
-                          Сергей
-                        </p>
-                        <p class="message_sidebar_theme_add">
-                          Mercedes-Benz e220 w210! 2.2disel...
-                        </p>
-                        <p class="message_sidebar_theme_date">
-                          30 Мая 13:09
-                        </p>
-                        <p class="message_sidebar_theme_message">
-                          Привет! Никаких дефект...
-                        </p>
-                      </div>
-                    </div>
-                    <div class="message_sidebar_theme_item">
-                      <div class="message_sidebar_theme_left">
-                        <div class="massage_user_avatar">
-                          <img src="/img/Avatar.png" alt="">
-                        </div>
-                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
-                      </div>
-                      <div class="message_sidebar_theme_right">
-                        <p class="message_sidebar_theme_name">
-                          Сергей
-                        </p>
-                        <p class="message_sidebar_theme_add">
-                          Mercedes-Benz e220 w210! 2.2disel...
-                        </p>
-                        <p class="message_sidebar_theme_date">
-                          30 Мая 13:09
-                        </p>
-                        <p class="message_sidebar_theme_message">
-                          Привет! Никаких дефект...
-                        </p>
-                      </div>
-                    </div>
-                    <div class="message_sidebar_theme_item">
-                      <div class="message_sidebar_theme_left">
-                        <div class="massage_user_avatar">
-                          <img src="/img/Avatar.png" alt="">
-                        </div>
-                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
-                      </div>
-                      <div class="message_sidebar_theme_right">
-                        <p class="message_sidebar_theme_name">
-                          Сергей
-                        </p>
-                        <p class="message_sidebar_theme_add">
-                          Mercedes-Benz e220 w210! 2.2disel...
-                        </p>
-                        <p class="message_sidebar_theme_date">
-                          30 Мая 13:09
-                        </p>
-                        <p class="message_sidebar_theme_message">
-                          Привет! Никаких дефект...
-                        </p>
-                      </div>
-                    </div>
-                    <div class="message_sidebar_theme_item">
-                      <div class="message_sidebar_theme_left">
-                        <div class="massage_user_avatar">
-                          <img src="/img/Avatar.png" alt="">
-                        </div>
-                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
-                      </div>
-                      <div class="message_sidebar_theme_right">
-                        <p class="message_sidebar_theme_name">
-                          Сергей
-                        </p>
-                        <p class="message_sidebar_theme_add">
-                          Mercedes-Benz e220 w210! 2.2disel...
-                        </p>
-                        <p class="message_sidebar_theme_date">
-                          30 Мая 13:09
-                        </p>
-                        <p class="message_sidebar_theme_message">
-                          Привет! Никаких дефект...
-                        </p>
-                      </div>
-                    </div>
-                    <div class="message_sidebar_theme_item">
-                      <div class="message_sidebar_theme_left">
-                        <div class="massage_user_avatar">
-                          <img src="/img/Avatar.png" alt="">
-                        </div>
-                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
-                      </div>
-                      <div class="message_sidebar_theme_right">
-                        <p class="message_sidebar_theme_name">
-                          Сергей
-                        </p>
-                        <p class="message_sidebar_theme_add">
-                          Mercedes-Benz e220 w210! 2.2disel...
-                        </p>
-                        <p class="message_sidebar_theme_date">
-                          30 Мая 13:09
-                        </p>
-                        <p class="message_sidebar_theme_message">
-                          Привет! Никаких дефект...
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-8">
-            <div class="wrapper_header_message">
-              <div class="wrapper_header_message_left">
-                <div class="massage_user_avatar massage_user_avatar_online">
-                  <img src="/img/messeg_img.svg" alt="">
-                </div>
-              </div>
-              <div class="wrapper_header_message_right">
-                <p class="wrapper_header_name">Александр</p>
-                <p class="wrapper_header_add_name">Mercedes-Benz e220 w210! 2.2disel! На полном ходу, топ комплект</p>
-                <p class="wrapper_header_add_price">£ 10 900</p>
-                <p class="wrapper_header_date">Опубликовано: <span>05-10-2020 07:00</span></p>
-                <div class="wrapper_header_setting">
-                  <img src="/img/settings-icon.svg" alt="">
-                </div>
-              </div>
-            </div>
-            <div class="wrapper_body_messege">
-              <div class="wrapper_body_messege_scroll">
-                <div class="body_messege_item body_my_messege_item">
-                  <p>Превет!</p>
-                  <span>30 Мая 12:34</span>
-                </div>
-                <div class="body_messege_item body_my_messege_item">
-                  <p>Какие проблемы по авто? И когда можно встретиться</p>
-                  <span>30 Мая 12:37</span>
-                </div>
-                <div class="body_messege_item body_to_messege_item">
-                  <p>Привет! Никаких дефектов нет, авто в идеальном состояние Привет!
-                  </p>
-                  <span>30 Мая 12:37</span>
-                </div>
-                <div class="body_messege_item body_my_messege_item">
-                  <p>Какие проблемы по авто? И когда можно встретиться</p>
-                  <span>30 Мая 12:37</span>
-                </div>
-                <div class="body_messege_item body_to_messege_item">
-                  <p>Привет! Никаких дефектов нет, авто в идеальном состояние Привет!
-                  </p>
-                  <span>30 Мая 12:37</span>
-                </div>
-                <div class="body_messege_item body_my_messege_item">
-                  <p>Превет!</p>
-                  <span>30 Мая 12:34</span>
-                </div>
-                <div class="body_messege_item body_my_messege_item">
-                  <p>Превет!</p>
-                  <span>30 Мая 12:34</span>
-                </div>
-              </div>
-            </div>
-            <div class="wrapper_footer_messege">
-              <form class="send_message_form">
-                <label for="send_message_foto">
-                  <img src="/img/photo-camera-icon-black.svg" alt="">
-                </label>
-                <input type="file" id="send_message_foto" name="send_message_foto" style="display: none;">
-                <input type="text" name="" placeholder="Текст сообщения..." required="">
-                <button><img src="/img/paper-plane-icon.svg" alt=""></button>
-              </form>
-              <p>RUKAV оставляет за собой право проверять сообщения посланные через наш сервер для того чтобы защитить вас от мошенничества и подозрительных действий.</p>
-            </div>
-          </div>
+        <div class="result_of_messages_table">
+
+
         </div>
       </div>
     </div>
@@ -1138,7 +774,7 @@
               </div>
               <p>Мои объявления</p>
             </a>
-            <a href="#messages" class="choosen_tab_title tab_message">
+            <a href="#messages" class="choosen_tab_title tab_message" onclick="reloadMessages()">
               <div class="choosen_tab_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">
@@ -1358,6 +994,8 @@
 
       $(document).ready(function() {
 
+          reloadMessages()
+
           $('#imgInputakk').on('change', function() {
 
               var fileName = '';
@@ -1405,12 +1043,43 @@
 
       });
 
+      if('{{$user->country }}'!=''){
+          var cnt='{{$user->country }}'
+      }
+      else{var cnt='gb'}
+
 $('#telphone5,#telphone6').intlTelInput(
     {
-    onlyCountries:['{{$user->country}}'],
+    onlyCountries:[cnt],
         preferredCountries:""
     }
 )
+
+
+      function reloadMessages(){
+
+          var module='staff.roles'
+          console.log();
+          var url='/cabinet/messagesData';
+          $.ajax({
+              method: 'POST',
+              dataType: 'html',
+              async:false,
+              url: url,
+              data: {module: module},
+              beforeSend: function() {
+                  $('#loader2').show();
+              },
+              complete: function() {
+                  $('#loader2').hide();
+              },
+              success: function (data) {
+
+                  $('.result_of_messages_table').html(data);
+
+              }
+          });
+      }
 
   </script>
 

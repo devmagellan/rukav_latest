@@ -55,4 +55,23 @@ $router->post('/upload-profile-image-ajax', [
 ]);
 
 
+$router->post('/cabinet/conversation', [
+    'as' => 'cabinet_conversation',
+    'uses'  => 'Controller@conversationData',
+    /*'middleware' => [
+      'auth:web',
+    ],*/
+]);
+
+
+
+$router->post('/cabinet/messagesData', [
+    'as' => 'cabinet_messagesData',
+    'uses'  => 'Controller@messagesData',
+    /*'middleware' => [
+      'auth:web',
+    ],*/
+]);
+
+
 
