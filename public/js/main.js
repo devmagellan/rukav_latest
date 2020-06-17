@@ -16,7 +16,7 @@ $(document).ready(function(){
     }
     if (hash == 'messages') {
         $('.choosen').addClass('page_hidden');
-        $('#message').removeClass('page_hidden');
+        $('#messages').removeClass('page_hidden');
     }
 
 
@@ -37,7 +37,7 @@ $(document).ready(function(){
 
     $('.tab_message').on('click', function () {
         $('.choosen').addClass('page_hidden');
-        $('#message').removeClass('page_hidden');
+        $('#messages').removeClass('page_hidden');
     });
 
     $('.user_cabinet_login').on('click', function () {

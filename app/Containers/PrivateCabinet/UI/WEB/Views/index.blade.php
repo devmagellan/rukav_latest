@@ -549,7 +549,7 @@
               </div>
               <p>Сообщения</p>
             </a>
-            <a href="#" class="choosen_tab_title tab_favorites">
+            <a href="#favorits" class="choosen_tab_title tab_favorites">
               <div class="choosen_tab_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path class="svg_tab_path" d="M17.5 13.737C17.2843 13.737 17.1094 13.9119 17.1094 14.1276V18.9658L10.1803 15.3603C10.0673 15.3015 9.93277 15.3015 9.81969 15.3603L2.89062 18.9658V7.67578C2.89062 7.46004 2.7157 7.28516 2.5 7.28516C2.2843 7.28516 2.10938 7.46004 2.10938 7.67578V19.6093C2.10938 19.7459 2.18063 19.8724 2.2973 19.9433C2.4141 20.0141 2.5593 20.0188 2.68031 19.9559L10 16.1472L17.3197 19.9559C17.3763 19.9853 17.4382 20 17.5 20C17.5704 20 17.6405 19.981 17.7027 19.9433C17.8194 19.8724 17.8906 19.7459 17.8906 19.6093V14.1276C17.8906 13.9119 17.7157 13.737 17.5 13.737Z" fill="white"/>
@@ -563,7 +563,7 @@
               </div>
               <p>Избранное</p>
             </a>
-            <a href="#" class="choosen_tab_title tab_my_profile">
+            <a href="#my_profile" class="choosen_tab_title tab_my_profile">
               <div class="choosen_tab_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">
@@ -1159,7 +1159,7 @@
               </div>
               <p>Сообщения</p>
             </a>
-            <a href="#" class="choosen_tab_title tab_active tab_favorites">
+            <a href="#favorits" class="choosen_tab_title tab_active tab_favorites">
               <div class="choosen_tab_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path class="svg_tab_path" d="M17.5 13.737C17.2843 13.737 17.1094 13.9119 17.1094 14.1276V18.9658L10.1803 15.3603C10.0673 15.3015 9.93277 15.3015 9.81969 15.3603L2.89062 18.9658V7.67578C2.89062 7.46004 2.7157 7.28516 2.5 7.28516C2.2843 7.28516 2.10938 7.46004 2.10938 7.67578V19.6093C2.10938 19.7459 2.18063 19.8724 2.2973 19.9433C2.4141 20.0141 2.5593 20.0188 2.68031 19.9559L10 16.1472L17.3197 19.9559C17.3763 19.9853 17.4382 20 17.5 20C17.5704 20 17.6405 19.981 17.7027 19.9433C17.8194 19.8724 17.8906 19.7459 17.8906 19.6093V14.1276C17.8906 13.9119 17.7157 13.737 17.5 13.737Z" fill="white"/>
@@ -1173,7 +1173,7 @@
               </div>
               <p>Избранное</p>
             </a>
-            <a href="#" class="choosen_tab_title tab_my_profile">
+            <a href="#my_profile" class="choosen_tab_title tab_my_profile">
               <div class="choosen_tab_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">
