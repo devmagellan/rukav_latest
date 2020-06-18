@@ -447,8 +447,9 @@ $(document).ready(function(){
     });
 
 
-    $('.message_sidebar_theme_head p').on('click', function () {
+    $('.message_sidebar_theme_head p').click(function () {
         $('.message_sidebar_theme_body').hide();
+        console.log('12345');
         $(this).parent().next().slideDown();
     });
 
