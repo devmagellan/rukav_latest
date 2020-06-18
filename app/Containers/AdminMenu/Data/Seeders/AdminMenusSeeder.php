@@ -294,7 +294,7 @@ class AdminMenusSeeder extends Seeder
                 'parent_id' => 26,
                 'name' => 'Редактирование категорий',
                 'icon'=> 'fal fa-window',
-                'link'=> '/company/edit_categories',
+                'link'=> '/edit_categories',
                 'system_name'=>'edit_categories',
                 'type'=>'linked',
                 'permission'=>null
