@@ -446,6 +446,23 @@ $(document).ready(function(){
         $(this).val("+" + $(".country[class*='active']").attr("data-dial-code") + $(this).val());
     });
 
+    $(function () {
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 500,
+            values: [75, 300],
+            slide: function (event, ui) {
+                $("#amount").val("£ " + ui.values[0] + " - " + ui.values[1]);
+                $("#price_start").val(ui.values[0]);
+                $("#price_end").val(ui.values[1]);
+            }
+        });
+        $("#amount").val("£ " + $("#slider-range").slider("values", 0) +
+            " - " + $("#slider-range").slider("values", 1));
+        $("#price_start").val($("#slider-range").slider("values", 0));
+        $("#price_end").val($("#slider-range").slider("values", 1));
+    });
 
     $('.message_sidebar_theme_head p').on('click', function () {
         $('.message_sidebar_theme_body').hide();
