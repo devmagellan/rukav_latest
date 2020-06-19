@@ -109,6 +109,13 @@
 
     $(document).ready(function(){
         reloadMessageList('{{$conversations->first()->id}}')
+		
+		
+    $('.message_sidebar_theme_head p').click(function () {
+        $('.message_sidebar_theme_body').hide();
+        console.log('12345');
+        $(this).parent().next().slideDown();
+    });
     })
 
     function reloadMessageList(conversation){

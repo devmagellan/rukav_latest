@@ -133,6 +133,7 @@ class Controller extends WebController
 
   public function loginAdmin(LoginUserRequest $request)
   {
+	
     if($this->service->authenticate($request)){
       if (Auth::user()->hasRole('admin')){
         return redirect(route('get_admin_dashboard_page'));

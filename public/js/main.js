@@ -464,7 +464,7 @@ $(document).ready(function(){
         $("#price_end").val($("#slider-range").slider("values", 1));
     });
 
-    $('.message_sidebar_theme_head p').click(function () {
+    $('.message_sidebar_theme_head').click(function () {
         $('.message_sidebar_theme_body').hide();
         console.log('12345');
         $(this).parent().next().slideDown();
