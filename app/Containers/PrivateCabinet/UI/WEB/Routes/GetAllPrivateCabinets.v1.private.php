@@ -74,4 +74,15 @@ $router->post('/cabinet/messagesData', [
 ]);
 
 
+$router->get('/send_message_to_client', [
+    'as' => 'send_message_to_client',
+    'uses'  => 'Controller@checkData',
+    'middleware' => [
+      'auth:web',]
+]);
+
+
+
+
+
 

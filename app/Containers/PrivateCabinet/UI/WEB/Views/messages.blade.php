@@ -9,84 +9,65 @@
                 <hr>
                 <input type="text" class="message_sidebar_input_search" name="" placeholder="Выберите тему для поиска">
                 <button class="message_sidebar_add_them">+</button>
+                <hr>
+                <div class="message_sidebar_theme">
+                    <div class="message_sidebar_theme_head">
+                        <img src="img/right_icon_f.svg" alt="">
+                        <p class="theme_main_text"><b>Основное ({{count($conversations)}})</b></p></div>
+                    <div class="message_sidebar_theme_body">
+                        @foreach($conversations as $conversation)
 
-                @foreach($conversations as $conversation)
-                    <div class="message_sidebar_theme">
-                        <div class="message_sidebar_theme_head">
-                            <img src="/img/right_icon_black.svg" alt="">
-                            <p>Такси аэропорт Ливерпуля</p>
-                            <button class="message_item_remove"><img src="/img/delete-icon-red.svg" alt=""></button>
-                        </div>
-                        <div class="message_sidebar_theme_body" style="display: none;">
-                            <div class="message_sidebar_theme_item message_sidebar_theme_item-new">
-                                <div class="message_sidebar_theme_left">
-                                    <div class="massage_user_avatar massage_user_avatar_online">
-                                        <img src="/img/Avatar.png" alt="">
-                                    </div>
-                                    <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
+<? dump($conversation);?>
+
+                        <div class="message_sidebar_theme_item message_sidebar_theme_item-remove" onclick="reloadMessageList('{{$conversation->id}}')" >
+                            <div class="message_sidebar_theme_left">
+                                <div class="massage_user_avatar">
+                                    <?
+                                    $photo=App\Containers\Ad\Models\Picture::where('ads_id',$conversation->message->id)->first();
+                                    ?>
+                                    <img src="/storage/pictures/{{$photo->photo}}" alt="">
                                 </div>
-                                <div class="message_sidebar_theme_right">
-                                    <p class="message_sidebar_theme_name">
-                                        Сергей
-                                    </p>
-                                    <p class="message_sidebar_theme_add">
-                                        Mercedes-Benz e220 w210! 2.2disel...
-                                    </p>
-                                    <p class="message_sidebar_theme_date">
-                                        30 Мая 13:09
-                                    </p>
-                                    <p class="message_sidebar_theme_message">
-                                        Привет! Никаких дефект...
-                                    </p>
-                                </div>
+                                <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
                             </div>
-                            <div class="message_sidebar_theme_item message_sidebar_theme_item-remove">
-                                <div class="message_sidebar_theme_left">
-                                    <div class="massage_user_avatar massage_user_avatar_online">
-                                        <img src="/img/Avatar.png" alt="">
-                                    </div>
-                                    <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
-                                </div>
-                                <div class="message_sidebar_theme_right">
-                                    <p class="message_sidebar_theme_name">
-                                        Сергей
-                                    </p>
-                                    <p class="message_sidebar_theme_add">
-                                        Mercedes-Benz e220 w210! 2.2disel...
-                                    </p>
-                                    <p class="message_sidebar_theme_date">
-                                        30 Мая 13:09
-                                    </p>
-                                    <p class="message_sidebar_theme_message">
-                                        Привет! Никаких дефект...
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="message_sidebar_theme_item">
-                                <div class="message_sidebar_theme_left">
-                                    <div class="massage_user_avatar massage_user_avatar_online">
-                                        <img src="/img/Avatar.png" alt="">
-                                    </div>
-                                    <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
-                                </div>
-                                <div class="message_sidebar_theme_right">
-                                    <p class="message_sidebar_theme_name">
-                                        Сергей
-                                    </p>
-                                    <p class="message_sidebar_theme_add">
-                                        Mercedes-Benz e220 w210! 2.2disel...
-                                    </p>
-                                    <p class="message_sidebar_theme_date">
-                                        30 Мая 13:09
-                                    </p>
-                                    <p class="message_sidebar_theme_message">
-                                        Привет! Никаких дефект...
-                                    </p>
-                                </div>
+                            <div class="message_sidebar_theme_right">
+                                <p class="message_sidebar_theme_name">
+                                    {{$conversation->author->name}}
+                                </p>
+                                <p class="message_sidebar_theme_add">
+                                    {{$conversation->message->title}}
+                                </p>
+                                <p class="message_sidebar_theme_date">
+                                    {{$conversation->created_at}}
+                                </p>
+                                <p class="message_sidebar_theme_message">
+
+                                    <?
+                                    $string = strip_tags($conversation->text);
+                                    if (strlen($string) > 10) {
+
+                                        // truncate string
+                                        $stringCut = substr($string, 0, 10);
+                                        $endPoint = strrpos($stringCut, ' ');
+
+                                        //if the string doesn't contain any space then it will cut without word basis.
+                                        $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+
+                                    }
+                                    $string .= '... ';
+
+                                    ?>
+                                    {{$string}}
+                                </p>
                             </div>
                         </div>
+                         @endforeach
+
+
+
+
                     </div>
-                @endforeach
+                </div>
+
             </div>
         </div>
     </div>
@@ -108,7 +89,7 @@
 <script>
 
     $(document).ready(function(){
-        reloadMessageList('{{$conversations->first()->id}}')
+        reloadMessageList('{{$conversations[0]->id}}')
 		
 		
     $('.message_sidebar_theme_head p').click(function () {

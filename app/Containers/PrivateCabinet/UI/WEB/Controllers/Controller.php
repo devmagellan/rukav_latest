@@ -46,14 +46,25 @@ class Controller extends WebController
         return view('privatecabinet::index',compact('categoriesOnlyRoot', 'categories', 'ads','favorits','user' ) );
     }
 
-
-
     public function messagesData(GetAllPrivateCabinetsRequest $request){
 
         $data['title']="Staff postData";
-        $data['conversations']=\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->orWhere('sender_id',\Auth::user()->id)
+        $conversations=\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->orWhere('sender_id',\Auth::user()->id)
             ->with('sender')->with('message')->with('pictures')
-            /*->groupBy('message_id','receiver_id')*/->distinct()->orderBy('created_at')->get();
+            ->groupBy('message_id','receiver_id')->distinct()->orderBy('created_at')->get();
+        $tmp_msg=[];
+        $tmp=[];
+        foreach($conversations as $conver){
+            if( (in_array($conver->sender_id,$tmp) && in_array($conver->receiver_id,$tmp))&& in_array($conver->message_id,$tmp_msg)){
+
+            }
+            else{
+                $tmp[]=$conver->sender_id;
+                $tmp[]=$conver->receiver_id;
+                $tmp_msg[]=$conver->message_id;
+                $data['conversations'][]= $conver;
+            }
+        }
         return view('privatecabinet::messages',$data);
     }
 
@@ -195,5 +206,27 @@ class Controller extends WebController
         $data['conversation']=$q->orderBy('created_at')->get();
         //dump($data['conversation']);
         return view('privatecabinet::messageList',$data);
+    }
+
+    public function checkData(GetAllPrivateCabinetsRequest $request){
+        $user=\App\Containers\User\Models\User::where('id',$request->input('client_id'))->first();
+        if (preg_match('/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/si', $request->input('text')))
+        {
+            dd("Contains an email");}
+        else{
+            $message['values']=['text'=>$request->input('text'),
+                'receiver_id'=>$user->id,
+                'sender_id'=>\Auth::user()->id,
+                'message_id'=>$request->input('message_id')
+
+            ];
+            $message['attributes']['id']=(null!=($request->input('connect_id')) && !empty($request->input('connectr_id'))) ? $request->input('connect_id') : null;
+            $entityClass=\App\Containers\Connect\Models\Connect::class;
+            if($message){
+
+                call_user_func("{$entityClass}::query")->updateOrCreate($message['attributes'], $message['values']);
+            }
+        }
+        return json_encode(['message'=>'success']);
     }
 }

@@ -57,17 +57,18 @@ else{
             <img src="/img/photo-camera-icon-black.svg" alt="">
         </label>
         <input type="file" id="send_message_foto" name="send_message_foto" style="display: none;">
-        <input type="text" name="" placeholder="Текст сообщения..." required="">
-        <button><img src="/img/paper-plane-icon.svg" alt=""></button>
+        <input id="msgr_input" type="text" name="" placeholder="Текст сообщения..." required="">
+        <button type="submit" ><img src="/img/paper-plane-icon.svg" alt=""></button>
     </form>
     <p>RUKAV оставляет за собой право проверять сообщения посланные через наш сервер для того чтобы защитить вас от мошенничества и подозрительных действий.</p>
 </div>
 
 <script>
     function sendMessage(){
-        if($('#msgr_input').text().length>0){
+        console.log('in_function')
+        if($('#msgr_input').val().length>0){
 
-            var text = $('#msgr_input').text()
+            var text = $('#msgr_input').val()
             var url = '/send_message_to_client';console.log(text)
             var client_id='{{$recepient}}';
             var message_id='{{$conversation->first()->message_id}}';
@@ -87,7 +88,13 @@ else{
 
                     console.log(data)
                     console.log({{$conversation->first()->message_id}})
-                    reloadMessageList({{$conversation->first()->message_id}})
+                    //reloadMessageList({{$conversation->first()->message_id}})
+                    $('.wrapper_body_messege_scroll').append(
+                    '<div class="body_messege_item body_my_messege_item">'+
+                        '<p>'+text+'</p>'+
+                        '<span>now</span>'+
+                        '</div>'
+                    );
 
                 }
             });
