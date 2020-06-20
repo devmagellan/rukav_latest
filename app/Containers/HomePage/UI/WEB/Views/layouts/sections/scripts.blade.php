@@ -16,7 +16,14 @@
 <script type="text/javascript" src="/js/login_user.js"></script>
 
 <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
-
+<?
+if(\Auth::user()){
+	$user_id=\Auth::user()->id;
+}
+else{
+	$user_id='';
+}
+?>
 <script>
 console.log('totify pusher')
    var notify_pusher = new Pusher('500e0547867ccfe184af', {
@@ -25,7 +32,7 @@ console.log('totify pusher')
 var notify_channel = notify_pusher.subscribe('notification-channel');
 
 Pusher.logToConsole = true;
-var notify_user='{{\Auth::user()->id}}'
+var notify_user='{{$user_id}}'
 console.log('notify - mid=>',notify_user)
 var notify='notification-'+notify_user+'-'
 console.log(notify)
