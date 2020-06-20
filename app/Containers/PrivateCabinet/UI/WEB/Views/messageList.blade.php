@@ -52,14 +52,14 @@ else{
     </div>
 </div>
 <div class="wrapper_footer_messege">
-    <form class="send_message_form">
+    <div class="send_message_form">
         <label for="send_message_foto">
             <img src="/img/photo-camera-icon-black.svg" alt="">
         </label>
         <input type="file" id="send_message_foto" name="send_message_foto" style="display: none;">
         <input id="msgr_input" type="text" name="" placeholder="Текст сообщения..." required="">
-        <button type="submit" ><img src="/img/paper-plane-icon.svg" alt=""></button>
-    </form>
+        <button onclick="sendMessage()"><img src="/img/paper-plane-icon.svg" alt=""></button>
+    </div>
     <p>RUKAV оставляет за собой право проверять сообщения посланные через наш сервер для того чтобы защитить вас от мошенничества и подозрительных действий.</p>
 </div>
 
