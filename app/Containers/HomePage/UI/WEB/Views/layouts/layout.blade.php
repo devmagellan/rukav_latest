@@ -3,3 +3,4 @@
 @include('homepage::layouts.sections.footer')
 @include('homepage::layouts.sections.popups')
 @include('homepage::layouts.sections.scripts')
+
