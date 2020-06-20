@@ -214,19 +214,46 @@ class Controller extends WebController
         {
             dd("Contains an email");}
         else{
+            var_dump('popali');
             $message['values']=['text'=>$request->input('text'),
                 'receiver_id'=>$user->id,
                 'sender_id'=>\Auth::user()->id,
-                'message_id'=>$request->input('message_id')
+                'message_id'=>$request->input('message_id'),
+                'is_viewed'=>0
 
             ];
-            $message['attributes']['id']=(null!=($request->input('connect_id')) && !empty($request->input('connectr_id'))) ? $request->input('connect_id') : null;
-            $entityClass=\App\Containers\Connect\Models\Connect::class;
+            $message['attributes']['id']=(null!=($request->input('connect_id')) && !empty($request->input('connect_id'))) ? $request->input('connect_id') : null;
+
             if($message){
 
-                call_user_func("{$entityClass}::query")->updateOrCreate($message['attributes'], $message['values']);
+                $entityClass=\App\Containers\Connect\Models\Connect::class;
+                $con=call_user_func("{$entityClass}::query")->updateOrCreate($message['attributes'], $message['values']);
+                var_dump($con);
+                var_dump('receiver-'.$user->id.'-');
+                $options = array(
+                    'cluster' => 'eu',
+                    'useTLS' => true
+                );
+                $pusher = new \Pusher\Pusher(
+                    '500e0547867ccfe184af',
+                    'b8d3a1076b93fe80dd50',
+                    '1000615',
+                    $options
+                );
+
+                $data['message_id'] = $request->input('message_id');
+                $data['sender_id'] = \Auth::user()->id;
+                $data['text'] = $request->input('text');
+                $data['created'] = $con->created_at;
+                $pusher->trigger('my-channel', /* 'my-event' */'receiver-'.$user->id.'-', $data);
+                $notification['created'] = $con->created_at;
+                $pusher->trigger('notification-channel', /* 'my-event' */'notification-'.$user->id.'-', $notification);
+
             }
         }
         return json_encode(['message'=>'success']);
     }
+
+
+
 }
