@@ -83,21 +83,63 @@ else{
                 },
                 complete: function() {
                     $('#loader').hide();
+					console.log('complete')
+					 $('.wrapper_body_messege_scroll').append(
+                    '<div class="body_messege_item body_my_messege_item">'+
+                        '<p>'+text+'</p>'+
+                        '<span>только что</span>'+
+                        '</div>'
+                    );
+					
                 },
                 success: function (data) {
-
+				console.log('success')
                     console.log(data)
                     console.log({{$conversation->first()->message_id}})
                     //reloadMessageList({{$conversation->first()->message_id}})
-                    $('.wrapper_body_messege_scroll').append(
-                    '<div class="body_messege_item body_my_messege_item">'+
-                        '<p>'+text+'</p>'+
-                        '<span>now</span>'+
-                        '</div>'
-                    );
+                   
 
                 }
             });
         }
     }
+	
+	
+		
+		
+
+   var pusher = new Pusher('500e0547867ccfe184af', {
+      cluster: 'eu'
+    });
+var channel = pusher.subscribe('my-channel');
+
+Pusher.logToConsole = true;
+var user='{{\Auth::user()->id}}'
+console.log('receiver - mid=>',window.message_id)
+var receiver='receiver-'+user+'-'//+window.message_id
+console.log(receiver)
+console.log(receiver.length)
+
+channel.bind(receiver, function(data) {
+console.log(data)	
+if('{{$conversation->first()->sender_id}}'=={{\Auth::user()->id}}){
+	var sender='{{$conversation->first()->receiver_id}}';
+}
+else{
+	var sender='{{$conversation->first()->sender_id}}'
+}
+console.log(sender)
+console.log('{{$conversation->first()->message->id}}')
+ if(data.sender_id==sender && '{{$conversation->first()->message->id}}'==data.message_id ){
+	console.log('popali')
+	 $('.wrapper_body_messege_scroll').append(
+                    '<div class="body_messege_item body_to_messege_item">'+
+                        '<p>'+data.text+'</p>'+
+                        '<span>'+data.created+'</span>'+
+                        '</div>'
+                    );
+} 
+
+})
+
 </script>
