@@ -315,5 +315,84 @@ class AdsTableSeeder_2 extends Seeder
 
 
         ]);
+
+
+
+        \DB::table('second_messanger_groups')->insert([
+            /*1*/
+            [
+            'group_name'=>'Такси близ Аэропорта Ливерпуль',
+            'parrent_category_id'=>32
+
+            ],
+            /*2*/
+            [
+                'group_name'=>'Такси центр Ливерпуль',
+                'parrent_category_id'=>32
+
+            ],
+            /*3*/
+            [
+                'group_name'=>'Перевозки микроавтобусом',
+                'parrent_category_id'=>33
+
+            ],
+            /*4*/
+            [
+                'group_name'=>'Перевозки групп от 10человек',
+                'parrent_category_id'=>33
+
+
+            ],
+
+
+
+        ]);
+
+        \DB::table('second_messanger_group_items')->insert([
+            /*1*/
+            [
+                'group_id'=>1,
+                'user_id'=>1
+
+            ],
+            /*2*/
+            [
+                'group_id'=>2,
+                'user_id'=>1
+
+            ],
+            /*3*/
+            [
+                'group_id'=>3,
+                'user_id'=>2
+
+            ],
+            /*4*/
+            [
+                'group_id'=>4,
+                'user_id'=>1
+
+
+            ],
+
+
+
+        ]);
+
+        \DB::table('second_messanger_group_recipient_items')->insert([
+            /*1*/
+            [
+                'group_id'=>1,
+                'user_id'=>4
+
+            ],
+
+
+
+        ]);
+
+
+
     }
 }

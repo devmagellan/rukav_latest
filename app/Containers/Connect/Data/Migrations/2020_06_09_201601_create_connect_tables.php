@@ -17,6 +17,7 @@ class CreateConnectTables extends Migration
             $table->bigInteger('receiver_id')->nullable()->unsigned();
             $table->string('text');
             $table->bigInteger('message_id')->unsigned();
+            $table->string('group_id')->nullable();
             $table->string('sender_name')->nullable();
             $table->string('sender_email')->nullable();
             $table->string('sender_phone')->nullable();

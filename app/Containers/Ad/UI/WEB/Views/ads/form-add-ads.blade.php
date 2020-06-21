@@ -1,4 +1,13 @@
-@extends('ad::layouts.layout')
+@extends('homepage::layouts.layout')
+<link rel="stylesheet" media="screen, print" href="/NewSmartAdmin/css/formplugins/select2/select2.bundle.css">
+<link rel="stylesheet" media="screen, print" href="/NewSmartAdmin/css/vendors.bundle.css">
+<link rel="stylesheet" media="screen, print" href="/NewSmartAdmin/css/app.bundle.css">
+<!-- Place favicon.ico in the root directory -->
+<link rel="apple-touch-icon" sizes="180x180" href="/NewSmartAdmin/img/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/NewSmartAdmin/img/favicon/favicon-32x32.png">
+<link rel="mask-icon" href="/NewSmartAdmin/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<!-- DEMO related CSS below -->
+<link rel="stylesheet" media="screen, print" href="/NewSmartAdmin/css/fa-brands.css">
 @section('content')
 <style>
 
@@ -11,6 +20,18 @@
   }
   .cat_block {
     padding: 10px 15px;
+  }
+
+  .select2-search {
+    display: block;
+  }
+
+  .select2-container--default .select2-selection--multiple{
+    border-radius: 20px;
+  }
+
+  .select2-container--default .select2-selection--multiple .select2-container--open{
+   border-radius: 20px !important;
   }
 </style>
   <article class="add_advert_block">
@@ -54,6 +75,22 @@
                 <div class="alert errorBlock">{{ $message }}</div>
               @enderror
             </div>
+            <div class="add_second_chat_block_input1" style="margin-top:40px">
+              <div class="form-group" style="width:60%">
+                <select class="select2-placeholder-multiple form-control"  multiple="multiple" id="multiple-placeholder">
+                  <optgroup label="Такси Ливерпуля">
+                    <option value="AK">Такси близ Аэропорта Ливерпуль</option>
+                    <option value="HI">Такси Центр Ливерпуль</option>
+                  </optgroup>
+                  <optgroup label="Заказ пасажирских перевозок">
+                    <option value="CA">Перевозки микроавтобусом</option>
+                    <option value="NV">Перевозки групп от 10человек</option>
+                  </optgroup>
+
+                </select>
+              </div>
+            </div>
+
           </div>
         </div>
         <input type="hidden" id="category_id" name="category_id" value="{{old('category_id')}}">
@@ -498,7 +535,22 @@
 
 @endsection
 @section('scripts')
+  <script src="/NewSmartAdmin/js/formplugins/select2/select2.bundle.js"></script>
+
 <script>
+
+
+    $(document).ready(function() {
+        $(function () {
+
+            $(".select2-placeholder-multiple").select2(
+                {
+                    placeholder: "Select State"
+                });
+        });
+
+    });
+
 
     $('.categories').delegate('.cat_block','click',function(){
 console.log()

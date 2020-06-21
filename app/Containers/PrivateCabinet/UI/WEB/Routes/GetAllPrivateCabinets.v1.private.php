@@ -82,6 +82,22 @@ $router->get('/send_message_to_client', [
 ]);
 
 
+$router->post('/add_second_messanger_group', [
+    'as' => 'add_second_messanger_group',
+    'uses'  => 'Controller@addSecondMessangerGroup',
+    /*'middleware' => [
+      'auth:web',
+    ],*/
+]);
+
+
+$router->post('/delete_second_group', [
+    'as' => 'delete_second_group',
+    'uses'  => 'Controller@deleteSecondGroup',
+    /*'middleware' => [
+      'auth:web',
+    ],*/
+]);
 
 
 

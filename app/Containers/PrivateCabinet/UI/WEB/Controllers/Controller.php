@@ -65,6 +65,9 @@ class Controller extends WebController
                 $data['conversations'][]= $conver;
             }
         }
+        $data['email']=\Auth::user()->email;
+        $data['businessOwnerConversationsList']=\App\Containers\Ad\Models\SecondMessangerGroupsItem::where('user_id',\Auth::user()->id)->with('message')->with('group')->get();
+        $data['privateOwnerConversationsList']=\App\Containers\Ad\Models\SecondMessangerGroupRecipientItems::where('user_id',\Auth::user()->id)->with('connects')->with('group')->get();
         return view('privatecabinet::messages',$data);
     }
 
@@ -199,9 +202,8 @@ class Controller extends WebController
         $example=\App\Containers\Connect\Models\Connect::where('id',$request->input('conversation'))->with('author')->first();
         //Если хозяин объявления я то тянуть все конекты в которых receiver_id я и sender_id $example->sender_id
         //Иначе тянуть все коннекты в которых receiver_id $example->receiver_id и sender_id я
-//dump($example);
         $recepients=[$example->sender_id,$example->receiver_id];
-        $q=\App\Containers\Connect\Models\Connect::where('message_id',$example->message_id)->whereIn('receiver_id',$recepients)->whereIn('sender_id',$recepients)->with('message')->with('author');
+        $q=\App\Containers\Connect\Models\Connect::where('group_id',$request->input('group_id'))->where('message_id',$example->message_id)->whereIn('receiver_id',$recepients)->whereIn('sender_id',$recepients)->with('message')->with('author');
 
         $data['conversation']=$q->orderBy('created_at')->get();
         //dump($data['conversation']);
@@ -214,7 +216,6 @@ class Controller extends WebController
         {
             dd("Contains an email");}
         else{
-            var_dump('popali');
             $message['values']=['text'=>$request->input('text'),
                 'receiver_id'=>$user->id,
                 'sender_id'=>\Auth::user()->id,
@@ -252,6 +253,33 @@ class Controller extends WebController
             }
         }
         return json_encode(['message'=>'success']);
+    }
+
+    public function addSecondMessangerGroup(GetAllPrivateCabinetsRequest $request){
+        //привязываем категорию к юзеру
+
+        $second_messanger_group_recipient_item=\App\Containers\Ad\Models\SecondMessangerGroupRecipientItems::where('group_id',$request->input('group_id'))->where('user_id',\Auth::user()->id)->first();
+
+        if(!$second_messanger_group_recipient_item){
+            $data=[
+                'group_id'=>$request->input('group_id'),
+                'user_id'=>\Auth::user()->id
+            ];
+
+            \App\Containers\Ad\Models\SecondMessangerGroupRecipientItems::insert($data);
+        }
+
+
+        return redirect('/private_cabinet#messages');
+    }
+
+    public function deleteSecondGroup (GetAllPrivateCabinetsRequest $request){
+        if($request->input('type')=='private'){
+            \App\Containers\Ad\Models\SecondMessangerGroupRecipientItems::where('group_id',$request->input('group_id'))->where('user_id',\Auth::user()->id)->delete();
+        }
+        else{
+            \App\Containers\Ad\Models\SecondMessangerGroupsItem::where('group_id',$request->input('group_id'))->where('user_id',\Auth::user()->id)->delete();
+        }
     }
 
 

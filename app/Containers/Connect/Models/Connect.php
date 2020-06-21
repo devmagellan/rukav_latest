@@ -6,6 +6,9 @@ use App\Ship\Parents\Models\Model;
 
 class Connect extends Model
 {
+
+    use \Awobaz\Compoships\Compoships;
+
     protected $fillable = [
         'receiver_id',
         'message_id',
@@ -37,6 +40,11 @@ class Connect extends Model
      * A resource key to be used by the the JSON API Serializer responses.
      */
     protected $resourceKey = 'connects';
+
+    public function SecondMessangerGroupRecipientItems()
+    {
+        return $this->belongsTo(\App\Containers\Ad\Models\SecondMessangerGroupRecipientItems::class, ['receiver_id','group_id'],['user_id','group_id']);
+    }
 
     public function message(){
         return $this->hasOne(\App\Containers\Ad\Models\Ad::class,'id','message_id');
