@@ -30,8 +30,9 @@
                 <button type="submit" class="message_sidebar_add_them" style="top:7px;position:relative;">+</button>
                 </form>
                 @foreach($businessOwnerConversationsList as $list)
-
-                    <div class="message_sidebar_theme" id="message_{{$privateList->group->id}}">
+@if(isset($list))
+                    <div class="message_sidebar_theme" id="message_{{$list->group->id}}">
+                        @endif
 
                         <div class="message_sidebar_theme_head">
                             <input type="hidden" class="group_type" value="business">
