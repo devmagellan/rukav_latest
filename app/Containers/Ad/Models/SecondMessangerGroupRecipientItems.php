@@ -31,4 +31,9 @@ class SecondMessangerGroupRecipientItems extends Model
         return $this->hasMany(\App\Containers\Connect\Models\Connect::class,['receiver_id','group_id'],['user_id','group_id']);
 
     }
+
+    public function recipients(){
+        return $this->hasManyThrough( \App\Containers\User\Models\User::class,\App\Containers\Ad\Models\SecondMessangerGroupsItem::class,'group_id','id','group_id','user_id');
+
+    }
 }

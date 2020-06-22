@@ -28,6 +28,7 @@ class CreateAdTables extends Migration
             $table->integer('visibility');
             $table->boolean('active')->default(true);
             $table->string('name')->nullable();
+            $table->integer('second_messanger_group_id')->nullable();
             $table->timestamps();
             //$table->softDeletes();
 

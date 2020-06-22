@@ -7,6 +7,8 @@ use App\Ship\Parents\Models\Model;
 class Ad extends Model
 {
 
+    use \Awobaz\Compoships\Compoships;
+
     protected $attributes = [
 
     ];
@@ -64,5 +66,7 @@ class Ad extends Model
     public function parentCategory(){
         return $this->hasOne('\App\Domain\Customer\Models\ProductCategory','id','category_id');
     }
+
+
 
 }

@@ -63,6 +63,14 @@ $router->post('/cabinet/conversation', [
     ],*/
 ]);
 
+$router->post('/cabinet/clean_conversation', [
+    'as' => 'cabinet_clean_conversation',
+    'uses'  => 'Controller@cleanConversationData',
+    /*'middleware' => [
+      'auth:web',
+    ],*/
+]);
+
 
 
 $router->post('/cabinet/messagesData', [
