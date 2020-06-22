@@ -189,7 +189,9 @@
                                                     <?
                                                     //$pht=App\Containers\Ad\Models\Picture::where('ads_id',$groupConversations->first()->id)->first();
                                                     ?>
+													@if(isset($finGroupMessage))
                                                     <img src="/storage/pictures/{{$finGroupMessage->pictures->first()->photo}}" alt="">
+												@endif
                                                 </div>
 
                                                 <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
