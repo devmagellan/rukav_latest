@@ -24,6 +24,7 @@ class User extends UserModel implements ChargeableInterface
     use AuthenticationTrait;
     use Notifiable;
     use HasRoles;
+    use \Awobaz\Compoships\Compoships;
 
     /**
      * The database table used by the model.
@@ -139,6 +140,10 @@ class User extends UserModel implements ChargeableInterface
     public function getBusinessAccount(){
         return $this->hasOne(\App\Containers\User\Models\BusinessAccount::class);
 
+    }
+
+    public function adsWithGroup(){
+        return $this->hasMany(\App\Containers\Ad\Models\Ad::class, 'sender','id');
     }
 
 

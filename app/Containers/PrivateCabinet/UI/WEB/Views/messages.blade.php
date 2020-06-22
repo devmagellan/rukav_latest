@@ -75,6 +75,8 @@
                 @endforeach
 
                 @foreach($privateOwnerConversationsList as $privateList)
+
+
                     <div class="message_sidebar_theme" id="message_{{$privateList->group->id}}">
 
                         <div class="message_sidebar_theme_head" >
@@ -85,13 +87,54 @@
                             <button class="message_item_remove"><img src="img/delete-icon-red.svg" alt=""></button>
                         </div>
                         <div class="message_sidebar_theme_body" style="display: none;">
-                            @foreach($privateList->connects as $pcnv)
-                                <div class="message_sidebar_theme_item message_sidebar_theme_item-new" onclick="reloadMessageList('{{$pcnv->id}}','{{$privateList->group_id}}')">
+                            @foreach($privateList->recipients as $recepient)
+                                <!--find messages in with this recipient in this group-->
+
+                                <?
+
+                                    $conversationsN=\App\Containers\Connect\Models\Connect::where('group_id',$privateList->group->id)->
+                                    where(function($query) use($recepient) {
+
+                                    $query->where(function($query) use($recepient){
+                                        $query->where('receiver_id',$recepient->id);
+                                        $query->where('sender_id',\Auth::user()->id);
+                                    });
+                                    $query->orWhere(function($query) use($recepient){
+                                        $query->where('receiver_id',\Auth::user()->id);
+                                        $query->where('sender_id',$recepient->id);
+                                    });
+
+                                    })
+
+
+                                        ->with('sender')->with('message')->with('pictures')
+                                        ->groupBy('message_id','receiver_id')->distinct()->orderBy('created_at')->get();
+                                    $tmp_msg=[];
+                                    $tmp=[];
+                                    $groupConversations=$conversationsN;
+                       /*             foreach($conversationsN as $conver){
+                                        if( (in_array($conver->sender_id,$tmp) && in_array($conver->receiver_id,$tmp))&& in_array($conver->message_id,$tmp_msg)){
+
+                                        }
+                                        else{
+                                            $tmp[]=$conver->sender_id;
+                                            $tmp[]=$conver->receiver_id;
+                                            $tmp_msg[]=$conver->message_id;
+                                            $groupConversations[]= $conver;
+                                        }
+                                    }
+
+                                        dump('$groupConversations',$groupConversations);*/
+                                ?>
+
+                                @if($groupConversations->first())
+
+                                    <div class="message_sidebar_theme_item message_sidebar_theme_item-new" onclick="reloadMessageList('{{$groupConversations->first()->id}}','{{$groupConversations->first()->group_id}}')">
                                     <div class="message_sidebar_theme_left">
                                         <div class="massage_user_avatar massage_user_avatar_online">
                                             <?
-                                            $pht=App\Containers\Ad\Models\Picture::where('ads_id',$pcnv->id)->first();
-                                            ?>
+                                    $pht=App\Containers\Ad\Models\Picture::where('ads_id',$groupConversations->first()->id)->first();
+                                    ?>
                                             <img src="/storage/pictures/{{$pht->photo}}" alt="">
                                         </div>
 
@@ -99,23 +142,96 @@
                                     </div>
                                     <div class="message_sidebar_theme_right">
                                         <p class="message_sidebar_theme_name">
-                                            Сергей
-                                        </p>
-                                        <p class="message_sidebar_theme_add">
-                                            {{$pcnv->title}}
-                                        </p>
-                                        <p class="message_sidebar_theme_date">
-                                            {{$pcnv->created_at}}
-                                        </p>
-                                        <p class="message_sidebar_theme_message">
-                                            Привет! Никаких дефект...
-                                        </p>
+                                            {{$groupConversations->first()->message->getSender->name}}
+                                            </p>
+                                            <p class="message_sidebar_theme_add">
+                                            {{$groupConversations->first()->title}}
+                                            </p>
+                                            <p class="message_sidebar_theme_date">
+                                            {{$groupConversations->first()->created_at}}
+                                            </p>
+                                            <p class="message_sidebar_theme_message">
+                                    <?
+                                    $string = strip_tags($groupConversations->first()->text);
+                                    if (strlen($string) > 40) {
+
+                                        // truncate string
+                                        $stringCut = substr($string, 0, 40);
+                                        $endPoint = strrpos($stringCut, ' ');
+
+                                        //if the string doesn't contain any space then it will cut without word basis.
+                                        $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+
+                                    }
+                                    $string .= '... ';
+
+                                    ?>
+                                    {{$string}}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
+                                 @else
+                                    <?
+
+                                        foreach($recepient->adsWithGroup as $ad){
+                                            if($privateList->group->id==$ad->second_messanger_group_id){
+                                                $ad->pictures=App\Containers\Ad\Models\Picture::where('ads_id',$ad->first()->id)->first();
+                                                $finGroupMessage=$ad;
+                                            }
+                                        }
+                                        //dump($finGroupMessage);
+                                        ?>
+
+                                    @if($recepient->adsWithGroup->first())
+                                        <div class="message_sidebar_theme_item message_sidebar_theme_item-new" onclick="reloadCleanMessageList('{{$recepient->adsWithGroup->first()->id}}')">
+                                            <div class="message_sidebar_theme_left">
+                                                <div class="massage_user_avatar massage_user_avatar_online">
+                                                    <?
+                                                    //$pht=App\Containers\Ad\Models\Picture::where('ads_id',$groupConversations->first()->id)->first();
+                                                    ?>
+                                                    <img src="/storage/pictures/{{$finGroupMessage->pictures->first()->photo}}" alt="">
+                                                </div>
+
+                                                <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                                            </div>
+                                            <div class="message_sidebar_theme_right">
+                                                <p class="message_sidebar_theme_name">
+                                                    {{$recepient->name}}
+                                                </p>
+                                                <p class="message_sidebar_theme_add">
+
+                                                </p>
+                                                <p class="message_sidebar_theme_date">
+
+                                                </p>
+                                                <p class="message_sidebar_theme_message">
+                                                    <?
+                                                    $string = strip_tags($recepient->adsWithGroup->first()->title);
+                                                    if (strlen($string) > 40) {
+
+                                                        // truncate string
+                                                        $stringCut = substr($string, 0, 40);
+                                                        $endPoint = strrpos($stringCut, ' ');
+
+                                                        //if the string doesn't contain any space then it will cut without word basis.
+                                                        $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+
+                                                    }
+                                                    $string .= '... ';
+
+                                                    ?>
+                                                    {{$string}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                 @endif
                             @endforeach
 
                         </div>
                     </div>
+
 
                 @endforeach
 
@@ -127,7 +243,7 @@
                         <p class="theme_main_text"><b>Основное ({{count($conversations)}})</b></p></div>
                     <div class="message_sidebar_theme_body">
                         @foreach($conversations as $conversation)
-                        <div class="message_sidebar_theme_item message_sidebar_theme_item-remove" onclick="reloadMessageList('{{$conversation->id}}')" >
+                        <div class="message_sidebar_theme_item " onclick="reloadMessageList('{{$conversation->id}}')" >
                             <div class="message_sidebar_theme_left">
                                 <div class="massage_user_avatar">
                                     <?
@@ -151,10 +267,10 @@
 
                                     <?
                                     $string = strip_tags($conversation->text);
-                                    if (strlen($string) > 10) {
+                                    if (strlen($string) > 40) {
 
                                         // truncate string
-                                        $stringCut = substr($string, 0, 10);
+                                        $stringCut = substr($string, 0, 40);
                                         $endPoint = strrpos($stringCut, ' ');
 
                                         //if the string doesn't contain any space then it will cut without word basis.
@@ -220,6 +336,29 @@
             async:false,
             url: url,
             data: {module: module, conversation:conversation,group_id:group_id},
+            beforeSend: function() {
+                $('#loader2').show();
+            },
+            complete: function() {
+                $('#loader2').hide();
+            },
+            success: function (data) {
+//console.log(data)
+                $('.result_of_messageList_table').html(data);
+
+            }
+        });
+    }
+
+    function reloadCleanMessageList(ad_id){
+
+        var url='/cabinet/clean_conversation';
+        $.ajax({
+            method: 'POST',
+            dataType: 'html',
+            async:false,
+            url: url,
+            data: {ad_id:ad_id},
             beforeSend: function() {
                 $('#loader2').show();
             },

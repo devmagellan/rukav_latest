@@ -49,7 +49,10 @@ class Controller extends WebController
     public function messagesData(GetAllPrivateCabinetsRequest $request){
 
         $data['title']="Staff postData";
-        $conversations=\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->orWhere('sender_id',\Auth::user()->id)
+        $conversations=\App\Containers\Connect\Models\Connect::whereNull('group_id')->
+            where(function($query)  {
+                $query->where('receiver_id', \Auth::user()->id)->orWhere('sender_id', \Auth::user()->id);
+                    })
             ->with('sender')->with('message')->with('pictures')
             ->groupBy('message_id','receiver_id')->distinct()->orderBy('created_at')->get();
         $tmp_msg=[];
@@ -67,7 +70,7 @@ class Controller extends WebController
         }
         $data['email']=\Auth::user()->email;
         $data['businessOwnerConversationsList']=\App\Containers\Ad\Models\SecondMessangerGroupsItem::where('user_id',\Auth::user()->id)->with('message')->with('group')->get();
-        $data['privateOwnerConversationsList']=\App\Containers\Ad\Models\SecondMessangerGroupRecipientItems::where('user_id',\Auth::user()->id)->with('connects')->with('group')->get();
+        $data['privateOwnerConversationsList']=\App\Containers\Ad\Models\SecondMessangerGroupRecipientItems::where('user_id',\Auth::user()->id)->with('recipients')->with('connects')->with('group')->get();
         return view('privatecabinet::messages',$data);
     }
 
@@ -280,6 +283,14 @@ class Controller extends WebController
         else{
             \App\Containers\Ad\Models\SecondMessangerGroupsItem::where('group_id',$request->input('group_id'))->where('user_id',\Auth::user()->id)->delete();
         }
+    }
+
+
+    public function cleanConversationData(GetAllPrivateCabinetsRequest $request){
+        $data['message_id']='';
+        $data['recepient']='';
+        $data['ad']=\App\Containers\Ad\Models\Ad::where('id',$request->input('ad_id'))->with('getSender')->first();
+        return view('privatecabinet::messageClean',$data);
     }
 
 
