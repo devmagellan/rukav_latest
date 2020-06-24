@@ -13,9 +13,9 @@
                 <img style="border-radius: 50%;" src="/storage/root_cat_photos/{{$category->photo}}" alt="">
               </div>
               @foreach($category->childrenCategories->take(7) as $childCategory)
-                <a href="/category{{$childCategory->link}}/{{$childCategory->id}}">{{$childCategory->name}}</a>
+                <a href="/category/{{$childCategory->id}}">{{$childCategory->name}}</a>
               @endforeach
-              <a href="/category{{$category->link}}/{{$category->id}}" class="search_all">Показать еще</a>
+              <a href="/category/{{$category->id}}" class="search_all">Показать еще</a>
             </div>
           </div>
         @endforeach

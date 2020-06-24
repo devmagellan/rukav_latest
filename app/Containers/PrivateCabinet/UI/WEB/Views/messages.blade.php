@@ -31,6 +31,7 @@
                 </form>
                 @foreach($businessOwnerConversationsList as $list)
 @if(isset($list))
+	
                     <div class="message_sidebar_theme" id="message_{{$list->group->id}}">
                         @endif
 
@@ -42,6 +43,7 @@
                             <button class="message_item_remove"><img src="img/delete-icon-red.svg" alt=""></button>
                         </div>
                         <div class="message_sidebar_theme_body" style="display: none;">
+						@if(isset($list->connects))
                             @foreach($list->connects as $cnv)
                             <div class="message_sidebar_theme_item message_sidebar_theme_item-new" onclick="reloadMessageList('{{$cnv->id}}','{{$list->group_id}}')">
                                 <div class="message_sidebar_theme_left">
@@ -70,6 +72,7 @@
                                 </div>
                             </div>
                                 @endforeach
+								@endif
 
                         </div>
                     </div>
