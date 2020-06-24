@@ -656,7 +656,17 @@
                     window.parent_cat_id = null;
                     console.log('window.cat_id=>',id_cat)
                     console.log('window.new_block_cl=>',window.new_block_cl)
-                    show_subcut(id_cat,window.new_block_cl)
+                    console.log('BBB=>',window.cat_id)
+                    if(id_cat==0){
+                        console.log('AAA')
+                        reloadData();
+                    }
+                    else if(window.new_block_cl!='cat_block_1' && window.new_block_cl!='undefined'){
+                        show_subcut(id_cat,window.new_block_cl)
+                    }
+                    else{
+                        reloadData();}
+
                     console.log('here modal submit')
                 }
             });
