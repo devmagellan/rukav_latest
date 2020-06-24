@@ -18,9 +18,9 @@ class CreateProductCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('parent_id');
             $table->string('name');
-            $table->string('icon');
-            $table->string('link');
-            $table->string('photo');
+            $table->string('icon')->nullable();
+            $table->string('link')->nullable();
+            $table->string('photo')->nullable();
             $table->integer('position');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
