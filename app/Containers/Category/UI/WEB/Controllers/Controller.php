@@ -341,7 +341,12 @@ if($pricesLimits[0]['max_price']==$pricesLimits[0]['min_price']){
         if($request->input('action')=='add'){
             $last=\App\Containers\Site\Models\ProductCategory::where('parent_id',$request->input('parent_id'))->orderBy('position','desc')->first();
             $data['parent_id']=$request->input('parent_id');
-            $data['position']=$last->position+1;
+            if(!$last){
+                $data['position']=1;
+            }
+            else{
+                $data['position']=$last->position+1;
+            }
             \App\Containers\Site\Models\ProductCategory::insert($data);
         }
         else{
