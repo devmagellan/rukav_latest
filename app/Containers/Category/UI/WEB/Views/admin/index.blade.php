@@ -178,40 +178,6 @@
                                     <div class="categories">
                                         <div class="block_main_categories cat_block_1" style="">
 
-                                            <? $i=0;?>
-                                            @foreach ($categories as $key=>$category)
-                                                @if($category->parent_id==0)
-                                                    @if($i==0)
-                                                        <div>
-
-
-
-                                                            <input type="hidden" class="category_level" value="{{$category->parent_id}}">
-                                                            <button class="add_category_into_level" type="button"  ><i class="fa fa-plus" ></i>Добавить категорию в уровень</button>
-
-                                                        </div>
-                                                    @endif
-                                                    <a >
-
-                                                        <div  class="cat_block" >
-
-                                                            <input  class="fahover_cubes_input" type="hidden" value="{{$category->id}}">
-                                                            <button style="background:red;color:white" class="delete_cat"><i class="fa fa-trash"></i></button>
-                                                            <button class="edit_cat"><i class="fa fa-pencil"></i></button>
-                                                            <button class="picture_cat" data-toggle="modal" data-target=".default-example-modal-right-lg-slider"><i class="fas fa-camera-retro"></i></i></button>
-
-                                                        <!--div style="display:inline-block" class="i-checks">
-                                                                <label> <input class="category_checkbox" type="checkbox" {{$category->checked}} value=""> </label>
-                                                            </div-->
-
-
-                                                            <span style="position:relative;padding-left:20px;">{{$category->name}}</span>
-
-                                                            <span class="fa arrow" style="float:right"></span>
-                                                        </div></a>
-                                                    <?$i++;?>
-                                                @endif
-                                            @endforeach
 
                                         </div>
 
@@ -609,8 +575,24 @@
     <script src="/NewSmartAdmin/js/formplugins/cropperjs/cropper.js"></script>
 
     <script>
+
+        function reloadData(){
+            $.ajax({
+                method: 'POST',
+                dataType: 'html',
+                async:false,
+                url: "/show_cats_main_level",
+                data: {}, // serializes the form's elements.
+                success: function (data) {
+                    $('.cat_block_1').html(data)
+                }
+            });
+        }
+
+
         $(document).ready(function () {
-            console.log(789);
+            reloadData();
+            console.log(788);
             checked_categories=[];
             <?php if(isset($json)){?>
                 checked_categories=eval('<?php echo $json;?>');
@@ -838,7 +820,7 @@
                         //alert(value.id+' -> '+value.name)
                         if(checkValue(value.id,checked_categories)=='Not exist'){
 
-                            $('.'+block_class+'').append(' <a ><div class="cat_block" >' +
+                            $('.'+block_class+'').append(' <a ><div class="cat_block" >123' +
                                 '<input class="fahover_cubes_input" type="hidden" value="'+value.id+'">' +
 
                                 '<!--div style="display:inline-block" class="i-checks"><label> <input class="category_checkbox" type="checkbox" value=""> </label></div-->\n' +
@@ -851,7 +833,7 @@
 
                             //alert(checked_categories)
 
-                            $('.'+block_class+'').append(' <a ><div class="cat_block" >' +
+                            $('.'+block_class+'').append(' <a ><div class="cat_block" >321' +
                                 '<input class="fahover_cubes_input" type="hidden" value="'+value.id+'">' +
 
                                 '<!--div style="display:inline-block" class="i-checks"><label> <input class="category_checkbox" checked type="checkbox" value=""> </label></div-->\n' +
@@ -904,23 +886,21 @@
         }
 
         function show_subcut(id_cat,new_block_cl){
-
+            console.log('sub_cat_depends',id_cat,new_block_cl)
+            $('.' + new_block_cl + '').empty()
             $.ajax({
                 method: 'POST',
-                dataType: 'json',
+                dataType: 'html',
                 async:false,
-                url: "/show_subcat",
+                url: "/show_subcat_depends",
                 data: {id_cat: id_cat}, // serializes the form's elements.
-                success: function (data) {
-                    console.log('new_block_cl',new_block_cl)
-                    if(data.message=='null'){
-                        console.log(333)
-                        //проверить чтобы соседние последующие блоки были пусты
+                success: function (sata) {
+                    $('.' + new_block_cl + '').html(sata)
 
-                        //если (data.value.info.parent_num) ==2
-                        //удалить 3,4
-                        // если (data.value.info.parent_num) ==3
-                        //4
+
+                    console.log('new_block_cl',new_block_cl)
+      /*              if(data.message=='null'){
+                        console.log(333)
                         if(data.value.info.parent_num==1){
                             $('.cat_block_2').empty();
                             $('.cat_block_3').empty();
@@ -964,7 +944,7 @@
 
                                 if(checkValue(value.id,checked_categories)=='Not exist') {
 
-                                    $('.' + new_block_cl + '').append(' <a ><div class="cat_block" >' +
+                                    $('.' + new_block_cl + '').append(' <a ><div class="cat_block" >432' +
                                         '<input class="fahover_cubes_input" type="hidden" value="' + value.id + '">' +
 
                                         '<!--div style="display:inline-block" class="i-checks"><label> <input class="category_checkbox" type="checkbox" value=""> </label></div-->\n' +
@@ -987,6 +967,8 @@
                             console.log('new_block_cl ELSE')
                             $.each( data.value, function( key, value ) {
 
+
+
                                 if(key==0){
                                     console.log(key)
                                     $('.'+new_block_cl+'').append('<div>'+
@@ -995,18 +977,38 @@
                                         '<button class="add_category_into_level"><i class="fa fa-plus"></i>Добавить категорию в уровень</button>'+
 
                                         '</div>')
+                                    var positionArrows='<i style="cursor:pointer" class="arrow_press arrow_down fal fa-arrow-down" aria-hidden="true"></i>';
+
                                 }
+                                if(key!=0 && key+1!=data.value.length){
+
+                                    var positionArrows='<i style="cursor:pointer" class="arrow_press arrow_up fal fa-arrow-up" aria-hidden="true"></i>'+
+                                    '<i style="cursor:pointer" class="arrow_press arrow_down fal fa-arrow-down" aria-hidden="true"></i>'
+                                    ;
+                                }
+                                console.log(key+1,data.value.length)
+                                if(key+1==data.value.length){
+
+                                    var positionArrows='<i style="cursor:pointer" class="arrow_press arrow_up fal fa-arrow-up" aria-hidden="true"></i>';
+                            }
 
                                 if(checkValue(value.id,checked_categories)=='Not exist'){
 
-                                    $('.'+new_block_cl+'').append(' <a ><div class="cat_block" >' +
+                                    $('.'+new_block_cl+'').append(' ' +
+                                        '<div id="pos_'+value.id+'">'+
+                                        '<div style="display:inline-block;width:27px">'+
+                                        '<input type="hidden" class="category_id" value="'+value.id+'">'+
+                                        '<input type="hidden" class="parent_id" value="'+value.parent_id+'">'+
+                                         ''+positionArrows+
+                                        '</div>'+
+                                        '<a style="display:inline-block" ><div class="cat_block" >' +
                                         '<input class="fahover_cubes_input" type="hidden" value="'+value.id+'">' +
                                         '<button style="background:red;color:white" class="delete_cat"><i class="fa fa-trash"></i></button>'+
                                         '<button class="edit_cat"><i class="fa fa-pencil"></i></button>'+
                                         '<!--div style="display:inline-block" class="i-checks"><label> <input class="category_checkbox" type="checkbox" value=""> </label></div-->\n' +
                                         value.name+
                                         '<span class="fa arrow" style="float:right"></span>' +
-                                        '</div></a>')
+                                        '</div></a></div>')
 
                                 }
                                 else{
@@ -1019,7 +1021,7 @@
                                         '<!--div style="display:inline-block" class="i-checks"><label> <input class="category_checkbox" checked type="checkbox" value=""> </label></div-->\n' +
                                         value.name+
                                         '<span class="fa arrow" style="float:right"></span>' +
-                                        '</div></a>')
+                                        '</div></a></div>')
                                 }
 
 
@@ -1028,7 +1030,9 @@
                         }
 
 
-                    }}
+                    }*/
+
+                }
 
             });
         }
@@ -1112,8 +1116,8 @@
 
             $('.categories').delegate('.delete_cat','click',function(event) {
                 console.log(338)
-                var cat_id=$(this).parent().find('.fahover_cubes_input').val()
-                var new_block_cl=$(this).parent().parent().parent().attr('class').split(' ')[1]
+                var cat_id=$(this).parent().parent().find('.fahover_cubes_input').val()
+                var new_block_cl=$(this).parent().parent().parent().parent().attr('class').split(' ')[1]
                 console.log('del_block_cl',new_block_cl)
                 $.ajax({
                     type: "POST",
@@ -1191,7 +1195,7 @@
         $('.categories').delegate('.cat_block','click',function(){
 
             var id_cat = $(this).parent('a').find('input').val()
-            var cl=$(this).parent('a').parent().attr('class');
+            var cl=$(this).parent('a').parent().parent().attr('class');
             cl=cl.split(' ')[1]
             var simbol=parseInt(cl.slice(10))+1
             new_block_cl=cl.slice(0, 10)+simbol
@@ -2093,6 +2097,40 @@
             }, false);
         })();
 
+
+       $('.block_main_categories').delegate('.arrow_press','click',(function(e){
+
+           console.log('cat_block_name',$(e.target).parent().parent().parent().attr('class').split(/\s+/)[1])
+           var cat_block_parent=$(e.target).parent().parent().parent().attr('class').split(/\s+/)[1]
+            var category=$(this).parent().find('.category_id').val()
+            var parent_id=$(this).parent().find('.parent_id').val()
+           console.log(parent_id)
+            var state = ($(this).hasClass("arrow_down")) ? 0 : 1;
+            console.log(category,state)
+
+            $.ajax({
+                method: 'POST',
+                dataType: 'json',
+                async:false,
+                url: '/category_position',
+                data: {category: category,state:state,parent_id:parent_id
+                },
+                beforeSend: function() {
+                },
+                complete: function() {
+
+                },
+                success: function (data) {
+
+                    console.log('success')
+                    if(cat_block_parent!='cat_block_1'){
+                        show_subcut(parent_id,cat_block_parent)
+                    }
+                    else{
+                    reloadData();}
+                }
+            });
+        }))
 
 
 

@@ -71,3 +71,33 @@ $router->post('/company/root_cat_photos/create', [
         'auth:admin',
     ],
 ]);
+
+$router->post('/category_position', [
+    'as'   => 'category_position',
+    'uses'       => 'Controller@setPosition',
+    //'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin'
+    ],
+]);
+
+
+$router->post('/show_cats_main_level', [
+    'as'   => 'show_cats_main_level',
+    'uses'       => 'Controller@showCatsMainLevel',
+    //'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin'
+    ],
+]);
+
+
+$router->post('/show_subcat_depends', [
+    'as'   => 'show_cats_main_level',
+    'uses'       => 'Controller@showSubCatsMainDepends',
+    //'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin'
+    ],
+]);
+

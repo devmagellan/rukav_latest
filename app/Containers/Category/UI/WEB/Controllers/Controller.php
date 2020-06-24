@@ -171,8 +171,8 @@ if($pricesLimits[0]['max_price']==$pricesLimits[0]['min_price']){
         $data['title'] = "Додати товар";
         $data['keywords'] = "Ukrainian industry platform";
         $data['description'] = "Ukrainian industry platform";
-        $data['categories']=\App\Containers\Site\Models\ProductCategory::orderBy('parent_id', 'asc')
-            ->get();
+        $data['categories']=\App\Containers\Site\Models\ProductCategory::where('parent_id',0)
+            ->orderBy('position')->get();
         return view('category::admin.index', $data);
     }
 
@@ -263,21 +263,22 @@ if($pricesLimits[0]['max_price']==$pricesLimits[0]['min_price']){
     public function print_subcat($id_cat){
 
         //find all categories which have parent_id = id_cat
-        $data['value']=\DB::table('product_categories')->where('parent_id', $id_cat)->get();
+        $data['value']=\DB::table('product_categories')->where('parent_id', $id_cat)->orderBy('position')->get();
         $data['message']='success';
         if(count($data['value'])<1){
-            $data['value']['id']=$id_cat;
+            return 'Дочерних категорий не обнаружено';
+  /*          $data['value']['id']=$id_cat;
             $name='';
 
             $data['value']['info']=$this->recursive_cat_names($name,$id_cat);
-            $data['message']='null';
+            $data['message']='null';*/
         }
         return $data;
     }
 
     public function recursive_cat_names($name,$id_cat){
         $this->parent_num=$this->parent_num+1;
-        $data['parent']=DB::table('product_categories')->where('id', $id_cat)->get();
+        $data['parent']=\DB::table('product_categories')->where('id', $id_cat)->get();
         if($data['parent'][0]->parent_id==0){
 
             $_name=$data['parent'][0]->name.' > '.$name;
@@ -386,6 +387,44 @@ if($pricesLimits[0]['max_price']==$pricesLimits[0]['min_price']){
         return call_user_func("{$entityClass}::query")->updateOrCreate($companyLogo['attributes'], $companyLogo['values']);
        // Company::updateCompanyRootCatPhoto($companyLogo);
 
+    }
+
+    public function setPosition(GetAllCategoriesRequest $request)
+    {
+        $update=[];
+        $data['category'] = \App\Containers\Site\Models\ProductCategory::where('parent_id',$request->input('parent_id'))->where('id',$request->input('category'))->first();
+        if($request->input('state')==0){
+
+            $update['position']=$data['category']->position+1;
+            $data['category'] = \App\Containers\Site\Models\ProductCategory::where('parent_id',$request->input('parent_id'))->where('position',$update['position'])->update(['position'=>$update['position']-1]);
+        }
+        else{
+            $update['position']=$data['category']->position-1;
+            $data['category'] = \App\Containers\Site\Models\ProductCategory::where('parent_id',$request->input('parent_id'))->where('position',$update['position'])->update(['position'=>$update['position']+1]);
+        }
+
+        \App\Containers\Site\Models\ProductCategory::where('parent_id',$request->input('parent_id'))->where('id',$request->input('category'))->update($update);
+
+        return json_encode(['status'=>'success']);
+    }
+
+    public function showCatsMainLevel(GetAllCategoriesRequest $request){
+        $data['categories']=\App\Containers\Site\Models\ProductCategory::where('parent_id',0)
+            ->orderBy('position')->get();
+        return view('category::admin.table', $data);
+
+    }
+
+    public function showSubCatsMainDepends(GetAllCategoriesRequest $request){
+
+        $id_cat=$request->input('id_cat');
+        $is_user=$request->input('is_user');
+        $data=$this->print_subcat($id_cat);
+        //var_dump($data);
+        //if($data['value']){return json_encode($data);}else{return json_encode('stop');}
+
+if(!is_array($data)){$sata['parent_id']=$id_cat;return view('category::admin.tableSubCatClear', $sata);}
+        return view('category::admin.tableSubCat', $data);
     }
 
 }
