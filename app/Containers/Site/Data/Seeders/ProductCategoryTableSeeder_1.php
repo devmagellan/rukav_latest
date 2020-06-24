@@ -27,6 +27,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Детский мир',
                 'link'=> '/child_world',
                 'icon'=>'fa-globe',
+                'position'=>1,
                 'photo'=>'https://images.ua.prom.st/181552823_w230_h230_detskie-elektromobili-benzomobili.jpg'
 
             ],
@@ -36,6 +37,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Недвижимость',
                 'link'=> '/advertising',
                 'icon'=>'fa-globe',
+                'position'=>2,
                 'photo'=>'https://images.ua.prom.st/197731655_w230_h230_operatsii-s-nedvizhimostyu.jpg'
             ],
             /*3*/
@@ -44,6 +46,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Транспорт',
                 'link'=> '/contact_with_admin',
                 'icon'=>'fa-globe',
+                'position'=>3,
                 'photo'=>'https://images.ua.prom.st/306573079_w230_h230_logisticheskie-i-skladskie.jpg'
 
             ],
@@ -53,6 +56,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Запчасти для транспорта',
                 'link'=> '/portal_information',
                 'icon'=>'fa-home',
+                'position'=>4,
                 'photo'=>'https://images.ua.prom.st/178467292_w230_h230_dvigateli-i-detali.jpg'
 
             ],
@@ -62,6 +66,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Работа',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>5,
                 'photo'=>'https://images.ua.prom.st/319555510_w230_h230_informatsionno-kommunikatsionnye-uslugi.jpg'
 
             ],
@@ -71,6 +76,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Животные',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>6,
                 'photo'=>'https://images.ua.prom.st/185429417_w230_h230_domashnie-zhivotnye-i.jpg'
 
             ],
@@ -80,6 +86,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Дом и Сад',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>7,
                 'photo'=>'https://images.ua.prom.st/167677418_w230_h230_sad.jpg'
 
             ],
@@ -89,6 +96,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Электроника',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>8,
                 'photo'=>'https://images.ua.prom.st/184039079_w230_h230_tv-i-videotehnika.jpg'
 
             ],
@@ -98,6 +106,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Бизнес и услуги',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>9,
                 'photo'=>'https://images.ua.prom.st/323740502_w230_h230_konsaltingovye-uslugi.jpg'
 
             ],
@@ -107,6 +116,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Мода и стиль',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>10,
                 'photo'=>'https://images.ua.prom.st/1080513521_w230_h230_vesennyaya-odezhda-i.jpg'
 
             ],
@@ -116,6 +126,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Хобби отдых и спорт',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>11,
                 'photo'=>'https://images.ua.prom.st/191919532_w230_h230_tovary-dlya-turizma.jpg'
 
             ],
@@ -125,6 +136,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Отдам бесплатно',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>12,
                 'photo'=>'https://images.ua.prom.st/191919525_w230_h230_tovary-dlya-sporta.jpg'
 
             ],
@@ -134,6 +146,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Обмен',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>13,
                 'photo'=>'https://images.ua.prom.st/171462971_w230_h230_numizmatika-bonistika.jpg'
 
             ],
@@ -143,6 +156,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Детская одежда',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>2,
                 'photo'=>'first_category.png'
 
             ],
@@ -152,6 +166,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Детская обувь',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>1,
                 'photo'=>'first_category.png'
 
             ],
@@ -161,6 +176,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Детские коляски',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>3,
                 'photo'=>'first_category.png'
 
             ],
@@ -170,6 +186,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Детские автокресла',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>4,
                 'photo'=>'first_category.png'
 
             ],
@@ -179,6 +196,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Детская мебель',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>5,
                 'photo'=>'first_category.png'
 
             ],
@@ -188,6 +206,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Игрушки',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>6,
                 'photo'=>'first_category.png'
 
             ],
@@ -197,6 +216,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Детский транспорт',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>7,
                 'photo'=>'first_category.png'
 
             ],
@@ -206,6 +226,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Питание',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>8,
                 'photo'=>'first_category.png'
 
             ],
@@ -215,6 +236,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Товары для школьников',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>9,
                 'photo'=>'first_category.png'
 
             ],
@@ -224,6 +246,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Другие детские товары',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>10,
                 'photo'=>'first_category.png'
 
             ],
@@ -233,6 +256,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Квартиры и комнаты',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>1,
                 'photo'=>'first_category.png'
 
             ],
@@ -242,6 +266,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Дома',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>2,
                 'photo'=>'first_category.png'
 
             ],
@@ -251,6 +276,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Земля',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>3,
                 'photo'=>'first_category.png'
 
             ],
@@ -260,6 +286,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Коммерческая недвижимость',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>4,
                 'photo'=>'first_category.png'
 
             ],
@@ -269,6 +296,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Гаражи парковки',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>5,
                 'photo'=>'first_category.png'
 
             ],
@@ -278,6 +306,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Посуточная аренда жилья',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>6,
                 'photo'=>'first_category.png'
 
             ],
@@ -287,6 +316,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Предложения от застройщиков',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>7,
                 'photo'=>'first_category.png'
 
             ],
@@ -296,6 +326,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Недвижимость за границей',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>8,
                 'photo'=>'first_category.png'
 
             ],
@@ -305,6 +336,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Такси',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>1,
                 'photo'=>'first_category.png'
 
             ],
@@ -314,6 +346,7 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'name' => 'Пасажирские перевозки',
                 'link'=> '/private_cabinet',
                 'icon'=>'fa-home',
+                'position'=>2,
                 'photo'=>'first_category.png'
 
             ],
