@@ -37,6 +37,42 @@ $router->post('/add/wishList', [
 
 
 
+$router->get('/make_categories', [
+    'as' => 'make_categories',
+    'uses'  => 'Controller@makeCategories',
+
+]);
+
+
+$router->post('/show_subcat_gumtree', [
+    'as' => 'show_subcat_gumtree',
+    'uses'  => 'Controller@showSubcatGumtree',
+    /* 'middleware' => [
+       'auth:web',
+     ],*/
+]);
+
+$router->post('/save_gumtree', [
+    'as' => 'save_subcat_gumtree',
+    'uses'  => 'Controller@saveGumtree',
+    /* 'middleware' => [
+       'auth:web',
+     ],*/
+]);
+
+
+
+
+$router->post('/show_maincat_gumtree', [
+    'as' => 'show_maincat_gumtree',
+    'uses'  => 'Controller@showMaincatGumtree',
+    /* 'middleware' => [
+       'auth:web',
+     ],*/
+]);
+
+
+
 
 
 

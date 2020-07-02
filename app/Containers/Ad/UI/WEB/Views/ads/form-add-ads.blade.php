@@ -33,6 +33,26 @@
   .select2-container--default .select2-selection--multiple .select2-container--open{
    border-radius: 20px !important;
   }
+
+  #chooseGumtreeButton {
+    float:right;
+    background: #A269F7;
+    border: 1px solid #A269F7;
+    box-sizing: border-box;
+    border-radius: 23px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 36px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    transition: all .2s ease-out;
+    margin-top: 20px;
+    width: 220px;
+    margin-right: 18px;
+  }
+
 </style>
   <article class="add_advert_block">
     <span data-status_created="{{session('infoAd')}}" id="statusAd"></span>
@@ -142,33 +162,38 @@
               @enderror
             </div>
 
-            <div class="Places" style="display:none">
-
+            <div class="Places" style="position:relative;display:none">
+              <input type="text" class="col-sm-11 control-label cat_name"
+                     style="left:5px !important;top:0 !important;font-size:17px;margin-top:30px;" disabled>
               <div class="form-group col-sm-12">
 
-                <label class="control-label" style="display:block;">Категория в
-                  каталоге*</label>
+                <!--label class="control-label" style="display:block;">Категория в
+                  каталоге*</label-->
                 <input type="hidden" name="id_cat">
                 <input type="hidden" name="model_id" value="{{null}}">
-                <input type="text" class="col-sm-11 control-label cat_name required"
-                       style="font-size:17px;">
+
 
               </div>
 
 
-              <div class="form-group col-sm-12 categories">
+              <div class="form-group col-sm-12 categories" style="border:1px solid #000;padding-top:50px;">
 
+
+<div class="loader-z" style="display:none;position:absolute;z-index:999;width:100%;height:100%;background-color:rgba(255,255,255,0.6)">
+  <div style="position:relative;left:200px;top:50px" class="spinner-border text-secondary"  role="status">
+  </div>
+
+</div>
                 @if($locations!==null)
                   <div class="block_main_categories cat_block_1" style="">
                     @foreach ($locations as $key=>$location)
                       @if($location->parent_id==0)
-                        <a>
-                          <div class="cat_block">
+                        <a style="cursor:pointer">
+                          <div class="cat_block" style="border-bottom:1px solid #000">
                             <input type="hidden" value="{{$location->id}}">
                             {{$location->name}}
 
-                            <span class="fa arrow"
-                                  style="float:right"></span>
+                            <i class="fa fa-arrow-right" aria-hidden="true" style="float:right"></i>
                           </div>
                         </a>
                       @endif
@@ -196,6 +221,8 @@
                     <a href="/admin/menu_areas">Перейти для выбора категорий</a>
                   </div>
                 @endif
+
+                <button type="button" id="chooseGumtreeButton">Выбрать</button>
               </div>
 
             </div>
@@ -552,106 +579,174 @@
     });
 
 
-    $('.categories').delegate('.cat_block','click',function(){
-console.log()
+
+
+
+
+
+    $('.categories').delegate('.cat_block','click',function(e){
+console.log('deligate!')
         var id_cat = $(this).parent('a').find('input').val()
+        console.log('id_cat',id_cat)
         var cl=$(this).parent('a').parent().attr('class');
         cl=cl.split(' ')[1]
         var simbol=parseInt(cl.slice(10))+1
         new_block_cl=cl.slice(0, 10)+simbol
 
+console.log(new_block_cl)
+        if(new_block_cl=='cat_block_2'){
+            $('.cat_block_2').empty()
+            $('.cat_block_3').empty()
+            $('.cat_block_4').empty()
+
+
+           $.ajax({
+                type: "POST",
+                dataType: 'html',
+                async: false,
+                url: '/show_maincat_gumtree',
+                data: {non_arrow: $(this).find('input').val()}, // serializes the form's elements.
+               beforeSend: function() {
+                   $('.loader-z').show();
+               },
+               complete:function(){
+                   $('.loader-z').hide();
+               },
+               success: function (sata) {
+                    $('.cat_block_1').html(sata)
+var inpText=$('.cat_name').text()
+                  var realValue=$.trim($(e.currentTarget).text());
+console.log(realValue)
+$('.cat_name').val(' /'+inpText+'/'+realValue)
+                }
+
+            });
+
+        }
+        if(new_block_cl=='cat_block_3'){
+            $('.cat_block_4').empty()
+
+            $.ajax({
+                type: "POST",
+                dataType: 'html',
+                async: false,
+                url: '/show_maincat_gumtree',
+                data: {non_arrow: $(this).find('input').val(),id_cat: id_cat}, // serializes the form's elements.
+                beforeSend: function() {
+                    $('.loader-z').css('display','block');
+                },
+                complete:function(){
+                    $('.loader-z').css('display','none');
+                },
+                success: function (wata) {
+                    $('.cat_block_2').html(wata)
+                    var inpText=$('.cat_name').text()
+                    var realValue=$.trim($(e.currentTarget).text());
+                    console.log(realValue)
+                    $('.cat_name').val(' /'+inpText+'/'+realValue)
+                }
+
+            });
+
+        }
+        if(new_block_cl=='cat_block_4'){
+            $('.cat_block_4').empty()
+
+            $.ajax({
+                type: "POST",
+                dataType: 'html',
+                async: false,
+                url: '/show_maincat_gumtree',
+                data: {non_arrow: $(this).find('input').val(),id_cat: id_cat}, // serializes the form's elements.
+                beforeSend: function() {
+                    $('.loader-z').css('display','block');
+                },
+                complete:function(){
+                    $('.loader-z').css('display','none');
+                },
+                success: function (wata) {
+                    $('.cat_block_3').html(wata)
+                    var inpText=$('.cat_name').text()
+                    var realValue=$.trim($(e.currentTarget).text());
+                    console.log(realValue)
+                    $('.cat_name').val(' /'+inpText+'/'+realValue)
+                }
+
+            });
+
+        }
+        if(new_block_cl=='cat_block_5'){
+            console.log($(this).find('input').val());
+            $.ajax({
+                type: "POST",
+                dataType: 'html',
+                async: false,
+                url: '/show_maincat_gumtree',
+                data: {non_arrow: $(this).find('input').val(),id_cat: id_cat}, // serializes the form's elements.
+                beforeSend: function() {
+                    $('.loader-z').css('display','block');
+                },
+                complete:function(){
+                    $('.loader-z').css('display','none');
+                },
+                success: function (gata) {
+                    $('.cat_block_4').html(gata)
+                    var inpText=$('.cat_name').text()
+                    var realValue=$.trim($(e.currentTarget).text());
+                    console.log(realValue)
+                    $('.cat_name').val(' /'+inpText+'/'+realValue)
+                }
+
+            });
+        }
+        else{
         $.ajax({
             type: "POST",
-            dataType: 'json',
+            dataType: 'html',
             async: false,
-            url: '/show_subcat',
-            data: {id_cat: id_cat,is_user:1}, // serializes the form's elements.
+            url: '/show_subcat_gumtree',
+            data: {id_cat: id_cat}, // serializes the form's elements.
+            beforeSend: function() {
+                $('.loader-z').show();
+            },
+            complete:function(){
+                $('.loader-z').hide();
+            },
             success: function (data) {
-                if(data.message=='null'){
-                    //проверить чтобы соседние последующие блоки были пусты
-
-                    $('input[name="id_cat"]').val(data.value.id)
-                    $('.cat_name').val(data.value.info.name)
-                    alert('меняется категория')
-                    //достать все свойства категории и отобразить в блоке #properties Временно заремлена
-                  /*                   $.ajax({
-                   type: "POST",
-                   dataType: 'json',
-                   async: false,
-                   url: '/show_property_by_category',
-                   data: {id_cat: data.value.id},
-                   success: function (dataprop) {
-                   if(dataprop=='no_properties'){
-
-
-                   }
-                   else{
-                   console.log(dataprop);
-                   $('#properties').empty();
-                   $.each( dataprop, function( k, prop ) {
-                   $('#properties').append(' <div style="border-right:1px solid #000;border-left:1px solid #000" class="prop col-md-3" >' +
-                   '<input type="hidden" value="'+prop.id+'">' +
-                   ' <div><h3 style="text-align:center;margin-top:10px;">'+prop.name+'</h3></div>'
-                   +'<div id="prop_datas_'+k+'" class=""></div>'+
-                   '</div>')
-
-                   $.each( prop.data, function( v, dat ) {
-                   $('#prop_datas_'+k).append('<div><div class="i-checks"><label><input type="radio" value="'+dat.id+'" name="property['+prop.id+'][]"> <i></i> '+dat.data+'</label></div></div>');
-                   });
-
-
-                   $('.i-checks').iCheck({
-                   checkboxClass: 'icheckbox_square-green',
-                   radioClass: 'iradio_square-green',
-                   });
-                   });
-                   }
-                   }
-
-                   });*/
-
-
-                    //если (data.value.info.parent_num) ==2
-                    //удалить 3,4
-                    // если (data.value.info.parent_num) ==3
-                    //4
-                    if(data.value.info.parent_num==2){
-                        $('.cat_block_3').empty();
-                        $('.cat_block_4').empty();
-                    }
-                    else if(data.value.info.parent_num==3){
-                        $('.cat_block_4').empty();
-                    }
-
-                }
-                else{
-                    $('.'+new_block_cl+'').empty();
-                    switch(new_block_cl){
-                        case 'cat_block_2':
-                            $('.cat_block_3').empty();
-                            $('.cat_block_4').empty();
-                            break;
-                        case 'cat_block_3':
-                            $('.cat_block_4').empty();
-                            break;
-
-                    }
-                    $.each( data.value, function( key, value ) {
-                        $('.'+new_block_cl+'').append(' <a ><div class="cat_block" >' +
-                            '<input type="hidden" value="'+value.id+'">' +
-                            value.name+
-                            '<span class="fa arrow" style="float:right"></span>' +
-                            '</div></a>')
-                    });
-
-                }}
+            $('.'+new_block_cl+'').html(data)
+            }
 
         });
+    }
+
 
 
 
 
     });
+
+
+    $('#chooseGumtreeButton').click(function(){
+        console.log('alert')
+        $.ajax({
+            type: "POST",
+            dataType: 'html',
+            async: false,
+            url: '/save_gumtree',
+            data: {}, // serializes the form's elements.
+            beforeSend: function() {
+                $('.loader-z').show();
+            },
+            complete:function(){
+                $('.loader-z').hide();
+
+            },
+            success: function (data) {
+            }
+
+        });
+
+    })
 </script>
   @endsection
 
