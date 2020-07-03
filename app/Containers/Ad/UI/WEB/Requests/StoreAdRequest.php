@@ -55,7 +55,7 @@ class StoreAdRequest extends Request
       'name_ad' => 'required|max:70',
 //      'category_ads' => 'required',
       'address' => 'required_if:select_addres,Полный адресс',
-      'post_code' => 'required',
+     // 'post_code' => 'required',
       'email' => 'required|email',
       'phone' => 'required',
       'name' => 'required|between:2,10',

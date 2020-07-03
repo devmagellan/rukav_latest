@@ -12588,7 +12588,9 @@ class Controller extends WebController
    */
   public function store(StoreAdRequest $request)
   {
+      \Log::info('ZASHLI',array($request));
     $ad = Apiato::call('Ad@CreateAdAction', [$request]);
+    \Log::info('AD',array($ad));
     if ($ad) {
       $request->session()->flash('infoAd', true);
     }

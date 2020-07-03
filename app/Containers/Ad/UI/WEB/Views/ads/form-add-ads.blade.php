@@ -54,9 +54,19 @@
   }
 
 </style>
+@if ($errors->any())
+  <div class="alert alert-danger">
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+@endif
+
   <article class="add_advert_block">
     <span data-status_created="{{session('infoAd')}}" id="statusAd"></span>
-    <form action="{{route('web_ad_store')}}" method="post" enctype="multipart/form-data">
+    <form action="/ads/store" method="post" enctype="multipart/form-data">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -146,7 +156,7 @@
               @error('address')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-              <input type="text" name="post_code" placeholder="Postcode" class="add_advert_input_location postcode InputControl" id="clntInfoEditZip" required value="{{old('post_code')}}">
+              <input type="text" name="post_code" placeholder="Postcode" class="add_advert_input_location postcode InputControl" id="allUsersClntInfoEditZip" required value="{{old('post_code')}}">
               @error('post_code')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
@@ -227,11 +237,11 @@
 
             </div>
             <div class="place_in_UK" style="display:none">
-              <input type="text" name="address" placeholder="Страна" class="add_advert_input_location InputControl" id="clntInfoEditAddrOutUk1" required value="{{old('address')}}">
+              <input type="text" name="address" placeholder="Страна" class="add_advert_input_location InputControl" id="clntInfoEditAddrPlaceUk1" value="{{old('address')}}">
               @error('address')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-              <input type="text" name="post_code" placeholder="Город" class="add_advert_input_location postcode InputControl" id="clntInfoEditOutUk" required value="{{old('post_code')}}">
+              <input type="text" name="post_code" placeholder="Город" class="add_advert_input_location postcode InputControl" id="clntInfoEditPlaceUk" value="{{old('post_code')}}">
               @error('post_code')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
@@ -568,6 +578,49 @@
 
 
     $(document).ready(function() {
+        $('#clntInfoEditZip').removeAttr("required");
+        $('#clntInfoEditOutUk').removeAttr("required");
+        $('#clntInfoEditAddrOutUk1').removeAttr("required");
+
+        $('#out_uk').on('click', function () {
+            $('.all_user_block').hide();
+            $('.outUk').show();
+            $('.Places').hide();
+        });
+
+        $('#all_adress').on('click', function () {
+            $('.all_user_block').show();
+
+
+            $('#clntInfoEditOutUk').removeAttr("required");
+            $('#clntInfoEditAddrOutUk1').removeAttr("required");
+
+
+
+            $('#clntInfoEditZip').removeAttr("required");
+
+            $('.cat_name').removeAttr("required");
+
+            $('.outUk').hide();
+            $('.Places').hide();
+        });
+
+        $('#select_adress').on('click', function () {
+            $('#clntInfoEditAddr1').removeAttr("required");
+            $('#allUsersClntInfoEditZip').removeAttr("required");
+            $('#clntInfoEditOutUk').removeAttr("required");
+            $('#clntInfoEditAddrOutUk1').removeAttr("required");
+            $('#clntInfoEditZip').removeAttr("required");
+
+            $('.cat_name').prop('required',true);
+            $('.all_user_block').hide().prop('required',false);
+            $('.outUk').hide().prop('required',false);
+            $('.Places').show();
+
+        });
+
+
+
         $(function () {
 
             $(".select2-placeholder-multiple").select2(
@@ -725,7 +778,9 @@ $('.cat_name').val(' /'+inpText+'/'+realValue)
 
     });
 
-
+$('.cat_name').click(function(){
+    $('.categories').show();
+})
     $('#chooseGumtreeButton').click(function(){
         console.log('alert')
         $.ajax({
@@ -739,13 +794,16 @@ $('.cat_name').val(' /'+inpText+'/'+realValue)
             },
             complete:function(){
                 $('.loader-z').hide();
+                $('.categories').hide();
 
             },
             success: function (data) {
+                $('.categories').hide();
             }
 
-        });
 
+        });
+        $('.categories').hide();
     })
 </script>
   @endsection

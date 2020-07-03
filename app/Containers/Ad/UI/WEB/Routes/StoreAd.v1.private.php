@@ -1,12 +1,12 @@
 <?php
 
 /** @var Route $router */
-$router->post('ads/store', [
+$router->post('/ads/store', [
     'as' => 'web_ad_store',
     'uses'  => 'Controller@store',
-    'middleware' => [
+   /* 'middleware' => [
       'auth:web',
-    ],
+    ],*/
 ]);
 
 $router->post('ads/search-rubrics', [

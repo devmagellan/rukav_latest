@@ -424,23 +424,7 @@ $(document).ready(function(){
 
     });
 
-    $('#out_uk').on('click', function () {
-        $('.all_user_block').hide();
-        $('.outUk').show();
-        $('.Places').hide();
-    });
 
-    $('#all_adress').on('click', function () {
-        $('.all_user_block').show();
-        $('.outUk').hide();
-        $('.Places').hide();
-    });
-
-    $('#select_adress').on('click', function () {
-        $('.all_user_block').hide();
-        $('.outUk').hide();
-        $('.Places').show();
-    });
 
 
     $('.btn-wishlist').on('click', function () {
