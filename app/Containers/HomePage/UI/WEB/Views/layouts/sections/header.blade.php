@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <title>Rukav</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@ 1.8.1/slick/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link href="{{asset('/css/intlTelInput.css')}}" rel="stylesheet">
-  <link href="{{asset('/css/main.css')}}" rel="stylesheet">
-  <link href="{{asset('/css/media.css')}}" rel="stylesheet">
-</head>
-<body>
+
 <header class="header">
   <div class="container">
     <div class="row">
@@ -31,7 +16,8 @@
         </a>
       </div>
       <div class="col-md-6 col-2">
-        <form class="form_category">
+        <!--form class="form_category"-->
+		<div class="form_category">
           <img src="{{asset('/img/loupe.svg')}}" alt="" class="form_category_imp-loupe">
           <img src="{{asset('/img/pin.svg')}}" alt="" class="form_category_imp-pin">
 
@@ -39,15 +25,15 @@
 
             <input type="text" id="search-field" name="search" class="form_category_search" placeholder="Я ищу...">
             <input type="text" id="location_search" name="location" class="form_category_search-city" placeholder="Город или посткод">
-            <button type="submit" class="form_category_btn" id="go">Поиск</button>
+            <button class="form_category_btn" id="go">Поиск</button>
 
           </div>
 
 
 
 
-
-        </form>
+</div>
+        <!--/form-->
         <a href="#" class="btn_search_m"><img src="{{asset('/img/loupe.svg')}}" alt=""
                                               class="form_category_imp-loupe"></a>
       </div>
@@ -279,149 +265,4 @@
   </div>
 
 </header>
-@section('scripts')
-<script>
-  console.log('876')
-    function initContinued(addr,ajax) {
-        console.log('aJax=>',ajax)
-        if(!addr.city){
-            city=addr.postal_town
-        }
-        else{
-            city=addr.city
-        }
-        if(ajax){
-            $.ajax({
-                method: 'POST',
-                dataType: 'json',
-                async:false,
-                url: '/customer/badge/send',
-                data: {location:window.location_place_id,city:city,administrative:addr.administrative,customer: window.customer,message:window.message,
-                    category:window.category,title:window.title,visibility:window.visibility
-                },
-                beforeSend: function() {
-                },
-                complete: function() {
-                    $('.company_create_close').trigger('click')
-                },
-                success: function (data) {
 
-                    $('#badges_modal').modal("hide");
-                    $(".modal-backdrop").remove();
-                    $('.categoryModalClose').trigger('click')
-                    $('.company_create_close').trigger('click')
-                    $('.modal-backdrop').removeClass('show').addClass('hide')
-
-
-
-                    console.log('success')
-
-                }
-            });
-        }
-        else{
-            console.log(890)
-            window.location.replace("/search?search_string="+window.search_field+"&city="+addr.city+"&administrative="+addr.administrative+"");
-        }
-
-    }
-
-
-  function codeLatLng(latlng,ajax) {
-      geocoder.geocode({'latLng': latlng}, function (results) {
-          var result = [];
-          for (i = 0; i < results.length; i++) {
-              console.log(results[i].address_components)
-              if (results[i].address_components[0].types[0] == "locality") {
-                  console.log(i + ": locality:" + results[i].address_components[0].long_name);
-                  result.city = results[i].address_components[0].long_name;
-                  console.log(result.city)
-              }
-              if (results[i].address_components[0].types[0] == "administrative_area_level_1") {
-                  console.log(i + ": administrative_area_level_1:" + results[i].address_components[0].long_name);
-                  result.administrative = results[i].address_components[0].long_name;
-              }
-              if (results[i].address_components[0].types[0] == "administrative_area_level_2") {
-                  console.log(i + ": administrative_area_level_2:" + results[i].address_components[0].long_name);
-                  result.administrative_2 = results[i].address_components[0].long_name;
-              }
-              if (results[i].address_components[0].types[0] == "postal_town") {
-                  console.log(i + ": postal_town:" + results[i].address_components[0].long_name);
-                  result.postal_town = results[i].address_components[0].long_name;
-              }
-              if (results[i].address_components[0].types[0] == "political") {
-                  console.log(i + ": political:" + results[i].address_components[0].long_name);
-              }
-              for (var j = 0; j < results[i].address_components.length; j++) {
-                  for (var k = 0; k < results[i].address_components[j].types.length; k++) {
-                      if (results[i].address_components[j].types[k] == "postal_code") {
-                          zipcode = results[i].address_components[j].short_name;
-                          //$('span.zip').html(zipcode);
-
-                      }
-                  }
-              }
-          }
-
-          console.log('result=>', result)
-
-          initContinued(result,ajax);
-
-      });
-  }
-
-
-  $(function(){
-
-
-
-      window.autocomplete;
-      window.geocoder;
-      window.input = document.getElementById('location');//
-      window.options = {
-          componentRestrictions: {'country':'uk'},
-          types: ['(regions)'] // (cities)
-      };
-
-      window.autocomplete = new google.maps.places.Autocomplete(window.input,window.options);
-
-      var autocompleteSearch;
-      var geocoderSearch;
-      var inputSearch = document.getElementById('location_search');//
-      var optionsSearch = {
-          componentRestrictions: {'country':'uk'},
-          types: ['(regions)'] // (cities)
-      };
-
-      autocompleteSearch = new google.maps.places.Autocomplete(inputSearch,optionsSearch);
-      $('#go').click(function(){
-          var location = autocompleteSearch.getPlace();
-          var search_field = $('#search-field').val()
-          window.search_field=search_field;
-          //location=JSON.stringify(location);
-          //geocoder = new google.maps.Geocoder();
-          console.log(location.place_id)
-          //location=JSON.stringify(location);
-          geocoder = new google.maps.Geocoder();
-          console.log(location)
-          lat = location['geometry']['location'].lat();
-          lng = location['geometry']['location'].lng();
-          var latlng = new google.maps.LatLng(lat,lng);
-          location=location.place_id
-          codeLatLng(latlng,false);
-
-
-
-
-
-
-
-
-
-      });
-
-  });
-
-
-  </script>
-@endsection

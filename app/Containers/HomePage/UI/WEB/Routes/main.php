@@ -3,3 +3,8 @@
   'as'   => 'get_main_home_page',
   'uses' => 'Controller@index',
 ]); 
+
+ $router->get('/search', [
+  'as'   => 'get_search',
+  'uses' => 'Controller@search',
+]); 
