@@ -14,6 +14,7 @@
 <script type="text/javascript" src="/js/jquery.zoom.min.js"></script>
 <script type="text/javascript" src="/js/register_user.js"></script>
 <script type="text/javascript" src="/js/login_user.js"></script>
+<script type="text/javascript" src="/js/search_rubricks.js"></script>
 
 <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
 <?
@@ -50,6 +51,34 @@ console.log(notify)
 	  
 	  
     });
+</script>
+
+<script>
+
+    $('.categoryLink').click(function(){
+        console.log(123)
+        var id=$(this).find('input').val()
+        console.log(id)
+        $.ajax({
+            method: 'POST',
+            dataType: 'json',
+            async:false,
+            url: '/categoryLink',
+            data: {  id:id },
+            beforeSend: function() {
+            },
+            complete: function() {
+
+            },
+            success: function (data) {
+                console.log(data)
+                if(data.response=='redirect'){
+                    window.location.href='/category/'+id
+                    console.log('redirect')
+                }
+            }
+        });
+    })
 </script>
 
 @yield('scripts')

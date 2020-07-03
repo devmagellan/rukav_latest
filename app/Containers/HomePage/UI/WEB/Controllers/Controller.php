@@ -181,7 +181,7 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
   })->where(function ($query) use($request){
             $query->where('message', 'like', '%' . $request->input('search_string') . '%')
                 ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
-        })->where('city',$request->input('city'))->where('administrative',$request->input('administrative'))
+        })->where('city', 'like', '%' . $request->input('city') . '%')->where('administrative',$request->input('administrative'))
             ->where('active',1)
 
 
@@ -203,6 +203,12 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
         $data['administrative']=$request->input('administrative');
         return view('category::catalog',$data);
 
+    }
+
+    public function categoryLink(GetAllHomePagesRequest $request){
+
+	        $isFinal=\App\Containers\Site\Models\ProductCategory::where('parent_id',$request->input('id'))->first();
+	        return json_encode(['response'=>(!$isFinal) ? 'redirect' : $isFinal]);
     }
 	
 	

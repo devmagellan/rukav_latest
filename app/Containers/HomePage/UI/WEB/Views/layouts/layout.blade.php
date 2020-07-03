@@ -14,7 +14,7 @@
   <link href="{{asset('/css/media.css')}}" rel="stylesheet">
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaZXMHQgJkoXZkkBbtelY8SLAwMOasg0Y&libraries=places&language=en"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-  
+
   <script>
   console.log('876')
     function initContinued(addr,ajax) {
@@ -60,7 +60,49 @@
         }
 
     }
+  function getCity(latlng) {
+      geocoder.geocode({'latLng': latlng}, function (results) {
+          var result = [];
+          for (i = 0; i < results.length; i++) {
+              console.log(results[i].address_components)
+              if (results[i].address_components[0].types[0] == "locality") {
+                  console.log(i + ": locality:" + results[i].address_components[0].long_name);
+                  result.city = results[i].address_components[0].long_name;
+                  console.log(result.city)
 
+                  $('#city').val(result.city)
+              }
+              if (results[i].address_components[0].types[0] == "administrative_area_level_1") {
+                  console.log(i + ": administrative_area_level_1:" + results[i].address_components[0].long_name);
+                  result.administrative = results[i].address_components[0].long_name;
+                  $('#administrative').val(result.administrative)
+              }
+              if (results[i].address_components[0].types[0] == "administrative_area_level_2") {
+                  console.log(i + ": administrative_area_level_2:" + results[i].address_components[0].long_name);
+                  result.administrative_2 = results[i].address_components[0].long_name;
+              }
+              if (results[i].address_components[0].types[0] == "postal_town") {
+                  console.log(i + ": postal_town:" + results[i].address_components[0].long_name);
+                  result.postal_town = results[i].address_components[0].long_name;
+              }
+              if (results[i].address_components[0].types[0] == "political") {
+                  console.log(i + ": political:" + results[i].address_components[0].long_name);
+              }
+              for (var j = 0; j < results[i].address_components.length; j++) {
+                  for (var k = 0; k < results[i].address_components[j].types.length; k++) {
+                      if (results[i].address_components[j].types[k] == "postal_code") {
+                          zipcode = results[i].address_components[j].short_name;
+                          //$('span.zip').html(zipcode);
+
+                      }
+                  }
+              }
+          }
+
+          console.log('result=>', result)
+
+      });
+  }
 
   function codeLatLng(latlng,ajax) {
       geocoder.geocode({'latLng': latlng}, function (results) {
@@ -71,6 +113,7 @@
                   console.log(i + ": locality:" + results[i].address_components[0].long_name);
                   result.city = results[i].address_components[0].long_name;
                   console.log(result.city)
+
               }
               if (results[i].address_components[0].types[0] == "administrative_area_level_1") {
                   console.log(i + ": administrative_area_level_1:" + results[i].address_components[0].long_name);
@@ -105,29 +148,6 @@
       });
   }
 
-  
-  function bindAutocomplete() {
- var autocompleteSearch;
-      var geocoderSearch;
-      var inputSearch = document.getElementById('location_search');//
-      var optionsSearch = {
-          componentRestrictions: {'country':'uk'},
-          types: ['(regions)'] // (cities)
-      };
-console.log('888=>',inputSearch,optionsSearch)
-      autocompleteSearch = new google.maps.places.Autocomplete(inputSearch,optionsSearch);
-
-    google.maps.event.addListener(autocompleteSearch, 'place_changed', function () {
-        var place = autocompleteSearch.getPlace();
-        console.log('PLACE',place);
-    });
-}
-
-$(document).ready(function(){
-	
-})
-
-
   $(function(){
 
 
@@ -142,6 +162,64 @@ $(document).ready(function(){
 
       window.autocomplete = new google.maps.places.Autocomplete(window.input,window.options);
 
+
+      var $autocompleteAdAddress;
+      var geocoderAdAddress;
+      var inputAdAddress = document.getElementById('clntInfoEditAddr1');//
+      var optionsAdAddress = {
+          componentRestrictions: {'country':'uk'},
+          types: ['(regions)'] // (cities)
+      };
+      $autocompleteAdAddress = new google.maps.places.Autocomplete(inputAdAddress,optionsAdAddress);
+
+      google.maps.event.addListener($autocompleteAdAddress, 'place_changed', function () {
+          var location = $autocompleteAdAddress.getPlace();
+          console.log('777=>',location);
+          console.log(location.place_id)
+          //location=JSON.stringify(location);
+          geocoder = new google.maps.Geocoder();
+          console.log('LOC',location)
+          lat = location['geometry']['location'].lat();
+          lng = location['geometry']['location'].lng();
+          var latlng = new google.maps.LatLng(lat,lng);
+          location=location.place_id
+          getCity(latlng);
+
+
+      });
+
+
+
+      var $autocompletePostCode;
+      var geocoderPostCode;
+      var inputPostCode = document.getElementById('allUsersClntInfoEditZip');//
+      var inputMerged = document.getElementById('clntInfoEditAddr1');
+      var optionsPostCode = {
+          componentRestrictions: {'country':'uk'},
+          types: ['(regions)'] // (cities)
+      };
+      $autocompletePostCode = new google.maps.places.Autocomplete(inputPostCode,optionsPostCode);
+
+      google.maps.event.addListener($autocompletePostCode, 'place_changed', function () {
+          var location = $autocompletePostCode.getPlace();
+          console.log('777=>',location);
+          console.log(location.place_id)
+          //location=JSON.stringify(location);
+          geocoder = new google.maps.Geocoder();
+          console.log('LOC',location)
+          lat = location['geometry']['location'].lat();
+          lng = location['geometry']['location'].lng();
+          var latlng = new google.maps.LatLng(lat,lng);
+          location=location.place_id
+          inputMerged.value=inputPostCode.value
+          document.getElementById('place_id').value=location
+          getCity(latlng);
+
+
+      });
+
+
+
       var $autocompleteSearch;
       var geocoderSearch;
       var inputSearch = document.getElementById('location_search');//
@@ -152,7 +230,6 @@ $(document).ready(function(){
       $autocompleteSearch = new google.maps.places.Autocomplete(inputSearch,optionsSearch);
       $('#go').click(function(){
 		  console.log(444)
-		  bindAutocomplete();
 		   google.maps.event.addListener($autocompleteSearch, 'place_changed', function () {
         var place = $autocompleteSearch.getPlace();
         console.log('PLACE',place);

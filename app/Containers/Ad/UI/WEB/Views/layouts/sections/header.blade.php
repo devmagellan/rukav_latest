@@ -152,7 +152,7 @@
                           if($parent_id == 0){
                                echo '<li class="category_dropdown_main_list-li"> <p>'.$arr[$parent_id][$i]->name.'</p>';
                           }else{
-                                echo '<li><p>'.$arr[$parent_id][$i]->name.'</p>';
+                                echo '<li class="categoryLink"><p>'.$arr[$parent_id][$i]->name.'</p>';
                           }
                           //рекурсия - проверяем нет ли дочерних категорий
                           $this->view_cat($arr, $arr[$parent_id][$i]->id, 1, $arr[$parent_id][$i]->name);

@@ -12593,8 +12593,9 @@ class Controller extends WebController
     \Log::info('AD',array($ad));
     if ($ad) {
       $request->session()->flash('infoAd', true);
+        return back()->with('success', 'Ваше объявление успешно добавлено ! Благодарим за сотрудничество');
     }
-    return back();
+     return back();
   }
 
 

@@ -233,9 +233,9 @@
                       //перебираем в цикле массив и выводим на экран
                       for ($i = 0; $i < count($arr[$parent_id]); $i++) {
                           if($parent_id == 0){
-                               echo '<li class="category_dropdown_main_list-li"> <p>'.$arr[$parent_id][$i]->name.'</p>';
+                               echo '<li class=categoryLink category_dropdown_main_list-li"> <input type="hidden" value="'.$arr[$parent_id][$i]->id.'"><p>'.$arr[$parent_id][$i]->name.'</p>';
                           }else{
-                                echo '<li><p>'.$arr[$parent_id][$i]->name.'</p>';
+                                echo '<li class="categoryLink" ><input type="hidden" value="'.$arr[$parent_id][$i]->id.'"><p>'.$arr[$parent_id][$i]->name.'</p>';
                           }
                           //рекурсия - проверяем нет ли дочерних категорий
                           $this->view_cat($arr, $arr[$parent_id][$i]->id, 1, $arr[$parent_id][$i]->name);
@@ -265,4 +265,6 @@
   </div>
 
 </header>
+
+
 

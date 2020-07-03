@@ -58,11 +58,20 @@ class StoreAdRequest extends Request
      // 'post_code' => 'required',
       'email' => 'required|email',
       'phone' => 'required',
+        'city' => 'required',
       'name' => 'required|between:2,10',
       'files' => 'required|max:100000',
       'category_id' => 'required'
     ];
   }
+
+    public function messages()
+    {
+        return [
+            'city.required' => 'Вам необходимо выбрать местоположение выбрав google location в полях секции Местоположение',
+
+        ];
+    }
 
   /**
    * @return  bool

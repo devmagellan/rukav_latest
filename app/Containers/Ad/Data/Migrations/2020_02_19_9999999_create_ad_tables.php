@@ -20,7 +20,7 @@ class CreateAdTables extends Migration
             $table->integer('status')->default(1);
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->string('place_id');
+            $table->string('place_id')->nullable();
             $table->string('city');
             $table->string('administrative');
             $table->string('message');

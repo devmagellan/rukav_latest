@@ -119,7 +119,7 @@
             </a>
             <p class="product_item_city d-none d-sm-block">
               <img src="/img/map_icon.svg" alt="" class="product_map_icon">
-              Ливерпуль
+                {{$product->city}}
             </p>
           </div>
           <div class="col-sm-2">
@@ -133,7 +133,7 @@
             <p class="product_map_marka d-sm-none">Volkswagen</p>
             <p class="product_item_city d-sm-none">
               <img src="/img/map_icon.svg" alt="" class="product_map_icon">
-              Ливерпуль
+              {{$product->city}}
             </p>
             <div>
                 <?

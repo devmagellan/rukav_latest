@@ -64,6 +64,14 @@
   </div>
 @endif
 
+@if (\Session::has('success'))
+  <div class="alert alert-success">
+    <ul>
+      <li>{!! \Session::get('success') !!}</li>
+    </ul>
+  </div>
+@endif
+
   <article class="add_advert_block">
     <span data-status_created="{{session('infoAd')}}" id="statusAd"></span>
     <form action="/ads/store" method="post" enctype="multipart/form-data">
@@ -129,6 +137,9 @@
             <h6 class="add_advert_block_wrapper_title">
               Местополежение
             </h6>
+            <input type="hidden" name="city"  id="city">
+            <input type="hidden" name="place_id"  id="place_id">
+            <input type="hidden" name="administrative"  id="administrative">
             <div class="hide_location_radio">
               <input type="radio" name="hide_location" value="1" id="hide_location" checked="">
               <label for="hide_location">Показывать</label>
@@ -588,6 +599,13 @@
             $('.Places').hide();
         });
 
+        $('#postcode').on('click', function () {
+            $('.all_user_block').hide();
+            $('.outUk').hide();
+            $('.Places').hide();
+            $('.postcode_block').show();
+        });
+
         $('#all_adress').on('click', function () {
             $('.all_user_block').show();
 
@@ -625,7 +643,7 @@
 
             $(".select2-placeholder-multiple").select2(
                 {
-                    placeholder: "Select State"
+                    placeholder: "Выберите дополнительную группу для общения"
                 });
         });
 
@@ -646,7 +664,7 @@ console.log('deligate!')
         var simbol=parseInt(cl.slice(10))+1
         new_block_cl=cl.slice(0, 10)+simbol
 
-console.log(new_block_cl)
+console.log('123=>',new_block_cl)
         if(new_block_cl=='cat_block_2'){
             $('.cat_block_2').empty()
             $('.cat_block_3').empty()
@@ -667,10 +685,13 @@ console.log(new_block_cl)
                },
                success: function (sata) {
                     $('.cat_block_1').html(sata)
-var inpText=$('.cat_name').text()
-                  var realValue=$.trim($(e.currentTarget).text());
-console.log(realValue)
-$('.cat_name').val(' /'+inpText+'/'+realValue)
+                    var inpText=$('.cat_name').text()
+                    var realValue=$.trim($(e.currentTarget).text());
+                    console.log('555=>',realValue)
+                    $('#administrative').val(realValue)
+
+                    $('.cat_name').val(' /'+inpText+'/'+realValue)
+                   $('#city').val(realValue)
                 }
 
             });
@@ -697,6 +718,7 @@ $('.cat_name').val(' /'+inpText+'/'+realValue)
                     var realValue=$.trim($(e.currentTarget).text());
                     console.log(realValue)
                     $('.cat_name').val(' /'+inpText+'/'+realValue)
+                    $('#city').val(realValue)
                 }
 
             });
@@ -723,6 +745,7 @@ $('.cat_name').val(' /'+inpText+'/'+realValue)
                     var realValue=$.trim($(e.currentTarget).text());
                     console.log(realValue)
                     $('.cat_name').val(' /'+inpText+'/'+realValue)
+                    $('#city').val(realValue)
                 }
 
             });
@@ -748,6 +771,7 @@ $('.cat_name').val(' /'+inpText+'/'+realValue)
                     var realValue=$.trim($(e.currentTarget).text());
                     console.log(realValue)
                     $('.cat_name').val(' /'+inpText+'/'+realValue)
+                    $('#city').val(realValue)
                 }
 
             });
@@ -805,6 +829,11 @@ $('.cat_name').click(function(){
         });
         $('.categories').hide();
     })
+
+
+  $('.cat_block_1 .cat_block').click(function(){
+      console.log('this=>',$(this))
+  })
 </script>
   @endsection
 

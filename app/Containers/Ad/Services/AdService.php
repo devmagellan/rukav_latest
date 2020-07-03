@@ -17,13 +17,13 @@ class AdService
       'phone' => $data->phone,
       'price' => $data->price,
       'message' => $data->description,
-      'city' => $data->address,
-      'place_id' => $data->post_code,
+      'city' => $data->city,
+      'place_id' => $data->place_id,
       'name' => $data->name,
       'category_id' => $data->category_id,
       'sender' => Auth::user()->id,
       //TODO не забыть узнать что с этим делать
-      'administrative' => false,
+      'administrative' => $data->administrative,
       'visibility' => false,
       'show_name' => $data->hide_name
     ]);
@@ -32,7 +32,7 @@ class AdService
   public function savePhoto($data, $adId)
   {
     foreach ($data->file('files') as $file) {
-      $filePath = Storage::disk('public')->put('/adsImages/' . $adId, $file);
+      $filePath = Storage::disk('public')->put('', $file);
       $this->createPicture($filePath, $adId);
     }
   }
