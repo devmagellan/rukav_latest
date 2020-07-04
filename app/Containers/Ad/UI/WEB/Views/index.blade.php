@@ -44,7 +44,7 @@
 
     <?
     use Apiato\Core\Foundation\Facades\Apiato;
-    $user=\Auth::user();
+    $user=\Auth::guard('admin')->user();
     if($user->hasRole('Gods_mode')){
         $company_temp=true;
     }

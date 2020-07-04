@@ -27,7 +27,7 @@ class AuthorizationDefaultUsersSeeder_3 extends Seeder
             'sunimedia',
             'admin',
             true,
-        ])->assignRole(Apiato::call('Authorization@FindRoleTask', ['Company_administrator']));
+        ])->assignRole(Apiato::call('Authorization@FindRoleTask', ['admin']))->assignRole(Apiato::call('Authorization@FindRoleTask', ['Company_administrator']));
 
         Apiato::call('User@CreateUserByCredentialsTask', [
             $isClient = false,
