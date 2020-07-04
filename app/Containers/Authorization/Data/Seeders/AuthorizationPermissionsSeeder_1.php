@@ -24,7 +24,6 @@ class AuthorizationPermissionsSeeder_1 extends Seeder
         Apiato::call('Authorization@CreatePermissionTask', ['create-admins', 'Создавать админов','menu']);
         Apiato::call('Authorization@CreatePermissionTask', ['manage-admins-access', 'Управление доступом админов','menu']);
         Apiato::call('Authorization@CreatePermissionTask', ['access-dashboard', 'Доступ к дашборду','menu']);
-
         Apiato::call('Authorization@CreatePermissionTask', ['view_slider', 'Просмотр редактирование слайдера','menu']);
         Apiato::call('Authorization@CreatePermissionTask', ['view_ads', 'Просмотр редактирование объявлений','menu']);
         Apiato::call('Authorization@CreatePermissionTask', ['edit_viewable_interfaces', 'Редактировать видимые интерфейсы','menu']);

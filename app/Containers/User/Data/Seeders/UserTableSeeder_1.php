@@ -68,18 +68,6 @@ class UserTableSeeder_1 extends Seeder
                 'is_client'=>true,
                 'avatar'=>'avatar-admin-lg.png'
             ],
-            /*5*/
-            [
-                'name' => 'Детская',
-                'sername'=>'Одежда',
-                'email'=> 'dev.magellan@gmail.com',
-                'password'=> Hash::make('sunimedia'),
-                'active'=>true,
-                'confirmed'=>true,
-                'is_client'=>true,
-                'avatar'=>'avatar-admin-lg.png'
-
-            ],
 
         ]);
 
