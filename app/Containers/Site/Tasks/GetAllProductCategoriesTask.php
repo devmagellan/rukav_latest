@@ -18,6 +18,6 @@ class GetAllProductCategoriesTask extends Task
 
     public function run()
     {
-        return $this->repository->with('childrenCategories')->get();
+        return $this->repository->with('childrenCategories')->orderBy('position')->get();
     }
 }

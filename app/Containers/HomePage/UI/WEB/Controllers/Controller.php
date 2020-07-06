@@ -28,7 +28,6 @@ class Controller extends WebController
      */
     public function index(GetAllHomePagesRequest $request)
     { 
-	dump(123);
       $categories= Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
       $categoriesOnlyRoot = $categories->where('parent_id', 0);
       $user=null;
