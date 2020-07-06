@@ -135,7 +135,7 @@
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
-              Местополежение
+              Местоположение
             </h6>
             <input type="hidden" name="city"  id="city">
             <input type="hidden" name="place_id"  id="place_id">
@@ -148,7 +148,7 @@
             </div>
             <div class="select_location_block">
               <input type="radio" name="select_addres" value="Полыний адрес" id="all_adress" checked="">
-              <label for="all_adress">Полыний адрес</label>
+              <label for="all_adress">Полный адрес</label>
               <input type="radio" name="select_addres" value="Только Postcode" id="postcode">
               <label for="postcode">Только Postcode</label>
               <input type="radio" name="select_addres" value="Выбрать местоположение" id="select_adress">
@@ -592,6 +592,7 @@
         $('#clntInfoEditZip').removeAttr("required");
         $('#clntInfoEditOutUk').removeAttr("required");
         $('#clntInfoEditAddrOutUk1').removeAttr("required");
+        $('#allUsersClntInfoEditZip').removeAttr("required");
 
         $('#out_uk').on('click', function () {
             $('.all_user_block').hide();
@@ -609,7 +610,7 @@
         $('#all_adress').on('click', function () {
             $('.all_user_block').show();
 
-
+            $('.postcode_block').hide();
             $('#clntInfoEditOutUk').removeAttr("required");
             $('#clntInfoEditAddrOutUk1').removeAttr("required");
 

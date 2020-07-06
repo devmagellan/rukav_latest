@@ -218,6 +218,34 @@
 
       });
 
+      var $autocompleteOnlyPostCode;
+      var geocoderOnlyPostCode;
+      var inputOnlyPostCode = document.getElementById('clntInfoEditZip');//
+      var inputMerged = document.getElementById('clntInfoEditAddr1');
+      var optionsOnlyPostCode = {
+          componentRestrictions: {'country':'uk'},
+          types: ['(regions)'] // (cities)
+      };
+      $autocompleteOnlyPostCode = new google.maps.places.Autocomplete(inputOnlyPostCode,optionsOnlyPostCode);
+
+      google.maps.event.addListener($autocompleteOnlyPostCode, 'place_changed', function () {
+          var location = $autocompleteOnlyPostCode.getPlace();
+          console.log('777=>',location);
+          console.log(location.place_id)
+          //location=JSON.stringify(location);
+          geocoder = new google.maps.Geocoder();
+          console.log('LOC',location)
+          lat = location['geometry']['location'].lat();
+          lng = location['geometry']['location'].lng();
+          var latlng = new google.maps.LatLng(lat,lng);
+          location=location.place_id
+          inputMerged.value=inputOnlyPostCode.value
+          document.getElementById('place_id').value=location
+          getCity(latlng);
+
+
+      });
+
 
 
       var $autocompleteSearch;
