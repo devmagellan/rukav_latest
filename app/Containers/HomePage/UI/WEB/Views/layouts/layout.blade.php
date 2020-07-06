@@ -240,6 +240,11 @@
           window.search_field=search_field;
           //location=JSON.stringify(location);
           //geocoder = new google.maps.Geocoder();
+
+          if(!location){
+              console.log(990)
+              window.location.replace("/search?search_string="+window.search_field+"&administrative=0");
+          }
           console.log(location.place_id)
           //location=JSON.stringify(location);
           geocoder = new google.maps.Geocoder();

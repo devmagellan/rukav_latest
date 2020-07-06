@@ -171,7 +171,9 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
             return $currentPage;
         });
 		
-		
+
+		    $administrative=$request->input('administrative');
+
 		      $messages=$q->where(function ($query) use($from,$to) {
       if(!empty($from) && !empty($to)){
           $query->where('price','>=',$from)
@@ -180,11 +182,23 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
   })->where(function ($query) use($request){
             $query->where('message', 'like', '%' . $request->input('search_string') . '%')
                 ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
-        })->where('city', 'like', '%' . $request->input('city') . '%')->where('administrative',$request->input('administrative'))
+        })->where('city', 'like', '%' . $request->input('city') . '%')
+                  ->where(function($query) use ($administrative)  {
+                      if(isset($administrative)&&$administrative!=0) {
+                          $query->where('administrative',$administrative);
+                      }
+                      else{
+                          $query->whereIn('administrative',['England','Nothern Irland','Scotland','Wales']);
+                      }
+                  })
+
+
+
             ->where('active',1)
 
 
           ->paginate(5);
+
 		
 /* 		
 		
