@@ -168,74 +168,24 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4 col-lg-3">
-            <div class="cart_item">
-              <h6>Детский мир</h6>
-              <div class="cart_item_wrapper">
-                <img src="/img/cart_icon1.png" alt="">
-              </div>
-              <a href="#">Детская одежда</a>
-              <a href="#">Детская обувь</a>
-              <a href="#">Детские коляски</a>
-              <a href="#">Детские автокресла</a>
-              <a href="#">Детская мебель</a>
-              <a href="#">Игрушки</a>
-              <a href="#">Детский транспорт</a>
 
-              <a href="#" class="search_all">Показать еще</a>
-            </div>
-          </div>
-          <div class="col-md-4 col-lg-3">
-            <div class="cart_item">
-              <h6>Недвижимость</h6>
-              <div class="cart_item_wrapper">
-                <img src="/img/cart_icon2.png" alt="">
-              </div>
-              <a href="#">Квартиры и комнаты</a>
-              <a href="#">Дома</a>
-              <a href="#">Земля</a>
-              <a href="#">Коммерческая недвижимость</a>
-              <a href="#">Гаражи парковки</a>
-              <a href="#">Посуточная аренда жилья</a>
-              <a href="#">Предложения от застройщиков</a>
 
-              <a href="#" class="search_all">Показать еще</a>
-            </div>
-          </div>
-          <div class="col-md-4 col-lg-3">
-            <div class="cart_item">
-              <h6>Транспорт</h6>
-              <div class="cart_item_wrapper">
-                <img src="/img/cart_icon3.png" alt="">
-              </div>
-              <a href="#">Легковые автомобили</a>
-              <a href="#">Грузовые автомобили</a>
-              <a href="#">Автобусы</a>
-              <a href="#">Мото</a>
-              <a href="#">Спецтехника</a>
-              <a href="#">Сельхозтехника</a>
-              <a href="#">Водный транспорт</a>
+            @foreach($categoriesOnlyRoot  as $category)
+                <div class="col-md-4 col-lg-3">
+                    <div class="cart_item">
+                        <h6>{{$category->name}}</h6>
+                        <div class="cart_item_wrapper">
+                            <img style="border-radius: 50%;" src="/storage/root_cat_photos/{{$category->photo}}" alt="">
+                        </div>
+                        @foreach($category->childrenCategories->take(7) as $childCategory)
+                            <a href="/category/{{$childCategory->id}}">{{$childCategory->name}}</a>
+                        @endforeach
+                        <a href="/category/{{$category->id}}" class="search_all">Показать еще</a>
+                    </div>
+                </div>
+            @endforeach
 
-              <a href="#" class="search_all">Показать еще</a>
-            </div>
-          </div>
-          <div class="col-md-4 col-lg-3">
-            <div class="cart_item">
-              <h6>Запчасти для транспорта</h6>
-              <div class="cart_item_wrapper">
-                <img src="/img/cart_icon4.png" alt="">
-              </div>
-              <a href="#">Всё запчасти для транспорта</a>
-              <a href="#">Автозапчасти и аксессуары</a>
-              <a href="#">Шины, диски и колеса</a>
-              <a href="#">Запчасти для спец/с.х. техники</a>
-              <a href="#">Мотозапчасти и аксессуары</a>
-              <a href="#">Прочие запчасти</a>
-              <a href="#">Транспорт</a>
 
-              <a href="#" class="search_all">Показать еще</a>
-            </div>
-          </div>
         </div>
       </div>
     </article>
