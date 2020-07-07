@@ -135,7 +135,7 @@
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
-              Местополежение
+              Местоположение
             </h6>
             <input type="hidden" name="city"  id="city">
             <input type="hidden" name="place_id"  id="place_id">
@@ -148,7 +148,7 @@
             </div>
             <div class="select_location_block">
               <input type="radio" name="select_addres" value="Полыний адрес" id="all_adress" checked="">
-              <label for="all_adress">Полыний адрес</label>
+              <label for="all_adress">Полный адрес</label>
               <input type="radio" name="select_addres" value="Только Postcode" id="postcode">
               <label for="postcode">Только Postcode</label>
               <input type="radio" name="select_addres" value="Выбрать местоположение" id="select_adress">
@@ -173,11 +173,85 @@
               @enderror
             </div>
             <div class="outUk" style="display:none">
-              <input type="text" name="address" placeholder="Страна" class="add_advert_input_location InputControl" id="clntInfoEditAddrOutUk1" required value="{{old('address')}}">
+
+
+              <div class="hotel-search">
+                <div id="findhotels">
+                </div>
+
+
+                <div id="controls" style="display:inline-block">
+                  <select id="country" class="add_advert_input_location InputControl">
+                    <option value="all">All</option>
+                    <option value="au">Australia</option>
+                    <option value="br">Brazil</option>
+                    <option value="ca">Canada</option>
+                    <option value="ru">Russia</option>
+                    <option value="fr">France</option>
+                    <option value="de">Germany</option>
+                    <option value="mx">Mexico</option>
+                    <option value="nz">New Zealand</option>
+                    <option value="it">Italy</option>
+                    <option value="za">South Africa</option>
+                    <option value="es">Spain</option>
+                    <option value="pt">Portugal</option>
+                    <option value="ru">Russia</option>
+                    <option value="us" selected>U.S.A.</option>
+                    <option value="uk">United Kingdom</option>
+                  </select>
+                </div>
+
+                <div id="locationField" style="display:inline-block">
+                  <input id="autocomplete" class="add_advert_input_location postcode InputControl" placeholder="Город" type="text" />
+                </div>
+
+
+              </div>
+
+
+
+              <div id="listing">
+                <table id="resultsTable">
+                  <tbody id="results"></tbody>
+                </table>
+              </div>
+
+              <div style="display: none">
+                <div id="info-content">
+                  <table>
+                    <tr id="iw-url-row" class="iw_table_row">
+                      <td id="iw-icon" class="iw_table_icon"></td>
+                      <td id="iw-url"></td>
+                    </tr>
+                    <tr id="iw-address-row" class="iw_table_row">
+                      <td class="iw_attribute_name">Address:</td>
+                      <td id="iw-address"></td>
+                    </tr>
+                    <tr id="iw-phone-row" class="iw_table_row">
+                      <td class="iw_attribute_name">Telephone:</td>
+                      <td id="iw-phone"></td>
+                    </tr>
+                    <tr id="iw-rating-row" class="iw_table_row">
+                      <td class="iw_attribute_name">Rating:</td>
+                      <td id="iw-rating"></td>
+                    </tr>
+                    <tr id="iw-website-row" class="iw_table_row">
+                      <td class="iw_attribute_name">Website:</td>
+                      <td id="iw-website"></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+
+
+
+              <!--input type="text" name="address" placeholder="Страна" class="add_advert_input_location InputControl" id="clntInfoEditAddrOutUk1" required value="{{old('address')}}"-->
               @error('address')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-              <input type="text" name="post_code" placeholder="Город" class="add_advert_input_location postcode InputControl" id="clntInfoEditOutUk" required value="{{old('post_code')}}">
+              <!--input type="text" name="post_code" placeholder="Город" class="add_advert_input_location postcode InputControl" id="clntInfoEditOutUk" required value="{{old('post_code')}}"-->
               @error('post_code')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
@@ -592,6 +666,7 @@
         $('#clntInfoEditZip').removeAttr("required");
         $('#clntInfoEditOutUk').removeAttr("required");
         $('#clntInfoEditAddrOutUk1').removeAttr("required");
+        $('#allUsersClntInfoEditZip').removeAttr("required");
 
         $('#out_uk').on('click', function () {
             $('.all_user_block').hide();
@@ -609,7 +684,7 @@
         $('#all_adress').on('click', function () {
             $('.all_user_block').show();
 
-
+            $('.postcode_block').hide();
             $('#clntInfoEditOutUk').removeAttr("required");
             $('#clntInfoEditAddrOutUk1').removeAttr("required");
 
@@ -835,5 +910,8 @@ $('.cat_name').click(function(){
       console.log('this=>',$(this))
   })
 </script>
+
+
+
   @endsection
 

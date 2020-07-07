@@ -173,6 +173,7 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
 		
 
 		    $administrative=$request->input('administrative');
+            $uk_only=$request->input('uk_only');
 
 		      $messages=$q->where(function ($query) use($from,$to) {
       if(!empty($from) && !empty($to)){
@@ -183,11 +184,11 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
             $query->where('message', 'like', '%' . $request->input('search_string') . '%')
                 ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
         })->where('city', 'like', '%' . $request->input('city') . '%')
-                  ->where(function($query) use ($administrative)  {
-                      if(isset($administrative)&&$administrative!=0) {
+                  ->where(function($query) use ($administrative,$uk_only)  {
+                      if(isset($administrative)&&$administrative!=0 && $uk_only=="checked") {
                           $query->where('administrative',$administrative);
                       }
-                      else{
+                     elseif($uk_only=="checked"){
                           $query->whereIn('administrative',['England','Nothern Irland','Scotland','Wales']);
                       }
                   })
