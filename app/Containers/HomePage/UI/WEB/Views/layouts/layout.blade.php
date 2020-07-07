@@ -287,6 +287,10 @@ $initAutoComplete = function(){
             center: {lat: 37.1, lng: -95.7},
             zoom: 3
         },
+        'ru': {
+            center: {lat: 55.751244, lng: 37.618423},
+            zoom: 3
+        },
         'uk': {
             center: {lat: 54.8, lng: -4.6},
             zoom: 5
