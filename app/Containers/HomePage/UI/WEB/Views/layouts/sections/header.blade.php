@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-2 col-6">
-        <a href="#" class="logo">
+        <a href="/" class="logo">
           <img src="{{asset('/img/logo.svg')}}" alt="">
         </a>
       </div>

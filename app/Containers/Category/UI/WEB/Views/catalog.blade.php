@@ -170,7 +170,7 @@
         <div class="row">
 
 
-            @foreach($categoriesOnlyRoot  as $category)
+            @foreach($categoriesOnlyRoot->take(4)  as $category)
                 <div class="col-md-4 col-lg-3">
                     <div class="cart_item">
                         <h6>{{$category->name}}</h6>

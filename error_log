@@ -352,3 +352,19 @@ Stack trace:
 [24-Jun-2020 17:42:01 UTC] PHP Warning:  Module 'zmq' already loaded in Unknown on line 0
 [24-Jun-2020 17:42:07 UTC] PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) '/usr/local/lib/libzmq.so' in Unknown on line 0
 [24-Jun-2020 17:42:07 UTC] PHP Warning:  Module 'zmq' already loaded in Unknown on line 0
+[03-Jul-2020 06:25:26 UTC] PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) '/usr/local/lib/libzmq.so' in Unknown on line 0
+[03-Jul-2020 06:25:26 UTC] PHP Warning:  Module 'zmq' already loaded in Unknown on line 0
+[03-Jul-2020 06:26:48 UTC] PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) '/usr/local/lib/libzmq.so' in Unknown on line 0
+[03-Jul-2020 06:26:48 UTC] PHP Warning:  Module 'zmq' already loaded in Unknown on line 0
+[03-Jul-2020 06:27:30 UTC] PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) '/usr/local/lib/libzmq.so' in Unknown on line 0
+[03-Jul-2020 06:27:30 UTC] PHP Warning:  Module 'zmq' already loaded in Unknown on line 0
+[03-Jul-2020 06:28:00 UTC] PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) '/usr/local/lib/libzmq.so' in Unknown on line 0
+[03-Jul-2020 06:28:00 UTC] PHP Warning:  Module 'zmq' already loaded in Unknown on line 0
+[03-Jul-2020 06:28:50 UTC] PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) '/usr/local/lib/libzmq.so' in Unknown on line 0
+[03-Jul-2020 06:28:50 UTC] PHP Warning:  Module 'zmq' already loaded in Unknown on line 0
+[03-Jul-2020 06:29:22 UTC] PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) '/usr/local/lib/libzmq.so' in Unknown on line 0
+[03-Jul-2020 06:29:22 UTC] PHP Warning:  Module 'zmq' already loaded in Unknown on line 0
+[03-Jul-2020 06:30:17 UTC] PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) '/usr/local/lib/libzmq.so' in Unknown on line 0
+[03-Jul-2020 06:30:17 UTC] PHP Warning:  Module 'zmq' already loaded in Unknown on line 0
+[04-Jul-2020 15:20:04 UTC] PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) '/usr/local/lib/libzmq.so' in Unknown on line 0
+[04-Jul-2020 15:20:04 UTC] PHP Warning:  Module 'zmq' already loaded in Unknown on line 0
