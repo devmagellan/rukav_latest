@@ -350,6 +350,16 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'photo'=>'first_category.png'
 
             ],
+            /*34*/
+            [
+                'parent_id' => 14,
+                'name' => 'Детские штанишки',
+                'link'=> '/private_cabinet',
+                'icon'=>'fa-home',
+                'position'=>1,
+                'photo'=>'first_category.png'
+
+            ],
 
 
         ]);

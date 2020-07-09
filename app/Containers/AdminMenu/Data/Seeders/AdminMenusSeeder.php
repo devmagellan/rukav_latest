@@ -366,7 +366,7 @@ class AdminMenusSeeder extends Seeder
                 'parent_id' => 26,
                 'name' => 'Просмотр статических страниц',
                 'icon'=> 'fal fa-window',
-                'link'=> '/admin/view_static_pages',
+                'link'=> '/staticpages',
                 'system_name'=>'view_static_pages',
                 'type'=>'linked',
                 'permission'=>'view_static_pages'
