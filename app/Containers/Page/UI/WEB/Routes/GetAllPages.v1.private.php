@@ -17,6 +17,14 @@ $router->get('adv', [
       ],*/
 ]);
 
+$router->get('confidencial', [
+    'as' => 'web_page_confidencial',
+    'uses'  => 'Controller@confidencial',
+    /*  'middleware' => [
+          'auth:web',
+      ],*/
+]);
+
 $router->get('career', [
     'as' => 'web_page_career',
     'uses'  => 'Controller@career',

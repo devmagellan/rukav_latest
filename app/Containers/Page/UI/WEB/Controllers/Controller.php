@@ -102,6 +102,16 @@ class Controller extends WebController
     }
 
 
+    public function confidencial(GetAllPagesRequest $request)
+    {
+        $categories= Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
+        $categoriesOnlyRoot = $categories->where('parent_id', 0);
+
+        if(\Auth::user()){
+            $user=\App\Containers\User\Models\User::where('id',\Auth::user()->id)->first();}
+        return view('page::politics.confidencial', compact('categoriesOnlyRoot', 'categories','user'));
+    }
+
     public function adv(GetAllPagesRequest $request)
     {
         $categories= Apiato::call('Site@GetAllProductCategoriesAction', [$request]);

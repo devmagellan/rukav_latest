@@ -136,7 +136,14 @@ $(document).ready(function(){
     });
 
     $('.button_show_reg').on('click', function () {
+        console.log('Registration')
         $('#ModalReg').modal('show');
+        $('#ModalIn').modal('hide');
+    });
+    $('#enterButton').on('click', function () {
+        console.log('LogIn')
+        $('#ModalReg').modal('hide');
+        $('#ModalIn').modal('show');
     });
 
     $('.select_company select').on('change', function () {
