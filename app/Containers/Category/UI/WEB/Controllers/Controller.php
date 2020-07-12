@@ -34,7 +34,11 @@ class Controller extends WebController
   {
       $data['properties']=$this->getMainProperties($request);
       $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
-
+      $data['currentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$id)->first();
+      $data['parentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$data['currentCat']->parent_id)->first();
+      if($data['parentCat']){
+          $data['grandParentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$data['parentCat']->parent_id)->first();
+      }
       $currentPage = $request->input('page');
       $from=$request->input('price_start');
       $to=$request->input('price_end');

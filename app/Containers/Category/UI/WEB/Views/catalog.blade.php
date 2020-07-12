@@ -15,9 +15,16 @@
       <div class="row">
         <div class="col-md-12">
           <ul class="breadcrumbs">
-            <li><a href="index.html"><img src="/img/home_icon.svg" alt=""></a><img src="/img/back_Icon.svg" alt=""></li>
-            <li><a href="index.html">Транспорт</a><img src="/img/back_Icon.svg" alt=""></li>
-            <li>Продажа автомобилей</li>
+
+            <li><a href="/"><img src="/img/home_icon.svg" alt=""></a><img src="/img/back_Icon.svg" alt=""></li>
+
+              @if(isset($data['garndParentCat']))
+            <li><a href="/category/{{$data['garndParentCat']->id}}">{{$data['garndParentCat']->name}}</a><img src="/img/back_Icon.svg" alt=""></li>
+              @endif
+              @if(isset($data['parentCat']))
+                  <li><a href="/category/{{$data['parentCat']->id}}">{{$data['parentCat']->name}}</a><img src="/img/back_Icon.svg" alt=""></li>
+              @endif
+            <li>{{$data['currentCat']->name}}</li>
           </ul>
         </div>
       </div>

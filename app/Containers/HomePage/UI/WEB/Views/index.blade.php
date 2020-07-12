@@ -9,7 +9,7 @@
           <div class="col-md-4 col-lg-3">
             <div class="cart_item">
               <h6>{{$category->name}}</h6>
-              <div class="cart_item_wrapper">
+              <div class="cart_item_wrapper" style="position:absolute">
                 <img style="border-radius: 50%;" src="/storage/root_cat_photos/{{$category->photo}}" alt="">
               </div>
               @foreach($category->childrenCategories->take(7) as $childCategory)
