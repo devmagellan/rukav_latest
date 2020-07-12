@@ -12549,7 +12549,7 @@ class Controller extends WebController
     //TODO эту переменную сделать в сервис провайдере
       $data['properties']=$this->getMainProperties($request);
     $breadcrumbsArray=\App\Containers\Site\Services\ProductCategoryService::BreadCrumbs($ad->category_id);
-    return view('ad::ads.single-ads', compact('categories', 'ad','breadcrumbsArray','receiver','user','data'));
+    return view('ad::ads.single-ads', compact( 'ad','breadcrumbsArray','receiver','data'));
   }
 
   /**
@@ -12563,7 +12563,7 @@ class Controller extends WebController
       $data['properties']=$this->getMainProperties($request);
     $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
     $locations=\App\Containers\Ad\Models\BritainRegion::where('parent_id',0)->get();
-    return view('ad::ads.form-add-ads', compact('categories', 'categoriesOnlyRoot','locations','data'));
+    return view('ad::ads.form-add-ads', compact( 'categoriesOnlyRoot','locations','data'));
   }
 
   public function searchRubrics(FindAdByIdRequest $request)
