@@ -18,3 +18,24 @@ $router->post('/admin/staticpages/data', [
         'auth:admin',
     ],
 ]);
+
+$router->post('/staticpage/update_status', [
+    'as' => 'staticpage_update_status',
+    'uses'  => 'Controller@updateStaticPageStatus',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
+]);
+
+$router->post('/staticpage/create', [
+    'as' => 'staticpage_create',
+    'uses'  => 'Controller@postSave',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
+]);
+
+
+

@@ -9,12 +9,13 @@ class CreateStaticpagesTables extends Migration
     public function up()
     {
         Schema::create('static_pages', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('name');
             $table->longText('content');
             $table->integer('group')->nullable();
             $table->boolean('active');
-            $table->unsignedBigInteger('editor')->unsigned();
+            $table->unsignedBigInteger('editor')->unsigned()->nullable();;
             $table->timestamps();
         });
 

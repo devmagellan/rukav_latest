@@ -119,9 +119,6 @@
                                 </div>
                                 <div class="panel-container show">
                                     <div class="panel-content">
-                                        <div class="panel-tag">
-                                            This is the default <code>summernote</code> example, with full toolbar buttons. We have also added a custom auto save script for localStorage which uses <code>onChange</code> and <code>onInit</code> hooks to load and save to <code>localStorage</code>
-                                        </div>
                                         <div class="js-summernote" id="saveToLocal"></div>
                                         <div class="mt-3">
                                             <div class="custom-control custom-checkbox">
@@ -460,17 +457,20 @@ $('#managerSwitch').change(function(){
                 console.log(998)
                 var staticpage_name = $('#staticpage_name').val()
                 var staticpage_content = localStorage.getItem('summernoteData');
+                var active =$('#managerSwitch')[0].checked
+                var staticpage_id=$('#staticpage_id').val()
 
-
+                console.log(staticpage_name);
                 $.ajax({
                     method: 'POST',
                     dataType: 'json',
                     async: false,
-                    url: '/company/staticpage/create',
+                    url: '/staticpage/create',
                     data: {
-                        //staticpage_id: staticpage_id,
                         staticpage_name: staticpage_name,
-                        staticpage_content: staticpage_content
+                        staticpage_content: staticpage_content,
+                        active:active,
+                        staticpage_id:staticpage_id
 
                     },
                     beforeSend: function () {
@@ -482,9 +482,7 @@ $('#managerSwitch').change(function(){
 
                     },
                     success: function (data) {
-
                         console.log('success')
-                        reloadData();
                     }
                 });
             }

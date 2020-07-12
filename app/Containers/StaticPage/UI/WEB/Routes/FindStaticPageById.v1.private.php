@@ -8,3 +8,9 @@ $router->get('staticpages/{id}', [
       'auth:web',
     ],
 ]);
+
+
+$router->get('help/{id}', [
+    'as' => 'web_staticpage_help',
+    'uses'  => 'Controller@showHelp',
+]);
