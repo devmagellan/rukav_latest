@@ -89,7 +89,7 @@
                 Мои объявления
               </p>
             </a>
-            <a href="#" class="user_cabinet_item">
+            <a href="/private_cabinet#messages" class="user_cabinet_item">
               <div class="user_cabinet_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">
@@ -112,7 +112,7 @@
                 Сообщения
               </p>
             </a>
-            <a href="#" class="user_cabinet_item">
+            <a href="/private_cabinet#favorits" class="user_cabinet_item">
               <div class="user_cabinet_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path class="svg_path" d="M17.5 13.737C17.2843 13.737 17.1094 13.9119 17.1094 14.1276V18.9658L10.1803 15.3603C10.0673 15.3015 9.93277 15.3015 9.81969 15.3603L2.89062 18.9658V7.67578C2.89062 7.46004 2.7157 7.28516 2.5 7.28516C2.2843 7.28516 2.10938 7.46004 2.10938 7.67578V19.6093C2.10938 19.7459 2.18063 19.8724 2.2973 19.9433C2.4141 20.0141 2.5593 20.0188 2.68031 19.9559L10 16.1472L17.3197 19.9559C17.3763 19.9853 17.4382 20 17.5 20C17.5704 20 17.6405 19.981 17.7027 19.9433C17.8194 19.8724 17.8906 19.7459 17.8906 19.6093V14.1276C17.8906 13.9119 17.7157 13.737 17.5 13.737Z" fill="white"/>
@@ -128,7 +128,7 @@
                 Избранное
               </p>
             </a>
-            <a href="#" class="user_cabinet_item">
+            <a href="/private_cabinet#my_profile" class="user_cabinet_item">
               <div class="user_cabinet_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">
@@ -154,7 +154,7 @@
                 Мой профиль
               </p>
             </a>
-            <a href="#" class="user_cabinet_item">
+            <a href="/help/1" class="user_cabinet_item">
               <div class="user_cabinet_icon">
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path class="svg_path" d="M11 1C5.48577 1 1 5.48577 1 11C1 16.5142 5.48577 21 11 21C16.5142 21 21 16.5142 21 11C21 5.48577 16.5142 1 11 1ZM11 20.2308C5.91038 20.2308 1.76923 16.0896 1.76923 11C1.76923 5.91038 5.91038 1.76923 11 1.76923C16.0896 1.76923 20.2308 5.91038 20.2308 11C20.2308 16.0896 16.0896 20.2308 11 20.2308Z" fill="#A269F7" stroke="#A269F7" stroke-width="0.1"/>
