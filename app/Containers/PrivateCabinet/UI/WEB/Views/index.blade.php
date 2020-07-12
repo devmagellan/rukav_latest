@@ -1,6 +1,5 @@
 @extends('homepage::layouts.layout')
 @section('content')
-
   <div class="breadcums_wrapper">
     <div class="container">
       <div class="row">
@@ -104,7 +103,7 @@
         <div class="row flex">
           <div class="col-md-12">
             <form class="prophile_form" method="post" action="/profile/save">
-              <input type="hidden" value="{{$user->id}}" name="id">
+              <input type="hidden" value="{{$data['properties']->user->id}}" name="id">
               <div class="prophile_show-wrapper ">
                 <div class="col-md-12">
                   <p class="prophile_show_title">
@@ -128,20 +127,20 @@
                   </p>
                   <div class="prophile_show_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_name" type="checkbox" @if($user->show_name) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_name" type="checkbox" @if($data['properties']->user->show_name) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" name="name" value="{{$user->name}}">
+                    <input type="text" class="prophile_main_input" name="name" value="{{$data['properties']->user->name}}">
                   </div>
                   <p class="prophile_main_text">
                     Ваша фамилия <span>*</span>
                   </p>
                   <div class="prophile_show_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_sername" type="checkbox" @if($user->show_sername) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_sername" type="checkbox" @if($data['properties']->user->show_sername) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" name="sername" value="{{$user->sername}}">
+                    <input type="text" class="prophile_main_input" name="sername" value="{{$data['properties']->user->sername}}">
                   </div>
                   <p class="prophile_main_text">
                     Страна резиденции <span>*</span>
@@ -151,7 +150,7 @@
                       <input class="checkbox_hidden"  type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" disabled class="prophile_main_input" name="country" value="{{$user->country}}">
+                    <input type="text" disabled class="prophile_main_input" name="country" value="{{$data['properties']->user->country}}">
                     <!--a href="#" class="prophile_change_country" >
                       Сменить
                     </a-->
@@ -164,13 +163,13 @@
                   </label>
                   <label class="prophile_photo_wrapper" for="imgInputakk">
                     <div class="prophile_photo_img">
-                      @if($user->avatar)
-                        <img src="/storage/avatars/{{$user->avatar}}" alt="">
+                      @if($data['properties']->user->avatar)
+                        <img src="/storage/avatars/{{$data['properties']->user->avatar}}" alt="">
 
                       @else
                       <img src="img/prophile_camera.png" alt="">@endif
                     </div>
-                    @if(!$user->avatar)
+                    @if(!$data['properties']->user->avatar)
 
                       <a class="prophile_photo_change">
                         Добавить фото или логотип
@@ -215,7 +214,7 @@
                 </div-->
               </div>
 
-              @if($user->getBusinessAccount)
+              @if($data['properties']->user->getBusinessAccount)
               <div class="prophile_main_wrapper d-flex">
                 <div class="col-md-7 flex-column">
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
@@ -256,10 +255,10 @@
                   </p>
                   <div class="prophile_show_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_email" type="checkbox" @if($user->show_email) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_email" type="checkbox" @if($data['properties']->user->show_email) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="email" class="prophile_main_input" placeholder="E-mail" name="email" value="{{$user->email}}">
+                    <input type="email" class="prophile_main_input" placeholder="E-mail" name="email" value="{{$data['properties']->user->email}}">
                     <!--a href="#" class="prophile_change_country">
                       Сменить
                     </a-->
@@ -268,12 +267,12 @@
                     Телефон мобильный <span>*</span>
                   </p>
                   <div class="prophile_show_input-wrapper d-flex align-items-center">
-                    <input type="hidden" class="phone_code" value="{{$user->phone_code}}">
+                    <input type="hidden" class="phone_code" value="{{$data['properties']->user->phone_code}}">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_phone" type="checkbox" @if($user->show_phone) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_phone" type="checkbox" @if($data['properties']->user->show_phone) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="tel" id="telphone5" name="phone" class="prophile_main_input" value="{{$user->phone}}">
+                    <input type="tel" id="telphone5" name="phone" class="prophile_main_input" value="{{$data['properties']->user->phone}}">
 
                     <!--a href="#" class="prophile_change_country">
                       Сменить
@@ -284,10 +283,10 @@
                   </p>
                   <div class="prophile_show_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden"  name="show_additional_phone" type="checkbox" @if($user->show_additional_phone) checked="checked" @endif>
+                      <input class="checkbox_hidden"  name="show_additional_phone" type="checkbox" @if($data['properties']->user->show_additional_phone) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="tel" id="telphone6" name="additional_phone" class="prophile_main_input" value="{{$user->additional_phone}}">
+                    <input type="tel" id="telphone6" name="additional_phone" class="prophile_main_input" value="{{$data['properties']->user->additional_phone}}">
                     <!--a href="#" class="prophile_change_country">
                       Сменить
                     </a-->
@@ -303,12 +302,12 @@
                   </div>
                 </div>
               </div>
-              @if($user->getBusinessAccount)
+              @if($data['properties']->user->getBusinessAccount)
               <div class="prophile_main_wrapper d-flex">
                 <div class="col-md-7 flex-column">
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_skype" type="checkbox" @if($user->show_skype) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_skype" type="checkbox" @if($data['properties']->user->show_skype) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
                     <input type="text" class="prophile_main_input" placeholder="Skype ник">
@@ -316,7 +315,7 @@
                   </div>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_facebook" type="checkbox" @if($user->show_facebook) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_facebook" type="checkbox" @if($data['properties']->user->show_facebook) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
                     <input type="text" class="prophile_main_input" placeholder="Facebook страница">
@@ -324,14 +323,14 @@
                   </div>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_instagram" type="checkbox" @if($user->show_instagram) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_instagram" type="checkbox" @if($data['properties']->user->show_instagram) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
                     <input type="text" class="prophile_main_input" placeholder="Instagram страница">
                   </div>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_www" type="checkbox" @if($user->show_www) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_www" type="checkbox" @if($data['properties']->user->show_www) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
                     <input type="text" class="prophile_main_input prophile_site" placeholder="Веб сайт">
@@ -349,7 +348,7 @@
                   </p>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container checkbox_unactive">
-                      <input class="checkbox_hidden" name="show_business_address" type="checkbox" @if($user->getBusinessAccount->address) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_business_address" type="checkbox" @if($data['properties']->user->getBusinessAccount->address) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
                     <input type="text" class="prophile_main_input" placeholder="Адрес">
@@ -589,10 +588,14 @@
             </a>
           </div>
         </div>
-        <div class="row">
+        <div class="row" >
 
-          <div class="col-md-12">
+          <div class="col-md-12" >
+            @if(count($ads)<1)
+            <div class="choosen_item-wrapper d-flex" style="height:300px"></div>
+            @endif
             @foreach($ads as $ad)
+              <? dump(123);?>
             <div class="choosen_item-wrapper d-flex">
 
               <div class="choosen_item_img">
@@ -1043,8 +1046,8 @@
 
       });
 
-      if('{{$user->country }}'!=''){
-          var cnt='{{$user->country }}'
+      if('{{$data['properties']->user->country }}'!=''){
+          var cnt='{{$data['properties']->user->country }}'
       }
       else{var cnt='gb'}
 
