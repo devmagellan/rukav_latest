@@ -12540,7 +12540,7 @@ class Controller extends WebController
         $user=\App\Containers\User\Models\User::where('id',\Auth::user()->id)->with('getBusinessAccount')->first();}
 
 
-        return view('privatecabinet::index',compact('categoriesOnlyRoot', 'categories', 'ads','favorits','user','data' ) );
+        return view('privatecabinet::index',compact('categoriesOnlyRoot',  'ads','favorits','data' ) );
     }
 
     public function messagesData(GetAllPrivateCabinetsRequest $request){
