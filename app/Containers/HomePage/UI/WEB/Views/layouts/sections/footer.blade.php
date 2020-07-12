@@ -46,7 +46,7 @@
         <h5>Пользователю</h5>
         <ul class="menu_footer">
           <li>
-            <a href="#">Помощь</a>
+            <a href="/help/1">Помощь</a>
           </li>
           <li>
             <a href="#">Безопасность</a>

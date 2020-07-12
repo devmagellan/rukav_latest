@@ -12543,15 +12543,13 @@ class Controller extends WebController
    */
   public function show(FindAdByIdRequest $request)
   {
-    $user=null;
-    if(\Auth::user()){
-          $user=\App\Containers\User\Models\User::where('id',\Auth::user()->id)->first();}
+
     $ad = Apiato::call('Ad@FindAdByIdAction', [$request]);
     $receiver=$ad->sender;
     //TODO эту переменную сделать в сервис провайдере
-    $categories = Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
+      $data['properties']=$this->getMainProperties($request);
     $breadcrumbsArray=\App\Containers\Site\Services\ProductCategoryService::BreadCrumbs($ad->category_id);
-    return view('ad::ads.single-ads', compact('categories', 'ad','breadcrumbsArray','receiver','user'));
+    return view('ad::ads.single-ads', compact('categories', 'ad','breadcrumbsArray','receiver','user','data'));
   }
 
   /**
@@ -12562,16 +12560,16 @@ class Controller extends WebController
   public function create(CreateAdRequest $request)
   {
     //TODO эту переменную сделать в сервис провайдере
-    $categories = Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
-    $categoriesOnlyRoot = $categories->where('parent_id', 0);
+      $data['properties']=$this->getMainProperties($request);
+    $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
     $locations=\App\Containers\Ad\Models\BritainRegion::where('parent_id',0)->get();
-    return view('ad::ads.form-add-ads', compact('categories', 'categoriesOnlyRoot','locations'));
+    return view('ad::ads.form-add-ads', compact('categories', 'categoriesOnlyRoot','locations','data'));
   }
 
   public function searchRubrics(FindAdByIdRequest $request)
   {
-    $categories = Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
-    $category = $categories->where('id', $request->categoryId)->first();
+      $data['properties']=$this->getMainProperties($request);
+    $category = $data['properties']->categories->where('id', $request->categoryId)->first();
     if($category->childrenCategories->count()){
       foreach ($category->childrenCategories as $categoryChild){
         echo '<li data-category_id="'.$categoryChild->id.'">'.$categoryChild->name.'</li>';

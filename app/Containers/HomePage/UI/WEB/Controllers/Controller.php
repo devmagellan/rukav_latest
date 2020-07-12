@@ -27,13 +27,10 @@ class Controller extends WebController
      * @param GetAllHomePagesRequest $request
      */
     public function index(GetAllHomePagesRequest $request)
-    { 
-      $categories= Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
-      $categoriesOnlyRoot = $categories->where('parent_id', 0);
-      $user=null;
-      if(\Auth::user()){
-      $user=\App\Containers\User\Models\User::where('id',\Auth::user()->id)->first();}
-      return view('homepage::index', compact('categoriesOnlyRoot', 'categories','user'));
+    {
+      $data['properties']=$this->getMainProperties($request);
+        $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
+      return view('homepage::index', compact('categoriesOnlyRoot','data'));
     }
 
     /**
@@ -107,8 +104,8 @@ class Controller extends WebController
 	
 	    public function search(GetAllHomePagesRequest $request){
 
-		
-		$data['categories']= Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
+
+            $data['properties']=$this->getMainProperties($request);
       $data['categoriesOnlyRoot'] = $data['categories']->where('parent_id', 0);
         $data['spacial_customer_id']=null;
         $data['title']="Додати товар";

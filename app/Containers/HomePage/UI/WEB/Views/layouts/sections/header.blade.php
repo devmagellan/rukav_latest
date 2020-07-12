@@ -60,20 +60,20 @@
           </a>
         </div>
       @else
-        @if(isset($user) )
+        @if(isset($data['properties']->user) )
         <div class="col-md-1 col-2">
           <a href="#" class="user_cabinet_login" >
-            @if(isset($user) && $user->avatar)
-              <img style="height:40px;border-radius: 50%;" src="/storage/avatars/{{ $user->avatar }}" />
-              @elseif(isset($user) && $user->name )
-             <img style="height:40px" src="{{ \Avatar::create($user->name.' '.$user->sername)->toBase64() }}" />
+            @if(isset($data['properties']->user) && $data['properties']->user->avatar)
+              <img style="height:40px;border-radius: 50%;" src="/storage/avatars/{{ $data['properties']->user->avatar }}" />
+              @elseif(isset($data['properties']->user) && $data['properties']->user->name )
+             <img style="height:40px" src="{{ \Avatar::create($data['properties']->user->name.' '.$data['properties']->user->sername)->toBase64() }}" />
             @endif
           </a>
           <div class="user_cabinet_dropdown">
 
             <img class="user_cabinet_dropdown_bg" src="/img/cabinet_dropdownbg.png" alt="">
             <p class="user_cabinet_name">
-              {{$user->name}} {{$user->sername}}
+              {{$data['properties']->user->name}} {{$data['properties']->user->sername}}
             </p>
             <a href="/private_cabinet#myads" class="user_cabinet_item">
               <div class="user_cabinet_icon">
@@ -247,9 +247,9 @@
                       }
                   }
     }
-    if(isset($categories)){
+    if(isset($data['properties']->categories)){
      $rec= new Recursion;
-     $result = $rec->get_cat($categories);
+     $result = $rec->get_cat($data['properties']->categories);
     //Выводи каталог на экран с помощью рекурсивной функции
     }
   @endphp

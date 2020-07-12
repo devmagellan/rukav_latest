@@ -12,22 +12,41 @@
         </thead>
         <tbody>
         @foreach($staticpages as $staticpage)
-            <form>
+
+            <form class="staticpage_form">
 
 
         <tr>
+
             <th class="customer_id" scope="row">{{$staticpage->id}}</th>
-            <td class="customer_name">{{$staticpage->name}}</td>
-            <td class="customer_name">{{$staticpage->editor}}</td>
-            <td class="company_name">
+            <td class="customer_name">{{$staticpage->name}}
+
+            </td>
+            <td class="customer_sditor">{{$staticpage->editor}}</td>
+            <td class="company_switch">
                 <div class="custom-control custom-switch">
+
                     <input type="checkbox" class="active_static_page_switch custom-control-input" id="customSwitch_{{$staticpage->id}}" @if($staticpage->active==0)  @else checked="true" @endif>
                     <label class="custom-control-label" for="customSwitch_{{$staticpage->id}}">@if($staticpage->active==0) Not Active @else Active @endif</label>
                 </div>
             </td>
 
-            <td class="customer_name">{{($staticpage->getGroup) ? $staticpage->getGroup->name : 'не принадлежит к группе'}}</td>
+            <td class="customer_group">
+               <? $groups=\App\Containers\StaticPage\Models\StaticPageGroup::get();?>
+                @if($staticpage->getGroup)
+                    <select class="form-control bootstrap-select" id="staticpage_group">
+                        @foreach($groups as $group)
+                            @if($group->id==$staticpage->getGroup->id)
+                        <option selected value="{{$group->id}}">{{$staticpage->getGroup->name}}</option>
+                                @else
+                                <option value="{{$group->id}}">{{$staticpage->getGroup->name}}</option>
+                            @endif
+@endforeach
+                    </select>
+@endif
+            </td>
             <td>
+                <input class="staticpage_text" type="hidden" value="{{$staticpage->content}}">
                 <a href="javascript:void(0)" class="PrependChangeCustomer btn btn-primary btn-sm btn-icon waves-effect waves-themed"  data-toggle="modal" data-target=".default-example-modal-right-lg-user">
                     <i class="fal fa-pencil"></i>
                 </a>
@@ -37,6 +56,7 @@
             </td>
         </tr>
             </form>
+
       @endforeach
         </tbody>
     </table>
@@ -47,9 +67,25 @@
             console.log('PrependChangeCustomer1')
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
             var manager =  $(this).parent().parent().find('.customer_manager').find('.is_manager').val()
-            console.log(manager);
+            var name= $(this).parent().parent().find('.customer_name').text()
+            $('#staticpage_name').val(name)
+            var active= $(this).parent().parent().find('.company_switch').find('.custom-switch').find('.active_static_page_switch')[0].checked;
+            console.log(active)
+            console.log($(this).parent().find('input').val())
+            var text= $(this).parent().find('.staticpage_text').val()
+            console.log('text',text)
+            $('#staticpage_id').val(customer_id)
+            localStorage.setItem('summernoteData', text);
+            $('.js-summernote').summernote("code", localStorage.getItem("summernoteData"));
+            if(active==true){
+                $('#managerSwitch').prop('checked', true);
+            }
+            else{
+                $('#managerSwitch').prop('checked',false);
+            }
+            console.log(name);
             //$('#manager_selected').val(1); //<---below this one
-           $.ajax({
+ /*          $.ajax({
                 method: 'POST',
                 dataType: 'json',
                 async:false,
@@ -87,7 +123,7 @@
                       console.log('success')
 
                 }
-            });
+            });*/
         });
 
         $('.DeleteCustomer').click(function(){
@@ -114,9 +150,11 @@
 
         });
 
-        $('.active_staticpage_switch').change(function(e){
+        $('.active_static_page_switch').change(function(e){
             e.preventDefault();
-            var id=$(this).parent().parent().parent().find('.staticpage_id').val()
+            console.log('Switch')
+            var id=$(this).parent().parent().parent().find('.customer_id').text()
+            console.log('id',id)
             var this_=$(this)
             console.log(this_)
             var status = $(this).is(":checked")
@@ -145,7 +183,7 @@
                 method: 'POST',
                 dataType: 'json',
                 async:false,
-                url: '/company/staticpage/update_status',
+                url: '/staticpage/update_status',
                 data: {id: id,status:status
                 },
                 beforeSend: function() {
@@ -155,7 +193,7 @@
                 },
                 success: function (data) {
 
-
+                    reloadData();
 
 
 

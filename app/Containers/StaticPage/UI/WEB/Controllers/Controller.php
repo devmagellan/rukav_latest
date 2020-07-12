@@ -109,4 +109,42 @@ class Controller extends WebController
 
          // ..
     }
+
+    public function updateStaticPageStatus(GetAllStaticPagesRequest $request){
+
+        $status=($request->input('status')=='true') ? 1 :0;
+
+        $companySlider['values']=['active'=>$status ];
+        $entityClass=\App\Containers\StaticPage\Models\StaticPage::class;
+        $companySlider['attributes']['id']=(null!=($request->input('id')) && !empty($request->input('id'))) ? $request->input('id') : null;
+        return call_user_func("{$entityClass}::query")->updateOrCreate($companySlider['attributes'], $companySlider['values']);
+    }
+
+
+    public function postSave(GetAllStaticPagesRequest $request){
+        //var_dump($request->input());
+        $companySlider['values']=['name'=>$request->input('staticpage_name'),
+            'content'=>$request->input('staticpage_content'),
+            'active'=>($request->input('active')=='true') ? 1 : 0,
+            'editor'=>\Auth::user()->id];
+        $entityClass=\App\Containers\StaticPage\Models\StaticPage::class;
+        $companySlider['attributes']['id']=($request->input('staticpage_id')&& $request->input('staticpage_id')!=0) ? $request->input('staticpage_id') : null;
+        return call_user_func("{$entityClass}::query")->updateOrCreate($companySlider['attributes'], $companySlider['values']);
+
+    }
+
+    public function showHelp(FindStaticPageByIdRequest $request,$id){
+
+        $helpPages=\App\Containers\StaticPage\Models\StaticPage::where('group',1)->get();
+        $data['firstHelpPage']=$helpPages->slice($id-1, $id)->first();
+        foreach($helpPages as $page){
+            if($page->id!==$data['firstHelpPage']->id){
+            $data['restHelpPage'][]=$page;
+            }
+        }
+        $data['properties']=$this->getMainProperties($request);
+        return view('staticpage::help.index', compact('data'));
+
+    }
+
 }

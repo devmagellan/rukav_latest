@@ -7,7 +7,7 @@ use App\Ship\Parents\Models\Model;
 class StaticPage extends Model
 {
     protected $fillable = [
-
+        'id','active','editor','name','content','group'
     ];
 
     protected $attributes = [

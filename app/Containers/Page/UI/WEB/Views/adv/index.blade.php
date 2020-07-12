@@ -11,9 +11,6 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-            <?
-
-            ?>
           <ul class="breadcrumbs">
             <li><a href="/"><img src="/img/home_icon.svg" alt=""></a><img src="{{asset('/img/back_Icon.svg')}}" alt=""></li>
 
