@@ -10,7 +10,9 @@ class CreateStaticpageGroupsTables extends Migration
     {
         Schema::create('staticpage_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('staticpage_id');
             $table->string('name');
+            $table->string('link');
 
             $table->timestamps();
         });

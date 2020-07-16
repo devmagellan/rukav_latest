@@ -123,7 +123,9 @@ class Controller extends WebController
 
     public function postSave(GetAllStaticPagesRequest $request){
         //var_dump($request->input());
-        $companySlider['values']=['name'=>$request->input('staticpage_name'),
+        $companySlider['values']=[
+            'link'=>$request->input('staticpage_link'),
+            'name'=>$request->input('staticpage_name'),
             'content'=>$request->input('staticpage_content'),
             'active'=>($request->input('active')=='true') ? 1 : 0,
             'editor'=>\Auth::user()->id];
@@ -132,6 +134,31 @@ class Controller extends WebController
         return call_user_func("{$entityClass}::query")->updateOrCreate($companySlider['attributes'], $companySlider['values']);
 
     }
+
+
+    public function getGroups(GetAllStaticPagesRequest $request){
+      $data['groups']=  \App\Containers\StaticPage\Models\StaticPageGroup::where('staticpage_id',$request->input('staticpage_id'))->get();
+        return view('staticpage::admin.groups', $data);
+    }
+    public function postGroupsSave(GetAllStaticPagesRequest $request){
+        //var_dump($request->input());
+var_dump($request->input('form'));
+
+        parse_str($request->input('form'), $searcharray);
+        print_r($searcharray);
+
+       \App\Containers\StaticPage\Models\StaticPageGroup::where('staticpage_id',$searcharray['staticpage_group_id'])->delete();
+    foreach($searcharray['link'] as $key=>$link){
+        $insert=[
+            'staticpage_id'=>$searcharray['staticpage_group_id'],
+            'link'=>$link,
+            'name'=>$searcharray['name'][$key]
+        ];
+        \App\Containers\StaticPage\Models\StaticPageGroup::where('staticpage_id',$searcharray['staticpage_group_id'])->insert($insert);
+    }
+    }
+
+
 
     public function showHelp(FindStaticPageByIdRequest $request,$id){
 
@@ -144,6 +171,12 @@ class Controller extends WebController
         }
         $data['properties']=$this->getMainProperties($request);
         return view('staticpage::help.index', compact('data'));
+
+    }
+
+    public function postDelete(GetAllStaticPagesRequest $request){
+        $message=\App\Containers\StaticPage\Models\StaticPage::where('id',$request->input('staticpage_id'))->delete();
+        return \Response::json(['result'=>'success']);
 
     }
 

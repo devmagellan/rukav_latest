@@ -38,4 +38,34 @@ $router->post('/staticpage/create', [
 ]);
 
 
+$router->post('/staticpages_groups/groups/get', [
+    'as' => 'staticpage_get',
+    'uses'  => 'Controller@getGroups',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
+]);
+$router->post('/staticpage_groups/update', [
+    'as' => 'staticpage_groups',
+    'uses'  => 'Controller@postGroupsSave',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
+]);
+
+
+
+$router->post('/staticpages/delete', [
+    'as' => 'staticpage_delete',
+    'uses'  => 'Controller@postDelete',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
+]);
+
+
+
 

@@ -12,6 +12,7 @@ class CreateStaticpagesTables extends Migration
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('link');
             $table->longText('content');
             $table->integer('group')->nullable();
             $table->boolean('active');

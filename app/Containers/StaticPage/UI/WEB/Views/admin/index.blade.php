@@ -94,6 +94,11 @@
                         <input type="text" id="staticpage_name" name="staticpage_name" required class="form-control" placeholder="Название страницы">
 
                     </div>
+                    <div class="form-group">
+                        <label class="form-label" for="staticpage_name">Адресс страницы</label>
+                        <input type="text" id="staticpage_link" name="staticpage_link" required class="form-control" placeholder="Адресс страницы">
+
+                    </div>
 
                     <div class="form-group">
                         <div class="custom-control custom-switch">
@@ -142,6 +147,47 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade default-example-modal-right-lg-sidebar" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-dialog-right modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title h4">Форма изменения сайдбара статической страницы</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                    </button>
+                </div>
+
+                <form class="needs-validation" id="staticpage_groups" novalidate onsubmit="theSubmitFunctionSidebar(); return false;">
+
+                    <div class="modal-body">
+                        <input type="hidden" id="staticpage_group_id" name="staticpage_group_id" value="0">
+                        <input type="hidden" id="company_id" name="company_id" value="1">
+                        <input type="hidden" id="manager_id" name="manager_id" value="1">
+
+
+
+                        <div class="input_fields_wrap">
+                            <button class="add_field_button">Add More Anchors</button>
+                           <div class="folder">
+
+                           </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="staticpage_groups_close btn btn-secondary waves-effect waves-themed" data-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="staticpage_group_create btn btn-primary waves-effect waves-themed" >Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
 @endsection
 
 @section('scripts')
@@ -158,7 +204,7 @@
                     saveToLocal();
 
                 clearInterval(interval);
-            }, 3000);
+            }, 100);
         };
 
         //save
@@ -456,6 +502,7 @@ $('#managerSwitch').change(function(){
 
                 console.log(998)
                 var staticpage_name = $('#staticpage_name').val()
+                var staticpage_link = $('#staticpage_link').val()
                 var staticpage_content = localStorage.getItem('summernoteData');
                 var active =$('#managerSwitch')[0].checked
                 var staticpage_id=$('#staticpage_id').val()
@@ -468,6 +515,7 @@ $('#managerSwitch').change(function(){
                     url: '/staticpage/create',
                     data: {
                         staticpage_name: staticpage_name,
+                        staticpage_link: staticpage_link,
                         staticpage_content: staticpage_content,
                         active:active,
                         staticpage_id:staticpage_id
@@ -478,6 +526,40 @@ $('#managerSwitch').change(function(){
                     complete: function () {
                         $('.staticpage_create_close').click();
                         $('#staticpage_id').val('')
+                        reloadData();
+
+                    },
+                    success: function (data) {
+                        console.log('success')
+                    }
+                });
+            }
+        }
+
+
+        function  theSubmitFunctionSidebar () {
+            $('.has_been_taken_message').hide();
+            var form = $('#staticpage_groups')
+            if (form[0].checkValidity() === false ) {
+            }
+            else {
+
+                $('#staticpage_groups').addClass('was-validated')
+                var staticpage_id=$('#staticpage_group_id').val()
+                $.ajax({
+                    method: 'POST',
+                    dataType: 'json',
+                    async: false,
+                    url: '/staticpage_groups/update',
+                    data: { form:form.serialize()
+
+                    },
+                    beforeSend: function () {
+                    },
+                    complete: function () {
+                        $('.staticpage_groups_close').click();
+                        $('.form').empty()
+                        $('#staticpage_group_id').val('')
                         reloadData();
 
                     },
@@ -560,6 +642,23 @@ function clearCustomerAdding(){
 
 }
 
+        $(document).ready(function() {
+            var max_fields      = 10; //maximum input boxes allowed
+            var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+            var add_button      = $(".add_field_button"); //Add button ID
 
+            var x = 1; //initlal text box count
+            $(add_button).click(function(e){ //on add input button click
+                e.preventDefault();
+                if(x < max_fields){ //max input box allowed
+                    x++; //text box increment
+                    $(wrapper).append('<div><input type="text" name="link[]"/><input type="text" name="name[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                }
+            });
+
+            $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+                e.preventDefault(); $(this).parent('div').remove(); x--;
+            })
+        });
     </script>
 @endsection

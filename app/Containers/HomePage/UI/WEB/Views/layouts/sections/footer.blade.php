@@ -8,12 +8,12 @@
         </p>
         <ul class="socials">
           <li>
-            <a href="#">
+            <a href="http://facebook.com/rukav.co.uk">
               <i class="fab fa-facebook-f"></i>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="http://instagram.com/rukav.co.uk">
               <i class="fab fa-instagram"></i>
             </a>
           </li>
