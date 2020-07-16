@@ -22,10 +22,24 @@ class StaticPageTableSeeder_2 extends Seeder
         \DB::table('staticpage_groups')->insert([
             /*1*/
             [
-                'name'=>'help information'
+                'name'=>'help information',
+                'link'=>'main',
+                'staticpage_id'=>1
             ],
             [
-                'name'=>'adv information'
+                'name'=>'help information',
+                'link'=>'adds',
+                'staticpage_id'=>1
+            ],
+            [
+                'name'=>'help information',
+                'link'=>'from_users',
+                'staticpage_id'=>1
+            ],
+            [
+                'name'=>'help information',
+                'link'=>'delete_reasons',
+                'staticpage_id'=>1
             ],
 
         ]);

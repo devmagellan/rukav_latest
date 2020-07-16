@@ -19,17 +19,13 @@
         <div class="container">
 <div class="row">
     <div class="col-md-4">
+        <?
+        $staticpages=\App\Containers\StaticPage\Models\StaticPageGroup::where('staticpage_id',$data['firstHelpPage']->id)->get();
+        ?>
         <ul style="margin-top:0px;color:#A269F7">
-
-                <a style="color:#A269F7" href="/help/1#main"><li style="cursor:pointer">> Общие положения</li></a><br>
-            <a style="color:#A269F7" href="/help/1#adds"><li style="cursor:pointer">> Размещение объявлений</li></a><br>
-            <a style="color:#A269F7" href="/help/1#from_users"><li style="cursor:pointer">> Сведения, предоставляемые пользователем</li></a><br>
-            <a style="color:#A269F7" href="/help/1#delete_reasons"><li style="cursor:pointer">> Причины удаления объявлений</li></a><br>
-            <a style="color:#A269F7" href="/help/1#rights"><li style="cursor:pointer">> Права и обязанности сторон</li></a><br>
-            <a style="color:#A269F7" href="/help/1#pays"><li style="cursor:pointer">> Оплата услуг</li></a><br>
-            <a style="color:#A269F7" href="/help/1#ltd"><li style="cursor:pointer">> Ограничение ответственности компании</li></a><br>
-            <a style="color:#A269F7" href="/help/1#changes"><li style="cursor:pointer">> Внесение изменений в соглашение</li></a><br>
-            <a style="color:#A269F7" href="/help/1#rest"><li style="cursor:pointer">> Прочие условия</li></a><br>
+@foreach($staticpages as $page)
+                <a style="color:#A269F7" href="/help/1{{$page->link}}"><li style="cursor:pointer">> {{$page->name}}</li></a><br>
+@endforeach
 
         </ul>
 
@@ -38,8 +34,8 @@
 
     <div class="col-md-8">
         <?
-print($data['firstHelpPage']->content);?>
-
+        print($data['firstHelpPage']->content);
+        ?>
     </div>
 </div>
 

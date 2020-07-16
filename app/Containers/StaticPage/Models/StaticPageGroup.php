@@ -7,7 +7,7 @@ use App\Ship\Parents\Models\Model;
 class StaticPageGroup extends Model
 {
     protected $fillable = [
-
+'link','name','staticpage_id'
     ];
 
     protected $attributes = [

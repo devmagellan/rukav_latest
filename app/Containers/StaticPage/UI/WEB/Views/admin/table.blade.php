@@ -4,9 +4,10 @@
         <tr>
             <th>#</th>
             <th>Название</th>
+            <th>Link</th>
             <th>Админ</th>
             <th>Активна/неактивна</th>
-            <th>Группа</th>
+            <th>Сайдбар страницы</th>
             <th>Действия</th>
         </tr>
         </thead>
@@ -22,6 +23,9 @@
             <td class="customer_name">{{$staticpage->name}}
 
             </td>
+            <td class="customer_name">{{$staticpage->link}}
+
+            </td>
             <td class="customer_sditor">{{$staticpage->editor}}</td>
             <td class="company_switch">
                 <div class="custom-control custom-switch">
@@ -32,6 +36,11 @@
             </td>
 
             <td class="customer_group">
+                <a href="javascript:void(0)" class="PrependChangeSidebar btn btn-primary btn-sm btn-icon waves-effect waves-themed">
+                    <i class="fal fa-object-group"></i>
+                </a>
+
+
                <? $groups=\App\Containers\StaticPage\Models\StaticPageGroup::get();?>
                 @if($staticpage->getGroup)
                     <select class="form-control bootstrap-select" id="staticpage_group">
@@ -47,6 +56,7 @@
             </td>
             <td>
                 <input class="staticpage_text" type="hidden" value="{{$staticpage->content}}">
+
                 <a href="javascript:void(0)" class="PrependChangeCustomer btn btn-primary btn-sm btn-icon waves-effect waves-themed"  data-toggle="modal" data-target=".default-example-modal-right-lg-user">
                     <i class="fal fa-pencil"></i>
                 </a>
@@ -126,6 +136,35 @@
             });*/
         });
 
+
+        $('.PrependChangeSidebar').click(function(){
+            console.log('PrependChangeSidebar1')
+            var staticpage_id =  $(this).parent().parent().find('.customer_id').text()
+            $('#staticpage_group_id').val(staticpage_id)
+            console.log(staticpage_id)
+
+               $.ajax({
+                method: 'POST',
+                dataType: 'html',
+                async:false,
+                url: '/staticpages_groups/groups/get',
+                data: {staticpage_id: staticpage_id
+                },
+                beforeSend: function() {
+                },
+                complete: function() {
+
+                },
+                success: function (data) {
+                $('.folder').html(data)
+                  $('.default-example-modal-right-lg-sidebar').modal({show:true})
+                }
+            });
+
+
+        });
+
+
         $('.DeleteCustomer').click(function(){
             var staticpage_id =  $(this).parent().parent().find('.customer_id').text()
 
@@ -133,7 +172,7 @@
                 method: 'POST',
                 dataType: 'json',
                 async:false,
-                url: '/company/staticpages/delete',
+                url: '/staticpages/delete',
                 data: {staticpage_id: staticpage_id
                 },
                 beforeSend: function() {
