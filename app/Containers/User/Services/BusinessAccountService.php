@@ -11,13 +11,18 @@ class BusinessAccountService
 {
   public function createBusinessAccount($data, $userId)
   {
+
+    if(!is_array($data)) {
+        $data=$data->toArray();
+    }
+    \Log::info('Data--=>',$data);
     BusinessAccount::create([
-      'option_user' => $data->optionUser,
-      'name_job' => $data->nameJob,
-      'address' => $data->address,
-      'post_code' => $data->postCode,
-      'reg_number' => $data->regNumber,
-      'vat_number' => $data->vatNumber,
+
+      'company_name' => $data['company_name'],
+      'address' => $data['address'],
+      'post_code' => $data['postCode'],
+      'reg_number' => $data['regNumber'],
+      'vat_number' => $data['vatNumber'],
       'user_id' => $userId,
     ]);
   }

@@ -5,6 +5,7 @@ namespace App\Containers\User\Services;
 use App\Containers\User\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravolt\Avatar\Avatar;
+
 class UserService
 {
   public function createUser($data): User
@@ -12,7 +13,6 @@ class UserService
       $nameAvatar=time() . '.jpg' ;
 
      // \Avatar::create($data->firstName.' '.$data->lastName)->save('avatars'.$nameAvatar, 100);
-
       return User::create([
       'name' => $data->firstName,
       'sername' => $data->lastName,
@@ -20,9 +20,29 @@ class UserService
       'password' => bcrypt($data->password),
       'country' => $data->country,
       'phone' => $data->phone,
-       'avatar'=>null
+      'vid_user' => $data->vid_user,
+      'avatar'=>null
     ]);
   }
+
+    public function updateUserInService($data)
+    {
+
+        \Log::info('user--=>'.$data['id']);
+          User::where('id',$data['id'])->update([
+            'name' => $data['name'],
+            'sername' => $data['sername'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'vid_user' => $data['vid_user'],
+              'skype' => $data['skype'],
+              'facebook' => $data['facebook'],
+              'instagram' => $data['instagram'],
+              'www' => $data['www'],
+
+        ]);
+        return User::where('id',$data['id'])->first();
+    }
 
   public function authenticate($data): bool
   {

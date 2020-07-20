@@ -4,8 +4,8 @@
 namespace App\Containers\User\UI\WEB\Requests;
 
 use App\Ship\Parents\Requests\Request;
-use Illuminate\Validation\Rule;
-class RegisterUserRequest extends Request
+
+class ChangeFromSimpleUserRequest extends Request
 {
 
   /**
@@ -43,16 +43,13 @@ class RegisterUserRequest extends Request
   public function rules()
   {
     $majorRules = [
-      'firstName' => 'required|between:2,30',
-      'lastName' => 'required|between:2,30',
-      'country' => 'required|max:30',
-      'phone' =>  'required_if:vid_user,Организация|required_if:vid_user,Предприниматель|required_if:vid_user,Компания|max:30|nullable||unique:users,phone',
-      'password' => 'required|between:6,30',
-      'email' => 'required|email|unique:users,email',
-      'nameJob' => 'required_if:vid_user,Бизнес',
-      'address' => 'required_if:vid_user,Бизнес',
-      'postCode' => 'required_if:vid_user,Бизнес',
-      'vid_user' => 'required|max:30',
+      'name' => 'required|between:2,30',
+      'sername' => 'required|between:2,30',
+      //'phone' => 'required|max:30|unique:users,phone',
+      //'password' => 'between:6,30',
+      'email' => 'required|email',
+      'address' => 'required_if:vid_user,Организация|required_if:vid_user,Предприниматель|required_if:vid_user,Компания',
+      'postCode' => 'required_if:vid_user,Организация|required_if:vid_user,Предприниматель|required_if:vid_user,Компания',
     ];
 
     $optionalRules = [
@@ -60,7 +57,7 @@ class RegisterUserRequest extends Request
       'vatNumber' => 'required',
     ];
     //если в форме юзер выбрал компания тогда смержить правила для компании
-    if ($this->vid_user == 'Бизнес' && $this->optionUser == 'Компания') {
+    if ($this->optionUser == 'Компания') {
       return array_merge($majorRules, $optionalRules);
     }
     return $majorRules;

@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
       $table->string('email')->unique()->nullable();
         $table->boolean('show_email')->default(false);
       $table->string('password')->nullable();
-      $table->boolean('active')->default(true);
+      $table->boolean('active')->default(false);
       $table->boolean('confirmed')->default(false);
       $table->string('gender')->nullable();
       $table->string('birth')->nullable();
@@ -46,6 +46,7 @@ class CreateUsersTable extends Migration
         $table->string('www')->nullable();
         $table->boolean('show_www')->default(false);
         $table->string('photo')->nullable();
+        $table->string('vid_user')->nullable();
         $table->boolean('show_photo')->default(true);
 
       $table->rememberToken();
