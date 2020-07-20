@@ -32,7 +32,7 @@ class User extends UserModel implements ChargeableInterface
      * @var string
      */
     protected $table = 'users';
-
+protected $emailCode;
     /**
      * The attributes that are mass assignable.
      *
@@ -64,7 +64,7 @@ class User extends UserModel implements ChargeableInterface
         'additional_phone',
         'show_phone',
         'show_additional_phone',
-        'avatar'
+        'avatar','vid_user'
     ];
 
     protected $casts = [
@@ -139,6 +139,16 @@ class User extends UserModel implements ChargeableInterface
 
     public function getBusinessAccount(){
         return $this->hasOne(\App\Containers\User\Models\BusinessAccount::class);
+
+    }
+
+    public function getIndividualAccount(){
+        return $this->hasOne(\App\Containers\User\Models\IndividualAccount::class);
+
+    }
+
+    public function getOrganisationAccount(){
+        return $this->hasOne(\App\Containers\User\Models\OrganisationAccount::class);
 
     }
 

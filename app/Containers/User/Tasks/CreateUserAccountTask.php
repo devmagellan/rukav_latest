@@ -18,6 +18,6 @@ class CreateUserAccountTask
 
   public function run($data)
   {
-    $this->service->createUser($data);
+    return $this->service->createUser($data);
   }
 }

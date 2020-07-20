@@ -16,6 +16,10 @@
   </div>
 
   <main>
+
+    @if(\Session::has('message'))
+      <p class="alert {{ \Session::get('alert-class', 'alert-info') }}">{{ \Session::get('message') }}</p>
+    @endif
     <div class="choosen" id="my-profile">
       <div class="container">
         <div class="row">
@@ -102,8 +106,22 @@
         </div>
         <div class="row flex">
           <div class="col-md-12">
-            <form class="prophile_form" method="post" action="/profile/save">
+            <form class="prophile_form changeUserTypeForm" id="changeRegisterForm" method="post" action="/profile/save">
               <input type="hidden" value="{{$data['properties']->user->id}}" name="id">
+              <? dump($toAccountType);
+              switch($toAccountType){
+                    case 'to_individual':
+                      $accountType='Предприниматель';
+                      break;
+                  case 'to_organisation':
+                      $accountType='Организация';
+                      break;
+                  case 'to_company':
+                      $accountType='Компания';
+                      break;
+              }
+              ?>
+              <input type="hidden" value="@if(isset($accountType)) {{$accountType}} @endif" name="vid_user">
               <div class="prophile_show-wrapper ">
                 <div class="col-md-12">
                   <p class="prophile_show_title">
@@ -150,12 +168,57 @@
                       <input class="checkbox_hidden"  type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" disabled class="prophile_main_input" name="country" value="{{$data['properties']->user->country}}">
+                    <input type="hidden" class="prophile_main_input" name="country" value="{{$data['properties']->user->country}}">
+                    <input type="text" disabled class="prophile_main_input" name="country_view" value="{{$data['properties']->user->country}}">
                     <!--a href="#" class="prophile_change_country" >
                       Сменить
                     </a-->
                   </div>
+                  @if((($data['properties']->user->getIndividualAccount   && $toAccountType!='to_company' && $toAccountType!='to_organisation' && $data['properties']->user->vid_user !='Частная'
+                  && $data['properties']->user->vid_user !='Организация' && $data['properties']->user->vid_user !='Компания')|| $toAccountType=='to_individual'))
+                    <p class="prophile_main_text">
+                      Название бизнеса <span>*</span>
+                    </p>
+                    <div class="prophile_show_input-wrapper d-flex align-items-center">
+                      <label class="checkbox_container checkbox_unactive">
+                        <input class="checkbox_hidden"  type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                      </label>
+                      @if($data['properties']->user->getIndividualAccount)
+
+                      <input type="text" class="prophile_main_input" name="business_name" value="{{$data['properties']->user->getIndividualAccount->business_name}}">
+                        @else
+                        <input type="text" class="prophile_main_input" name="business_name" value="">
+                        @endif
+                    </div>
+
+                  @endif
+                  @if((($data['properties']->user->getOrganisationAccount   && $toAccountType!='to_company' && $toAccountType!='to_individual' && $data['properties']->user->vid_user !='Частная'
+                  && $data['properties']->user->vid_user !='Предприниматель' && $data['properties']->user->vid_user !='Компания')|| $toAccountType=='to_organisation'))
+                    <p class="prophile_main_text">
+                      Название организации <span>*</span>
+                    </p>
+                    <div class="prophile_show_input-wrapper d-flex align-items-center">
+                      <label class="checkbox_container checkbox_unactive">
+                        <input class="checkbox_hidden"  type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                      </label>
+                      @if($data['properties']->user->getOrganisationAccount)
+                      <input type="text" class="prophile_main_input" name="organisation_name" value="{{$data['properties']->user->getOrganisationAccount->organisation_name}}">
+                   @else
+                        <input type="text" class="prophile_main_input" name="organisation_name" value="">
+
+                      @endif
+
+                    </div>
+
+                  @endif
                 </div>
+
+
+
+
+
 
                 <div class="col-sm-12 col-md-5">
                   <label for="imgInputakk" class="prophile_photo_picked_wrapper">
@@ -214,7 +277,7 @@
                 </div-->
               </div>
 
-              @if($data['properties']->user->getBusinessAccount)
+              @if($data['properties']->user->getBusinessAccount || $toAccountType=='to_company')
               <div class="prophile_main_wrapper d-flex">
                 <div class="col-md-7 flex-column">
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
@@ -222,7 +285,11 @@
                       <input class="checkbox_hidden" type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" placeholder="Название компании">
+                    @if($data['properties']->user->getBusinessAccount)
+                    <input type="text" class="prophile_main_input" value="{{$data['properties']->user->getBusinessAccount->company_name}}" name="company_name" placeholder="Название компании">
+                    @else
+                      <input type="text" class="prophile_main_input" name="company_name" placeholder="Название компании">
+                      @endif
                     <p class="prophile_required">
                       *
                     </p>
@@ -232,7 +299,11 @@
                       <input class="checkbox_hidden" type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" placeholder="Регистрационный номер">
+                    @if($data['properties']->user->getBusinessAccount)
+                    <input type="text" class="prophile_main_input" name="regNumber" value="{{$data['properties']->user->getBusinessAccount->reg_number}}" placeholder="Регистрационный номер">
+                    @else
+                      <input type="text" class="prophile_main_input" name="regNumber" placeholder="Регистрационный номер">
+                      @endif
                     <p class="prophile_required">
                       *
                     </p>
@@ -242,7 +313,12 @@
                       <input class="checkbox_hidden" type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" placeholder="VAT номер">
+                    @if($data['properties']->user->getBusinessAccount)
+                    <input type="text" class="prophile_main_input" name="vatNumber" value="{{$data['properties']->user->getBusinessAccount->vat_number}}" placeholder="VAT номер">
+                      @else
+                      <input type="text" class="prophile_main_input" name="vatNumber" placeholder="VAT номер">
+
+                    @endif
                   </div>
                 </div>
               </div>
@@ -295,14 +371,17 @@
                     Пароль <span>*</span>
                   </p>
                   <div class="prophile_show_input-wrapper d-flex align-items-center">
-                    <input type="text" class="prophile_main_input prophile_password" placeholder="************">
+                    <input type="text" class="prophile_main_input prophile_password" name="password"  placeholder="************">
                     <a href="#" class="prophile_change_country prophile_change_pass" data-toggle="modal" data-target="#passwordUpdate">
                       Сменить
                     </a>
                   </div>
                 </div>
               </div>
-              @if($data['properties']->user->getBusinessAccount)
+              @if($data['properties']->user->getIndividualAccount || $toAccountType=='to_individual'
+              || $data['properties']->user->getOrganisationAccount || $toAccountType=='to_organisation'
+              || $data['properties']->user->getBusinessAccount || $toAccountType=='to_company'
+              )
               <div class="prophile_main_wrapper d-flex">
                 <div class="col-md-7 flex-column">
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
@@ -310,7 +389,7 @@
                       <input class="checkbox_hidden" name="show_skype" type="checkbox" @if($data['properties']->user->show_skype) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" placeholder="Skype ник">
+                    <input type="text" class="prophile_main_input" name="skype" value="{{$data['properties']->user->skype}}" placeholder="Skype ник">
 
                   </div>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
@@ -318,7 +397,7 @@
                       <input class="checkbox_hidden" name="show_facebook" type="checkbox" @if($data['properties']->user->show_facebook) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" placeholder="Facebook страница">
+                    <input type="text" class="prophile_main_input" name="facebook" value="{{$data['properties']->user->facebook}}" placeholder="Facebook страница">
 
                   </div>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
@@ -326,14 +405,14 @@
                       <input class="checkbox_hidden" name="show_instagram" type="checkbox" @if($data['properties']->user->show_instagram) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" placeholder="Instagram страница">
+                    <input type="text" class="prophile_main_input" name="instagram" value="{{$data['properties']->user->instagram}}" placeholder="Instagram страница">
                   </div>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
                       <input class="checkbox_hidden" name="show_www" type="checkbox" @if($data['properties']->user->show_www) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input prophile_site" placeholder="Веб сайт">
+                    <input type="text" class="prophile_main_input prophile_site" name="www" value="{{$data['properties']->user->www}}" placeholder="Веб сайт">
                     <div class="prophile_site_add">
                       <p class="prophile_www">www.</p>
                     </div>
@@ -341,18 +420,44 @@
                 </div>
               </div>
 
+
+              @if($data['properties']->user->getIndividualAccount || $toAccountType=='to_individual'
+              || $data['properties']->user->getOrganisationAccount || $toAccountType=='to_organisation'
+              || $data['properties']->user->getBusinessAccount || $toAccountType=='to_company'
+
+              )
               <div class="prophile_main_wrapper d-flex flex-wrap">
                 <div class="col-md-9 col-lg-5 flex-column">
-                  <p class="prophile_main_text">
-                    Юридический адрес <span>*</span>
-                  </p>
+                  @if($data['properties']->user->getOrganisationAccount || $toAccountType=='to_organisation'
+                    || $data['properties']->user->getIndividualAccount || $toAccountType=='to_individual')
+                    <p class="prophile_main_text">
+                      Aдрес <span>*</span>
+                    </p>
+                    @elseif($data['properties']->user->getBusinessAccount || $toAccountType=='to_company')
+                    <p class="prophile_main_text">
+                      Юридический адрес <span>*</span>
+                    </p>
+                  @endif
+
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container checkbox_unactive">
-                      <input class="checkbox_hidden" name="show_business_address" type="checkbox" @if($data['properties']->user->getBusinessAccount->address) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_business_address" type="checkbox"
+                             @if(isset($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->address
+                             || isset($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->address
+                             ) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" placeholder="Адрес">
+                    @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->address)
+                    <input type="text" class="prophile_main_input" name="address" value="{{$data['properties']->user->getOrganisationAccount->address}}" placeholder="Адрес">
+@elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->address)
+                      <input type="text" class="prophile_main_input" name="address" value="{{$data['properties']->user->getIndividualAccount->address}}" placeholder="Адрес">
 
+                    @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->address)
+                      <input type="text" class="prophile_main_input" name="address" value="{{$data['properties']->user->getBusinessAccount->address}}" placeholder="Адрес">
+
+                    @else
+                      <input type="text" class="prophile_main_input" name="address"  placeholder="Адрес">
+                    @endif
                   </div>
                 </div>
                 <div class="col-md-3 col-lg-7 flex-column">
@@ -360,11 +465,23 @@
                     Почт. индекс <span>*</span>
                   </p>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper prophile_postcode d-flex align-items-center flex-column">
+                    @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->address)
+                      <input type="text" class="prophile_main_input" name="postCode" value="{{$data['properties']->user->getOrganisationAccount->post_code}}" placeholder="Postcode">
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->address)
+                      <input type="text" class="prophile_main_input" name="postCode" value="{{$data['properties']->user->getIndividualAccount->post_code}}" placeholder="Postcode">
+                    @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->address)
+                      <input type="text" class="prophile_main_input" name="postCode" value="{{$data['properties']->user->getBusinessAccount->post_code}}" placeholder="Postcode">
 
-                    <input type="text" class="prophile_main_input" placeholder="Postcode">
+
+                    @else
+                      <input type="text" class="prophile_main_input" name="postCode"  placeholder="Postcode">
+                    @endif
+
 
                   </div>
                 </div>
+                @if($data['properties']->user->getBusinessAccount || $toAccountType=='to_company')
+
                 <div class="col-md-9 col-lg-5 flex-column">
                   <p class="prophile_main_text">
                     Фактический адрес
@@ -374,7 +491,11 @@
                       <input class="checkbox_hidden" type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" placeholder="Адрес">
+               @if($data['properties']->user->getBusinessAccount && $data['properties']->user->getBusinessAccount->phisical_address)
+                    <input type="text" class="prophile_main_input" name="phisical_address" value="{{$data['properties']->user->getBusinessAccount->phisical_address}}" placeholder="Адрес">
+                    @else
+                      <input type="text" class="prophile_main_input" name="phisical_address" placeholder="Адрес">
+                 @endif
                     <a href="#" class="prophile_adress_question">
                       Если фактический адрес другой
                     </a>
@@ -385,12 +506,17 @@
                     Почт. индекс
                   </p>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper prophile_postcode d-flex align-items-center flex-column">
-
-                    <input type="text" class="prophile_main_input" placeholder="Postcode">
-
+                    @if($data['properties']->user->getBusinessAccount && $data['properties']->user->getBusinessAccount->phisical_post_code)
+                    <input type="text" class="prophile_main_input" name="phisical_post_code" value="{{$data['properties']->user->getBusinessAccount->phisical_post_code}}" placeholder="Postcode">
+                    @else
+                      <input type="text" class="prophile_main_input" name="phisical_post_code" placeholder="Postcode">
+                      @endif
                   </div>
                 </div>
+                @endif
+
               </div>
+                @endif
 
 
               <div class="prophile_main_wrapper d-flex ">
@@ -484,17 +610,43 @@
                 </div>
               </div>
               @endif
-
               <div class="prophile_main_wrapper prophile_down_wrapper d-flex align-items-center">
                 <a href="#" class="prophile_mydata d-flex align-items-center">
                   <img src="/img/data_icon.svg" alt="">Скачать мои данные
                 </a>
-                <a href="#" class="prophile_change_account">
+
+                <div style="@if($data['properties']->user->vid_user=='Предприниматель') margin-top:0px;
+                @elseif($data['properties']->user->vid_user=='Частная')margin-top:40px;
+                @endif position:relative;min-width:280px">
+                  <a href="JavaScript:Void(0);" style="position:absolute" class="prophile_change_account">
                   <img src="/img/user_icon_profile.svg" alt="">Сменить вид учётной записи
-                </a>
+                  </a>
+                  @if($data['properties']->user->vid_user!='Организация' && $data['properties']->user->vid_user!='Предприниматель' &&
+                  $data['properties']->user->vid_user!='Компания'
+                  )
+                <div style="clear:both;"> <a href="/private_cabinet/to_organisation" style="position:relative;top:30px;font-weight:200"class="prophile_change_account">
+                    <img src="/img/user_icon_profile.svg" alt="">Сменить на Организацию
+                  </a></div>
+                  @endif
+                  @if( $data['properties']->user->vid_user!='Предприниматель' &&
+                 $data['properties']->user->vid_user!='Компания'
+                 )
+                  <div style="clear:both;" ><a href="/private_cabinet/to_individual" style="position:relative;top:40px;font-weight:200"class="prophile_change_account">
+                      <img src="/img/user_icon_profile.svg" alt="">Сменить на Предприниматель
+                    </a></div>
+                  @endif
+                  @if($data['properties']->user->vid_user!='Компания')
+                  <div style="clear:both;" ><a href="/private_cabinet/to_company" style="position:relative;top:50px;font-weight:200"class="prophile_change_account">
+                      <img src="/img/user_icon_profile.svg" alt="">Сменить на Компанию
+                    </a></div>
+                    @endif
+                </div>
+
                 <a href="#" class="prophile_delete_registration">
                   <img src="/img/delete_icon_profile.svg" alt="">Удалить регистрацию
                 </a>
+
+                <input type="hidden" name="current_type" value="{{$data['properties']->user->vid_user}}">
                 <button type="submit" class="prophile_save ml-auto">
                   Сохранить
                 </button>
