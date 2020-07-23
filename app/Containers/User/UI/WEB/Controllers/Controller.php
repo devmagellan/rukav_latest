@@ -177,19 +177,23 @@ var_dump($user);
 
   public function confirmEmail(GetAllUsersRequest $request){
       if($request->input('emailConfirmation')!='' && $request->input('emailConfirmation')==session()->get('emailVerificationCode') ){
-          \App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->update(['active'=>1]);
-          $user=\App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->first();
+		  $tmp_user=\App\Containers\User\Models\TmpUser::where('id',session()->get('emailVerificationCodeUser'))->first();
+          // replace the data
+        $staff = $tmp_user->replicate();
+
+        // make into array for mass assign. 
+        //make sure you activate $guarded in your Staff model
+        $staff = $tmp_user->toArray();
+
+        $user=\App\Containers\User\Models\User::firstOrCreate($staff);
+		$user->active=1;
+		$user->save();
+          //$user=\App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->first();
           $data= new \StdClass();
           $data->email=$user->email;
           $data->password=session()->get('emailVerificationCodePassword');
-          //var_dump($data);
-          if (\Auth::guard('web')->attempt(['email' => $data->email, 'password' => $data->password])) {
-              //var_dump('true',array(\Auth::guard('web')->user()));
-              //return true;
-          }
-          else{
-              var_dump('false');
-          }
+	  
+		  \Auth::guard('web')->loginUsingId($user->id, true);
           return response()->json(['response'=>'success'],200);
       }
       else{
@@ -202,11 +206,6 @@ var_dump($user);
         $error=[];
      // var_dump(session()->get('emailVerificationCode'));
         if($request->input('emailConfirmation')!='' && $request->input('emailConfirmation')==session()->get('emailVerificationCode') ){
-            \App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->update(['active'=>1]);
-            $user=\App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->first();
-            $data= new \StdClass();
-            $data->email=$user->email;
-            $data->password=session()->get('emailVerificationCodePassword');
             $emailConfirmed=true;
         }
         else{
@@ -217,12 +216,6 @@ var_dump($user);
 
 $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',session()->get('emailVerificationTelephone'))->orderBy('id','desc')->first();
         if($request->input('phoneConfirmationSecond')!='' && $request->input('phoneConfirmationSecond')==$smsCode->code ){
-            \App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->update(['active'=>1]);
-            $user=\App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->first();
-            $data= new \StdClass();
-            $data->email=$user->email;
-            $data->password=session()->get('emailVerificationCodePassword');
-
             $phoneConfirmed=true;
         }
         else{
@@ -234,15 +227,18 @@ $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',ses
 
 
         if($emailConfirmed && $phoneConfirmed){
+		$tmp_user=\App\Containers\User\Models\TmpUser::where('id',session()->get('emailVerificationCodeUser'))->first();
+          // replace the data
+        $staff = $tmp_user->replicate();
 
-            //var_dump($data);
-            if (\Auth::guard('web')->attempt(['email' => $data->email, 'password' => $data->password, 'active' => 1])) {
-                //var_dump('true',array(\Auth::guard('web')->user()));
-                //return true;
-            }
-            else{
-                var_dump('false');
-            }
+        // make into array for mass assign. 
+        //make sure you activate $guarded in your Staff model
+        $staff = $tmp_user->toArray();
+
+        $user=\App\Containers\User\Models\User::firstOrCreate($staff);
+		$user->active=1;
+		$user->save();
+          \Auth::guard('web')->loginUsingId($user->id, true);
             return response()->json(['response'=>'success'],200);
         }
         return response()->json(['response'=>$error],403);

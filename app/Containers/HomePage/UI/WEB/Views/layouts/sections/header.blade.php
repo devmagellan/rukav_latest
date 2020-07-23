@@ -248,8 +248,8 @@
                   }
     }
     if(isset($data['properties']->categories)){
-     $rec ?? ''= new Recursion;
-     $result = $rec ?? ''->get_cat($data['properties']->categories);
+     $rec = new Recursion;
+     $result = isset($rec) ? $rec->get_cat($data['properties']->categories):'';
     //Выводи каталог на экран с помощью рекурсивной функции
     }
   @endphp
@@ -258,7 +258,9 @@
       <div class="row">
         <div class="col-md-12">
           <ul class="category_dropdown_main_list">
-            {{ $rec ?? ''->view_cat($result,0,0)}}
+		  @if(isset($rec))
+            {{ $rec->view_cat($result,0,0)}}
+		@endif
           </ul>
         </div>
       </div>

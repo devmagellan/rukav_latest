@@ -33,7 +33,7 @@ return [
   'facebook' => [
     'client_id' => '242771253750028',
     'client_secret' => 'c33c2e109a77dc30e1d9738441206889',
-    'redirect' => 'https://rukav.uk/callback/facebook',
+    'redirect' => 'https://rukav.co.uk/callback/facebook',
   ],
   
   'google' => [
@@ -47,10 +47,10 @@ return [
     'redirect' => env('VKONTAKTE_REDIRECT_URI')
 ],
 'odnoklassniki' => [
-    'client_id' => env('ODNOKLASSNIKI_KEY'),
-    'client_secret' => env('ODNOKLASSNIKI_SECRET'),
-	'client_public' => env('ODNOKLASSNIKI_PUBLIC'),
-    'redirect' => env('ODNOKLASSNIKI_REDIRECT_URI')
+    'client_id' => '512000692510',
+    'client_secret' => 'C1515CCFF78B0F18F6DF3DE7',
+	'client_public' => 'CPBCJPJGDIHBABABA',
+    'redirect' => 'https://rukav.co.uk/ok/callback'
 ],
 
 ];

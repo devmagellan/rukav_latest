@@ -33,6 +33,7 @@ class User extends UserModel implements ChargeableInterface
      */
     protected $table = 'users';
 protected $emailCode;
+
     /**
      * The attributes that are mass assignable.
      *

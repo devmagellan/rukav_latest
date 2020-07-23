@@ -29,6 +29,7 @@
   "type": "project",
   "require": {
     "php": "^7.2.5",
+    "ext-json": "*",
     "ext-mbstring": "*",
     "ext-openssl": "*",
     "ext-pdo": "*",
@@ -41,19 +42,20 @@
     "intervention/image": "^2.5",
     "laravel/framework": "^7.0",
     "laravel/passport": "~8.4.3",
-    "laravel/socialite": "^4.4",
     "laravel/tinker": "^2.0",
     "maatwebsite/excel": "^3.2",
     "prettus/l5-repository": "^2.6",
     "pusher/pusher-php-server": "^4.1",
+    "socialiteproviders/facebook": "^1.0",
     "socialiteproviders/odnoklassniki": "^1.0",
     "socialiteproviders/pinterest": "^3.0",
     "socialiteproviders/vkontakte": "4.1.0",
     "spatie/laravel-fractal": "5.7.0",
+    "twilio/sdk": "^6.9",
     "vinkla/hashids": "8.1.0",
     "wikimedia/composer-merge-plugin": "^1.3.1",
     "yajra/laravel-datatables-oracle": "~9.10.0",
-    "twilio/sdk": "^6.9"
+	"vladimir-yuldashev/laravel-queue-rabbitmq": "^10.2.2"
   },
   "require-dev": {
     "facade/ignition": "^2.0",

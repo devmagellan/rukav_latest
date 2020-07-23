@@ -12,11 +12,14 @@ class CompanyRegistrationDone extends Notification //implements ShouldQueue
 {
 //use Queueable;
 
-public $user;
+protected $user;
+protected $code;
 
-public function __construct(\App\Containers\User\Models\User $company){
+public function __construct(\App\Containers\User\Models\TmpUser $company){
     $this->user=$company;
-
+	$this->code=$this->user->emailCode;
+	\Log::info('emailVerificationCodeinSession2'.session()->get('emailVerificationCode'));
+\Log::info('emailVerificationCodeinObject'.$this->user->emailCode);
     $this->user=\App\Containers\User\Models\User::where('email',$this->user->email)->first();
 }
     /**
@@ -27,10 +30,11 @@ public function __construct(\App\Containers\User\Models\User $company){
      */
     public function toMail($notifiable)
     {
+		
         return (new MailMessage)
             ->greeting('Hello!')
             ->line('Ваш код для верификации EMAIL')
-            ->line('VerificationCode: '.session()->get('emailVerificationCode'));
+            ->line('VerificationCode: '.$this->code);
     }
 
     public function via($notifiable)

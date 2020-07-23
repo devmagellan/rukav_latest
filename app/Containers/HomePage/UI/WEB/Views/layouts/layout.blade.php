@@ -705,3 +705,17 @@ $initAutoComplete = function(){
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaZXMHQgJkoXZkkBbtelY8SLAwMOasg0Y&libraries=places&language=en&callback=initMap" async defer></script>
 
+
+@if(null!=(session()->get('registration_error')))
+{{session()->get('registration_error')}}
+<?dump(122);?>
+<script>
+$(document).ready(function(){
+	console.log('777');
+$('#ModalIn').modal('show');
+});
+</script>
+{{session()->forget('registration_error')}}
+
+@endif
+

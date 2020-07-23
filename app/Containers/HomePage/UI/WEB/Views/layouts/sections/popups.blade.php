@@ -1,3 +1,6 @@
+
+
+
 <div class="modal fade" id="ModalIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -7,6 +10,10 @@
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
       <h6 class="modalTitle">Вход</h6>
+@if(null!=(session()->get('registration_error')))
+	<div style="color:red" class="alert alert-error">{{session()->get('registration_error')}}</div>
+@endif
+	  
       <form class="formModal" action="{{route('login_user')}}" method="post" id="loginForm">
         <div id="loginErrorsBlock" class="errorBlock"></div>
         <input type="text" name="email" placeholder="Телефон или email">
