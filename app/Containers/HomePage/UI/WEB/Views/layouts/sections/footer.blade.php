@@ -8,12 +8,12 @@
         </p>
         <ul class="socials">
           <li>
-            <a href="http://facebook.com/rukav.co.uk">
+            <a target="_blank" href="http://facebook.com/rukav.co.uk">
               <i class="fab fa-facebook-f"></i>
             </a>
           </li>
           <li>
-            <a href="http://instagram.com/rukav.co.uk">
+            <a target="_blank" href="http://instagram.com/rukav.co.uk">
               <i class="fab fa-instagram"></i>
             </a>
           </li>
@@ -23,7 +23,7 @@
         <h5>Навигация</h5>
         <ul class="menu_footer">
           <li>
-            <a href="#">О нас</a>
+            <a href="/about_us">О нас</a>
           </li>
           <li>
             <a href="/adv">Реклама на Rukav</a>
@@ -67,9 +67,9 @@
       </div>
       <div class="col-md-3">
         <h5>Мобильное приложение Rukav</h5>
-        <a href="#" class="link_footer">
+        <!--a href="#" class="link_footer">
           <img src="{{asset('img/button_playstore.svg')}}" alt="">
-        </a>
+        </a-->
         <a href="#" class="link_footer">
           <img src="{{asset('img/button_appstore.svg')}}" alt="">
         </a>

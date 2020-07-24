@@ -330,11 +330,11 @@ if (!empty($_GET['error'])) {
             $newUser->active = 1;
             $newUser->company_id          = 1;
             $newUser->save();
-            auth()->login($newUser, true);
+            \Auth::guard('web')->login($newUser, true);
 			}
 			elseif($provider=='facebook'){
 			$user = $this->createUser($user,$provider);
-			auth()->login($newUser, true);
+			\Auth::guard('web')->login($user, true);
 			}
         }
         return redirect()->to('/');
@@ -360,6 +360,53 @@ if (!empty($_GET['error'])) {
             ]);
        
         return $user;
+    }
+	
+		  public function handleProviderCallbackPinterest()
+    {
+		session()->forget('registration_error');
+		$provider='pinterest';
+
+        try {
+            $user = Socialite::driver('pinterest')->user();
+        } catch (\Exception $e) {
+            return redirect('/login');
+        }
+        // only allow people with @company.com to login
+     /*   if(explode("@", $user->email)[1] !== 'company.com'){
+            return redirect()->to('/');
+        }*/
+        // check if they're an existing user
+        $existingUser = User::where('email', $user->email)->first();
+        if($existingUser){
+            // log them in
+\Auth::guard('web')->login($newUser, true);
+        } else {
+			
+			dd($user);
+			//dd($user);
+			if(!$user->user['email']){
+				session()->put('registration_error','В ваших данных из соцсети не хватает email для регистрации, Мы не смогли Вас зарегистрировать, попробуйте альтернативный способ');
+				return redirect('/')->withInput()->withErrors(array('user_name' => 'some message'));   
+			}
+			
+			  $newUser                  = new User;
+            $newUser->name            = $user->user['first_name'];
+            $newUser->sername            = $user->user['last_name'];
+            $newUser->email           = $user->user['email'];
+            //$newUser->google_id       = $user->id;
+            $newUser->avatar          = $user->avatar;
+            //$newUser->avatar_original = $user->avatar;
+            //$newUser->login = $user->user['email'];
+            //$newUser->department = 'none';
+            $newUser->active = 1;
+            //$newUser->company_id          = 1;
+            $newUser->save();
+			//$user = $this->createUser($user,$provider);
+			\Auth::guard('web')->login($newUser, true);
+			
+        }
+        return redirect()->to('/');
     }
 
 }
