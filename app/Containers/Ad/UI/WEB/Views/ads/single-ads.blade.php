@@ -1,4 +1,6 @@
-@include('homepage::layouts.sections.header')
+
+@extends('homepage::layouts.layout')
+@section('content')
 <article class="product_main_block">
   <div class="container">
     <div class="row">
@@ -190,6 +192,4 @@
     </div>
   </div>
 </article>
-@include('homepage::layouts.sections.footer')
-@include('homepage::layouts.sections.popups')
-@include('homepage::layouts.sections.scripts')
+@endsection

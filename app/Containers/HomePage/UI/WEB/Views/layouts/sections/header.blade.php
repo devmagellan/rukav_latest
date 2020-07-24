@@ -40,7 +40,7 @@
       </div>
       @if(!\Illuminate\Support\Facades\Auth::user())
       <div class="col-md-2 col-2">
-        <a href="#" class="add_ad" data-toggle="modal" data-target="#confirmEmailPhone">
+        <a href="#" class="add_ad" data-toggle="modal" data-target="#youAreNotLeggedIn">
           <span class="plus">+</span>
           <span>Подать объявление</span>
         </a>
@@ -63,8 +63,11 @@
         @if(isset($data['properties']->user) )
         <div class="col-md-1 col-2">
           <a href="#" class="user_cabinet_login" >
+		  
+		  
+		  
             @if(isset($data['properties']->user) && $data['properties']->user->avatar)
-              <img style="height:40px;border-radius: 50%;" src="/storage/avatars/{{ $data['properties']->user->avatar }}" />
+              <img style="height:40px;border-radius: 50%;" src="@if(substr($data['properties']->user->avatar, 0, 4)!='http')/storage/avatars/@endif{{ $data['properties']->user->avatar }}" />
               @elseif(isset($data['properties']->user) && $data['properties']->user->name )
              <img style="height:40px" src="{{ \Avatar::create($data['properties']->user->name.' '.$data['properties']->user->sername)->toBase64() }}" />
             @endif

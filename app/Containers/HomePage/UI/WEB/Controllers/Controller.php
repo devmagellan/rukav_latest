@@ -106,7 +106,7 @@ class Controller extends WebController
 
 
             $data['properties']=$this->getMainProperties($request);
-      $data['categoriesOnlyRoot'] = $data['categories']->where('parent_id', 0);
+      $data['categoriesOnlyRoot'] = $data['properties']->categories->where('parent_id', 0);
         $data['spacial_customer_id']=null;
         $data['title']="Додати товар";
         $data['user']=(\Auth::user()) ? \Auth::user() : null;

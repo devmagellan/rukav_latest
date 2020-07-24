@@ -24,7 +24,9 @@
               @if(isset($data['parentCat']))
                   <li><a href="/category/{{$data['parentCat']->id}}">{{$data['parentCat']->name}}</a><img src="/img/back_Icon.svg" alt=""></li>
               @endif
+			   @if(isset($data['currentCat']))
             <li>{{$data['currentCat']->name}}</li>
+					@endif
           </ul>
         </div>
       </div>
@@ -92,7 +94,7 @@
             <div id="slider-range"></div>
           </div>
           <div class="col-sm-2">
-            <button type="submit" class="product_filter_btn">Пременить</button>
+            <button type="submit" class="product_filter_btn">Применить</button>
             <button class="product_filter_clear">Очистить</button>
           </div>
         </div>
@@ -121,7 +123,7 @@
             @endif
           </div>
           <div class="col-sm-4">
-            <a href="#" class="product_item_name">
+            <a href="/ads/{{$product->id}}" class="product_item_name">
               {{$product->title}}
             </a>
             <p class="product_item_city d-none d-sm-block">

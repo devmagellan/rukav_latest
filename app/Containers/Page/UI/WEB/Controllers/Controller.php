@@ -114,6 +114,13 @@ class Controller extends WebController
         $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
         return view('page::adv.index', compact('categoriesOnlyRoot', 'data'));
     }
+	
+	public function about(GetAllPagesRequest $request)
+    {
+        $data['properties']=$this->getMainProperties($request);
+        $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
+        return view('page::about_us.index', compact('categoriesOnlyRoot', 'data'));
+    }
 
 
     public function career(GetAllPagesRequest $request)
