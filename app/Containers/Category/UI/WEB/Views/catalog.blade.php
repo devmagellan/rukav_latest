@@ -35,6 +35,11 @@
 
   <main>
     <article class="product_main">
+	@if(count($products)<1)
+		<div class="container">
+	<h3>По Вашему запросу объявлени не найдено </h3>
+	</div>
+	@else
       <div class="container">
         <form action="#" method="get" >
         <div class="row">
@@ -168,6 +173,7 @@
         {{ $products->links() }}
 
       </div>
+	  @endif
     </article>
     <article class="popular_category d-none d-sm-block">
       <div class="container">

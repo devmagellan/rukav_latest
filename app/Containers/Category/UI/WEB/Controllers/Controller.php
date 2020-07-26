@@ -83,7 +83,7 @@ if($pricesLimits[0]['max_price']==$pricesLimits[0]['min_price']){
           $query->where('price','>=',$from)
               ->where('price','<=',$to);
       }
-  })
+  })->where('status',1)
           /*->where('city',$request->input('city'))->where('administrative',$request->input('administrative'))*/
 
           ->paginate(5);

@@ -1,5 +1,4 @@
-
-@extends('homepage::layouts.layout')
+@extends('ad::layouts.layout_second')
 @section('content')
 <article class="product_main_block">
   <div class="container">

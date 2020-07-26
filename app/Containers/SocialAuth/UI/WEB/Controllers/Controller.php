@@ -151,7 +151,7 @@ class Controller extends WebController
 	public function redirectGoogle()
     {
         //return Socialite::driver($provider)->redirect();
-		return Socialite::with('googlek')->redirect();
+		return Socialite::with('google')->redirect();
     }
 	
 	public function redirectOklassniki()

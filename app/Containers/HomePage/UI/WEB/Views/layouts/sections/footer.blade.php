@@ -4,7 +4,7 @@
       <div class="col-md-4">
         <img src="{{asset('img/logo.svg')}}" alt="">
         <p class="footer_text">
-          It is a long established fact that a reader will be distracted by the readable content of a page when looking.
+          Бесплатные объявления для русскоязычных жителей Великобритании.
         </p>
         <ul class="socials">
           <li>

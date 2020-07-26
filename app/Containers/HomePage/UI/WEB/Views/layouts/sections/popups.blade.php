@@ -82,11 +82,11 @@
             <i class="fab fa-odnoklassniki"></i>
           </a>
         </li>
-		<li>
+		<!--li>
           <a href="{{ route('login.provider.pi', 'pinterest') }}">
             <i class="fab fa-pinterest"></i>
           </a>
-        </li>
+        </li-->
       </ul>
 
       <p class="privatpolitica">
@@ -522,6 +522,62 @@
           <div class="col-sm-6">
             <button type="button" class="buttonHref">вернуться</button>
           </div>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="ModalSendMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel8"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <img src="{{asset('img/close-icon.svg')}}" alt="">
+      </button>
+      <h6 class="modalTitle">Сообщение</h6>
+      <form class="formModal needs-validation" action="/connects/store" method="get" id="contact"  novalidate >
+        <input type="hidden" name="message_id" value="{{\Request::segment(2)}}">
+       @if(isset($receiver))
+        <input type="hidden" name="receiver_id" value="{{$receiver}}">
+        @endif
+        <div class="row">
+          @if(!\Auth::user())
+            <input type="hidden" name="sender_id" value="0">
+          <div class="col-sm-12">
+            <input type="text" name="sender_name" placeholder="Ваше Имя"> <span class="required">*</span>
+            <span id="firstName" class="errorBlock"></span>
+          </div>
+          <div class="col-sm-12">
+            <input type="text" name="sender_email" placeholder="Ваш email"> <span class="required">*</span>
+            <span id="lastName" class="errorBlock"></span>
+          </div>
+          <div class="col-sm-12" style="margin-top:15px">
+            <input type="tel" name="sender_phone" id="telphone5"><span class="required">*</span>
+            <span id="phone" class="errorBlock"></span>
+          </div>
+            @else
+            <input type="hidden" name="sender_id" value="{{Auth::user()->id}}">
+          @endif
+          <div class="col-sm-12">
+            <textarea name="text" id="msgr_input" placeholder="Текст сообщения"> </textarea>
+            <span id="lastName" class="errorBlock"></span>
+          </div>
+        </div>
+        <p class="form_modal_text_bottom">
+          Оригинал объявления автоматически будет приложен к этому сообщению
+        </p>
+        <div class="row">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6">
+            <button type="submit"  >Отправить сообщение
+            </button>
+          </div>
+
         </div>
       </form>
 
