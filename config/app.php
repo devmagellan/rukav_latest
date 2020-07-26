@@ -175,7 +175,8 @@ return [
 		Yajra\Datatables\DatatablesServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
-		\SocialiteProviders\Manager\ServiceProvider::class
+		\SocialiteProviders\Manager\ServiceProvider::class,
+		VladimirYuldashev\LaravelQueueRabbitMQ\LaravelQueueRabbitMQServiceProvider::class
 
     ],
 
@@ -231,6 +232,12 @@ return [
         'Image' => Intervention\Image\ImageManagerStatic::class,
         'Avatar'    => Laravolt\Avatar\Facade::class,
         // NOTE: all packages aliases must be registered inside their containers service providers
+    ],
+
+    'twilio' => [
+        'TWILIO_AUTH_TOKEN'  => env('TWILIO_AUTH_TOKEN'),
+        'TWILIO_ACCOUNT_SID' => env('TWILIO_ACCOUNT_SID'),
+        'TWILIO_PHONE'  => env('TWILIO_PHONE'),
     ],
 
 ];

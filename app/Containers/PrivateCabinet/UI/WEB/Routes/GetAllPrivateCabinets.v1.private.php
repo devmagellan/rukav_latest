@@ -1,7 +1,7 @@
 <?php
 
 /** @var Route $router */
-$router->get('private_cabinet', [
+$router->get('/private_cabinet/{type?}', [
     'as' => 'web_privatecabinet_index',
     'uses'  => 'Controller@index',
     /*'middleware' => [

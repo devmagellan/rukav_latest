@@ -12524,12 +12524,16 @@ class Controller extends WebController
      *
      * @param GetAllPrivateCabinetsRequest $request
      */
-    public function index(GetAllPrivateCabinetsRequest $request)
+    public function index(GetAllPrivateCabinetsRequest $request,$type=null)
     {
+        $toAccountType='';
+        if($type){
+            $toAccountType=$type;
+        }
 
-        $categories= Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
+        $data['properties']=$this->getMainProperties($request);
         $ads= \App\Containers\Ad\Models\Ad::where('sender',\Auth::user()->id)->with('pictures')->get();
-        $categoriesOnlyRoot = $categories->where('parent_id', 0);
+        $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
         $result=\App\Containers\Ad\Models\Wishlist::where('user_id',\Auth::user()->id)->where('active',1)->get();
         $favorits=[];
         foreach($result as $res){
@@ -12540,7 +12544,7 @@ class Controller extends WebController
         $user=\App\Containers\User\Models\User::where('id',\Auth::user()->id)->with('getBusinessAccount')->first();}
 
 
-        return view('privatecabinet::index',compact('categoriesOnlyRoot', 'categories', 'ads','favorits','user' ) );
+        return view('privatecabinet::index',compact('categoriesOnlyRoot',  'ads','favorits','data','toAccountType' ) );
     }
 
     public function messagesData(GetAllPrivateCabinetsRequest $request){

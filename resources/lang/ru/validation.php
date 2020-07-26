@@ -41,7 +41,7 @@ return [
   'distinct'       => 'Поле :attribute содержит повторяющееся значение.',
   'email'          => 'Поле :attribute должно быть действительным электронным адресом.',
   'ends_with'      => 'Поле :attribute должно заканчиваться одним из следующих значений: :values',
-  'exists'         => 'Выбранное значение для :attribute некорректно.',
+  'exists'         => 'Указанный :attribute не зарегистрирован на сайте',
   'file'           => 'Поле :attribute должно быть файлом.',
   'filled'         => 'Поле :attribute обязательно для заполнения.',
   'gt'             => [
@@ -163,7 +163,7 @@ return [
   'attributes' => [
     'name'                  => 'Имя',
     'username'              => 'Никнейм',
-    'email'                 => 'E-Mail адрес',
+    'email'                 => 'email',
     'first_name'            => 'Имя',
     'last_name'             => 'Фамилия',
     'password'              => 'Пароль',

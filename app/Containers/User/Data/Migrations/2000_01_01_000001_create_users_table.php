@@ -12,16 +12,17 @@ class CreateUsersTable extends Migration
   public function up()
   {
     Schema::create('users', function (Blueprint $table) {
+        $table->engine = 'InnoDB';
       $table->bigIncrements('id');
 
       $table->string('name')->nullable();
        $table->boolean('show_name')->default(true);
       $table->string('sername')->nullable();
-        $table->boolean('show_sername')->default(false);
+      $table->boolean('show_sername')->default(false);
       $table->string('email')->unique()->nullable();
-        $table->boolean('show_email')->default(false);
+      $table->boolean('show_email')->default(false);
       $table->string('password')->nullable();
-      $table->boolean('active')->default(true);
+      $table->boolean('active')->default(false);
       $table->boolean('confirmed')->default(false);
       $table->string('gender')->nullable();
       $table->string('birth')->nullable();
@@ -45,7 +46,9 @@ class CreateUsersTable extends Migration
         $table->string('www')->nullable();
         $table->boolean('show_www')->default(false);
         $table->string('photo')->nullable();
+        $table->string('vid_user')->nullable();
         $table->boolean('show_photo')->default(true);
+		$table->string('emailCode')->nullable();
 
       $table->rememberToken();
       $table->timestamps();

@@ -27,6 +27,7 @@ class LocalizationMiddleware extends Middleware
      */
     public function handle(Request $request, Closure $next)
     {
+		\Log::info('Localisation');
         // find and validate the lang on that request
         $lang = $this->validateLanguage($this->findLanguage($request));
 

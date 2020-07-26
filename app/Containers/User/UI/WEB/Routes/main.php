@@ -11,3 +11,33 @@ $router->post('/register', [
 ]);
 
 
+
+$router->post('/changeUserData', [
+    'as'   => '/changeUserData',
+    'uses' => 'Controller@postUpdate',
+]);
+$router->post('/changeRegisterFromSimpleUser', [
+    'as'   => 'changeRegisterFromSimpleUser',
+    'uses' => 'Controller@changeRegisterFromSimpleUser',
+]);
+
+$router->post('/changeRegisterFromRestUser', [
+    'as'   => 'changeRegisterFromSimpleUser',
+    'uses' => 'Controller@changeRegisterFromRestUser',
+]);
+
+$router->post('/confirm_email', [
+    'as'   => 'confirm_email',
+    'uses'       => 'Controller@confirmEmail',
+]);
+
+$router->post('/confirm_email_phone', [
+    'as'   => 'confirm_email_phone',
+    'uses'       => 'Controller@confirmEmailPhone',
+]);
+
+$router->post('/confirm_phone', [
+    'as'   => 'confirm_phone',
+    'uses'       => 'Controller@confirmPhone',
+]);
+

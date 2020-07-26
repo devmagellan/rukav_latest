@@ -15,8 +15,11 @@ class CreateBusinessAccountTable extends Migration
   {
     Schema::create('business_accounts', function (Blueprint $table) {
       $table->id();
+        $table->string('company_name');
       $table->string('option_user');
       $table->string('name_job');
+        $table->string('phisical_address')->nullable();
+        $table->string('phisical_post_code')->nullable();
       $table->string('address');
       $table->string('post_code');
       $table->string('reg_number')->nullable();

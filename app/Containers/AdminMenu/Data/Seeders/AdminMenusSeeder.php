@@ -362,22 +362,11 @@ class AdminMenusSeeder extends Seeder
                 'type'=>'linked',
                 'permission'=>null
             ],
-            /*32*/
             [
-                'parent_id' => 0,
-                'name' => 'Статические страницы',
-                'icon'=> 'fal fa-window',
-                'link'=> '/admin/view_static_pages',
-                'system_name'=>'view_static_pages',
-                'type'=>'not_linked',
-                'permission'=>'view_static_pages'
-            ],
-            /*33*/
-            [
-                'parent_id' => 32,
+                'parent_id' => 26,
                 'name' => 'Просмотр статических страниц',
                 'icon'=> 'fal fa-window',
-                'link'=> '/admin/view_static_pages',
+                'link'=> '/staticpages',
                 'system_name'=>'view_static_pages',
                 'type'=>'linked',
                 'permission'=>'view_static_pages'

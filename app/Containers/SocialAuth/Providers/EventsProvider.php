@@ -25,6 +25,7 @@ class EventsProvider extends ServiceProvider
         // add your listeners (aka providers) here
         'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
 		'SocialiteProviders\\Odnoklassniki\\OdnoklassnikiExtendSocialite@handle',
+		'SocialiteProviders\\Facebook\\FacebookExtendSocialite@handle',
     ],
 
 ];

@@ -3,9 +3,12 @@
 namespace App\Containers\User\UI\WEB\Controllers;
 
 use App\Containers\User\UI\WEB\Requests\RegisterUserRequest;
+use App\Containers\User\UI\WEB\Requests\ChangeFromSimpleUserRequest;
 use App\Ship\Parents\Controllers\WebController;
 use App\Containers\User\UI\WEB\Requests\GetAllUsersRequest;
 use Apiato\Core\Foundation\Facades\Apiato;
+use App\Containers\User\Services\UserService;
+use App\Containers\User\Services\SmsService;
 
 /**
  * Class Controller
@@ -15,6 +18,14 @@ use Apiato\Core\Foundation\Facades\Apiato;
 class Controller extends WebController
 {
 
+
+    protected $service;
+    protected $smsService;
+
+    public function __construct(UserService $service)
+    {
+        $this->service = $service;
+    }
   /**
    * @return  \Illuminate\Contracts\View\Factory|\Illuminate\View\View
    */
@@ -83,6 +94,12 @@ class Controller extends WebController
 
     }
   }
+
+    public function postUpdate(GetAllUsersRequest $request)
+    {
+        $user = Apiato::call('User@UpdateUserAction', [$request]);
+        return response()->json(['response'=>'success'],200);
+    }
 
   public function postSave(GetAllUsersRequest $request)
   {
@@ -157,10 +174,119 @@ var_dump($user);
 
   }
 
+
   public function registerUser(RegisterUserRequest $request)
   {
    $resultCreated = Apiato::call('User@CreateUserAccountAction', [$request]);
    return $resultCreated;
   }
+
+  public function confirmEmail(GetAllUsersRequest $request){
+      if($request->input('emailConfirmation')!='' && $request->input('emailConfirmation')==session()->get('emailVerificationCode') ){
+		  $tmp_user=\App\Containers\User\Models\TmpUser::where('id',session()->get('emailVerificationCodeUser'))->first();
+          // replace the data
+        $staff = $tmp_user->replicate();
+
+        // make into array for mass assign. 
+        //make sure you activate $guarded in your Staff model
+        $staff = $tmp_user->toArray();
+
+        $user=\App\Containers\User\Models\User::firstOrCreate($staff);
+		$user->active=1;
+		$user->save();
+          //$user=\App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->first();
+          $data= new \StdClass();
+          $data->email=$user->email;
+          $data->password=session()->get('emailVerificationCodePassword');
+	  
+		  \Auth::guard('web')->loginUsingId($user->id, true);
+          return response()->json(['response'=>'success'],200);
+      }
+      else{
+          return response()->json(['response'=>'error'],400);
+      }
+  }
+
+
+    public function confirmEmailPhone(GetAllUsersRequest $request){
+        $error=[];
+     // var_dump(session()->get('emailVerificationCode'));
+        if($request->input('emailConfirmation')!='' && $request->input('emailConfirmation')==session()->get('emailVerificationCode') ){
+            $emailConfirmed=true;
+        }
+        else{
+            //var_dump(1);
+            $emailConfirmed=false;
+           $error[]='error emailCode';
+        }
+
+$smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',session()->get('emailVerificationTelephone'))->orderBy('id','desc')->first();
+        if($request->input('phoneConfirmationSecond')!='' && $request->input('phoneConfirmationSecond')==$smsCode->code ){
+            $phoneConfirmed=true;
+        }
+        else{
+            //var_dump(2);
+            $phoneConfirmed=false;
+            $error[]='error SmsCode';
+            //return response()->json(['response'=>'error SmsCode'],403);
+        }
+
+
+        if($emailConfirmed && $phoneConfirmed){
+		$tmp_user=\App\Containers\User\Models\TmpUser::where('id',session()->get('emailVerificationCodeUser'))->first();
+          // replace the data
+        $staff = $tmp_user->replicate();
+
+        // make into array for mass assign. 
+        //make sure you activate $guarded in your Staff model
+        $staff = $tmp_user->toArray();
+
+        $user=\App\Containers\User\Models\User::firstOrCreate($staff);
+		$user->active=1;
+		$user->save();
+          \Auth::guard('web')->loginUsingId($user->id, true);
+            return response()->json(['response'=>'success'],200);
+        }
+        return response()->json(['response'=>$error],403);
+    }
+
+    public function changeRegisterFromSimpleUser(ChangeFromSimpleUserRequest $request){
+        $this->smsService=new SmsService();
+        $message=$this->smsService->store($request);
+        session()->put('emailVerificationTelephone',$request->phone);
+        $collection=$request->all();
+        session()->put('updatedUser',$collection);
+        return response()->json(['response'=>'success'],200);
+    }
+
+    public function changeRegisterFromRestUser(ChangeFromSimpleUserRequest $request){
+        Apiato::call('User@ChangeUserAccountAction', [$request]);
+        session()->flash('message', 'Данные успешно обновлены!');
+        return response()->json(['response'=>'success'],200);
+    }
+
+    public function confirmPhone(GetAllUsersRequest $request){
+        \Log::info('emailVerificationTelephone'.session()->get('emailVerificationTelephone'));
+        $error=[];
+        $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',session()->get('emailVerificationTelephone'))->orderBy('id','desc')->first();
+        if($request->input('phoneConfirmation')!='' && $request->input('phoneConfirmation')==$smsCode->code ){
+            \Log::info('emailVerificationTelephoneConfirm');
+
+            $phoneConfirmed=true;
+        }
+        else{
+            $phoneConfirmed=false;
+            $error[]='error SmsCode';
+        }
+
+
+        if($phoneConfirmed){
+            $request=session()->get('updatedUser');
+            Apiato::call('User@ChangeUserAccountAction', [$request]);
+            session()->flash('message', 'Данные успешно обновлены!');
+            return response()->json(['response'=>'success'],200);
+        }
+        return response()->json(['response'=>$error],403);
+    }
 
 }

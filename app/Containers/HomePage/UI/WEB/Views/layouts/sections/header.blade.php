@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-2 col-6">
-        <a href="#" class="logo">
+        <a href="/" class="logo">
           <img src="{{asset('/img/logo.svg')}}" alt="">
         </a>
       </div>
@@ -21,10 +21,11 @@
           <img src="{{asset('/img/loupe.svg')}}" alt="" class="form_category_imp-loupe">
           <img src="{{asset('/img/pin.svg')}}" alt="" class="form_category_imp-pin">
 
-          <div class="search">
-
+          <div class="search" style="position:relative">
+            <div style="position:absolute;left:250px;top:-20px">
+            <input type="checkbox" style="display:inline-block !important" id="uk_only" name="uk_only" checked> <label for="uk_only"> искать только по UK</label></div>
             <input type="text" id="search-field" name="search" class="form_category_search" placeholder="Я ищу...">
-            <input type="text" id="location_search" name="location" class="form_category_search-city" placeholder="Город или посткод">
+            <input type="text" id="location_search" name="location" class="form_category_search-city" placeholder="Город или посткод UK">
             <button class="form_category_btn" id="go">Поиск</button>
 
           </div>
@@ -39,7 +40,7 @@
       </div>
       @if(!\Illuminate\Support\Facades\Auth::user())
       <div class="col-md-2 col-2">
-        <a href="#" class="add_ad" data-toggle="modal" data-target="#confirmEmailPhone">
+        <a href="#" class="add_ad" data-toggle="modal" data-target="#youAreNotLeggedIn">
           <span class="plus">+</span>
           <span>Подать объявление</span>
         </a>
@@ -59,20 +60,23 @@
           </a>
         </div>
       @else
-        @if(isset($user) )
+        @if(isset($data['properties']->user) )
         <div class="col-md-1 col-2">
           <a href="#" class="user_cabinet_login" >
-            @if(isset($user) && $user->avatar)
-              <img style="height:40px;border-radius: 50%;" src="/storage/avatars/{{ $user->avatar }}" />
-              @elseif(isset($user) && $user->name )
-             <img style="height:40px" src="{{ \Avatar::create($user->name.' '.$user->sername)->toBase64() }}" />
+		  
+		  
+		  
+            @if(isset($data['properties']->user) && $data['properties']->user->avatar)
+              <img style="height:40px;border-radius: 50%;" src="@if(substr($data['properties']->user->avatar, 0, 4)!='http')/storage/avatars/@endif{{ $data['properties']->user->avatar }}" />
+              @elseif(isset($data['properties']->user) && $data['properties']->user->name )
+             <img style="height:40px" src="{{ \Avatar::create($data['properties']->user->name.' '.$data['properties']->user->sername)->toBase64() }}" />
             @endif
           </a>
           <div class="user_cabinet_dropdown">
 
             <img class="user_cabinet_dropdown_bg" src="/img/cabinet_dropdownbg.png" alt="">
             <p class="user_cabinet_name">
-              {{$user->name}} {{$user->sername}}
+              {{$data['properties']->user->name}} {{$data['properties']->user->sername}}
             </p>
             <a href="/private_cabinet#myads" class="user_cabinet_item">
               <div class="user_cabinet_icon">
@@ -88,7 +92,7 @@
                 Мои объявления
               </p>
             </a>
-            <a href="#" class="user_cabinet_item">
+            <a href="/private_cabinet#messages" class="user_cabinet_item">
               <div class="user_cabinet_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">
@@ -111,7 +115,7 @@
                 Сообщения
               </p>
             </a>
-            <a href="#" class="user_cabinet_item">
+            <a href="/private_cabinet#favorits" class="user_cabinet_item">
               <div class="user_cabinet_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path class="svg_path" d="M17.5 13.737C17.2843 13.737 17.1094 13.9119 17.1094 14.1276V18.9658L10.1803 15.3603C10.0673 15.3015 9.93277 15.3015 9.81969 15.3603L2.89062 18.9658V7.67578C2.89062 7.46004 2.7157 7.28516 2.5 7.28516C2.2843 7.28516 2.10938 7.46004 2.10938 7.67578V19.6093C2.10938 19.7459 2.18063 19.8724 2.2973 19.9433C2.4141 20.0141 2.5593 20.0188 2.68031 19.9559L10 16.1472L17.3197 19.9559C17.3763 19.9853 17.4382 20 17.5 20C17.5704 20 17.6405 19.981 17.7027 19.9433C17.8194 19.8724 17.8906 19.7459 17.8906 19.6093V14.1276C17.8906 13.9119 17.7157 13.737 17.5 13.737Z" fill="white"/>
@@ -127,7 +131,7 @@
                 Избранное
               </p>
             </a>
-            <a href="#" class="user_cabinet_item">
+            <a href="/private_cabinet#my_profile" class="user_cabinet_item">
               <div class="user_cabinet_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">
@@ -153,7 +157,7 @@
                 Мой профиль
               </p>
             </a>
-            <a href="#" class="user_cabinet_item">
+            <a href="/help/1" class="user_cabinet_item">
               <div class="user_cabinet_icon">
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path class="svg_path" d="M11 1C5.48577 1 1 5.48577 1 11C1 16.5142 5.48577 21 11 21C16.5142 21 21 16.5142 21 11C21 5.48577 16.5142 1 11 1ZM11 20.2308C5.91038 20.2308 1.76923 16.0896 1.76923 11C1.76923 5.91038 5.91038 1.76923 11 1.76923C16.0896 1.76923 20.2308 5.91038 20.2308 11C20.2308 16.0896 16.0896 20.2308 11 20.2308Z" fill="#A269F7" stroke="#A269F7" stroke-width="0.1"/>
@@ -246,9 +250,9 @@
                       }
                   }
     }
-    if(isset($categories)){
-     $rec= new Recursion;
-     $result = $rec->get_cat($categories);
+    if(isset($data['properties']->categories)){
+     $rec = new Recursion;
+     $result = isset($rec) ? $rec->get_cat($data['properties']->categories):'';
     //Выводи каталог на экран с помощью рекурсивной функции
     }
   @endphp
@@ -257,7 +261,9 @@
       <div class="row">
         <div class="col-md-12">
           <ul class="category_dropdown_main_list">
+		  @if(isset($rec))
             {{ $rec->view_cat($result,0,0)}}
+		@endif
           </ul>
         </div>
       </div>

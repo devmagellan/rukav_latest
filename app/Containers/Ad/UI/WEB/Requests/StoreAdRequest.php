@@ -60,7 +60,7 @@ class StoreAdRequest extends Request
       'phone' => 'required',
         'city' => 'required',
       'name' => 'required|between:2,10',
-      'files' => 'required|max:100000',
+      'files.*' => 'required|image|max:7000',
       'category_id' => 'required'
     ];
   }
@@ -69,6 +69,9 @@ class StoreAdRequest extends Request
     {
         return [
             'city.required' => 'Вам необходимо выбрать местоположение выбрав google location в полях секции Местоположение',
+            'files.required' => "You must use the 'Choose file' button to select which file you wish to upload",
+            'files.*.max' => "Maximum file size to upload is 8MB (8192 KB). If you are uploading a photo, try to reduce its resolution to make it under 8MB",
+            'files.*.image' => "Not an image"
 
         ];
     }

@@ -4,7 +4,7 @@
 namespace App\Containers\User\UI\WEB\Requests;
 
 use App\Ship\Parents\Requests\Request;
-
+use Illuminate\Validation\Rule;
 class RegisterUserRequest extends Request
 {
 
@@ -46,12 +46,13 @@ class RegisterUserRequest extends Request
       'firstName' => 'required|between:2,30',
       'lastName' => 'required|between:2,30',
       'country' => 'required|max:30',
-      'phone' => 'required|max:30|unique:users,phone',
+      'phone' =>  'required_if:vid_user,Организация|required_if:vid_user,Предприниматель|required_if:vid_user,Компания|max:30|nullable||unique:users,phone',
       'password' => 'required|between:6,30',
       'email' => 'required|email|unique:users,email',
       'nameJob' => 'required_if:vid_user,Бизнес',
       'address' => 'required_if:vid_user,Бизнес',
       'postCode' => 'required_if:vid_user,Бизнес',
+      'vid_user' => 'required|max:30',
     ];
 
     $optionalRules = [

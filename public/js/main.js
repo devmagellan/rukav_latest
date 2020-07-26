@@ -136,7 +136,14 @@ $(document).ready(function(){
     });
 
     $('.button_show_reg').on('click', function () {
+        console.log('Registration')
         $('#ModalReg').modal('show');
+        $('#ModalIn').modal('hide');
+    });
+    $('#enterButton').on('click', function () {
+        console.log('LogIn')
+        $('#ModalReg').modal('hide');
+        $('#ModalIn').modal('show');
     });
 
     $('.select_company select').on('change', function () {
@@ -160,13 +167,48 @@ $(document).ready(function(){
     });
 
     $('#private').on('click', function () {
+        $('.organisation_modal_block').hide();
         $('.company_modal_block').hide();
+        $('.individual_modal_block').hide();
         $('.socials_reg').show();
+        $('.phoneDiv').hide();
     });
 
-    $('#buisnes').on('click', function () {
-        $('.company_modal_block').show();
+    $('#organisation').on('click', function () {
+        $('.organisation_modal_block').show();
+        $('.company_modal_block').hide();
+        $('.individual_modal_block').hide();
         $('.socials_reg').hide();
+        $('.phoneDiv').show();
+        $('.company_modal_block').find('input[name="www"]').prop( "disabled", true );
+        $('.company_modal_block').find('input[name="address"]').prop( "disabled", true );
+        $('.company_modal_block').find('input[name="postCode"]').prop( "disabled", true );
+        $('.individual_modal_block').find('input[name="www"]').prop( "disabled", true );
+        $('.individual_modal_block').find('input[name="address"]').prop( "disabled", true );
+        $('.individual_modal_block').find('input[name="postCode"]').prop( "disabled", true );
+
+    });
+
+    $('#company').on('click', function () {
+        $('.company_modal_block').show();
+        $('.organisation_modal_block').hide();
+        $('.individual_modal_block').hide();
+        $('.socials_reg').hide();
+        $('.phoneDiv').show();
+        $('.organisation_modal_block').find('input[name="www"]').prop( "disabled", true );
+        $('.organisation_modal_block').find('input[name="address"]').prop( "disabled", true );
+        $('.organisation_modal_block').find('input[name="postCode"]').prop( "disabled", true );
+        $('.individual_modal_block').find('input[name="www"]').prop( "disabled", true );
+        $('.individual_modal_block').find('input[name="address"]').prop( "disabled", true );
+        $('.individual_modal_block').find('input[name="postCode"]').prop( "disabled", true );
+    });
+
+    $('#individual').on('click', function () {
+        $('.company_modal_block').hide();
+        $('.organisation_modal_block').hide();
+        $('.individual_modal_block').show();
+        $('.socials_reg').hide();
+        $('.phoneDiv').show();
     });
 
 

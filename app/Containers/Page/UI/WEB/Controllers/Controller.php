@@ -102,25 +102,32 @@ class Controller extends WebController
     }
 
 
+    public function confidencial(GetAllPagesRequest $request)
+    {
+        $data['properties']=$this->getMainProperties($request);
+        return view('page::politics.confidencial', compact('categoriesOnlyRoot', 'categories','user','data'));
+    }
+
     public function adv(GetAllPagesRequest $request)
     {
-        $categories= Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
-        $categoriesOnlyRoot = $categories->where('parent_id', 0);
-
-        if(\Auth::user()){
-            $user=\App\Containers\User\Models\User::where('id',\Auth::user()->id)->first();}
-        return view('page::adv.index', compact('categoriesOnlyRoot', 'categories','user'));
+        $data['properties']=$this->getMainProperties($request);
+        $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
+        return view('page::adv.index', compact('categoriesOnlyRoot', 'data'));
+    }
+	
+	public function about(GetAllPagesRequest $request)
+    {
+        $data['properties']=$this->getMainProperties($request);
+        $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
+        return view('page::about_us.index', compact('categoriesOnlyRoot', 'data'));
     }
 
 
     public function career(GetAllPagesRequest $request)
     {
-        $categories= Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
-        $categoriesOnlyRoot = $categories->where('parent_id', 0);
-
-        if(\Auth::user()){
-            $user=\App\Containers\User\Models\User::where('id',\Auth::user()->id)->first();}
-        return view('page::career.index', compact('categoriesOnlyRoot', 'categories','user'));
+        $data['properties']=$this->getMainProperties($request);
+        $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
+        return view('page::career.index', compact('categoriesOnlyRoot', 'data'));
     }
 
 

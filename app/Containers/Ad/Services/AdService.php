@@ -31,7 +31,13 @@ class AdService
 
   public function savePhoto($data, $adId)
   {
+\Log::info('beforeValidation');
+      $validator = \Validator::make($data->all(), [
+          'files' => 'max:500',
+      ]);
+      \Log::info('AfterbeforeValidation');
     foreach ($data->file('files') as $file) {
+
       $filePath = Storage::disk('public')->put('', $file);
       $this->createPicture($filePath, $adId);
     }

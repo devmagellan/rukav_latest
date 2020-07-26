@@ -32,14 +32,13 @@ class Controller extends WebController
    */
   public function index(GetAllCategoriesRequest $request, $id)
   {
-    //$categories = Apiato::call('Category@GetAllCategoriesAction', [$request]);
-      $categories= Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
-      $categoriesOnlyRoot = $categories->where('parent_id', 0);
-      $user=null;
-      if(\Auth::user()){
-          $user=\App\Containers\User\Models\User::where('id',\Auth::user()->id)->first();}
-
-
+      $data['properties']=$this->getMainProperties($request);
+      $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
+      $data['currentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$id)->first();
+      $data['parentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$data['currentCat']->parent_id)->first();
+      if($data['parentCat']){
+          $data['grandParentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$data['parentCat']->parent_id)->first();
+      }
       $currentPage = $request->input('page');
       $from=$request->input('price_start');
       $to=$request->input('price_end');
@@ -84,12 +83,12 @@ if($pricesLimits[0]['max_price']==$pricesLimits[0]['min_price']){
           $query->where('price','>=',$from)
               ->where('price','<=',$to);
       }
-  })
+  })->where('status',1)
           /*->where('city',$request->input('city'))->where('administrative',$request->input('administrative'))*/
 
           ->paginate(5);
     //$products=\App\Containers\Ad\Models\Ad::where('category_id',$id)->with('pictures')->paginate(4);
-      return view('category::catalog',  compact('products','categoriesOnlyRoot', 'categories','user','pricesLimits'));
+      return view('category::catalog',  compact('products','categoriesOnlyRoot','pricesLimits','data'));
    // return $link . ' ' . $id;
   }
 

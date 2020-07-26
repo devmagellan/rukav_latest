@@ -20,6 +20,8 @@ $router->post('/users/data', [
     ],
 ]);
 
+
+
 $router->post('/user/email_check', [
     'as'   => 'users_list_dashboard',
     'uses'       => 'Controller@emailCheck',

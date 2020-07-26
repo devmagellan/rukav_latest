@@ -16,6 +16,7 @@ class CreateUserAccountWithBusinessAccountTask
    * @var UserService
    */
   private $userService;
+protected $user;
 
   public function __construct(BusinessAccountService $service, UserService $userService)
   {
@@ -26,8 +27,10 @@ class CreateUserAccountWithBusinessAccountTask
   public function run($data)
   {
     DB::transaction(function () use ($data) {
-      $user = $this->userService->createUser($data);
-      $this->service->createBusinessAccount($data, $user->id);
+      $this->user = $this->userService->createUser($data);
+      $this->service->createBusinessAccount($data, $this->user->id);
     });
+    return $this->user;
+
   }
 }

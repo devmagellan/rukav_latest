@@ -4,16 +4,16 @@
       <div class="col-md-4">
         <img src="{{asset('img/logo.svg')}}" alt="">
         <p class="footer_text">
-          It is a long established fact that a reader will be distracted by the readable content of a page when looking.
+          Бесплатные объявления для русскоязычных жителей Великобритании.
         </p>
         <ul class="socials">
           <li>
-            <a href="#">
+            <a target="_blank" href="http://facebook.com/rukav.co.uk">
               <i class="fab fa-facebook-f"></i>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a target="_blank" href="http://instagram.com/rukav.co.uk">
               <i class="fab fa-instagram"></i>
             </a>
           </li>
@@ -23,7 +23,7 @@
         <h5>Навигация</h5>
         <ul class="menu_footer">
           <li>
-            <a href="#">О нас</a>
+            <a href="/about_us">О нас</a>
           </li>
           <li>
             <a href="/adv">Реклама на Rukav</a>
@@ -46,7 +46,7 @@
         <h5>Пользователю</h5>
         <ul class="menu_footer">
           <li>
-            <a href="#">Помощь</a>
+            <a href="/help/1">Помощь</a>
           </li>
           <li>
             <a href="#">Безопасность</a>
@@ -67,9 +67,9 @@
       </div>
       <div class="col-md-3">
         <h5>Мобильное приложение Rukav</h5>
-        <a href="#" class="link_footer">
+        <!--a href="#" class="link_footer">
           <img src="{{asset('img/button_playstore.svg')}}" alt="">
-        </a>
+        </a-->
         <a href="#" class="link_footer">
           <img src="{{asset('img/button_appstore.svg')}}" alt="">
         </a>
