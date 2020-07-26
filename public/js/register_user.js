@@ -112,7 +112,11 @@ $(document).ready(function () {
         var current_type = $(e.target).find('input[name="current_type"]').val()
         console.log('changeUserTypeForm', current_type);
         var formData = $('#changeRegisterForm').serialize();
-        if (current_type == 'Частная') {
+        if (window.location.href.indexOf("to_individual") >= 0 || window.location.href.indexOf("to_company") >= 0 || window.location.href.indexOf("to_organisation")>= 0 ) {
+console.log(window.location.href.indexOf("to_individual")>= 0)
+            console.log(window.location.href.indexOf("to_company")>= 0)
+            console.log(window.location.href.indexOf("to_organisation")>= 0)
+      if (current_type == 'Частная') {
             $.ajax({
                 method: 'post',
                 url: '/changeRegisterFromSimpleUser',
@@ -146,8 +150,32 @@ $(document).ready(function () {
                 }
             });
         }
-    });
+        }
+        else{
+            $.ajax({
+                method: 'post',
+                url: '/changeUserData',
+                data: formData,
+                success: function (data) {
+                    //location.reload();
+                    console.log('Updated To session saved', data)
+$('#updated_data').show();
+                    goToByScroll('updated_data');
+                },
+                error: function (errors) {
 
+                }
+            });
+        }
+    });
+    function goToByScroll(id) {
+        // Remove "link" from the ID
+        id = id.replace("link", "");
+        // Scroll
+        $('html,body').animate({
+            scrollTop: $("#" + id).offset().top
+        }, 'slow');
+    }
 
         $(".phoneConfirmationForm").bind('submit', function (e) {
             e.preventDefault();

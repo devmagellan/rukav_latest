@@ -10,6 +10,12 @@ $router->post('/register', [
   'uses' => 'Controller@registerUser',
 ]);
 
+
+
+$router->post('/changeUserData', [
+    'as'   => '/changeUserData',
+    'uses' => 'Controller@postUpdate',
+]);
 $router->post('/changeRegisterFromSimpleUser', [
     'as'   => 'changeRegisterFromSimpleUser',
     'uses' => 'Controller@changeRegisterFromSimpleUser',

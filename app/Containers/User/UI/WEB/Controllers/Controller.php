@@ -95,6 +95,12 @@ class Controller extends WebController
     }
   }
 
+    public function postUpdate(GetAllUsersRequest $request)
+    {
+        $user = Apiato::call('User@UpdateUserAction', [$request]);
+        return response()->json(['response'=>'success'],200);
+    }
+
   public function postSave(GetAllUsersRequest $request)
   {
     /*$user['values'] = ['name' => $request->input('customer_name'),

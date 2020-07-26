@@ -20,6 +20,7 @@
     @if(\Session::has('message'))
       <p class="alert {{ \Session::get('alert-class', 'alert-info') }}">{{ \Session::get('message') }}</p>
     @endif
+      <p id="updated_data" style="display:none" class="alert  alert-info ">Ваши данные обновлены</p>
     <div class="choosen" id="my-profile">
       <div class="container">
         <div class="row">
