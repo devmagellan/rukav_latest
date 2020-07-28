@@ -23,6 +23,7 @@ class UpdateUserAction extends Action
      */
     public function run(DataTransporter $data): User
     {
+
         $userData = [
             //'password'             => $data->password ? Hash::make($data->password) : Hash::make('PasswordYouCanChangeIT'),
             'name'                 => $data->name,
@@ -44,8 +45,16 @@ class UpdateUserAction extends Action
             'social_expires_in'    => $data->expiresIn,
             'social_refresh_token' => $data->refreshToken,
             'social_token_secret'  => $data->tokenSecret,
-        ];
 
+            'skype'=>$data->skype,
+        'show_skype'=>$data->show_skype,
+        'facebook'=>$data->facebook,
+        'show_facebook'=>$data->show_facebook,
+        'instagram'=>$data->instagram,
+        'show_instagram'=>$data->show_instagram,
+        'www'=>$data->www,
+        'show_www'=>$data->show_www,
+        ];
         // remove null values and their keys
         $userData = array_filter($userData);
 
