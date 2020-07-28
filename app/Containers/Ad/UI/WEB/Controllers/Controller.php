@@ -12777,7 +12777,7 @@ class Controller extends WebController
       $nestedData [5] = $ad->getSender->name . ' ' . $ad->getSender->sername;
       $nestedData [6] = $ad->getSender->email;
       $nestedData [7] = ($ad->phone) ? $ad->phone : 'нет';
-      $nestedData [8] = $rubrik->name;
+      $nestedData [8] = ($rubrik) ? $rubrik->name : 'NoCategoryName';
       $nestedData [9] = 'second';
       $nestedData [10] = 'third';
       $nestedData [11] = ($ad->updated_at) ? $ad->updated_at->toDateTimeString() : $ad->created_at->toDateTimeString();
