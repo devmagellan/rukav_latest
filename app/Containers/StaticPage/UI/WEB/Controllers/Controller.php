@@ -109,6 +109,13 @@ class Controller extends WebController
 
          // ..
     }
+	
+	public function getPage(GetAllStaticPagesRequest $request,$page){
+	
+        $data['firstHelpPage']=\App\Containers\StaticPage\Models\StaticPage::where('link',$page)->first();
+        $data['properties']=$this->getMainProperties($request);
+        return view('staticpage::static.index', compact('data'));
+	}
 
     public function updateStaticPageStatus(GetAllStaticPagesRequest $request){
 

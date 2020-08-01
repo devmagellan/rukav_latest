@@ -23,7 +23,7 @@
             <td class="customer_name">{{$staticpage->name}}
 
             </td>
-            <td class="customer_name">{{$staticpage->link}}
+            <td class="staticpage_link">{{$staticpage->link}}
 
             </td>
             <td class="customer_sditor">{{$staticpage->editor}}</td>
@@ -78,7 +78,9 @@
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
             var manager =  $(this).parent().parent().find('.customer_manager').find('.is_manager').val()
             var name= $(this).parent().parent().find('.customer_name').text()
+			var link= $(this).parent().parent().find('.staticpage_link').text()
             $('#staticpage_name').val(name)
+			$('#staticpage_link').val(link)
             var active= $(this).parent().parent().find('.company_switch').find('.custom-switch').find('.active_static_page_switch')[0].checked;
             console.log(active)
             console.log($(this).parent().find('input').val())

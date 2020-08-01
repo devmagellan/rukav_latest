@@ -1,8 +1,17 @@
 @foreach ($locations as $key=>$location)
-
         <a style="cursor:pointer">
-            <div class="cat_block" style="border-bottom:1px solid #000">
-                <input type="hidden" value="{{$location->id}}">
+
+<?$hasParent=\App\Containers\Ad\Models\BritainRegion::where('parent_id',$location->id)->first();?>
+@if(!$hasParent)
+
+                        <div class="cat_block " style="border-bottom:1px solid #000">
+@else
+                <div class="cat_block bodya" style="border-bottom:1px solid #000">
+                    @endif
+
+
+			
+                <input type="hidden" value="{{$location->id}}">  
                 {{$location->name}}
 
 

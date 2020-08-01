@@ -82,12 +82,35 @@
             <i class="fab fa-odnoklassniki"></i>
           </a>
         </li>
+		
 		<!--li>
           <a href="{{ route('login.provider.pi', 'pinterest') }}">
             <i class="fab fa-pinterest"></i>
           </a>
         </li-->
       </ul>
+	  <style>
+	  #sign-in-with-apple {
+	display: block;
+    font-family:'SF Pro Text' !important;
+    text-align: center;
+    height: 40px !important;
+    padding: 25%;
+    padding-top: 2% !important;
+    padding-bottom: 2% !important;
+    background-color: #000;
+    border: none;
+    border-radius: 0px;
+    color: #fff;
+	width:50% !important;
+	margin-left:25%;
+	text-decoration:none !important;
+	
+	  }
+	  </style>
+	  <div style="margin-top:10px" class="apple_id">
+		@signInWithApple('black', false, 'sign-in', 40)
+		</div>
 
       <p class="privatpolitica">
         Авторизуясь на сайте, Вы принимаете <a href="/help/1">Пользовательское соглашение,</a> <a href="/help/1">Политику

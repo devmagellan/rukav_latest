@@ -98,7 +98,7 @@ protected $emailCode;
      * @var array
      */
     protected $hidden = [
-        'password',
+        //'password',
         'remember_token',
     ];
 

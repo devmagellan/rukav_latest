@@ -10,3 +10,4 @@ $router->get('redirect/facebook', 'Controller@redirectFacebook')->name('login.pr
 $router->get('redirect/google', 'Controller@redirectGoogle')->name('login.provider.google');
 
 $router->get('redirect/pinterest', 'Controller@redirectPinterest')->name('login.provider.pi');
+$router->get('redirect/apple', 'AppleController@login')->name('login.provider.apple');
