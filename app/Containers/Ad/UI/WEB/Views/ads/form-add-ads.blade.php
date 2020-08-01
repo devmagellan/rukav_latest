@@ -910,6 +910,13 @@ $('.cat_name').click(function(){
   $('.cat_block_1 .cat_block').click(function(){
       console.log('this=>',$(this))
   })
+
+  $('.select_category').change(function(){
+      //Услуги/Перевозки/Такси
+      if($(this).val()=='Услуги/Перевозки/Такси'){
+          console.log('Услуги/Перевозки/Такси')
+      }
+  })
 </script>
 
 
