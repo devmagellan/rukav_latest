@@ -38,4 +38,14 @@ class StaticPage extends Model
         return $this->hasOne(\App\Containers\StaticPage\Models\StaticPageGroup::class,'id','group');
 
     }
+
+    public function getType(){
+        return $this->hasOne(\App\Containers\StaticPage\Models\StaticPageType::class,'id','type');
+
+    }
+
+    public function getSidebar(){
+        return $this->hasMany(\App\Containers\StaticPage\Models\StaticPageSidebar::class,'staticpage_id','id');
+
+    }
 }

@@ -550,7 +550,7 @@ $('#managerSwitch').change(function(){
                     method: 'POST',
                     dataType: 'json',
                     async: false,
-                    url: '/staticpage_groups/update',
+                    url: '/staticpage_sidebar/update',
                     data: { form:form.serialize()
 
                     },
