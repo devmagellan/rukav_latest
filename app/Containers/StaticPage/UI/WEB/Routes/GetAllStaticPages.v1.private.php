@@ -37,6 +37,10 @@ $router->post('/staticpage/create', [
     ],
 ]);
 
+$router->get('/static/{name}', [
+    'as' => 'static_page_get',
+    'uses'  => 'Controller@getPage',
+]);
 
 $router->post('/staticpages_groups/groups/get', [
     'as' => 'staticpage_get',

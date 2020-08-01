@@ -1204,12 +1204,12 @@
       }
       else{var cnt='gb'}
 
-$('#telphone5,#telphone6').intlTelInput(
-    {
-    onlyCountries:[cnt],
-        preferredCountries:""
-    }
-)
+//$('#telphone5,#telphone6').intlTelInput(
+//    {
+//    onlyCountries:[cnt],
+//        preferredCountries:""
+//    }
+//)
 
 
       function reloadMessages(){

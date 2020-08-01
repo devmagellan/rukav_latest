@@ -211,34 +211,39 @@ $(document).ready(function(){
         $('.phoneDiv').show();
     });
 
+    var countryData = window.intlTelInputGlobals.getCountryData(),
+        input = document.querySelector("#telphone"),
+        addressDropdown = document.querySelector("#address-country");
 
-    var countryData = $.fn.intlTelInput.getCountryData(),
-        telInput = $("#telphone"),
-        addressDropdown = $("#address-country");
-
-    telInput.intlTelInput({
-
-        nationalMode: true,
-        defaultCountry: "ua",
-        utilsScript: "/js/utils.js" //для форматирования/плейсхолдера и т.д.
+// init plugin
+    var iti = window.intlTelInput(input, {
+        separateDialCode: true,
+        loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
+        initialCountry: "gb"
     });
 
-    $.each(countryData, function(i, country) {
-        addressDropdown.append($("<option></option>").attr("value", country.iso2).text(country.name));
+// populate the country dropdown
+    for (var i = 0; i < countryData.length; i++) {
+        var country = countryData[i];
+        var optionNode = document.createElement("option");
+        optionNode.value = country.iso2;
+        var textNode = document.createTextNode(country.name);
+        optionNode.appendChild(textNode);
+        addressDropdown.appendChild(optionNode);
+    }
+// set it's initial value
+    addressDropdown.value = iti.getSelectedCountryData().iso2;
+
+// listen to the telephone input for changes
+    input.addEventListener('countrychange', function(e) {
+        addressDropdown.value = iti.getSelectedCountryData().iso2;
     });
 
-    telInput.change(function() {
-        var countryCode = telInput.intlTelInput("getSelectedCountryData").iso2;
-        addressDropdown.val(countryCode);
+// listen to the address dropdown for changes
+    addressDropdown.addEventListener('change', function() {
+        iti.setCountry(this.value);
     });
 
-    telInput.change();
-
-// отслеживаем изменение страны в выпадающем списке
-    addressDropdown.change(function() {
-        var countryCode = $(this).val();
-        telInput.intlTelInput("selectCountry", countryCode);
-    });
 
     $('#show_password').on('click', function(){
 
@@ -257,7 +262,8 @@ $(document).ready(function(){
         $(this).parent().addClass('category_link_active');
         $(this).closest(".category_dropdown_main_list-li").addClass('category_link_active');
         $(this).next().show();
-        $('.category_dropdown').innerHeight($(this).next('.category_dropdown_sub_list').height());
+        $('.category_dropdown').innerHeight($(this).next('ul.category_dropdown_sub_list').height());
+        console.log($(this).next('ul.category_dropdown_sub_list').height());
     });
 
     $('.btn_category').on('click', function(e){
@@ -317,23 +323,32 @@ $(document).ready(function(){
         }]
     });
 
-    $('#telphone2').intlTelInput({
-        nationalMode: true,
-        defaultCountry: "ua",
-        utilsScript: "/js/utils.js" //для форматирования/плейсхолдера и т.д.
-    });
+    var input2 = document.querySelector("#telphone2");
+    if(input2!=null){
+        var iti = window.intlTelInput(input2, {
+            separateDialCode: true,
+            loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
+            initialCountry: "gb"
+        });
+    }
 
-    $('#telphone5').intlTelInput({
-        nationalMode: true,
-        defaultCountry: "ua",
-        utilsScript: "/js/utils.js" //для форматирования/плейсхолдера и т.д.
-    });
+    var input5 = document.querySelector("#telphone5");
+    if(input5!=null) {
+        var iti = window.intlTelInput(input5, {
+            separateDialCode: true,
+            loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
+            initialCountry: "gb"
+        });
+    }
 
-    $('#telphone6').intlTelInput({
-        nationalMode: true,
-        defaultCountry: "ua",
-        utilsScript: "/js/utils.js" //для форматирования/плейсхолдера и т.д.
-    });
+    var input6 = document.querySelector("#telphone6");
+    if(input6!=null) {
+        var iti = window.intlTelInput(input6, {
+            separateDialCode: true,
+            loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
+            initialCountry: "gb"
+        });
+    }
 
     function readURL(input) {
 
@@ -466,9 +481,6 @@ $(document).ready(function(){
 
     });
 
-
-
-
     $('.btn-wishlist').on('click', function () {
         $(this).toggleClass('active');
     });
@@ -477,9 +489,9 @@ $(document).ready(function(){
         $(this).toggleClass('active');
     });
 
-    $("input[type='tel']").on("blur", function () {
-        $(this).val("+" + $(".country[class*='active']").attr("data-dial-code") + $(this).val());
-    });
+    // $("input[type='tel']").on("blur", function () {
+    //     $(this).val("+" + $(".country[class*='active']").attr("data-dial-code") + $(this).val());
+    // });
 
     $(function () {
         $("#slider-range").slider({
@@ -504,5 +516,67 @@ $(document).ready(function(){
         console.log('12345');
         $(this).parent().next().slideDown();
     });
+
+    ScreenWidth = screen.width;
+
+    $('.cat_block_1').on('click', function () {
+        if(ScreenWidth < 720){
+            $(".block_main_categories_wrapper1").hide();
+            $(".block_main_categories_wrapper2").show();
+        }
+    });
+    $('.block_main_categories1_next').on('click', function () {
+        if(ScreenWidth < 720){
+            $(".block_main_categories_wrapper1").hide();
+            $(".block_main_categories_wrapper2").show();
+        }
+    });
+
+    $('.cat_block_2').on('click', function () {
+        if(ScreenWidth < 720){
+            $(".block_main_categories_wrapper2").hide();
+            $(".block_main_categories_wrapper3").show();
+        }
+    });
+    $('.block_main_categories2_prev').on('click', function () {
+        if(ScreenWidth < 720){
+            $(".block_main_categories_wrapper2").hide();
+            $(".block_main_categories_wrapper1").show();
+        }
+    });
+    $('.block_main_categories2_next').on('click', function () {
+        if(ScreenWidth < 720){
+            $(".block_main_categories_wrapper2").hide();
+            $(".block_main_categories_wrapper3").show();
+        }
+    });
+
+    $('.cat_block_3').on('click', function () {
+        if(ScreenWidth < 720){
+            $(".block_main_categories_wrapper3").hide();
+            $(".block_main_categories_wrapper4").show();
+        }
+    });
+    $('.block_main_categories3_prev').on('click', function () {
+        if(ScreenWidth < 720){
+            $(".block_main_categories_wrapper3").hide();
+            $(".block_main_categories_wrapper2").show();
+        }
+    });
+    $('.block_main_categories3_next').on('click', function () {
+        if(ScreenWidth < 720){
+            $(".block_main_categories_wrapper3").hide();
+            $(".block_main_categories_wrapper4").show();
+        }
+    });
+
+    $('.block_main_categories4_prev').on('click', function () {
+        if(ScreenWidth < 720){
+            $(".block_main_categories_wrapper4").hide();
+            $(".block_main_categories_wrapper3").show();
+        }
+    });
+
+
 
 });

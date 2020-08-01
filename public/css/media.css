@@ -159,6 +159,14 @@
     }
 }
 @media (max-width: 768px) {
+    .block_main_categories{
+        width: 100%!important;
+    }
+    .block_main_categories_wrapper2, .block_main_categories_wrapper3, .block_main_categories_wrapper4{
+        display: none;
+        position: relative;
+        width: 100%;
+    }
     .btn_category, .form_category_search-city, .form_category_imp-pin{
         display: none;
     }
@@ -562,6 +570,76 @@
     }
     .product_btn_wishlist{
         right: 15px;
+    }
+    .block_main_categories_wrapper1{
+        position: relative;
+        width: 100%;
+    }
+    .block_main_categories1_next{
+        position: absolute;
+        bottom: -54px;
+        left: 50px;
+        width: 28px;
+        height: 28px;
+    }
+    .block_main_categories1_next img{
+        width: 100%;
+    }
+
+    .block_main_categories2_next{
+        position: absolute;
+        bottom: -54px;
+        left: 50px;
+        width: 28px;
+        height: 28px;
+    }
+    .block_main_categories2_next img{
+        width: 100%;
+    }
+    .block_main_categories2_prev{
+        position: absolute;
+        bottom: -54px;
+        left: 10px;
+        width: 28px;
+        height: 28px;
+        transform: rotate(180deg);
+    }
+    .block_main_categories2_prev img{
+        width: 100%;
+    }
+
+    .block_main_categories3_next{
+        position: absolute;
+        bottom: -54px;
+        left: 50px;
+        width: 28px;
+        height: 28px;
+    }
+    .block_main_categories3_next img{
+        width: 100%;
+    }
+    .block_main_categories3_prev{
+        position: absolute;
+        bottom: -54px;
+        left: 10px;
+        width: 28px;
+        height: 28px;
+        transform: rotate(180deg);
+    }
+    .block_main_categories3_prev img{
+        width: 100%;
+    }
+
+    .block_main_categories4_prev{
+        position: absolute;
+        bottom: -54px;
+        left: 10px;
+        width: 28px;
+        height: 28px;
+        transform: rotate(180deg);
+    }
+    .block_main_categories4_prev img{
+        width: 100%;
     }
 }
 
