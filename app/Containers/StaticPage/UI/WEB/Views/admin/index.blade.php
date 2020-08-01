@@ -341,7 +341,7 @@
             rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
         }
 
-        var runDatePicker = function()
+/*         var runDatePicker = function()
         {
 
             // minimum setup
@@ -429,10 +429,10 @@
                     todayHighlight: true,
                     templates: controls
                 });
-        }
+        } */
 
 
-$(document).ready(function(){ runDatePicker();})
+//$(document).ready(function(){ runDatePicker();})
 
 $('#managerSwitch').change(function(){
     console.log('Manager1',$(this).is(':checked'))
