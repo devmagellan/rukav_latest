@@ -113,7 +113,13 @@
                 <div class="alert errorBlock">{{ $message }}</div>
               @enderror
             </div>
-            <div class="add_second_chat_block_input1" style="margin-top:40px">
+            <style>
+              .select2-search__field{
+                min-width:400px;
+                width:400px !important;
+              }
+            </style>
+            <div class="add_second_chat_block_input1" style="margin-top:40px;display:none">
               <div class="form-group" style="width:60%">
                 <select class="select2-placeholder-multiple form-control"  multiple="multiple" id="multiple-placeholder">
                   <optgroup label="Такси Ливерпуля">
@@ -929,6 +935,10 @@ $('.cat_name').click(function(){
       //Услуги/Перевозки/Такси
       if($(this).val()=='Услуги/Перевозки/Такси'){
           console.log('Услуги/Перевозки/Такси')
+          $('.add_second_chat_block_input1').show()
+      }
+      else{
+          $('.add_second_chat_block_input1').hide()
       }
   })
 </script>
