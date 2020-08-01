@@ -19,7 +19,8 @@
           </li>
         </ul>
       </div>
-      <div class="col-md-2">
+
+      <!--div class="col-md-2">
         <h5>Навигация</h5>
         <ul class="menu_footer">
           <li>
@@ -31,9 +32,7 @@
           <li>
             <a href="#">Наши партнеры</a>
           </li>
-          <!--li>
-            <a href="#">Популярные запросы</a>
-          </li-->
+
           <li>
             <a href="#">Контакты для прессы</a>
           </li>
@@ -51,13 +50,8 @@
           <li>
             <a href="/static/safety">Безопасность</a>
           </li>
-          <!--li>
-            <a href="#">Политика конфиденциальности</a>
-          </li-->
-          <!--li>
-            <a href="#">Условия использование RUKAV</a>
-          </li-->
-		  <li>
+
+          <li>
             <a href="/static/policies ">Правила</a>
           </li>
           <li>
@@ -66,6 +60,35 @@
           <li>
             <a href="#">Связаться с нами</a>
           </li>
+        </ul>
+      </div-->
+        <?
+        $staticPages=\App\Containers\StaticPage\Models\StaticPage::get();
+        ?>
+      <div class="col-md-2">
+        <h5>Навигация</h5>
+
+        <ul class="menu_footer">
+          @foreach($staticPages as $page)
+            @if($page->group==1)
+          <li>
+            <a href="/static/{{$page->link}}">{{$page->name}}</a>
+          </li>
+            @endif
+         @endforeach
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h5>Пользователю</h5>
+        <ul class="menu_footer">
+          @foreach($staticPages as $page)
+            @if($page->group==2)
+              <li>
+                <a href="/static/{{$page->link}}">{{$page->name}}</a>
+              </li>
+            @endif
+          @endforeach
         </ul>
       </div>
       <div class="col-md-3">

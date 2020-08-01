@@ -50,9 +50,45 @@ $router->post('/staticpages_groups/groups/get', [
         'auth:admin',
     ],
 ]);
+$router->post('/staticpages_groups/sidebar/get', [
+    'as' => 'staticpage_get_sidebar',
+    'uses'  => 'Controller@getSidebar',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
+]);
+$router->post('/staticpages_groups/groups/update', [
+    'as' => 'staticpage_group_update',
+    'uses'  => 'Controller@updateGroup',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
+]);
+
+
+
+$router->post('/staticpages_types/update', [
+    'as' => 'staticpage_types_update',
+    'uses'  => 'Controller@updateType',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
+]);
 $router->post('/staticpage_groups/update', [
     'as' => 'staticpage_groups',
     'uses'  => 'Controller@postGroupsSave',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
+]);
+
+$router->post('/staticpage_sidebar/update', [
+    'as' => 'staticpage_sidebar',
+    'uses'  => 'Controller@postSidebarSave',
     'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
     'middleware' => [
         'auth:admin',
