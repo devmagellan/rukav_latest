@@ -63,7 +63,7 @@
         </ul>
       </div-->
         <?
-        $staticPages=\App\Containers\StaticPage\Models\StaticPage::get();
+        $staticPages=\App\Containers\StaticPage\Models\StaticPage::orderBy('position','asc')->get();
         ?>
       <div class="col-md-2">
         <h5>Навигация</h5>

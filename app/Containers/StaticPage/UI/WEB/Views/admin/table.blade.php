@@ -11,10 +11,12 @@
             <th>Сайдбар страницы</th>
             <th>Группа футера</th>
             <th>Действия</th>
+            <th>Position</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($staticpages as $staticpage)
+        <? $last=count($staticpages);?>
+        @foreach($staticpages as $key=>$staticpage)
 
             <form class="staticpage_form">
 
@@ -83,6 +85,15 @@
                 <a href="javascript:void(0);" class="DeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed">
                     <i class="fal fa-times"></i>
                 </a>
+            </td>
+            <td class="customer_manager">
+                <input type="hidden" class="id" value="{{$staticpage->id}}">
+                @if($key!=0)
+                    <i style="cursor:pointer" class="arrow_press arrow_up fal fa-arrow-up" aria-hidden="true"></i>
+                @endif
+                @if($key+1!=$last)
+                    <i style="cursor:pointer" class="arrow_press arrow_down fal fa-arrow-down" aria-hidden="true"></i>
+                @endif
             </td>
         </tr>
             </form>
@@ -316,6 +327,33 @@
 
 
         });
+
+
+        $('.arrow_press').click(function(){
+            var restorant=$(this).parent().find('.restorant_id').val()
+            var id=$(this).parent().find('.id').val()
+            var state = ($(this).hasClass("arrow_down")) ? 0 : 1;
+            console.log(restorant,state,id)
+
+            $.ajax({
+                method: 'POST',
+                dataType: 'json',
+                async:false,
+                url: '/staticpages_position',
+                data: {state:state,id:id
+                },
+                beforeSend: function() {
+                },
+                complete: function() {
+
+                },
+                success: function (data) {
+
+                    console.log('success')
+                    reloadData();
+                }
+            });
+        })
 
 
 

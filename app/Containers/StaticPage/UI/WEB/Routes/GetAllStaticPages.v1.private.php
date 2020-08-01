@@ -106,6 +106,15 @@ $router->post('/staticpages/delete', [
     ],
 ]);
 
+$router->post('/staticpages_position', [
+    'as'   => 'staticpages_position',
+    'uses'       => 'Controller@setPosition',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin'
+    ],
+]);
+
 
 
 

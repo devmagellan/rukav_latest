@@ -17,6 +17,6 @@ class GetAllStaticPagesTask extends Task
 
     public function run()
     {
-        return $this->repository->with('getGroup')->get();
+        return $this->repository->orderBy('position','asc')->with('getGroup')->get();
     }
 }
