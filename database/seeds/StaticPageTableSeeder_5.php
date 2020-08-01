@@ -1,6 +1,4 @@
 <?php
-namespace App\Containers\StaticPage\Data\Seeders;
-
 use App\Ship\Parents\Seeders\Seeder;
 
 /**
@@ -9,7 +7,7 @@ use App\Ship\Parents\Seeders\Seeder;
  * @author  Mahmoud Zalt  <mahmoud@zalt.me>
  */
 
-class StaticPageTableSeeder_3 extends Seeder
+class StaticPageTableSeeder_5 extends Seeder
 {
     /**
      * Run the database seeds.
