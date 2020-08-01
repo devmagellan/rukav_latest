@@ -38,25 +38,27 @@ class StaticPageTableSeeder_2 extends Seeder
        \DB::table('static_pages')->insert([
             /*1*/
         [
-        'name'=>'help',
+        'name'=>'safety',
         'content'=>'Lorem ipsum dollor',
         'group'=>1,
         'active'=>1,
-        'editor'=>1
+        'editor'=>1,
+        'position'=>1
         ],
            [
                'name'=>'help',
                'content'=>'Lorem ipsum dollor',
                'group'=>1,
                'active'=>1,
-               'editor'=>1
+               'editor'=>1,'position'=>2
            ],
            [
-               'name'=>'help',
+               'name'=>'about_us',
                'content'=>'Lorem ipsum dollor',
                'group'=>1,
                'active'=>1,
-               'editor'=>1
+               'editor'=>1,
+               'position'=>3
            ]
 
 
