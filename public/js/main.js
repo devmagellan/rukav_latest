@@ -577,6 +577,13 @@ $(document).ready(function(){
         }
     });
 
+    $('.btn_search_m').on('click', function () {
+        if(ScreenWidth < 720){
+            $(".form_category").show();
+            $("#location_search").css("display", "inline-block");
+            $("header.header").css("padding-bottom","94px");
+        }
+    });
 
 
 });

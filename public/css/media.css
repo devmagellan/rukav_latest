@@ -200,6 +200,33 @@
     }
     .form_category{
         display: none;
+        position: absolute;
+        left: -170px;
+        right: -110px;
+        top: 74px;
+        text-align: center;
+    }
+    .form_category .search div{
+        left: 150px!important;
+        top: -29px!important;
+    }
+    .form_category_search{
+        font-size: 12px;
+        padding-left: 25px;
+        width: 134px;
+        box-shadow: none;
+        height: 34px;
+        vertical-align: top;
+    }
+    .form_category_search-city{
+        padding-left: 16px;
+        width: 136px;
+        box-shadow: none;
+        height: 34px;
+        vertical-align: top;
+    }
+    .form_category_btn{
+        line-height: 34px;
     }
     .header{
         padding: 15px 0;
