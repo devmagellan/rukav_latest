@@ -22,21 +22,21 @@
       <div class="row">
         <h3 style="font-weight:600" >Реклама на RUKAV</h3>
         <div class="col-md-12">
-        <p>
-            <?
-            print($data['firstHelpPage']->content);
-            ?>
-        </p></div>
+          @if($data['firstHelpPage'])
+                <?
+                print($data['firstHelpPage']->content);
+                ?>
+          @endif</div>
       </div>
       <div class="row" style="margin-top:50px">
         <div class="col-md-7">
         <h3 style="font-weight:600">По вопросам размещения рекламы заполните форму!</h3>
           <ul>
-
-            <li>-  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical</li>
-            <li>-  Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College</li>
-          <li>-  It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College</li>
-
+            @if($data['firstHelpPage'])
+              @foreach($data['firstHelpPage']->getSidebar as $side)
+                <li><a href="#{{$side->link}}"># {{$side->name}}</a></li></br>
+              @endforeach
+            @endif
           </ul>
         </div>
         <div class="col-md-5">

@@ -113,7 +113,6 @@ class Controller extends WebController
 	
         $data['firstHelpPage']=\App\Containers\StaticPage\Models\StaticPage::where('link',$page)->orderBy('position','asc')->with('getSidebar')->first();
         $data['properties']=$this->getMainProperties($request);
-
         switch($page){
             case 'about_us':
                 $template='about_us';
