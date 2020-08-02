@@ -265,7 +265,7 @@
 
             <div class="Places" style="position:relative;display:none">
               <input type="text" class="col-sm-11 control-label cat_name"
-                     style="left:5px !important;top:0 !important;font-size:17px;margin-top:30px;" disabled>
+                     style="left:5px !important;top:0 !important;font-size:17px;margin-top:30px;" readonly="true">
               <div class="form-group col-sm-12">
 
                 <!--label class="control-label" style="display:block;">Категория в
@@ -746,7 +746,36 @@
     });
 
 
+function getAllParentsString(child,current){
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        async: false,
+        url: '/getAllParentsString',
+        data: {child:child}, // serializes the form's elements.
+        beforeSend: function() {
+            $('.loader-z').css('display','block');
+        },
+        complete:function(){
+            $('.loader-z').css('display','none');
+        },
+        success: function (data) {
+        console.log(data)
+        if(data.result=='empty'){
+            $('.cat_name').val(current)
+        }else{
+            var string='';
+            $.each(data.result, function(i, val) {
+               string=string+'/'+val.name
+            });
+            $('.cat_name').val(string+'/'+current)
 
+        }
+
+        }
+
+    });
+}
 
 
 
@@ -759,7 +788,8 @@ console.log('deligate!')
         cl=cl.split(' ')[1]
         var simbol=parseInt(cl.slice(10))+1
         new_block_cl=cl.slice(0, 10)+simbol
-
+        window.inpText=$('.cat_name').val()
+        console.log('window.inpText',window.inpText)
 console.log('123=>',new_block_cl)
         if(new_block_cl=='cat_block_2'){
             $('.cat_block_2').empty()
@@ -781,12 +811,15 @@ console.log('123=>',new_block_cl)
                },
                success: function (sata) {
                     $('.cat_block_1').html(sata)
-                    var inpText=$('.cat_name').text()
+console.log('sata',$(e.currentTarget).find('input').val())
+                   var child=$(e.currentTarget).find('input').val();
+
                     var realValue=$.trim($(e.currentTarget).text());
                     console.log('555=>',realValue)
+                   getAllParentsString(child,realValue)
                     $('#administrative').val(realValue)
 
-                    $('.cat_name').val(' /'+inpText+'/'+realValue)
+                   // $('.cat_name').val(window.inpText+'/'+realValue)
                    $('#city').val(realValue)
                 }
 
@@ -811,9 +844,13 @@ console.log('123=>',new_block_cl)
                 success: function (wata) {
                     $('.cat_block_2').html(wata)
                     var inpText=$('.cat_name').text()
+                    console.log('sata',$(e.currentTarget).find('input').val())
+                    var child=$(e.currentTarget).find('input').val();
+
                     var realValue=$.trim($(e.currentTarget).text());
+                    getAllParentsString(child,realValue)
                     console.log(realValue)
-                    $('.cat_name').val(' /'+inpText+'/'+realValue)
+                    //$('.cat_name').val(window.inpText+'/'+realValue)
                     $('#city').val(realValue)
                 }
 
@@ -838,9 +875,13 @@ console.log('123=>',new_block_cl)
                 success: function (wata) {
                     $('.cat_block_3').html(wata)
                     var inpText=$('.cat_name').text()
+                    console.log('sata',$(e.currentTarget).find('input').val())
+                    var child=$(e.currentTarget).find('input').val();
+
                     var realValue=$.trim($(e.currentTarget).text());
+                    getAllParentsString(child,realValue)
                     console.log(realValue)
-                    $('.cat_name').val(' /'+inpText+'/'+realValue)
+                    //$('.cat_name').val(window.inpText+'/'+realValue)
                     $('#city').val(realValue)
                 }
 
@@ -864,9 +905,13 @@ console.log('123=>',new_block_cl)
                 success: function (gata) {
                     $('.cat_block_4').html(gata)
                     var inpText=$('.cat_name').text()
+                    console.log('sata',$(e.currentTarget).find('input').val())
+                    var child=$(e.currentTarget).find('input').val();
+
                     var realValue=$.trim($(e.currentTarget).text());
+                    getAllParentsString(child,realValue)
                     console.log(realValue)
-                    $('.cat_name').val(' /'+inpText+'/'+realValue)
+                    //$('.cat_name').val(window.inpText+'/'+realValue)
                     $('#city').val(realValue)
                 }
 

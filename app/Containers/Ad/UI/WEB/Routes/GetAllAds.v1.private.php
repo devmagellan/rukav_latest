@@ -72,6 +72,14 @@ $router->post('/show_maincat_gumtree', [
 ]);
 
 
+$router->post('/getAllParentsString', [
+    'as' => 'getAllParentsString',
+    'uses'  => 'Controller@getAllParentsString',
+    /* 'middleware' => [
+       'auth:web',
+     ],*/
+]);
+
 
 
 
