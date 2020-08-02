@@ -23,9 +23,9 @@
 
           <div class="search" style="position:relative">
             <div style="position:absolute;left:250px;top:-20px">
-            <input type="checkbox" style="display:inline-block !important" id="uk_only" name="uk_only" checked> <label for="uk_only"> искать только по UK</label></div>
+            <input type="checkbox" style="display:inline-block !important" id="uk_only" name="uk_only"> <label for="uk_only"> искать только по UK</label></div>
             <input type="text" id="search-field" name="search" class="form_category_search" placeholder="Я ищу...">
-            <input type="text" id="location_search" name="location" class="form_category_search-city" placeholder="Город или посткод UK">
+            <input type="text" id="location_search" name="location" class="form_category_search-city" placeholder="Ищем по миру :">
             <button class="form_category_btn" id="go">Поиск</button>
 
           </div>
