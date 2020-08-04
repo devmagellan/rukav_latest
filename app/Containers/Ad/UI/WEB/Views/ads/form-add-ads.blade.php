@@ -356,16 +356,16 @@
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
-              Контактная информация
+              Цена
             </h6><br>
-            <div class="contact_info_wrapper">
+            <!--div class="contact_info_wrapper">
               <p>Email для сообщений (скрыт)</p>
               <input type="email" name="email" placeholder="Email" required value="{{old('email')}}">
               @error('email')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-            </div>
-            <div class="contact_info_wrapper contact_info_wrapper2">
+            </div-->
+            <!--div class="contact_info_wrapper contact_info_wrapper2">
               <div class="hide_phone_radio">
                 <input type="radio" name="hide_phone" value="Показывать" id="hide_phone1" checked>
                 <label for="hide_phone1">Показывать</label>
@@ -376,8 +376,8 @@
               @error('email')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-            </div>
-            <div class="contact_info_wrapper">
+            </div-->
+            <!--div class="contact_info_wrapper">
               <div class="hide_phone_radio">
                 <input type="radio" name="hide_name" value="1" id="hide_name" checked>
                 <label for="hide_name">Показывать</label>
@@ -388,9 +388,9 @@
               @error('name')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-            </div>
+            </div-->
             <div class="contact_info_wrapper">
-              <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (необезательно)" value="{{old('price')}}">
+              <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (не обезательно)" value="{{old('price')}}">
             </div>
           </div>
         </div>

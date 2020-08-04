@@ -13,19 +13,19 @@ class AdService
   {
     return Ad::create([
       'title' => $data->name_ad,
-      'email' => $data->email,
-      'phone' => $data->phone,
+      'email' => Auth::user()->email,
+      'phone' => (Auth::user()->phone) ? Auth::user()->phone : '',
       'price' => $data->price,
       'message' => $data->description,
       'city' => $data->city,
       'place_id' => $data->place_id,
-      'name' => $data->name,
+      'name' => Auth::user()->name,
       'category_id' => $data->category_id,
       'sender' => Auth::user()->id,
       //TODO не забыть узнать что с этим делать
       'administrative' => $data->administrative,
       'visibility' => false,
-      'show_name' => $data->hide_name
+      'show_name' => Auth::user()->name
     ]);
   }
 

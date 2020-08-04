@@ -216,11 +216,6 @@
                   @endif
                 </div>
 
-
-
-
-
-
                 <div class="col-sm-12 col-md-5">
                   <label for="imgInputakk" class="prophile_photo_picked_wrapper">
                     <img class="prophile_photo_picked" for="imgInputakk" src="@if($data['properties']->user->avatar)  storage/avatars/{{$data['properties']->user->avatar}} @else img/slide_img1.png @endif " alt="">
@@ -1328,7 +1323,7 @@
           $.ajax({
               method: 'POST',
               dataType: 'json',
-              async:false,
+              async:true,
               url: '/ad/message_activity_set',
               data: {message: message,state:state
               },

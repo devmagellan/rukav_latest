@@ -56,10 +56,10 @@ class StoreAdRequest extends Request
 //      'category_ads' => 'required',
       'address' => 'required_if:select_addres,Полный адресс',
      // 'post_code' => 'required',
-      'email' => 'required|email',
-      'phone' => 'required',
+      //'email' => 'required|email',
+      //'phone' => 'required',
         'city' => 'required',
-      'name' => 'required|between:2,10',
+      //'name' => 'required|between:2,10',
       'files.*' => 'required|image|max:7000',
       'category_id' => 'required'
     ];
