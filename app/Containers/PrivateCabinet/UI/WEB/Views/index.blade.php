@@ -223,7 +223,7 @@
 
                 <div class="col-sm-12 col-md-5">
                   <label for="imgInputakk" class="prophile_photo_picked_wrapper">
-                    <img class="prophile_photo_picked" for="imgInputakk" src="img/slide_img1.png" alt="">
+                    <img class="prophile_photo_picked" for="imgInputakk" src="@if($data['properties']->user->avatar)  storage/avatars/{{$data['properties']->user->avatar}} @else img/slide_img1.png @endif " alt="">
                   </label>
                   <label class="prophile_photo_wrapper" for="imgInputakk">
                     <div class="prophile_photo_img">
@@ -1402,7 +1402,7 @@
           reloadMessages()
 
           $('#imgInputakk').on('change', function() {
-
+console.log('imgInputakk')
               var fileName = '';
               fileName = $(this).val();
               $('#file-selected').html(fileName);
@@ -1485,6 +1485,7 @@
               }
           });
       }
+
 
   </script>
 
