@@ -97,7 +97,6 @@
                     <div class="form-group">
                         <label class="form-label" for="staticpage_name">Адресс страницы</label>
                         <input type="text" id="staticpage_link" name="staticpage_link" required class="form-control" placeholder="Адресс страницы">
-
                     </div>
 
                     <div class="form-group">
