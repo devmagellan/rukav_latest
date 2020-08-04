@@ -71,9 +71,15 @@
         <ul class="menu_footer">
           @foreach($staticPages as $page)
             @if($page->group==1)
+              @if(mb_substr($page->link, 0, 6)=='mailto')
+                <li>
+                  <a href="{{$page->link}}">{{$page->name}}</a>
+                </li>
+              @else
           <li>
             <a href="/static/{{$page->link}}">{{$page->name}}</a>
           </li>
+                @endif
             @endif
          @endforeach
           </li>
@@ -84,9 +90,15 @@
         <ul class="menu_footer">
           @foreach($staticPages as $page)
             @if($page->group==2)
+              @if(mb_substr($page->link, 0, 6)=='mailto')
+                <li>
+                  <a href="{{$page->link}}">{{$page->name}}</a>
+                </li>
+              @else
               <li>
                 <a href="/static/{{$page->link}}">{{$page->name}}</a>
               </li>
+                @endif
             @endif
           @endforeach
         </ul>
