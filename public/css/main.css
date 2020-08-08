@@ -584,11 +584,34 @@ input[type="radio"]:checked + label:after{
     height: 36px!important;
 }
 
-ul.country-list li{
+ul.iti__country-list li{
     display: block;
 }
 
+.iti--separate-dial-code .iti__selected-flag{
+    background-color: #fff !important;
+    border-radius: 20px 0 0 20px !important;
+    padding-right: 0!important;
+}
+
+.iti--separate-dial-code .iti__selected-dial-code{
+    margin-left: 14px!important;
+    font-size: 14px!important;
+}
+.iti__arrow{
+    position: absolute!important;
+    left: 27px!important;
+}
+
 .intl-tel-input{
+    width: 100%;
+}
+
+input[type="tel"]{
+    width: 100%;
+}
+
+.iti{
     width: 100%;
 }
 
@@ -727,6 +750,7 @@ p.input_text_top + input{
 .category_dropdown{
     margin-top: 10px;
     margin-bottom: 50px;
+    min-height: 625px!important;
 }
 .category_dropdown_main_list{
     position: relative;
@@ -774,7 +798,7 @@ ul.category_dropdown_sub_list li{
 ul.category_dropdown_sub_list li ul{
     position: absolute;
     top: 0;
-    margin-left: 400px;
+    margin-left: 98px;
     width: 400px;
     padding-top: 10px;
 }
@@ -3381,4 +3405,51 @@ padding-left: 30px;
     display: inline-block;
     border-radius: 50%;
     margin-right: 3px;
+}
+
+.categories{
+    border: 0!important;
+    padding: 0!important;
+}
+
+.block_main_categories{
+    border: 0!important;
+}
+
+.block_main_categories .cat_block{
+    border-bottom: 0!important;
+}
+
+.col-sm-11.control-label.cat_name{
+    background: #FFFFFF;
+    border: 1px solid #E4E4E4;
+    box-sizing: border-box;
+    border-radius: 30px;
+    width: 100%;
+    line-height: 36px;
+}
+
+.block_main_categories::-webkit-scrollbar {
+    width: 2px;
+}
+
+.block_main_categories::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #E4E4E4;
+}
+
+.block_main_categories::-webkit-scrollbar-thumb {
+    background-color: #A269F7;
+    outline: 1px solid #E4E4E4;
+}
+
+.block_main_categories_wrapper1, .block_main_categories_wrapper2, .block_main_categories_wrapper3, .block_main_categories_wrapper4{
+    width: 24.2%;
+    display: inline-block;
+}
+
+.block_main_categories_wrapper1 span, .block_main_categories_wrapper2 span, .block_main_categories_wrapper3 span, .block_main_categories_wrapper4 span {
+    display: none;
+}
+.block_main_categories{
+    width: 100%!important;
 }

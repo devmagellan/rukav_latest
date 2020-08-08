@@ -60,7 +60,7 @@ class Controller extends WebController
 
   public function loginUser(LoginUserRequest $request)
   {
-    if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1])) {
+    if (\Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password , 'active' => 1 ])) {
       return response(['message' => true], Response::HTTP_OK);
     }
     return response(['Не правильный логин или пароль'], Response::HTTP_CONFLICT);

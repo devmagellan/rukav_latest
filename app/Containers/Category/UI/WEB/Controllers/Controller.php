@@ -25,6 +25,19 @@ class Controller extends WebController
     public $level=0;
 
 
+    public function moreCategories(GetAllCategoriesRequest $request, $id)
+    {
+        $data['properties']=$this->getMainProperties($request);
+        $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
+        $data['currentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$id)->first();
+        $data['parentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$data['currentCat']->parent_id)->first();
+        if($data['parentCat']){
+            $data['grandParentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$data['parentCat']->parent_id)->first();
+        }
+        return view('category::morecategories',  compact('categoriesOnlyRoot','data','id'));
+        // return $link . ' ' . $id;
+    }
+
   /**
    * Show all entities
    *

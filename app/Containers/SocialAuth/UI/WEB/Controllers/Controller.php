@@ -43,7 +43,7 @@ class OAuthOK {
      */
     public static function goToAuth()
     {
-       dd(self::URL_AUTHORIZE .
+       Utils::redirect(self::URL_AUTHORIZE .
             '?client_id=' . self::APP_ID .
 			'&scope=GET_EMAIL' .
             '&response_type=code' .
@@ -222,7 +222,6 @@ if (!empty($_GET['error'])) {
             return redirect()->to('/');
         }*/
         // check if they're an existing user
-		dd($user);
 			if(!isset($user->email)){
 				session()->put('registration_error','В ваших данных из соцсети не хватает email для регистрации, Мы не смогли Вас зарегистрировать, попробуйте альтернативный способ');
 				return redirect('/')->withInput()->withErrors(array('user_name' => 'some message'));   
@@ -240,8 +239,8 @@ if (!empty($_GET['error'])) {
             $newUser->name            = $user->first_name;
             $newUser->sername            = $user->last_name;
             $newUser->email           = $user->email;
-            $newUser->google_id       = $user->id;
-            $newUser->avatar          = $user->pic_1;
+            //$newUser->google_id       = $user->id;
+            //$newUser->avatar          = $user->pic_1;
             $newUser->active = 1;
             $newUser->save();
 			$user = $this->createUser($user,$provider);

@@ -19,7 +19,8 @@
           </li>
         </ul>
       </div>
-      <div class="col-md-2">
+
+      <!--div class="col-md-2">
         <h5>Навигация</h5>
         <ul class="menu_footer">
           <li>
@@ -31,9 +32,7 @@
           <li>
             <a href="#">Наши партнеры</a>
           </li>
-          <li>
-            <a href="#">Популярные запросы</a>
-          </li>
+
           <li>
             <a href="#">Контакты для прессы</a>
           </li>
@@ -49,13 +48,11 @@
             <a href="/help/1">Помощь</a>
           </li>
           <li>
-            <a href="#">Безопасность</a>
+            <a href="/static/safety">Безопасность</a>
           </li>
+
           <li>
-            <a href="#">Политика конфиденциальности</a>
-          </li>
-          <li>
-            <a href="#">Условия использование RUKAV</a>
+            <a href="/static/policies ">Правила</a>
           </li>
           <li>
             <a href="/career">Карьера</a>
@@ -63,6 +60,47 @@
           <li>
             <a href="#">Связаться с нами</a>
           </li>
+        </ul>
+      </div-->
+        <?
+        $staticPages=\App\Containers\StaticPage\Models\StaticPage::orderBy('position','asc')->get();
+        ?>
+      <div class="col-md-2">
+        <h5>Навигация</h5>
+
+        <ul class="menu_footer">
+          @foreach($staticPages as $page)
+            @if($page->group==1)
+              @if(mb_substr($page->link, 0, 6)=='mailto')
+                <li>
+                  <a href="{{$page->link}}">{{$page->name}}</a>
+                </li>
+              @else
+          <li>
+            <a href="/static/{{$page->link}}">{{$page->name}}</a>
+          </li>
+                @endif
+            @endif
+         @endforeach
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h5>Пользователю</h5>
+        <ul class="menu_footer">
+          @foreach($staticPages as $page)
+            @if($page->group==2)
+              @if(mb_substr($page->link, 0, 6)=='mailto')
+                <li>
+                  <a href="{{$page->link}}">{{$page->name}}</a>
+                </li>
+              @else
+              <li>
+                <a href="/static/{{$page->link}}">{{$page->name}}</a>
+              </li>
+                @endif
+            @endif
+          @endforeach
         </ul>
       </div>
       <div class="col-md-3">

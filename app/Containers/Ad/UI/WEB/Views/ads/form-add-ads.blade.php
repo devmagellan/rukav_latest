@@ -113,7 +113,13 @@
                 <div class="alert errorBlock">{{ $message }}</div>
               @enderror
             </div>
-            <div class="add_second_chat_block_input1" style="margin-top:40px">
+            <style>
+              .select2-search__field{
+                min-width:400px;
+                width:400px !important;
+              }
+            </style>
+            <div class="add_second_chat_block_input1" style="margin-top:40px;display:none">
               <div class="form-group" style="width:60%">
                 <select class="select2-placeholder-multiple form-control"  multiple="multiple" id="multiple-placeholder">
                   <optgroup label="Такси Ливерпуля">
@@ -259,7 +265,7 @@
 
             <div class="Places" style="position:relative;display:none">
               <input type="text" class="col-sm-11 control-label cat_name"
-                     style="left:5px !important;top:0 !important;font-size:17px;margin-top:30px;" disabled>
+                     style="left:5px !important;top:0 !important;font-size:17px;margin-top:30px;" readonly="true">
               <div class="form-group col-sm-12">
 
                 <!--label class="control-label" style="display:block;">Категория в
@@ -280,6 +286,7 @@
 
 </div>
                 @if($locations!==null)
+                <div class="block_main_categories_wrapper1" style="">
                   <div class="block_main_categories cat_block_1" style="">
                     @foreach ($locations as $key=>$location)
                       @if($location->parent_id==0)
@@ -295,18 +302,31 @@
                     @endforeach
 
                   </div>
+<span class="block_main_categories1_next"><img src="https://rukav.co.uk/img/right_icon_black.svg"></span>
+</div>
+<div class="block_main_categories_wrapper2" style="">
                   <div class="block_main_categories cat_block_2">
 
 
                   </div>
+<span class="block_main_categories2_prev"><img src="https://rukav.co.uk/img/right_icon_black.svg"></span>
+<span class="block_main_categories2_next"><img src="https://rukav.co.uk/img/right_icon_black.svg"></span>
+</div>
+<div class="block_main_categories_wrapper3" style="">
                   <div class="block_main_categories cat_block_3">
 
 
                   </div>
+<span class="block_main_categories3_prev"><img src="https://rukav.co.uk/img/right_icon_black.svg"></span>
+<span class="block_main_categories3_next"><img src="https://rukav.co.uk/img/right_icon_black.svg"></span>
+</div>
+<div class="block_main_categories_wrapper4" style="">
                   <div class="block_main_categories cat_block_4">
 
 
                   </div>
+<span class="block_main_categories4_prev"><img src="https://rukav.co.uk/img/right_icon_black.svg"></span>
+</div>
 
                 @else
                   <div style="width:100%;height:100px;color:#fff;background:red;text-align:center">
@@ -336,16 +356,16 @@
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
-              Контактная информация
+              Цена
             </h6><br>
-            <div class="contact_info_wrapper">
+            <!--div class="contact_info_wrapper">
               <p>Email для сообщений (скрыт)</p>
               <input type="email" name="email" placeholder="Email" required value="{{old('email')}}">
               @error('email')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-            </div>
-            <div class="contact_info_wrapper contact_info_wrapper2">
+            </div-->
+            <!--div class="contact_info_wrapper contact_info_wrapper2">
               <div class="hide_phone_radio">
                 <input type="radio" name="hide_phone" value="Показывать" id="hide_phone1" checked>
                 <label for="hide_phone1">Показывать</label>
@@ -356,8 +376,8 @@
               @error('email')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-            </div>
-            <div class="contact_info_wrapper">
+            </div-->
+            <!--div class="contact_info_wrapper">
               <div class="hide_phone_radio">
                 <input type="radio" name="hide_name" value="1" id="hide_name" checked>
                 <label for="hide_name">Показывать</label>
@@ -368,9 +388,9 @@
               @error('name')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-            </div>
+            </div-->
             <div class="contact_info_wrapper">
-              <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (необезательно)" value="{{old('price')}}">
+              <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (не обезательно)" value="{{old('price')}}">
             </div>
           </div>
         </div>
@@ -726,7 +746,36 @@
     });
 
 
+function getAllParentsString(child,current){
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        async: false,
+        url: '/getAllParentsString',
+        data: {child:child}, // serializes the form's elements.
+        beforeSend: function() {
+            $('.loader-z').css('display','block');
+        },
+        complete:function(){
+            $('.loader-z').css('display','none');
+        },
+        success: function (data) {
+        console.log(data)
+        if(data.result=='empty'){
+            $('.cat_name').val(current)
+        }else{
+            var string='';
+            $.each(data.result, function(i, val) {
+               string=string+'/'+val.name
+            });
+            $('.cat_name').val(string+'/'+current)
 
+        }
+
+        }
+
+    });
+}
 
 
 
@@ -739,7 +788,8 @@ console.log('deligate!')
         cl=cl.split(' ')[1]
         var simbol=parseInt(cl.slice(10))+1
         new_block_cl=cl.slice(0, 10)+simbol
-
+        window.inpText=$('.cat_name').val()
+        console.log('window.inpText',window.inpText)
 console.log('123=>',new_block_cl)
         if(new_block_cl=='cat_block_2'){
             $('.cat_block_2').empty()
@@ -761,12 +811,15 @@ console.log('123=>',new_block_cl)
                },
                success: function (sata) {
                     $('.cat_block_1').html(sata)
-                    var inpText=$('.cat_name').text()
+console.log('sata',$(e.currentTarget).find('input').val())
+                   var child=$(e.currentTarget).find('input').val();
+
                     var realValue=$.trim($(e.currentTarget).text());
                     console.log('555=>',realValue)
+                   getAllParentsString(child,realValue)
                     $('#administrative').val(realValue)
 
-                    $('.cat_name').val(' /'+inpText+'/'+realValue)
+                   // $('.cat_name').val(window.inpText+'/'+realValue)
                    $('#city').val(realValue)
                 }
 
@@ -791,9 +844,13 @@ console.log('123=>',new_block_cl)
                 success: function (wata) {
                     $('.cat_block_2').html(wata)
                     var inpText=$('.cat_name').text()
+                    console.log('sata',$(e.currentTarget).find('input').val())
+                    var child=$(e.currentTarget).find('input').val();
+
                     var realValue=$.trim($(e.currentTarget).text());
+                    getAllParentsString(child,realValue)
                     console.log(realValue)
-                    $('.cat_name').val(' /'+inpText+'/'+realValue)
+                    //$('.cat_name').val(window.inpText+'/'+realValue)
                     $('#city').val(realValue)
                 }
 
@@ -818,9 +875,13 @@ console.log('123=>',new_block_cl)
                 success: function (wata) {
                     $('.cat_block_3').html(wata)
                     var inpText=$('.cat_name').text()
+                    console.log('sata',$(e.currentTarget).find('input').val())
+                    var child=$(e.currentTarget).find('input').val();
+
                     var realValue=$.trim($(e.currentTarget).text());
+                    getAllParentsString(child,realValue)
                     console.log(realValue)
-                    $('.cat_name').val(' /'+inpText+'/'+realValue)
+                    //$('.cat_name').val(window.inpText+'/'+realValue)
                     $('#city').val(realValue)
                 }
 
@@ -844,9 +905,13 @@ console.log('123=>',new_block_cl)
                 success: function (gata) {
                     $('.cat_block_4').html(gata)
                     var inpText=$('.cat_name').text()
+                    console.log('sata',$(e.currentTarget).find('input').val())
+                    var child=$(e.currentTarget).find('input').val();
+
                     var realValue=$.trim($(e.currentTarget).text());
+                    getAllParentsString(child,realValue)
                     console.log(realValue)
-                    $('.cat_name').val(' /'+inpText+'/'+realValue)
+                    //$('.cat_name').val(window.inpText+'/'+realValue)
                     $('#city').val(realValue)
                 }
 
@@ -909,6 +974,17 @@ $('.cat_name').click(function(){
 
   $('.cat_block_1 .cat_block').click(function(){
       console.log('this=>',$(this))
+  })
+
+  $('.select_category').change(function(){
+      //Услуги/Перевозки/Такси
+      if($(this).val()=='Услуги/Перевозки/Такси'){
+          console.log('Услуги/Перевозки/Такси')
+          $('.add_second_chat_block_input1').show()
+      }
+      else{
+          $('.add_second_chat_block_input1').hide()
+      }
   })
 </script>
 

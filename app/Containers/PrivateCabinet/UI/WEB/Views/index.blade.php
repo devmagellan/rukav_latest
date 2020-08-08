@@ -216,14 +216,9 @@
                   @endif
                 </div>
 
-
-
-
-
-
                 <div class="col-sm-12 col-md-5">
                   <label for="imgInputakk" class="prophile_photo_picked_wrapper">
-                    <img class="prophile_photo_picked" for="imgInputakk" src="img/slide_img1.png" alt="">
+                    <img class="prophile_photo_picked" for="imgInputakk" src="@if($data['properties']->user->avatar)  storage/avatars/{{$data['properties']->user->avatar}} @else img/slide_img1.png @endif " alt="">
                   </label>
                   <label class="prophile_photo_wrapper" for="imgInputakk">
                     <div class="prophile_photo_img">
@@ -448,15 +443,22 @@
                              ) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->address)
+                    @if((null!=($data['properties']->user->getOrganisationAccount)
+                    && $data['properties']->user->getOrganisationAccount->address)
+                    && null==$data['properties']->user->getIndividualAccount
+                    )
                     <input type="text" class="prophile_main_input" name="address" value="{{$data['properties']->user->getOrganisationAccount->address}}" placeholder="Адрес">
-@elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->address)
+@elseif((null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->address)
+&& null==$data['properties']->user->getBusinessAccount
+)
+
                       <input type="text" class="prophile_main_input" name="address" value="{{$data['properties']->user->getIndividualAccount->address}}" placeholder="Адрес">
 
                     @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->address)
                       <input type="text" class="prophile_main_input" name="address" value="{{$data['properties']->user->getBusinessAccount->address}}" placeholder="Адрес">
 
                     @else
+
                       <input type="text" class="prophile_main_input" name="address"  placeholder="Адрес">
                     @endif
                   </div>
@@ -466,11 +468,15 @@
                     Почт. индекс <span>*</span>
                   </p>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper prophile_postcode d-flex align-items-center flex-column">
-                    @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->address)
+                    @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->post_code
+                    && null==$data['properties']->user->getIndividualAccount
+                    )
                       <input type="text" class="prophile_main_input" name="postCode" value="{{$data['properties']->user->getOrganisationAccount->post_code}}" placeholder="Postcode">
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->address)
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->post_code
+                      && null==$data['properties']->user->getBusinessAccount
+                      )
                       <input type="text" class="prophile_main_input" name="postCode" value="{{$data['properties']->user->getIndividualAccount->post_code}}" placeholder="Postcode">
-                    @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->address)
+                    @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->post_code)
                       <input type="text" class="prophile_main_input" name="postCode" value="{{$data['properties']->user->getBusinessAccount->post_code}}" placeholder="Postcode">
 
 
@@ -524,7 +530,35 @@
                 <div class="col-md-10 col-lg-7 flex-column">
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" type="checkbox" checked="checked">
+
+
+
+
+                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->post_code
+                    && null==$data['properties']->user->getIndividualAccount
+                    )
+                        <input type="checkbox" class="checkbox_hidden" name="show_work_hours" value="{{$data['properties']->user->getOrganisationAccount->show_work_hours}}"
+                        @if($data['properties']->user->getOrganisationAccount->show_work_hours==1)  checked="checked" @endif>
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->show_work_hours
+                      && null==$data['properties']->user->getBusinessAccount
+                      )
+
+                        <input type="checkbox" class="checkbox_hidden" name="show_work_hours" value="{{$data['properties']->user->getIndividualAccount->show_work_hours}}"
+                               @if($data['properties']->user->getIndividualAccount->show_work_hours==1)  checked="checked" @endif>
+                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->post_code)
+                        <input type="checkbox" class="checkbox_hidden" name="show_work_hours" value="{{$data['properties']->user->getBusinessAccount->show_work_hours}}"
+                               @if($data['properties']->user->getBusinessAccount->show_work_hours==1)  checked="checked" @endif>
+
+                      @else
+                        <input class="checkbox_hidden" type="checkbox" name="show_work_hours" checked="checked">
+                      @endif
+
+
+
+
+
+
+
                       <span class="checkmark"></span>
                     </label>
                     <p class="prophile_hours_text">
@@ -535,77 +569,287 @@
                     <p class="prophile_day_text">
                       Пн.-Пт.
                     </p>
-
                     <div class="quantity">
-                      <input type="number" min="1" max="24" step="1" value="1">
+
+
+                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->hours_from_weekday
+                   && null==$data['properties']->user->getIndividualAccount
+                   )
+                        <input type="number" min="1" max="24" step="1" name="hours_from_weekday" value="{{$data['properties']->user->getOrganisationAccount->hours_from_weekday}}">
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->hours_from_weekday
+                      && null==$data['properties']->user->getBusinessAccount
+                      )
+
+                        <input type="number" min="1" max="24" step="1" name="hours_from_weekday" value="{{$data['properties']->user->getIndividualAccount->hours_from_weekday}}">
+                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->hours_from_weekday)
+                        <input type="number" min="1" max="24" step="1" name="hours_from_weekday" value="{{$data['properties']->user->getBusinessAccount->hours_from_weekday}}">
+
+                      @else
+                        <input type="number" min="1" max="24" step="1" name="hours_from_weekday" value="1">
+                      @endif
+
+
+
+
+
+
+
+
                     </div>
                     <p class="prophile_day_text prophile_day_divider">
                       :
                     </p>
                     <div class="quantity quantity2">
-                      <input type="number" min="1" max="55" step="5" value="0">
+                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->minutes_from_weekday
+                && null==$data['properties']->user->getIndividualAccount
+                )
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{$data['properties']->user->getOrganisationAccount->minutes_from_weekday}}">
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->minutes_from_weekday
+                      && null==$data['properties']->user->getBusinessAccount
+                      )
+
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{$data['properties']->user->getIndividualAccount->minutes_from_weekday}}">
+                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->minutes_from_weekday)
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{$data['properties']->user->getBusinessAccount->minutes_from_weekday}}">
+
+                      @else
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="1">
+                      @endif
                     </div>
                     <p class="prophile_day_text prophile_day_divider prophile_day_adddivider">
                       до
                     </p>
                     <div class="quantity">
-                      <input type="number" min="1" max="24" step="1" value="1">
+
+
+                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->hours_till_weekday
+                   && null==$data['properties']->user->getIndividualAccount
+                   )
+                        <input type="number" min="1" max="24" step="1" name="hours_till_weekday" value="{{$data['properties']->user->getOrganisationAccount->hours_till_weekday}}">
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->hours_till_weekday
+                      && null==$data['properties']->user->getBusinessAccount
+                      )
+
+                        <input type="number" min="1" max="24" step="1" name="hours_till_weekday" value="{{$data['properties']->user->getIndividualAccount->hours_till_weekday}}">
+                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->hours_till_weekday)
+                        <input type="number" min="1" max="24" step="1" name="hours_till_weekday" value="{{$data['properties']->user->getBusinessAccount->hours_till_weekday}}">
+
+                      @else
+                        <input type="number" min="1" max="24" step="1" name="hours_till_weekday" value="1">
+                      @endif
                     </div>
                     <p class="prophile_day_text prophile_day_divider">
                       :
                     </p>
                     <div class="quantity quantity2">
-                      <input type="number" min="1" max="55" step="5" value="0">
+
+
+                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->minutes_till_weekday
+               && null==$data['properties']->user->getIndividualAccount
+               )
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{$data['properties']->user->getOrganisationAccount->minutes_till_weekday}}">
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->minutes_till_weekday
+                      && null==$data['properties']->user->getBusinessAccount
+                      )
+
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_weekday" value="{{$data['properties']->user->getIndividualAccount->minutes_till_weekday}}">
+                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->minutes_till_weekday)
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_weekday" value="{{$data['properties']->user->getBusinessAccount->minutes_till_weekday}}">
+
+                      @else
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_weekday" value="1">
+                      @endif
+
+
                     </div>
                     <p class="prophile_day_text">
                       Сб.
                     </p>
 
                     <div class="quantity">
-                      <input type="number" min="1" max="24" step="1" value="1">
+
+
+
+
+
+                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->hours_from_saturday
+                 && null==$data['properties']->user->getIndividualAccount
+                 )
+                        <input type="number" min="1" max="24" step="1" name="hours_from_saturday" value="{{$data['properties']->user->getOrganisationAccount->hours_from_saturday}}">
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->hours_from_saturday
+                      && null==$data['properties']->user->getBusinessAccount
+                      )
+
+                        <input type="number" min="1" max="24" step="1" name="hours_from_saturday" value="{{$data['properties']->user->getIndividualAccount->hours_from_saturday}}">
+                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->hours_from_saturday)
+                        <input type="number" min="1" max="24" step="1" name="hours_from_saturday" value="{{$data['properties']->user->getBusinessAccount->hours_from_saturday}}">
+
+                      @else
+                        <input type="number" min="1" max="24" step="1" name="hours_from_saturday" value="1">
+                      @endif
+
+
+
                     </div>
                     <p class="prophile_day_text prophile_day_divider">
                       :
                     </p>
                     <div class="quantity quantity2">
-                      <input type="number" min="1" max="55" step="5" value="0">
+
+
+                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->minutes_from_saturday
+               && null==$data['properties']->user->getIndividualAccount
+               )
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="{{$data['properties']->user->getOrganisationAccount->minutes_from_saturday}}">
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->minutes_from_saturday
+                      && null==$data['properties']->user->getBusinessAccount
+                      )
+
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="{{$data['properties']->user->getIndividualAccount->minutes_from_saturday}}">
+                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->minutes_from_saturday)
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="{{$data['properties']->user->getBusinessAccount->minutes_from_saturday}}">
+
+                      @else
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="1">
+                      @endif
+
+
                     </div>
                     <p class="prophile_day_text prophile_day_divider prophile_day_adddivider">
                       до
                     </p>
                     <div class="quantity">
-                      <input type="number" min="1" max="24" step="1" value="1">
+
+
+                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->hours_till_saturday
+                 && null==$data['properties']->user->getIndividualAccount
+                 )
+                        <input type="number" min="1" max="24" step="1" name="hours_till_saturday" value="{{$data['properties']->user->getOrganisationAccount->hours_till_saturday}}">
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->hours_till_saturday
+                      && null==$data['properties']->user->getBusinessAccount
+                      )
+
+                        <input type="number" min="1" max="24" step="1" name="hours_till_saturday" value="{{$data['properties']->user->getIndividualAccount->hours_till_saturday}}">
+                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->hours_till_saturday)
+                        <input type="number" min="1" max="24" step="1" name="hours_till_saturday" value="{{$data['properties']->user->getBusinessAccount->hours_till_saturday}}">
+
+                      @else
+                        <input type="number" min="1" max="24" step="1" name="hours_till_saturday" value="1">
+                      @endif
+
+
                     </div>
                     <p class="prophile_day_text prophile_day_divider">
                       :
                     </p>
                     <div class="quantity quantity2">
-                      <input type="number" min="1" max="55" step="5" value="0">
+
+
+
+                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->minutes_till_saturday
+               && null==$data['properties']->user->getIndividualAccount
+               )
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="{{$data['properties']->user->getOrganisationAccount->minutes_till_saturday}}">
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->minutes_till_saturday
+                      && null==$data['properties']->user->getBusinessAccount
+                      )
+
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="{{$data['properties']->user->getIndividualAccount->minutes_till_saturday}}">
+                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->minutes_till_saturday)
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="{{$data['properties']->user->getBusinessAccount->minutes_till_saturday}}">
+
+                      @else
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="1">
+                      @endif
+
                     </div>
                     <p class="prophile_day_text">
                       Вс.
                     </p>
 
                     <div class="quantity">
-                      <input type="number" min="1" max="24" step="1" value="1">
+
+                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->hours_from_sunday
+                 && null==$data['properties']->user->getIndividualAccount
+                 )
+                        <input type="number" min="1" max="24" step="1" name="hours_from_sunday" value="{{$data['properties']->user->getOrganisationAccount->hours_from_sunday}}">
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->hours_from_sunday
+                      && null==$data['properties']->user->getBusinessAccount
+                      )
+
+                        <input type="number" min="1" max="24" step="1" name="hours_from_sunday" value="{{$data['properties']->user->getIndividualAccount->hours_from_sunday}}">
+                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount-> hours_from_sunday)
+                        <input type="number" min="1" max="24" step="1" name="hours_from_sunday" value="{{$data['properties']->user->getBusinessAccount->hours_from_sunday}}">
+
+                      @else
+                        <input type="number" min="1" max="24" step="1" name="hours_from_sunday" value="1">
+                      @endif
+
                     </div>
                     <p class="prophile_day_text prophile_day_divider">
                       :
                     </p>
                     <div class="quantity quantity2">
-                      <input type="number" min="1" max="55" step="5" value="0">
+
+
+                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->minutes_from_sunday
+                && null==$data['properties']->user->getIndividualAccount
+                )
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="{{$data['properties']->user->getOrganisationAccount->minutes_from_sunday}}">
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->minutes_from_sunday
+                      && null==$data['properties']->user->getBusinessAccount
+                      )
+
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="{{$data['properties']->user->getIndividualAccount->minutes_from_sunday}}">
+                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->minutes_from_sunday)
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="{{$data['properties']->user->getBusinessAccount->minutes_from_sunday}}">
+
+                      @else
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="1">
+                      @endif
                     </div>
                     <p class="prophile_day_text prophile_day_divider prophile_day_adddivider">
                       до
                     </p>
                     <div class="quantity">
-                      <input type="number" min="1" max="24" step="1" value="1">
+
+
+                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->hours_till_sunday
+                && null==$data['properties']->user->getIndividualAccount
+                )
+                        <input type="number" min="1" max="24" step="1" name="hours_till_sunday" value="{{$data['properties']->user->getOrganisationAccount->hours_till_sunday}}">
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->hours_till_sunday
+                      && null==$data['properties']->user->getBusinessAccount
+                      )
+
+                        <input type="number" min="1" max="24" step="1" name="hours_till_sunday" value="{{$data['properties']->user->getIndividualAccount->hours_till_sunday}}">
+                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->hours_till_sunday)
+                        <input type="number" min="1" max="24" step="1" name="hours_till_sunday" value="{{$data['properties']->user->getBusinessAccount->hours_till_sunday}}">
+
+                      @else
+                        <input type="number" min="1" max="24" step="1" name="hours_till_sunday" value="1">
+                      @endif
                     </div>
                     <p class="prophile_day_text prophile_day_divider">
                       :
                     </p>
                     <div class="quantity quantity2">
-                      <input type="number" min="1" max="55" step="5" value="0">
+
+                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->minutes_till_sunday
+                 && null==$data['properties']->user->getIndividualAccount
+                 )
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="{{$data['properties']->user->getOrganisationAccount->minutes_till_sunday}}">
+                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->minutes_till_sunday
+                      && null==$data['properties']->user->getBusinessAccount
+                      )
+
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="{{$data['properties']->user->getIndividualAccount->minutes_till_sunday}}">
+                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->minutes_till_sunday)
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="{{$data['properties']->user->getBusinessAccount->minutes_till_sunday}}">
+
+                      @else
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="1">
+                      @endif
                     </div>
                   </div>
                 </div>
@@ -1079,7 +1323,7 @@
           $.ajax({
               method: 'POST',
               dataType: 'json',
-              async:false,
+              async:true,
               url: '/ad/message_activity_set',
               data: {message: message,state:state
               },
@@ -1153,7 +1397,7 @@
           reloadMessages()
 
           $('#imgInputakk').on('change', function() {
-
+console.log('imgInputakk')
               var fileName = '';
               fileName = $(this).val();
               $('#file-selected').html(fileName);
@@ -1204,12 +1448,12 @@
       }
       else{var cnt='gb'}
 
-$('#telphone5,#telphone6').intlTelInput(
-    {
-    onlyCountries:[cnt],
-        preferredCountries:""
-    }
-)
+//$('#telphone5,#telphone6').intlTelInput(
+//    {
+//    onlyCountries:[cnt],
+//        preferredCountries:""
+//    }
+//)
 
 
       function reloadMessages(){
@@ -1236,6 +1480,7 @@ $('#telphone5,#telphone6').intlTelInput(
               }
           });
       }
+
 
   </script>
 

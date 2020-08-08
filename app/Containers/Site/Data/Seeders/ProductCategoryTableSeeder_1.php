@@ -360,6 +360,36 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'photo'=>'first_category.png'
 
             ],
+            /*35*/
+            [
+                'parent_id' => 0,
+                'name' => 'Услуги',
+                'link'=> '/private_cabinet',
+                'icon'=>'fa-home',
+                'position'=>1,
+                'photo'=>'first_category.png'
+
+            ],
+            /*36*/
+            [
+                'parent_id' => 35,
+                'name' => 'Перевозки',
+                'link'=> '/private_cabinet',
+                'icon'=>'fa-home',
+                'position'=>1,
+                'photo'=>'first_category.png'
+
+            ],
+            /*37*/
+            [
+                'parent_id' => 36,
+                'name' => 'Такси',
+                'link'=> '/private_cabinet',
+                'icon'=>'fa-home',
+                'position'=>1,
+                'photo'=>'first_category.png'
+
+            ],
 
 
         ]);

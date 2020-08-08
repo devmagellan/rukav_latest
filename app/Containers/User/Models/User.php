@@ -65,7 +65,15 @@ protected $emailCode;
         'additional_phone',
         'show_phone',
         'show_additional_phone',
-        'avatar','vid_user'
+        'avatar','vid_user',
+        'skype',
+        'show_skype',
+        'facebook',
+        'show_facebook',
+        'instagram',
+        'show_instagram',
+        'www',
+        'show_www',
     ];
 
     protected $casts = [
@@ -90,7 +98,7 @@ protected $emailCode;
      * @var array
      */
     protected $hidden = [
-        'password',
+        //'password',
         'remember_token',
     ];
 

@@ -22,50 +22,43 @@ class StaticPageTableSeeder_2 extends Seeder
         \DB::table('staticpage_groups')->insert([
             /*1*/
             [
-                'name'=>'help information',
+                'name'=>'Навигация',
                 'link'=>'main',
                 'staticpage_id'=>1
             ],
             [
-                'name'=>'help information',
+                'name'=>'Пользователю',
                 'link'=>'adds',
                 'staticpage_id'=>1
             ],
-            [
-                'name'=>'help information',
-                'link'=>'from_users',
-                'staticpage_id'=>1
-            ],
-            [
-                'name'=>'help information',
-                'link'=>'delete_reasons',
-                'staticpage_id'=>1
-            ],
+
 
         ]);
 
        \DB::table('static_pages')->insert([
             /*1*/
         [
-        'name'=>'help',
+        'name'=>'safety',
         'content'=>'Lorem ipsum dollor',
         'group'=>1,
         'active'=>1,
-        'editor'=>1
+        'editor'=>1,
+        'position'=>1
         ],
            [
                'name'=>'help',
                'content'=>'Lorem ipsum dollor',
                'group'=>1,
                'active'=>1,
-               'editor'=>1
+               'editor'=>1,'position'=>2
            ],
            [
-               'name'=>'help',
+               'name'=>'about_us',
                'content'=>'Lorem ipsum dollor',
                'group'=>1,
                'active'=>1,
-               'editor'=>1
+               'editor'=>1,
+               'position'=>3
            ]
 
 

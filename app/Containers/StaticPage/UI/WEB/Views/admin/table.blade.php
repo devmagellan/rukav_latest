@@ -5,14 +5,18 @@
             <th>#</th>
             <th>Название</th>
             <th>Link</th>
+            <th>Тип страницы</th>
             <th>Админ</th>
             <th>Активна/неактивна</th>
             <th>Сайдбар страницы</th>
+            <th>Группа футера</th>
             <th>Действия</th>
+            <th>Position</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($staticpages as $staticpage)
+        <? $last=count($staticpages);?>
+        @foreach($staticpages as $key=>$staticpage)
 
             <form class="staticpage_form">
 
@@ -23,7 +27,25 @@
             <td class="customer_name">{{$staticpage->name}}
 
             </td>
-            <td class="customer_name">{{$staticpage->link}}
+            <td class="staticpage_link">{{$staticpage->link}}
+
+            </td>
+            <td class="customer_group">
+                <? $groups=\App\Containers\StaticPage\Models\StaticPageType::get();
+                ?>
+
+                    <select class="form-control bootstrap-select staticpage_type" id="staticpage_type">
+                        @foreach($groups as $group)
+                            @if(!$staticpage->getType)
+                                <option value="0" selected disabled>-----</option>
+                                @endif
+                            @if($staticpage->getType && $group->id==$staticpage->getType->id)
+                                <option selected value="{{$group->id}}">{{$staticpage->getType->name}}</option>
+                            @else
+                                <option value="{{$group->id}}">{{$group->name}}</option>
+                            @endif
+                        @endforeach
+                    </select>
 
             </td>
             <td class="customer_sditor">{{$staticpage->editor}}</td>
@@ -39,16 +61,16 @@
                 <a href="javascript:void(0)" class="PrependChangeSidebar btn btn-primary btn-sm btn-icon waves-effect waves-themed">
                     <i class="fal fa-object-group"></i>
                 </a>
-
-
+            </td>
+            <td class="customer_group">
                <? $groups=\App\Containers\StaticPage\Models\StaticPageGroup::get();?>
                 @if($staticpage->getGroup)
-                    <select class="form-control bootstrap-select" id="staticpage_group">
+                    <select class="form-control bootstrap-select staticpage_group" id="staticpage_group_{{$staticpage->id}}">
                         @foreach($groups as $group)
                             @if($group->id==$staticpage->getGroup->id)
                         <option selected value="{{$group->id}}">{{$staticpage->getGroup->name}}</option>
                                 @else
-                                <option value="{{$group->id}}">{{$staticpage->getGroup->name}}</option>
+                                <option value="{{$group->id}}">{{$group->name}}</option>
                             @endif
 @endforeach
                     </select>
@@ -64,6 +86,15 @@
                     <i class="fal fa-times"></i>
                 </a>
             </td>
+            <td class="customer_manager">
+                <input type="hidden" class="id" value="{{$staticpage->id}}">
+                @if($key!=0)
+                    <i style="cursor:pointer" class="arrow_press arrow_up fal fa-arrow-up" aria-hidden="true"></i>
+                @endif
+                @if($key+1!=$last)
+                    <i style="cursor:pointer" class="arrow_press arrow_down fal fa-arrow-down" aria-hidden="true"></i>
+                @endif
+            </td>
         </tr>
             </form>
 
@@ -78,7 +109,9 @@
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
             var manager =  $(this).parent().parent().find('.customer_manager').find('.is_manager').val()
             var name= $(this).parent().parent().find('.customer_name').text()
+			var link= $(this).parent().parent().find('.staticpage_link').text()
             $('#staticpage_name').val(name)
+			$('#staticpage_link').val(link)
             var active= $(this).parent().parent().find('.company_switch').find('.custom-switch').find('.active_static_page_switch')[0].checked;
             console.log(active)
             console.log($(this).parent().find('input').val())
@@ -147,7 +180,7 @@
                 method: 'POST',
                 dataType: 'html',
                 async:false,
-                url: '/staticpages_groups/groups/get',
+                url: '/staticpages_groups/sidebar/get',
                 data: {staticpage_id: staticpage_id
                 },
                 beforeSend: function() {
@@ -241,6 +274,86 @@
                 }
             });
         });
+
+
+        $('.staticpage_group').change(function(){
+            console.log('staticpage_group')
+            var staticpage_id =  $(this).parent().parent().find('.customer_id').text()
+            console.log(staticpage_id)
+            var group_id=$(this).val()
+            console.log(group_id)
+            $.ajax({
+                method: 'POST',
+                dataType: 'json',
+                async:false,
+                url: '/staticpages_groups/groups/update',
+                data: {staticpage_id: staticpage_id,group_id:group_id
+                },
+                beforeSend: function() {
+                },
+                complete: function() {
+
+                },
+                success: function (data) {
+
+                }
+            });
+
+
+        });
+
+        $('.staticpage_type').change(function(){
+            console.log('staticpage_group')
+            var staticpage_id =  $(this).parent().parent().find('.customer_id').text()
+            console.log(staticpage_id)
+            var type_id=$(this).val()
+            console.log(type_id)
+            $.ajax({
+                method: 'POST',
+                dataType: 'json',
+                async:false,
+                url: '/staticpages_types/update',
+                data: {staticpage_id: staticpage_id,type_id:type_id
+                },
+                beforeSend: function() {
+                },
+                complete: function() {
+
+                },
+                success: function (data) {
+
+                }
+            });
+
+
+        });
+
+
+        $('.arrow_press').click(function(){
+            var restorant=$(this).parent().find('.restorant_id').val()
+            var id=$(this).parent().find('.id').val()
+            var state = ($(this).hasClass("arrow_down")) ? 0 : 1;
+            console.log(restorant,state,id)
+
+            $.ajax({
+                method: 'POST',
+                dataType: 'json',
+                async:false,
+                url: '/staticpages_position',
+                data: {state:state,id:id
+                },
+                beforeSend: function() {
+                },
+                complete: function() {
+
+                },
+                success: function (data) {
+
+                    console.log('success')
+                    reloadData();
+                }
+            });
+        })
 
 
 

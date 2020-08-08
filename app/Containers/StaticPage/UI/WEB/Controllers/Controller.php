@@ -35,7 +35,6 @@ class Controller extends WebController
     public function postData(GetAllStaticPagesRequest $request)
     {
         $data['staticpages'] = Apiato::call('StaticPage@GetAllStaticPagesAction', [$request]);
-        //dd($data['staticpages']);
         return view('staticpage::admin.table', $data);
         // ..
     }
@@ -109,6 +108,35 @@ class Controller extends WebController
 
          // ..
     }
+	
+	public function getPage(GetAllStaticPagesRequest $request,$page){
+	
+        $data['firstHelpPage']=\App\Containers\StaticPage\Models\StaticPage::where('link',$page)->orderBy('position','asc')->with('getSidebar')->first();
+        $data['properties']=$this->getMainProperties($request);
+        switch($page){
+            case 'about_us':
+                $template='about_us';
+                break;
+
+            case 'adv':
+                $template='adv';
+                break;
+            case 'career':
+                $template='career';
+                break;
+            case 'politics':
+                $template='politics';
+                break;
+            case 'help' || 'safety':
+                $template='help';
+                break;
+
+            default:
+                $template='static';
+        }
+
+        return view('staticpage::'.$template.'.index', compact('data'));
+	}
 
     public function updateStaticPageStatus(GetAllStaticPagesRequest $request){
 
@@ -123,12 +151,15 @@ class Controller extends WebController
 
     public function postSave(GetAllStaticPagesRequest $request){
         //var_dump($request->input());
+        $position = \App\Containers\StaticPage\Models\StaticPage::orderBy('position','desc')->first();
+
         $companySlider['values']=[
             'link'=>$request->input('staticpage_link'),
             'name'=>$request->input('staticpage_name'),
             'content'=>$request->input('staticpage_content'),
             'active'=>($request->input('active')=='true') ? 1 : 0,
-            'editor'=>\Auth::user()->id];
+            'editor'=>\Auth::user()->id,
+        'position'=>($position) ? $position->position+1 : 1];
         $entityClass=\App\Containers\StaticPage\Models\StaticPage::class;
         $companySlider['attributes']['id']=($request->input('staticpage_id')&& $request->input('staticpage_id')!=0) ? $request->input('staticpage_id') : null;
         return call_user_func("{$entityClass}::query")->updateOrCreate($companySlider['attributes'], $companySlider['values']);
@@ -139,6 +170,21 @@ class Controller extends WebController
     public function getGroups(GetAllStaticPagesRequest $request){
       $data['groups']=  \App\Containers\StaticPage\Models\StaticPageGroup::where('staticpage_id',$request->input('staticpage_id'))->get();
         return view('staticpage::admin.groups', $data);
+    }
+
+    public function getSidebar(GetAllStaticPagesRequest $request){
+        $data['groups']=  \App\Containers\StaticPage\Models\StaticPageSidebar::where('staticpage_id',$request->input('staticpage_id'))->get();
+        return view('staticpage::admin.groups', $data);
+    }
+
+    public function updateGroup(GetAllStaticPagesRequest $request){
+        $data['groups']=  \App\Containers\StaticPage\Models\StaticPage::where('id',$request->input('staticpage_id'))->update(['group'=>$request->input('group_id')]);
+        return json_encode(['result'=>'success']);
+    }
+
+    public function updateType(GetAllStaticPagesRequest $request){
+        $data['groups']=  \App\Containers\StaticPage\Models\StaticPage::where('id',$request->input('staticpage_id'))->update(['type'=>$request->input('type_id')]);
+        return json_encode(['result'=>'success']);
     }
     public function postGroupsSave(GetAllStaticPagesRequest $request){
         //var_dump($request->input());
@@ -156,6 +202,24 @@ var_dump($request->input('form'));
         ];
         \App\Containers\StaticPage\Models\StaticPageGroup::where('staticpage_id',$searcharray['staticpage_group_id'])->insert($insert);
     }
+    }
+
+    public function postSidebarSave(GetAllStaticPagesRequest $request){
+        //var_dump($request->input());
+        var_dump($request->input('form'));
+
+        parse_str($request->input('form'), $searcharray);
+        print_r($searcharray);
+
+        \App\Containers\StaticPage\Models\StaticPageSidebar::where('staticpage_id',$searcharray['staticpage_group_id'])->delete();
+        foreach($searcharray['link'] as $key=>$link){
+            $insert=[
+                'staticpage_id'=>$searcharray['staticpage_group_id'],
+                'link'=>$link,
+                'name'=>$searcharray['name'][$key]
+            ];
+            \App\Containers\StaticPage\Models\StaticPageSidebar::where('staticpage_id',$searcharray['staticpage_group_id'])->insert($insert);
+        }
     }
 
 
@@ -178,6 +242,27 @@ var_dump($request->input('form'));
         $message=\App\Containers\StaticPage\Models\StaticPage::where('id',$request->input('staticpage_id'))->delete();
         return \Response::json(['result'=>'success']);
 
+    }
+
+
+    public function setPosition(GetAllStaticPagesRequest $request)
+    {
+        $update=[];
+        $data['staticpage'] = \App\Containers\StaticPage\Models\StaticPage::where('id',$request->input('id'))->first();
+
+        if($request->input('state')==0){
+
+            $update['position']=$data['staticpage']->position+1;
+            $data['staticpage'] = \App\Containers\StaticPage\Models\StaticPage::where('position',$update['position'])->update(['position'=>$update['position']-1]);
+        }
+        else{
+            $update['position']=$data['staticpage']->position-1;
+            $data['staticpage'] = \App\Containers\StaticPage\Models\StaticPage::where('position',$update['position'])->update(['position'=>$update['position']+1]);
+        }
+
+        \App\Containers\StaticPage\Models\StaticPage::where('id',$request->input('id'))->update($update);
+
+        return json_encode(['status'=>'success']);
     }
 
 }

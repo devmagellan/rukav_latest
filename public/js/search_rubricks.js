@@ -22,7 +22,7 @@ $(document).ready(function () {
     $(this).addClass('active');
     var category = $(".listCatalog1").find('.active').html();
       var category2 = $(".listCatalog2").find('.active').html();
-    $(".select_category").val(category + '/'+category2+'/' + $(this).html());
+    $(".select_category").val(category + '/'+category2+'/' + $(this).html()).change();
     $('#category_id').val($(this).data('category_id'));
     $('#mainCatalog').modal('hide');
   });

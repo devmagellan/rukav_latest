@@ -190,7 +190,9 @@ var_dump($user);
         // make into array for mass assign. 
         //make sure you activate $guarded in your Staff model
         $staff = $tmp_user->toArray();
-
+\Log::info('replica',$staff);
+/* $staff['password']=bcrypt($staff['password']);
+\Log::info('replica',$staff); */
         $user=\App\Containers\User\Models\User::firstOrCreate($staff);
 		$user->active=1;
 		$user->save();

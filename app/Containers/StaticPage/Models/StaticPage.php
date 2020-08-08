@@ -7,7 +7,7 @@ use App\Ship\Parents\Models\Model;
 class StaticPage extends Model
 {
     protected $fillable = [
-        'id','active','editor','name','content','group'
+        'id','active','editor','name','link','content','group','position'
     ];
 
     protected $attributes = [
@@ -36,6 +36,16 @@ class StaticPage extends Model
 
     public function getGroup(){
         return $this->hasOne(\App\Containers\StaticPage\Models\StaticPageGroup::class,'id','group');
+
+    }
+
+    public function getType(){
+        return $this->hasOne(\App\Containers\StaticPage\Models\StaticPageType::class,'id','type');
+
+    }
+
+    public function getSidebar(){
+        return $this->hasMany(\App\Containers\StaticPage\Models\StaticPageSidebar::class,'staticpage_id','id');
 
     }
 }

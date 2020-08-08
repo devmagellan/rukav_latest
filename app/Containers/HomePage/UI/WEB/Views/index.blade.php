@@ -17,7 +17,7 @@
               @foreach($category->childrenCategories->take(7) as $childCategory)
                 <a href="/category/{{$childCategory->id}}">{{$childCategory->name}}</a>
               @endforeach
-              <a href="/category/{{$category->id}}" class="search_all">Показать еще</a>
+              <a href="/more_categories/{{$category->id}}" class="search_all">Показать еще</a>
             </div>
           </div>
         @endforeach

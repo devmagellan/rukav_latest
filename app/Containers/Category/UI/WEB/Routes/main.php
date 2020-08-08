@@ -3,6 +3,10 @@ $router->get('/category/{id}', [
   'as'   => 'get_main_home_page',
   'uses' => 'Controller@index',
 ]);
+$router->get('/more_categories/{id}', [
+    'as'   => 'more_categories',
+    'uses' => 'Controller@moreCategories',
+]);
 
 
 $router->get('edit_categories', [
