@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:7.2.24-fpm
 
 MAINTAINER Andrey Lopushansky <dev.magellan@gmail.com>
 
@@ -13,19 +13,15 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
-USER root
+
 COPY ./composer.json /var/www/html/composer.json
 RUN /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
-RUN chmod 600 -R /sbin/mkswap /var/swap.1
-RUN chmod 600 -R /sbin/swapon /var/swap.1
-#RUN /usr/local/bin/php -d memory_limit=-1 /usr/local/bin/composer install --prefer-dist
+RUN sudo /sbin/mkswap /var/swap.1
+RUN sudo chmod 600 -R /sbin/swapon /var/swap.1
+RUN /usr/local/bin/php -d memory_limit=-1 /usr/local/bin/composer install --prefer-dist
 WORKDIR /var/www/html
 
-COPY ./docker/entrypoint.sh /etc/entrypoint.sh
-
-COPY --chown=www-data:www-data ./ /var/www/html
-
-WORKDIR /var/www/html
-
-RUN composer install
 EXPOSE 80 443
+
+CMD ["php-fpm"]
+
