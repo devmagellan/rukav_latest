@@ -6,7 +6,7 @@ services:
     image: devmagellan/wgtcrm-web:latest
     container_name: wgtcrm-web
     ports:
-      - "80:80"
+      - "8080:80"
     restart: always
     volumes:
       - "./docker/nginx/conf.d:/etc/nginx/conf.d"
@@ -28,9 +28,9 @@ services:
     restart: always
     working_dir: /app
     volumes:
-      - "./docker/php:/usr/local/etc/php"
+      #- "./docker/php:/usr/local/etc/php/conf.d"
       - "./:/app"
-      #- ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
       #/usr/local/etc/php/php.ini - real place
     
      

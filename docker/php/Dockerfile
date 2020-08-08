@@ -1,15 +1,14 @@
 FROM php:7.2.24-fpm
 
-MAINTAINER Andrey Lopushansky <dev.magellan@gmail.com>
+MAINTAINER Roberto Arruda <robertoarruda@gmail.com>
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN apt update -yqq \
     && apt full-upgrade -y \
-    && pecl channel-update pecl.php.net \
-    && apt install nano 
-	
-	
-	
-	
+    && apt-get install -y nginx \
+    && pecl channel-update pecl.php.net
+
 RUN apt install --no-install-recommends -y sudo \
     && groupadd -g 1000 docker \
     && useradd -m -u 1000 -g docker docker -G sudo \
@@ -137,18 +136,33 @@ RUN apt autoremove -y \
     && ssh-keyscan bitbucket.org >> /home/docker/.ssh/known_hosts \
     && echo 'alias ll="ls -la --color=auto"' >> /home/docker/.bashrc
 
-COPY ./docker/supervisor/local /etc/supervisor/conf.d
+#COPY /docker/supervisor/local /etc/supervisor/conf.d
 
-
-COPY ./ /app
-
+#USER docker
+#RUN chown docker:docker /usr/local/bin
+RUN chmod a+rwx -R /usr/local/bin
 # Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+##RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV COMPOSER_MEMORY_LIMIT -1
-ENV COMPOSER_PROCESS_TIMEOUT 2000
+#COPY ./docker/php/supervisord.conf /etc/supervisord.conf
+#COPY /composer.json /var/www/html/composer.json
+USER docker
+
+
+# PHP_CPPFLAGS are used by the docker-php-ext-* scripts
+ENV PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
+
+#COPY nginx/wgtcrm.conf /etc/nginx/sites-enabled/default
+#COPY entrypoint.sh /etc/entrypoint.sh
+
+COPY --chown=www-data:www-data ./ /app
+
 WORKDIR /app
-RUN composer self-update
-RUN composer clearcache
-RUN composer install 
+
+RUN composer install --prefer-source --no-interaction
+EXPOSE 80 443
+
+ENTRYPOINT ["/etc/entrypoint.sh"]
+
