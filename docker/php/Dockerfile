@@ -137,16 +137,18 @@ RUN apt autoremove -y \
     && ssh-keyscan bitbucket.org >> /home/docker/.ssh/known_hosts \
     && echo 'alias ll="ls -la --color=auto"' >> /home/docker/.bashrc
 
-COPY /docker/supervisor/local /etc/supervisor/conf.d
+COPY ./docker/supervisor/local /etc/supervisor/conf.d
 
 
-COPY ./ /var/www/html
+COPY ./ /app
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
-WORKDIR /var/www/html
+ENV COMPOSER_MEMORY_LIMIT -1
+ENV COMPOSER_PROCESS_TIMEOUT 2000
+WORKDIR /app
 RUN composer self-update
 RUN composer clearcache
-RUN php -d memory_limit=-1 /usr/local/bin/composer install 
+RUN composer install 

@@ -26,7 +26,7 @@ services:
     #environment:
       #APP_ENV: local
     restart: always
-    working_dir: /var/www/html
+    working_dir: /app
     volumes:
       - "./docker/php:/usr/local/etc/php"
       - "./:/app"
