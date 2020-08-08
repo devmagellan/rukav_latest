@@ -1,0 +1,62 @@
+version: "3.7"
+
+services:
+  wgtcrm-web:
+    build: ./docker/nginx
+    image: devmagellan/wgtcrm-web:latest
+    container_name: wgtcrm-web
+    ports:
+      - "80:80"
+    restart: always
+    volumes:
+      - "./docker/nginx/conf.d:/etc/nginx/conf.d"
+      #- "./docker/nginx:/etc/nginx/conf.d"
+      - "./:/app"
+    working_dir: /app  
+    depends_on:
+      - "wgtcrm-php"
+     
+     
+  wgtcrm-php:
+    build: 
+        context: ./
+        dockerfile: ./docker/php/Dockerfile
+    container_name: wgtcrm-php
+    image: devmagellan/wgtcrm-php:latest
+    #environment:
+      #APP_ENV: local
+    restart: always
+    working_dir: /var/www/html
+    volumes:
+      - "./docker/php:/usr/local/etc/php"
+      - "./:/app"
+      #- ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+      #/usr/local/etc/php/php.ini - real place
+    
+     
+    secrets:
+      - source: ssh_key
+        target: /home/docker/.ssh/id_rsa
+        
+        
+  rabbitmq:
+        image: rabbitmq:3.7.5-management
+        hostname: app-rabbitmq
+        ports:
+            - 5672:5672
+            - 15672:15672
+        volumes:
+            - ./data/rabbitmq:/var/lib/rabbitmq/mnesia/rabbit@app-rabbitmq:cached
+        environment:
+            RABBITMQ_ERLANG_COOKIE: 6085e2412b6fa88647466c6a81c0cea0
+            RABBITMQ_DEFAULT_USER: rabbitmq
+            RABBITMQ_DEFAULT_PASS: rabbitmq
+            RABBITMQ_DEFAULT_VHOST: /         
+
+networks:
+  wgtcrm:
+    name: wgtcrm
+
+secrets:
+  ssh_key:
+    file: ~/.ssh/id_rsa
