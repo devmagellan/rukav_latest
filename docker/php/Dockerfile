@@ -3,7 +3,7 @@ LABEL maintainer="dev@chialab.io"
 
 # Download script to install PHP extensions and dependencies
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
-
+COPY .env /var/www/html/
 RUN sed -i '/jessie-updates/d' /etc/apt/sources.list  # Now archived
 RUN chmod uga+x /usr/local/bin/install-php-extensions && sync
 
@@ -51,7 +51,7 @@ ENV COMPOSER_HOME /tmp
 RUN composer global require hirak/prestissimo
 COPY --chown=www-data:www-data ./ /var/www/html
 COPY ./docker/php/run.sh /
-COPY ./.env /var/www/html/
+
 RUN chmod 777 /run.sh
 WORKDIR /var/www/html
 #RUN  php -d memory_limit=-1 /usr/local/bin/composer install --no-interaction --ansi --no-suggest --prefer-source
