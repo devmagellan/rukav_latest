@@ -45,7 +45,7 @@ services:
         target: /home/docker/.ssh/id_rsa
 
   rabbitmq:
-     image: devmagellan/rabbitmq:3.7.5-management
+     image: devmagellan/rabbitmq:latest
      hostname: app-rabbitmq
      ports:
        - 5672:5672
@@ -61,7 +61,7 @@ services:
        - wgtcrm
 
   wgtcrm-mysql:
-    image: devmagellan/mysql:5.7.30
+    image: devmagellan/mysql:latest
     container_name: wgtcrm-mysql
     restart: always
     environment:
@@ -78,7 +78,7 @@ services:
     networks:
       - wgtcrm
   phpmyadmin:
-      image: phpmyadmin/phpmyadmin
+      image: devmagellan/phpmyadmin:latest
       container_name: 'sc-phpmyadmin'
       links:
         - wgtcrm-mysql
