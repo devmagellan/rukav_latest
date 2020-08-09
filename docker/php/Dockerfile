@@ -32,8 +32,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -q \
       zip \
       sockets \
       iconv \
-      mbstring 
-
+      mbstring
+RUN apt-get install nano
 # Install Composer.
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && ln -s $(composer config --global home) /root/composer
@@ -50,6 +50,7 @@ ENV COMPOSER_HOME /tmp
 RUN composer global require hirak/prestissimo
 COPY --chown=www-data:www-data ./ /var/www/html
 COPY ./docker/php/run.sh /
+COPY ./.env /var/www/html/.env
 RUN chmod 777 /run.sh
 WORKDIR /var/www/html
 #RUN  php -d memory_limit=-1 /usr/local/bin/composer install --no-interaction --ansi --no-suggest --prefer-source
