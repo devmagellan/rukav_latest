@@ -1,5 +1,6 @@
 version: "3.7"
-
+volumes:
+  db_data: {}
 
 services:
   wgtcrm-web:
@@ -86,7 +87,7 @@ services:
     expose:
       - '3306'
     volumes:
-      - "./docker/tmp/mysql:/var/lib/mysql"
+      - db_data:/var/lib/mysql/data
 
     networks:
       - wgtcrm
