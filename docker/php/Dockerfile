@@ -4,6 +4,7 @@ LABEL maintainer="dev@chialab.io"
 # Download script to install PHP extensions and dependencies
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
 
+RUN sed -i '/jessie-updates/d' /etc/apt/sources.list  # Now archived
 RUN chmod uga+x /usr/local/bin/install-php-extensions && sync
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -q \
