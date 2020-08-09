@@ -40,6 +40,10 @@ services:
       - "9000:9000"
     networks:
       - wgtcrm
+    depends_on:
+      - "wgtcrm-mysql"
+    links:
+      - "wgtcrm-mysql"
     secrets:
       - source: ssh_key
         target: /home/docker/.ssh/id_rsa
@@ -81,8 +85,7 @@ services:
       - '3306'
     volumes:
       - "./docker/tmp/mysql:/var/lib/mysql"
-    depends_on:
-      - "wgtcrm-php"
+
     networks:
       - wgtcrm
   phpmyadmin:
