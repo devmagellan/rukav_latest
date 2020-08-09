@@ -39,6 +39,7 @@ services:
     secrets:
       - source: ssh_key
         target: /home/docker/.ssh/id_rsa
+<<<<<<< HEAD
         
   composer:
     restart: 'no'
@@ -48,6 +49,9 @@ services:
       - wgtcrm-php
     volumes:
       - ./:/var/www/html
+=======
+  
+>>>>>>> 40e81dd0cf62f216b91acd2c0bb334ddf8886115
 
 networks:
   wgtcrm:

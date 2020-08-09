@@ -46,6 +46,7 @@
 195.214.222.8 - - [08/Aug/2020:21:10:58 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "http://142.93.239.248:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 195.214.222.8 - - [08/Aug/2020:21:33:45 +0000] "GET / HTTP/1.1" 200 81274 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 195.214.222.8 - - [08/Aug/2020:21:33:46 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "http://142.93.239.248:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+<<<<<<< HEAD
 195.214.222.8 - - [08/Aug/2020:22:00:45 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "http://3.18.112.158:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 195.214.222.8 - - [08/Aug/2020:22:01:00 +0000] "GET / HTTP/1.1" 200 81486 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 195.214.222.8 - - [08/Aug/2020:22:01:01 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "http://3.18.112.158:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
@@ -59,3 +60,5 @@
 198.98.61.139 - - [08/Aug/2020:23:23:40 +0000] "GET /manager/html HTTP/1.1" 400 157 "-" "-"
 23.101.184.196 - - [08/Aug/2020:23:26:21 +0000] "GET /script HTTP/1.1" 400 157 "-" "-"
 13.65.240.44 - - [08/Aug/2020:23:27:25 +0000] "GET /script HTTP/1.1" 400 157 "-" "-"
+=======
+>>>>>>> 40e81dd0cf62f216b91acd2c0bb334ddf8886115
