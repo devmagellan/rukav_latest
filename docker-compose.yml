@@ -56,7 +56,7 @@ services:
      hostname: app-rabbitmq
      ports:
        - 5672:5672
-       - 15673:15673
+       - 15672:15672
      volumes:
        - ./data/rabbitmq:/var/lib/rabbitmq/mnesia/rabbit@app-rabbitmq:cached
      environment:
