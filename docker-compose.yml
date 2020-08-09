@@ -39,7 +39,15 @@ services:
     secrets:
       - source: ssh_key
         target: /home/docker/.ssh/id_rsa
-  
+        
+  composer:
+    restart: 'no'
+    image: composer:latest
+    command: install -d /var/www/html
+    depends_on:
+      - wgtcrm-php
+    volumes:
+      - ./:/var/www/html
 
 networks:
   wgtcrm:
