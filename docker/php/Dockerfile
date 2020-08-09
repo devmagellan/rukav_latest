@@ -33,7 +33,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -q \
       sockets \
       iconv \
       mbstring
-RUN apt-get install nano
+RUN DEBIAN_FRONTEND=noninteractive apt-get install nano -q -y
 # Install Composer.
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && ln -s $(composer config --global home) /root/composer
