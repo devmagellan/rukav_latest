@@ -1,5 +1,6 @@
 version: "3.7"
 
+
 services:
   wgtcrm-web:
     build: ./docker/nginx
@@ -58,10 +59,40 @@ services:
         RABBITMQ_DEFAULT_VHOST: /
      networks:
        - wgtcrm
+
+  wgtcrm-mysql:
+    image: mysql:5.7.30
+    container_name: wgtcrm-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'production'
+      MYSQL_USER: 'imediasun'
+      MYSQL_PASSWORD: 'sunimedia'
+      MYSQL_ROOT_PASSWORD: 'sunimedia'
+    ports:
+      - '13306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - "./docker/tmp/mysql:/var/lib/mysql"
+    networks:
+      - wgtcrm
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      container_name: 'sc-phpmyadmin'
+      links:
+        - mysql
+      environment:
+        PMA_HOST: wgtcrm-mysql
+        PMA_PORT: 3306
+      ports:
+        - '8081:80'
+      volumes:
+        - /sessions
 networks:
   wgtcrm:
     name: wgtcrm
-
+    driver: bridge
 secrets:
   ssh_key:
     file: ~/.ssh/id_rsa
