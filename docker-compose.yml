@@ -13,13 +13,15 @@ services:
       #- "./docker/nginx:/etc/nginx/conf.d"
       - "./:/var/www/html"
       - ./docker/nginx/logs:/var/log/nginx
-    working_dir: /var/www/html  
+    working_dir: /var/www/html
     depends_on:
       - "wgtcrm-php"
-     
-     
+    networks:
+      - wgtcrm
+
+
   wgtcrm-php:
-    build: 
+    build:
         context: ./
         dockerfile: ./docker/php/Dockerfile
     container_name: wgtcrm-php
@@ -35,7 +37,8 @@ services:
       #/usr/local/etc/php/php.ini - real place
     ports:
       - "9000:9000"
-     
+    networks:
+      - wgtcrm
     secrets:
       - source: ssh_key
         target: /home/docker/.ssh/id_rsa
@@ -52,7 +55,9 @@ services:
         RABBITMQ_ERLANG_COOKIE: 6085e2412b6fa88647466c6a81c0cea0
         RABBITMQ_DEFAULT_USER: imediasun
         RABBITMQ_DEFAULT_PASS: sunimedia
-        RABBITMQ_DEFAULT_VHOST: /  
+        RABBITMQ_DEFAULT_VHOST: /
+     networks:
+       - wgtcrm
 networks:
   wgtcrm:
     name: wgtcrm
