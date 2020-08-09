@@ -7,7 +7,7 @@ ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/mas
 RUN sed -i '/jessie-updates/d' /etc/apt/sources.list  # Now archived
 RUN chmod uga+x /usr/local/bin/install-php-extensions && sync
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update -q \
+RUN DEBIAN_FRONTEND=noninteractive apt-get update -q
 RUN DEBIAN_FRONTEND=noninteractive apt-get install nano -q -y
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
       curl \
