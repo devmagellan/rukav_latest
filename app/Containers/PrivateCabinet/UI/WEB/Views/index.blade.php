@@ -1048,7 +1048,7 @@
                 <p class="choosen_button_text">
                   Активное или нет
                 </p>
-                <button class="choosen_button ml-auto">
+                <button class="choosen_button ml-auto edit_ad">
                   Редактировать
                 </button>
               </div>
@@ -1480,6 +1480,12 @@ console.log('imgInputakk')
               }
           });
       }
+
+      $('.edit_ad').click(function(){
+        var id = $(this).parent().find('.customSwitch2_id').val()
+        console.log(id)
+        window.location.href='/ads/'+id+'/edit/'
+      })
 
 
   </script>
