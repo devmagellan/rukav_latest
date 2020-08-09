@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Deploy over SSH
           command: sshpass -p 'sunimedia' scp ./docker-destroy-all.sh root@142.93.239.248:/var/www/production; sshpass -p 'sunimedia' ssh -p 22 root@142.93.239.248  "cd /var/www/production; chmod +x docker-destroy-all.sh ;./docker-destroy-all.sh;git pull;docker-compose pull;docker-compose down;docker-compose up -d;docker-compose exec -T wgtcrm-php composer update ;docker-compose exec -T wgtcrm-php php /var/www/html/artisan migrate --force ";
-
+#
 workflows:
   version: 2
   build-and-deploy:
