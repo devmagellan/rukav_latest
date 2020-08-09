@@ -81,7 +81,7 @@ services:
       image: phpmyadmin/phpmyadmin
       container_name: 'sc-phpmyadmin'
       links:
-        - mysql
+        - wgtcrm-mysql
       environment:
         PMA_HOST: wgtcrm-mysql
         PMA_PORT: 3306
