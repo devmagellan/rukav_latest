@@ -40,6 +40,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 ENV PATH=$PATH:/root/composer/vendor/bin COMPOSER_ALLOW_SUPERUSER=1
 ENV COMPOSER_VERSION 1.7.2
 ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_MEMORY_LIMIT -1
 ENV COMPOSER_HOME /tmp
 
 
@@ -48,7 +49,9 @@ ENV COMPOSER_HOME /tmp
 # https://github.com/composer/composer/pull/7904
 RUN composer global require hirak/prestissimo
 COPY --chown=www-data:www-data ./ /var/www/html
-
+COPY ./docker/php/run.sh /
+RUN chmod 777 /run.sh
 WORKDIR /var/www/html
-RUN  composer install --no-interaction --ansi --no-suggest --prefer-source
+#RUN  php -d memory_limit=-1 /usr/local/bin/composer install --no-interaction --ansi --no-suggest --prefer-source
+#CMD ["/run.sh"]
 

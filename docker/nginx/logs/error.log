@@ -129,3 +129,7 @@ PHP message: PHP Fatal error:  require(): Failed opening required '/var/www/html
 PHP message: PHP Fatal error:  require(): Failed opening required '/var/www/html/public/../vendor/autoload.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 22" while reading upstream, client: 195.214.222.8, server: _, request: "GET / HTTP/1.1", upstream: "fastcgi://172.23.0.2:9000", host: "3.18.112.158:8080"
 =======
 >>>>>>> 40e81dd0cf62f216b91acd2c0bb334ddf8886115
+2020/08/09 12:44:07 [error] 28#28: *1 connect() failed (113: No route to host) while connecting to upstream, client: 195.214.222.8, server: _, request: "GET / HTTP/1.1", upstream: "fastcgi://172.26.0.3:9000", host: "142.93.239.248:8080"
+2020/08/09 12:47:37 [error] 28#28: *4 connect() failed (113: No route to host) while connecting to upstream, client: 195.214.222.8, server: _, request: "GET / HTTP/1.1", upstream: "fastcgi://172.26.0.3:9000", host: "142.93.239.248:8080"
+2020/08/09 13:05:32 [error] 27#27: *1 FastCGI sent in stderr: "PHP message: PHP Warning:  require(/var/www/html/public/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/public/index.php on line 22
+PHP message: PHP Fatal error:  require(): Failed opening required '/var/www/html/public/../vendor/autoload.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 22" while reading upstream, client: 195.214.222.8, server: _, request: "GET / HTTP/1.1", upstream: "fastcgi://172.27.0.3:9000", host: "142.93.239.248:8080"
