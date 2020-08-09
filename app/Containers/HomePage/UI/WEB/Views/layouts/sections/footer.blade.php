@@ -88,6 +88,7 @@
       <div class="col-md-3">
         <h5>Пользователю</h5>
         <ul class="menu_footer">
+          @if($staticPages)
           @foreach($staticPages as $page)
             @if($page->group==2)
               @if(mb_substr($page->link, 0, 6)=='mailto')
@@ -101,6 +102,7 @@
                 @endif
             @endif
           @endforeach
+            @endif
         </ul>
       </div>
       <div class="col-md-3">
