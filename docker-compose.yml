@@ -45,7 +45,7 @@ services:
         target: /home/docker/.ssh/id_rsa
 
   rabbitmq:
-     image: rabbitmq:3.7.5-management
+     image: devmagellan/rabbitmq:3.7.5-management
      hostname: app-rabbitmq
      ports:
        - 5672:5672
@@ -61,12 +61,12 @@ services:
        - wgtcrm
 
   wgtcrm-mysql:
-    image: mysql:5.7.30
+    image: devmagellan/mysql:5.7.30
     container_name: wgtcrm-mysql
     restart: always
     environment:
       MYSQL_DATABASE: 'production'
-      MYSQL_USER: 'imediasun'
+      MYSQL_USER: 'root'
       MYSQL_PASSWORD: 'sunimedia'
       MYSQL_ROOT_PASSWORD: 'sunimedia'
     ports:
