@@ -81,6 +81,8 @@ services:
       - '3306'
     volumes:
       - "./docker/tmp/mysql:/var/lib/mysql"
+    depends_on:
+      - "wgtcrm-php"
     networks:
       - wgtcrm
   phpmyadmin:
@@ -98,6 +100,8 @@ services:
         - '8081:80'
       volumes:
         - /sessions
+      networks:
+        - wgtcrm
 networks:
   wgtcrm:
     name: wgtcrm
