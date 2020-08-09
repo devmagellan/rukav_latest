@@ -41,14 +41,6 @@ ENV PATH=$PATH:/root/composer/vendor/bin COMPOSER_ALLOW_SUPERUSER=1
 ENV COMPOSER_VERSION 1.7.2
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /tmp
-RUN set -xe \
-    && composer --ansi --version --no-interaction \
-    && composer --no-interaction global require 'hirak/prestissimo' \
-    && composer clear-cache \
-    # show php info
-    && php -v \
-    && php-fpm -v \
-    && php -m
 
 
 # Install prestissimo (composer plugin). Plugin that downloads packages in parallel to speed up the installation process
