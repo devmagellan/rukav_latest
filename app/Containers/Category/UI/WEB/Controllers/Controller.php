@@ -55,6 +55,8 @@ class Controller extends WebController
       $currentPage = $request->input('page');
       $from=$request->input('price_start');
       $to=$request->input('price_end');
+
+
       $sort_by_date=$request->input('sort_by_date');
       // Make sure that you call the static method currentPageResolver()
       // before querying users
@@ -183,6 +185,7 @@ if($pricesLimits[0]['max_price']==$pricesLimits[0]['min_price']){
         $data['title'] = "Додати товар";
         $data['keywords'] = "Ukrainian industry platform";
         $data['description'] = "Ukrainian industry platform";
+      $data['filters']=\App\Containers\Filter\Models\Filter::get();
         $data['categories']=\App\Containers\Site\Models\ProductCategory::where('parent_id',0)
             ->orderBy('position')->get();
         return view('category::admin.index', $data);

@@ -371,6 +371,16 @@ class AdminMenusSeeder extends Seeder
                 'type'=>'linked',
                 'permission'=>'view_static_pages'
             ],
+          [
+            'parent_id' => 26,
+            'name' => 'Редактирование фильтров',
+            'icon'=> 'fal fa-window',
+            'link'=> '/filters',
+            'system_name'=>'view_filters_pages',
+            'type'=>'linked',
+            'permission'=>'view_filters_pages'
+          ],
+
 
 
 

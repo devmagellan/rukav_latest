@@ -108,10 +108,23 @@
 
 
 
-          <div class="col-sm-5 d-none d-sm-block"><button>Объявления </button></div>
-          <div class="col-4 col-sm-3" style="text-align: center"><button class="data_sort   @if( Request::get('sort_by_date')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_date')=='high_to_low') high_to_low @else low_to_high @endif">Дата @if( Request::get('sort_by_date')=='lo_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_date')=='high_to_low') <img src="/img/play_button_img.svg" alt=""> @else <img src="/img/play_button_img.svg" alt=""> @endif</button></div>
-          <div class="col-4 col-sm-2" style="text-align: center"><button>Марка <img src="/img/play_button_img.svg" alt=""></button></div>
-          <div class="col-4 col-sm-2" style="text-align: center"><button>Цена <img src="/img/play_button_img.svg" alt=""></button></div>
+          <div class="col-sm-4 d-none d-sm-block"><button>Объявления </button></div>
+          <div class="col-4 col-sm-1" style="text-align: center"><button class="data_sort   @if( Request::get('sort_by_date')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_date')=='high_to_low') high_to_low @else low_to_high @endif">Дата @if( Request::get('sort_by_date')=='lo_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_date')=='high_to_low') <img src="/img/play_button_img.svg" alt=""> @else <img src="/img/play_button_img.svg" alt=""> @endif</button></div>
+
+            <?
+            $currentFilters=\App\Containers\Filter\Models\CategoryFilter::with('filter')->where('category_id',$data['currentCat']->id)->get();
+            ?>
+            @foreach($currentFilters as $filter)
+                <div class="col-md-2" style="text-align: center">
+<input type="hidden" class="filter_variant" value="{{$filter->filter->id}}">
+                  <? $filter_variant='sort_by_filter_'.$filter->filter->id;
+                  ?>
+                  <button class="filter_sort @if( Request::get($filter_variant)=='lo_to_high') lo_to_high @elseif(Request::get($filter_variant)=='high_to_low') high_to_low @else low_to_high @endif">{{$filter->filter->name}} @if( Request::get($filter_variant)=='lo_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get($filter_variant)=='high_to_low') <img src="/img/play_button_img.svg" alt=""> @else <img src="/img/play_button_img.svg" alt=""> @endif </button>
+                </div>
+            @endforeach
+
+
+          <div class="col-4 col-sm-1" style="text-align: center"><button>Цена <img src="/img/play_button_img.svg" alt=""></button></div>
         </div>
 
         @foreach($products as $product)
@@ -127,7 +140,7 @@
               <img src="/storage/messages/{{$product->pictures->first()->photo}}" alt="" class="product_item_img">
             @endif
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <a href="/ads/{{$product->id}}" class="product_item_name">
               {{$product->title}}
             </a>
@@ -136,13 +149,13 @@
                 {{$product->city}}
             </p>
           </div>
-          <div class="col-sm-2">
-            <p class="product_map_marka d-none d-sm-block">{{$product->created_at}}</p>
-          </div>
-          <div class="col-sm-2">
-            <p class="product_map_marka d-none d-sm-block">Volkswagen</p>
-          </div>
-          <div class="col-sm-2">
+          @foreach($currentFilters as $filter)
+            <div class="col-md-2" style="text-align: center">
+              <p class="product_map_marka d-none d-sm-block">Volkswagen</p>
+            </div>
+          @endforeach
+
+          <div class="col-sm-1">
             <p class="product_item_price">£ {{$product->price}}</p>
             <p class="product_map_marka d-sm-none">Volkswagen</p>
             <p class="product_item_city d-sm-none">
@@ -306,6 +319,38 @@ console.log({{$pricesLimits[0]['max_price']}})
 
 console.log('final=>',url+param)
         window.location.href=url+param
+    })
+
+    $('.filter_sort').click(function(){
+      console.log(444)
+      var filter_id=$(this).parent().find('.filter_variant').val()
+      var url=$(location).attr('href');
+      var url=removeParams(url,'sort_by_filter_'+filter_id+'')
+      console.log('clear=>',url)
+      if($(this).hasClass('low_to_high')){
+        if (url.indexOf('?') > -1)
+        {
+
+          var param= '&sort_by_filter_'+filter_id+'=high_to_low'
+        }
+        else{
+          var param= '?sort_by_filter_'+filter_id+'=high_to_low'
+        }
+
+      }else{
+        $(this).removeClass('low_to_high')
+        if (url.indexOf('?') > -1)
+        {
+          var param= '&sort_by_filter_'+filter_id+'=low_to_high'
+        }
+        else{
+          var param= '?sort_by_filter_'+filter_id+'=low_to_high'
+        }
+
+      }
+
+      console.log('final=>',url+param)
+      window.location.href=url+param
     })
 
 
