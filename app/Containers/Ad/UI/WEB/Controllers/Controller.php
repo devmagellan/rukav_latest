@@ -11,6 +11,7 @@ use App\Containers\Ad\UI\WEB\Requests\FindAdByIdRequest;
 use App\Containers\Ad\UI\WEB\Requests\UpdateAdRequest;
 use App\Containers\Ad\UI\WEB\Requests\StoreAdRequest;
 use App\Containers\Ad\UI\WEB\Requests\EditAdRequest;
+use App\Containers\Filter\UI\WEB\Requests\GetAllFiltersRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
 use Illuminate\Http\Response;
@@ -12981,5 +12982,7 @@ class Controller extends WebController
       \Log::info('sata',array($this->resultCat));
       return $this->resultCat;}
   }
+
+
 
 }

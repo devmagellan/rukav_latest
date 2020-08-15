@@ -155,4 +155,10 @@ class Controller extends WebController
       }
 return json_encode(['result'=>'success']);
   }
+
+
+  public function searchForFilters(GetAllFiltersRequest $request){
+      $data['filters']=\App\Containers\Filter\Models\CategoryFilter::where('category_id',$request->input('cat_id'))->with('filter')->get();
+      return view('ad::filters.table', $data);
+  }
 }

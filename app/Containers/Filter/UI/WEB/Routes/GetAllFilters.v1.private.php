@@ -65,3 +65,12 @@ $router->post('/filters/add', [
 ]);
 
 
+$router->post('/search_for_filters', [
+  'as' => 'search_for_filters',
+  'uses'  => 'Controller@searchForFilters',
+  'middleware' => [
+    'auth:web',
+  ],
+]);
+
+

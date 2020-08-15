@@ -4,10 +4,10 @@ namespace App\Containers\Filter\Models;
 
 use App\Ship\Parents\Models\Model;
 
-class Filter extends Model
+class AddFilter extends Model
 {
     protected $fillable = [
-'add_id','filter_id'
+'add_id','filter_id','value'
     ];
 
     protected $attributes = [
