@@ -114,92 +114,10 @@
                 <div class="modal-body">
                     <input type="hidden" id="customer_id" name="customer_id" value="0">
                     <input type="hidden" id="company_id" name="company_id" value="1">
-                    <input type="hidden" id="is_client" name="is_client" value="1">
+                    <input type="hidden" id="manager_id" name="manager_id" value="1">
 
-                  <div class="form-group">
-                    <label class="form-label" for="customer_name">Вид пользователя</label>
 
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input vid_user" id="privat" value="Частная" name="vid_user" checked="">
-                      <label class="custom-control-label" for="privat">Частная</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input vid_user" id="organisation" value="Организация" name="vid_user" >
-                      <label class="custom-control-label" for="organisation">Организация</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input vid_user" id="enterprenur" value="Предприниматель" name="vid_user" >
-                      <label class="custom-control-label" for="enterprenur">Предприниматель</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input vid_user" id="company" value="Компания" name="vid_user" >
-                      <label class="custom-control-label" for="company">Компания</label>
-                    </div>
 
-                  </div>
-
-                  <div id="company_information" class="company_modal_block">
-                    <div class="form-group">
-                      <label class="form-label" for="customer_name">Название компании</label>
-                      <input type="text" id="company_name" name="company_name" class="form-control" placeholder="Название компании">
-
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label" for="customer_name">Регистрационный номер</label>
-                      <input type="text" id="reg_number" name="reg_number" class="form-control" placeholder="Регистрационный номер">
-
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label" for="customer_name">VAT number</label>
-                      <input type="text" id="vat_number" name="vat_number" class="form-control" placeholder="VAT number">
-
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label" for="customer_name">Юридический адрес</label>
-                      <input type="text" id="address" name="address" class="form-control" placeholder="Юридический адрес">
-
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label" for="post_code">PostCode</label>
-                      <input type="text" id="post_code" name="postCode" class="form-control" placeholder="PostCode">
-
-                    </div>
-                  </div>
-
-                  <div id="individual_information" class="individual_modal_block">
-                    <div class="form-group">
-                      <label class="form-label" for="customer_name">Название бизнеса</label>
-                      <input type="text" id="business_name" name="business_name" class="form-control" placeholder="Название бизнеса">
-
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label" for="customer_name">Адрес</label>
-                      <input type="text" id="address" name="address" class="form-control" placeholder="Адрес">
-
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label" for="post_code">PostCode</label>
-                      <input type="text" id="post_code" name="postCode" class="form-control" placeholder="PostCode">
-
-                    </div>
-                  </div>
-                  <div id="organisation_information" class="organisation_modal_block">
-                    <div class="form-group">
-                      <label class="form-label" for="organisation_name">Название организации</label>
-                      <input type="text" id="business_name" name="business_name" class="form-control" placeholder="Название бизнеса">
-
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label" for="customer_name">Адрес</label>
-                      <input type="text" id="address" name="address" class="form-control" placeholder="Адрес">
-
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label" for="post_code">PostCode</label>
-                      <input type="text" id="post_code" name="postCode" class="form-control" placeholder="PostCode">
-
-                    </div>
-                  </div>
 
                     <div class="form-group">
                         <label class="form-label" for="customer_name">Имя пользователя</label>
@@ -213,7 +131,49 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="customer_location">Страна резиденции</label>
+                        <label class="form-label" for="customer_sex">Пол</label>
+                        <select class="form-control" id="customer_sex">
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
+                        </select>
+                    </div>
+
+                    @if($company_temp)
+                        <div class="form-group">
+                            <label class="form-label" for="select">Выбрать этому пользователю компанию</label>
+                            <select   class="form-control" id="selectCompany">
+                                @foreach($companies as $company)
+                                    <option value="{{$company->id}}">{{$company->name}} </option>
+                                @endforeach
+                            </select>
+
+
+
+
+                        </div>
+                    @endif
+                    <div class="form-group">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="managerSwitch" >
+                            <label class="custom-control-label" for="managerSwitch">Менеджер/не менеджер</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="select">Назначить этому пользователю менеджера</label>
+                        <select   class="form-control" id="select">
+                             {{-- @foreach($managers as $manager)
+                                    <option value="{{$manager->id}}">{{$manager->user->name}} {{$manager->user->sername}}</option>
+                                @endforeach--}}
+                        </select>
+
+
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="customer_location">Местонахождение пользователя</label>
                         <input type="text" id="customer_location" name="customer_location" class="form-control" required placeholder="Локация пользователя">
                     </div>
 
@@ -222,11 +182,34 @@
                         <input type="email" id="customer_email" name="customer_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required email class="form-control" placeholder="Email">
                         <span class="has_been_taken_message" style="display:none;color:red"> Email has been taken</span>
                     </div>
+                    <div class="form-group">
+                        <label class="form-label" for="company_department">Департамент</label>
+                        <input type="text" id="customer_department" name="customer_department" required class="form-control" placeholder="Департамент">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="company_position">Должность</label>
+                        <input type="text" id="customer_position" name="customer_position" required class="form-control" placeholder="Должность">
+                    </div>
 
                     <div class="form-group">
                         <label class="form-label" for="customer_phone">Контактный телефон</label>
-                        <input type="text" id="customer_phone" name="customer_phone" class="form-control" placeholder="Контактный телефон">
+                        <input type="text" id="customer_phone" name="customer_phone" required class="form-control" placeholder="Контактный телефон">
                     </div>
+                    <div class="form-group">
+                        <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Birth date</label>
+                        <div class="col-12 col-lg-6 ">
+                            <input type="text" class="form-control" id="datepicker-1" readonly placeholder="Select date" value="{{$today}}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Start date</label>
+                        <div class="col-12 col-lg-6 ">
+                            <input type="text" class="form-control" id="datepicker-2" readonly placeholder="Select date" value="{{$today}}">
+                        </div>
+                    </div>
+
+
 
 
 
@@ -241,37 +224,6 @@
         </div>
     </div>
 
-
-
-      <div class="modal fade default-example-modal-right-lg-ad" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-dialog-right modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title h4">Форма добавления объявления</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true"><i class="fal fa-times"></i></span>
-              </button>
-            </div>
-
-            <form class="needs-validation" id="customer_create" novalidate onsubmit="theSubmitFunctionAd(); return false;">
-
-              <div class="modal-body">
-                <input type="hidden" id="customer_id" name="customer_id" value="0">
-  
-
-
-
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="customer_create_close btn btn-secondary waves-effect waves-themed" data-dismiss="modal">Закрыть</button>
-                <button type="submit" class="customer_create btn btn-primary waves-effect waves-themed" >Сохранить</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
     </main>
 @endsection
 
@@ -280,57 +232,6 @@
     <script>
 
 
-      $('.vid_user').on('change', function () {
-
-        var vid_user=$(this).val()
-        console.log(vid_user)
-if(vid_user=='Компания'){
-        $('.organisation_modal_block').hide();
-        $('.company_modal_block').show();
-        $('.individual_modal_block').hide();
-        $('.organisation_modal_block').find('input[name="www"]').prop( "disabled", true );
-        $('.organisation_modal_block').find('input[name="address"]').prop( "disabled", true );
-        $('.organisation_modal_block').find('input[name="postCode"]').prop( "disabled", true );
-        $('.individual_modal_block').find('input[name="www"]').prop( "disabled", true );
-        $('.individual_modal_block').find('input[name="address"]').prop( "disabled", true );
-        $('.individual_modal_block').find('input[name="postCode"]').prop( "disabled", true );
-  window.www=$('.company_modal_block').find('input[name="www"]').val();
-  window.address=$('.company_modal_block').find('input[name="address"]').val();
-  window.postCode=$('.company_modal_block').find('input[name="postCode"]').val();
-      }
-      else if(vid_user=='Предприниматель'){
-  $('.organisation_modal_block').hide();
-  $('.company_modal_block').hide();
-  $('.individual_modal_block').show();
-  $('.organisation_modal_block').find('input[name="www"]').prop( "disabled", true );
-  $('.organisation_modal_block').find('input[name="address"]').prop( "disabled", true );
-  $('.organisation_modal_block').find('input[name="postCode"]').prop( "disabled", true );
-  $('.comany_modal_block').find('input[name="www"]').prop( "disabled", true );
-  $('.comany_modal_block').find('input[name="address"]').prop( "disabled", true );
-  $('.comany_modal_block').find('input[name="postCode"]').prop( "disabled", true );
-  window.www=$('.individual_modal_block').find('input[name="www"]').val();
-  window.address=$('.individual_modal_block').find('input[name="address"]').val();
-  window.postCode=$('.individual_modal_block').find('input[name="postCode"]').val();
-        }
-else if(vid_user=='Организация'){
-  $('.organisation_modal_block').show();
-  $('.company_modal_block').hide();
-  $('.individual_modal_block').hide();
-  $('.individual_modal_block').find('input[name="www"]').prop( "disabled", true );
-  $('.individual_modal_block').find('input[name="address"]').prop( "disabled", true );
-  $('.individual_modal_block').find('input[name="postCode"]').prop( "disabled", true );
-  $('.comany_modal_block').find('input[name="www"]').prop( "disabled", true );
-  $('.comany_modal_block').find('input[name="address"]').prop( "disabled", true );
-  $('.comany_modal_block').find('input[name="postCode"]').prop( "disabled", true );
-  window.www=$('.organisation_modal_block').find('input[name="www"]').val();
-  window.address=$('.organisation_modal_block').find('input[name="address"]').val();
-  window.postCode=$('.organisation_modal_block').find('input[name="postCode"]').val();
-}
-
-
-
-      });
-
         // Class definition
 
         var controls = {
@@ -338,24 +239,98 @@ else if(vid_user=='Организация'){
             rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
         }
 
+        var runDatePicker = function()
+        {
+
+            // minimum setup
+            $('#datepicker-1').datepicker(
+                {
+                    todayHighlight: true,
+                    orientation: "bottom left",
+                    templates: controls
+                });
 
 
+            // input group layouts
+            $('#datepicker-2').datepicker(
+                {
+                    todayHighlight: true,
+                    orientation: "bottom left",
+                    templates: controls
+                });
 
-$(document).ready(function(){
-  $('.organisation_modal_block').hide();
-  $('.company_modal_block').hide();
-  $('.individual_modal_block').hide();
-  $('.organisation_modal_block').find('input[name="www"]').prop( "disabled", true );
-  $('.organisation_modal_block').find('input[name="address"]').prop( "disabled", true );
-  $('.organisation_modal_block').find('input[name="postCode"]').prop( "disabled", true );
-  $('.individual_modal_block').find('input[name="www"]').prop( "disabled", true );
-  $('.individual_modal_block').find('input[name="address"]').prop( "disabled", true );
-  $('.individual_modal_block').find('input[name="postCode"]').prop( "disabled", true );
-  $('.company_modal_block').find('input[name="www"]').prop( "disabled", true );
-  $('.company_modal_block').find('input[name="address"]').prop( "disabled", true );
-  $('.company_modal_block').find('input[name="postCode"]').prop( "disabled", true );
+            // input group layouts for modal demo
+            $('#datepicker-modal-2').datepicker(
+                {
+                    todayHighlight: true,
+                    orientation: "bottom left",
+                    templates: controls
+                });
 
-})
+            // enable clear button
+            $('#datepicker-3').datepicker(
+                {
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+
+            // enable clear button for modal demo
+            $('#datepicker-modal-3').datepicker(
+                {
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    todayHighlight: true,
+                    templates: controls
+                });
+
+            // orientation
+            $('#datepicker-4-1').datepicker(
+                {
+                    orientation: "top left",
+                    todayHighlight: true,
+                    templates: controls
+                });
+
+            $('#datepicker-4-2').datepicker(
+                {
+                    orientation: "top right",
+                    todayHighlight: true,
+                    templates: controls
+                });
+
+            $('#datepicker-4-3').datepicker(
+                {
+                    orientation: "bottom left",
+                    todayHighlight: true,
+                    templates: controls
+                });
+
+            $('#datepicker-4-4').datepicker(
+                {
+                    orientation: "bottom right",
+                    todayHighlight: true,
+                    templates: controls
+                });
+
+            // range picker
+            $('#datepicker-5').datepicker(
+                {
+                    todayHighlight: true,
+                    templates: controls
+                });
+
+            // inline picker
+            $('#datepicker-6').datepicker(
+                {
+                    todayHighlight: true,
+                    templates: controls
+                });
+        }
+
+
+$(document).ready(function(){ runDatePicker();})
 
 $('#managerSwitch').change(function(){
     console.log('Manager1',$(this).is(':checked'))
@@ -412,20 +387,19 @@ $('.has_been_taken_message').hide();
         $('#customer_create').removeClass('was-validated')
         $('.has_been_taken_message').show();
     }
-console.log(777,form[0].checkValidity())
+console.log(777)
     }
     else {
 
         $('#customer_create').addClass('was-validated')
-        var customer_email = $('#customer_email').val()
-      var vid_user=$('#customer_create').find('input[name="vid_user"]').val()
-      console.log(vid_user)
+        console.log(222, company_id)
+        @if($company_temp)
+           company_id=$('#selectCompany').val()
+        @endif
         var customer_name = $('#customer_name').val()
-      var admin_side=1;
         var customer_sername = $('#customer_sername').val()
+        var customer_sex = $('#customer_sex').val()
         var customer_location = $('#customer_location').val()
-      var reg_number = $('#reg_namber').val()
-      var vat_number = $('#vat_namber').val()
         if($('#customer_id').val()){
             var customer_id = $('#customer_id').val()
         }
@@ -433,6 +407,23 @@ console.log(777,form[0].checkValidity())
             var customer_id =0;
         }
 
+        var manager = $('#managerSwitch').is(':checked')
+        var manager_id = $('#select').val()
+        var customer_department = $('#customer_department').val()
+        var customer_position = $('#customer_position').val()
+
+        console.log('customer_position',customer_position)
+        console.log('customer_id',customer_id)
+        var customer_email = $('#customer_email').val()
+        var customer_birth_date = $('#datepicker-1').val()
+        var customer_start_date = $('#datepicker-2').val()
+        console.log('customer_id=', customer_id, 'customer_name=>', customer_name, 'customer_sername=>', customer_sername,
+            'customer_sex=>', customer_sex, 'customer_location=>', customer_location,
+            'customer_department=>', customer_department, 'company_id=>', company_id, 'manager_id=>', manager_id,
+            'customer_position=>' ,customer_position,
+            'customer_email=>', customer_email, 'manager=>', manager,
+            'birth_date=>',customer_birth_date,
+            'start_date=>',customer_start_date);
 
         $.ajax({
             method: 'POST',
@@ -441,8 +432,11 @@ console.log(777,form[0].checkValidity())
             url: '/users/create',
             data: {
                 customer_id: customer_id, customer_name: customer_name, sername: customer_sername,
-                location: customer_location,
-                email: customer_email, is_client:1,reg_number:reg_number,vat_number:vat_number,vid_user:vid_user,admin_side:admin_side
+                sex: customer_sex, location: customer_location,manager_id: manager_id,
+                position: customer_position,
+                email: customer_email, manager: manager,
+                birth_date:customer_birth_date,
+                start_date:customer_start_date
             },
             beforeSend: function () {
             },

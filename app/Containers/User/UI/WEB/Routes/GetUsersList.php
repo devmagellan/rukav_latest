@@ -11,6 +11,15 @@ $router->get('/users_list', [
     ],
 ]);
 
+$router->get('/admins_list', [
+  'as'   => 'admins_list_dashboard',
+  'uses'       => 'Controller@indexAdmin',
+  'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+  'middleware' => [
+    'auth:admin'
+  ],
+]);
+
 $router->post('/users/data', [
     'as'   => 'users_list_dashboard',
     'uses'       => 'Controller@postData',
@@ -18,6 +27,15 @@ $router->post('/users/data', [
     'middleware' => [
         'auth:admin'
     ],
+]);
+
+$router->post('/admins/data', [
+  'as'   => 'users_list_dashboard',
+  'uses'       => 'Controller@postAdminsData',
+  'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+  'middleware' => [
+    'auth:admin'
+  ],
 ]);
 
 

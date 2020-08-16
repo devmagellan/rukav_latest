@@ -12569,6 +12569,17 @@ class Controller extends WebController
     return view('ad::ads.form-add-ads', compact( 'categoriesOnlyRoot','locations','data'));
   }
 
+  public function adminCreate(CreateAdRequest $request,$user_id){
+    $result['user_id']=$user_id;
+    $data['properties']=$this->getMainProperties($request);
+    $result['categoriesOnlyRoot'] = $data['properties']->categories->where('parent_id', 0);
+    $result['locations']=\App\Containers\Ad\Models\BritainRegion::where('parent_id',0)->get();
+    $result['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
+    //$users = Apiato::call('Ad@GetAllAdsDataTableAction', [$request]);
+    $result['main_rubrics'] = Apiato::call('Site@GetProductCategoriesByParentIdAction', [0], [0]);
+    return view('ad::admin.add.index', $result);
+  }
+
   public function searchRubrics(FindAdByIdRequest $request)
   {
       $data['properties']=$this->getMainProperties($request);
@@ -12983,6 +12994,12 @@ class Controller extends WebController
       return $this->resultCat;}
   }
 
+  public function adminAddAds(GetAllAdsDataTableRequest $request){
 
+    $result['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
+    //$users = Apiato::call('Ad@GetAllAdsDataTableAction', [$request]);
+    $result['main_rubrics'] = Apiato::call('Site@GetProductCategoriesByParentIdAction', [0], [0]);
+    return view('ad::admin.add.index', $result);
+  }
 
 }

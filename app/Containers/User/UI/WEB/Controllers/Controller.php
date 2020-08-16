@@ -59,7 +59,43 @@ class Controller extends WebController
     return view('user::index', $data);
   }
 
+  public function indexAdmin(GetAllUsersRequest $request)
+  {
+    //$adminpanels = Apiato::call('AdminPanel@GetAllAdminPanelsAction', [$request]);
+    //$data=$this->mainSettings();
+    //$data['menu']=$this->menu();
+    $role = \Auth::user()->roles;
+
+
+    //$data['customer']=null;
+    //$data['company']=\Auth::user()->getCompany[0];
+    //$data['company_id']=\Auth::user()->getCompany[0]->id;
+
+    //$data['managers']=\App\Domain\Manager\Models\Manager::where('company_id',$data['company_id'])->with('user')->get();
+    $data['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
+    $data['title'] = "Додати товар";
+    $data['keywords'] = "Ukrainian industry platform";
+    $data['description'] = "Ukrainian industry platform";
+    return view('user::admins.index', $data);
+  }
+
   public function postData(GetAllUsersRequest $request)
+  {
+
+    $data['title'] = "Customers postData";
+    $company_id = 1;//\Auth::user()->getCompany[0]->id;
+    /*$data['customers']=\App\User::join('customers', function ($join) use ($company_id) {
+        $join->on('users.id', '=', 'customers.user_id')
+            ->where('customers.company_id', $company_id);
+    })->with('getCustomersCompany')->get();*/
+        $data['customers'] = \App\Containers\User\Models\User::where('is_client',1)->with('getCustomersCompany')->get();
+
+
+    //rightJoin('customers', 'users.id', '=', 'user_id')->where('customers.company_id',$company_id)
+    return view('user::table', $data);
+  }
+
+  public function postAdminsData(GetAllUsersRequest $request)
   {
 
     $data['title'] = "Customers postData";
@@ -76,7 +112,7 @@ class Controller extends WebController
 
 
     //rightJoin('customers', 'users.id', '=', 'user_id')->where('customers.company_id',$company_id)
-    return view('user::table', $data);
+    return view('user::admins.table', $data);
   }
 
 
@@ -113,11 +149,11 @@ class Controller extends WebController
       'remember_token' => Str::random(60)];*/
     $user['attributes']['id'] = ($request->input('customer_id') != 0) ? $request->input('customer_id') : null;
     $changeRole = $user['attributes']['id'];
-if($request->input('customer_id') != 0){
+    if($request->input('customer_id') != 0){
     $user = Apiato::call('User@UpdateUserAccountAction', [$request]);}
     else{$user = Apiato::call('User@CreateUserAccountAction', [$request]);}
-var_dump($user);
    // $user = UserFacade::updateUser($user);
+    if($request->admin_side!=1){
     if ($changeRole == null) {
       $role_data = [
         'role_id' => 5,
@@ -132,7 +168,7 @@ var_dump($user);
     $start_string = $request->input('start_date') . ' 16:34:00';
     $start_date = \Carbon\Carbon::createFromFormat('m/d/Y H:i:s', $start_string, 'Europe/London');
     $start_date->setTimezone('UTC');
-    $customer_tmp = \App\Containers\Customer\Models\Customer::where('user_id', $request->input('customer_id'))->first();
+    $customer_tmp = \App\Containers\Customer\Models\Customer::where('user_id', $request->input('customer_id'))->first();}
 /*    $customer['values'] = [
       'user_id' => $user->id,
       'start_date' => $start_date,
@@ -187,7 +223,7 @@ var_dump($user);
           // replace the data
         $staff = $tmp_user->replicate();
 
-        // make into array for mass assign. 
+        // make into array for mass assign.
         //make sure you activate $guarded in your Staff model
         $staff = $tmp_user->toArray();
 \Log::info('replica',$staff);
@@ -200,7 +236,7 @@ var_dump($user);
           $data= new \StdClass();
           $data->email=$user->email;
           $data->password=session()->get('emailVerificationCodePassword');
-	  
+
 		  \Auth::guard('web')->loginUsingId($user->id, true);
           return response()->json(['response'=>'success'],200);
       }
@@ -239,7 +275,7 @@ $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',ses
           // replace the data
         $staff = $tmp_user->replicate();
 
-        // make into array for mass assign. 
+        // make into array for mass assign.
         //make sure you activate $guarded in your Staff model
         $staff = $tmp_user->toArray();
 

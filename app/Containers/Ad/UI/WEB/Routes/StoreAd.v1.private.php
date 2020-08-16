@@ -12,7 +12,4 @@ $router->post('/ads/store', [
 $router->post('ads/search-rubrics', [
   'as' => 'search-rubrics',
   'uses'  => 'Controller@searchRubrics',
-  'middleware' => [
-    'auth:web',
-  ],
 ]);

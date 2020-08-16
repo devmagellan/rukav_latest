@@ -12,21 +12,27 @@ class AdService
 {
   public function createAd($data): Ad
   {
+    if($data->is_admin_format){
+      $user=\App\Containers\User\Models\User::where('id',$data->user_id)->first();
+    }
+    else{
+      $user=Auth::user();
+    }
     return Ad::create([
       'title' => $data->name_ad,
-      'email' => Auth::user()->email,
-      'phone' => (Auth::user()->phone) ? Auth::user()->phone : '',
+      'email' => $user->email,
+      'phone' => ($user->phone) ? $user->phone : '',
       'price' => $data->price,
       'message' => $data->description,
       'city' => $data->city,
       'place_id' => $data->place_id,
-      'name' => Auth::user()->name,
+      'name' => $user->name,
       'category_id' => $data->category_id,
-      'sender' => Auth::user()->id,
+      'sender' => $user->id,
       //TODO не забыть узнать что с этим делать
       'administrative' => $data->administrative,
       'visibility' => false,
-      'show_name' => Auth::user()->name
+      'show_name' => $user->name
     ]);
   }
 

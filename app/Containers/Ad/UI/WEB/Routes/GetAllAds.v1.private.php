@@ -72,13 +72,15 @@ $router->post('/show_maincat_gumtree', [
 ]);
 
 
-$router->post('/getAllParentsString', [
-    'as' => 'getAllParentsString',
-    'uses'  => 'Controller@getAllParentsString',
-    /* 'middleware' => [
-       'auth:web',
-     ],*/
+$router->get('/admin/add_ads', [
+    'as' => 'admin_add_ads',
+    'uses'  => 'Controller@adminAddAds',
+  'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+       'auth:admin',
+     ],
 ]);
+
 
 
 
