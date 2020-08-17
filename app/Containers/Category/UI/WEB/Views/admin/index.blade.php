@@ -262,7 +262,39 @@
         </div>
     </div>
 
+      <!-- Modal center Large -->
+      <div class="modal fade default-example-modal-lg-center-filter"  role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="needs-validation" id="filter_groups" method="post" action="/filters/add" novalidate onsubmit="theSubmitFunctionFilters(); return false;">
 
+                <div class="modal-body">
+                  <div class="input_fields_wrap">
+                    <button style="width:150px;" class="add_field_button">Add More Filters</button>
+                    <div class="folder">
+
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="filters_groups_close btn btn-secondary waves-effect waves-themed" data-dismiss="modal">Закрыть</button>
+                  <button type="submit" class="filters_group_create btn btn-primary waves-effect waves-themed" >Сохранить</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
 
     <!-- Modal center Large -->
     <div class="modal fade default-example-modal-right-lg-slider"  role="dialog" aria-hidden="true">
@@ -560,7 +592,15 @@
 
     </div-->
 
+    <?php
+    $html='<div><select name="filters[]" class="form-control" style="width:150px;">';
+    foreach($filters as $filter) {
+      $html.='<option value="'.$filter->id.'">'.$filter->name.'</option>';
 
+    }
+    $html.='</select><a href="#" class="remove_field">Удалить</a></div>';
+dump($html);
+    ?>
 
 
 @endsection
@@ -575,7 +615,24 @@
     <script src="/NewSmartAdmin/js/formplugins/cropperjs/cropper.js"></script>
 
     <script>
+      $(document).ready(function() {
+        var max_fields      = 4; //maximum input boxes allowed
+        var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+        var add_button      = $(".add_field_button"); //Add button ID
 
+        var x = 1; //initlal text box count
+        $(add_button).click(function(e){ //on add input button click
+          e.preventDefault();
+          if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<? print($html);?>'); //add input box
+          }
+        });
+
+        $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+          e.preventDefault(); $(this).parent('div').remove(); x--;
+        })
+      });
         function reloadData(){
             $.ajax({
                 method: 'POST',
@@ -896,6 +953,7 @@
         }
 
         function show_subcut(id_cat,new_block_cl){
+          //
             console.log('sub_cat_depends',id_cat,new_block_cl)
             $('.' + new_block_cl + '').empty()
             $.ajax({
@@ -1169,6 +1227,31 @@
                 return false;
             })
 
+          $('.categories').delegate('.filter_cat','click',function(event) {
+            console.log(334)
+            window.cat_id=$(this).parent().find('.fahover_cubes_input').val()
+            $('.add_edit_category_btn').text('Изменить')
+            //$( "#addtab" ).dialog( "option", "title", "Изменение названия категории" );
+            console.log('window.cat_id',window.cat_id)
+            //dialog.dialog("open");
+            $('.folder').empty()
+            $.ajax({
+              type: "POST",
+
+              dataType: 'html',
+              url: '/category/filters/get',
+              data: {cat_id:cat_id}, // serializes the form's elements.
+              success: function (data) {
+                $('.folder').append(data)
+
+              }
+            });
+
+            //
+            $('.default-example-modal-lg-center-filter').modal({show:true})
+            return false;
+          })
+
 
             $('.categories').delegate('.add_category_into_level','click',function(event) {
                 console.log(334,event)
@@ -1215,10 +1298,10 @@
             show_subcut(id_cat,new_block_cl);
 
 
-            $('.i-checks').iCheck({
+          /*  $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
-            });
+            });*/
 
         });
 
@@ -1303,6 +1386,26 @@
             });
         });
 
+
+        function theSubmitFunctionFilters (){
+          console.log(222)
+          var form=$('#filter_groups')
+          console.log('cat=>',window.cat_id)
+          console.log(form.serialize())
+          $.ajax( {
+            type: "POST",
+            url: '/filters/add',
+            data: {cat_id:window.cat_id,filters:form.serialize()},
+            success: function( response ) {
+              console.log( response );
+            }
+          } );
+
+
+
+            $('.filters_groups_close').trigger('click')
+
+        }
 
         function theSubmitFunction (){
             console.log(222)

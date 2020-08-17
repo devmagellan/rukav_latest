@@ -21,7 +21,9 @@ class UserService
       'country' => $data->country,
       'phone' => $data->phone,
       'vid_user' => $data->vid_user,
-      'avatar'=>null
+      'avatar'=>null,
+        'active'=>1,
+        'is_client'=>1
     ]);
   }
 

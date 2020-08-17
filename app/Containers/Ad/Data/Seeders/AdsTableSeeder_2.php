@@ -192,6 +192,20 @@ class AdsTableSeeder_2 extends Seeder
                'visibility'=>3,'active'=>1,'city'=>'Manchester','administrative'=>'Scotland','status' => 2,
                'price'=>1000.00
            ],
+         /*16*/
+         [
+           'category_id' => 39,
+           'sender' => 1,
+           'status' => 3,
+           'title' => 'Легковой автомобиль с прицепом',
+           'message' => 'Lorem ipsum dolor measure amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+           'place_id'=>'ChIJdd4hrwug2EcRmSrV3Vo6llI',
+           'created_at'=>\Carbon\Carbon::now(),
+           'visibility'=>3,
+           'city'=>'London',
+           'active'=>1,'administrative'=>'England',
+           'price'=>1000.00
+         ],
 
 
        ]);

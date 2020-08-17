@@ -8,3 +8,13 @@ $router->get('ads/create', [
       'auth:web',
     ],
 ]);
+
+
+$router->get('/admin/user_add/adv/{user_id}', [
+  'as' => 'admin_ad_create',
+  'uses'  => 'Controller@adminCreate',
+  'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+  'middleware' => [
+    'auth:admin',
+  ],
+]);

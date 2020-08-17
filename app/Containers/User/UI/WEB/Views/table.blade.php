@@ -1,3 +1,4 @@
+<link rel="stylesheet" media="screen, print" href="https://stackpath.bootstrapcdn.com/font-awesome/5.14.0/css/font-awesome.min.css">
 <div class="frame-wrap">
     <table class="table table-sm m-0">
         <thead class="bg-primary-500">
@@ -5,58 +6,43 @@
             <th>#</th>
             <th>Name</th>
             <th>Email</th>
-            <th>BirthDate</th>
-            <th>Gender</th>
-            <th>Department</th>
-            <th>ManagerId</th>
-            <th>ManagerName</th>
-            <th>IsManager</th>
-            <th>Position</th>
-            <th>StartDate</th>
-            <th>Location</th>
+            <th>Вид пользователя</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Страна</th>
             <th>Действия</th>
         </tr>
         </thead>
         <tbody>
         @foreach($customers as $customer)
-            @if($customer->getCustomersCompany)
             <form>
-
-                <?
-
-                $manager=App\Containers\Manager\Models\Manager::where('id',$customer->getCustomersCompany['manager_id'])->first();
-                if($manager){
-                $manager_user=\App\Containers\User\Models\User::where('id',$manager->user_id)->first();}
-                ?>
         <tr>
             <th class="customer_id" scope="row">{{$customer->id}}</th>
             <td class="customer_name">{{$customer->name}}</td>
             <td class="customer_email">{{$customer->email}}</td>
-            <td class="customer_phone">{{$customer->getCustomersCompany['birth_date']}}</td>
-            <td class="customer_phone">@if ($customer->getCustomersCompany['sex']==1) {{'male'}} @else {{'female'}} @endif</td>
-            <td class="customer_phone">{{$customer->getCustomersCompany['department']}}</td>
-            <td class="customer_phone">{{$customer->getCustomersCompany['manager_id']}}</td>
-            <td class="customer_phone">@if($manager) {{$manager_user->name}} {{$manager_user->sername}} @endif</td>
+            <td class="customer_phone">{{$customer->vid_user}}</td>
+            <td class="customer_phone"></td>
+            <td class="customer_phone"></td>
+            <td class="customer_phone"></td>
+            <td class="customer_phone"></td>
             <td class="customer_manager">
-                <?
-                $is_manager=App\Containers\Manager\Models\Manager::where('user_id',$customer->id)->first();
-                ?>
-                @if($is_manager)
-            <input type="hidden" class="is_manager" value="1">
-                    @else
-                        <input type="hidden" class="is_manager" value="0">
-                    @endif
-                <div class="custom-control custom-switch">
-                    <input type="hidden" class="customSwitch2_id" value="{{$customer->id}}" >
-                    <input type="checkbox" class="custom-control-input customSwitch2" id="customSwitch2_{{$customer->id}}" @if($is_manager) checked="" @else @endif >
-                    <label class="custom-control-label" for="customSwitch2_{{$customer->id}}"></label>
-                </div>
+
+
             </td>
 
-            <td class="customer_phone">{{$customer->getCustomersCompany['position']}}</td>
-            <td class="customer_phone">{{$customer->getCustomersCompany['start_date']}}</td>
-            <td class="customer_phone">{{$customer->getCustomersCompany['location']}}</td>
+            <td class="customer_phone"></td>
+            <td class="customer_phone"></td>
+            <td class="customer_phone">{{$customer->country}}</td>
             <td>
+              <a target="_blanc" href="/admin/user_add/adv/{{$customer->id}}" class="PrependAd btn btn-primary btn-sm btn-icon waves-effect waves-themed"  >
+               <i class="far fa-file"></i>
+
+              </a>
                 <a href="javascript:void(0)" class="PrependChangeCustomer btn btn-primary btn-sm btn-icon waves-effect waves-themed"  data-toggle="modal" data-target=".default-example-modal-right-lg-user">
                     <i class="fal fa-pencil"></i>
                 </a>
@@ -66,7 +52,6 @@
             </td>
         </tr>
             </form>
-            @endif
       @endforeach
         </tbody>
     </table>

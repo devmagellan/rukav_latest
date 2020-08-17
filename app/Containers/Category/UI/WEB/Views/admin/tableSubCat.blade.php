@@ -8,7 +8,7 @@ $last=count($value);?>
 
 
                 <input type="hidden" class="category_level" value="{{$category->parent_id}}">
-                <button class="add_category_into_level" type="button"  ><i class="fa fa-plus" ></i>Добавить категорию в уровень</button>
+                <button class="add_category_into_level" type="button"  ><i class="fa fa-plus" ></i>Добавить категорию в уровень 2</button>
 
             </div>
         @endif
@@ -31,8 +31,14 @@ $last=count($value);?>
 
 
                     <input  class="fahover_cubes_input" type="hidden" value="{{$category->id}}">
+                  <?
+                  $hasChild=\App\Containers\Site\Models\ProductCategory::where('parent_id',$category->id)->first();
+                  ?>
                     <button style="background:red;color:white" class="delete_cat"><i class="fa fa-trash"></i></button>
                     <button class="edit_cat"><i class="fa fa-pencil"></i></button>
+                  @if(!$hasChild)
+                  <button class="filter_cat"><i class="fa fa-filter"></i></button>
+                  @endif
                     <span style="position:relative;padding-left:20px;">{{$category->name}}</span>
 
                     <span class="fa arrow" style="float:right"></span>

@@ -390,6 +390,26 @@ class ProductCategoryTableSeeder_1 extends Seeder
                 'photo'=>'first_category.png'
 
             ],
+          /*38*/
+          [
+            'parent_id' => 3,
+            'name' => 'Легковые автомобили',
+            'link'=> '/private_cabinet',
+            'icon'=>'fa-home',
+            'position'=>3,
+            'photo'=>'first_category.png'
+
+          ],
+          /*39*/
+          [
+            'parent_id' => 38,
+            'name' => 'Легковые автомобили с прицепом',
+            'link'=> '/private_cabinet',
+            'icon'=>'fa-home',
+            'position'=>1,
+            'photo'=>'first_category.png'
+
+          ],
 
 
         ]);

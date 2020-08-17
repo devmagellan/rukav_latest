@@ -111,9 +111,9 @@ class AdminMenusSeeder extends Seeder
             /*9*/  //Role=>company_admin 1)Impresonate by user
             [
                 'parent_id' => 8,
-                'name' => 'Список пользователей',
+                'name' => 'Список администраторов',
                 'icon'=> 'fal fa-window',
-                'link'=> '/company/users_list',
+                'link'=> '/admins_list',
                 'system_name'=>'company_users_list',
                 'type'=>'linked',
                 'permission'=>null
@@ -362,7 +362,8 @@ class AdminMenusSeeder extends Seeder
                 'type'=>'linked',
                 'permission'=>null
             ],
-            [
+          /*32*/
+          [
                 'parent_id' => 26,
                 'name' => 'Просмотр статических страниц',
                 'icon'=> 'fal fa-window',
@@ -371,6 +372,37 @@ class AdminMenusSeeder extends Seeder
                 'type'=>'linked',
                 'permission'=>'view_static_pages'
             ],
+          /*33*/
+          [
+            'parent_id' => 26,
+            'name' => 'Редактирование фильтров',
+            'icon'=> 'fal fa-window',
+            'link'=> '/filters',
+            'system_name'=>'view_filters_pages',
+            'type'=>'linked',
+            'permission'=>'view_filters_pages'
+          ],
+          /*34*/  //Role=>company_admin 1)Impresonate by user
+          [
+            'parent_id' => 28,
+            'name' => 'Добавление объявлений',
+            'icon'=> 'fal fa-window',
+            'link'=> '/admin/add_ads',
+            'system_name'=>'add_messages',
+            'type'=>'linked',
+            'permission'=>null
+          ],
+          /*35*/  //Role=>company_admin 1)Impresonate by user
+          [
+            'parent_id' => 8,
+            'name' => 'Список пользователей',
+            'icon'=> 'fal fa-window',
+            'link'=> '/users_list',
+            'system_name'=>'company_users_list',
+            'type'=>'linked',
+            'permission'=>null
+          ],
+
 
 
 

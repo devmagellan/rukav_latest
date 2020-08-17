@@ -28,7 +28,12 @@ class CreateAdTask extends Task
   {
     try {
       $ad = $this->service->createAd($data);
+      \Log::info('Ad',array($ad));
       $this->service->savePhoto($data, $ad->id);
+      \Log::info('SaveFilter',array($data->all()));
+      if($data->filter_id){
+        $this->service->saveFilters($data, $ad->id);
+      }
     } catch (Exception $exception) {
       Log::error('Createing ads filed: ' . $exception->getMessage());
       return  false;

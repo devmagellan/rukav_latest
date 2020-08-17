@@ -41,6 +41,8 @@ class AuthorizationPermissionsSeeder_1 extends Seeder
         Apiato::call('Authorization@CreatePermissionTask', ['view_roles_and_permissions_menu', 'Просмотр меню ролей и пермишенов','menu']);
         Apiato::call('Authorization@CreatePermissionTask', ['view_companies_managment_menu', 'Просмотр меню менеджеров компаний','menu']);
         Apiato::call('Authorization@CreatePermissionTask', ['view_static_pages', 'Просмотр статичных страниц','menu']);
+      Apiato::call('Authorization@CreatePermissionTask', ['view_filters_pages', 'Просмотр фильтров','menu']);
+      Apiato::call('Authorization@CreatePermissionTask', ['add_messages', 'Добавление объявлений','menu']);
 
 
 

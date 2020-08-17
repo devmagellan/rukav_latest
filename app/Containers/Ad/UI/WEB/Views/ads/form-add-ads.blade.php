@@ -135,8 +135,14 @@
               </div>
             </div>
 
+
+
           </div>
         </div>
+
+        <div class="filters_block"></div>
+
+
         <input type="hidden" id="category_id" name="category_id" value="{{old('category_id')}}">
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
@@ -985,6 +991,11 @@ $('.cat_name').click(function(){
       else{
           $('.add_second_chat_block_input1').hide()
       }
+
+
+    var cat_id=window.cat_id
+
+
   })
 </script>
 

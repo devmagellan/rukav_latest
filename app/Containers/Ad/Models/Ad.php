@@ -68,5 +68,9 @@ class Ad extends Model
     }
 
 
+  public function validFilter() {
+    return $this->hasMany(\App\Containers\Filter\Models\AddFilter::class, 'add_id', 'id');
+  }
+
 
 }
