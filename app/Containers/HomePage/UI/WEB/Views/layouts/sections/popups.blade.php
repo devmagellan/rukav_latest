@@ -113,8 +113,8 @@
 		</div>
 
       <p class="privatpolitica">
-        Авторизуясь на сайте, Вы принимаете <a href="/help/1">Пользовательское соглашение,</a> <a href="/help/1">Политику
-          конфиденциальности</a> и <a href="/help/1">Политику “Cookie”</a> сайта RUKAV
+        Авторизуясь на сайте, Вы принимаете <a href="/static/policies" target="_blanc">Пользовательское соглашение,</a> <a href="/static/policies" target="_blanc">Политику
+          конфиденциальности</a> и <a href="/static/policies" target="_blanc">Политику “Cookie”</a> сайта RUKAV
       </p>
 
     </div>
@@ -134,7 +134,7 @@
       <button type="button" class="close" data-dismiss="modal" id="closeReg" aria-label="Close">
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
-      <h6 class="modalTitle">Регистрация3</h6>
+      <h6 class="modalTitle">Регистрация</h6>
       <form class="formModal" action="{{route('register_user_web')}}" method="post" id="registerForm">
 
         <div class="row">

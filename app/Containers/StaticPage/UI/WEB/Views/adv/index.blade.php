@@ -34,7 +34,7 @@
           <ul>
             @if($data['firstHelpPage'])
               @foreach($data['firstHelpPage']->getSidebar as $side)
-                <li><a href="#{{$side->link}}"># {{$side->name}}</a></li></br>
+                <li><a href="#{{$side->link}}">{{$side->name}}</a></li></br>
               @endforeach
             @endif
           </ul>

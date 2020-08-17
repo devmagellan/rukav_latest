@@ -33,9 +33,9 @@
         
 		 <div class="col-md-2">
 		 <div class="row">
-           <span class="col-md-3" style="color:#A269F7;font-weight:bold;font-size:48px">10</span>
+           <span class="col-md-3" style="color:#A269F7;font-weight:bold;font-size:48px">2</span>
 		   <div class="row" style="top:10px;position:relative;float:left;font-sixe:24px;">
-		   <div class="col-md-12"><span class="col-md-6">+</span><br><span class="col-md-12">ЛЕТ</span></div>
+		   <div class="col-md-12"><span class="col-md-6">+</span><br><span class="col-md-12">ГОДА</span></div>
 		   </div>
 		   </div>
           </div>
@@ -56,7 +56,7 @@
 		   </div>
           </div>
 		  <div class="row">
-           <span class="col-md-3" style="color:#A269F7;font-weight:bold;font-size:48px">13</span>
+           <span class="col-md-3" style="color:#A269F7;font-weight:bold;font-size:48px">17</span>
 		   <div class="row" style="top:10px;position:relative;float:left;font-sixe:24px;">
 		   <div class="col-md-12"><span class="col-md-6">+</span><br><span class="col-md-12">ПАРТНЕРОВ</span></div>
 		   </div>

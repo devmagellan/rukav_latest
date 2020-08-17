@@ -18,16 +18,16 @@
     <main>
         <div class="container">
 <div class="row">
-    <div class="col-md-4">
-        <?
-        $staticpages=\App\Containers\StaticPage\Models\StaticPageGroup::where('staticpage_id',$data['firstHelpPage']->id)->get();
-        ?>
-        <ul style="margin-top:0px;color:#A269F7">
-@foreach($staticpages as $page)
-                <a style="color:#A269F7" href="/static/{{$data['firstHelpPage']->link}}{{$page->link}}"><li style="cursor:pointer">> {{$page->name}}</li></a><br>
-@endforeach
-
+      <div class="col-md-4">
+        <ul style="margin-top:50px;color:#A269F7">
+            @if($data['firstHelpPage'])
+            @foreach($data['firstHelpPage']->getSidebar as $side)
+                <li><a href="#{{$side->link}}"> {{$side->name}}</a></li></br>
+            @endforeach
+            @endif
         </ul>
+
+
     </div>
 
     <div class="col-md-8">
