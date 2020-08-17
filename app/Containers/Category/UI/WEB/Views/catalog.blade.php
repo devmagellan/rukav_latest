@@ -122,7 +122,11 @@
                   <button class="filter_sort @if( Request::get($filter_variant)=='lo_to_high') lo_to_high @elseif(Request::get($filter_variant)=='high_to_low') high_to_low @else low_to_high @endif">{{$filter->filter->name}} @if( Request::get($filter_variant)=='lo_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get($filter_variant)=='high_to_low') <img src="/img/play_button_img.svg" alt=""> @else <img src="/img/play_button_img.svg" alt=""> @endif </button>
                 </div>
             @endforeach
-
+          @if(count($currentFilters)<3)
+            @for($i=1;$i<=3-count($currentFilters);$i++)
+              <div class="col-md-2" style="text-align: center"></div>
+            @endfor
+          @endif
 
           <div class="col-4 col-sm-1" style="text-align: center"><button>Цена <img src="/img/play_button_img.svg" alt=""></button></div>
         </div>
@@ -150,11 +154,20 @@
             </p>
           </div>
           @foreach($currentFilters as $filter)
+            <?
+            $filterValue=\App\Containers\Filter\Models\AddFilter::where('add_id',$product->id)->where('filter_id',$filter->id)->first();
+            ?>
             <div class="col-md-2" style="text-align: center">
-              <p class="product_map_marka d-none d-sm-block">Volkswagen</p>
+              @if($filterValue)
+              <p class="product_map_marka d-none d-sm-block">{{$filterValue->value}}</p>
+              @endif
             </div>
           @endforeach
-
+          @if(count($currentFilters)<3)
+            @for($i=1;$i<=3-count($currentFilters);$i++)
+              <div class="col-md-2" style="text-align: center"></div>
+            @endfor
+          @endif
           <div class="col-sm-1">
             <p class="product_item_price">£ {{$product->price}}</p>
             <p class="product_map_marka d-sm-none">Volkswagen</p>

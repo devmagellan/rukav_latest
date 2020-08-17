@@ -45,6 +45,7 @@ class Controller extends WebController
    */
   public function index(GetAllCategoriesRequest $request, $id)
   {
+    //dump($request->input());
       $data['properties']=$this->getMainProperties($request);
       $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
       $data['currentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$id)->first();
@@ -75,24 +76,41 @@ class Controller extends WebController
           })
 
 
-          ->where('active',1);
+          ->where('active',1)
+        ->with('validFilter')
+        ->join('add_filters', 'add_filters.add_id', '=', 'ads.id')
+        ->select('ads.*') // Avoid selecting everything from the stocks table
+      ;
 
       if($request->input('sort_by_date')=='low_to_high'){
-          dump('low_to_high');
-          $q->orderBy('created_at');
+          //dump('low_to_high');
+          $q->orderBy('ads.created_at');
       }
       if($request->input('sort_by_date')=='high_to_low'){
-          dump('high_to_low');
-          $q->orderByDesc('created_at');
+          //dump('high_to_low');
+          $q->orderByDesc('ads.created_at');
+      }
+
+      foreach($request->input() as $key=>$filter){
+        //dump(substr($key, 0, 14));
+        if(substr($key, 0, 14)=='sort_by_filter'){
+        $id_filter=str_replace("sort_by_filter_", "", $key);
+        if($filter=='low_to_high'){
+          $q->orderBy('add_filters.value');
+        }
+        elseif($filter=='high_to_low'){
+          $q->orderByDesc('add_filters.value');
+        }
+        }
       }
 
 
 
       $qr=clone($q);
-$pricesLimits=$qr->select( \DB::raw("MAX(ads.price) AS max_price"), \DB::raw("MIN(ads.price) AS min_price"))->get()->toArray();
-if($pricesLimits[0]['max_price']==$pricesLimits[0]['min_price']){
-    $pricesLimits[0]['min_price']=0;
-}
+      $pricesLimits=$qr->select( \DB::raw("MAX(ads.price) AS max_price"), \DB::raw("MIN(ads.price) AS min_price"))->get()->toArray();
+      if($pricesLimits[0]['max_price']==$pricesLimits[0]['min_price']){
+          $pricesLimits[0]['min_price']=0;
+      }
       $products=$q->where(function ($query) use($from,$to) {
       if(!empty($from) && !empty($to)){
           $query->where('price','>=',$from)
