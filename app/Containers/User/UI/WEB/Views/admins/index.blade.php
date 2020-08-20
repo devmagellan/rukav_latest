@@ -121,12 +121,12 @@
 
                     <div class="form-group">
                         <label class="form-label" for="customer_name">Имя пользователя</label>
-                        <input type="text" id="customer_name" name="customer_name" required class="form-control" placeholder="Имя пользователя">
+                        <input type="text" id="customer_name" name="firstName" required class="form-control" placeholder="Имя пользователя">
 
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="customer_sername">Фамилия пользователя</label>
-                        <input type="text" id="customer_sername" name="customer_sername" required class="form-control" placeholder="Фамилия пользователя">
+                        <input type="text" id="customer_sername" name="lastName" required class="form-control" placeholder="Фамилия пользователя">
 
                     </div>
 
@@ -417,7 +417,7 @@ console.log(777)
         var customer_email = $('#customer_email').val()
         var customer_birth_date = $('#datepicker-1').val()
         var customer_start_date = $('#datepicker-2').val()
-        console.log('customer_id=', customer_id, 'customer_name=>', customer_name, 'customer_sername=>', customer_sername,
+        console.log('customer_id=', customer_id, 'firstName=>', customer_name, 'lastName=>', customer_sername,
             'customer_sex=>', customer_sex, 'customer_location=>', customer_location,
             'customer_department=>', customer_department, 'company_id=>', company_id, 'manager_id=>', manager_id,
             'customer_position=>' ,customer_position,
@@ -431,7 +431,7 @@ console.log(777)
             async: false,
             url: '/users/create',
             data: {
-                customer_id: customer_id, customer_name: customer_name, sername: customer_sername,
+                customer_id: customer_id, firstName: customer_name, lastName: customer_sername,
                 sex: customer_sex, location: customer_location,manager_id: manager_id,
                 position: customer_position,
                 email: customer_email, manager: manager,
@@ -449,7 +449,7 @@ console.log(777)
             success: function (data) {
 
                 console.log('success')
-                //reloadData();
+                reloadData();
             }
         });
     }
@@ -468,7 +468,7 @@ console.log(777)
         function reloadData(){
 
             var module='admin.company.users.data'
-            var url='/users/data';
+            var url='/admins/data';
             $.ajax({
                 method: 'POST',
                 dataType: 'html',

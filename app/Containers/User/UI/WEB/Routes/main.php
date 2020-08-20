@@ -10,6 +10,10 @@ $router->post('/register', [
   'uses' => 'Controller@registerUser',
 ]);
 
+$router->post('/users/delete', [
+  'as'   => 'users_delete',
+  'uses' => 'Controller@deleteUser',
+]);
 
 
 $router->post('/changeUserData', [
@@ -29,6 +33,11 @@ $router->post('/changeRegisterFromRestUser', [
 $router->post('/confirm_email', [
     'as'   => 'confirm_email',
     'uses'       => 'Controller@confirmEmail',
+]);
+
+$router->post('/confirm_email_if_registered', [
+  'as'   => 'confirm_email_if_registered',
+  'uses'       => 'Controller@confirmEmailIfRegistered',
 ]);
 
 $router->post('/confirm_email_phone', [

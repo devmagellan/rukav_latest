@@ -153,13 +153,16 @@
                 {{$product->city}}
             </p>
           </div>
-          @foreach($currentFilters as $filter)
+          <?$filterValue=[];
+          ?>
+
+          @foreach($currentFilters as $key=>$filter)
             <?
-            $filterValue=\App\Containers\Filter\Models\AddFilter::where('add_id',$product->id)->where('filter_id',$filter->id)->first();
+            $filterValue[$key]=\App\Containers\Filter\Models\AddFilter::where('add_id',$product->id)->where('filter_id',$filter->filter_id)->first();
             ?>
             <div class="col-md-2" style="text-align: center">
-              @if($filterValue)
-              <p class="product_map_marka d-none d-sm-block">{{$filterValue->value}}</p>
+              @if($filterValue[$key])
+              <p class="product_map_marka d-none d-sm-block">{{$filterValue[$key]->value}}</p>
               @endif
             </div>
           @endforeach

@@ -195,6 +195,9 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="add_advert_block_wrapper">
+
+
+
                   <h6 class="add_advert_block_wrapper_title">
                     Заголовок
                   </h6>
@@ -735,7 +738,7 @@
                   <div class="alert errorBlock">{{ $message }}</div>
                   @enderror
                   <button type="submit" id="saveAdsButton">Подать обьявление</button>
-                  <button type="button" class="buttonHref">Предварительный просмотр</button>
+
                 </div>
               </div>
             </div>

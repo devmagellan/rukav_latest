@@ -97,7 +97,6 @@ class Controller extends WebController
 
   public function postAdminsData(GetAllUsersRequest $request)
   {
-
     $data['title'] = "Customers postData";
     $company_id = 1;//\Auth::user()->getCompany[0]->id;
     /*$data['customers']=\App\User::join('customers', function ($join) use ($company_id) {
@@ -105,9 +104,9 @@ class Controller extends WebController
             ->where('customers.company_id', $company_id);
     })->with('getCustomersCompany')->get();*/
     if (\Auth::user()->hasRole('Gods_mode')) {
-      $data['customers'] = \App\Containers\User\Models\User::with('getCustomersCompany')->get();
+      $data['customers'] = \App\Containers\User\Models\User::where('is_client',0)->with('getCustomersCompany')->get();
     } else {
-      $data['customers'] = \App\Containers\User\Models\User::with('getCustomersCompany')->get();
+      $data['customers'] = \App\Containers\User\Models\User::where('is_client',0)->with('getCustomersCompany')->get();
     }
 
 
@@ -245,6 +244,25 @@ class Controller extends WebController
       }
   }
 
+  public function confirmEmailIfRegistered(GetAllUsersRequest $request){
+    if($request->input('emailConfirmation')!='' && $request->input('emailConfirmation')==session()->get('emailVerificationCode') ){
+      $user=\App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->first();
+      $user->active=1;
+      $user->confirmed=1;
+      $user->save();
+      //$user=\App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->first();
+      $data= new \StdClass();
+      $data->email=$user->email;
+      $data->password=session()->get('emailVerificationCodePassword');
+
+      \Auth::guard('web')->loginUsingId($user->id, true);
+      return response()->json(['response'=>'success'],200);
+    }
+    else{
+      return response()->json(['response'=>'error'],400);
+    }
+  }
+
 
     public function confirmEmailPhone(GetAllUsersRequest $request){
         $error=[];
@@ -268,9 +286,15 @@ $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',ses
             $error[]='error SmsCode';
             //return response()->json(['response'=>'error SmsCode'],403);
         }
+      $user=\App\Containers\User\Models\User::where('phone',session()->get('emailVerificationTelephone'))->first();
+if( $user && $emailConfirmed && $phoneConfirmed){
+  $user->is_confirmed_phone=1;
+  $user->save();
+  \Auth::guard('web')->loginUsingId($user->id, true);
+  return response()->json(['response'=>'success'],200);
 
-
-        if($emailConfirmed && $phoneConfirmed){
+}
+        elseif($emailConfirmed && $phoneConfirmed){
 		$tmp_user=\App\Containers\User\Models\TmpUser::where('id',session()->get('emailVerificationCodeUser'))->first();
           // replace the data
         $staff = $tmp_user->replicate();
@@ -325,6 +349,11 @@ $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',ses
             return response()->json(['response'=>'success'],200);
         }
         return response()->json(['response'=>$error],403);
+    }
+
+    public function deleteUser(GetAllUsersRequest $request){
+    \App\Containers\User\Models\User::where('id',$request->input('id'))->delete();
+    return json_encode(['result'=>'success']);
     }
 
 }

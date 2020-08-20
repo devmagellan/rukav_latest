@@ -29,7 +29,7 @@
 @if(null!=(session()->get('registration_error')))
 	<div style="color:red" class="alert alert-error">{{session()->get('registration_error')}}</div>
 @endif
-	  
+
       <form class="formModal" action="{{route('login_user')}}" method="post" id="loginForm">
         <div id="loginErrorsBlock" class="errorBlock"></div>
         <input type="text" name="email" placeholder="Телефон или email">
@@ -82,7 +82,7 @@
             <i class="fab fa-odnoklassniki"></i>
           </a>
         </li>
-		
+
 		<!--li>
           <a href="{{ route('login.provider.pi', 'pinterest') }}">
             <i class="fab fa-pinterest"></i>
@@ -105,7 +105,7 @@
 	width:50% !important;
 	margin-left:25%;
 	text-decoration:none !important;
-	
+
 	  }
 	  </style>
 	  <div style="margin-top:10px" class="apple_id">
@@ -444,6 +444,81 @@
         <div class="row">
           <div class="col-sm-12">
             <input type="text" class="emailConfirmation" name="" placeholder="Введите код который мы прислали на ваш email">
+            <span id="emailConfirmation" class="errorBlock"></span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <button type="submit">подтвердить</button>
+          </div>
+          <div class="col-sm-6">
+            <button type="button" class="buttonHref">переслать еще раз</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+<div class="modal modal_confirm_email_phone fade" id="confirmEmailPhonelIfRegistered" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <img src="{{asset('img/close-icon.svg')}}" alt="">
+      </button>
+
+      <form class="formModal emailPhoneConfirmationForm">
+
+        <img src="{{asset('img/modalIconPhone.svg')}}" alt="" class="moadal_img">
+        <h6 class="modalTitle">Подтвердите свой телефонный номер</h6>
+        <div class="row">
+          <div class="col-sm-12">
+            <input type="text" name="" class="phoneConfirmationSecond" placeholder="Введите код который мы прислали на ваш телефон">
+            <span id="phoneConfirmationWithEmail" class="errorBlock"></span>
+          </div>
+        </div>
+
+        <img src="{{asset('img/modalIconEmail.svg')}}" alt="" class="moadal_img">
+        <h6 class="modalTitle">Подтвердите свой email</h6>
+        <div class="row">
+          <div class="col-sm-12">
+            <input type="text" name="emailConfirmation" class="emailConfirmationWithPhone" placeholder="Введите код который мы прислали на ваш email">
+            <span id="emailConfirmationWithPhone" class="errorBlock"></span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <button type="submit">подтвердить</button>
+          </div>
+          <div class="col-sm-6">
+            <button type="button" class="buttonHref">переслать еще раз</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="confirmEmailIfRegistered" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <button type="button" class="close confirmEmailClose" data-dismiss="modal" aria-label="Close">
+        <img src="{{asset('img/close-icon.svg')}}" alt="">
+      </button>
+      <img src="{{asset('img/modalIconEmail.svg')}}" alt="" class="moadal_img">
+      <h6 class="modalTitle">Подтвердите свой email</h6>
+      <form class="formModal emailConfirmationFormIfRegistered">
+
+        <div class="row">
+          <div class="col-sm-12">
+            <input type="text" class="emailConfirmationIfRegistered" name="emailConfirmation" placeholder="Введите код который мы прислали на ваш email">
             <span id="emailConfirmation" class="errorBlock"></span>
           </div>
         </div>
