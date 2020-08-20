@@ -77,9 +77,9 @@ class Controller extends WebController
 
 
           ->where('active',1)
-        ->with('validFilter')
+        /*->with('validFilter')
         ->join('add_filters', 'add_filters.add_id', '=', 'ads.id')->distinct('ads.id')
-        ->select('ads.*') // Avoid selecting everything from the stocks table
+        ->select('ads.*')*/ // Avoid selecting everything from the stocks table
       ;
 
       if($request->input('sort_by_date')=='low_to_high'){
@@ -91,7 +91,7 @@ class Controller extends WebController
           $q->orderByDesc('ads.created_at');
       }
 
-     foreach($request->input() as $key=>$filter){
+     /*foreach($request->input() as $key=>$filter){
         //dump(substr($key, 0, 14));
         if(substr($key, 0, 14)=='sort_by_filter'){
         $id_filter=str_replace("sort_by_filter_", "", $key);
@@ -102,7 +102,7 @@ class Controller extends WebController
           $q->orderByDesc('add_filters.value');
         }
         }
-      }
+      }*/
 
 
 

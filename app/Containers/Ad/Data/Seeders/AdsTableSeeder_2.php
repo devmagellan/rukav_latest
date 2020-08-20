@@ -36,7 +36,7 @@ class AdsTableSeeder_2 extends Seeder
            ],
            /*2*/
            [
-               'category_id' => 14,
+               'category_id' => 34,
                'sender' => 1,
                'title' => 'Детские футболочки',
                'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -48,7 +48,7 @@ class AdsTableSeeder_2 extends Seeder
            ],
            /*3*/
            [
-               'category_id' => 14,
+               'category_id' => 34,
                'sender' => 1,
                'title' => 'Детские футболочки',
                'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -60,7 +60,7 @@ class AdsTableSeeder_2 extends Seeder
            ],
            /*4*/
            [
-               'category_id' => 14,
+               'category_id' => 34,
                'sender' => 1,
                'title' => 'Детские футболочки',
                'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -71,7 +71,7 @@ class AdsTableSeeder_2 extends Seeder
            ],
            /*5*/
            [
-               'category_id' => 14,
+               'category_id' => 34,
                'sender' => 1,
                'title' => 'Детские футболочки',
                'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -83,7 +83,7 @@ class AdsTableSeeder_2 extends Seeder
            ],
            /*6*/
            [
-               'category_id' => 14,
+               'category_id' => 34,
                'sender' => 1,
                'title' => 'Детские футболочки',
                'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -94,7 +94,7 @@ class AdsTableSeeder_2 extends Seeder
            ],
            /*7*/
            [
-               'category_id' => 14,
+               'category_id' => 34,
                'sender' => 1,
                'title' => 'Детские футболочки',
                'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -105,7 +105,7 @@ class AdsTableSeeder_2 extends Seeder
            ],
            /*8*/
            [
-               'category_id' => 14,
+               'category_id' => 34,
                'sender' => 1,
                'title' => 'Детские футболочки',
                'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -117,7 +117,7 @@ class AdsTableSeeder_2 extends Seeder
 
            /*9*/
            [
-               'category_id' => 14,
+               'category_id' => 34,
                'sender' => 1,
                'title' => 'Детские футболочки',
                'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -128,7 +128,7 @@ class AdsTableSeeder_2 extends Seeder
            ],
            /*10*/
            [
-               'category_id' => 14,
+               'category_id' => 34,
                'sender' => 1,
                'title' => 'Детские футболочки',
                'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -139,7 +139,7 @@ class AdsTableSeeder_2 extends Seeder
            ],
            /*11*/
            [
-               'category_id' => 14,
+               'category_id' => 34,
                'sender' => 1,
                'title' => 'Детские футболочки',
                'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -150,7 +150,7 @@ class AdsTableSeeder_2 extends Seeder
            ],
            /*12*/
            [
-               'category_id' => 14,
+               'category_id' => 34,
                'sender' => 1,
                'title' => 'Детские футболочки',
                'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -161,7 +161,7 @@ class AdsTableSeeder_2 extends Seeder
            ],
            /*13*/
            [
-               'category_id' => 14,
+               'category_id' => 34,
                'sender' => 1,
                'title' => 'Женские футболочки',
                'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -172,7 +172,7 @@ class AdsTableSeeder_2 extends Seeder
            ],
            /*14*/
            [
-               'category_id' => 14,
+               'category_id' => 34,
                'sender' => 1,
                'title' => 'Взрослые футболочки',
                'message' => 'Lorem ipsum dolor sit amet, measure adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',

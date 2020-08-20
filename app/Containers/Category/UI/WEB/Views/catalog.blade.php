@@ -8,7 +8,13 @@
       color: #fff;
       background-color: #A269F7;
       border-color: #A269F7;}
+.flag{width:30px;height:30px;margin-top:100px}
+    .flag > svg {
+      position:absolute;
+      background-size: 20px 30px;
+    }
   </style>
+
 
   <div class="breadcums_wrapper">
     <div class="container">
@@ -148,10 +154,17 @@
             <a href="/ads/{{$product->id}}" class="product_item_name">
               {{$product->title}}
             </a>
+            <div >
+              <div class="flag" style="width:30px;display:none;">
+             <?
+              $egypt = country($product->getSender->country);
+
+              echo $egypt->getFlag();
+              ?></div>
             <p class="product_item_city d-none d-sm-block">
               <img src="/img/map_icon.svg" alt="" class="product_map_icon">
                 {{$product->city}}
-            </p>
+            </p></div>
           </div>
           <?$filterValue=[];
           ?>
@@ -383,6 +396,31 @@ console.log('final=>',url+param)
   $('.product_filter_clear').click(function(){
       window.location = window.location.href.split("?")[0];
   })
+
+
+    $(document).ready(function () {
+      var svg = $('.flag').find('svg');
+      $.each(svg, function (index, value) {
+        console.log(value);
+
+        var w = value.getAttribute('width').replace('px', '');
+        var h = value.getAttribute('height').replace('px', '');
+
+        value.removeAttribute('width');
+        value.removeAttribute('height');
+
+        value.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        value.setAttribute('preserveAspectRatio', 'xMinYMin meet')
+
+        $(value)
+          .css('width', '10%')
+          .css('height', '10%')
+          .css('background-color', 'white');
+
+      });
+      $('.flag').css('display','block')
+    });
+</script>
 </script>
 @endsection
 
