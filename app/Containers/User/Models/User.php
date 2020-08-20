@@ -73,12 +73,13 @@ protected $emailCode;
         'instagram',
         'show_instagram',
         'www',
-        'show_www','encripted_password'
+        'show_www','encripted_password','is_confirmed_phone'
     ];
 
     protected $casts = [
         'is_client' => 'boolean',
         'confirmed' => 'boolean',
+      'is_confirmed_phone' => 'boolean',
     ];
 
     /**

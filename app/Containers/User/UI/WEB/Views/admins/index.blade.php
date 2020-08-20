@@ -468,7 +468,7 @@ console.log(777)
         function reloadData(){
 
             var module='admin.company.users.data'
-            var url='/users/data';
+            var url='/admins/data';
             $.ajax({
                 method: 'POST',
                 dataType: 'html',

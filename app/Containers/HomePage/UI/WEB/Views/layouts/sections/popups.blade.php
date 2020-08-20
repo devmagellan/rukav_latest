@@ -461,7 +461,48 @@
     </div>
   </div>
 </div>
+<div class="modal modal_confirm_email_phone fade" id="confirmEmailPhonelIfRegistered" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
 
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <img src="{{asset('img/close-icon.svg')}}" alt="">
+      </button>
+
+      <form class="formModal emailPhoneConfirmationForm">
+
+        <img src="{{asset('img/modalIconPhone.svg')}}" alt="" class="moadal_img">
+        <h6 class="modalTitle">Подтвердите свой телефонный номер</h6>
+        <div class="row">
+          <div class="col-sm-12">
+            <input type="text" name="" class="phoneConfirmationSecond" placeholder="Введите код который мы прислали на ваш телефон">
+            <span id="phoneConfirmationWithEmail" class="errorBlock"></span>
+          </div>
+        </div>
+
+        <img src="{{asset('img/modalIconEmail.svg')}}" alt="" class="moadal_img">
+        <h6 class="modalTitle">Подтвердите свой email</h6>
+        <div class="row">
+          <div class="col-sm-12">
+            <input type="text" name="emailConfirmation" class="emailConfirmationWithPhone" placeholder="Введите код который мы прислали на ваш email">
+            <span id="emailConfirmationWithPhone" class="errorBlock"></span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <button type="submit">подтвердить</button>
+          </div>
+          <div class="col-sm-6">
+            <button type="button" class="buttonHref">переслать еще раз</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
 
 <div class="modal fade" id="confirmEmailIfRegistered" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
      aria-hidden="true">

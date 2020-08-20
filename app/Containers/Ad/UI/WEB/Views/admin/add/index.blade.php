@@ -738,7 +738,7 @@
                   <div class="alert errorBlock">{{ $message }}</div>
                   @enderror
                   <button type="submit" id="saveAdsButton">Подать обьявление</button>
-                  <button type="button" class="buttonHref">Предварительный просмотр</button>
+
                 </div>
               </div>
             </div>

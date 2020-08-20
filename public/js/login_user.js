@@ -18,6 +18,10 @@ $(document).ready(function () {
           $('#ModalIn').modal('hide');
           $('#confirmEmailIfRegistered').modal('show');
         }
+        else if(response.message=='Не подтвержденный email и телефон'){
+          $('#ModalIn').modal('hide');
+          $('#confirmEmailPhonelIfRegistered').modal('show');
+        }
 
 
 

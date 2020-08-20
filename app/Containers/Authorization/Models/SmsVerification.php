@@ -11,7 +11,8 @@ class SmsVerification extends Model
     ];
     public function store($request)
     {
-        $this->fill($request->all());
+      $req=(is_array($request)) ? $request : $request->all();
+        $this->fill($req);
         $sms=[];
         $sms['response'] = $this->save();
         $sms['id']=$this->id;

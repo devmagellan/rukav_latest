@@ -107,13 +107,13 @@
 
         $('.DeleteCustomer').click(function(){
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
-
+console.log(customer_id)
             $.ajax({
                 method: 'POST',
                 dataType: 'json',
                 async:false,
-                url: '/company/users/delete',
-                data: {customer_id: customer_id
+                url: '/users/delete',
+                data: {id: customer_id
                 },
                 beforeSend: function() {
                 },

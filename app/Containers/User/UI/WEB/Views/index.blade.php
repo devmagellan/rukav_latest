@@ -198,7 +198,7 @@
                   <div id="organisation_information" class="organisation_modal_block">
                     <div class="form-group">
                       <label class="form-label" for="organisation_name">Название организации</label>
-                      <input type="text" id="business_name" name="business_name" class="form-control" placeholder="Название бизнеса">
+                      <input type="text" id="business_name" name="business_name" class="form-control" placeholder="Название организации">
 
                     </div>
                     <div class="form-group">
@@ -309,6 +309,9 @@ if(vid_user=='Компания'){
   window.www=$('.company_modal_block').find('input[name="www"]').val();
   window.address=$('.company_modal_block').find('input[name="address"]').val();
   window.postCode=$('.company_modal_block').find('input[name="postCode"]').val();
+  $('.company_modal_block').find('input[name="www"]').prop( "disabled", false );
+  $('.company_modal_block').find('input[name="address"]').prop( "disabled", false );
+  $('.company_modal_block').find('input[name="postCode"]').prop( "disabled", false );
       }
       else if(vid_user=='Предприниматель'){
   $('.organisation_modal_block').hide();
@@ -323,6 +326,9 @@ if(vid_user=='Компания'){
   window.www=$('.individual_modal_block').find('input[name="www"]').val();
   window.address=$('.individual_modal_block').find('input[name="address"]').val();
   window.postCode=$('.individual_modal_block').find('input[name="postCode"]').val();
+  $('.individual_modal_block').find('input[name="www"]').prop( "disabled", false );
+  $('.individual_modal_block').find('input[name="address"]').prop( "disabled", false );
+  $('.individual_modal_block').find('input[name="postCode"]').prop( "disabled", false );
         }
 else if(vid_user=='Организация'){
   $('.organisation_modal_block').show();
@@ -337,6 +343,9 @@ else if(vid_user=='Организация'){
   window.www=$('.organisation_modal_block').find('input[name="www"]').val();
   window.address=$('.organisation_modal_block').find('input[name="address"]').val();
   window.postCode=$('.organisation_modal_block').find('input[name="postCode"]').val();
+  $('.organisation_modal_block').find('input[name="www"]').prop( "disabled", false );
+  $('.organisation_modal_block').find('input[name="address"]').prop( "disabled", false );
+  $('.organisation_modal_block').find('input[name="postCode"]').prop( "disabled", false );
 }
 
 
@@ -430,6 +439,7 @@ console.log(777,form[0].checkValidity())
 
         $('#customer_create').addClass('was-validated')
         var customer_email = $('#customer_email').val()
+      var customer_phone =$('#customer_phone').val()
       var vid_user=$('#customer_create').find('input[name="vid_user"]').val()
       console.log(vid_user)
         var customer_name = $('#customer_name').val()
@@ -456,7 +466,7 @@ console.log(777,form[0].checkValidity())
                 customer_id: customer_id, firstName: customer_name, lastName: customer_sername,
                 location: customer_location,
                 email: customer_email, is_client:1,reg_number:reg_number,vat_number:vat_number,vid_user:vid_user,admin_side:admin_side,
-              send_notification:send_notification
+              send_notification:send_notification,phone:customer_phone
             },
             beforeSend: function () {
             },

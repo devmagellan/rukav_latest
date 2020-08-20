@@ -22,9 +22,10 @@ class UserService
       'phone' => $data->phone,
       'vid_user' => $data->vid_user,
       'avatar'=>null,
-        'active'=>1,
+      'active'=>1,
       'is_client'=>1,
-      'confirmed'=> ($data->admin_side==1) ? 0 : 1
+      'confirmed'=> ($data->admin_side==1) ? 0 : 1,
+        'is_confirmed_phone'=> ($data->admin_side==1 && $data->phone) ? 0 : 1
     ]);
   }
 

@@ -10,6 +10,10 @@ $router->post('/register', [
   'uses' => 'Controller@registerUser',
 ]);
 
+$router->post('/users/delete', [
+  'as'   => 'users_delete',
+  'uses' => 'Controller@deleteUser',
+]);
 
 
 $router->post('/changeUserData', [
