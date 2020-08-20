@@ -11,6 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Containers\User\Services\SmsService;
 use App\Containers\User\Notifications\CompanyRegistrationDone;
 use App\Containers\User\Jobs\SendEmailVerification;
+use App\Containers\User\Jobs\SendPasswordNotification;
+use Defuse\Crypto\Crypto;
+use Defuse\Crypto\Key;
+use Illuminate\Support\Facades\Hash;
 
 class CreateUserAccountAction extends Action
 {
@@ -74,7 +78,7 @@ class CreateUserAccountAction extends Action
     } catch (\Throwable $exception) {
       return response(['message' => $exception->getMessage()], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
-    if($data->admin_side!=1){
+    if($data->admin_side!=1 ){
       $emailCode = rand(1000, 9999); //generate random code
       session()->put('emailVerificationCode',$emailCode);
       session()->put('emailVerificationCodeUser',$user->id);
@@ -87,8 +91,53 @@ class CreateUserAccountAction extends Action
 	  dispatch(new SendEmailVerification($user))->onQueue('queue_name');
       //$this->sendCompanyRegistrationDoneNotification($user);
       \Log::info($data);}
+    elseif($data->admin_side==1 && $data->send_notification==1){
+/*      $key = Key::createNewRandomKey();
+      \Log::info('KEY:'.$key);*/
+      $random=$this->randomPassword();
+/*      $encrypted = Crypto::encrypt($random, $key);
+      $plaintext = Crypto::decrypt($encrypted, $key);*/
+      $string_to_encrypt="Test";
+      $password="password";
+      $encrypted_string=openssl_encrypt($random,"AES-128-ECB",$password);
+      $decrypted_string=openssl_decrypt($encrypted_string,"AES-128-ECB",$password);
+      \Log::info('$decrypted_string:'.$decrypted_string);
+      $user->encripted_password=$encrypted_string;
+      \Log::info('Password:'.$random);
+      $user->password=Hash::make($random);
+      $user->save();
+      dispatch(new SendPasswordNotification($user))->onQueue('queue_name');
+
+ /*     $data = base64_decode($encrypted);
+      $iv = substr($data, 0, mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC));
+
+      $decrypted = rtrim(
+        mcrypt_decrypt(
+          MCRYPT_RIJNDAEL_128,
+          hash('sha256', $key, true),
+          substr($data, mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC)),
+          MCRYPT_MODE_CBC,
+          $iv
+        ),
+        "\0"
+      );*/
+    }
+    else{
+
+    }
     //$this->service->authenticate($data);
     return response(['message' => 'account created'], Response::HTTP_OK);
+  }
+
+  public function randomPassword() {
+    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    $pass = array(); //remember to declare $pass as an array
+    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+    for ($i = 0; $i < 8; $i++) {
+      $n = rand(0, $alphaLength);
+      $pass[] = $alphabet[$n];
+    }
+    return implode($pass); //turn the array into a string
   }
 
 

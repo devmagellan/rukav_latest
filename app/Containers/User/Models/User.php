@@ -73,7 +73,7 @@ protected $emailCode;
         'instagram',
         'show_instagram',
         'www',
-        'show_www',
+        'show_www','encripted_password'
     ];
 
     protected $casts = [

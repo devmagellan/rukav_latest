@@ -245,6 +245,25 @@ class Controller extends WebController
       }
   }
 
+  public function confirmEmailIfRegistered(GetAllUsersRequest $request){
+    if($request->input('emailConfirmation')!='' && $request->input('emailConfirmation')==session()->get('emailVerificationCode') ){
+      $user=\App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->first();
+      $user->active=1;
+      $user->confirmed=1;
+      $user->save();
+      //$user=\App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->first();
+      $data= new \StdClass();
+      $data->email=$user->email;
+      $data->password=session()->get('emailVerificationCodePassword');
+
+      \Auth::guard('web')->loginUsingId($user->id, true);
+      return response()->json(['response'=>'success'],200);
+    }
+    else{
+      return response()->json(['response'=>'error'],400);
+    }
+  }
+
 
     public function confirmEmailPhone(GetAllUsersRequest $request){
         $error=[];

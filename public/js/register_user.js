@@ -61,6 +61,31 @@ $(document).ready(function () {
 
     });
 
+  $(".emailConfirmationFormIfRegistered").bind('submit', function (e) {
+    e.preventDefault();
+    console.log('this_ajax')
+    $.ajax({
+      type: "POST",
+      url: "/confirm_email_if_registered",
+      dataType: "json",
+      data: { emailConfirmation: $('.emailConfirmationIfRegistered').val()},
+      success: function (result) {
+        console.log(result);
+        if(result.response=='success' || result==1 ){
+          $('.confirmEmailClose').trigger('click')
+          window.location.reload()
+          return true;
+        }
+      },
+      error:function(result){
+        $('#emailConfirmation').text('Не правильный код!')
+      }
+    });
+
+    return false;
+
+  });
+
     $(".emailPhoneConfirmationForm").bind('submit', function (e) {
         e.preventDefault();
         console.log('this_ajax',$('.emailConfirmationWithPhone').val())

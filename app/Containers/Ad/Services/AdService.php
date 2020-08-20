@@ -13,11 +13,14 @@ class AdService
   public function createAd($data): Ad
   {
     if($data->is_admin_format){
+
       $user=\App\Containers\User\Models\User::where('id',$data->user_id)->first();
     }
     else{
+
       $user=Auth::user();
     }
+    \Log::info('data_information',array($data));
     return Ad::create([
       'title' => $data->name_ad,
       'email' => $user->email,
@@ -59,14 +62,13 @@ class AdService
     \Log::info('SaveFilter',array($data->all()));
     \Log::info('SaveFilterADID'.$adId);
     \Log::info('Foreach',$data->input('filter_id'));
+    \Log::info('ForValue',$data->input('filter_value'));
     foreach ($data->input('filter_id') as $key=>$filter) {
-     // dump($filter);
       \Log::info('FilterSave=>key',array($filter));
-      $filterId=$data->input('filter_id')[$filter-1];
-      \Log::info('Error=>key'.$filter);
-      \Log::info('EndError=>key'.$data->input('filter_value')[$filter-1]);
-      $filterValue=$data->input('filter_value')[$filter-1];
-
+      $filterId=$data->input('filter_id')[$key];
+      \Log::info('Error=>key'.$key);
+      \Log::info('EndError=>key'.$data->input('filter_value')[$key]);
+      $filterValue=$data->input('filter_value')[$key];
       $this->createFilter($filterId,$filterValue, $adId);
     }
   }

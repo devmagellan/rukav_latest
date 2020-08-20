@@ -23,7 +23,8 @@ class UserService
       'vid_user' => $data->vid_user,
       'avatar'=>null,
         'active'=>1,
-        'is_client'=>1
+      'is_client'=>1,
+      'confirmed'=> ($data->admin_side==1) ? 0 : 1
     ]);
   }
 

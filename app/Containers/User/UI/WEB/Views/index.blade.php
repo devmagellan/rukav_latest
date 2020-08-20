@@ -116,6 +116,18 @@
                     <input type="hidden" id="company_id" name="company_id" value="1">
                     <input type="hidden" id="is_client" name="is_client" value="1">
 
+
+                  <div class="form-group">
+                    <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" name="send_notification" value="1" id="send_notification" >
+                    <label class="custom-control-label" for="send_notification">Отправлять письмо с уведомлением</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" name="send_notification" value="0" id="dont_send_notification" checked="">
+                    <label  class="custom-control-label" for="dont_send_notification">Не отправлять</label>
+                    </div>
+                  </div>
+                  <br>
                   <div class="form-group">
                     <label class="form-label" for="customer_name">Вид пользователя</label>
 
@@ -257,7 +269,7 @@
 
               <div class="modal-body">
                 <input type="hidden" id="customer_id" name="customer_id" value="0">
-  
+
 
 
 
@@ -426,6 +438,7 @@ console.log(777,form[0].checkValidity())
         var customer_location = $('#customer_location').val()
       var reg_number = $('#reg_namber').val()
       var vat_number = $('#vat_namber').val()
+      var send_notification = $('#customer_create').find('input[name="send_notification"]').val()
         if($('#customer_id').val()){
             var customer_id = $('#customer_id').val()
         }
@@ -440,9 +453,10 @@ console.log(777,form[0].checkValidity())
             async: false,
             url: '/users/create',
             data: {
-                customer_id: customer_id, customer_name: customer_name, sername: customer_sername,
+                customer_id: customer_id, firstName: customer_name, lastName: customer_sername,
                 location: customer_location,
-                email: customer_email, is_client:1,reg_number:reg_number,vat_number:vat_number,vid_user:vid_user,admin_side:admin_side
+                email: customer_email, is_client:1,reg_number:reg_number,vat_number:vat_number,vid_user:vid_user,admin_side:admin_side,
+              send_notification:send_notification
             },
             beforeSend: function () {
             },
@@ -455,7 +469,7 @@ console.log(777,form[0].checkValidity())
             success: function (data) {
 
                 console.log('success')
-                //reloadData();
+                reloadData();
             }
         });
     }

@@ -31,6 +31,11 @@ $router->post('/confirm_email', [
     'uses'       => 'Controller@confirmEmail',
 ]);
 
+$router->post('/confirm_email_if_registered', [
+  'as'   => 'confirm_email_if_registered',
+  'uses'       => 'Controller@confirmEmailIfRegistered',
+]);
+
 $router->post('/confirm_email_phone', [
     'as'   => 'confirm_email_phone',
     'uses'       => 'Controller@confirmEmailPhone',

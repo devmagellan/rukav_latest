@@ -7,19 +7,22 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Hash;
 
-class CompanyRegistrationDone extends Notification //implements ShouldQueue
+class PasswordNotificationDone extends Notification //implements ShouldQueue
 {
 //use Queueable;
 
 protected $user;
-protected $code;
+protected $password;
 
-public function __construct($company){
+public function __construct(\App\Containers\User\Models\User $company){
     $this->user=$company;
-	$this->code=$this->user->emailCode;
+  $password="password";
+
+	$this->password=$decrypted_string=openssl_decrypt($this->user->encripted_password,"AES-128-ECB",$password);;
 	\Log::info('emailVerificationCodeinSession2'.session()->get('emailVerificationCode'));
-\Log::info('emailVerificationCodeinObject'.$this->user->emailCode);
+\Log::info('emailVerificationCodeinObject'.$this->password);
     $this->user=\App\Containers\User\Models\User::where('email',$this->user->email)->first();
 }
     /**
@@ -33,12 +36,14 @@ public function __construct($company){
 
         return (new MailMessage)
             ->greeting('Hello!')
-            ->line('Ваш код для верификации EMAIL')
-            ->line('VerificationCode: '.$this->code);
+            ->line('Вы можете войти в ваш аккаунт с помощью временного пароля')
+            ->line('Временный Пароль: '.$this->password);
     }
 
     public function via($notifiable)
     {
         return ['mail'];
     }
+
+
 }
