@@ -625,15 +625,15 @@
                   Длительность
                 </h6>
                 <div class="add_advert_block_btn_wrapper">
-                    <input type="radio" name="select_time" value="7 дней" id="7day" checked="">
+                    <input type="radio" name="select_time" value="7" id="7day" checked="">
                     <label for="7day">7 дней</label>
-                    <input type="radio" name="select_time" value="14 дней" id="14day" checked="">
+                    <input type="radio" name="select_time" value="14" id="14day" checked="">
                     <label for="14day">14 дней</label>
-                    <input type="radio" name="select_time" value="1 мес" id="1mon" checked="">
+                    <input type="radio" name="select_time" value="30" id="1mon" checked="">
                     <label for="1mon">1 месяц</label>
-                    <input type="radio" name="select_time" value="6 мес" id="6mon" checked="">
+                    <input type="radio" name="select_time" value="180" id="6mon" checked="">
                     <label for="6mon">6 месяц</label>
-                    <input type="radio" name="select_time" value="вечно" id="always" checked="">
+                    <input type="radio" name="select_time" value="0" id="always" checked="">
                     <label for="always">вечно</label>
                 </div>
             </div>

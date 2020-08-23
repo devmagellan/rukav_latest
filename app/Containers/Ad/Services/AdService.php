@@ -32,6 +32,7 @@ class AdService
       'name' => $user->name,
       'category_id' => $data->category_id,
       'sender' => $user->id,
+      'select_time' => $data->select_time,
       //TODO не забыть узнать что с этим делать
       'administrative' => $data->administrative,
       'visibility' => false,
