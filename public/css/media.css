@@ -78,6 +78,14 @@
     }
 }
 @media (max-width: 990px) {
+    .add_advert_block_btn_wrapper{
+        display: block;
+        margin-right: 0;
+    }
+    .add_advert_block_btn_wrapper label{
+        display: block;
+        margin-bottom: 10px;
+    }
     .btn_category{
         display: none;
     }

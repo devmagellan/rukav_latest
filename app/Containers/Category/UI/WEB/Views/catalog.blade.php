@@ -8,7 +8,7 @@
       color: #fff;
       background-color: #A269F7;
       border-color: #A269F7;}
-.flag{width:30px;height:30px;margin-top:100px}
+.flag{width:30px;height:30px;margin-top:80px;margin-left:30px;}
     .flag > svg {
       position:absolute;
       background-size: 20px 30px;
@@ -155,12 +155,13 @@
               {{$product->title}}
             </a>
             <div >
-              <div class="flag" style="width:30px;display:none;">
+              <div class="flag" style="width:30px;display:none;position:relative">
              <?
+			 if($product->getSender->country){
               $egypt = country($product->getSender->country);
 
               echo $egypt->getFlag();
-              ?></div>
+			 }?></div>
             <p class="product_item_city d-none d-sm-block">
               <img src="/img/map_icon.svg" alt="" class="product_map_icon">
                 {{$product->city}}
@@ -413,8 +414,8 @@ console.log('final=>',url+param)
         value.setAttribute('preserveAspectRatio', 'xMinYMin meet')
 
         $(value)
-          .css('width', '10%')
-          .css('height', '10%')
+          .css('width', '100%')
+          .css('height', '100%')
           .css('background-color', 'white');
 
       });

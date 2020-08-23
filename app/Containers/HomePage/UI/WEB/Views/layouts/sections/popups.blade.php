@@ -125,9 +125,18 @@
   input[type="radio"] + label:before {
     margin-right:2px;
   }
+
+.modal {
+  overflow-y: auto;
+}
+.modal-open {
+  overflow: auto;
+}
+
+
 </style>
 <div class="modal fade" id="ModalReg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
-     aria-hidden="true">
+     aria-hidden="true" >
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
 
