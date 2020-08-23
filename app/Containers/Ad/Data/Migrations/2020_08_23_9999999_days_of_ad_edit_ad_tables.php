@@ -12,7 +12,7 @@ class DaysOfAdEditAdTables extends Migration
     public function up()
     {
       Schema::table('ads', function (Blueprint $table) {
-        $table->integer('select_time')->nullable();
+        $table->dateTime('expired')->nullable();
 
       });
     }
@@ -22,7 +22,7 @@ class DaysOfAdEditAdTables extends Migration
     public function down()
     {
       Schema::table('ads', function($table) {
-        $table->dropColumn('select_time');
+        $table->dropColumn('expired');
       });
     }
 }

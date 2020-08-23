@@ -7,7 +7,7 @@ use App\Containers\Ad\Models\Picture;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Containers\Filter\Models\AddFilter;
-
+use Carbon\Carbon;
 class AdService
 {
   public function createAd($data): Ad
@@ -21,6 +21,9 @@ class AdService
       $user=Auth::user();
     }
     \Log::info('data_information',array($data));
+    $mutable = Carbon::now();
+    $modifiedMutable = $mutable->add($data->select_time, 'day');
+    \Log::info('date_information'.$modifiedMutable);
     return Ad::create([
       'title' => $data->name_ad,
       'email' => $user->email,
@@ -32,8 +35,7 @@ class AdService
       'name' => $user->name,
       'category_id' => $data->category_id,
       'sender' => $user->id,
-      'select_time' => $data->select_time,
-      //TODO не забыть узнать что с этим делать
+      'expired' => $modifiedMutable,
       'administrative' => $data->administrative,
       'visibility' => false,
       'show_name' => $user->name
