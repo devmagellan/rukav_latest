@@ -3,13 +3,13 @@
 namespace App\Ship\Commands;
 
 use App\Ship\Parents\Commands\ConsoleCommand;
-
+use App\Containers\User\Jobs\ExpiredAdsEmailVerification;
 /**
- * Class HelloWorldCommand
+ * Class ExpiredAdsCommand
  *
  * @author  Mahmoud Zalt  <mahmoud@zalt.me>
  */
-class HelloWorldCommand extends ConsoleCommand
+class ExpiredAdsCommand extends ConsoleCommand
 {
 
     /**
@@ -17,14 +17,14 @@ class HelloWorldCommand extends ConsoleCommand
      *
      * @var string
      */
-    protected $signature = 'hello:world';
+    protected $signature = 'expired:ads';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Hello World!';
+    protected $description = 'Expired Ads!';
 
     /**
      * Create a new command instance.
@@ -41,7 +41,9 @@ class HelloWorldCommand extends ConsoleCommand
      */
     public function handle()
     {
-        echo "Hello World :)\n";
-		\Log::info('HelloCron');
+
+     //$expiredAds=\App\Containers\Ad\Models\Ad::where('')->get();
+		//dispatch(new SendEmailVerification($user))->onQueue('queue_name');
+
     }
 }
