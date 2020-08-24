@@ -34,9 +34,8 @@ class ConsoleKernel extends LaravelConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-		\Log::info('HelloCron');
         // $schedule->command('inspire')->hourly();
-		$schedule->command('hello:world')->everyMinute();
+		$schedule->command('expired:ads')->everyMinute();
     }
 
     /**

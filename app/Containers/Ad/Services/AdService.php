@@ -35,7 +35,7 @@ class AdService
       'name' => $user->name,
       'category_id' => $data->category_id,
       'sender' => $user->id,
-      'expired' => $modifiedMutable,
+      'expired' => $modifiedMutable->toDateTimeString(),
       'administrative' => $data->administrative,
       'visibility' => false,
       'show_name' => $user->name

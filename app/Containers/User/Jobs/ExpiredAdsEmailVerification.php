@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Containers\User\Notifications\CompanyRegistrationDone;
+use App\Containers\User\Notifications\ExpiredAdsNotification;
 use Log;
 
 class ExpiredAdsEmailVerification implements ShouldQueue
