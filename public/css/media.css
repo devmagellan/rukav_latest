@@ -85,6 +85,7 @@
     .add_advert_block_btn_wrapper label{
         display: block;
         margin-bottom: 10px;
+        margin-right: 0;
     }
     .btn_category{
         display: none;

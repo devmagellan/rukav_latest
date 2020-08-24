@@ -392,7 +392,7 @@
               @enderror
             </div-->
             <div class="contact_info_wrapper">
-              <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (не обезательно)" value="{{old('price')}}">
+              <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (не обязательно)" value="{{old('price')}}">
             </div>
           </div>
         </div>
@@ -489,7 +489,7 @@
             <div class="add_advert_desc">
               <p>Текст объявления: на русском языке. Допустимое использование английского не более 20%(термины, названия).</p>
               <p class="end">Транслит не допускается.</p>
-              <textarea name="description" placeholder="Текст обьявления" required>{{old('description')}}</textarea>
+              <textarea name="description" placeholder="Текст объявления" required>{{old('description')}}</textarea>
               @error('description')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror

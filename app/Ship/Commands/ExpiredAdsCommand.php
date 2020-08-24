@@ -4,6 +4,7 @@ namespace App\Ship\Commands;
 
 use App\Ship\Parents\Commands\ConsoleCommand;
 use App\Containers\User\Jobs\ExpiredAdsEmailVerification;
+use Carbon\Carbon;
 /**
  * Class ExpiredAdsCommand
  *
@@ -41,9 +42,20 @@ class ExpiredAdsCommand extends ConsoleCommand
      */
     public function handle()
     {
-
-     //$expiredAds=\App\Containers\Ad\Models\Ad::where('')->get();
-		//dispatch(new SendEmailVerification($user))->onQueue('queue_name');
+		$mutable = Carbon::now();
+		$date=$mutable->subDays(2);
+	//\Log::info('Days',array($date));
+     $expiredAds=\App\Containers\Ad\Models\Ad::where('expired', '>=', $date)->where('expired_sent',0)->with('getSender')->get();
+	 
+	 if($expiredAds){
+	 foreach($expiredAds as $user){
+		 //\Log::info('ArrayDays',array($user->getSender));
+		 dispatch(new ExpiredAdsEmailVerification($user->getSender))->onQueue('queue_name');
+		 $user->expired_sent=1;
+		 $user->save();
+	 }}
+	 
+		//
 
     }
 }
