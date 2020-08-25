@@ -253,9 +253,9 @@ a.search_all:hover{
     border: 1px solid #A269F7;
     line-height: 30px;
     border-radius: 30px;
-    padding: 0 30px;
+    padding: 0 32px;
     margin: 0;
-    margin-right: 10px;
+    margin-right: 14px;
 }
 .add_advert_block_btn_wrapper label:before, .add_advert_block_btn_wrapper label:after{
     content: none!important;

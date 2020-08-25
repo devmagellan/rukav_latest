@@ -54,6 +54,7 @@
   }
   .mainPreviewmodal-dialog {
     max-width: 1567px !important;
+    margin: 0 auto;
   }
 
 </style>
@@ -736,7 +737,9 @@
 <div class="modal fade mainPreview" id="mainPreview" tabindex="-1" role="dialog" aria-labelledby="mainPreview1" aria-hidden="true">
   <div class="mainPreviewmodal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <img src="https://rukav.co.uk/img/close-icon.svg" alt="">
+    </button>
 @if(null!=(\Session::get('ad')))
       <article class="product_main_block">
         <div class="container">
@@ -908,6 +911,16 @@
               </div>
             </div>
           </div>
+        
+        <div class="row justify-content-end preview_btn_wrapper">
+            <div class="col-md-2">
+                <button type="button" class="preview_btn_close">Отмена</button>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="preview_btn">Добавить</button>
+            </div>
+        </div>
+
         </div>
       </article>
 @else
@@ -925,6 +938,34 @@
 @endsection
 @section('scripts')
   <script src="/NewSmartAdmin/js/formplugins/select2/select2.bundle.js"></script>
+
+<style>
+.preview_btn_wrapper button{
+    display: block;
+    width: 100%;
+    line-height: 36px;
+    padding: 0 30px;
+    border: 1px solid #A269F7;
+    color: #A269F7;
+    background: #fff;
+    border-radius: 40px;
+    margin: 20px 0;
+    margin-top: 40px;
+}
+.preview_btn_wrapper .preview_btn{
+    background: #A269F7;
+    color: #fff;
+}
+#controls{
+    width: 636px;
+}
+#filterDeals{
+    width: 100%;
+    background: #fff;
+    box-shadow: none;
+    border-radius: 30px;
+}
+</style>
 
 <script>
     $('#previewAdsButton').click(function(){
@@ -1240,6 +1281,7 @@ $('.cat_name').click(function(){
 
   })
 </script>
+
 
 
 
