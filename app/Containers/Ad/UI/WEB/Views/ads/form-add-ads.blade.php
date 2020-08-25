@@ -79,7 +79,19 @@
 @if (\Session::has('success') && \Session::get('success')=='Просмотр объявления')
 <script>
   $(document).ready(function() {
-    $('#mainPreview').modal({show:true})
+                    $('#mainPreview').modal({show:true});
+                  
+                    $('.close_button_modal_previws').click(function(){
+                                                           $('#mainPreview').modal({show:false});
+                                                           $('#mainPreview').removeClass("show");
+                                                           $('#mainPreview').hide();
+                                                           $('.modal-backdrop').hide();
+                       alert('1');
+                    });
+                    $('.preview_btn').click(function(){
+                       alert('2');
+                    });
+                    
 
   });
 </script>
@@ -737,7 +749,7 @@
 <div class="modal fade mainPreview" id="mainPreview" tabindex="-1" role="dialog" aria-labelledby="mainPreview1" aria-hidden="true">
   <div class="mainPreviewmodal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <button type="button" class="close close_button_modal_previws" data-dismiss="modal" aria-label="Close">
       <img src="https://rukav.co.uk/img/close-icon.svg" alt="">
     </button>
 @if(null!=(\Session::get('ad')))
@@ -914,7 +926,7 @@
         
         <div class="row justify-content-end preview_btn_wrapper">
             <div class="col-md-2">
-                <button type="button" class="preview_btn_close">Отмена</button>
+                <button type="button" class="preview_btn_close close_button_modal_previws">Отмена</button>
             </div>
             <div class="col-md-2">
                 <button type="button" class="preview_btn">Добавить</button>
