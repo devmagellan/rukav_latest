@@ -24,6 +24,19 @@ class Controller extends WebController
     public $all_parcats=[];
     public $level=0;
 
+    public function similar_key_in_array( $sNeedle , $aHaystack )
+    {
+
+        foreach ($aHaystack as $key=>$sKey)
+        {
+            if( stripos( strtolower($key) , strtolower($sNeedle) ) !== false )
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public function moreCategories(GetAllCategoriesRequest $request, $id)
     {
@@ -46,6 +59,7 @@ class Controller extends WebController
   public function index(GetAllCategoriesRequest $request, $id)
   {
     //dump($request->input());
+      $data['filterDeals']=\App\Containers\Filter\Models\FilterDeals::get();
       $data['properties']=$this->getMainProperties($request);
       $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
       $data['currentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$id)->first();
@@ -64,8 +78,6 @@ class Controller extends WebController
       \Illuminate\Pagination\Paginator::currentPageResolver(function () use ($currentPage) {
           return $currentPage;
       });
-
-      '';
       $q= \App\Containers\Ad\Models\Ad::where('category_id',$id)->with('pictures')->where(function ($query) use($request) {
           $query->where('message', 'like', '%' . $request->input('search_string') . '%')
               ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
@@ -76,12 +88,20 @@ class Controller extends WebController
           })
 
 
-          ->where('active',1)->where('is_tmp',0)
-        /*->with('validFilter')
-        ->join('add_filters', 'add_filters.add_id', '=', 'ads.id')->distinct('ads.id')
-        ->select('ads.*')*/ // Avoid selecting everything from the stocks table
+        ->where('active',1)->where('is_tmp',0)
+        ->with('validFilter')
+          ->when(null!=($request->input('filterDeals')) && $request->input('filterDeals')!=0 , function($q) use($request) {
+              return $q->leftJoin('add_filter_deals', function($join) use($request) {
+              $join->on('add_filter_deals.add_id', '=', 'ads.id');
+              })->where('add_filter_deals.filter_deals_id',$request->input('filterDeals'));
+          })
+          ->when($this->similar_key_in_array( 'sort_by_filter' , $request->input() ), function($q) use($request) {
+              return $q->leftJoin('add_filters', function($join) use($request) {
+                  $join->on( 'add_filters.add_id', '=', 'ads.id');
+              })->distinct('ads.id');
+          })
+        ->select('ads.*') // Avoid selecting everything from the stocks table
       ;
-
       if($request->input('sort_by_date')=='low_to_high'){
           //dump('low_to_high');
           $q->orderBy('ads.created_at');
@@ -90,8 +110,7 @@ class Controller extends WebController
           //dump('high_to_low');
           $q->orderByDesc('ads.created_at');
       }
-
-     /*foreach($request->input() as $key=>$filter){
+     foreach($request->input() as $key=>$filter){
         //dump(substr($key, 0, 14));
         if(substr($key, 0, 14)=='sort_by_filter'){
         $id_filter=str_replace("sort_by_filter_", "", $key);
@@ -102,7 +121,7 @@ class Controller extends WebController
           $q->orderByDesc('add_filters.value');
         }
         }
-      }*/
+      }
 
 
 
@@ -111,7 +130,12 @@ class Controller extends WebController
       if($pricesLimits[0]['max_price']==$pricesLimits[0]['min_price']){
           $pricesLimits[0]['min_price']=0;
       }
-      $products=$q->where(function ($query) use($from,$to) {
+      $products=$q->where(function ($query) use($from,$to,$request) {
+          if(null!=($request->input('filterDeals'))){
+              $query->where('price','>=',$from)
+                  ->where('price','<=',$to);
+          }
+
       if(!empty($from) && !empty($to)){
           $query->where('price','>=',$from)
               ->where('price','<=',$to);

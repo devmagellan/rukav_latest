@@ -81,13 +81,13 @@
             <p class="product_filter_text">
               Тип сделки:
             </p>
-            <select class="catalog_select">
-              <option value="">Все</option>
-              <option value="">Все</option>
-              <option>Все</option>
-              <option>Все</option>
-              <option>Все</option>
-            </select>
+
+
+              <select id="filterDeals" class="form-control" name="filterDeals">
+                  @foreach($data['filterDeals'] as $filter)
+                      <option value="{{$filter->id}}">{{$filter->name}}</option>
+                  @endforeach
+              </select>
           </div>
           <div class="col-sm-3">
             <p class="product_filter_text">
@@ -355,7 +355,9 @@ console.log('final=>',url+param)
       console.log(444)
       var filter_id=$(this).parent().find('.filter_variant').val()
       var url=$(location).attr('href');
-      var url=removeParams(url,'sort_by_filter_'+filter_id+'')
+        var url=removeFilterParams(url,'sort_by_filter_')
+      //var url=removeParams(url,'sort_by_filter_'+filter_id+'')
+
       console.log('clear=>',url)
       if($(this).hasClass('low_to_high')){
         if (url.indexOf('?') > -1)
@@ -393,6 +395,23 @@ console.log('final=>',url+param)
       console.log(url)
       return url.href
   }
+
+    function removeFilterParams(url,sParam){
+
+        var url = new URL(url);
+        console.log(url)
+        var search_params = url.searchParams;
+        console.log('search_params',search_params)
+        search_params.forEach(function(value, key) {
+            console.log(key.includes('sort_by_filter_'));
+        if(key.includes('sort_by_filter_')){
+            search_params.delete(key);
+        }
+        });
+
+        console.log(url)
+        return url.href
+    }
 
   $('.product_filter_clear').click(function(){
       window.location = window.location.href.split("?")[0];
