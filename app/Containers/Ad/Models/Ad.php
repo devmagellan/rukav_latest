@@ -35,7 +35,7 @@ class Ad extends Model
 
     protected $fillable = [
         'id', 'category_id','sender','status','company_id','title','message','active','badge_id','visibility','place_id','city','administrative'
-        ,'phone','email','price', 'show_name', 'name','expired','is_tmp'
+        ,'phone','email','price', 'show_name', 'name','expired','is_tmp','select_time'
 
     ];
 
@@ -71,6 +71,10 @@ class Ad extends Model
   public function validFilter() {
     return $this->hasMany(\App\Containers\Filter\Models\AddFilter::class, 'add_id', 'id');
   }
+
+    public function filterDeals() {
+        return $this->hasOne(\App\Containers\Filter\Models\AddFilterDeals::class, 'add_id', 'id');
+    }
 
 
 }

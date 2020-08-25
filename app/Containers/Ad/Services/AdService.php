@@ -36,6 +36,7 @@ class AdService
       'category_id' => $data->category_id,
       'sender' => $user->id,
       'is_tmp'=>(isset($data->save)) ? false : true,
+      'select_time' => $data->select_time,
       'expired' => $modifiedMutable->toDateTimeString(),
       'administrative' => $data->administrative,
       'visibility' => false,

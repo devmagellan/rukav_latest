@@ -113,7 +113,7 @@
               Заголовок
             </h6>
             <div class="add_advert_block_input1">
-              <input type="text" name="name_ad" maxlength="70" placeholder="Название объявления" required value="{{old('name_ad')}}">
+              <input type="text" name="name_ad" maxlength="70" placeholder="Название объявления" required value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->title}} @endif">
               <span class="required">*</span>
               @error('name_ad')
               <div class="alert errorBlock">{{ $message }}</div>
@@ -121,7 +121,11 @@
               <p class="number_of_signs"><span>70</span> знаков остается</p>
             </div>
             <div class="add_advert_block_input1">
+              @if(null!=(\Session::get('catsString')))
+                <input type="text" name="category_ads" placeholder="Выберите категорию" value="{{\Session::get('catsString')}}" class="select_category" required readonly>
+                @else
               <input type="text" name="category_ads" placeholder="Выберите категорию" class="select_category" required readonly>
+              @endif
               <img src="/img/ipagination_right.svg" alt="">
               <span class="required">*</span>
               @error('category_id')
@@ -165,8 +169,13 @@
 
           <div id="controls" style="display:inline-block">
             <select id="filterDeals" class="form-control" name="filterDeals">
+
               @foreach($filterDeals as $filter)
-              <option value="{{$filter->id}}">{{$filter->name}}</option>
+                @if(null!=(\Session::get('ad')) && $filter->id==\Session::get('ad')->filterDeals->filter_deals_id)
+              <option selected value="{{$filter->id}}">{{$filter->name}}</option>
+                @else
+                  <option value="{{$filter->id}}">{{$filter->name}}</option>
+                @endif
              @endforeach
             </select>
           </div>
@@ -174,7 +183,7 @@
           </div></div>
 
 
-        <input type="hidden" id="category_id" name="category_id" value="{{old('category_id')}}">
+        <input type="hidden" id="category_id" name="category_id" value="@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->category_id}} @endif">
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
@@ -427,7 +436,7 @@
               @enderror
             </div-->
             <div class="contact_info_wrapper">
-              <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (не обязательно)" value="{{old('price')}}">
+              <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (не обязательно)" value="@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->price}} @endif">
             </div>
           </div>
         </div>
@@ -656,15 +665,15 @@
                   Длительность
                 </h6>
                 <div class="add_advert_block_btn_wrapper">
-                    <input type="radio" name="select_time" value="7" id="7day" checked="">
+                    <input type="radio" name="select_time" value="7" id="7day" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==7) checked="" @endif>
                     <label for="7day">7 дней</label>
-                    <input type="radio" name="select_time" value="14" id="14day" checked="">
+                    <input type="radio" name="select_time" value="14" id="14day" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==14) checked="" @endif>
                     <label for="14day">14 дней</label>
-                    <input type="radio" name="select_time" value="30" id="1mon" checked="">
+                    <input type="radio" name="select_time" value="30" id="1mon" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==30) checked="" @endif>
                     <label for="1mon">1 месяц</label>
-                    <input type="radio" name="select_time" value="180" id="6mon" checked="">
+                    <input type="radio" name="select_time" value="180" id="6mon" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==180) checked="" @endif>
                     <label for="6mon">6 месяц</label>
-                    <input type="radio" name="select_time" value="0" id="always" checked="">
+                    <input type="radio" name="select_time" value="0" id="always" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==0) checked="" @endif>
                     <label for="always">вечно</label>
                 </div>
             </div>
@@ -677,7 +686,7 @@
             <div class="add_advert_desc">
               <p>Текст объявления: на русском языке. Допустимое использование английского не более 20%(термины, названия).</p>
               <p class="end">Транслит не допускается.</p>
-              <textarea name="description" placeholder="Текст объявления" required>{{old('description')}}</textarea>
+              <textarea name="description" placeholder="Текст объявления" required>@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->message}} @endif</textarea>
               @error('description')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
@@ -911,13 +920,10 @@
               </div>
             </div>
           </div>
-        
+
         <div class="row justify-content-end preview_btn_wrapper">
             <div class="col-md-2">
-                <button type="button" class="preview_btn_close">Отмена</button>
-            </div>
-            <div class="col-md-2">
-                <button type="button" class="preview_btn">Добавить</button>
+                <button type="button" class="preview_btn_close" data-dismiss="modal">Отмена</button>
             </div>
         </div>
 
