@@ -402,6 +402,16 @@ class AdminMenusSeeder extends Seeder
             'type'=>'linked',
             'permission'=>null
           ],
+            /*33*/
+            [
+                'parent_id' => 26,
+                'name' => 'Редактирование типов сделок',
+                'icon'=> 'fal fa-window',
+                'link'=> '/filter_deals',
+                'system_name'=>'view_filter_deals_pages',
+                'type'=>'linked',
+                'permission'=>'view_filter_deals_pages'
+            ],
 
 
 

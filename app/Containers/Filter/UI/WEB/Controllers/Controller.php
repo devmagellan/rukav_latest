@@ -37,6 +37,19 @@ class Controller extends WebController
     return view('filter::admin.table', $data);
     // ..
   }
+
+    public function indexFilterDeals(GetAllFiltersRequest $request)
+    {
+        $data['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
+        return view('filter::admin.filter_deals.index', $data);
+    }
+
+    public function postDataFilterDeals(GetAllFiltersRequest $request)
+    {
+        $data['filters'] = Apiato::call('Filter@GetAllFilterDealsAction', [$request]);
+        return view('filter::admin.filter_deals.table', $data);
+        // ..
+    }
     /**
      * Show one entity
      *
@@ -123,6 +136,12 @@ class Controller extends WebController
 
   }
 
+    public function postDeleteFilterDeals(GetAllFiltersRequest  $request){
+        $message=\App\Containers\Filter\Models\FilterDeals::where('id',$request->input('filter_id'))->delete();
+        return \Response::json(['result'=>'success']);
+
+    }
+
   public function postSave(GetAllFiltersRequest $request){
     $companySlider['values']=[
       'name'=>$request->input('filter_name'),
@@ -133,6 +152,17 @@ class Controller extends WebController
     return call_user_func("{$entityClass}::query")->updateOrCreate($companySlider['attributes'], $companySlider['values']);
 
   }
+
+    public function postSaveFilterDeals(GetAllFiltersRequest $request){
+        $companySlider['values']=[
+            'name'=>$request->input('filter_name'),
+            'active'=>($request->input('active')=='true') ? 1 : 0,
+        ];
+        $entityClass=\App\Containers\Filter\Models\FilterDeals::class;
+        $companySlider['attributes']['id']=($request->input('filter_id')&& $request->input('filter_id')!=0) ? $request->input('filter_id') : null;
+        return call_user_func("{$entityClass}::query")->updateOrCreate($companySlider['attributes'], $companySlider['values']);
+
+    }
 
   public function getFilters(GetAllFiltersRequest $request){
       $data['filters']= \App\Containers\Filter\Models\Filter::get();

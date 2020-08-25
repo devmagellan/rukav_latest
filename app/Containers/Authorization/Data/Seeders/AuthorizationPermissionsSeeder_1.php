@@ -43,6 +43,7 @@ class AuthorizationPermissionsSeeder_1 extends Seeder
         Apiato::call('Authorization@CreatePermissionTask', ['view_static_pages', 'Просмотр статичных страниц','menu']);
       Apiato::call('Authorization@CreatePermissionTask', ['view_filters_pages', 'Просмотр фильтров','menu']);
       Apiato::call('Authorization@CreatePermissionTask', ['add_messages', 'Добавление объявлений','menu']);
+        Apiato::call('Authorization@CreatePermissionTask', ['view_filter_deals_pages', 'Просмотр фильтров типов сделок','menu']);
 
 
 

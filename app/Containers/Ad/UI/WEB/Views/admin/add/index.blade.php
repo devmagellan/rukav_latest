@@ -1524,6 +1524,7 @@ var new_rubric=$(this).parent().find('.hidden_rubric').val()
               $.each(data.result, function(i, val) {
                 string=string+'/'+val.name
               });
+              console.log('current=>',current)
               $('.cat_name').val(string+'/'+current)
 
             }

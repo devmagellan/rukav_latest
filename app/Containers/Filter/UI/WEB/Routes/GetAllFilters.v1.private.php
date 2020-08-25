@@ -10,6 +10,15 @@ $router->get('filters', [
     ],
 ]);
 
+$router->get('filter_deals', [
+    'as' => 'web_filter_index',
+    'uses'  => 'Controller@indexFilterDeals',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
+]);
+
 $router->post('/admin/filters/data', [
   'as' => 'web_filters_data',
   'uses'  => 'Controller@postData',
@@ -17,6 +26,15 @@ $router->post('/admin/filters/data', [
   'middleware' => [
     'auth:admin',
   ],
+]);
+
+$router->post('/admin/filterDeals/data', [
+    'as' => 'web_filters_data',
+    'uses'  => 'Controller@postDataFilterDeals',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
 ]);
 
 $router->post('/filter/update_status', [
@@ -36,6 +54,14 @@ $router->post('/filter/delete', [
     'auth:admin',
   ],
 ]);
+$router->post('/filterDeals/delete', [
+    'as' => 'filter_delete',
+    'uses'  => 'Controller@postDeleteFilterDeals',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
+]);
 
 $router->post('/filter/create', [
   'as' => 'filter_create',
@@ -44,6 +70,15 @@ $router->post('/filter/create', [
   'middleware' => [
     'auth:admin',
   ],
+]);
+
+$router->post('/filterDeals/create', [
+    'as' => 'filter_create',
+    'uses'  => 'Controller@postSaveFilterDeals',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
 ]);
 
 $router->post('/category/filters/get', [

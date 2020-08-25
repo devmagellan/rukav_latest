@@ -427,6 +427,13 @@ class AuthorizationRolesSeeder_2 extends Seeder
 
 
           ],
+            [
+
+                'permission_id' =>23 ,
+                'role_id'=>1
+
+
+            ],
 
 
         ]);

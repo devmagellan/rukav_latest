@@ -7,6 +7,7 @@ use App\Containers\Ad\Models\Picture;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Containers\Filter\Models\AddFilter;
+use App\Containers\Filter\Models\AddFilterDeals;
 use Carbon\Carbon;
 class AdService
 {
@@ -17,7 +18,6 @@ class AdService
       $user=\App\Containers\User\Models\User::where('id',$data->user_id)->first();
     }
     else{
-
       $user=Auth::user();
     }
     \Log::info('data_information',array($data));
@@ -35,12 +35,15 @@ class AdService
       'name' => $user->name,
       'category_id' => $data->category_id,
       'sender' => $user->id,
+      'is_tmp'=>(isset($data->save)) ? false : true,
       'expired' => $modifiedMutable->toDateTimeString(),
       'administrative' => $data->administrative,
       'visibility' => false,
       'show_name' => $user->name
     ]);
   }
+
+
 
   public function savePhoto($data, $adId)
   {
@@ -75,6 +78,15 @@ class AdService
       $this->createFilter($filterId,$filterValue, $adId);
     }
   }
+
+    public function saveFilterDeals($data, $adId)
+    {
+        \Log::info('add_filter_deals'.$data->filterDeals);
+        AddFilterDeals::create([
+        'add_id' => $adId,
+        'filter_deals_id' => $data->filterDeals,
+        ]);
+    }
 
   public function createPicture($path, $adId)
   {

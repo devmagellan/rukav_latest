@@ -12566,7 +12566,8 @@ class Controller extends WebController
       $data['properties']=$this->getMainProperties($request);
     $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
     $locations=\App\Containers\Ad\Models\BritainRegion::where('parent_id',0)->get();
-    return view('ad::ads.form-add-ads', compact( 'categoriesOnlyRoot','locations','data'));
+    $filterDeals=\App\Containers\Filter\Models\FilterDeals::get();
+    return view('ad::ads.form-add-ads', compact( 'categoriesOnlyRoot','locations','data','filterDeals'));
   }
 
   public function adminCreate(CreateAdRequest $request,$user_id){
@@ -12574,6 +12575,7 @@ class Controller extends WebController
     $data['properties']=$this->getMainProperties($request);
     $result['categoriesOnlyRoot'] = $data['properties']->categories->where('parent_id', 0);
     $result['locations']=\App\Containers\Ad\Models\BritainRegion::where('parent_id',0)->get();
+      $result['filterDeals']=\App\Containers\Filter\Models\FilterDeals::get();
     $result['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
     //$users = Apiato::call('Ad@GetAllAdsDataTableAction', [$request]);
     $result['main_rubrics'] = Apiato::call('Site@GetProductCategoriesByParentIdAction', [0], [0]);
@@ -12601,12 +12603,23 @@ class Controller extends WebController
   public function store(StoreAdRequest $request)
   {
       \Log::info('ZASHLI',array($request));
+
+      if($request->save==1){
     $ad = Apiato::call('Ad@CreateAdAction', [$request]);
-    \Log::info('AD',array($ad));
+    \Log::info('AD1',array($ad));
     if ($ad) {
       $request->session()->flash('infoAd', true);
         return back()->with('success', 'Ваше объявление успешно добавлено ! Благодарим за сотрудничество');
     }
+      }
+      else{
+          $ad = Apiato::call('Ad@CreateAdAction', [$request]);
+          \Log::info('AD2',array($ad));
+          if ($ad) {
+              $request->session()->flash('infoAd', true);
+              return back()->with('success', 'Просмотр объявления')->with('ad',$ad);
+          }
+      }
      return back();
   }
 

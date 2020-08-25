@@ -76,7 +76,7 @@ class Controller extends WebController
           })
 
 
-          ->where('active',1)
+          ->where('active',1)->where('is_tmp',0)
         /*->with('validFilter')
         ->join('add_filters', 'add_filters.add_id', '=', 'ads.id')->distinct('ads.id')
         ->select('ads.*')*/ // Avoid selecting everything from the stocks table

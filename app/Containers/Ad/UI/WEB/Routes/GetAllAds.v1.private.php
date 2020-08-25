@@ -82,6 +82,16 @@ $router->get('/admin/add_ads', [
 ]);
 
 
+$router->post('/getAllParentsString', [
+    'as' => 'getAllParentsString',
+    'uses'  => 'Controller@getAllParentsString',
+    /* 'middleware' => [
+       'auth:web',
+     ],*/
+]);
+
+
+
 
 
 
