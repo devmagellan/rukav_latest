@@ -952,6 +952,9 @@
   <script src="/NewSmartAdmin/js/formplugins/select2/select2.bundle.js"></script>
 
 <style>
+.product_slider_main .slick-list.draggable{
+    height: auto!important;
+}
 .preview_btn_wrapper button{
     display: block;
     width: 100%;
