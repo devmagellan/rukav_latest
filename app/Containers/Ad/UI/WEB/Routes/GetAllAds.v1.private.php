@@ -91,6 +91,13 @@ $router->post('/getAllParentsString', [
 ]);
 
 
+$router->get('/save_preview/{id}', [
+    'as' => 'save_preview',
+    'uses'  => 'Controller@savePreview',
+]);
+
+
+
 
 
 

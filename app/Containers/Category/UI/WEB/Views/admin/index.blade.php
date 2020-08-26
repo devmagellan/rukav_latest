@@ -267,7 +267,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
+              <h5 class="modal-title">Привязка фильтров к категориям</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
               </button>
@@ -276,14 +276,24 @@
               <form class="needs-validation" id="filter_groups" method="post" action="/filters/add" novalidate onsubmit="theSubmitFunctionFilters(); return false;">
 
                 <div class="modal-body">
-                  <div class="input_fields_wrap">
-                    <button style="width:150px;" class="add_field_button">Add More Filters</button>
-                    <div class="folder">
+                    <div class="row">
+                  <div class="col-md-6">
+                      <div class="input_fields_wrap">
+                        <button style="width:150px;" class="add_field_button">Add Additional filter</button>
+                        <div class="folder">
 
-                    </div>
+                        </div>
+                      </div>
                   </div>
+                    <div class="col-md-5">
+                        <div class="input_fields_wrap_deals">
+                            <button style="width:150px;" class="add_field_button_deals">Add deals type filter</button>
+                            <div class="folder_deals">
 
-
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="filters_groups_close btn btn-secondary waves-effect waves-themed" data-dismiss="modal">Закрыть</button>
@@ -599,7 +609,15 @@
 
     }
     $html.='</select><a href="#" class="remove_field">Удалить</a></div>';
-dump($html);
+
+
+    $html_deals='<div><select name="filter_deals[]" class="form-control" style="width:150px;">';
+    foreach($filter_deals as $filter_deal) {
+        $html_deals.='<option value="'.$filter_deal->id.'">'.$filter_deal->name.'</option>';
+
+    }
+    $html_deals.='</select><a href="#" class="remove_field_deals">Удалить</a></div>';
+
     ?>
 
 
@@ -607,7 +625,6 @@ dump($html);
 
 @section('scripts')
     <!-- iCheck -->
-    <!--script src="{!! asset('/inspinia/js/plugins/iCheck/icheck.min.js') !!}"></script-->
 
 
 
@@ -617,9 +634,11 @@ dump($html);
     <script>
       $(document).ready(function() {
         var max_fields      = 4; //maximum input boxes allowed
+          var max_fields_deals      = 8;
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-        var add_button      = $(".add_field_button"); //Add button ID
-
+          var wrapper_deals         = $(".input_fields_wrap_deals"); //Fields wrapper
+        var add_button_deals      = $(".add_field_button_deals"); //Add button ID
+          var add_button      = $(".add_field_button"); //Add button ID
         var x = 1; //initlal text box count
         $(add_button).click(function(e){ //on add input button click
           e.preventDefault();
@@ -629,9 +648,20 @@ dump($html);
           }
         });
 
+          $(add_button_deals).click(function(e){ //on add input button click
+              e.preventDefault();
+              if(x < max_fields_deals){ //max input box allowed
+                  x++; //text box increment
+                  $(wrapper_deals).append('<? print($html_deals);?>'); //add input box
+              }
+          });
+
         $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
           e.preventDefault(); $(this).parent('div').remove(); x--;
         })
+          $(wrapper_deals).on("click",".remove_field_deals", function(e){ //user click on remove text
+              e.preventDefault(); $(this).parent('div').remove(); x--;
+          })
       });
         function reloadData(){
             $.ajax({
@@ -654,11 +684,6 @@ dump($html);
             <?php if(isset($json)){?>
                 checked_categories=eval('<?php echo $json;?>');
             <?php } ?>
-
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
         });
     </script>
 
@@ -1235,6 +1260,7 @@ dump($html);
             console.log('window.cat_id',window.cat_id)
             //dialog.dialog("open");
             $('.folder').empty()
+              $('.folder_deals').empty()
             $.ajax({
               type: "POST",
 
@@ -1246,6 +1272,18 @@ dump($html);
 
               }
             });
+
+              $.ajax({
+                  type: "POST",
+
+                  dataType: 'html',
+                  url: '/category/filter_deals/get',
+                  data: {cat_id:cat_id}, // serializes the form's elements.
+                  success: function (data) {
+                      $('.folder_deals').append(data)
+
+                  }
+              });
 
             //
             $('.default-example-modal-lg-center-filter').modal({show:true})

@@ -13,6 +13,7 @@ class AdService
 {
   public function createAd($data): Ad
   {
+
     if($data->is_admin_format){
 
       $user=\App\Containers\User\Models\User::where('id',$data->user_id)->first();
@@ -42,6 +43,7 @@ class AdService
       'visibility' => false,
       'show_name' => $user->name
     ]);
+
   }
 
 

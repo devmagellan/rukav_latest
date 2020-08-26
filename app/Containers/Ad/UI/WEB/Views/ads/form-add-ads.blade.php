@@ -77,12 +77,25 @@
 @endif
 
 @if (\Session::has('success') && \Session::get('success')=='Просмотр объявления')
-<script>
-  $(document).ready(function() {
-    $('#mainPreview').modal({show:true})
+  <script>
+    $(document).ready(function() {
+      $('#mainPreview').modal({show:true});
 
-  });
-</script>
+      $('.close_button_modal_previws').click(function(){
+        $('#mainPreview').modal({show:false});
+        $('#mainPreview').removeClass("show");
+        $('#mainPreview').hide();
+        $('.modal-backdrop').hide();
+        alert('1');
+      });
+      $('.preview_btn').click(function(){
+        var id='{{\Session::get('ad')->id}}'
+       window.location.href='/save_preview/'+id;
+      });
+
+
+    });
+  </script>
 
 
 @endif
@@ -114,7 +127,7 @@
             </h6>
             <div class="add_advert_block_input1">
               <input type="text" name="name_ad" maxlength="70" placeholder="Название объявления" required value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->title}} @endif">
-              <span class="required">*</span>
+              <span class="required"></span>
               @error('name_ad')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
@@ -127,7 +140,7 @@
               <input type="text" name="category_ads" placeholder="Выберите категорию" class="select_category" required readonly>
               @endif
               <img src="/img/ipagination_right.svg" alt="">
-              <span class="required">*</span>
+              <span class="required"></span>
               @error('category_id')
                 <div class="alert errorBlock">{{ $message }}</div>
               @enderror
@@ -160,28 +173,7 @@
         </div>
 
         <div class="filters_block"></div>
-        <div class="col-sm-12">
-          <div class="add_advert_block_wrapper">
-            <h6 class="add_advert_block_wrapper_title">
-              Тип сделки
-            </h6>
-        <div class="filterDeals_block">
-
-          <div id="controls" style="display:inline-block">
-            <select id="filterDeals" class="form-control" name="filterDeals">
-
-              @foreach($filterDeals as $filter)
-                @if(null!=(\Session::get('ad')) && $filter->id==\Session::get('ad')->filterDeals->filter_deals_id)
-              <option selected value="{{$filter->id}}">{{$filter->name}}</option>
-                @else
-                  <option value="{{$filter->id}}">{{$filter->name}}</option>
-                @endif
-             @endforeach
-            </select>
-          </div>
-        </div>
-          </div></div>
-
+        <div class="filter_deals_block"></div>
 
         <input type="hidden" id="category_id" name="category_id" value="@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->category_id}} @endif">
         <div class="col-sm-12">
@@ -436,10 +428,74 @@
               @enderror
             </div-->
             <div class="contact_info_wrapper">
-              <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (не обязательно)" value="@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->price}} @endif">
+              <div class="input_price_icon">£</div><input type="number" step="1" name="price" placeholder="Цена (не обязательно)" value="@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->price}} @endif">
             </div>
           </div>
         </div>
+      @if(null!=(\Session::get('ad')))
+        <div class="col-sm-12">
+          <div class="add_advert_block_wrapper">
+            <h6 class="add_advert_block_wrapper_title">
+              Фотографии
+            </h6>
+            <?
+            $realCount=count(\Session::get('ad')->pictures);
+            ?>
+
+            <div class="add_foto_file_wrapper">
+              @foreach(\Session::get('ad')->pictures as $realPic)
+                <div class="add_foto_file_item">
+
+                  <div class="upload-file-container-text">
+
+                    <label style="position: relative;height: 114px;width: 114px;" for="imgInput" class="add_foto_file_item_load">
+                      <img style="object-fit: cover;height: 100%;width: 100%;" src="/storage/messages/{{$realPic->photo}}" alt="">
+                    </label>
+                    <div class="add_foto_file_img_wrapper">
+                      <img  src="#" alt="" class="add_foto_file_img" />
+                      <div class="add_foto_file_block_hover">
+                        <label for="imgInput" class="add_foto_file_item_load2">
+                          <img src="/img/refresh_icon.svg" alt="">
+                        </label>
+                        <div class="add_foto_file_delete">
+                          <img src="/img/delete-icon.svg" alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <input type="file" name="files[]" class="photo" id="imgInput"/>
+                  </div>
+                </div>
+              @endforeach
+              @for($i=1;$i<=10-$realCount;$i++)
+                <div class="add_foto_file_item">
+                  <div class="upload-file-container-text">
+
+                    <label for="imgInput2" class="add_foto_file_item_load">
+                      <img src="/img/photo-camera-icon.svg" alt="">
+                      <span>Добавить фото</span>
+                    </label>
+                    <div class="add_foto_file_img_wrapper">
+                      <img  src="#" alt="" class="add_foto_file_img" />
+                      <div class="add_foto_file_block_hover">
+                        <label for="imgInput2" class="add_foto_file_item_load2">
+                          <img src="/img/refresh_icon.svg" alt="">
+                        </label>
+                        <div class="add_foto_file_delete">
+                          <img src="/img/delete-icon.svg" alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <input type="file" name="files[]" class="photo" id="imgInput2"/>
+                  </div>
+                </div>
+              @endfor
+
+            </div>
+          </div>
+          <a href="#" class="add_advert_rolls_foto">Привила добавления фото</a>
+        </div>
+
+      @else
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
@@ -659,6 +715,7 @@
             @enderror
           </div>
         </div>
+      @endif
         <div class="col-sm-12">
             <div class="add_advert_block_wrapper">
                 <h6 class="add_advert_block_wrapper_title">
@@ -669,7 +726,7 @@
                     <label for="7day">7 дней</label>
                     <input type="radio" name="select_time" value="14" id="14day" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==14) checked="" @endif>
                     <label for="14day">14 дней</label>
-                    <input type="radio" name="select_time" value="30" id="1mon" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==30) checked="" @endif>
+                    <input type="radio" name="select_time" value="30" id="1mon" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==30) checked="" @elseif(null==(\Session::get('ad'))) checked="" @endif>
                     <label for="1mon">1 месяц</label>
                     <input type="radio" name="select_time" value="180" id="6mon" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==180) checked="" @endif>
                     <label for="6mon">6 месяц</label>
@@ -746,7 +803,7 @@
 <div class="modal fade mainPreview" id="mainPreview" tabindex="-1" role="dialog" aria-labelledby="mainPreview1" aria-hidden="true">
   <div class="mainPreviewmodal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <button type="button" class="close close_button_modal_previws" data-dismiss="modal" aria-label="Close">
       <img src="https://rukav.co.uk/img/close-icon.svg" alt="">
     </button>
 @if(null!=(\Session::get('ad')))
@@ -923,7 +980,10 @@
 
         <div class="row justify-content-end preview_btn_wrapper">
             <div class="col-md-2">
-                <button type="button" class="preview_btn_close" data-dismiss="modal">Отмена</button>
+                <button type="button" class="preview_btn_close close_button_modal_previws">Отмена</button>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="preview_btn">Опубликовать</button>
             </div>
         </div>
 

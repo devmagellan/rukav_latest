@@ -12638,6 +12638,11 @@ class Controller extends WebController
   }
 
 
+  public function savePreview($id){
+      \App\Containers\Ad\Models\Ad::where('id',$id)->update(['is_tmp'=>1]);
+      return redirect('/private_cabinet#myads');
+  }
+
   /**
    * Edit entity (show UI)
    *
