@@ -26,6 +26,25 @@ $(document).ready(function () {
 
 
       });
+
+      $.ajax({
+        type: "POST",
+        dataType: 'html',
+        async: false,
+        url: '/search_for_filter_deals',
+        data: {cat_id:window.cat_id}, // serializes the form's elements.
+        beforeSend: function() {
+
+        },
+        complete:function(){
+
+        },
+        success: function (data) {
+          $('.filter_deals_block').html(data)
+        }
+
+
+      });
     }
   });
   $(document).on('click', '.listCatalog2 li', function () {
@@ -58,6 +77,25 @@ $(document).ready(function () {
 
 
       });
+
+      $.ajax({
+        type: "POST",
+        dataType: 'html',
+        async: false,
+        url: '/search_for_filter_deals',
+        data: {cat_id:window.cat_id}, // serializes the form's elements.
+        beforeSend: function() {
+
+        },
+        complete:function(){
+
+        },
+        success: function (data) {
+          $('.filter_deals_block').html(data)
+        }
+
+
+      });
     }
     console.log('WithOrWihout',window.cont)
   });
@@ -85,6 +123,25 @@ $(document).ready(function () {
       },
       success: function (data) {
         $('.filters_block').html(data)
+      }
+
+
+    });
+
+    $.ajax({
+      type: "POST",
+      dataType: 'html',
+      async: false,
+      url: '/search_for_filter_deals',
+      data: {cat_id:window.cat_id}, // serializes the form's elements.
+      beforeSend: function() {
+
+      },
+      complete:function(){
+
+      },
+      success: function (data) {
+        $('.filter_deals_block').html(data)
       }
 
 

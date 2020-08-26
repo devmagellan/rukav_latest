@@ -13,6 +13,7 @@ class AdService
 {
   public function createAd($data): Ad
   {
+
     if($data->is_admin_format){
 
       $user=\App\Containers\User\Models\User::where('id',$data->user_id)->first();
@@ -36,11 +37,13 @@ class AdService
       'category_id' => $data->category_id,
       'sender' => $user->id,
       'is_tmp'=>(isset($data->save)) ? false : true,
+      'select_time' => $data->select_time,
       'expired' => $modifiedMutable->toDateTimeString(),
       'administrative' => $data->administrative,
       'visibility' => false,
       'show_name' => $user->name
     ]);
+
   }
 
 

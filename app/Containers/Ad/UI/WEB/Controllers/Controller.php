@@ -12617,12 +12617,31 @@ class Controller extends WebController
           \Log::info('AD2',array($ad));
           if ($ad) {
               $request->session()->flash('infoAd', true);
-              return back()->with('success', 'Просмотр объявления')->with('ad',$ad);
+              $ad=\App\Containers\Ad\Models\Ad::where('id',$ad->id)->with('filterDeals')->first();
+//dd($ad->category_id);
+
+              $this->getAllParentsCategoriesRecursive($ad->category_id);
+              $catsString='';
+              foreach(array_reverse($this->resultCat) as $value){
+
+                  $catsString.=$value->name;
+                  $catsString.='/';
+              }
+              $catsString.=\App\Containers\Site\Models\ProductCategory::where('id',$ad->category_id)->first()->name;
+
+
+
+              return back()->with('success', 'Просмотр объявления')->with('ad',$ad)->with('catsString',$catsString);
           }
       }
      return back();
   }
 
+
+  public function savePreview($id){
+      \App\Containers\Ad\Models\Ad::where('id',$id)->update(['is_tmp'=>1]);
+      return redirect('/private_cabinet#myads');
+  }
 
   /**
    * Edit entity (show UI)

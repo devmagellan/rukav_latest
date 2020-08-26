@@ -169,10 +169,19 @@ class Controller extends WebController
     $data['groups']=  \App\Containers\Filter\Models\CategoryFilter::where('category_id',$request->input('cat_id'))->with('filter')->get();
     return view('filter::admin.groups', $data);
   }
+
+    public function getFilterDeals(GetAllFiltersRequest $request){
+        $data['filters']= \App\Containers\Filter\Models\FilterDeals::get();
+        $data['group_deals']=  \App\Containers\Filter\Models\CategoryFilterDeals::where('category_id',$request->input('cat_id'))->with('filter')->get();
+        return view('filter::admin.groups_deals', $data);
+    }
+
   public function filtersAdd(GetAllFiltersRequest $request){
     \App\Containers\Filter\Models\CategoryFilter::where('category_id',$request->input('cat_id'))->delete();
+      \App\Containers\Filter\Models\CategoryFilterDeals::where('category_id',$request->input('cat_id'))->delete();
     $params = array();
     parse_str($request->input('filters'), $params);
+      \Log::info('FilterDeals',$params);
        foreach($params['filters'] as $filter){
         $present=\App\Containers\Filter\Models\CategoryFilter::where('category_id',$request->input('cat_id'))->where('filter_id',$filter)->first();
         $companySlider['values']=[
@@ -183,6 +192,17 @@ class Controller extends WebController
         $companySlider['attributes']['id']=($present) ? $present->id : null;
         call_user_func("{$entityClass}::query")->updateOrCreate($companySlider['attributes'], $companySlider['values']);
       }
+
+      foreach($params['filter_deals'] as $filter){
+          $present=\App\Containers\Filter\Models\CategoryFilterDeals::where('category_id',$request->input('cat_id'))->where('filter_id',$filter)->first();
+          $companySlider['values']=[
+              'category_id'=>$request->input('cat_id'),
+              'filter_id'=>$filter,
+          ];
+          $entityClass=\App\Containers\Filter\Models\CategoryFilterDeals::class;
+          $companySlider['attributes']['id']=($present) ? $present->id : null;
+          call_user_func("{$entityClass}::query")->updateOrCreate($companySlider['attributes'], $companySlider['values']);
+      }
 return json_encode(['result'=>'success']);
   }
 
@@ -191,4 +211,9 @@ return json_encode(['result'=>'success']);
       $data['filters']=\App\Containers\Filter\Models\CategoryFilter::where('category_id',$request->input('cat_id'))->with('filter')->get();
       return view('ad::filters.table', $data);
   }
+
+    public function searchForFilterDeals(GetAllFiltersRequest $request){
+        $data['filters']=\App\Containers\Filter\Models\CategoryFilterDeals::where('category_id',$request->input('cat_id'))->with('filter')->get();
+        return view('ad::filters.table_deals', $data);
+    }
 }

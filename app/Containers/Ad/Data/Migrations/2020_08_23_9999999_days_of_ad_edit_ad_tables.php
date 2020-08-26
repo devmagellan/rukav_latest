@@ -12,6 +12,7 @@ class DaysOfAdEditAdTables extends Migration
     public function up()
     {
       Schema::table('ads', function (Blueprint $table) {
+          $table->integer('select_time')->nullable();
         $table->dateTime('expired')->nullable();
 		$table->boolean('expired_sent')->default(false);
 
@@ -23,6 +24,7 @@ class DaysOfAdEditAdTables extends Migration
     public function down()
     {
       Schema::table('ads', function($table) {
+          $table->dropColumn('select_time');
         $table->dropColumn('expired');
 		$table->dropColumn('expired_sent');
       });

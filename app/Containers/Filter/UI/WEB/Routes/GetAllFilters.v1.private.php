@@ -89,6 +89,14 @@ $router->post('/category/filters/get', [
     'auth:admin',
   ],
 ]);
+$router->post('/category/filter_deals/get', [
+    'as' => 'category_filters_get',
+    'uses'  => 'Controller@getFilterDeals',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
+]);
 
 $router->post('/filters/add', [
   'as' => 'filter_add',
@@ -103,6 +111,11 @@ $router->post('/filters/add', [
 $router->post('/search_for_filters', [
   'as' => 'search_for_filters',
   'uses'  => 'Controller@searchForFilters',
+]);
+
+$router->post('/search_for_filter_deals', [
+    'as' => 'search_for_filters',
+    'uses'  => 'Controller@searchForFilterDeals',
 ]);
 
 

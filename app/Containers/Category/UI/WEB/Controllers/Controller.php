@@ -90,10 +90,15 @@ class Controller extends WebController
 
         ->where('active',1)->where('is_tmp',0)
         ->with('validFilter')
-          ->when(null!=($request->input('filterDeals')) && $request->input('filterDeals')!=0 , function($q) use($request) {
+          ->when(null!=($request->input('filterDeals')) && $request->input('filterDeals')!=1 , function($q) use($request) {
               return $q->leftJoin('add_filter_deals', function($join) use($request) {
               $join->on('add_filter_deals.add_id', '=', 'ads.id');
               })->where('add_filter_deals.filter_deals_id',$request->input('filterDeals'));
+          })
+          ->when(null!=($request->input('filterDeals')) && $request->input('filterDeals')==1 , function($q) use($request) {
+              return $q->leftJoin('add_filter_deals', function($join) use($request) {
+                  $join->on('add_filter_deals.add_id', '=', 'ads.id');
+              });
           })
           ->when($this->similar_key_in_array( 'sort_by_filter' , $request->input() ), function($q) use($request) {
               return $q->leftJoin('add_filters', function($join) use($request) {
@@ -228,6 +233,7 @@ class Controller extends WebController
         $data['keywords'] = "Ukrainian industry platform";
         $data['description'] = "Ukrainian industry platform";
       $data['filters']=\App\Containers\Filter\Models\Filter::get();
+        $data['filter_deals']=\App\Containers\Filter\Models\FilterDeals::get();
         $data['categories']=\App\Containers\Site\Models\ProductCategory::where('parent_id',0)
             ->orderBy('position')->get();
         return view('category::admin.index', $data);
