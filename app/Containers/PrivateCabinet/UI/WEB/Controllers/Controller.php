@@ -12532,7 +12532,8 @@ class Controller extends WebController
         }
 
         $data['properties']=$this->getMainProperties($request);
-        $ads= \App\Containers\Ad\Models\Ad::where('sender',\Auth::user()->id)->with('pictures')->get();
+        $ads= \App\Containers\Ad\Models\Ad::where('sender',\Auth::user()->id)->with('pictures')->orderBy('created_at','desc')->get();
+
         $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
         $result=\App\Containers\Ad\Models\Wishlist::where('user_id',\Auth::user()->id)->where('active',1)->get();
         $favorits=[];

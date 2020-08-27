@@ -7,7 +7,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Вид пользователя</th>
-            <th></th>
+            <th>Телефон</th>
             <th></th>
             <th></th>
             <th></th>
@@ -26,7 +26,7 @@
             <td class="customer_name">{{$customer->name}}</td>
             <td class="customer_email">{{$customer->email}}</td>
             <td class="customer_phone">{{$customer->vid_user}}</td>
-            <td class="customer_phone"></td>
+            <td class="customer_phone">{{$customer->phone}}</td>
             <td class="customer_phone"></td>
             <td class="customer_phone"></td>
             <td class="customer_phone"></td>

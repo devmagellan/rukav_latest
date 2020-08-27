@@ -492,7 +492,7 @@
 
             </div>
           </div>
-          <a href="#" class="add_advert_rolls_foto">Привила добавления фото</a>
+          <a href="/static/help#photo" class="add_advert_rolls_foto">Привила добавления фото</a>
         </div>
 
       @else
@@ -709,7 +709,7 @@
                 </div>
               </div>
             </div>
-            <a href="#" class="add_advert_rolls_foto">Привила добавления фото</a>
+            <a href="/static/help#photo" class="add_advert_rolls_foto">Привила добавления фото</a>
             @error('files')
             <div class="alert errorBlock">{{ $message }}</div>
             @enderror
@@ -1006,6 +1006,9 @@
   <script src="/NewSmartAdmin/js/formplugins/select2/select2.bundle.js"></script>
 
 <style>
+.product_slider_main .slick-list.draggable{
+    height: auto!important;
+}
 .preview_btn_wrapper button{
     display: block;
     width: 100%;
