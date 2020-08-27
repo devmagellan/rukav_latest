@@ -7,6 +7,6 @@
           <option value="{{$fi->id}}">{{$fi->name}}</option>
           @endif
       @endforeach
-    </select><a href="#" class="remove_field">Удалить</a></div>
+    </select><a href="#" class="remove_field_deals">Удалить</a></div>
     @endforeach
 
