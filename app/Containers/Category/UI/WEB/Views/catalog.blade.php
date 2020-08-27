@@ -115,17 +115,17 @@
 
 
           <div class="col-sm-4 d-none d-sm-block"><button>Объявления </button></div>
-          <div class="col-4 col-sm-1" style="text-align: center"><button class="data_sort   @if( Request::get('sort_by_date')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_date')=='high_to_low') high_to_low @else low_to_high @endif">Дата @if( Request::get('sort_by_date')=='lo_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_date')=='high_to_low') <img src="/img/play_button_img.svg" alt=""> @else <img src="/img/play_button_img.svg" alt=""> @endif</button></div>
+          <div class="col-4 col-sm-1" style="text-align: center"><button class="data_sort   @if( Request::get('sort_by_date')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_date')=='high_to_low') high_to_low @else low_to_high @endif">Дата @if( Request::get('sort_by_date')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_date')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
 
             <?
             $currentFilters=\App\Containers\Filter\Models\CategoryFilter::with('filter')->where('category_id',$data['currentCat']->id)->get();
             ?>
             @foreach($currentFilters as $filter)
                 <div class="col-md-2" style="text-align: center">
-<input type="hidden" class="filter_variant" value="{{$filter->filter->id}}">
+                <input type="hidden" class="filter_variant" value="{{$filter->filter->id}}">
                   <? $filter_variant='sort_by_filter_'.$filter->filter->id;
                   ?>
-                  <button class="filter_sort @if( Request::get($filter_variant)=='lo_to_high') lo_to_high @elseif(Request::get($filter_variant)=='high_to_low') high_to_low @else low_to_high @endif">{{$filter->filter->name}} @if( Request::get($filter_variant)=='lo_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get($filter_variant)=='high_to_low') <img src="/img/play_button_img.svg" alt=""> @else <img src="/img/play_button_img.svg" alt=""> @endif </button>
+                  <button class="filter_sort @if( Request::get($filter_variant)=='lo_to_high') lo_to_high @elseif(Request::get($filter_variant)=='high_to_low') high_to_low @else low_to_high @endif">{{$filter->filter->name}} @if( Request::get($filter_variant)=='lo_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get($filter_variant)=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img src="/img/play_button_img.svg" alt=""> @endif </button>
                 </div>
             @endforeach
           @if(count($currentFilters)<3)
@@ -134,7 +134,7 @@
             @endfor
           @endif
 
-          <div class="col-4 col-sm-1" style="text-align: center"><button>Цена <img src="/img/play_button_img.svg" alt=""></button></div>
+            <div class="col-4 col-sm-1" style="text-align: center"><button class="price_sort   @if( Request::get('sort_by_price')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_price')=='high_to_low') high_to_low @else low_to_high @endif">Цена @if( Request::get('sort_by_price')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_price')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
         </div>
 
         @foreach($products as $product)
@@ -348,6 +348,39 @@ console.log({{$pricesLimits[0]['max_price']}})
         }
 
 console.log('final=>',url+param)
+        window.location.href=url+param
+    })
+
+
+
+    $('.price_sort').click(function(){
+        console.log(444)
+        var url=$(location).attr('href');
+        var url=removeParams(url,'sort_by_price')
+        console.log('clear=>',url)
+        if($(this).hasClass('low_to_high')){
+            if (url.indexOf('?') > -1)
+            {
+
+                var param= '&sort_by_price=high_to_low'
+            }
+            else{
+                var param= '?sort_by_price=high_to_low'
+            }
+
+        }else{
+            $(this).removeClass('low_to_high')
+            if (url.indexOf('?') > -1)
+            {
+                var param= '&sort_by_price=low_to_high'
+            }
+            else{
+                var param= '?sort_by_price=low_to_high'
+            }
+
+        }
+
+        console.log('final=>',url+param)
         window.location.href=url+param
     })
 

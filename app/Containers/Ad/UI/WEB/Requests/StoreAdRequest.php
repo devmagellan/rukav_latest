@@ -60,7 +60,7 @@ class StoreAdRequest extends Request
       //'phone' => 'required',
         'city' => 'required',
       //'name' => 'required|between:2,10',
-      'files.*' => 'required|image|max:7000',
+      'files.*' => 'required|image|max:8000',
       'category_id' => 'required'
     ];
   }

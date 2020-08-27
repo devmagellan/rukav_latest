@@ -115,6 +115,14 @@ class Controller extends WebController
           //dump('high_to_low');
           $q->orderByDesc('ads.created_at');
       }
+      if($request->input('sort_by_price')=='low_to_high'){
+          //dump('low_to_high');
+          $q->orderBy('ads.price');
+      }
+      if($request->input('sort_by_price')=='high_to_low'){
+          //dump('high_to_low');
+          $q->orderByDesc('ads.price');
+      }
      foreach($request->input() as $key=>$filter){
         //dump(substr($key, 0, 14));
         if(substr($key, 0, 14)=='sort_by_filter'){
