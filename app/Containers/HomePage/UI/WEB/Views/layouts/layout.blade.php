@@ -303,6 +303,7 @@ $initAutoComplete = function(){
             center: countries['us'].center,
             mapTypeControl: false,
             panControl: false,
+            language: 'en-GB',
             zoomControl: false,
             streetViewControl: false
         });
@@ -317,6 +318,7 @@ $initAutoComplete = function(){
             /** @type {!HTMLInputElement} */ (
                 document.getElementById('autocomplete')), {
                 types: ['(cities)'],
+                  language: 'en-GB',
                 componentRestrictions: countryRestrict
             });
         places = new google.maps.places.PlacesService(map);
@@ -327,7 +329,9 @@ $initAutoComplete = function(){
         var elementExists = document.getElementById("country");
         if(elementExists){
         document.getElementById('country').addEventListener(
-            'change', setAutocompleteCountry);}
+            'change', setAutocompleteCountry);
+          $('#add_place').removeClass('redBorder')
+        }
 
 
 
@@ -370,6 +374,7 @@ $initAutoComplete = function(){
             var latlng = new google.maps.LatLng(lat,lng);
             location=location.place_id
             getCity(latlng);
+          $('#add_place').removeClass('redBorder')
 
 
         });
@@ -382,13 +387,15 @@ $initAutoComplete = function(){
         var inputMerged = document.getElementById('clntInfoEditAddr1');
         var optionsPostCode = {
             componentRestrictions: {'country':'uk'},
-            types: ['(regions)'] // (cities)
+            types: ['(regions)'],
+          language: 'en-GB',
+          // (cities)
         };
         $autocompletePostCode = new google.maps.places.Autocomplete(inputPostCode,optionsPostCode);
 
         google.maps.event.addListener($autocompletePostCode, 'place_changed', function () {
             var location = $autocompletePostCode.getPlace();
-            console.log('777=>',location);
+            console.log('778=>',location);
             console.log(location.place_id)
             //location=JSON.stringify(location);
             geocoder = new google.maps.Geocoder();
@@ -400,6 +407,7 @@ $initAutoComplete = function(){
             inputMerged.value=inputPostCode.value
             document.getElementById('place_id').value=location
             getCity(latlng);
+          $('#add_place').removeClass('redBorder')
 
 
         });
@@ -428,7 +436,7 @@ $initAutoComplete = function(){
             inputMerged.value=inputOnlyPostCode.value
             document.getElementById('place_id').value=location
             getCity(latlng);
-
+          $('#add_place').removeClass('redBorder')
 
         });
 
@@ -457,7 +465,7 @@ $initAutoComplete = function(){
             document.getElementById('place_id').value=location
 
             getCity(latlng);
-
+          $('#add_place').removeClass('redBorder')
 
         });
 
@@ -505,7 +513,7 @@ $initAutoComplete = function(){
             var latlng = new google.maps.LatLng(lat,lng);
             location=location.place_id
             codeLatLng(latlng,false);
-
+          $('#add_place').removeClass('redBorder')
 
 
 
@@ -530,6 +538,7 @@ $initAutoComplete = function(){
             map.panTo(place.geometry.location);
             map.setZoom(15);
             search();
+          $('#add_place').removeClass('redBorder')
         } else {
             document.getElementById('autocomplete').placeholder = 'Enter a city';
         }
@@ -703,7 +712,7 @@ $initAutoComplete = function(){
   /*  });*/
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaZXMHQgJkoXZkkBbtelY8SLAwMOasg0Y&libraries=places&language=en&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.13&sensor=false&key=AIzaSyDaZXMHQgJkoXZkkBbtelY8SLAwMOasg0Y&libraries=places&callback=initMap&language=en" async defer></script>
 
 
 @if(null!=(session()->get('registration_error')))

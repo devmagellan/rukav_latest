@@ -57,6 +57,10 @@
     margin: 0 auto;
   }
 
+  .redBorder{
+    border: 2px solid red;
+  }
+
 </style>
 @if ($errors->any())
   <div class="alert alert-danger">
@@ -102,7 +106,7 @@
 
   <article class="add_advert_block">
     <span data-status_created="{{session('infoAd')}}" id="statusAd"></span>
-    <form action="/ads/store" method="post" enctype="multipart/form-data">
+    <form action="/ads/store" method="post" id="add_ads_form" onsubmit="submitFunction()" enctype="multipart/form-data">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -121,7 +125,7 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <div class="add_advert_block_wrapper">
+          <div class="add_advert_block_wrapper" id="add_header">
             <h6 class="add_advert_block_wrapper_title">
               Заголовок
             </h6>
@@ -175,28 +179,30 @@
         <div class="filters_block"></div>
         <div class="filter_deals_block"></div>
 
-        <input type="hidden" id="category_id" name="category_id" value="@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->category_id}} @endif">
+        <input type="hidden" id="category_id" name="category_id" required value="@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->category_id}} @endif">
         <div class="col-sm-12">
-          <div class="add_advert_block_wrapper">
+          <div class="add_advert_block_wrapper" id="add_place">
             <h6 class="add_advert_block_wrapper_title">
               Местоположение
             </h6>
             <input type="hidden" name="city"  id="city">
             <input type="hidden" name="place_id"  id="place_id">
             <input type="hidden" name="administrative"  id="administrative">
-            <div class="hide_location_radio">
+            <!--div class="hide_location_radio">
               <input type="radio" name="hide_location" value="1" id="hide_location" checked="">
               <label for="hide_location">Показывать</label>
               <input type="radio" name="hide_location" value="Не показывать" id="no_hide_location">
               <label for="no_hide_location">Не показывать</label>
-            </div>
+            </div-->
             <div class="select_location_block">
               <input type="radio" name="select_addres" value="Полыний адрес" id="all_adress" checked="">
               <label for="all_adress">Полный адрес</label>
               <input type="radio" name="select_addres" value="Только Postcode" id="postcode">
               <label for="postcode">Только Postcode</label>
               <input type="radio" name="select_addres" value="Выбрать местоположение" id="select_adress">
-              <label for="select_adress">Выбрать местоположение</label>
+              <label for="select_adress">Выбрать место</label>
+              <input type="radio" name="select_addres" value="Весь UK" id="all_uk">
+              <label for="all_uk">Весь UK</label>
               <input type="radio" name="select_addres" value="Вне UK" id="out_uk">
               <label for="out_uk">Вне UK</label>
             </div>
@@ -736,7 +742,7 @@
             </div>
         </div>
         <div class="col-sm-12">
-          <div class="add_advert_block_wrapper">
+          <div class="add_advert_block_wrapper" id="add_description">
             <h6 class="add_advert_block_wrapper_title">
               Описание
             </h6>
@@ -1051,6 +1057,7 @@
             $('.all_user_block').hide();
             $('.outUk').show();
             $('.Places').hide();
+          $('#clntInfoEditZip').hide()
         });
 
         $('#postcode').on('click', function () {
@@ -1058,6 +1065,7 @@
             $('.outUk').hide();
             $('.Places').hide();
             $('.postcode_block').show();
+          $('#clntInfoEditZip').show()
         });
 
         $('#all_adress').on('click', function () {
@@ -1078,18 +1086,33 @@
         });
 
         $('#select_adress').on('click', function () {
-            $('#clntInfoEditAddr1').removeAttr("required");
-            $('#allUsersClntInfoEditZip').removeAttr("required");
-            $('#clntInfoEditOutUk').removeAttr("required");
-            $('#clntInfoEditAddrOutUk1').removeAttr("required");
-            $('#clntInfoEditZip').removeAttr("required");
+        console.log(434)
+        $('#clntInfoEditAddr1').removeAttr("required");
+        $('#allUsersClntInfoEditZip').removeAttr("required");
+        $('#clntInfoEditOutUk').removeAttr("required");
+        $('#clntInfoEditAddrOutUk1').removeAttr("required");
+        $('#clntInfoEditZip').removeAttr("required");
+        $('#clntInfoEditZip').hide()
+        $('.cat_name').prop('required',true);
+        $('.all_user_block').hide().prop('required',false);
+        $('.outUk').hide().prop('required',false);
+        $('.Places').show();
 
-            $('.cat_name').prop('required',true);
-            $('.all_user_block').hide().prop('required',false);
-            $('.outUk').hide().prop('required',false);
-            $('.Places').show();
+      });
 
-        });
+      $('#all_uk').on('click', function () {
+        console.log(434)
+        $('#clntInfoEditAddr1').removeAttr("required");
+        $('#allUsersClntInfoEditZip').removeAttr("required");
+        $('#clntInfoEditOutUk').removeAttr("required");
+        $('#clntInfoEditAddrOutUk1').removeAttr("required");
+        $('#clntInfoEditZip').removeAttr("required");
+        $('#clntInfoEditZip').hide()
+        $('.all_user_block').hide().prop('required',false);
+        $('.outUk').hide().prop('required',false);
+        $('.Places').hide();
+
+      });
 
 
 
@@ -1169,7 +1192,7 @@ console.log('123=>',new_block_cl)
                },
                success: function (sata) {
                     $('.cat_block_1').html(sata)
-console.log('sata',$(e.currentTarget).find('input').val())
+                    console.log('sata',$(e.currentTarget).find('input').val())
                    var child=$(e.currentTarget).find('input').val();
 
                     var realValue=$.trim($(e.currentTarget).text());
@@ -1179,6 +1202,7 @@ console.log('sata',$(e.currentTarget).find('input').val())
 
                    // $('.cat_name').val(window.inpText+'/'+realValue)
                    $('#city').val(realValue)
+                 $('#add_place').removeClass('redBorder')
                 }
 
             });
@@ -1210,6 +1234,7 @@ console.log('sata',$(e.currentTarget).find('input').val())
                     console.log(realValue)
                     //$('.cat_name').val(window.inpText+'/'+realValue)
                     $('#city').val(realValue)
+                  $('#add_place').removeClass('redBorder')
                 }
 
             });
@@ -1241,6 +1266,7 @@ console.log('sata',$(e.currentTarget).find('input').val())
                     console.log(realValue)
                     //$('.cat_name').val(window.inpText+'/'+realValue)
                     $('#city').val(realValue)
+                  $('#add_place').removeClass('redBorder')
                 }
 
             });
@@ -1271,6 +1297,7 @@ console.log('sata',$(e.currentTarget).find('input').val())
                     console.log(realValue)
                     //$('.cat_name').val(window.inpText+'/'+realValue)
                     $('#city').val(realValue)
+                  $('#add_place').removeClass('redBorder')
                 }
 
             });
@@ -1349,6 +1376,70 @@ $('.cat_name').click(function(){
 
 
   })
+
+
+
+   $(document).ready(function() {
+      $('#allUsersClntInfoEditZip, #clntInfoEditZip, #clntInfoEditAddr1, #autocomplete').bind('keyup blur', function() {
+        //alert('In here with' + $(this).val())
+        //var regex = new RegExp("/^[a-z ]+$/i");
+        if($(this).val().match(/[^A-Za-z ]/g)){
+          alert('Пожалуйста используйте только латинские символы.');
+          $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''))
+          return false;
+        }
+      });
+    });
+
+
+    $('input[name="name_ad"]').change(function(){
+      if($('input[name="category_id"]').val()){
+        $('#add_header').removeClass('redBorder')
+      }
+    })
+
+
+
+    $('textarea[name="description"]').on('input',function(e){
+      $('#add_description').removeClass('redBorder')
+    });
+
+    $( "#saveAdsButton, #previewAdsButton" ).click(function( event ) {
+      console.log(987)
+      if (!$('input[name="name_ad"]').is(':valid') || !$('input[name="category_id"]').val()) {
+        console.log(777)
+        console.log($('#category_id').val())
+        $('#add_header').addClass('redBorder')
+        $(window).scrollTop($('#add_header').offset().top);
+      }
+      else{
+        $('#add_header').removeClass('redBorder')
+      }
+
+
+      if (($('#clntInfoEditAddr1').is(':valid') && $('#all_adress').is(':checked')) || ($('#clntInfoEditZip').is(':valid')&& $('#postcode').is(':checked')) || ($('#city').is(':valid') && $('#select_adress').is(':checked')) || ($('#autocomplete').is(':valid') && $('#out_uk').is(':checked')) || $('#all_uk').is(':checked')) {
+
+        $('#add_place').removeClass('redBorder')
+      }
+      else{
+        $('#add_place').addClass('redBorder')
+        $(window).scrollTop($('#add_place').offset().top);
+      }
+
+
+      if (!$('textarea[name="description"]').is(':valid') ) {
+        console.log(779)
+        console.log($('#category_id').val())
+        $('#add_description').addClass('redBorder')
+        $(window).scrollTop($('#add_description').offset().top);
+      }
+      else{
+        $('#add_description').removeClass('redBorder')
+      }
+
+    });
+
+
 </script>
 
 

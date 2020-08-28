@@ -7,6 +7,9 @@ $(document).ready(function () {
     getChildCategory($(this).data('category_id'), '.listCatalog2', true);
     console.log('WithOrWihout',window.cont)
     if(window.cont==1){$('#category_id').val($(this).data('category_id'));
+      if($('input[name="name_ad"]').is(':valid')){
+        $('#add_header').removeClass('redBorder')
+      }
       window.cat_id=$(this).data('category_id');
       $.ajax({
         type: "POST",
@@ -58,6 +61,9 @@ $(document).ready(function () {
       $('.listCatalog3').empty()
     getChildCategory($(this).data('category_id'), '.listCatalog3', true);
     if(window.cont==1){$('#category_id').val($(this).data('category_id'));
+      if($('input[name="name_ad"]').is(':valid')){
+        $('#add_header').removeClass('redBorder')
+      }
     window.cat_id=$(this).data('category_id');
       $.ajax({
         type: "POST",
@@ -108,6 +114,9 @@ $(document).ready(function () {
     $(".select_category").val(category + '/'+category2+'/' + $(this).html()).change();
     console.log('#3',$(this).data('category_id'))
     $('#category_id').val($(this).data('category_id'));
+    if($('input[name="name_ad"]').is(':valid')){
+      $('#add_header').removeClass('redBorder')
+    }
     window.cat_id=$(this).data('category_id');
     $.ajax({
       type: "POST",
