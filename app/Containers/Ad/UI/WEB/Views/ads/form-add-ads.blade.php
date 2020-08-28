@@ -245,7 +245,11 @@
                     <option value="za">South Africa</option>
                     <option value="es">Spain</option>
                     <option value="pt">Portugal</option>
-                    <option value="ru">Russia</option>
+                    <option value="ua">Ukraine</option>
+                    <option value="lv">Latvia</option>
+                    <option value="lt">Lithuania</option>
+                    <option value="by">Belarus</option>
+                    <option value="ee">Estonia</option>
                     <option value="us" selected>U.S.A.</option>
                     <option value="uk">United Kingdom</option>
                   </select>
@@ -753,6 +757,7 @@
               @error('description')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
+              <p class="number_of_signs_text"><span>70000</span> знаков остается</p>
               <button type="submit" name="save" value="1" id="saveAdsButton">Подать обьявление</button>
               <button type="submit" id="previewAdsButton" name="preview" value="1" class="buttonHref">Предварительный просмотр</button>
             </div>

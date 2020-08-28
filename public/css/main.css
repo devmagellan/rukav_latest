@@ -1410,7 +1410,7 @@ ul.category_dropdown_sub_list li ul a:hover{
     padding-left: 20px;
     font-size: 14px;
 }
-.number_of_signs{
+.number_of_signs, .number_of_signs_text{
     font-size: 12px;
     color: #808080;
     margin-top: 10px;

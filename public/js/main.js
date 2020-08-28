@@ -413,6 +413,12 @@ $(document).ready(function(){
             $('.number_of_signs span').html(70 - $(this).val().length)
     });
 
+    $('textarea[name="description"]').on('input', function () {
+        console.log(7000 - $(this).val().length);
+        if(7000 - $(this).val().length)
+            $('.number_of_signs_text span').html(7000 - $(this).val().length)
+    });
+
     $(".select_category").on('click', function(){
         $('#mainCatalog').modal('show');
     });
