@@ -27,9 +27,6 @@
             display:none;
         }
         #dt-basic-example > thead > tr:nth-child(1) > th.dt-center.sorting_asc{ width:17px !important;}
-        .redBorder{
-          border: 2px solid red;
-        }
 
     </style>
 @endsection
@@ -178,7 +175,7 @@
 
       <article class="add_advert_block">
         <span data-status_created="{{session('infoAd')}}" id="statusAd"></span>
-        <form action="/ads/store" method="post" id="add_ads_form" enctype="multipart/form-data">
+        <form action="/ads/store" method="post" enctype="multipart/form-data">
           <div class="container">
             <div class="row">
               <div class="col-md-12">
@@ -197,28 +194,27 @@
             </div>
             <div class="row">
               <div class="col-sm-12">
-                <div class="add_advert_block_wrapper" id="add_header">
+                <div class="add_advert_block_wrapper">
+
+
+
                   <h6 class="add_advert_block_wrapper_title">
                     Заголовок
                   </h6>
                   <div class="add_advert_block_input1">
                     <input type="hidden" name="user_id" value="{{$user_id}}">
                     <input type="hidden" name="is_admin_format" value="1">
-                    <input type="text" name="name_ad" maxlength="70" placeholder="Название объявления" required value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->title}} @endif">
-                    <span class="required"></span>
+                    <input type="text" name="name_ad" maxlength="70" placeholder="Название объявления" required value="{{old('name_ad')}}">
+                    <span class="required">*</span>
                     @error('name_ad')
                     <div class="alert errorBlock">{{ $message }}</div>
                     @enderror
                     <p class="number_of_signs"><span>70</span> знаков остается</p>
                   </div>
                   <div class="add_advert_block_input1">
-                    @if(null!=(\Session::get('catsString')))
-                      <input type="text" name="category_ads" placeholder="Выберите категорию" value="{{\Session::get('catsString')}}" class="select_category" required readonly>
-                    @else
-                      <input type="text" name="category_ads" placeholder="Выберите категорию" class="select_category" required readonly>
-                    @endif
+                    <input type="text" name="category_ads" placeholder="Выберите категорию" class="select_category" required readonly>
                     <img src="/img/ipagination_right.svg" alt="">
-                    <span class="required"></span>
+                    <span class="required">*</span>
                     @error('category_id')
                     <div class="alert errorBlock">{{ $message }}</div>
                     @enderror
@@ -251,32 +247,30 @@
               </div>
 
               <div class="filters_block"></div>
-              <div class="filter_deals_block"></div>
 
-              <input type="hidden" id="category_id" name="category_id" required value="@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->category_id}} @endif">
+
+              <input type="hidden" id="category_id" name="category_id" value="{{old('category_id')}}">
               <div class="col-sm-12">
-                <div class="add_advert_block_wrapper" id="add_place">
+                <div class="add_advert_block_wrapper">
                   <h6 class="add_advert_block_wrapper_title">
                     Местоположение
                   </h6>
                   <input type="hidden" name="city"  id="city">
                   <input type="hidden" name="place_id"  id="place_id">
                   <input type="hidden" name="administrative"  id="administrative">
-                  <!--div class="hide_location_radio">
+                  <div class="hide_location_radio">
                     <input type="radio" name="hide_location" value="1" id="hide_location" checked="">
                     <label for="hide_location">Показывать</label>
                     <input type="radio" name="hide_location" value="Не показывать" id="no_hide_location">
                     <label for="no_hide_location">Не показывать</label>
-                  </div-->
+                  </div>
                   <div class="select_location_block">
                     <input type="radio" name="select_addres" value="Полыний адрес" id="all_adress" checked="">
                     <label for="all_adress">Полный адрес</label>
                     <input type="radio" name="select_addres" value="Только Postcode" id="postcode">
                     <label for="postcode">Только Postcode</label>
                     <input type="radio" name="select_addres" value="Выбрать местоположение" id="select_adress">
-                    <label for="select_adress">Выбрать место</label>
-                    <input type="radio" name="select_addres" value="Весь UK" id="all_uk">
-                    <label for="all_uk">Весь UK</label>
+                    <label for="select_adress">Выбрать местоположение</label>
                     <input type="radio" name="select_addres" value="Вне UK" id="out_uk">
                     <label for="out_uk">Вне UK</label>
                   </div>
@@ -484,9 +478,9 @@
               <p>Email для сообщений (скрыт)</p>
               <input type="email" name="email" placeholder="Email" required value="{{old('email')}}">
               @error('email')
-                      <div class="alert errorBlock">{{ $message }}</div>
+                <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-                      </div-->
+                </div-->
               <!--div class="contact_info_wrapper contact_info_wrapper2">
               <div class="hide_phone_radio">
                 <input type="radio" name="hide_phone" value="Показывать" id="hide_phone1" checked>
@@ -496,9 +490,9 @@
               </div>
               <input type="tel" id="telphone2" name="phone" required value="{{old('phone')}}">
               @error('email')
-                      <div class="alert errorBlock">{{ $message }}</div>
+                <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-                      </div-->
+                </div-->
               <!--div class="contact_info_wrapper">
               <div class="hide_phone_radio">
                 <input type="radio" name="hide_name" value="1" id="hide_name" checked>
@@ -508,336 +502,271 @@
               </div>
               <input type="text" name="name" placeholder="Имя" required value="{{old('name')}}">
               @error('name')
-                      <div class="alert errorBlock">{{ $message }}</div>
+                <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-                      </div-->
+                </div-->
                 <div class="contact_info_wrapper">
-                  <div class="input_price_icon">£</div><input type="number" step="1" name="price" placeholder="Цена (не обязательно)" value="@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->price}} @endif">
+                  <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (не обезательно)" value="{{old('price')}}">
                 </div>
               </div>
             </div>
-            @if(null!=(\Session::get('ad')))
-              <div class="col-sm-12">
-                <div class="add_advert_block_wrapper">
-                  <h6 class="add_advert_block_wrapper_title">
-                    Фотографии
-                  </h6>
-                  <?
-                  $realCount=count(\Session::get('ad')->pictures);
-                  ?>
+            <div class="col-sm-12">
+              <div class="add_advert_block_wrapper">
+                <h6 class="add_advert_block_wrapper_title">
+                  Фотографии
+                </h6>
+                <div class="add_foto_file_wrapper">
+                  <div class="add_foto_file_item">
 
-                  <div class="add_foto_file_wrapper">
-                    @foreach(\Session::get('ad')->pictures as $realPic)
-                      <div class="add_foto_file_item">
+                    <div class="upload-file-container-text">
 
-                        <div class="upload-file-container-text">
-
-                          <label style="position: relative;height: 114px;width: 114px;" for="imgInput" class="add_foto_file_item_load">
-                            <img style="object-fit: cover;height: 100%;width: 100%;" src="/storage/messages/{{$realPic->photo}}" alt="">
+                      <label for="imgInput" class="add_foto_file_item_load">
+                        <img src="/img/photo-camera-icon.svg" alt="">
+                        <span>Добавить фото</span>
+                      </label>
+                      <div class="add_foto_file_img_wrapper">
+                        <img  src="#" alt="" class="add_foto_file_img" />
+                        <div class="add_foto_file_block_hover">
+                          <label for="imgInput" class="add_foto_file_item_load2">
+                            <img src="/img/refresh_icon.svg" alt="">
                           </label>
-                          <div class="add_foto_file_img_wrapper">
-                            <img  src="#" alt="" class="add_foto_file_img" />
-                            <div class="add_foto_file_block_hover">
-                              <label for="imgInput" class="add_foto_file_item_load2">
-                                <img src="/img/refresh_icon.svg" alt="">
-                              </label>
-                              <div class="add_foto_file_delete">
-                                <img src="/img/delete-icon.svg" alt="">
-                              </div>
-                            </div>
-                          </div>
-                          <input type="file" name="files[]" class="photo" id="imgInput"/>
-                        </div>
-                      </div>
-                    @endforeach
-                    @for($i=1;$i<=10-$realCount;$i++)
-                      <div class="add_foto_file_item">
-                        <div class="upload-file-container-text">
-
-                          <label for="imgInput2" class="add_foto_file_item_load">
-                            <img src="/img/photo-camera-icon.svg" alt="">
-                            <span>Добавить фото</span>
-                          </label>
-                          <div class="add_foto_file_img_wrapper">
-                            <img  src="#" alt="" class="add_foto_file_img" />
-                            <div class="add_foto_file_block_hover">
-                              <label for="imgInput2" class="add_foto_file_item_load2">
-                                <img src="/img/refresh_icon.svg" alt="">
-                              </label>
-                              <div class="add_foto_file_delete">
-                                <img src="/img/delete-icon.svg" alt="">
-                              </div>
-                            </div>
-                          </div>
-                          <input type="file" name="files[]" class="photo" id="imgInput2"/>
-                        </div>
-                      </div>
-                    @endfor
-
-                  </div>
-                </div>
-                <a href="/static/help#photo" class="add_advert_rolls_foto">Привила добавления фото</a>
-              </div>
-
-            @else
-              <div class="col-sm-12">
-                <div class="add_advert_block_wrapper">
-                  <h6 class="add_advert_block_wrapper_title">
-                    Фотографии
-                  </h6>
-                  <div class="add_foto_file_wrapper">
-                    <div class="add_foto_file_item">
-
-                      <div class="upload-file-container-text">
-
-                        <label for="imgInput" class="add_foto_file_item_load">
-                          <img src="/img/photo-camera-icon.svg" alt="">
-                          <span>Добавить фото</span>
-                        </label>
-                        <div class="add_foto_file_img_wrapper">
-                          <img  src="#" alt="" class="add_foto_file_img" />
-                          <div class="add_foto_file_block_hover">
-                            <label for="imgInput" class="add_foto_file_item_load2">
-                              <img src="/img/refresh_icon.svg" alt="">
-                            </label>
-                            <div class="add_foto_file_delete">
-                              <img src="/img/delete-icon.svg" alt="">
-                            </div>
+                          <div class="add_foto_file_delete">
+                            <img src="/img/delete-icon.svg" alt="">
                           </div>
                         </div>
-                        <input type="file" name="files[]" class="photo" id="imgInput"/>
                       </div>
-                    </div>
-                    <div class="add_foto_file_item">
-                      <div class="upload-file-container-text">
-
-                        <label for="imgInput2" class="add_foto_file_item_load">
-                          <img src="/img/photo-camera-icon.svg" alt="">
-                          <span>Добавить фото</span>
-                        </label>
-                        <div class="add_foto_file_img_wrapper">
-                          <img  src="#" alt="" class="add_foto_file_img" />
-                          <div class="add_foto_file_block_hover">
-                            <label for="imgInput2" class="add_foto_file_item_load2">
-                              <img src="/img/refresh_icon.svg" alt="">
-                            </label>
-                            <div class="add_foto_file_delete">
-                              <img src="/img/delete-icon.svg" alt="">
-                            </div>
-                          </div>
-                        </div>
-                        <input type="file" name="files[]" class="photo" id="imgInput2"/>
-                      </div>
-                    </div>
-                    <div class="add_foto_file_item">
-                      <div class="upload-file-container-text">
-
-                        <label for="imgInput3" class="add_foto_file_item_load">
-                          <img src="/img/photo-camera-icon.svg" alt="">
-                          <span>Добавить фото</span>
-                        </label>
-                        <div class="add_foto_file_img_wrapper">
-                          <img  src="#" alt="" class="add_foto_file_img" />
-                          <div class="add_foto_file_block_hover">
-                            <label for="imgInput3" class="add_foto_file_item_load2">
-                              <img src="/img/refresh_icon.svg" alt="">
-                            </label>
-                            <div class="add_foto_file_delete">
-                              <img src="/img/delete-icon.svg" alt="">
-                            </div>
-                          </div>
-                        </div>
-                        <input type="file" name="files[]" class="photo" id="imgInput3"/>
-                      </div>
-                    </div>
-                    <div class="add_foto_file_item">
-                      <div class="upload-file-container-text">
-                        <label for="imgInput4" class="add_foto_file_item_load">
-                          <img src="/img/photo-camera-icon.svg" alt="">
-                          <span>Добавить фото</span>
-                        </label>
-                        <div class="add_foto_file_img_wrapper">
-                          <img  src="#" alt="" class="add_foto_file_img" />
-                          <div class="add_foto_file_block_hover">
-                            <label for="imgInput4" class="add_foto_file_item_load2">
-                              <img src="/img/refresh_icon.svg" alt="">
-                            </label>
-                            <div class="add_foto_file_delete">
-                              <img src="/img/delete-icon.svg" alt="">
-                            </div>
-                          </div>
-                        </div>
-                        <input type="file" name="files[]" class="photo" id="imgInput4"/>
-                      </div>
-                    </div>
-                    <div class="add_foto_file_item">
-                      <div class="upload-file-container-text">
-                        <label for="imgInput5" class="add_foto_file_item_load">
-                          <img src="/img/photo-camera-icon.svg" alt="">
-                          <span>Добавить фото</span>
-                        </label>
-                        <div class="add_foto_file_img_wrapper">
-                          <img  src="#" alt="" class="add_foto_file_img" />
-                          <div class="add_foto_file_block_hover">
-                            <label for="imgInput5" class="add_foto_file_item_load2">
-                              <img src="/img/refresh_icon.svg" alt="">
-                            </label>
-                            <div class="add_foto_file_delete">
-                              <img src="/img/delete-icon.svg" alt="">
-                            </div>
-                          </div>
-                        </div>
-                        <input type="file" name="files[]" class="photo" id="imgInput5"/>
-                      </div>
-                    </div>
-                    <div class="add_foto_file_item">
-                      <div class="upload-file-container-text">
-                        <label for="imgInput6" class="add_foto_file_item_load">
-                          <img src="/img/photo-camera-icon.svg" alt="">
-                          <span>Добавить фото</span>
-                        </label>
-                        <div class="add_foto_file_img_wrapper">
-                          <img  src="#" alt="" class="add_foto_file_img" />
-                          <div class="add_foto_file_block_hover">
-                            <label for="imgInput6" class="add_foto_file_item_load2">
-                              <img src="img/refresh_icon.svg" alt="">
-                            </label>
-                            <div class="add_foto_file_delete">
-                              <img src="/img/delete-icon.svg" alt="">
-                            </div>
-                          </div>
-                        </div>
-                        <input type="file" name="files[]" class="photo" id="imgInput6"/>
-                      </div>
-                    </div>
-                    <div class="add_foto_file_item">
-                      <div class="upload-file-container-text">
-                        <label for="imgInput7" class="add_foto_file_item_load">
-                          <img src="/img/photo-camera-icon.svg" alt="">
-                          <span>Добавить фото</span>
-                        </label>
-                        <div class="add_foto_file_img_wrapper">
-                          <img  src="#" alt="" class="add_foto_file_img" />
-                          <div class="add_foto_file_block_hover">
-                            <label for="imgInput2" class="add_foto_file_item_load2">
-                              <img src="/img/refresh_icon.svg" alt="">
-                            </label>
-                            <div class="add_foto_file_delete">
-                              <img src="/img/delete-icon.svg" alt="">
-                            </div>
-                          </div>
-                        </div>
-                        <input type="file" name="files[]" class="photo" id="imgInput7"/>
-                      </div>
-                    </div>
-                    <div class="add_foto_file_item">
-                      <div class="upload-file-container-text">
-                        <label for="imgInput8" class="add_foto_file_item_load">
-                          <img src="/img/photo-camera-icon.svg" alt="">
-                          <span>Добавить фото</span>
-                        </label>
-                        <div class="add_foto_file_img_wrapper">
-                          <img  src="#" alt="" class="add_foto_file_img" />
-                          <div class="add_foto_file_block_hover">
-                            <label for="imgInput8" class="add_foto_file_item_load2">
-                              <img src="/img/refresh_icon.svg" alt="">
-                            </label>
-                            <div class="add_foto_file_delete">
-                              <img src="/img/delete-icon.svg" alt="">
-                            </div>
-                          </div>
-                        </div>
-                        <input type="file" name="files[]" class="photo" id="imgInput8"/>
-                      </div>
-                    </div>
-                    <div class="add_foto_file_item">
-                      <div class="upload-file-container-text">
-
-                        <label for="imgInput9" class="add_foto_file_item_load">
-                          <img src="/img/photo-camera-icon.svg" alt="">
-                          <span>Добавить фото</span>
-                        </label>
-                        <div class="add_foto_file_img_wrapper">
-                          <img  src="#" alt="" class="add_foto_file_img" />
-                          <div class="add_foto_file_block_hover">
-                            <label for="imgInput9" class="add_foto_file_item_load2">
-                              <img src="/img/refresh_icon.svg" alt="">
-                            </label>
-                            <div class="add_foto_file_delete">
-                              <img src="/img/delete-icon.svg" alt="">
-                            </div>
-                          </div>
-                        </div>
-                        <input type="file" name="files[]" class="photo" id="imgInput9"/>
-                      </div>
-                    </div>
-                    <div class="add_foto_file_item">
-                      <div class="upload-file-container-text">
-
-                        <label for="imgInput10" class="add_foto_file_item_load">
-                          <img src="/img/photo-camera-icon.svg" alt="">
-                          <span>Добавить фото</span>
-                        </label>
-                        <div class="add_foto_file_img_wrapper">
-                          <img  src="#" alt="" class="add_foto_file_img" />
-                          <div class="add_foto_file_block_hover">
-                            <label for="imgInput10" class="add_foto_file_item_load2">
-                              <img src="/img/refresh_icon.svg" alt="">
-                            </label>
-                            <div class="add_foto_file_delete">
-                              <img src="/img/delete-icon.svg" alt="">
-                            </div>
-                          </div>
-                        </div>
-                        <input type="file" name="files[]" class="photo" id="imgInput10"/>
-                      </div>
+                      <input type="file" name="files[]" class="photo" id="imgInput"/>
                     </div>
                   </div>
-                  <a href="/static/help#photo" class="add_advert_rolls_foto">Привила добавления фото</a>
-                  @error('files')
-                  <div class="alert errorBlock">{{ $message }}</div>
-                  @enderror
+                  <div class="add_foto_file_item">
+                    <div class="upload-file-container-text">
+
+                      <label for="imgInput2" class="add_foto_file_item_load">
+                        <img src="/img/photo-camera-icon.svg" alt="">
+                        <span>Добавить фото</span>
+                      </label>
+                      <div class="add_foto_file_img_wrapper">
+                        <img  src="#" alt="" class="add_foto_file_img" />
+                        <div class="add_foto_file_block_hover">
+                          <label for="imgInput2" class="add_foto_file_item_load2">
+                            <img src="/img/refresh_icon.svg" alt="">
+                          </label>
+                          <div class="add_foto_file_delete">
+                            <img src="/img/delete-icon.svg" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <input type="file" name="files[]" class="photo" id="imgInput2"/>
+                    </div>
+                  </div>
+                  <div class="add_foto_file_item">
+                    <div class="upload-file-container-text">
+
+                      <label for="imgInput3" class="add_foto_file_item_load">
+                        <img src="/img/photo-camera-icon.svg" alt="">
+                        <span>Добавить фото</span>
+                      </label>
+                      <div class="add_foto_file_img_wrapper">
+                        <img  src="#" alt="" class="add_foto_file_img" />
+                        <div class="add_foto_file_block_hover">
+                          <label for="imgInput3" class="add_foto_file_item_load2">
+                            <img src="/img/refresh_icon.svg" alt="">
+                          </label>
+                          <div class="add_foto_file_delete">
+                            <img src="/img/delete-icon.svg" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <input type="file" name="files[]" class="photo" id="imgInput3"/>
+                    </div>
+                  </div>
+                  <div class="add_foto_file_item">
+                    <div class="upload-file-container-text">
+                      <label for="imgInput4" class="add_foto_file_item_load">
+                        <img src="/img/photo-camera-icon.svg" alt="">
+                        <span>Добавить фото</span>
+                      </label>
+                      <div class="add_foto_file_img_wrapper">
+                        <img  src="#" alt="" class="add_foto_file_img" />
+                        <div class="add_foto_file_block_hover">
+                          <label for="imgInput4" class="add_foto_file_item_load2">
+                            <img src="/img/refresh_icon.svg" alt="">
+                          </label>
+                          <div class="add_foto_file_delete">
+                            <img src="/img/delete-icon.svg" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <input type="file" name="files[]" class="photo" id="imgInput4"/>
+                    </div>
+                  </div>
+                  <div class="add_foto_file_item">
+                    <div class="upload-file-container-text">
+                      <label for="imgInput5" class="add_foto_file_item_load">
+                        <img src="/img/photo-camera-icon.svg" alt="">
+                        <span>Добавить фото</span>
+                      </label>
+                      <div class="add_foto_file_img_wrapper">
+                        <img  src="#" alt="" class="add_foto_file_img" />
+                        <div class="add_foto_file_block_hover">
+                          <label for="imgInput5" class="add_foto_file_item_load2">
+                            <img src="/img/refresh_icon.svg" alt="">
+                          </label>
+                          <div class="add_foto_file_delete">
+                            <img src="/img/delete-icon.svg" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <input type="file" name="files[]" class="photo" id="imgInput5"/>
+                    </div>
+                  </div>
+                  <div class="add_foto_file_item">
+                    <div class="upload-file-container-text">
+                      <label for="imgInput6" class="add_foto_file_item_load">
+                        <img src="/img/photo-camera-icon.svg" alt="">
+                        <span>Добавить фото</span>
+                      </label>
+                      <div class="add_foto_file_img_wrapper">
+                        <img  src="#" alt="" class="add_foto_file_img" />
+                        <div class="add_foto_file_block_hover">
+                          <label for="imgInput6" class="add_foto_file_item_load2">
+                            <img src="img/refresh_icon.svg" alt="">
+                          </label>
+                          <div class="add_foto_file_delete">
+                            <img src="/img/delete-icon.svg" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <input type="file" name="files[]" class="photo" id="imgInput6"/>
+                    </div>
+                  </div>
+                  <div class="add_foto_file_item">
+                    <div class="upload-file-container-text">
+                      <label for="imgInput7" class="add_foto_file_item_load">
+                        <img src="/img/photo-camera-icon.svg" alt="">
+                        <span>Добавить фото</span>
+                      </label>
+                      <div class="add_foto_file_img_wrapper">
+                        <img  src="#" alt="" class="add_foto_file_img" />
+                        <div class="add_foto_file_block_hover">
+                          <label for="imgInput2" class="add_foto_file_item_load2">
+                            <img src="/img/refresh_icon.svg" alt="">
+                          </label>
+                          <div class="add_foto_file_delete">
+                            <img src="/img/delete-icon.svg" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <input type="file" name="files[]" class="photo" id="imgInput7"/>
+                    </div>
+                  </div>
+                  <div class="add_foto_file_item">
+                    <div class="upload-file-container-text">
+                      <label for="imgInput8" class="add_foto_file_item_load">
+                        <img src="/img/photo-camera-icon.svg" alt="">
+                        <span>Добавить фото</span>
+                      </label>
+                      <div class="add_foto_file_img_wrapper">
+                        <img  src="#" alt="" class="add_foto_file_img" />
+                        <div class="add_foto_file_block_hover">
+                          <label for="imgInput8" class="add_foto_file_item_load2">
+                            <img src="/img/refresh_icon.svg" alt="">
+                          </label>
+                          <div class="add_foto_file_delete">
+                            <img src="/img/delete-icon.svg" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <input type="file" name="files[]" class="photo" id="imgInput8"/>
+                    </div>
+                  </div>
+                  <div class="add_foto_file_item">
+                    <div class="upload-file-container-text">
+
+                      <label for="imgInput9" class="add_foto_file_item_load">
+                        <img src="/img/photo-camera-icon.svg" alt="">
+                        <span>Добавить фото</span>
+                      </label>
+                      <div class="add_foto_file_img_wrapper">
+                        <img  src="#" alt="" class="add_foto_file_img" />
+                        <div class="add_foto_file_block_hover">
+                          <label for="imgInput9" class="add_foto_file_item_load2">
+                            <img src="/img/refresh_icon.svg" alt="">
+                          </label>
+                          <div class="add_foto_file_delete">
+                            <img src="/img/delete-icon.svg" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <input type="file" name="files[]" class="photo" id="imgInput9"/>
+                    </div>
+                  </div>
+                  <div class="add_foto_file_item">
+                    <div class="upload-file-container-text">
+
+                      <label for="imgInput10" class="add_foto_file_item_load">
+                        <img src="/img/photo-camera-icon.svg" alt="">
+                        <span>Добавить фото</span>
+                      </label>
+                      <div class="add_foto_file_img_wrapper">
+                        <img  src="#" alt="" class="add_foto_file_img" />
+                        <div class="add_foto_file_block_hover">
+                          <label for="imgInput10" class="add_foto_file_item_load2">
+                            <img src="/img/refresh_icon.svg" alt="">
+                          </label>
+                          <div class="add_foto_file_delete">
+                            <img src="/img/delete-icon.svg" alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <input type="file" name="files[]" class="photo" id="imgInput10"/>
+                    </div>
+                  </div>
                 </div>
+                <a href="#" class="add_advert_rolls_foto">Привила добавления фото</a>
+                @error('files')
+                <div class="alert errorBlock">{{ $message }}</div>
+                @enderror
               </div>
-            @endif
+            </div>
             <div class="col-sm-12">
               <div class="add_advert_block_wrapper">
                 <h6 class="add_advert_block_wrapper_title">
                   Длительность
                 </h6>
                 <div class="add_advert_block_btn_wrapper">
-                  <input type="radio" name="select_time" value="7" id="7day" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==7) checked="" @endif>
+                  <input type="radio" name="select_time" value="7" id="7day" >
                   <label for="7day">7 дней</label>
-                  <input type="radio" name="select_time" value="14" id="14day" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==14) checked="" @endif>
+                  <input type="radio" name="select_time" value="14" id="14day" >
                   <label for="14day">14 дней</label>
-                  <input type="radio" name="select_time" value="30" id="1mon" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==30) checked="" @elseif(null==(\Session::get('ad'))) checked="" @endif>
+                  <input type="radio" name="select_time" value="30" id="1mon" checked="" >
                   <label for="1mon">1 месяц</label>
-                  <input type="radio" name="select_time" value="180" id="6mon" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==180) checked="" @endif>
+                  <input type="radio" name="select_time" value="180" id="6mon" >
                   <label for="6mon">6 месяц</label>
-                  <input type="radio" name="select_time" value="0" id="always" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==0) checked="" @endif>
+                  <input type="radio" name="select_time" value="0" id="always">
                   <label for="always">вечно</label>
                 </div>
               </div>
             </div>
             <div class="col-sm-12">
-              <div class="add_advert_block_wrapper" id="add_description">
+              <div class="add_advert_block_wrapper">
                 <h6 class="add_advert_block_wrapper_title">
                   Описание
                 </h6>
                 <div class="add_advert_desc">
                   <p>Текст объявления: на русском языке. Допустимое использование английского не более 20%(термины, названия).</p>
                   <p class="end">Транслит не допускается.</p>
-                  <textarea name="description" placeholder="Текст объявления" required>@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->message}} @endif</textarea>
+                  <textarea name="description" placeholder="Текст обьявления" required>{{old('description')}}</textarea>
                   @error('description')
                   <div class="alert errorBlock">{{ $message }}</div>
                   @enderror
-                  <p class="number_of_signs_text"><span>70000</span> знаков остается</p>
-                  <button type="submit" name="save" value="1" id="saveAdsButton">Подать обьявление</button>
+                  <button type="submit" id="saveAdsButton">Подать обьявление</button>
+
                 </div>
               </div>
             </div>
           </div>
-        </form>
+      </form>
       </article>
 
 
@@ -1543,7 +1472,6 @@ var new_rubric=$(this).parent().find('.hidden_rubric').val()
           $('.all_user_block').hide();
           $('.outUk').show();
           $('.Places').hide();
-          $('#clntInfoEditZip').hide()
         });
 
         $('#postcode').on('click', function () {
@@ -1551,7 +1479,6 @@ var new_rubric=$(this).parent().find('.hidden_rubric').val()
           $('.outUk').hide();
           $('.Places').hide();
           $('.postcode_block').show();
-          $('#clntInfoEditZip').show()
         });
 
         $('#all_adress').on('click', function () {
@@ -1572,31 +1499,16 @@ var new_rubric=$(this).parent().find('.hidden_rubric').val()
         });
 
         $('#select_adress').on('click', function () {
-          console.log(434)
           $('#clntInfoEditAddr1').removeAttr("required");
           $('#allUsersClntInfoEditZip').removeAttr("required");
           $('#clntInfoEditOutUk').removeAttr("required");
           $('#clntInfoEditAddrOutUk1').removeAttr("required");
           $('#clntInfoEditZip').removeAttr("required");
-          $('#clntInfoEditZip').hide()
+
           $('.cat_name').prop('required',true);
           $('.all_user_block').hide().prop('required',false);
           $('.outUk').hide().prop('required',false);
           $('.Places').show();
-
-        });
-
-        $('#all_uk').on('click', function () {
-          console.log(434)
-          $('#clntInfoEditAddr1').removeAttr("required");
-          $('#allUsersClntInfoEditZip').removeAttr("required");
-          $('#clntInfoEditOutUk').removeAttr("required");
-          $('#clntInfoEditAddrOutUk1').removeAttr("required");
-          $('#clntInfoEditZip').removeAttr("required");
-          $('#clntInfoEditZip').hide()
-          $('.all_user_block').hide().prop('required',false);
-          $('.outUk').hide().prop('required',false);
-          $('.Places').hide();
 
         });
 
@@ -1605,9 +1517,9 @@ var new_rubric=$(this).parent().find('.hidden_rubric').val()
         $(function () {
 
           $(".select2-placeholder-multiple").select2(
-                  {
-                    placeholder: "Выберите дополнительную группу для общения"
-                  });
+            {
+              placeholder: "Выберите дополнительную группу для общения"
+            });
         });
 
       });
@@ -1859,69 +1771,6 @@ var new_rubric=$(this).parent().find('.hidden_rubric').val()
 
 
       })
-
-
-
-
-      $(document).ready(function() {
-        $('#allUsersClntInfoEditZip, #clntInfoEditZip, #clntInfoEditAddr1, #autocomplete').bind('keyup blur', function() {
-          //alert('In here with' + $(this).val())
-          //var regex = new RegExp("/^[a-z ]+$/i");
-          if($(this).val().match(/[^A-Za-z ]/g)){
-            alert('Пожалуйста используйте только латинские символы.');
-            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''))
-            return false;
-          }
-        });
-      });
-
-
-      $('input[name="name_ad"]').change(function(){
-        if($('input[name="category_id"]').val()){
-          $('#add_header').removeClass('redBorder')
-        }
-      })
-
-
-
-      $('textarea[name="description"]').on('input',function(e){
-        $('#add_description').removeClass('redBorder')
-      });
-
-      $( "#saveAdsButton, #previewAdsButton" ).click(function( event ) {
-        console.log(987)
-        if (!$('input[name="name_ad"]').is(':valid') || !$('input[name="category_id"]').val()) {
-          console.log(777)
-          console.log($('#category_id').val())
-          $('#add_header').addClass('redBorder')
-          $(window).scrollTop($('#add_header').offset().top);
-        }
-        else{
-          $('#add_header').removeClass('redBorder')
-        }
-
-
-        if (($('#clntInfoEditAddr1').is(':valid') && $('#all_adress').is(':checked')) || ($('#clntInfoEditZip').is(':valid')&& $('#postcode').is(':checked')) || ($('#city').is(':valid') && $('#select_adress').is(':checked')) || ($('#autocomplete').is(':valid') && $('#out_uk').is(':checked')) || $('#all_uk').is(':checked')) {
-
-          $('#add_place').removeClass('redBorder')
-        }
-        else{
-          $('#add_place').addClass('redBorder')
-          $(window).scrollTop($('#add_place').offset().top);
-        }
-
-
-        if (!$('textarea[name="description"]').is(':valid') ) {
-          console.log(779)
-          console.log($('#category_id').val())
-          $('#add_description').addClass('redBorder')
-          $(window).scrollTop($('#add_description').offset().top);
-        }
-        else{
-          $('#add_description').removeClass('redBorder')
-        }
-
-      });
     </script>
 
 @endsection
