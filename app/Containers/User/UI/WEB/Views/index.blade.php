@@ -473,7 +473,7 @@ console.log(777,form[0].checkValidity())
             complete: function () {
                 $('.customer_create_close').click();
                 $('#customer_id').val('')
-                //reloadData();
+                reloadData();
 
             },
             success: function (data) {
