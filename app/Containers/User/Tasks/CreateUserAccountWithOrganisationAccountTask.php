@@ -30,7 +30,7 @@ class CreateUserAccountWithOrganisationAccountTask
   {
     DB::transaction(function () use ($data) {
         $this->user = $this->userService->createUser($data);
-
+        \Log::info('Task from admin=>',array($this->user));
        $this->service->createOrganisationAccount($data, $this->user->id);
 
 

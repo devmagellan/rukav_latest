@@ -11,6 +11,7 @@ class OrganisationAccountService
 {
   public function createOrganisationAccount($data, $userId)
   {
+      try {
       if(!is_array($data)) {
           $data=$data->toArray();
       }
@@ -36,5 +37,8 @@ class OrganisationAccountService
       'show_work_hours'=> ($data['show_work_hours']) ? $data['show_work_hours'] : null,
 
     ]);
+      } catch (\Throwable $exception) {
+          \Log::info('exception',array($exception));
+      }
   }
 }

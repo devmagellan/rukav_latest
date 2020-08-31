@@ -3,6 +3,7 @@
 namespace App\Containers\User\Services;
 
 use App\Containers\User\Models\User;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Laravolt\Avatar\Avatar;
 
@@ -11,7 +12,7 @@ class UserService
   public function createUser($data): User
   {
       $nameAvatar=time() . '.jpg' ;
-
+      try {
      // \Avatar::create($data->firstName.' '.$data->lastName)->save('avatars'.$nameAvatar, 100);
       return User::create([
       'name' => $data->firstName,
@@ -25,8 +26,11 @@ class UserService
       'active'=>1,
       'is_client'=>1,
       'confirmed'=> ($data->admin_side==1) ? 0 : 1,
-        'is_confirmed_phone'=> ($data->admin_side==1 && $data->phone) ? 0 : 1
+      'is_confirmed_phone'=> ($data->admin_side==1 && $data->phone) ? 0 : 1
     ]);
+      } catch (\Throwable $exception) {
+          \Log::info('exception',array($exception));
+      }
   }
 
     public function updateUserInService($data)
