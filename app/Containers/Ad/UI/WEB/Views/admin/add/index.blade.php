@@ -411,7 +411,7 @@
                       <div class="block_main_categories_wrapper1" style="">
                         <div class="block_main_categories cat_block_1" style="">
                           @foreach ($locations as $key=>$location)
-                            @if($location->parent_id==0)
+                            @if($location->parent_id==0 && !empty($location->name) && $location->name!=='Wales' && $location->name!=='Nothern Irland')
                               <a style="cursor:pointer">
                                 <div class="cat_block" style="border-bottom:1px solid #000">
                                   <input type="hidden" value="{{$location->id}}">
