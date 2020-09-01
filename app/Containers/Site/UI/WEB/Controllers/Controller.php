@@ -13309,9 +13309,10 @@ class Controller extends WebController
         ],
 
         /*1886*/
+		[
         'name'      => 'Bedlington, Northumberland',
         'parent_id' => 1879,
-
+		],
            /*1887*/
            [
                'name' => 'Belford, Northumberland',
@@ -31873,7 +31874,7 @@ class Controller extends WebController
 
 
 
-    public function makeCategories(GetAllAdsDataTableRequest $request)
+    public function makeCategories(GetAllSitesRequest $request)
     {
 
         $final = [];

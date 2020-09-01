@@ -12908,7 +12908,7 @@ class Controller extends WebController
         $message=[
             'active'=>$request->input('active'),
             'user_id'=>\Auth::user()->id,
-            'message_id'=>$request->input('id'),
+            'message_id'=>$request->input('id'), 
         ];
         if(null!=$result ){
             \App\Containers\Ad\Models\Wishlist::where('message_id',$request->input('id'))->where('user_id',\Auth::user()->id)->update($message);

@@ -78,7 +78,7 @@ class Controller extends WebController
       \Illuminate\Pagination\Paginator::currentPageResolver(function () use ($currentPage) {
           return $currentPage;
       });
-      $q= \App\Containers\Ad\Models\Ad::where('category_id',$id)->with('pictures')->where(function ($query) use($request) {
+      $q= \App\Containers\Ad\Models\Ad::where('category_id',$id)->with('pictures') ->where(function ($query) use($request) {
           $query->where('message', 'like', '%' . $request->input('search_string') . '%')
               ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
       })
@@ -88,7 +88,7 @@ class Controller extends WebController
           })
 
 
-        ->where('active',1)->where('is_tmp',0)
+        ->where('active',1) ->where('is_tmp',0) 
         ->with('validFilter')
           ->when(null!=($request->input('filterDeals')) && $request->input('filterDeals')!=1 , function($q) use($request) {
               return $q->leftJoin('add_filter_deals', function($join) use($request) {
@@ -153,11 +153,11 @@ class Controller extends WebController
           $query->where('price','>=',$from)
               ->where('price','<=',$to);
       }
-  })->where('status',1)
+  }) /*->where('status',1) */
           /*->where('city',$request->input('city'))->where('administrative',$request->input('administrative'))*/
 
           ->paginate(5);
-    //$products=\App\Containers\Ad\Models\Ad::where('category_id',$id)->with('pictures')->paginate(4);
+   //$products=\App\Containers\Ad\Models\Ad::where('category_id',$id)->with('pictures')->paginate(4);
       return view('category::catalog',  compact('products','categoriesOnlyRoot','pricesLimits','data'));
    // return $link . ' ' . $id;
   }
