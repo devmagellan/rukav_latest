@@ -37,7 +37,7 @@ $router->post('/add/wishList', [
 
 
 
-$router->get('/make_categories', [
+$router->get('/_make_categories', [
     'as' => 'make_categories',
     'uses'  => 'Controller@makeCategories',
 

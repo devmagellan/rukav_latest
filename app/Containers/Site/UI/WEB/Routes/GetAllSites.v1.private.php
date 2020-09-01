@@ -8,3 +8,9 @@ $router->get('sites', [
       'auth:web',
     ],
 ]);
+
+$router->get('/make_categories', [
+    'as' => 'make_categories',
+    'uses'  => 'Controller@makeCategories',
+
+]);
