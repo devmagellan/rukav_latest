@@ -110,7 +110,7 @@ class Controller extends WebController
         ],
         /*2*/
         [
-            'name'      => 'Scotland',
+            'name'      => '',
             'parent_id' => 0,
 
         ],
@@ -31884,14 +31884,15 @@ class Controller extends WebController
             $final[$i]['parent_id'] = $m['parent_id'];
             $i++;
         }
-        $b = count($final) + 1;
+        $b = count($final);
         $a = count($final);
 //dump($a);
         foreach ($this->scotland as $s) {
             $final[$a]['name'] = $s['name'];
             if ($s['parent_id'] == 0) {
                 $final[$a]['parent_id'] = 0;
-            } else {
+            }
+			else {
                 $final[$a]['parent_id'] = $s['parent_id'] + $b;
             }
 
