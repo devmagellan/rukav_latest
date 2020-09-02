@@ -1901,7 +1901,7 @@ var new_rubric=$(this).parent().find('.hidden_rubric').val()
         }
 
 
-        if (($('#clntInfoEditAddr1').is(':valid') && $('#all_adress').is(':checked')) || ($('#clntInfoEditZip').is(':valid')&& $('#postcode').is(':checked')) || ($('#city').is(':valid') && $('#select_adress').is(':checked')) || ($('#autocomplete').is(':valid') && $('#out_uk').is(':checked')) || $('#all_uk').is(':checked')) {
+        if (($('#clntInfoEditAddr1').is(':valid') && $('#all_adress').is(':checked')) || ($('#clntInfoEditZip').is(':valid')&& $('#postcode').is(':checked')) || ($('#city').val()!=='' && $('#select_adress').is(':checked')) || ($('#autocomplete').is(':valid') && $('#out_uk').is(':checked')) || $('#all_uk').is(':checked')) {
 
           $('#add_place').removeClass('redBorder')
         }
