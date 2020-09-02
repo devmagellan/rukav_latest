@@ -1099,6 +1099,7 @@
         $('#clntInfoEditZip').removeAttr("required");
         $('#clntInfoEditZip').hide()
         $('.cat_name').prop('required',true);
+          //$('#city').prop('required',true);
         $('.all_user_block').hide().prop('required',false);
         $('.outUk').hide().prop('required',false);
         $('.Places').show();
@@ -1394,6 +1395,11 @@ $('.cat_name').click(function(){
           return false;
         }
       });
+
+     $('#add_ads_form').validate({
+       ignore: [],
+       // any other options and/or rules
+     });
     });
 
 
@@ -1422,11 +1428,13 @@ $('.cat_name').click(function(){
       }
 
 
-      if (($('#clntInfoEditAddr1').is(':valid') && $('#all_adress').is(':checked')) || ($('#clntInfoEditZip').is(':valid')&& $('#postcode').is(':checked')) || ($('#city').is(':valid') && $('#select_adress').is(':checked')) || ($('#autocomplete').is(':valid') && $('#out_uk').is(':checked')) || $('#all_uk').is(':checked')) {
+      if (($('#clntInfoEditAddr1').is(':valid') && $('#all_adress').is(':checked')) || ($('#clntInfoEditZip').is(':valid')&& $('#postcode').is(':checked')) || ($('#city').val()!=='' && $('#select_adress').is(':checked')) || ($('#autocomplete').is(':valid') && $('#out_uk').is(':checked')) || $('#all_uk').is(':checked')) {
 
         $('#add_place').removeClass('redBorder')
       }
       else{
+
+        console.log(765,$('#city').val())
         $('#add_place').addClass('redBorder')
         $(window).scrollTop($('#add_place').offset().top);
       }
