@@ -12963,7 +12963,7 @@ class Controller extends WebController
             $data['locations']=\App\Containers\Ad\Models\BritainRegion::where('parent_id',$cat->parent_id)->get();
         }else{
 
-        $data['locations']=\App\Containers\Ad\Models\BritainRegion::whereIn('name',['England','Scotland','Wheles','Nothern Irland'])->get();}
+        $data['locations']=\App\Containers\Ad\Models\BritainRegion::whereIn('name',['England','Scotland','Wales','Nothern Irland'])->get();}
         $data['non_arrow']=$request->input('non_arrow');
         return view('ad::gumtree.table', $data);
     }
