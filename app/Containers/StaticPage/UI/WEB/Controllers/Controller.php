@@ -152,6 +152,12 @@ class Controller extends WebController
     public function postSave(GetAllStaticPagesRequest $request){
         //var_dump($request->input());
         $position = \App\Containers\StaticPage\Models\StaticPage::orderBy('position','desc')->first();
+        if($request->input('staticpage_id') && $request->input('staticpage_id')!=0){
+            $position= \App\Containers\StaticPage\Models\StaticPage::where('id',$request->input('staticpage_id'))->first()->position;
+        }
+        else{
+            $position=($position) ? $position->position+1 : 1;
+        }
 
         $companySlider['values']=[
             'link'=>$request->input('staticpage_link'),
@@ -159,7 +165,7 @@ class Controller extends WebController
             'content'=>$request->input('staticpage_content'),
             'active'=>($request->input('active')=='true') ? 1 : 0,
             'editor'=>\Auth::user()->id,
-        'position'=>($position) ? $position->position+1 : 1];
+        'position'=>$position];
         $entityClass=\App\Containers\StaticPage\Models\StaticPage::class;
         $companySlider['attributes']['id']=($request->input('staticpage_id')&& $request->input('staticpage_id')!=0) ? $request->input('staticpage_id') : null;
         return call_user_func("{$entityClass}::query")->updateOrCreate($companySlider['attributes'], $companySlider['values']);
