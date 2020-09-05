@@ -35,6 +35,8 @@
     "ext-pdo": "*",
     "ext-tokenizer": "*",
     "awobaz/compoships": "^2.0",
+    "deployer/deployer": "^6.8",
+    "deployer/recipes": "^6.2",
     "doctrine/dbal": "2.5.*",
     "fideloper/proxy": "^4.2",
     "fruitcake/laravel-cors": "^1.0",
