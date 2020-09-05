@@ -2,6 +2,7 @@
 
 namespace App\Containers\User\UI\WEB\Controllers;
 
+use App\Containers\User\Jobs\ExpiredAdsEmailVerification;
 use App\Containers\User\UI\WEB\Requests\RegisterUserRequest;
 use App\Containers\User\UI\WEB\Requests\ChangeFromSimpleUserRequest;
 use App\Ship\Parents\Controllers\WebController;
@@ -26,6 +27,12 @@ class Controller extends WebController
     {
         $this->service = $service;
     }
+
+    public function notify(GetAllUsersRequest $request){
+        $user=\App\Containers\User\Models\User::where('id',1)->first();
+        dispatch(new ExpiredAdsEmailVerification($user))->onQueue('queue_name');
+    }
+
   /**
    * @return  \Illuminate\Contracts\View\Factory|\Illuminate\View\View
    */

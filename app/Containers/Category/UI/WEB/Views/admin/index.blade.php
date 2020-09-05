@@ -285,14 +285,7 @@
                         </div>
                       </div>
                   </div>
-                    <div class="col-md-5">
-                        <div class="input_fields_wrap_deals">
-                            <button style="width:150px;" class="add_field_button_deals">Add deals type filter</button>
-                            <div class="folder_deals">
 
-                            </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -305,6 +298,42 @@
           </div>
         </div>
       </div>
+
+        <!-- Modal center Large -->
+        <div class="modal fade default-example-modal-lg-center-filter-second"  role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Привязка фильтров к категориям</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="needs-validation" id="filter_groups" method="post" action="/filters/add" novalidate onsubmit="theSubmitFunctionFilters(); return false;">
+
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="input_fields_wrap_deals">
+                                            <button style="width:150px;" class="add_field_button_deals">Add deals type filter</button>
+                                            <div class="folder_deals">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="filters_groups_close btn btn-secondary waves-effect waves-themed" data-dismiss="modal">Закрыть</button>
+                                <button type="submit" class="filters_group_create btn btn-primary waves-effect waves-themed" >Сохранить</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
     <!-- Modal center Large -->
     <div class="modal fade default-example-modal-right-lg-slider"  role="dialog" aria-hidden="true">
@@ -1289,6 +1318,45 @@
             $('.default-example-modal-lg-center-filter').modal({show:true})
             return false;
           })
+
+
+            $('.categories').delegate('.filter_second_cat','click',function(event) {
+                console.log(334)
+                window.cat_id=$(this).parent().find('.fahover_cubes_input').val()
+                $('.add_edit_category_btn').text('Изменить')
+                //$( "#addtab" ).dialog( "option", "title", "Изменение названия категории" );
+                console.log('window.cat_id',window.cat_id)
+                //dialog.dialog("open");
+                $('.folder').empty()
+                $('.folder_deals').empty()
+                $.ajax({
+                    type: "POST",
+
+                    dataType: 'html',
+                    url: '/category/filters/get',
+                    data: {cat_id:cat_id}, // serializes the form's elements.
+                    success: function (data) {
+                        $('.folder').append(data)
+
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+
+                    dataType: 'html',
+                    url: '/category/filter_deals/get',
+                    data: {cat_id:cat_id}, // serializes the form's elements.
+                    success: function (data) {
+                        $('.folder_deals').append(data)
+
+                    }
+                });
+
+                //
+                $('.default-example-modal-lg-center-filter-second').modal({show:true})
+                return false;
+            })
 
 
             $('.categories').delegate('.add_category_into_level','click',function(event) {

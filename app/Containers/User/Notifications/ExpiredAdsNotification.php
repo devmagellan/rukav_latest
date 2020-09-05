@@ -32,7 +32,10 @@ public function __construct($company){
 
         return (new MailMessage)
             ->greeting('Hello!')
-            ->line('Срок действия подачи Вашего объявления истекает');
+            ->line('Здравствуйте !  Срок вашего обьявления истекает через 2 дня.   
+                    Хотите его продлить ? ')
+            ->action('Продлить объявление', 'http://apiato/private_cabinet#myads')
+            ;
     }
 
     public function via($notifiable)

@@ -22,8 +22,6 @@ class ExpiredAdsEmailVerification implements ShouldQueue
 			
 			Log::info('user: ',array($user));
         $this->user=$user;
-						\Log::info('emailVerificationCodeinSession2'.session()->get('emailVerificationCode'));
-\Log::info('emailVerificationCodeinObject'.$this->user->emailCode);
 
     }
 
@@ -34,9 +32,6 @@ class ExpiredAdsEmailVerification implements ShouldQueue
      */
     public function handle() 
     {
-	\Log::info('emailVerificationCodeinSession2'.session()->get('emailVerificationCode'));
-		\Log::info('emailVerificationCodeinObject'.$this->user->emailCode);
-		\Log::info('emailVerificationCodeinObject',array($this->user));
 		//$this->user->sendEmailVerificationNotification();
 		
 		//$this->user->notify(new CustomerEmail($this->user));
