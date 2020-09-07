@@ -38,6 +38,7 @@ $last=count($value);?>
                     <button class="edit_cat"><i class="fa fa-pencil"></i></button>
                   @if(!$hasChild)
                   <button class="filter_cat"><i class="fa fa-filter"></i></button>
+                        <button class="filter_second_cat"><i class="fa fa-filter"></i></button>
                   @endif
                     <span style="position:relative;padding-left:20px;">{{$category->name}}</span>
 

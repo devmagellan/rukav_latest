@@ -50,3 +50,16 @@ $router->post('/confirm_phone', [
     'uses'       => 'Controller@confirmPhone',
 ]);
 
+$router->get('/notify', [
+    'as'   => 'get_user_home_page',
+    'uses' => 'Controller@notify',
+]);
+
+
+$router->get('/longtime/email_notification', [
+    'as'   => 'get_user_home_page',
+    'uses' => 'Controller@longtime',
+]);
+
+
+
