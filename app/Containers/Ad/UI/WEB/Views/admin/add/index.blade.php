@@ -1597,6 +1597,8 @@ var new_rubric=$(this).parent().find('.hidden_rubric').val()
           $('.all_user_block').hide().prop('required',false);
           $('.outUk').hide().prop('required',false);
           $('.Places').hide();
+          $('#city').val('UK')
+          $('#administrative').val('UK')
 
         });
 
@@ -1629,14 +1631,18 @@ var new_rubric=$(this).parent().find('.hidden_rubric').val()
           success: function (data) {
             console.log(data)
             if(data.result=='empty'){
-              $('.cat_name').val(current)
+              $('.cat_name').val(current.split(",")[0])
             }else{
               var string='';
               $.each(data.result, function(i, val) {
                 string=string+'/'+val.name
+                console.log('FIRSTChar=>',string.charAt(0))
+                if(string.charAt(0)=='/'){
+                  string=string.substring(1)
+                }
               });
-              console.log('current=>',current)
-              $('.cat_name').val(string+'/'+current)
+              console.log('Cardif=>',current)
+              $('.cat_name').val(string+'/'+current.split(",")[0])
 
             }
 
