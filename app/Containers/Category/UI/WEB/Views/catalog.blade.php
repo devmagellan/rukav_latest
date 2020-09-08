@@ -216,7 +216,7 @@
           @endforeach
 		  
 
-        {{ $products->links() }}
+        {{ $products->appends(request()->input())->links() }}
 
       </div>
 	  @endif

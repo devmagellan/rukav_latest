@@ -195,7 +195,7 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
             ->where('active',1)
 
 
-          ->paginate(5);
+          ->paginate(1);
 
 		
 /* 		
