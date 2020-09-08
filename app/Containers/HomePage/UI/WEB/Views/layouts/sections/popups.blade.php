@@ -17,6 +17,24 @@
   </div>
 </div>
 
+<div class="modal modal_confirm_email_phone fade" id="simbolsNotAuthorised" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <img src="{{asset('img/close-icon.svg')}}" alt="">
+      </button>
+
+      <form class="formModal emailPhoneConfirmationForm">
+        <h6 class="modalTitle">Пожалуйста используйте только латинские символы.</h6>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
 <div class="modal fade" id="ModalIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

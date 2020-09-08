@@ -576,7 +576,7 @@
 
                   </div>
                 </div>
-                <a href="/static/help#photo" class="add_advert_rolls_foto">Привила добавления фото</a>
+
               </div>
 
             @else
@@ -1867,9 +1867,9 @@ var new_rubric=$(this).parent().find('.hidden_rubric').val()
         $('#allUsersClntInfoEditZip, #clntInfoEditZip, #clntInfoEditAddr1, #autocomplete').bind('keyup blur', function() {
           //alert('In here with' + $(this).val())
           //var regex = new RegExp("/^[a-z ]+$/i");
-          if($(this).val().match(/[^A-Za-z ]/g)){
+          if($(this).val().match(/[^A-Za-z0-9\s]/ig)){
             alert('Пожалуйста используйте только латинские символы.');
-            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''))
+            $(this).val($(this).val().replace(/[^A-Za-z0-9\s]/ig, ''))
             return false;
           }
         });

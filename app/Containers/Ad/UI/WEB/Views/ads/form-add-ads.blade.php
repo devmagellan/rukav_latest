@@ -502,7 +502,7 @@
 
             </div>
           </div>
-          <a href="/static/help#photo" class="add_advert_rolls_foto">Привила добавления фото</a>
+          <a href="/static/policies#photo" class="add_advert_rolls_foto">Привила добавления фото</a>
         </div>
 
       @else
@@ -1117,6 +1117,8 @@
         $('.all_user_block').hide().prop('required',false);
         $('.outUk').hide().prop('required',false);
         $('.Places').hide();
+        $('#city').val('UK')
+        $('#administrative').val('UK')
 
       });
 
@@ -1149,13 +1151,18 @@ function getAllParentsString(child,current){
         success: function (data) {
         console.log(data)
         if(data.result=='empty'){
-            $('.cat_name').val(current)
+            $('.cat_name').val(current.split(",")[0])
         }else{
             var string='';
             $.each(data.result, function(i, val) {
                string=string+'/'+val.name
+              console.log('FIRSTChar=>',string.charAt(0))
+              if(string.charAt(0)=='/'){
+                string=string.substring(1)
+              }
             });
-            $('.cat_name').val(string+'/'+current)
+            console.log('Cardif=>',current)
+            $('.cat_name').val(string+'/'+current.split(",")[0])
 
         }
 
@@ -1389,9 +1396,11 @@ $('.cat_name').click(function(){
       $('#allUsersClntInfoEditZip, #clntInfoEditZip, #clntInfoEditAddr1, #autocomplete').bind('keyup blur', function() {
         //alert('In here with' + $(this).val())
         //var regex = new RegExp("/^[a-z ]+$/i");
-        if($(this).val().match(/[^A-Za-z ]/g)){
-          alert('Пожалуйста используйте только латинские символы.');
-          $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''))
+        if($(this).val().match(/[^A-Za-z0-9\s]/ig)){
+          $('#simbolsNotAuthorised').modal({show:true});
+          //#youAreNotLeggedIn
+         // alert('Пожалуйста используйте только латинские символы.');
+          $(this).val($(this).val().replace(/[^A-Za-z0-9\s]/ig, ''))
           return false;
         }
       });

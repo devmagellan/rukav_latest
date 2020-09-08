@@ -353,7 +353,7 @@ $initAutoComplete = function(){
         window.autocomplete = new google.maps.places.Autocomplete(window.input,window.options);*/
 
 
-        var $autocompleteAdAddress;
+     /*   var $autocompleteAdAddress;
         var geocoderAdAddress;
         var inputAdAddress = document.getElementById('clntInfoEditAddr1');//
         var optionsAdAddress = {
@@ -377,7 +377,7 @@ $initAutoComplete = function(){
           $('#add_place').removeClass('redBorder')
 
 
-        });
+        });*/
 
 
 
@@ -404,7 +404,7 @@ $initAutoComplete = function(){
             lng = location['geometry']['location'].lng();
             var latlng = new google.maps.LatLng(lat,lng);
             location=location.place_id
-            inputMerged.value=inputPostCode.value
+            //inputMerged.value=inputPostCode.value
             document.getElementById('place_id').value=location
             getCity(latlng);
           $('#add_place').removeClass('redBorder')
@@ -433,7 +433,7 @@ $initAutoComplete = function(){
             lng = location['geometry']['location'].lng();
             var latlng = new google.maps.LatLng(lat,lng);
             location=location.place_id
-            inputMerged.value=inputOnlyPostCode.value
+            //inputMerged.value=inputOnlyPostCode.value
             document.getElementById('place_id').value=location
             getCity(latlng);
           $('#add_place').removeClass('redBorder')

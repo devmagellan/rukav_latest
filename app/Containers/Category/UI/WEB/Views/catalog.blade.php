@@ -43,7 +43,7 @@
     <article class="product_main">
 	@if(count($products)<1)
 		<div class="container">
-	<h3>По Вашему запросу объявлени не найдено </h3>
+	<h3>По Вашему запросу объявлений не найдено </h3>
 	</div>
 	@else
       <div class="container">
