@@ -113,19 +113,19 @@ class Controller extends WebController
         ],
         /*2*/
         [
-            'name'      => 'Scotland',
+            'name'      => '',
             'parent_id' => 0,
 
         ],
         /*3*/
         [
-            'name'      => 'Wales',
+            'name'      => '',
             'parent_id' => 0,
 
         ],
         /*4*/
         [
-            'name'      => 'Nothern Irland',
+            'name'      => '',
             'parent_id' => 0,
 
         ],
@@ -22525,7 +22525,7 @@ class Controller extends WebController
 
         /*452*/
         [
-            'name'      => 'Walney, Cumbria',
+            'name' => 'Walney, Cumbria',
             'parent_id' => 421,
 
         ],
@@ -31874,33 +31874,3300 @@ class Controller extends WebController
 
         ],
     ];
+	
+	public $irland=[
+	   /*1*/
+           [
+               'name' => 'Nothern Irland',
+               'parent_id'=>0,
 
+           ],
+            /*2*/
+           [
+               'name' => 'Belfast',
+               'parent_id'=>1,
 
+           ],
+		    /*3*/
+           [
+               'name' => 'County Antrim',
+               'parent_id'=>1,
+
+           ],
+		   /*4*/
+           [
+               'name' => 'County Armagh',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*5*/
+           [
+               'name' => 'County Down',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*6*/
+           [
+               'name' => 'County Fermanagh',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*7*/
+           [
+               'name' => 'County Londonderry',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*8*/
+           [
+               'name' => 'County Tyrone',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*9*/
+           [
+               'name' => 'Andersonstown, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*10*/
+           [
+               'name' => 'Antrim Road, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*11*/
+           [
+               'name' => 'Belfast City Centre, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*12*/
+           [
+               'name' => 'Bloomfield, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*13*/
+           [
+               'name' => 'Botanic, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*14*/
+           [
+               'name' => 'Carryduff, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*15*/
+           [
+               'name' => 'Castlereagh, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*16*/
+           [
+               'name' => 'Cregagh, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*17*/
+           [
+               'name' => 'Donegall Road, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*18*/
+           [
+               'name' => 'Dundonald, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*19*/
+           [
+               'name' => 'Dunmurry, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*20*/
+           [
+               'name' => 'Falls Road, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*21*/
+           [
+               'name' => 'Finaghy, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*22*/
+           [
+               'name' => 'Four Winds, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*23*/
+           [
+               'name' => 'Lisburn Road, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*24*/
+           [
+               'name' => 'Malone, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*25*/
+           [
+               'name' => 'Ormeau Road, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*26*/
+           [
+               'name' => 'Ravenhill, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*27*/
+           [
+               'name' => 'Stranmillis, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*28*/
+           [
+               'name' => 'Sydenham, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*29*/
+           [
+               'name' => 'University Area, Belfast',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*30*/
+           [
+               'name' => 'Antrim, County Antrim',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*31*/
+           [
+               'name' => 'Ballycastle, County Antrim',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*32*/
+           [
+               'name' => 'Ballyclare, County Antrim',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*33*/
+           [
+               'name' => 'Ballymena, County Antrim',
+               'parent_id'=>3,
+
+           ],
+		   /*34*/
+           [
+               'name' => 'Ballymoney, County Antrim',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*35*/
+           [
+               'name' => 'Bushmills, County Antrim',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*36*/
+           [
+               'name' => 'Carrickfergus, County Antrim',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*37*/
+           [
+               'name' => 'Crumlin, County Antrim',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*38*/
+           [
+               'name' => 'Larne, County Antrim',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*39*/
+           [
+               'name' => 'Lisburn, County Antrim',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*40*/
+           [
+               'name' => 'Newtownabbey, County Antrim',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*41*/
+           [
+               'name' => 'Portrush, County Antrim',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*42*/
+           [
+               'name' => 'Randalstown, County Antrim',
+               'parent_id'=>30,
+
+           ],
+		   
+		   /*43*/
+           [
+               'name' => 'Toomebridge, County Antrim',
+               'parent_id'=>30,
+
+           ],
+		   
+		   /*44*/
+           [
+               'name' => 'Doagh, County Antrim',
+               'parent_id'=>32,
+
+           ],
+		   
+		   /*45*/
+           [
+               'name' => 'Templepatrick, County Antrim',
+               'parent_id'=>32,
+
+           ],
+		   
+		   /*46*/
+           [
+               'name' => 'Ahoghill, County Antrim',
+               'parent_id'=>33,
+
+           ],
+		   
+		   /*47*/
+           [
+               'name' => 'Broughshane, County Antrim',
+               'parent_id'=>33,
+
+           ],
+		   
+		   /*48*/
+           [
+               'name' => 'Cullybackey, County Antrim',
+               'parent_id'=>33,
+
+           ],
+		   
+		   /*49*/
+           [
+               'name' => 'Portglenone, County Antrim',
+               'parent_id'=>33,
+
+           ],
+		   
+		   /*50*/
+           [
+               'name' => 'Armoy, County Antrim',
+               'parent_id'=>34,
+
+           ],
+		   
+		   /*51*/
+           [
+               'name' => 'Greenisland, County Antrim',
+               'parent_id'=>36,
+
+           ],
+		   
+		   /*52*/
+           [
+               'name' => 'Whitehead, County Antrim',
+               'parent_id'=>36,
+
+           ],
+		   
+		   /*53*/
+           [
+               'name' => 'Ballinderry Upper, County Antrim',
+               'parent_id'=>39,
+
+           ],
+		   
+		   /*54*/
+           [
+               'name' => 'Armagh, County Armagh',
+               'parent_id'=>4,
+
+           ],
+		   
+		   /*55*/
+           [
+               'name' => 'Craigavon, County Armagh',
+               'parent_id'=>4,
+
+           ],
+		   
+		   /*56*/
+           [
+               'name' => 'Keady, County Armagh',
+               'parent_id'=>54,
+
+           ],
+		   
+		   /*57*/
+           [
+               'name' => 'Gilford, County Armagh',
+               'parent_id'=>55,
+
+           ],
+		   
+		   /*58*/
+           [
+               'name' => 'Lurgan, County Armagh',
+               'parent_id'=>55,
+
+           ],
+		   
+		   /*59*/
+           [
+               'name' => 'Moira, County Armagh',
+               'parent_id'=>55,
+
+           ],
+		   
+		   /*60*/
+           [
+               'name' => 'Portadown, County Armagh',
+               'parent_id'=>55,
+
+           ],
+		   
+		   /*61*/
+           [
+               'name' => 'Tandragee, County Armagh',
+               'parent_id'=>55,
+
+           ],
+		   
+		   /*62*/
+           [
+               'name' => 'Ballynahinch, County Down',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*63*/
+           [
+               'name' => 'Banbridge, County Down',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*64*/
+           [
+               'name' => 'Bangor, County Down',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*65*/
+           [
+               'name' => 'Castlewellan, County Down',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*66*/
+           [
+               'name' => 'Donaghadee, County Down',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*67*/
+           [
+               'name' => 'Downpatrick, County Down',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*68*/
+           [
+               'name' => 'Dromore, County Down',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*69*/
+           [
+               'name' => 'Hillsborough, County Down',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*70*/
+           [
+               'name' => 'Holywood, County Down',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*71*/
+           [
+               'name' => 'Newcastle, County Down',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*72*/
+           [
+               'name' => 'Newry, County Down',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*73*/
+           [
+               'name' => 'Newtownards, County Down',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*74*/
+           [
+               'name' => 'Saintfield, County Down',
+               'parent_id'=>62,
+
+           ],
+		   
+		   /*75*/
+           [
+               'name' => 'Crossgar, County Down',
+               'parent_id'=>67,
+
+           ],
+		   
+		   /*76*/
+           [
+               'name' => 'Killyleagh, County Down',
+               'parent_id'=>67,
+
+           ],
+		   
+		   /*77*/
+           [
+               'name' => 'Dromara, County Down',
+               'parent_id'=>68,
+
+           ],
+		   
+		   /*78*/
+           [
+               'name' => 'Bessbrook, County Down',
+               'parent_id'=>72,
+
+           ],
+		   
+		   /*79*/
+           [
+               'name' => 'Crossmaglen, County Down',
+               'parent_id'=>72,
+
+           ],
+		   
+		   
+		   
+		   /*80*/
+           [
+               'name' => 'Kilkeel, County Down',
+               'parent_id'=>72,
+
+           ],
+		   
+		   /*81*/
+           [
+               'name' => 'Newtownhamilton, County Down',
+               'parent_id'=>72,
+
+           ],
+		   
+		   /*82*/
+           [
+               'name' => 'Rathfriland, County Down',
+               'parent_id'=>72,
+
+           ],
+		   
+		   /*83*/
+           [
+               'name' => 'Rostrevor, County Down',
+               'parent_id'=>72,
+
+           ],
+		   
+		   /*84*/
+           [
+               'name' => 'Warrenpoint, County Down',
+               'parent_id'=>72,
+
+           ],
+		   
+		   /*85*/
+           [
+               'name' => 'Ballygowan, County Down',
+               'parent_id'=>73,
+
+           ],
+		   
+		   /*86*/
+           [
+               'name' => 'Comber, County Down',
+               'parent_id'=>73,
+
+           ],
+		   
+		   /*87*/
+           [
+               'name' => 'Killinchy, County Down',
+               'parent_id'=>73,
+
+           ],
+		   
+		   /*88*/
+           [
+               'name' => 'Millisle, County Down',
+               'parent_id'=>73,
+
+           ],
+		   
+		   /*89*/
+           [
+               'name' => 'Portaferry, County Down',
+               'parent_id'=>73,
+
+           ],
+		   
+		   /*90*/
+           [
+               'name' => 'Enniskillen, County Fermanagh',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*91*/
+           [
+               'name' => 'Ballinamallard, County Fermanagh',
+               'parent_id'=>90,
+
+           ],
+		   
+		   /*92*/
+           [
+               'name' => 'Belleek, County Fermanagh',
+               'parent_id'=>90,
+
+           ],
+		   
+		   /*93*/
+           [
+               'name' => 'Brookeborough, County Fermanagh',
+               'parent_id'=>90,
+
+           ],
+		   
+		   /*94*/
+           [
+               'name' => 'Derrygonnelly, County Fermanagh',
+               'parent_id'=>90,
+
+           ],
+		   
+		   /*95*/
+           [
+               'name' => 'Derrylin, County Fermanagh',
+               'parent_id'=>90,
+
+           ],
+		   
+		   /*96*/
+           [
+               'name' => 'Irvinestown, County Fermanagh',
+               'parent_id'=>90,
+
+           ],
+		   
+		   /*97*/
+           [
+               'name' => 'Kesh, County Fermanagh',
+               'parent_id'=>90,
+
+           ],
+		   
+		   /*98*/
+           [
+               'name' => 'Kinawley, County Fermanagh',
+               'parent_id'=>90,
+
+           ],
+		   
+		   /*99*/
+           [
+               'name' => 'Lisbellaw, County Fermanagh',
+               'parent_id'=>90,
+
+           ],
+		   
+		   /*100*/
+           [
+               'name' => 'Lisnaskea, County Fermanagh',
+               'parent_id'=>90,
+
+           ],
+		   
+		   /*101*/
+           [
+               'name' => 'Maguiresbridge, County Fermanagh',
+               'parent_id'=>90,
+
+           ],
+		   
+		   /*102*/
+           [
+               'name' => 'Newtownbutler, County Fermanagh',
+               'parent_id'=>90,
+
+           ],
+		   
+		   /*103*/
+           [
+               'name' => 'Rosslea, County Fermanagh',
+               'parent_id'=>90,
+
+           ],
+		   
+		   /*104*/
+           [
+               'name' => 'Tempo, County Fermanagh',
+               'parent_id'=>90,
+
+           ],
+		   
+		   /*105*/
+           [
+               'name' => 'Coleraine, County Londonderry',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*106*/
+           [
+               'name' => 'Limavady, County Londonderry',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*107*/
+           [
+               'name' => 'Londonderry, County Londonderry',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*108*/
+           [
+               'name' => 'Maghera, County Londonderry',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*109*/
+           [
+               'name' => 'Magherafelt, County Londonderry',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*110*/
+           [
+               'name' => 'Portstewart, County Londonderry',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*111*/
+           [
+               'name' => 'Castlerock, County Londonderry',
+               'parent_id'=>105,
+
+           ],
+		   
+		   /*112*/
+           [
+               'name' => 'Garvagh, County Londonderry',
+               'parent_id'=>105,
+
+           ],
+		   
+		   /*113*/
+           [
+               'name' => 'Kilrea, County Londonderry',
+               'parent_id'=>105,
+
+           ],
+		   
+		   /*114*/
+           [
+               'name' => 'Claudy, County Londonderry',
+               'parent_id'=>107,
+
+           ],
+		   
+		   /*115*/
+           [
+               'name' => 'Dungiven, County Londonderry',
+               'parent_id'=>107,
+
+           ],
+		   
+		   /*116*/
+           [
+               'name' => 'Eglinton, County Londonderry',
+               'parent_id'=>107,
+
+           ],
+		   
+		   /*117*/
+           [
+               'name' => 'Castledawson, County Londonderry',
+               'parent_id'=>109,
+
+           ],
+		   
+		   /*118*/
+           [
+               'name' => 'Draperstown, County Londonderry',
+               'parent_id'=>109,
+
+           ],
+		   
+		   /*119*/
+           [
+               'name' => 'Moneymore, County Londonderry',
+               'parent_id'=>109,
+
+           ],
+		   
+		   /*120*/
+           [
+               'name' => 'Augher, County Tyrone',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*121*/
+           [
+               'name' => 'Aughnacloy, County Tyrone',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*122*/
+           [
+               'name' => 'Caledon, County Tyrone',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*123*/
+           [
+               'name' => 'Castlederg, County Tyrone',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*124*/
+           [
+               'name' => 'Clogher, County Tyrone',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*125*/
+           [
+               'name' => 'Cookstown, County Tyrone',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*126*/
+           [
+               'name' => 'Dungannon, County Tyrone',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*127*/
+           [
+               'name' => 'Fivemiletown, County Tyrone',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*128*/
+           [
+               'name' => 'Omagh, County Tyrone',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*129*/
+           [
+               'name' => 'Strabane, County Tyrone',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*130*/
+           [
+               'name' => 'Coalisland, County Tyrone',
+               'parent_id'=>126,
+
+           ],
+		   
+		   /*131*/
+           [
+               'name' => 'Pomeroy, County Tyrone',
+               'parent_id'=>126,
+
+           ],
+		   
+		   /*132*/
+           [
+               'name' => 'Dromore, County Tyrone',
+               'parent_id'=>128,
+
+           ],
+		   
+		   /*133*/
+           [
+               'name' => 'Drumquin, County Tyrone',
+               'parent_id'=>128,
+
+           ],
+		   
+		   /*134*/
+           [
+               'name' => 'Fintona, County Tyrone',
+               'parent_id'=>128,
+
+           ],
+		   
+		   /*135*/
+           [
+               'name' => 'Newtownstewart, County Tyrone',
+               'parent_id'=>128,
+
+           ],
+		   
+		   /*136*/
+           [
+               'name' => 'Sixmilecross, County Tyrone',
+               'parent_id'=>128,
+
+           ],
+		   
+		   /*137*/
+           [
+               'name' => 'Trillick, County Tyrone',
+               'parent_id'=>128,
+
+           ],
+		   
+		   /*138*/
+           [
+               'name' => 'Dunamanagh, County Tyrone',
+               'parent_id'=>129,
+
+           ],
+	]; 
+
+public $weles=[
+  /*1*/
+           [
+               'name' => 'Wales',
+               'parent_id'=>0,
+
+           ],
+            /*2*/
+           [
+               'name' => 'Blaenau Gwent',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*3*/
+           [
+               'name' => 'Bridgend',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*4*/
+           [
+               'name' => 'Caerphilly',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*5*/
+           [
+               'name' => 'Cardiff',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*6*/
+           [
+               'name' => 'Carmarthenshire',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*7*/
+           [
+               'name' => 'Ceredigion',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*8*/
+           [
+               'name' => 'Conwy',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*9*/
+           [
+               'name' => 'Denbighshire',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*10*/
+           [
+               'name' => 'Flintshire',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*11*/
+           [
+               'name' => 'Gwynedd',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*12*/
+           [
+               'name' => 'Isle of Anglesey',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*13*/
+           [
+               'name' => 'Merthyr Tydfil',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*14*/
+           [
+               'name' => 'Monmouthshire',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*15*/
+           [
+               'name' => 'Neath Port Talbot',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*16*/
+           [
+               'name' => 'Newport',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*17*/
+           [
+               'name' => 'Pembrokeshire',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*18*/
+           [
+               'name' => 'Powys',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*19*/
+           [
+               'name' => 'Rhondda Cynon Taf',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*20*/
+           [
+               'name' => 'Swansea',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*21*/
+           [
+               'name' => 'Torfaen',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*22*/
+           [
+               'name' => 'Vale of Glamorgan',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*23*/
+           [
+               'name' => 'Wrexham',
+               'parent_id'=>1,
+
+           ],
+		   
+		   /*24*/
+           [
+               'name' => 'Abertillery, Blaenau Gwent',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*25*/
+           [
+               'name' => 'Ebbw Vale, Blaenau Gwent',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*26*/
+           [
+               'name' => 'Tredegar, Blaenau Gwent',
+               'parent_id'=>2,
+
+           ],
+		   
+		   /*27*/
+           [
+               'name' => 'Blaina, Blaenau Gwent',
+               'parent_id'=>24,
+
+           ],
+		   
+		   /*28*/
+           [
+               'name' => 'Beaufort, Blaenau Gwent',
+               'parent_id'=>25,
+
+           ],
+		   
+		   /*29*/
+           [
+               'name' => 'Brynmawr, Blaenau Gwent',
+               'parent_id'=>25,
+
+           ],
+		   
+		   /*30*/
+           [
+               'name' => 'Nantyglo, Blaenau Gwent',
+               'parent_id'=>25,
+
+           ],
+		   
+		   /*31*/
+           [
+               'name' => 'Rhymney, Blaenau Gwent',
+               'parent_id'=>26,
+
+           ],
+		   
+		   /*32*/
+           [
+               'name' => 'Brackla, Bridgend',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*33*/
+           [
+               'name' => 'Maesteg, Bridgend',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*34*/
+           [
+               'name' => 'North Cornelly, Bridgend',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*35*/
+           [
+               'name' => 'Pencoed, Bridgend',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*36*/
+           [
+               'name' => 'Porthcawl, Bridgend',
+               'parent_id'=>3,
+
+           ],
+		   
+		   /*37*/
+           [
+               'name' => 'Bargoed, Caerphilly',
+               'parent_id'=>4,
+
+           ],
+		   
+		   /*38*/
+           [
+               'name' => 'Bedwas, Caerphilly',
+               'parent_id'=>4,
+
+           ],
+		   
+		   /*39*/
+           [
+               'name' => 'Blackwood, Caerphilly',
+               'parent_id'=>4,
+
+           ],
+		   
+		   /*40*/
+           [
+               'name' => 'Hengoed, Caerphilly',
+               'parent_id'=>4,
+
+           ],
+		   
+		   /*41*/
+           [
+               'name' => 'Machen, Caerphilly',
+               'parent_id'=>4,
+
+           ],
+		   
+		   /*42*/
+           [
+               'name' => 'New Tredegar, Caerphilly',
+               'parent_id'=>4,
+
+           ],
+		   
+		   /*43*/
+           [
+               'name' => 'Pontllanfraith, Caerphilly',
+               'parent_id'=>39,
+
+           ],
+		   
+		   /*44*/
+           [
+               'name' => 'Ystrad Mynach, Caerphilly',
+               'parent_id'=>40,
+
+           ],
+		   
+		   /*45*/
+           [
+               'name' => 'Adamsdown, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*46*/
+           [
+               'name' => 'Albany Road, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*47*/
+           [
+               'name' => 'Atlantic Wharf, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*48*/
+           [
+               'name' => 'Birchgrove, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*49*/
+           [
+               'name' => 'Butetown, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*50*/
+           [
+               'name' => 'Caerau, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*51*/
+           [
+               'name' => 'Canton, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*52*/
+           [
+               'name' => 'Cardiff Bay, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*53*/
+           [
+               'name' => 'Cardiff City Centre, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*54*/
+           [
+               'name' => 'Cathays, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*55*/
+           [
+               'name' => 'Culverhouse Cross, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*56*/
+           [
+               'name' => 'Cyncoed, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*57*/
+           [
+               'name' => 'Danescourt, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*58*/
+           [
+               'name' => 'Ely, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*59*/
+           [
+               'name' => 'Fairwater, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*60*/
+           [
+               'name' => 'Gabalfa, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*61*/
+           [
+               'name' => 'Grangetown, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*62*/
+           [
+               'name' => 'Heath, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*63*/
+           [
+               'name' => 'Lakeside, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*64*/
+           [
+               'name' => 'Leckwith, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*65*/
+           [
+               'name' => 'Lisvane, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*66*/
+           [
+               'name' => 'Llandaff North, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*67*/
+           [
+               'name' => 'Llandaff, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*68*/
+           [
+               'name' => 'Llandough, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*69*/
+           [
+               'name' => 'Llanedeyrn, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*70*/
+           [
+               'name' => 'Llanishen, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*71*/
+           [
+               'name' => 'Llanrumney, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*72*/
+           [
+               'name' => 'Maindy, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*73*/
+           [
+               'name' => 'Marshfield, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*74*/
+           [
+               'name' => 'Mynachdy, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*75*/
+           [
+               'name' => 'Newport Road, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*76*/
+           [
+               'name' => 'Old St Mellons, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*77*/
+           [
+               'name' => 'Pengam Green, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*78*/
+           [
+               'name' => 'Pentwyn, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*79*/
+           [
+               'name' => 'Penylan, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*80*/
+           [
+               'name' => 'Pontcanna, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*81*/
+           [
+               'name' => 'Pontprennau, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*82*/
+           [
+               'name' => 'Radyr, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*83*/
+           [
+               'name' => 'Rhiwbina, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*84*/
+           [
+               'name' => 'Riverside, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*85*/
+           [
+               'name' => 'Roath Park, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*86*/
+           [
+               'name' => 'Roath, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*87*/
+           [
+               'name' => 'Rumney, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*88*/
+           [
+               'name' => 'Splott, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*89*/
+           [
+               'name' => 'St Fagans, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*90*/
+           [
+               'name' => 'St Mellons, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*91*/
+           [
+               'name' => 'Thornhill, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*92*/
+           [
+               'name' => 'Tremorfa, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*93*/
+           [
+               'name' => 'Victoria Park, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*94*/
+           [
+               'name' => 'Whitchurch, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*95*/
+           [
+               'name' => 'Whitchurch, Cardiff',
+               'parent_id'=>5,
+
+           ],
+		   
+		   /*96*/
+           [
+               'name' => 'Ammanford, Carmarthenshire',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*97*/
+           [
+               'name' => 'Burry Port, Carmarthenshire',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*98*/
+           [
+               'name' => 'Carmarthen, Carmarthenshire',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*99*/
+           [
+               'name' => 'Ferryside, Carmarthenshire',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*100*/
+           [
+               'name' => 'Kidwelly, Carmarthenshire',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*100*/
+           [
+               'name' => 'Llandeilo, Carmarthenshire',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*101*/
+           [
+               'name' => 'Llandovery, Carmarthenshire',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*102*/
+           [
+               'name' => 'Llanelli, Carmarthenshire',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*103*/
+           [
+               'name' => 'Llangadog, Carmarthenshire',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*104*/
+           [
+               'name' => 'Llanwrda, Carmarthenshire',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*105*/
+           [
+               'name' => 'Llanybydder, Carmarthenshire',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*106*/
+           [
+               'name' => 'Newcastle Emlyn, Carmarthenshire',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*107*/
+           [
+               'name' => 'Pencader, Carmarthenshire',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*108*/
+           [
+               'name' => 'Whitland, Carmarthenshire',
+               'parent_id'=>6,
+
+           ],
+		   
+		   /*109*/
+           [
+               'name' => 'St Clears, Carmarthenshire',
+               'parent_id'=>98,
+
+           ],
+		   
+		   /*110*/
+           [
+               'name' => 'Llangennech, Carmarthenshire',
+               'parent_id'=>102,
+
+           ],
+		   
+		   /*111*/
+           [
+               'name' => 'Aberaeron, Ceredigion',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*112*/
+           [
+               'name' => 'Aberystwyth, Ceredigion',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*113*/
+           [
+               'name' => 'Borth, Ceredigion',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*114*/
+           [
+               'name' => 'Bow Street, Ceredigion',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*115*/
+           [
+               'name' => 'Cardigan, Ceredigion',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*116*/
+           [
+               'name' => 'Lampeter, Ceredigion',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*117*/
+           [
+               'name' => 'Llanarth, Ceredigion',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*118*/
+           [
+               'name' => 'Llandysul, Ceredigion',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*119*/
+           [
+               'name' => 'Llanon, Ceredigion',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*120*/
+           [
+               'name' => 'Llanrhystud, Ceredigion',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*121*/
+           [
+               'name' => 'New Quay, Ceredigion',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*122*/
+           [
+               'name' => 'Talybont, Ceredigion',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*123*/
+           [
+               'name' => 'Tregaron, Ceredigion',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*124*/
+           [
+               'name' => 'Ystrad Meurig, Ceredigion',
+               'parent_id'=>7,
+
+           ],
+		   
+		   /*125*/
+           [
+               'name' => 'Abergele, Conwy',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*126*/
+           [
+               'name' => 'Betws-y-Coed, Conwy',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*127*/
+           [
+               'name' => 'Colwyn Bay, Conwy',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*128*/
+           [
+               'name' => 'Deganwy, Conwy',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*129*/
+           [
+               'name' => 'Dolwyddelan, Conwy',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*130*/
+           [
+               'name' => 'Llandudno Junction, Conwy',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*131*/
+           [
+               'name' => 'Llandudno, Conwy',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*132*/
+           [
+               'name' => 'Llanfairfechan, Conwy',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*133*/
+           [
+               'name' => 'Llanrwst, Conwy',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*134*/
+           [
+               'name' => 'Penmaenmawr, Conwy',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*135*/
+           [
+               'name' => 'Trefriw, Conwy',
+               'parent_id'=>8,
+
+           ],
+		   
+		   /*136*/
+           [
+               'name' => 'Old Colwyn, Conwy',
+               'parent_id'=>127,
+
+           ],
+		   
+		   /*137*/
+           [
+               'name' => 'Rhos on Sea, Conwy',
+               'parent_id'=>127,
+
+           ],
+		   
+		   /*138*/
+           [
+               'name' => 'Penrhyn Bay, Conwy',
+               'parent_id'=>131,
+
+           ],
+		   
+		   /*139*/
+           [
+               'name' => 'Corwen, Denbighshire',
+               'parent_id'=>9,
+
+           ],
+		   
+		   /*140*/
+           [
+               'name' => 'Denbigh, Denbighshire',
+               'parent_id'=>9,
+
+           ],
+		   
+		   /*141*/
+           [
+               'name' => 'Llangollen, Denbighshire',
+               'parent_id'=>9,
+
+           ],
+		   
+		   /*142*/
+           [
+               'name' => 'Prestatyn, Denbighshire',
+               'parent_id'=>9,
+
+           ],
+		   
+		   /*143*/
+           [
+               'name' => 'Rhyl, Denbighshire',
+               'parent_id'=>9,
+
+           ],
+		   
+		   /*144*/
+           [
+               'name' => 'Ruthin, Denbighshire',
+               'parent_id'=>9,
+
+           ],
+		   
+		   /*145*/
+           [
+               'name' => 'St Asaph, Denbighshire',
+               'parent_id'=>9,
+
+           ],
+		   
+		   /*146*/
+           [
+               'name' => 'Kinmel Bay, Denbighshire',
+               'parent_id'=>143,
+
+           ],
+		   
+		   /*147*/
+           [
+               'name' => 'Rhuddlan, Denbighshire',
+               'parent_id'=>143,
+
+           ],
+		   
+		   /*148*/
+           [
+               'name' => 'Bagillt, Flintshire',
+               'parent_id'=>10,
+
+           ],
+		   
+		   /*149*/
+           [
+               'name' => 'Buckley, Flintshire',
+               'parent_id'=>10,
+
+           ],
+		   
+		   /*150*/
+           [
+               'name' => 'Deeside, Flintshire',
+               'parent_id'=>10,
+
+           ],
+		   
+		   /*151*/
+           [
+               'name' => 'Flint, Flintshire',
+               'parent_id'=>10,
+
+           ],
+		   
+		   /*152*/
+           [
+               'name' => 'Holywell, Flintshire',
+               'parent_id'=>10,
+
+           ],
+		   
+		   /*153*/
+           [
+               'name' => 'Mold, Flintshire',
+               'parent_id'=>10,
+
+           ],
+		   
+		   /*154*/
+           [
+               'name' => 'Connahs Quay, Flintshire',
+               'parent_id'=>150,
+
+           ],
+		   
+		   /*155*/
+           [
+               'name' => 'Ewloe, Flintshire',
+               'parent_id'=>150,
+
+           ],
+		   
+		   /*156*/
+           [
+               'name' => 'Hawarden, Flintshire',
+               'parent_id'=>150,
+
+           ],
+		   
+		   /*157*/
+           [
+               'name' => 'Shotton, Flintshire',
+               'parent_id'=>150,
+
+           ],
+		   
+		   /*158*/
+           [
+               'name' => 'Aberdovey, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*159*/
+           [
+               'name' => 'Arthog, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*160*/
+           [
+               'name' => 'Bala, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*161*/
+           [
+               'name' => 'Bangor, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*162*/
+           [
+               'name' => 'Barmouth, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*163*/
+           [
+               'name' => 'Blaenau Ffestiniog, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*164*/
+           [
+               'name' => 'Caernarfon, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*165*/
+           [
+               'name' => 'Criccieth, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*166*/
+           [
+               'name' => 'Dolgellau, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*167*/
+           [
+               'name' => 'Dyffryn Ardudwy, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*168*/
+           [
+               'name' => 'Fairbourne, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*169*/
+           [
+               'name' => 'Garndolbenmaen, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*170*/
+           [
+               'name' => 'Harlech, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*171*/
+           [
+               'name' => 'Llanbedr, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*172*/
+           [
+               'name' => 'Llwyngwril, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*173*/
+           [
+               'name' => 'Penrhyndeudraeth, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*174*/
+           [
+               'name' => 'Porthmadog, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*175*/
+           [
+               'name' => 'Pwllheli, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*176*/
+           [
+               'name' => 'Talsarnau, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*177*/
+           [
+               'name' => 'Talybont, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*178*/
+           [
+               'name' => 'Tywyn, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*179*/
+           [
+               'name' => 'Y Felinheli, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*180*/
+           [
+               'name' => 'Caernarfon, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*181*/
+           [
+               'name' => 'Caernarfon, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*182*/
+           [
+               'name' => 'Caernarfon, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*183*/
+           [
+               'name' => 'Caernarfon, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*184*/
+           [
+               'name' => 'Caernarfon, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*185*/
+           [
+               'name' => 'Caernarfon, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*186*/
+           [
+               'name' => 'Caernarfon, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*187*/
+           [
+               'name' => 'Caernarfon, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*188*/
+           [
+               'name' => 'Caernarfon, Gwynedd',
+               'parent_id'=>11,
+
+           ],
+		   
+		   /*189*/
+           [
+               'name' => 'Amlwch, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*190*/
+           [
+               'name' => 'Beaumaris, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*191*/
+           [
+               'name' => 'Bodorgan, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*192*/
+           [
+               'name' => 'Brynteg, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*193*/
+           [
+               'name' => 'Cemaes Bay, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*194*/
+           [
+               'name' => 'Dulas, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*195*/
+           [
+               'name' => 'Gaerwen, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*196*/
+           [
+               'name' => 'Holyhead, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*197*/
+           [
+               'name' => 'Llanbedrgoch, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*198*/
+           [
+               'name' => 'Llanfairpwllgwyngyll, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*199*/
+           [
+               'name' => 'Llangefni, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*200*/
+           [
+               'name' => 'Llannerch-y-Medd, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*201*/
+           [
+               'name' => 'Marianglas, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*202*/
+           [
+               'name' => 'Menai Bridge, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*203*/
+           [
+               'name' => 'Moelfre, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*204*/
+           [
+               'name' => 'Pentraeth, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*205*/
+           [
+               'name' => 'Penysarn, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*206*/
+           [
+               'name' => 'Rhosgoch, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*207*/
+           [
+               'name' => 'Rhosneigr, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*208*/
+           [
+               'name' => 'Ty Croes, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*209*/
+           [
+               'name' => 'Tyn-y-Gongl, Isle of Anglesey',
+               'parent_id'=>12,
+
+           ],
+		   
+		   /*210*/
+           [
+               'name' => 'Dowlais, Merthyr Tydfil',
+               'parent_id'=>13,
+
+           ],
+		   
+		   /*211*/
+           [
+               'name' => 'Treharris, Merthyr Tydfil',
+               'parent_id'=>13,
+
+           ],
+		   
+		   /*212*/
+           [
+               'name' => 'Troedyrhiw, Merthyr Tydfil',
+               'parent_id'=>13,
+
+           ],
+		   
+		   /*213*/
+           [
+               'name' => 'Nelson, Merthyr Tydfil',
+               'parent_id'=>211,
+
+           ],
+		   
+		   /*214*/
+           [
+               'name' => 'Abergavenny, Monmouthshire',
+               'parent_id'=>14,
+
+           ],
+		   
+		   /*215*/
+           [
+               'name' => 'Caldicot, Monmouthshire',
+               'parent_id'=>14,
+
+           ],
+		   
+		   /*216*/
+           [
+               'name' => 'Chepstow, Monmouthshire',
+               'parent_id'=>14,
+
+           ],
+		   
+		   /*217*/
+           [
+               'name' => 'Monmouth, Monmouthshire',
+               'parent_id'=>14,
+
+           ],
+		   
+		   /*218*/
+           [
+               'name' => 'Usk, Monmouthshire',
+               'parent_id'=>14,
+
+           ],
+		   
+		   /*219*/
+           [
+               'name' => 'Undy, Monmouthshire',
+               'parent_id'=>215,
+
+           ],
+		   
+		   /*220*/
+           [
+               'name' => 'Neath, Neath Port Talbot',
+               'parent_id'=>15,
+
+           ],
+		   
+		   /*221*/
+           [
+               'name' => 'Port Talbot, Neath Port Talbot',
+               'parent_id'=>15,
+
+           ],
+		   
+		   /*222*/
+           [
+               'name' => 'Glynneath, Neath Port Talbot',
+               'parent_id'=>220,
+
+           ],
+		   
+		   /*223*/
+           [
+               'name' => 'Skewen, Neath Port Talbot',
+               'parent_id'=>220,
+
+           ],
+		   
+		   /*224*/
+           [
+               'name' => 'Baglan, Neath Port Talbot',
+               'parent_id'=>221,
+
+           ],
+		   
+		   /*225*/
+           [
+               'name' => 'Cwmavon, Neath Port Talbot',
+               'parent_id'=>221,
+
+           ],
+		   
+		   /*226*/
+           [
+               'name' => 'Bassaleg, Newport',
+               'parent_id'=>16,
+
+           ],
+		   
+		   /*227*/
+           [
+               'name' => 'Bettws, Newport',
+               'parent_id'=>16,
+
+           ],
+		   
+		   /*228*/
+           [
+               'name' => 'Caerleon, Newport',
+               'parent_id'=>16,
+
+           ],
+		   
+		   /*229*/
+           [
+               'name' => 'Newbridge, Newport',
+               'parent_id'=>16,
+
+           ],
+		   
+		   /*230*/
+           [
+               'name' => 'Risca, Newport',
+               'parent_id'=>16,
+
+           ],
+		   
+		   /*231*/
+           [
+               'name' => 'Rogerstone, Newport',
+               'parent_id'=>16,
+
+           ],
+		   
+		   /*232*/
+           [
+               'name' => 'Boncath, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*233*/
+           [
+               'name' => 'Clarbeston Road, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*234*/
+           [
+               'name' => 'Clynderwen, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*235*/
+           [
+               'name' => 'Crymych, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*236*/
+           [
+               'name' => 'Fishguard, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*237*/
+           [
+               'name' => 'Glogue, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*238*/
+           [
+               'name' => 'Goodwick, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*239*/
+           [
+               'name' => 'Haverfordwest, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*240*/
+           [
+               'name' => 'Kilgetty, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*241*/
+           [
+               'name' => 'Llanfyrnach, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*242*/
+           [
+               'name' => 'Milford Haven, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*243*/
+           [
+               'name' => 'Narberth, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*244*/
+           [
+               'name' => 'Pembroke Dock, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*245*/
+           [
+               'name' => 'Pembroke, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*246*/
+           [
+               'name' => 'Saundersfoot, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*247*/
+           [
+               'name' => 'Tenby, Pembrokeshire',
+               'parent_id'=>17,
+
+           ],
+		   
+		   /*248*/
+           [
+               'name' => 'Brecon, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*249*/
+           [
+               'name' => 'Builth Wells, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*250*/
+           [
+               'name' => 'Caersws, Powys',
+               'parent_id'=>18
+
+           ],
+		   
+		   /*251*/
+           [
+               'name' => 'Crickhowell, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*252*/
+           [
+               'name' => 'Knighton, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*253*/
+           [
+               'name' => 'Llanbrynmair, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*254*/
+           [
+               'name' => 'Llandinam, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*255*/
+           [
+               'name' => 'Llandrindod Wells, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*256*/
+           [
+               'name' => 'Llanfechain, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*257*/
+           [
+               'name' => 'Llanfyllin, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*258*/
+           [
+               'name' => 'Llangammarch Wells, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*259*/
+           [
+               'name' => 'Llanidloes, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*260*/
+           [
+               'name' => 'Llansanffraid, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*261*/
+           [
+               'name' => 'Llanwrtyd Wells, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*262*/
+           [
+               'name' => 'Llanymynech, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*263*/
+           [
+               'name' => 'Machynlleth, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*264*/
+           [
+               'name' => 'Meifod, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*265*/
+           [
+               'name' => 'Montgomery, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*266*/
+           [
+               'name' => 'Newtown, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*267*/
+           [
+               'name' => 'Presteigne, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*268*/
+           [
+               'name' => 'Rhayader, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*269*/
+           [
+               'name' => 'Welshpool, Powys',
+               'parent_id'=>18,
+
+           ],
+		   
+		   /*270*/
+           [
+               'name' => 'Llanfair Caereinion, Powys',
+               'parent_id'=>269,
+
+           ],
+		   
+		   /*271*/
+           [
+               'name' => 'Aberdare, Rhondda Cynon Taf',
+               'parent_id'=>19,
+
+           ],
+		   
+		   /*272*/
+           [
+               'name' => 'Ferndale, Rhondda Cynon Taf',
+               'parent_id'=>19,
+
+           ],
+		   
+		   /*273*/
+           [
+               'name' => 'Mountain Ash, Rhondda Cynon Taf',
+               'parent_id'=>19,
+
+           ],
+		   
+		   /*274*/
+           [
+               'name' => 'Pentre, Rhondda Cynon Taf',
+               'parent_id'=>19,
+
+           ],
+		   
+		   /*275*/
+           [
+               'name' => 'Pontyclun, Rhondda Cynon Taf',
+               'parent_id'=>19,
+
+           ],
+		   
+		   /*276*/
+           [
+               'name' => 'Pontypridd, Rhondda Cynon Taf',
+               'parent_id'=>19,
+
+           ],
+		   
+		   /*277*/
+           [
+               'name' => 'Porth, Rhondda Cynon Taf',
+               'parent_id'=>19,
+
+           ],
+		   
+		   /*278*/
+           [
+               'name' => 'Tonypandy, Rhondda Cynon Taf',
+               'parent_id'=>19,
+
+           ],
+		   
+		   /*279*/
+           [
+               'name' => 'Treorchy, Rhondda Cynon Taf',
+               'parent_id'=>19,
+
+           ],
+		   
+		   /*280*/
+           [
+               'name' => 'Hirwaun, Rhondda Cynon Taf',
+               'parent_id'=>271,
+
+           ],
+		   
+		   /*281*/
+           [
+               'name' => 'Abercynon, Rhondda Cynon Taf',
+               'parent_id'=>273,
+
+           ],
+		   
+		   /*282*/
+           [
+               'name' => 'Llantrisant, Rhondda Cynon Taf',
+               'parent_id'=>275,
+
+           ],
+		   
+		   /*283*/
+           [
+               'name' => 'Beddau, Rhondda Cynon Taf',
+               'parent_id'=>276,
+
+           ],
+		   
+		   /*283*/
+           [
+               'name' => 'Church Village, Rhondda Cynon Taf',
+               'parent_id'=>276,
+
+           ],
+		   
+		   /*284*/
+           [
+               'name' => 'Llantwit Fardre, Rhondda Cynon Taf',
+               'parent_id'=>276,
+
+           ],
+		   
+		   /*285*/
+           [
+               'name' => 'Tonyrefail, Rhondda Cynon Taf',
+               'parent_id'=>277,
+
+           ],
+		   
+		   /*286*/
+           [
+               'name' => 'Treherbert, Rhondda Cynon Taf',
+               'parent_id'=>279,
+
+           ],
+		   
+		   /*287*/
+           [
+               'name' => 'Birchgrove, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*288*/
+           [
+               'name' => 'Clydach, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*289*/
+           [
+               'name' => 'Fforestfach, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*290*/
+           [
+               'name' => 'Gorseinon, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*291*/
+           [
+               'name' => 'Gowerton, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*292*/
+           [
+               'name' => 'Llansamlet, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*293*/
+           [
+               'name' => 'Loughor, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*294*/
+           [
+               'name' => 'Morriston, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*295*/
+           [
+               'name' => 'Mumbles, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*296*/
+           [
+               'name' => 'Penlan, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*297*/
+           [
+               'name' => 'Pontardawe, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*298*/
+           [
+               'name' => 'Pontarddulais, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*299*/
+           [
+               'name' => 'Sketty, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*300*/
+           [
+               'name' => 'West Cross, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*301*/
+           [
+               'name' => 'Ystradgynlais, Swansea',
+               'parent_id'=>20,
+
+           ],
+		   
+		   /*302*/
+           [
+               'name' => 'Cwmbran, Torfaen',
+               'parent_id'=>21,
+
+           ],
+		   
+		   /*303*/
+           [
+               'name' => 'Pontypool, Torfaen',
+               'parent_id'=>21,
+
+           ],
+		   
+		   /*304*/
+           [
+               'name' => 'Croesyceiliog, Torfaen',
+               'parent_id'=>302,
+
+           ],
+		   
+		   /*305*/
+           [
+               'name' => 'Pontnewydd, Torfaen',
+               'parent_id'=>302,
+
+           ],
+		   
+		   /*306*/
+           [
+               'name' => 'Abersychan, Torfaen',
+               'parent_id'=>303,
+
+           ],
+		   
+		   /*307*/
+           [
+               'name' => 'Blaenavon, Torfaen',
+               'parent_id'=>303,
+
+           ],
+		   
+		   /*308*/
+           [
+               'name' => 'Griffithstown, Torfaen',
+               'parent_id'=>303,
+
+           ],
+		   
+		   /*309*/
+           [
+               'name' => 'New Inn, Torfaen',
+               'parent_id'=>303,
+
+           ],
+		   
+		   /*310*/
+           [
+               'name' => 'Pontnewynydd, Torfaen',
+               'parent_id'=>303,
+
+           ],
+		   
+		   /*311*/
+           [
+               'name' => 'Barry, Vale of Glamorgan',
+               'parent_id'=>22,
+
+           ],
+		   
+		   /*312*/
+           [
+               'name' => 'Cowbridge, Vale of Glamorgan',
+               'parent_id'=>22,
+
+           ],
+		   
+		   /*313*/
+           [
+               'name' => 'Dinas Powys, Vale of Glamorgan',
+               'parent_id'=>22,
+
+           ],
+		   
+		   /*314*/
+           [
+               'name' => 'Llantwit Major, Vale of Glamorgan',
+               'parent_id'=>22,
+
+           ],
+		   
+		   /*315*/
+           [
+               'name' => 'Penarth, Vale of Glamorgan',
+               'parent_id'=>22,
+
+           ],
+		   
+		   /*316*/
+           [
+               'name' => 'Acrefair, Wrexham',
+               'parent_id'=>23,
+
+           ],
+		   
+		   /*317*/
+           [
+               'name' => 'Chirk, Wrexham',
+               'parent_id'=>23,
+
+           ],
+		   
+		   /*318*/
+           [
+               'name' => 'Coedpoeth, Wrexham',
+               'parent_id'=>23,
+
+           ],
+		   
+		   /*319*/
+           [
+               'name' => 'Gresford, Wrexham',
+               'parent_id'=>23,
+
+           ],
+		   
+		   /*320*/
+           [
+               'name' => 'Gwersyllt, Wrexham',
+               'parent_id'=>23,
+
+           ],
+		   
+		   /*321*/
+           [
+               'name' => 'Llay, Wrexham',
+               'parent_id'=>23,
+
+           ],
+		   
+		   /*322*/
+           [
+               'name' => 'Rhosllanerchrugog, Wrexham',
+               'parent_id'=>23,
+
+           ],
+		   
+		   /*323*/
+           [
+               'name' => 'Ruabon, Wrexham',
+               'parent_id'=>23,
+
+           ],
+];
 
     public function makeCategories(GetAllSitesRequest $request)
     {
 
-/*        $final = [];
+        $final = [];
         $i = 0;
         foreach ($this->main as $m) {
             $final[$i]['name'] = $m['name'];
             $final[$i]['parent_id'] = $m['parent_id'];
             $i++;
         }
-        $b = count($final) + 1;
+        $b = count($final);
         $a = count($final);
         foreach ($this->scotland as $s) {
             $final[$a]['name'] = $s['name'];
             if ($s['parent_id'] == 0) {
                 $final[$a]['parent_id'] = 0;
-            } else {
+            }
+			else {
+                $final[$a]['parent_id'] = $s['parent_id'] + $b;
+            }
+
+            $a++;
+        }
+		$b = count($final);
+        $a = count($final);
+		foreach ($this->irland as $s) {
+            $final[$a]['name'] = $s['name'];
+            if ($s['parent_id'] == 0) {
+                $final[$a]['parent_id'] = 0;
+            }
+			else {
+                $final[$a]['parent_id'] = $s['parent_id'] + $b;
+            }
+
+            $a++;
+        }
+		$b = count($final);
+        $a = count($final);
+		foreach ($this->weles as $s) {
+            $final[$a]['name'] = $s['name'];
+            if ($s['parent_id'] == 0) {
+                $final[$a]['parent_id'] = 0;
+            }
+			else {
                 $final[$a]['parent_id'] = $s['parent_id'] + $b;
             }
 
             $a++;
         }
         $f = var_export($final, true);
-        echo $f;*/
+        echo $f;
 
         //dump($this->fin[1176]);
         //\App\Containers\Ad\Models\BritainRegion::insert($this->fin);
