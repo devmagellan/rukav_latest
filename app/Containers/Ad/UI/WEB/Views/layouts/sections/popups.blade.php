@@ -361,7 +361,7 @@
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
       <h1>Успех</h1>
-      <p>Ваше обьявление создано</p>
+      <p>Ваше объявление создано</p>
     </div>
   </div>
 </div>

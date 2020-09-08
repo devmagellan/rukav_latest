@@ -119,7 +119,7 @@
       <div class="row">
         <div class="col-sm-12">
           <h5 class="add_advert_block_title">
-            Подать новое обьявление
+            Подать новое объявление
           </h5>
         </div>
       </div>
