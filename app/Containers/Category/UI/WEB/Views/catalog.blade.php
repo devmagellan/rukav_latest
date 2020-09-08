@@ -82,12 +82,13 @@
               Тип сделки:
             </p>
 
-
+				@if(isset($data))
               <select id="filterDeals" class="form-control" name="filterDeals">
                   @foreach($data['filterDeals'] as $filter)
                       <option value="{{$filter->id}}">{{$filter->name}}</option>
                   @endforeach
               </select>
+			  @endif
           </div>
           <div class="col-sm-3">
             <p class="product_filter_text">
@@ -116,7 +117,7 @@
 
           <div class="col-sm-4 d-none d-sm-block"><button>Объявления </button></div>
           <div class="col-4 col-sm-1" style="text-align: center"><button class="data_sort   @if( Request::get('sort_by_date')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_date')=='high_to_low') high_to_low @else low_to_high @endif">Дата @if( Request::get('sort_by_date')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_date')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
-
+			@if(isset($data))
             <?
             $currentFilters=\App\Containers\Filter\Models\CategoryFilter::with('filter')->where('category_id',$data['currentCat']->id)->get();
             ?>
@@ -133,7 +134,7 @@
               <div class="col-md-2" style="text-align: center"></div>
             @endfor
           @endif
-
+			@endif
             <div class="col-4 col-sm-1" style="text-align: center"><button class="price_sort   @if( Request::get('sort_by_price')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_price')=='high_to_low') high_to_low @else low_to_high @endif">Цена @if( Request::get('sort_by_price')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_price')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
         </div>
 
@@ -143,7 +144,7 @@
             @if($product->pictures)
             <span class="product_item_foto"><img src="/img/photo_camera_icon.svg" alt="">{{count($product->pictures)}}</span>
             @endif
-            @if(!$product->pictures)
+            @if(!$product->pictures->first())
             <img src="/storage/pictures/photo_icon.png" alt="" class="product_item_img">
 
             @else
@@ -169,7 +170,7 @@
           </div>
           <?$filterValue=[];
           ?>
-
+@if(isset($currentFilters))
           @foreach($currentFilters as $key=>$filter)
             <?
             $filterValue[$key]=\App\Containers\Filter\Models\AddFilter::where('add_id',$product->id)->where('filter_id',$filter->filter_id)->first();
@@ -185,6 +186,7 @@
               <div class="col-md-2" style="text-align: center"></div>
             @endfor
           @endif
+		@endif  
           <div class="col-sm-1">
             <p class="product_item_price">£ {{$product->price}}</p>
             <p class="product_map_marka d-sm-none">Volkswagen</p>
@@ -212,6 +214,7 @@
           </div>
         </div>
           @endforeach
+		  
 
         {{ $products->links() }}
 
