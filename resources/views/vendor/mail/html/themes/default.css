@@ -129,7 +129,10 @@ img {
     padding: 0;
     width: 100%;
 }
-
+.additional{
+    font-style:italic;
+    font-size:16px;
+}
 .inner-body {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
@@ -281,6 +284,35 @@ img {
     margin-bottom: 0;
     padding-bottom: 0;
 }
+
+/* Additional */
+
+.additional {
+    margin: 21px 0;
+}
+
+.additional-content {
+    background-color: #edf2f7;
+    color: #718096;
+    padding: 16px;
+}
+
+.additional-content p {
+    color: #718096;
+    font-style:italic;
+    font-size:13px;
+}
+
+.additional-item {
+    padding: 0;
+}
+
+.additional-item p:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+
 
 /* Utilities */
 

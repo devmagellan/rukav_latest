@@ -41,10 +41,13 @@
 
 {{-- Salutation --}}
 @if (! empty($salutation))
-    <p style="font-size: 14px;font-style: italic;">{{ $salutation }}</p>
+@component('mail::additional')
+{{ $salutation }}
+@endcomponent
 @else
-@lang('Regards'),<br>
-{{ config('app.name') }}
+    <span class="additional">Вы получили это письмо, потому что зарегистрированы на сайте «RUKAV».
+        Если у вас есть вопросы, воспользуйтесь разделом «Помощь» или напишите нам на support@rukav.co.uk.
+        Если вы больше не хотите получать нашу рассылку, нажмите сюда. Мы будем скучать!</span>
 @endif
 
 {{-- Subcopy --}}

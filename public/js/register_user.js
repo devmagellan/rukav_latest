@@ -6,8 +6,9 @@ $(document).ready(function () {
       var radioValue = $("input[name='vid_user']:checked"). val();
     e.preventDefault();
     var formData = $('#registerForm').serialize();
+    console.log('HERE')
     $.ajax({
-      method: 'post',
+      type: 'post',
       url: '/register',
       data: formData,
       success: function (data) {
@@ -34,7 +35,7 @@ $(document).ready(function () {
         });
       }
     });
-  })
+  });
 
     $(".emailConfirmationForm").bind('submit', function (e) {
         e.preventDefault();
