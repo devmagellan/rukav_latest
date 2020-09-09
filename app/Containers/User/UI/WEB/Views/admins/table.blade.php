@@ -5,21 +5,12 @@
             <th>#</th>
             <th>Name</th>
             <th>Email</th>
-            <th>BirthDate</th>
-            <th>Gender</th>
-            <th>Department</th>
-            <th>ManagerId</th>
-            <th>ManagerName</th>
-            <th>IsManager</th>
-            <th>Position</th>
-            <th>StartDate</th>
-            <th>Location</th>
+
             <th>Действия</th>
         </tr>
         </thead>
         <tbody>
         @foreach($customers as $customer)
-            @if($customer->getCustomersCompany)
             <form>
 
                 <?
@@ -32,30 +23,6 @@
             <th class="customer_id" scope="row">{{$customer->id}}</th>
             <td class="customer_name">{{$customer->name}}</td>
             <td class="customer_email">{{$customer->email}}</td>
-            <td class="customer_phone">{{$customer->getCustomersCompany['birth_date']}}</td>
-            <td class="customer_phone">@if ($customer->getCustomersCompany['sex']==1) {{'male'}} @else {{'female'}} @endif</td>
-            <td class="customer_phone">{{$customer->getCustomersCompany['department']}}</td>
-            <td class="customer_phone">{{$customer->getCustomersCompany['manager_id']}}</td>
-            <td class="customer_phone">@if($manager) {{$manager_user->name}} {{$manager_user->sername}} @endif</td>
-            <td class="customer_manager">
-                <?
-                $is_manager=App\Containers\Manager\Models\Manager::where('user_id',$customer->id)->first();
-                ?>
-                @if($is_manager)
-            <input type="hidden" class="is_manager" value="1">
-                    @else
-                        <input type="hidden" class="is_manager" value="0">
-                    @endif
-                <div class="custom-control custom-switch">
-                    <input type="hidden" class="customSwitch2_id" value="{{$customer->id}}" >
-                    <input type="checkbox" class="custom-control-input customSwitch2" id="customSwitch2_{{$customer->id}}" @if($is_manager) checked="" @else @endif >
-                    <label class="custom-control-label" for="customSwitch2_{{$customer->id}}"></label>
-                </div>
-            </td>
-
-            <td class="customer_phone">{{$customer->getCustomersCompany['position']}}</td>
-            <td class="customer_phone">{{$customer->getCustomersCompany['start_date']}}</td>
-            <td class="customer_phone">{{$customer->getCustomersCompany['location']}}</td>
             <td>
                 <a href="javascript:void(0)" class="PrependChangeCustomer btn btn-primary btn-sm btn-icon waves-effect waves-themed"  data-toggle="modal" data-target=".default-example-modal-right-lg-user">
                     <i class="fal fa-pencil"></i>
@@ -66,7 +33,6 @@
             </td>
         </tr>
             </form>
-            @endif
       @endforeach
         </tbody>
     </table>
@@ -127,8 +93,8 @@
                 method: 'POST',
                 dataType: 'json',
                 async:false,
-                url: '/company/users/delete',
-                data: {customer_id: customer_id
+                url: '/users/delete',
+                data: {id: customer_id
                 },
                 beforeSend: function() {
                 },

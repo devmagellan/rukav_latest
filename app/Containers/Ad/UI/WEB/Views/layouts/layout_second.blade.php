@@ -13,8 +13,14 @@
   <link href="{{asset('/css/main.css')}}" rel="stylesheet">
   <link href="{{asset('/css/media.css')}}" rel="stylesheet">
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
 
   <script>
+
+
+
+
   console.log('876')
     function initContinued(addr,ajax) {
         console.log('aJax=>',ajax)
@@ -207,6 +213,21 @@ $initAutoComplete = function(){
           }
       })
   })
+  
+  $(document).ready(function(){
+	setTimeout(function () {
+	console.log('height',$('.slick-list').height());
+	var h=$('.product_slider_main').height()+80
+	var hs=h+'px'
+	console.log('height',h);
+	$('.adv_photo').height(hs)
+	if(h<560){
+		console.log('less')
+		var res=$('.product_description').detach()
+		$('.adv_photo_main').append(res)
+	}
+	}, 500)
+});
   </script>
 
 </head>
@@ -218,7 +239,7 @@ $initAutoComplete = function(){
 <div id="map" style="display:none"></div>
 @include('ad::layouts.sections.footer')
 @include('ad::layouts.sections.popups')
-@include('ad::layouts.sections.scripts')
+@include('homepage::layouts.sections.scripts')
 
 
 <script>

@@ -421,7 +421,10 @@ class Controller extends WebController
             \App\Containers\Site\Models\ProductCategory::insert($data);
         }
         else{
-        \App\Containers\Site\Models\ProductCategory::where('id',$request->input('id'))->update($data);}
+        \App\Containers\Site\Models\ProductCategory::where('id',$request->input('id'))->update($data);
+		\Cache::forget('all_categories_');
+		\Cache::forget('root_categories_');
+		}
         $cat=\App\Containers\Site\Models\ProductCategory::where('id',$request->input('id'))->first();
         return json_encode(['message'=>'success','cat'=>json_decode($cat)]);
     }

@@ -116,7 +116,6 @@ class Controller extends WebController
       $data['customers'] = \App\Containers\User\Models\User::where('is_client',0)->with('getCustomersCompany')->get();
     }
 
-
     //rightJoin('customers', 'users.id', '=', 'user_id')->where('customers.company_id',$company_id)
     return view('user::admins.table', $data);
   }

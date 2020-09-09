@@ -14,3 +14,8 @@ $router->post('/categoryLink', [
     'uses' => 'Controller@categoryLink',
 ]);
 
+$router->get('/all_author_ads', [
+    'as' => 'save_preview',
+    'uses'  => 'Controller@allAuthorAds',
+]);
+
