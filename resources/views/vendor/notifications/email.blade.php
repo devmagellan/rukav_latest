@@ -12,7 +12,17 @@
 
 {{-- Intro Lines --}}
 @foreach ($introLines as $line)
+@if(mb_substr($line, 0, 22)=='Спасибо за регистрацию')
+@component('mail::thanks_for_registartion')
+@endcomponent
+@elseif(mb_substr($line, 0, 8)=='Ваш код:')
+@component('mail::code')
 {{ $line }}
+@endcomponent
+@else
+{{ $line }}
+@endif
+
 
 @endforeach
 
