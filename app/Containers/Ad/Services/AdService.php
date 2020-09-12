@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Containers\Filter\Models\AddFilter;
 use App\Containers\Filter\Models\AddFilterDeals;
 use Carbon\Carbon;
+use App\Containers\HomePage\Services\GlobalService;
 class AdService
 {
   public function createAd($data): Ad

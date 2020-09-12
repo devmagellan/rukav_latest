@@ -88,7 +88,7 @@
             <a href="/all_author_ads?id={{$ad->getSender->id}}" class="product_info_all_add">смотреть все объявления</a>
             <p class="product_info_city">{{$ad->city}}</p>
           </div>
-          <a href="#" class="product_info_btn_phone">
+          <a href="tel:{{$ad->phone}}" class="product_info_btn_phone">
             <img src="/img/info_phone.svg" alt="">
             <span>{{$ad->phone}}</span>
           </a>
@@ -189,7 +189,7 @@
         </div>
       </div>
     </div>
-    <div class="row product_description">
+    <div class="row product_description" style="word-wrap: break-word;">
       <div class="col-sm-12">
         <h4>Описание</h4>
         <p>
@@ -201,9 +201,9 @@
     <div class="row product_will_share justify-content-between">
       <div class="col-md-6">
         <p class="product_will_share_desc">Поделиться на:</p>
-        <ul class="socials">
+        <!--ul class="socials">
           <li>
-            <a href="#">
+            <a href="http://www.facebook.com/sharer.php?u={{url()->current()}}">
               <i class="fab fa-facebook-f"></i>
             </a>
           </li>
@@ -213,7 +213,7 @@
             </a>
           </li>
           <li>
-            <a href="#" class="twitter">
+            <a href="https://twitter.com/share?url={{url()->current()}}&amp;text=Simple%20Share%20Buttons&amp;hashtags=simplesharebuttons" class="twitter">
               <i class="fab fa-twitter"></i>
             </a>
           </li>
@@ -223,11 +223,22 @@
             </a>
           </li>
           <li>
-            <a href="#" class="envelope">
+            <a href="mailto:?Subject=Simple Share Buttons&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 {{url()->current()}}" class="envelope">
               <i class="fas fa-envelope"></i>
             </a>
           </li>
-        </ul>
+        </ul-->
+		<!-- AddToAny BEGIN -->
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_email"></a>
+<a class="a2a_button_pinterest"></a>
+<a class="a2a_button_vk"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
       </div>
       <div class="col-md-6" style="text-align: right">
         <img src="/img/tag_icon.png" alt="">

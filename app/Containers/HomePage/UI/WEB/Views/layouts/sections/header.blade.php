@@ -60,23 +60,23 @@
           </a>
         </div>
       @else
-        @if(isset($data['properties']->user) )
+        @if(null!=(\Auth::user()) )
         <div class="col-md-1 col-2">
           <a href="#" class="user_cabinet_login" >
 		  
 		  
 		  
-            @if(isset($data['properties']->user) && $data['properties']->user->avatar)
-              <img style="height:40px;border-radius: 50%;" src="@if(substr($data['properties']->user->avatar, 0, 4)!='http')/storage/avatars/@endif{{ $data['properties']->user->avatar }}" />
-              @elseif(isset($data['properties']->user) && $data['properties']->user->name )
-             <img style="height:40px" src="{{ \Avatar::create($data['properties']->user->name.' '.$data['properties']->user->sername)->toBase64() }}" />
+            @if(null!=(\Auth::user()) && \Auth::user()->avatar)
+              <img style="height:40px;border-radius: 50%;" src="@if(substr(\Auth::user()->avatar, 0, 4)!='http')/storage/avatars/@endif{{ \Auth::user()->avatar }}" />
+              @elseif(null!=(\Auth::user()) && \Auth::user()->name )
+             <img style="height:40px" src="{{ \Avatar::create(\Auth::user()->name.' '.\Auth::user()->sername)->toBase64() }}" />
             @endif
           </a>
           <div class="user_cabinet_dropdown">
 
             <img class="user_cabinet_dropdown_bg" src="/img/cabinet_dropdownbg.png" alt="">
             <p class="user_cabinet_name">
-              {{$data['properties']->user->name}} {{$data['properties']->user->sername}}
+              {{\Auth::user()->name}} {{\Auth::user()->sername}}
             </p>
             <a href="/private_cabinet#myads" class="user_cabinet_item">
               <div class="user_cabinet_icon">
@@ -250,9 +250,9 @@
                       }
                   }
     }
-    if(isset($data['properties']->categories)){
+    if(isset($data['properties'])){
      $rec = new Recursion;
-     $result = isset($rec) ? $rec->get_cat($data['properties']->categories):'';
+     $result = isset($rec) ? $rec->get_cat($data['properties']):'';
     //Выводи каталог на экран с помощью рекурсивной функции
     }
   @endphp

@@ -717,7 +717,6 @@ $initAutoComplete = function(){
 
 @if(null!=(session()->get('registration_error')))
 {{session()->get('registration_error')}}
-<?dump(122);?>
 <script>
 $(document).ready(function(){
 	console.log('777');

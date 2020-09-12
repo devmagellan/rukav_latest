@@ -18,6 +18,7 @@ use Illuminate\Http\Response;
 use MongoDB\Driver\Session;
 use App\Ship\Parents\Requests\Request;
 use App\Containers\Connect\UI\WEB\Requests\CreateConnectRequest;
+use App\Containers\HomePage\Services\GlobalService;
 
 /**
  * Class Controller
@@ -12563,8 +12564,8 @@ class Controller extends WebController
   public function create(CreateAdRequest $request)
   {
     //TODO эту переменную сделать в сервис провайдере
-      $data['properties']=$this->getMainProperties($request);
-    $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
+    $data['properties']=GlobalService::getMainProperties($request)['categories'];
+    $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
     $locations=\App\Containers\Ad\Models\BritainRegion::where('parent_id',0)->get();
     $filterDeals=\App\Containers\Filter\Models\FilterDeals::get();
     return view('ad::ads.form-add-ads', compact( 'categoriesOnlyRoot','locations','data','filterDeals'));
@@ -12572,8 +12573,8 @@ class Controller extends WebController
 
   public function adminCreate(CreateAdRequest $request,$user_id){
     $result['user_id']=$user_id;
-    $data['properties']=$this->getMainProperties($request);
-    $result['categoriesOnlyRoot'] = $data['properties']->categories->where('parent_id', 0);
+    $data['properties']=GlobalService::getMainProperties($request)['categories'];
+    $result['categoriesOnlyRoot'] = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
     $result['locations']=\App\Containers\Ad\Models\BritainRegion::where('parent_id',0)->get();
       $result['filterDeals']=\App\Containers\Filter\Models\FilterDeals::get();
     $result['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
@@ -12840,8 +12841,8 @@ class Controller extends WebController
       $nestedData [2] = $ad->title;
       $nestedData [3] = '<span style="font-size:9px">' . mb_strimwidth($ad->message, 0, 30, "...") . '</span>';
       $nestedData [4] = $ad->sender;
-      $nestedData [5] = $ad->getSender->name . ' ' . $ad->getSender->sername;
-      $nestedData [6] = $ad->getSender->email;
+      $nestedData [5] = ($ad->getSender) ? $ad->getSender->name . ' ' . $ad->getSender->sername : 'Не известно';
+      $nestedData [6] = ($ad->getSender) ? $ad->getSender->email : 'Не известно';
       $nestedData [7] = ($ad->phone) ? $ad->phone : 'нет';
       $nestedData [8] = ($rubrik) ? $rubrik->name : 'NoCategoryName';
       $nestedData [9] = 'second';

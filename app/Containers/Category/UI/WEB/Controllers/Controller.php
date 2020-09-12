@@ -11,6 +11,7 @@ use App\Containers\Category\UI\WEB\Requests\StoreCategoryRequest;
 use App\Containers\Category\UI\WEB\Requests\EditCategoryRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
+use App\Containers\HomePage\Services\GlobalService;
 
 /**
  * Class Controller
@@ -60,13 +61,15 @@ class Controller extends WebController
   {
     //dump($request->input());
       $data['filterDeals']=\App\Containers\Filter\Models\FilterDeals::get();
-      $data['properties']=$this->getMainProperties($request);
-      $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
-      $data['currentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$id)->first();
+	   $data['properties']=GlobalService::getMainProperties($request)['categories'];
+      $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
+	  $data['currentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$id)->first();
+	  if(null!=$data['currentCat']){
       $data['parentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$data['currentCat']->parent_id)->first();
-      if($data['parentCat']){
+      if(null!=$data['parentCat']){
           $data['grandParentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$data['parentCat']->parent_id)->first();
       }
+	  }
       $currentPage = $request->input('page');
       $from=$request->input('price_start');
       $to=$request->input('price_end');

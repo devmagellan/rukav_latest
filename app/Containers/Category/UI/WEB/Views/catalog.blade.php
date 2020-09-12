@@ -158,11 +158,12 @@
             <div >
               <div class="flag" style="width:30px;display:none;position:relative">
              <?
+			 if($product->getSender){
 			 if($product->getSender->country){
               $egypt = country($product->getSender->country);
 
               echo $egypt->getFlag();
-			 }?></div>
+			 }}?></div>
             <p class="product_item_city d-none d-sm-block">
               <img src="/img/map_icon.svg" alt="" class="product_map_icon">
                 {{$product->city}}

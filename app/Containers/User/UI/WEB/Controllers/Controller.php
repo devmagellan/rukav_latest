@@ -111,11 +111,10 @@ class Controller extends WebController
             ->where('customers.company_id', $company_id);
     })->with('getCustomersCompany')->get();*/
     if (\Auth::user()->hasRole('Gods_mode')) {
-      $data['customers'] = \App\Containers\User\Models\User::where('is_client',0)->with('getCustomersCompany')->get();
+      $data['customers'] = \App\Containers\User\Models\User::where('is_client',0)/* ->with('getCustomersCompany') */->get();
     } else {
-      $data['customers'] = \App\Containers\User\Models\User::where('is_client',0)->with('getCustomersCompany')->get();
+      $data['customers'] = \App\Containers\User\Models\User::where('is_client',0)/* ->with('getCustomersCompany') */->get();
     }
-
     //rightJoin('customers', 'users.id', '=', 'user_id')->where('customers.company_id',$company_id)
     return view('user::admins.table', $data);
   }
@@ -231,12 +230,20 @@ class Controller extends WebController
         // make into array for mass assign.
         //make sure you activate $guarded in your Staff model
         $staff = $tmp_user->toArray();
-\Log::info('replica',$staff);
-/* $staff['password']=bcrypt($staff['password']);
-\Log::info('replica',$staff); */
-        $user=\App\Containers\User\Models\User::firstOrCreate($staff);
+		/* $staff['password']=bcrypt($staff['password']);*/
+		$current=\App\Containers\User\Models\User::where('email',$staff['email'])->withTrashed()->first();
+		
+		if($current!=null && $current->deleted_at!=null){
+			\App\Containers\User\Models\User::where('email',$staff['email'])->update($staff);
+			$user=\App\Containers\User\Models\User::where('email',$staff['email'])->withTrashed()->first();
+			$user->deleted_at=null;
+		}
+		else{
+			$user=\App\Containers\User\Models\User::firstOrCreate($staff);
+		}
 		$user->active=1;
 		$user->save();
+        
           //$user=\App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->first();
           $data= new \StdClass();
           $data->email=$user->email;

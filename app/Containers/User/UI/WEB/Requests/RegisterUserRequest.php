@@ -48,13 +48,13 @@ class RegisterUserRequest extends Request
       'country' => 'required|max:30',
       'phone' =>  'required_if:vid_user,Организация|required_if:vid_user,Предприниматель|required_if:vid_user,Компания|max:30|nullable||unique:users,phone',
       'password' => 'required|between:6,30',
-      'email' => 'required|email|unique:users,email',
+      'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
       'nameJob' => 'required_if:vid_user,Бизнес',
       'address' => 'required_if:vid_user,Бизнес',
       'postCode' => 'required_if:vid_user,Бизнес',
       'vid_user' => 'required|max:30',
     ];
-
+	
     $optionalRules = [
       'regNumber' => 'required',
       'vatNumber' => 'required',

@@ -21,9 +21,21 @@
             display:none;
         }
         #dt-basic-example > thead > tr:nth-child(1) > th.dt-center.sorting_asc::after{
-            display:none;
+        display:none;
         }
         #dt-basic-example > thead > tr:nth-child(1) > th.dt-center.sorting_asc{ width:17px !important;}
+		
+#dt-basic-example {
+  table-layout: fixed;
+  width: 100% !important;
+}
+#dt-basic-example td,
+#dt-basic-example th{
+  width: auto !important;
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 
     </style>
 @endsection
@@ -676,7 +688,8 @@
                     "orderCellsTop": true,
                     "fixedHeader": true,
                     "searching": true, // Search box and search function will be actived
-                       "ordering": true,
+                    "ordering": true,
+					"scrollX": true,
                     "info": true,
                     "autoWidth": true,
                     "processing": true,  // Show processing
