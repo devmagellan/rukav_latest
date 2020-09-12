@@ -11,7 +11,7 @@ use App\Containers\StaticPage\UI\WEB\Requests\StoreStaticPageRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\EditStaticPageRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
-
+use App\Containers\HomePage\Services\GlobalService;
 /**
  * Class Controller
  *
@@ -112,7 +112,7 @@ class Controller extends WebController
 	public function getPage(GetAllStaticPagesRequest $request,$page){
 	
         $data['firstHelpPage']=\App\Containers\StaticPage\Models\StaticPage::where('link',$page)->orderBy('position','asc')->with('getSidebar')->first();
-        $data['properties']=$this->getMainProperties($request);
+        $data['properties']=GlobalService::getMainProperties($request)['categories'];
         switch($data['firstHelpPage']->type){
             case 3:
                 $template='about_us';
