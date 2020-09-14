@@ -117,7 +117,90 @@
                     <input type="hidden" id="manager_id" name="manager_id" value="1">
 
 
+                    <div class="form-group">
+                        <label class="form-label" for="customer_name">Вид пользователя</label>
 
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input vid_user" id="privat" value="Частная" name="vid_user" checked="">
+                            <label class="custom-control-label" for="privat">Частная</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input vid_user" id="organisation" value="Организация" name="vid_user" >
+                            <label class="custom-control-label" for="organisation">Организация</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input vid_user" id="enterprenur" value="Предприниматель" name="vid_user" >
+                            <label class="custom-control-label" for="enterprenur">Предприниматель</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input vid_user" id="company" value="Компания" name="vid_user" >
+                            <label class="custom-control-label" for="company">Компания</label>
+                        </div>
+
+                    </div>
+
+                    <div id="company_information" class="company_modal_block">
+                        <div class="form-group">
+                            <label class="form-label" for="customer_name">Название компании</label>
+                            <input type="text" id="company_name" name="company_name" class="form-control" placeholder="Название компании">
+
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="customer_name">Регистрационный номер</label>
+                            <input type="text" id="reg_number" name="reg_number" class="form-control" placeholder="Регистрационный номер">
+
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="customer_name">VAT number</label>
+                            <input type="text" id="vat_number" name="vat_number" class="form-control" placeholder="VAT number">
+
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="customer_name">Юридический адрес</label>
+                            <input type="text" id="address" name="address" class="form-control" placeholder="Юридический адрес">
+
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="post_code">PostCode</label>
+                            <input type="text" id="post_code" name="postCode" class="form-control" placeholder="PostCode">
+
+                        </div>
+                    </div>
+
+                    <div id="individual_information" class="individual_modal_block">
+                        <div class="form-group">
+                            <label class="form-label" for="customer_name">Название бизнеса</label>
+                            <input type="text" id="business_name" name="business_name" class="form-control" placeholder="Название бизнеса">
+
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="customer_name">Адрес</label>
+                            <input type="text" id="address" name="address" class="form-control" placeholder="Адрес">
+
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="post_code">PostCode</label>
+                            <input type="text" id="post_code" name="postCode" class="form-control" placeholder="PostCode">
+
+                        </div>
+                    </div>
+                    <div id="organisation_information" class="organisation_modal_block">
+                        <div class="form-group">
+                            <label class="form-label" for="organisation_name">Название организации</label>
+                            <input type="text" id="business_name" name="business_name" class="form-control" placeholder="Название организации">
+
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="customer_name">Адрес</label>
+                            <input type="text" id="address" name="address" class="form-control" placeholder="Адрес">
+
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="post_code">PostCode</label>
+                            <input type="text" id="post_code" name="postCode" class="form-control" placeholder="PostCode">
+
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="form-label" for="customer_name">Имя пользователя</label>
@@ -130,15 +213,15 @@
 
                     </div>
 
-                    <div class="form-group">
+  {{--                  <div class="form-group">
                         <label class="form-label" for="customer_sex">Пол</label>
                         <select class="form-control" id="customer_sex">
                             <option value="1">Male</option>
                             <option value="0">Female</option>
                         </select>
-                    </div>
+                    </div>--}}
 
-                    @if($company_temp)
+{{--                    @if($company_temp)
                         <div class="form-group">
                             <label class="form-label" for="select">Выбрать этому пользователю компанию</label>
                             <select   class="form-control" id="selectCompany">
@@ -151,26 +234,18 @@
 
 
                         </div>
-                    @endif
+                    @endif--}}
+                    @if(\Auth::user()->can('manage-roles'))
                     <div class="form-group">
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="managerSwitch" >
-                            <label class="custom-control-label" for="managerSwitch">Менеджер/не менеджер</label>
+                            <input type="checkbox" class="custom-control-input" name="is_client" id="managerSwitch" >
+                            <label class="custom-control-label" for="managerSwitch">Админ/не админ</label>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="select">Назначить этому пользователю менеджера</label>
-                        <select   class="form-control" id="select">
-                             {{-- @foreach($managers as $manager)
-                                    <option value="{{$manager->id}}">{{$manager->user->name}} {{$manager->user->sername}}</option>
-                                @endforeach--}}
-                        </select>
-
-
-
-
-                    </div>
+                    @endif
+                    @if(\Auth::user()->can('manage-roles'))
+                    <div id="rolesBlock"></div>
+                    @endif
 
                     <div class="form-group">
                         <label class="form-label" for="customer_location">Местонахождение пользователя</label>
@@ -182,20 +257,20 @@
                         <input type="email" id="customer_email" name="customer_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required email class="form-control" placeholder="Email">
                         <span class="has_been_taken_message" style="display:none;color:red"> Email has been taken</span>
                     </div>
-                    <div class="form-group">
+          {{--          <div class="form-group">
                         <label class="form-label" for="company_department">Департамент</label>
                         <input type="text" id="customer_department" name="customer_department" required class="form-control" placeholder="Департамент">
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="company_position">Должность</label>
                         <input type="text" id="customer_position" name="customer_position" required class="form-control" placeholder="Должность">
-                    </div>
+                    </div>--}}
 
                     <div class="form-group">
                         <label class="form-label" for="customer_phone">Контактный телефон</label>
                         <input type="text" id="customer_phone" name="customer_phone" required class="form-control" placeholder="Контактный телефон">
                     </div>
-                    <div class="form-group">
+   {{--                 <div class="form-group">
                         <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Birth date</label>
                         <div class="col-12 col-lg-6 ">
                             <input type="text" class="form-control" id="datepicker-1" readonly placeholder="Select date" value="{{$today}}">
@@ -207,7 +282,7 @@
                         <div class="col-12 col-lg-6 ">
                             <input type="text" class="form-control" id="datepicker-2" readonly placeholder="Select date" value="{{$today}}">
                         </div>
-                    </div>
+                    </div>--}}
 
 
 
@@ -338,7 +413,9 @@ $('#managerSwitch').change(function(){
 
 
 
-        $('#customer_email').change(function(){
+        $('#customer_email').focusout(function(){
+            console.log(323,$('#customer_id').val())
+            var customer_id = $('#customer_id').val()
             var company_email = $('#customer_email').val()
 
             $.ajax({
@@ -349,10 +426,11 @@ $('#managerSwitch').change(function(){
                 data: {
                     'email_check': 1,
                     'email': company_email,
+                    'customer_id':customer_id
                 },
                 success: function (response) {
                     console.log(response )
-                    if (response == 'taken') {
+                    if (response.result == 'taken' && response.belonging!=true) {
                         localStorage.setItem('email_state',1);
                         console.log(response )
                         $('#customer_email').addClass("is-invalid");
@@ -360,8 +438,8 @@ $('#managerSwitch').change(function(){
                         /*           $('#company_email').parent().removeClass();
                          $('#company_email').parent().addClass("form_error");
                          $('#company_email').siblings("span").text('Sorry... Email already taken');*/
-                    } else if (response == 'not_taken') {
-                        console.log(response )
+                    } else {
+                        console.log(response.result )
                         localStorage.setItem('email_state',0);
                         $('#customer_email').removeClass("is-invalid");
                         $('#customer_email').addClass("is-valid");

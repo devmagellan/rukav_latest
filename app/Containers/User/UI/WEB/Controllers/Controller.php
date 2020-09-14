@@ -122,14 +122,17 @@ class Controller extends WebController
 
   public function emailCheck(GetAllUsersRequest $request)
   {
-
+    $belonging=false;
+    if(null != $request->input('customer_id') && null != ($request->input('email'))){
+        $belonging = boolval(\App\Containers\User\Models\User::where('id',$request->input('customer_id'))->where('email', $request->input('email'))->first());
+    }
     if (null !== ($request->input('email'))) {
       $email = $request->input('email');
       $results = \App\Containers\User\Models\User::where('email', $email)->first();
       if ($results) {
-        return json_encode("taken");
+        return json_encode(["result"=>"taken",'belonging'=>$belonging]);
       } else {
-        return json_encode('not_taken');
+        return json_encode(["result"=>'not_taken','belonging'=>$belonging]);
       }
 
     }
@@ -367,6 +370,18 @@ if( $user && $emailConfirmed && $phoneConfirmed){
     public function deleteUser(GetAllUsersRequest $request){
     \App\Containers\User\Models\User::where('id',$request->input('id'))->delete();
     return json_encode(['result'=>'success']);
+
+    }
+
+    public function getUserData(GetAllUsersRequest $request){
+
+        return \App\Containers\User\Models\User::where('id',$request->input('customer_id'))->first();
+    }
+
+    public function getUserRolesData(GetAllUsersRequest $request){
+        $data['user']=\App\Containers\User\Models\User::where('id',$request->input('customer_id'))->with('roles')->first();
+        $data['roles_array']=$data['user']->roles->pluck('id')->toArray();
+        return view('user::admins.roles', $data);
     }
 
 }

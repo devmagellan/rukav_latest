@@ -12,19 +12,21 @@ class UserService
   public function createUser($data): User
   {
       $nameAvatar=time() . '.jpg' ;
+      \Log::info('UserData=>',array($data));
       try {
      // \Avatar::create($data->firstName.' '.$data->lastName)->save('avatars'.$nameAvatar, 100);
-      return User::create([
+      return User::updateOrCreate([
+      'id'=>$data->customer_id,
       'name' => $data->firstName,
       'sername' => $data->lastName,
       'email' => $data->email,
-      'password' => bcrypt($data->password),
+      'password' => ($data->customer_id) ? $data->password : bcrypt($data->password),
       'country' => $data->country,
       'phone' => $data->phone,
       'vid_user' => $data->vid_user,
-      'avatar'=>null,
-      'active'=>1,
-      'is_client'=>1,
+      'avatar'=>($data->customer_id) ? $data->avatar : null,
+      'active'=>($data->customer_id) ? $data->active : 1,
+      'is_client'=>($data->customer_id) ? $data->is_client : 1,
       'confirmed'=> ($data->admin_side==1) ? 0 : 1,
       'is_confirmed_phone'=> ($data->admin_side==1 && $data->phone) ? 0 : 1
     ]);

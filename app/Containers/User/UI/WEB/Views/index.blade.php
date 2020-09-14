@@ -427,7 +427,8 @@ function  theSubmitFunction () {
 $('.has_been_taken_message').hide();
     var form=$('#customer_create')
     if (form[0].checkValidity() === false || localStorage.getItem('email_state') == 1) {
-    if(localStorage.getItem('email_state') == 1){
+
+    if(localStorage.getItem('email_state') == 1 ){
         console.log(555)
         $('#customer_email').closest('.form-control').removeClass('is-valid').addClass('is-invalid')
         $('#customer_create').removeClass('was-validated')

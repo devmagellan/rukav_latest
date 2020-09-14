@@ -166,6 +166,4 @@ protected $emailCode;
         return $this->hasMany(\App\Containers\Ad\Models\Ad::class, 'sender','id');
     }
 
-
-
 }

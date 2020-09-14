@@ -15,9 +15,10 @@ class BusinessAccountService
     if(!is_array($data)) {
         $data=$data->toArray();
     }
+    $isSet=BusinessAccount::where('user_id',$userId)->first()->pluck('id');
     \Log::info('Data--=>',$data);
-    BusinessAccount::create([
-
+    BusinessAccount::updateOrCreate([
+      'id'=>$isSet,
       'company_name' => $data['company_name'],
       'address' => $data['address'],
       'post_code' => $data['postCode'],
@@ -39,4 +40,5 @@ class BusinessAccountService
         'show_work_hours'=> ($data['show_work_hours']) ? $data['show_work_hours'] : null,
     ]);
   }
+
 }
