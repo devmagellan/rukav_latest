@@ -15,4 +15,7 @@ $router->get('/logoutUser', [
     ->where('driver', implode('|', config('auth.socialite.drivers')));
 	
 	$router->get('/callback/{facebook}', '\App\Containers\Authentication\UI\WEB\Controllers\Controller@handleProviderCallback'); */
-
+$router->get('/verify/{token}', [
+    'as'   => 'register.verify',
+    'uses' => 'Controller@verify',
+]);

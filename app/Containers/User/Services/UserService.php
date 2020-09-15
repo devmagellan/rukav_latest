@@ -6,6 +6,7 @@ use App\Containers\User\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Laravolt\Avatar\Avatar;
+use Illuminate\Support\Str;
 
 class UserService
 {
@@ -13,10 +14,14 @@ class UserService
   {
       $nameAvatar=time() . '.jpg' ;
       \Log::info('UserData=>',array($data));
+      \Log::info('Phone=>'.$data->hide_phone);
       try {
-     // \Avatar::create($data->firstName.' '.$data->lastName)->save('avatars'.$nameAvatar, 100);
+
+
+      $current=\App\Containers\User\Models\User::where('email',$data->email)->withTrashed()->first();
+
       return User::updateOrCreate([
-      'id'=>$data->customer_id,
+      'id'=>($current!=null) ? $current->id : $data->customer_id,
       'name' => $data->firstName,
       'sername' => $data->lastName,
       'email' => $data->email,
@@ -27,8 +32,10 @@ class UserService
       'avatar'=>($data->customer_id) ? $data->avatar : null,
       'active'=>($data->customer_id) ? $data->active : 1,
       'is_client'=>($data->customer_id) ? $data->is_client : 1,
-      'confirmed'=> ($data->admin_side==1) ? 0 : 1,
-      'is_confirmed_phone'=> ($data->admin_side==1 && $data->phone) ? 0 : 1
+      'confirmed'=> ($data->customer_id) ? $data->confirmed : User::STATUS_INACTIVE,
+      'is_confirmed_phone'=> ($data->customer_id) ? $data->is_confirmed_phone : 0,
+      'verify_token' => Str::random(),
+      'deleted_at'=>null
     ]);
       } catch (\Throwable $exception) {
           \Log::info('exception',array($exception));

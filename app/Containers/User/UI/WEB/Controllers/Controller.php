@@ -283,14 +283,14 @@ class Controller extends WebController
     public function confirmEmailPhone(GetAllUsersRequest $request){
         $error=[];
      // var_dump(session()->get('emailVerificationCode'));
-        if($request->input('emailConfirmation')!='' && $request->input('emailConfirmation')==session()->get('emailVerificationCode') ){
+/*        if($request->input('emailConfirmation')!='' && $request->input('emailConfirmation')==session()->get('emailVerificationCode') ){
             $emailConfirmed=true;
         }
         else{
             //var_dump(1);
             $emailConfirmed=false;
            $error[]='error emailCode';
-        }
+        }*/
 
 $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',session()->get('emailVerificationTelephone'))->orderBy('id','desc')->first();
         if($request->input('phoneConfirmationSecond')!='' && $request->input('phoneConfirmationSecond')==$smsCode->code ){
@@ -303,27 +303,31 @@ $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',ses
             //return response()->json(['response'=>'error SmsCode'],403);
         }
       $user=\App\Containers\User\Models\User::where('phone',session()->get('emailVerificationTelephone'))->first();
-if( $user && $emailConfirmed && $phoneConfirmed){
+if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
   $user->is_confirmed_phone=1;
   $user->save();
   \Auth::guard('web')->loginUsingId($user->id, true);
   return response()->json(['response'=>'success'],200);
 
 }
-        elseif($emailConfirmed && $phoneConfirmed){
-		$tmp_user=\App\Containers\User\Models\TmpUser::where('id',session()->get('emailVerificationCodeUser'))->first();
+        elseif(/*$emailConfirmed &&*/ $phoneConfirmed){
+/*		$tmp_user=\App\Containers\User\Models\TmpUser::where('id',session()->get('emailVerificationCodeUser'))->first();
           // replace the data
-        $staff = $tmp_user->replicate();
+        $staff = $tmp_user->replicate();*/
 
         // make into array for mass assign.
         //make sure you activate $guarded in your Staff model
-        $staff = $tmp_user->toArray();
+        $user=\App\Containers\User\Models\TmpUser::where('id',session()->get('emailVerificationCodeUser'))->first()->toArray();
 
-        $user=\App\Containers\User\Models\User::firstOrCreate($staff);
+       /* $user=\App\Containers\User\Models\User::firstOrCreate($staff);*/
 		$user->active=1;
 		$user->save();
+		if($user->confirmed){
           \Auth::guard('web')->loginUsingId($user->id, true);
-            return response()->json(['response'=>'success'],200);
+            return response()->json(['response'=>'success'],200);}
+            else{
+                return response()->json(['response'=>'temporary'],200);
+            }
         }
         return response()->json(['response'=>$error],403);
     }
@@ -384,4 +388,8 @@ if( $user && $emailConfirmed && $phoneConfirmed){
         return view('user::admins.roles', $data);
     }
 
+    public function refresh(GetAllUsersRequest $request){
+        \Auth::guard('web')->loginUsingId($request->input('id'), true);
+        return json_encode(['result'=>'success']);
+    }
 }

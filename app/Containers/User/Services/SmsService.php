@@ -28,8 +28,8 @@ class SmsService
     {
         $code = rand(1000, 9999); //generate random code
         //$request->input('code') = $code; //add code in $request body
-
-      if ($request->all()[0] instanceof User) {
+        \Log::info('Array=>',$request->all());
+      if (isset($request->all()[0]) && $request->all()[0] instanceof User) {
 
 
         \Log::info('request-info',$request->all()[0]->toArray());

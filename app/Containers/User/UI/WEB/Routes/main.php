@@ -15,6 +15,10 @@ $router->post('/users/delete', [
   'uses' => 'Controller@deleteUser',
 ]);
 
+$router->post('/refresh', [
+    'as'   => 'users_delete',
+    'uses' => 'Controller@refresh',
+]);
 
 $router->post('/changeUserData', [
     'as'   => '/changeUserData',

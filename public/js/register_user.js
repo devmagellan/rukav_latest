@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
 
 
@@ -7,6 +8,7 @@ $(document).ready(function () {
     e.preventDefault();
     var formData = $('#registerForm').serialize();
     console.log('HERE')
+
     $.ajax({
       type: 'post',
       url: '/register',
@@ -94,7 +96,7 @@ $(document).ready(function () {
             type: "POST",
             url: "/confirm_email_phone",
             dataType: "json",
-            data: { emailConfirmation: $('.emailConfirmationWithPhone').val(),phoneConfirmationSecond: $('.phoneConfirmationSecond').val()},
+            data: { /*emailConfirmation: $('.emailConfirmationWithPhone').val(),*/phoneConfirmationSecond: $('.phoneConfirmationSecond').val()},
             complete:function(result){
 
             },
@@ -104,6 +106,10 @@ $(document).ready(function () {
                     $('.confirmEmailClose').trigger('click')
                     window.location.reload()
                     return true;
+                }
+                else if(result.response=='temporary'){
+                    $('.confirmEmailClose').trigger('click')
+                    $('#confirmEmail').modal({show:true})
                 }
 
             },
