@@ -60,6 +60,19 @@
   .redBorder{
     border: 2px solid red;
   }
+  
+  #search-field {
+    max-width: 21.875rem;
+     height: 2.425rem !important; 
+     line-height: 34px !important; 
+    border-radius: 34px 0px 0px 34px !important;
+    background: transparent;
+   border: 1px solid #E4E4E4 !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+     font-size: 14px !important; 
+    padding-left: 48px !important;
+}
 
 </style>
 @if ($errors->any())

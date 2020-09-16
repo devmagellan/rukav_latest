@@ -21,6 +21,15 @@
     @if($errors->any())
       <h4 class="success_message" style="color:green">{{$errors->first()}}</h4>
     @endif
+	@if(!$ad->getSender)
+		<div class="row">
+      <div class="col-md-8 justify-content-between product_title_block" style="display: flex;">
+        <h3 class="product_title">
+         данное объявление временно не демонстрируется
+        </h3>
+		</div>
+		</div>
+		@else
     <div class="row">
       <div class="col-md-8 justify-content-between product_title_block" style="display: flex;">
         <h3 class="product_title">
@@ -260,6 +269,7 @@
         </div>
       </div>
     </div>
+	@endif
   </div>
 </article>
 @endsection

@@ -12,6 +12,7 @@ use App\Containers\Category\UI\WEB\Requests\EditCategoryRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
 use App\Containers\HomePage\Services\GlobalService;
+use Carbon\Carbon;
 
 /**
  * Class Controller
@@ -59,6 +60,7 @@ class Controller extends WebController
    */
   public function index(GetAllCategoriesRequest $request, $id)
   {
+	$deleted_users=\App\Containers\User\Models\User::onlyTrashed()->pluck('id')->toArray();
     //dump($request->input());
       $data['filterDeals']=\App\Containers\Filter\Models\FilterDeals::get();
 	   $data['properties']=GlobalService::getMainProperties($request)['categories'];
@@ -91,7 +93,12 @@ class Controller extends WebController
           })
 
 
-        ->where('active',1) ->where('is_tmp',0) 
+        ->where('active',1) ->where('is_tmp',0)
+		->whereNotIn('sender', $deleted_users)
+		->where(function ($query) {
+			$query->whereDate('expired','>',Carbon::now())->orWhere('expired',null);
+		})
+		
         ->with('validFilter')
           ->when(null!=($request->input('filterDeals')) && $request->input('filterDeals')!=1 , function($q) use($request) {
               return $q->leftJoin('add_filter_deals', function($join) use($request) {

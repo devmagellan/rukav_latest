@@ -1,6 +1,10 @@
 $(document).ready(function () {
 
-
+    // var iti = window.intlTelInput(input, {
+    //     separateDialCode: true,
+    //     loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
+    //     initialCountry: "gb"
+    // });
 
   $('#registerButton').on('click', function (e) {
       var radioValue = $("input[name='vid_user']:checked"). val();
@@ -15,7 +19,12 @@ $(document).ready(function () {
         //location.reload();
           console.log(data)
           if(data.message=='account created'){
-              console.log(radioValue)
+              console.log(radioValue);
+
+              // var countryData2 = iti.getSelectedCountryData().dialCode;
+              // // $("#hidden_input").val(iti.intlTelInput('getSelectedCountryData').dialCode);
+              // console.log("test123445");
+              console.log(countryData2);
               if(radioValue=='Частная'){
                   $('#closeReg').trigger('click')
                   $('#confirmEmail').modal({show:true})
@@ -35,6 +44,7 @@ $(document).ready(function () {
         });
       }
     });
+
   });
 
     $(".emailConfirmationForm").bind('submit', function (e) {

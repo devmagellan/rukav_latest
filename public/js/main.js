@@ -222,6 +222,14 @@ $(document).ready(function(){
         initialCountry: "gb"
     });
 
+    // $("#registerForm").submit(function() {
+    //     var countryData2 = iti.getSelectedCountryData();
+    //     // $("#hidden_input").val(iti.intlTelInput('getSelectedCountryData').dialCode);
+    //     console.log("test123445");
+    //     console.log(countryData2);
+    // });
+
+
 // populate the country dropdown
     for (var i = 0; i < countryData.length; i++) {
         var country = countryData[i];
@@ -327,6 +335,7 @@ $(document).ready(function(){
     if(input2!=null){
         var iti = window.intlTelInput(input2, {
             separateDialCode: true,
+            hiddenInput: "full_phone",
             loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
             initialCountry: "gb"
         });
@@ -336,6 +345,7 @@ $(document).ready(function(){
     if(input5!=null) {
         var iti = window.intlTelInput(input5, {
             separateDialCode: true,
+            hiddenInput: "full_phone",
             loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
             initialCountry: "gb"
         });
@@ -345,6 +355,7 @@ $(document).ready(function(){
     if(input6!=null) {
         var iti = window.intlTelInput(input6, {
             separateDialCode: true,
+            hiddenInput: "full_phone",
             loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
             initialCountry: "gb"
         });
