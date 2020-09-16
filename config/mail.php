@@ -55,8 +55,8 @@ return [
     |
     */
    'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'imediasun1@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'imediasun1@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'trapeznikova.tatjana@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'trapeznikova.tatjana@gmail.com'),
     ],
 
     /*
@@ -116,6 +116,13 @@ return [
 
         'paths' => [
             resource_path('views/vendor/mail'),
+        ],
+    ],
+	'stream' => [
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true,
         ],
     ],
 

@@ -719,7 +719,7 @@
                 </div>
               </div>
             </div>
-            <a href="/static/help#photo" class="add_advert_rolls_foto">Привила добавления фото</a>
+            <a href="/static/policies#photo" class="add_advert_rolls_foto">Привила добавления фото</a>
             @error('files')
             <div class="alert errorBlock">{{ $message }}</div>
             @enderror
