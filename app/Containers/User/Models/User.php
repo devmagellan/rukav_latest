@@ -34,6 +34,10 @@ class User extends UserModel implements ChargeableInterface
     protected $table = 'users';
 protected $emailCode;
 
+    const STATUS_DELETED = 0;
+    const STATUS_INACTIVE = 9;
+    const STATUS_ACTIVE = 10;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -73,7 +77,7 @@ protected $emailCode;
         'instagram',
         'show_instagram',
         'www',
-        'show_www','encripted_password','is_confirmed_phone'
+        'show_www','encripted_password','is_confirmed_phone','verify_token',
     ];
 
     protected $casts = [
@@ -165,7 +169,5 @@ protected $emailCode;
     public function adsWithGroup(){
         return $this->hasMany(\App\Containers\Ad\Models\Ad::class, 'sender','id');
     }
-
-
 
 }

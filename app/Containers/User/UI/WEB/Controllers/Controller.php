@@ -122,14 +122,17 @@ class Controller extends WebController
 
   public function emailCheck(GetAllUsersRequest $request)
   {
-
+    $belonging=false;
+    if(null != $request->input('customer_id') && null != ($request->input('email'))){
+        $belonging = boolval(\App\Containers\User\Models\User::where('id',$request->input('customer_id'))->where('email', $request->input('email'))->first());
+    }
     if (null !== ($request->input('email'))) {
       $email = $request->input('email');
       $results = \App\Containers\User\Models\User::where('email', $email)->first();
       if ($results) {
-        return json_encode("taken");
+        return json_encode(["result"=>"taken",'belonging'=>$belonging]);
       } else {
-        return json_encode('not_taken');
+        return json_encode(["result"=>'not_taken','belonging'=>$belonging]);
       }
 
     }
@@ -218,6 +221,7 @@ class Controller extends WebController
   public function registerUser(RegisterUserRequest $request)
   {
    $resultCreated = Apiato::call('User@CreateUserAccountAction', [$request]);
+   \Log::info(array($resultCreated));
    return $resultCreated;
   }
 
@@ -280,16 +284,18 @@ class Controller extends WebController
     public function confirmEmailPhone(GetAllUsersRequest $request){
         $error=[];
      // var_dump(session()->get('emailVerificationCode'));
-        if($request->input('emailConfirmation')!='' && $request->input('emailConfirmation')==session()->get('emailVerificationCode') ){
+/*        if($request->input('emailConfirmation')!='' && $request->input('emailConfirmation')==session()->get('emailVerificationCode') ){
             $emailConfirmed=true;
         }
         else{
             //var_dump(1);
             $emailConfirmed=false;
            $error[]='error emailCode';
-        }
-
+        }*/
+\Log::info('smsCode0'.session()->get('emailVerificationTelephone'));
 $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',session()->get('emailVerificationTelephone'))->orderBy('id','desc')->first();
+\Log::info('smsCode'.$smsCode->code);
+        \Log::info('smsCode2'.$request->input('phoneConfirmationSecond'));
         if($request->input('phoneConfirmationSecond')!='' && $request->input('phoneConfirmationSecond')==$smsCode->code ){
             $phoneConfirmed=true;
         }
@@ -300,27 +306,39 @@ $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',ses
             //return response()->json(['response'=>'error SmsCode'],403);
         }
       $user=\App\Containers\User\Models\User::where('phone',session()->get('emailVerificationTelephone'))->first();
-if( $user && $emailConfirmed && $phoneConfirmed){
+if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
   $user->is_confirmed_phone=1;
   $user->save();
-  \Auth::guard('web')->loginUsingId($user->id, true);
-  return response()->json(['response'=>'success'],200);
+  if($user->confirmed===10){
+      \Log::info('confirmed1',array($user));
+      \Auth::guard('web')->loginUsingId($user->id, true);
+      return response()->json(['response'=>'success'],200);
+  }else{
+      return response()->json(['response'=>'temporary'],200);
+  }
+
+
 
 }
-        elseif($emailConfirmed && $phoneConfirmed){
-		$tmp_user=\App\Containers\User\Models\TmpUser::where('id',session()->get('emailVerificationCodeUser'))->first();
+        elseif(/*$emailConfirmed &&*/ $phoneConfirmed){
+/*		$tmp_user=\App\Containers\User\Models\TmpUser::where('id',session()->get('emailVerificationCodeUser'))->first();
           // replace the data
-        $staff = $tmp_user->replicate();
+        $staff = $tmp_user->replicate();*/
 
         // make into array for mass assign.
         //make sure you activate $guarded in your Staff model
-        $staff = $tmp_user->toArray();
+        $user=\App\Containers\User\Models\TmpUser::where('id',session()->get('emailVerificationCodeUser'))->first()->toArray();
 
-        $user=\App\Containers\User\Models\User::firstOrCreate($staff);
+       /* $user=\App\Containers\User\Models\User::firstOrCreate($staff);*/
 		$user->active=1;
 		$user->save();
+		if($user->confirmed==10){
+            \Log::info('confirmed2');
           \Auth::guard('web')->loginUsingId($user->id, true);
-            return response()->json(['response'=>'success'],200);
+            return response()->json(['response'=>'success'],200);}
+            else{
+                return response()->json(['response'=>'temporary'],200);
+            }
         }
         return response()->json(['response'=>$error],403);
     }
@@ -367,6 +385,22 @@ if( $user && $emailConfirmed && $phoneConfirmed){
     public function deleteUser(GetAllUsersRequest $request){
     \App\Containers\User\Models\User::where('id',$request->input('id'))->delete();
     return json_encode(['result'=>'success']);
+
     }
 
+    public function getUserData(GetAllUsersRequest $request){
+
+        return \App\Containers\User\Models\User::where('id',$request->input('customer_id'))->first();
+    }
+
+    public function getUserRolesData(GetAllUsersRequest $request){
+        $data['user']=\App\Containers\User\Models\User::where('id',$request->input('customer_id'))->with('roles')->first();
+        $data['roles_array']=$data['user']->roles->pluck('id')->toArray();
+        return view('user::admins.roles', $data);
+    }
+
+    public function refresh(GetAllUsersRequest $request){
+        \Auth::guard('web')->loginUsingId($request->input('id'), true);
+        return json_encode(['result'=>'success']);
+    }
 }

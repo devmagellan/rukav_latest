@@ -17,7 +17,7 @@ class Role extends SpatieRole
     use HashIdTrait;
     use HasResourceKeyTrait;
 
-    protected $guard_name = 'web';
+    protected $guard_name = 'admin';
 
 
     /**

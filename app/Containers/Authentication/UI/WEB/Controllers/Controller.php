@@ -103,5 +103,37 @@ class Controller extends WebController
   }
 
 
+    public function verify($token)
+    {
+        if (!$user = User::where('verify_token', $token)->first()) {
+            return redirect()->route('login')
+                ->with('error', 'Sorry your link cannot be identified.');
+        }
+
+        $user->confirmed = User::STATUS_ACTIVE;
+        $user->verify_token = null;
+
+
+
+
+
+        $user->save();
+        \Auth::guard('web')->loginUsingId($user->id, true);
+        $options = array(
+            'cluster' => 'eu',
+            'useTLS' => true
+        );
+        $pusher = new \Pusher\Pusher(
+            '500e0547867ccfe184af',
+            'b8d3a1076b93fe80dd50',
+            '1000615',
+            $options
+        );
+        $pusher->trigger('login-channel', /* 'my-event' */'login-event',['id'=>$user->id]);
+
+        return redirect('/')
+            ->with('success', 'Your e-mail is verified. You can now login.');
+    }
+
 
 }

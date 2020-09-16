@@ -21,7 +21,9 @@ class TmpUserService
       'country' => $data->country,
       'phone' => $data->phone,
       'vid_user' => $data->vid_user,
-      'avatar'=>null
+      'avatar'=>null,
+      'is_client'=>1,
+
     ]);
   }
 

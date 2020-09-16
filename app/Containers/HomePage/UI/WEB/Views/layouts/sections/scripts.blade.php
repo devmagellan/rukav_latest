@@ -53,6 +53,36 @@ console.log(notify)
     });
 </script>
 
+
+<script>
+    console.log('login pusher')
+    var login_pusher = new Pusher('500e0547867ccfe184af', {
+        cluster: 'eu'
+    });
+    var login_channel = login_pusher.subscribe('login-channel');
+
+    Pusher.logToConsole = true;
+    //login_channel.unbind();
+
+    login_channel.bind('login-event', function(data) {
+        console.log('getPush')
+        console.log(JSON.stringify(data));
+        $.ajax({
+            method: 'POST',
+            url: '/refresh',
+            dataType: 'json',
+            data:{id:data.id},
+            success: function(data) {
+                if (data.result == "success"){
+                    window.location.reload(); // This is not jQuery but simple plain ol' JS
+                }
+            }
+        });
+
+    });
+
+</script>
+
 <script>
 
     $('.categoryLink').click(function(){

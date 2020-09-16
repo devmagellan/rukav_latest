@@ -214,13 +214,13 @@ $(document).ready(function(){
     var countryData = window.intlTelInputGlobals.getCountryData(),
         input = document.querySelector("#telphone"),
         addressDropdown = document.querySelector("#address-country");
-
 // init plugin
     var iti = window.intlTelInput(input, {
         separateDialCode: true,
         loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
         initialCountry: "gb"
     });
+<<<<<<< HEAD
 
     // $("#registerForm").submit(function() {
     //     var countryData2 = iti.getSelectedCountryData();
@@ -230,13 +230,16 @@ $(document).ready(function(){
     // });
 
 
+=======
+    console.log('CouNTRy2+',iti.getSelectedCountryData().dialCode)
+>>>>>>> c8d0cd81a4fc34332a4a383d34308f35f16e57e5
 // populate the country dropdown
     for (var i = 0; i < countryData.length; i++) {
         var country = countryData[i];
         var optionNode = document.createElement("option");
         optionNode.value = country.iso2;
         var textNode = document.createTextNode(country.name);
-        optionNode.appendChild(textNode);
+         optionNode.appendChild(textNode);
         addressDropdown.appendChild(optionNode);
     }
 // set it's initial value
@@ -245,13 +248,18 @@ $(document).ready(function(){
 // listen to the telephone input for changes
     input.addEventListener('countrychange', function(e) {
         addressDropdown.value = iti.getSelectedCountryData().iso2;
+        console.log('CouNTRy3+',iti.getSelectedCountryData().dialCode)
+        var code = $('.iti__selected-dial-code').text().split('+')[1]
+        $('#code').val('+'+code)
     });
 
 // listen to the address dropdown for changes
     addressDropdown.addEventListener('change', function() {
         iti.setCountry(this.value);
+        console.log('CouNTRy4+',iti.getSelectedCountryData().dialCode)
     });
 
+    $('#code').val($('.iti__selected-dial-code').text())
 
     $('#show_password').on('click', function(){
 
@@ -339,8 +347,14 @@ $(document).ready(function(){
             loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
             initialCountry: "gb"
         });
-    }
 
+    input2.addEventListener('countrychange', function(e) {
+        addressDropdown.value = iti.getSelectedCountryData().iso2;
+        console.log('CouNTRy3+',iti.getSelectedCountryData().dialCode)
+        var code = $('.iti__selected-dial-code').text().split('+')[1]
+        $('#code').val('+'+code)
+    });
+    }
     var input5 = document.querySelector("#telphone5");
     if(input5!=null) {
         var iti = window.intlTelInput(input5, {
@@ -349,8 +363,14 @@ $(document).ready(function(){
             loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
             initialCountry: "gb"
         });
-    }
 
+    input5.addEventListener('countrychange', function(e) {
+        addressDropdown.value = iti.getSelectedCountryData().iso2;
+        console.log('CouNTRy3+',iti.getSelectedCountryData().dialCode)
+        var code = $('.iti__selected-dial-code').text().split('+')[1]
+        $('#code').val('+'+code)
+    });
+    }
     var input6 = document.querySelector("#telphone6");
     if(input6!=null) {
         var iti = window.intlTelInput(input6, {
@@ -359,8 +379,14 @@ $(document).ready(function(){
             loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
             initialCountry: "gb"
         });
-    }
 
+    input6.addEventListener('countrychange', function(e) {
+        addressDropdown.value = iti.getSelectedCountryData().iso2;
+        console.log('CouNTRy3+',iti.getSelectedCountryData().dialCode)
+        var code = $('.iti__selected-dial-code').text().split('+')[1]
+        $('#code').val('+'+code)
+    });
+    }
     function readURL(input) {
 
         if (input.files && input.files[0]) {

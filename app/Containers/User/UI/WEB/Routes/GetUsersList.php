@@ -11,6 +11,26 @@ $router->get('/users_list', [
     ],
 ]);
 
+$router->post('/user/get', [
+    'as'   => 'user_data',
+    'uses'       => 'Controller@getUserData',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin'
+    ],
+]);
+
+$router->post('/user/roles_get', [
+    'as'   => 'user_roles_get',
+    'uses'       => 'Controller@getUserRolesData',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin'
+    ],
+]);
+
+
+
 $router->get('/admins_list', [
   'as'   => 'admins_list_dashboard',
   'uses'       => 'Controller@indexAdmin',
