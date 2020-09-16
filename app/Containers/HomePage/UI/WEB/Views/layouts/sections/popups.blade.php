@@ -162,7 +162,7 @@
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
       <h6 class="modalTitle">Регистрация</h6>
-      <form class="formModal" action="{{route('register_user_web')}}" method="post" id="registerForm">
+      <form class="formModal"action="{{route('register_user_web')}}" method="post" id="registerForm">
 
         <div class="row">
           <div class="col-sm-6">
@@ -303,11 +303,14 @@
 
             <input type="tel" name="phone" id="telphone"><span class="required">*</span>
             <span id="phone" class="errorBlock"></span>
-            <input type="hidden" name="code" id="code">
+
           </div>
 
 
+
+
         </div>
+        <input type="hidden" name="code" id="code" value="0">
         <div class="row">
           <div class="col-sm-6">
             <button type="submit" id="registerButton">Зарегистрироваться</button>
@@ -660,7 +663,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
 
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <button type="button" class="close confirmPhoneClose" data-dismiss="modal" aria-label="Close">
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
 
@@ -670,19 +673,19 @@
         <h6 class="modalTitle">Подтвердите свой телефонный номер</h6>
         <div class="row">
           <div class="col-sm-12">
-            <input type="text" name="" class="phoneConfirmationSecond" placeholder="Введите код который мы прислали на ваш телефон">
+            <input type="text" name="" id="phoneConfirmationSecond" class="phoneConfirmationSecond" placeholder="Введите код который мы прислали на ваш телефон">
             <span id="phoneConfirmationWithEmail" class="errorBlock"></span>
           </div>
         </div>
 
-        <img src="{{asset('img/modalIconEmail.svg')}}" alt="" class="moadal_img">
+        <!--img src="{{asset('img/modalIconEmail.svg')}}" alt="" class="moadal_img">
         <h6 class="modalTitle">Подтвердите свой email</h6>
         <div class="row">
           <div class="col-sm-12">
             <input type="text" name="emailConfirmation" class="emailConfirmationWithPhone" placeholder="Введите код который мы прислали на ваш email">
             <span id="emailConfirmationWithPhone" class="errorBlock"></span>
           </div>
-        </div>
+        </div-->
 
         <div class="row">
           <div class="col-sm-6">

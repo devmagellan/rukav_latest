@@ -1,9 +1,7 @@
 
 $(document).ready(function () {
 
-
-
-  $('#registerButton').on('click', function (e) {
+  $('#registerForm').submit( function (e) {
       var radioValue = $("input[name='vid_user']:checked"). val();
     e.preventDefault();
     var formData = $('#registerForm').serialize();
@@ -12,6 +10,7 @@ $(document).ready(function () {
     $.ajax({
       type: 'post',
       url: '/register',
+      dataType: "json",
       data: formData,
       success: function (data) {
         //location.reload();
@@ -92,11 +91,12 @@ $(document).ready(function () {
     $(".emailPhoneConfirmationForm").bind('submit', function (e) {
         e.preventDefault();
         console.log('this_ajax',$('.emailConfirmationWithPhone').val())
+        console.log('this_ajax_second',$('#phoneConfirmationSecond').val())
         $.ajax({
             type: "POST",
             url: "/confirm_email_phone",
             dataType: "json",
-            data: { /*emailConfirmation: $('.emailConfirmationWithPhone').val(),*/phoneConfirmationSecond: $('.phoneConfirmationSecond').val()},
+            data: { /*emailConfirmation: $('.emailConfirmationWithPhone').val(),*/phoneConfirmationSecond: $('#phoneConfirmationSecond').val()},
             complete:function(result){
 
             },
@@ -108,7 +108,7 @@ $(document).ready(function () {
                     return true;
                 }
                 else if(result.response=='temporary'){
-                    $('.confirmEmailClose').trigger('click')
+                    $('.confirmPhoneClose').trigger('click')
                     $('#confirmEmail').modal({show:true})
                 }
 

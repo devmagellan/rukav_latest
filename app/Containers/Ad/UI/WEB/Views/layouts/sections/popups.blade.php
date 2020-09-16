@@ -385,13 +385,13 @@
           </div>
         </div>
 
-        <img src="{{asset('img/modalIconEmail.svg')}}" alt="" class="moadal_img">
+        <!--img src="{{asset('img/modalIconEmail.svg')}}" alt="" class="moadal_img">
         <h6 class="modalTitle">Подтвердите свой email</h6>
         <div class="row">
           <div class="col-sm-12">
             <input type="text" name="" placeholder="Введите код который мы прислали на ваш email">
           </div>
-        </div>
+        </div-->
 
         <div class="row">
           <div class="col-sm-6">

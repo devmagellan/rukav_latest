@@ -95,7 +95,8 @@ class CreateUserAccountAction extends Action
         }
 
 
-        return response(['message' => 'account created'], Response::HTTP_OK);
+        //return response(['message' => 'account created'], Response::HTTP_OK);
+        return json_encode(['message'=>'account created']);
     }
 
 

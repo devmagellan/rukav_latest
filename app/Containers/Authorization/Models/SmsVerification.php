@@ -11,6 +11,7 @@ class SmsVerification extends Model
     ];
     public function store($request)
     {
+      $request['phone']=$request['phonecode'].$request['phone'];
       $req=(is_array($request)) ? $request : $request->all();
         $this->fill($req);
         $sms=[];

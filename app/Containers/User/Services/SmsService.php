@@ -29,18 +29,20 @@ class SmsService
         $code = rand(1000, 9999); //generate random code
         //$request->input('code') = $code; //add code in $request body
         \Log::info('Array=>',$request->all());
-      if (isset($request->all()[0]) && $request->all()[0] instanceof User) {
+      if (null!=($request->all()) ) {
 
 
-        \Log::info('request-info',$request->all()[0]->toArray());
+        \Log::info('request-info',$request->all());
         $reqArray=[];
         $reqArray['code']=$code;
-        $reqArray['phone']=$request->all()[0]->toArray()['phone'];
+        $reqArray['phone']=$request->all()['phone'];
+          $reqArray['phonecode']=$request->all()['code'];
         $data['store']=$this->smsVerifcation->store($reqArray)['id'];
 
         $data['message']=$this->sendSms($reqArray);
       }
       else{
+        $request->request->add(['phonecode' => $request->all()['code']]);
         $request->request->add(['code' => $code]);
         $data['store']=$this->smsVerifcation->store($request)['id']; //call store method of model
         $data['message']=$this->sendSms($request->all());}
@@ -49,6 +51,7 @@ class SmsService
 
     public function sendSms($request)
     {
+        \Log::info('PhoneNumber'.$request['phonecode'].$request['phone']);
         $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
         $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
         $authTelephone = config('app.twilio')['TWILIO_PHONE'];
@@ -60,9 +63,8 @@ class SmsService
             $sid    = $accountSid;
             $token  = $authToken;
             $twilio = new Client($sid, $token);
-
             $message = $twilio->messages
-                ->create($request['phone'], // to
+                ->create($request['phonecode'].$request['phone'], // to
                     ["body" => "Hi there! your confirmation code is ".$request['code'], "from" => $authTelephone]
                 );
 

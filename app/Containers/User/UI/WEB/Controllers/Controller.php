@@ -221,6 +221,7 @@ class Controller extends WebController
   public function registerUser(RegisterUserRequest $request)
   {
    $resultCreated = Apiato::call('User@CreateUserAccountAction', [$request]);
+   \Log::info(array($resultCreated));
    return $resultCreated;
   }
 
@@ -291,8 +292,10 @@ class Controller extends WebController
             $emailConfirmed=false;
            $error[]='error emailCode';
         }*/
-
+\Log::info('smsCode0'.session()->get('emailVerificationTelephone'));
 $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',session()->get('emailVerificationTelephone'))->orderBy('id','desc')->first();
+\Log::info('smsCode'.$smsCode->code);
+        \Log::info('smsCode2'.$request->input('phoneConfirmationSecond'));
         if($request->input('phoneConfirmationSecond')!='' && $request->input('phoneConfirmationSecond')==$smsCode->code ){
             $phoneConfirmed=true;
         }
@@ -306,8 +309,15 @@ $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',ses
 if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
   $user->is_confirmed_phone=1;
   $user->save();
-  \Auth::guard('web')->loginUsingId($user->id, true);
-  return response()->json(['response'=>'success'],200);
+  if($user->confirmed===10){
+      \Log::info('confirmed1',array($user));
+      \Auth::guard('web')->loginUsingId($user->id, true);
+      return response()->json(['response'=>'success'],200);
+  }else{
+      return response()->json(['response'=>'temporary'],200);
+  }
+
+
 
 }
         elseif(/*$emailConfirmed &&*/ $phoneConfirmed){
@@ -322,7 +332,8 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
        /* $user=\App\Containers\User\Models\User::firstOrCreate($staff);*/
 		$user->active=1;
 		$user->save();
-		if($user->confirmed){
+		if($user->confirmed==10){
+            \Log::info('confirmed2');
           \Auth::guard('web')->loginUsingId($user->id, true);
             return response()->json(['response'=>'success'],200);}
             else{
