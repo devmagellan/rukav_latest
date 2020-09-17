@@ -13,6 +13,7 @@ use App\Containers\User\UI\WEB\Requests\GetAllUsersRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
 use Image;
+use App\Containers\HomePage\Services\GlobalService;
 
 
 /**
@@ -12531,10 +12532,9 @@ class Controller extends WebController
             $toAccountType=$type;
         }
 
-        $data['properties']=$this->getMainProperties($request);
+        $data['properties']=GlobalService::getMainProperties($request)['categories'];
+		$categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
         $ads= \App\Containers\Ad\Models\Ad::where('sender',\Auth::user()->id)->with('pictures')->orderBy('created_at','desc')->get();
-
-        $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
         $result=\App\Containers\Ad\Models\Wishlist::where('user_id',\Auth::user()->id)->where('active',1)->get();
         $favorits=[];
         foreach($result as $res){

@@ -19,7 +19,6 @@ class UserService
 
 
       $current=\App\Containers\User\Models\User::where('email',$data->email)->withTrashed()->first();
-
       return User::updateOrCreate([
       'id'=>($current!=null) ? $current->id : $data->customer_id,
       'name' => $data->firstName,

@@ -299,7 +299,7 @@ if (!empty($_GET['error'])) {
     {
 
         try {
-            $user = Socialite::driver($provider)->user();
+            $user = Socialite::driver($provider)->stateless()->user();
         } catch (\Exception $e) {
 			dd($e);
             return redirect('/login');
@@ -309,7 +309,6 @@ if (!empty($_GET['error'])) {
             return redirect()->to('/');
         }*/
         // check if they're an existing user
-		
         $existingUser = User::where('email', $user->email)->first();
         if($existingUser){
             // log them in

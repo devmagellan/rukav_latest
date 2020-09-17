@@ -220,19 +220,6 @@ $(document).ready(function(){
         loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
         initialCountry: "gb"
     });
-<<<<<<< HEAD
-
-    // $("#registerForm").submit(function() {
-    //     var countryData2 = iti.getSelectedCountryData();
-    //     // $("#hidden_input").val(iti.intlTelInput('getSelectedCountryData').dialCode);
-    //     console.log("test123445");
-    //     console.log(countryData2);
-    // });
-
-
-=======
-    console.log('CouNTRy2+',iti.getSelectedCountryData().dialCode)
->>>>>>> c8d0cd81a4fc34332a4a383d34308f35f16e57e5
 // populate the country dropdown
     for (var i = 0; i < countryData.length; i++) {
         var country = countryData[i];

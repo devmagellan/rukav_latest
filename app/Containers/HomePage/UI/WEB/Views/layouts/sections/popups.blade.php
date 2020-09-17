@@ -300,6 +300,7 @@
               <input type="radio" name="hide_phone" value="Не показывать" id="no_hide_phone">
               <label for="no_hide_phone">Не показывать</label>
             </div>
+
             <input type="tel" name="phone" id="telphone"><span class="required">*</span>
             <span id="phone" class="errorBlock"></span>
 

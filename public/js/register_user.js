@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+
+$(document).ready(function () {
 
   $('#registerForm').submit( function (e) {
       var radioValue = $("input[name='vid_user']:checked"). val();
@@ -15,12 +16,7 @@
         //location.reload();
           console.log(data)
           if(data.message=='account created'){
-              console.log(radioValue);
-
-              // var countryData2 = iti.getSelectedCountryData().dialCode;
-              // // $("#hidden_input").val(iti.intlTelInput('getSelectedCountryData').dialCode);
-              // console.log("test123445");
-              console.log(countryData2);
+              console.log(radioValue)
               if(radioValue=='Частная'){
                   $('#closeReg').trigger('click')
                   $('#confirmEmail').modal({show:true})
@@ -40,7 +36,6 @@
         });
       }
     });
-
   });
 
     $(".emailConfirmationForm").bind('submit', function (e) {

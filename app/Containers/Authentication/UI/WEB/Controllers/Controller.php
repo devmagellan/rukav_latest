@@ -106,7 +106,7 @@ class Controller extends WebController
     public function verify($token)
     {
         if (!$user = User::where('verify_token', $token)->first()) {
-            return redirect()->route('login')
+            return redirect()->route('login_user')
                 ->with('error', 'Sorry your link cannot be identified.');
         }
 

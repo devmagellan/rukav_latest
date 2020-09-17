@@ -108,8 +108,8 @@
         <div class="row flex">
           <div class="col-md-12">
             <form class="prophile_form changeUserTypeForm" id="changeRegisterForm" method="post" action="/profile/save">
-              <input type="hidden" value="{{$data['properties']->user->id}}" name="id">
-              <? dump($toAccountType);
+              <input type="hidden" value="{{\Auth::user()->id}}" name="id">
+              <? 
               switch($toAccountType){
                     case 'to_individual':
                       $accountType='Предприниматель';
@@ -146,20 +146,20 @@
                   </p>
                   <div class="prophile_show_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_name" type="checkbox" @if($data['properties']->user->show_name) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_name" type="checkbox" @if(\Auth::user()->show_name) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" name="name" value="{{$data['properties']->user->name}}">
+                    <input type="text" class="prophile_main_input" name="name" value="{{\Auth::user()->name}}">
                   </div>
                   <p class="prophile_main_text">
                     Ваша фамилия <span>*</span>
                   </p>
                   <div class="prophile_show_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_sername" type="checkbox" @if($data['properties']->user->show_sername) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_sername" type="checkbox" @if(\Auth::user()->show_sername) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" name="sername" value="{{$data['properties']->user->sername}}">
+                    <input type="text" class="prophile_main_input" name="sername" value="{{\Auth::user()->sername}}">
                   </div>
                   <p class="prophile_main_text">
                     Страна резиденции <span>*</span>
@@ -169,14 +169,14 @@
                       <input class="checkbox_hidden"  type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
-                    <input type="hidden" class="prophile_main_input" name="country" value="{{$data['properties']->user->country}}">
-                    <input type="text" disabled class="prophile_main_input" name="country_view" value="{{$data['properties']->user->country}}">
+                    <input type="hidden" class="prophile_main_input" name="country" value="{{\Auth::user()->country}}">
+                    <input type="text" disabled class="prophile_main_input" name="country_view" value="{{\Auth::user()->country}}">
                     <!--a href="#" class="prophile_change_country" >
                       Сменить
                     </a-->
                   </div>
-                  @if((($data['properties']->user->getIndividualAccount   && $toAccountType!='to_company' && $toAccountType!='to_organisation' && $data['properties']->user->vid_user !='Частная'
-                  && $data['properties']->user->vid_user !='Организация' && $data['properties']->user->vid_user !='Компания')|| $toAccountType=='to_individual'))
+                  @if(((\Auth::user()->getIndividualAccount   && $toAccountType!='to_company' && $toAccountType!='to_organisation' && \Auth::user()->vid_user !='Частная'
+                  && \Auth::user()->vid_user !='Организация' && \Auth::user()->vid_user !='Компания')|| $toAccountType=='to_individual'))
                     <p class="prophile_main_text">
                       Название бизнеса <span>*</span>
                     </p>
@@ -185,17 +185,17 @@
                         <input class="checkbox_hidden"  type="checkbox" checked="checked">
                         <span class="checkmark"></span>
                       </label>
-                      @if($data['properties']->user->getIndividualAccount)
+                      @if(\Auth::user()->getIndividualAccount)
 
-                      <input type="text" class="prophile_main_input" name="business_name" value="{{$data['properties']->user->getIndividualAccount->business_name}}">
+                      <input type="text" class="prophile_main_input" name="business_name" value="{{\Auth::user()->getIndividualAccount->business_name}}">
                         @else
                         <input type="text" class="prophile_main_input" name="business_name" value="">
                         @endif
                     </div>
 
                   @endif
-                  @if((($data['properties']->user->getOrganisationAccount   && $toAccountType!='to_company' && $toAccountType!='to_individual' && $data['properties']->user->vid_user !='Частная'
-                  && $data['properties']->user->vid_user !='Предприниматель' && $data['properties']->user->vid_user !='Компания')|| $toAccountType=='to_organisation'))
+                  @if(((\Auth::user()->getOrganisationAccount   && $toAccountType!='to_company' && $toAccountType!='to_individual' && \Auth::user()->vid_user !='Частная'
+                  && \Auth::user()->vid_user !='Предприниматель' && \Auth::user()->vid_user !='Компания')|| $toAccountType=='to_organisation'))
                     <p class="prophile_main_text">
                       Название организации <span>*</span>
                     </p>
@@ -204,8 +204,8 @@
                         <input class="checkbox_hidden"  type="checkbox" checked="checked">
                         <span class="checkmark"></span>
                       </label>
-                      @if($data['properties']->user->getOrganisationAccount)
-                      <input type="text" class="prophile_main_input" name="organisation_name" value="{{$data['properties']->user->getOrganisationAccount->organisation_name}}">
+                      @if(\Auth::user()->getOrganisationAccount)
+                      <input type="text" class="prophile_main_input" name="organisation_name" value="{{\Auth::user()->getOrganisationAccount->organisation_name}}">
                    @else
                         <input type="text" class="prophile_main_input" name="organisation_name" value="">
 
@@ -218,17 +218,17 @@
 
                 <div class="col-sm-12 col-md-5">
                   <label for="imgInputakk" class="prophile_photo_picked_wrapper">
-                    <img class="prophile_photo_picked" for="imgInputakk" src="@if($data['properties']->user->avatar)  storage/avatars/{{$data['properties']->user->avatar}} @else img/slide_img1.png @endif " alt="">
+                    <img class="prophile_photo_picked" for="imgInputakk" src="@if(\Auth::user()->avatar)  storage/avatars/{{\Auth::user()->avatar}} @else img/slide_img1.png @endif " alt="">
                   </label>
                   <label class="prophile_photo_wrapper" for="imgInputakk">
                     <div class="prophile_photo_img">
-                      @if($data['properties']->user->avatar)
-                        <img src="/storage/avatars/{{$data['properties']->user->avatar}}" alt="">
+                      @if(\Auth::user()->avatar)
+                        <img src="/storage/avatars/{{\Auth::user()->avatar}}" alt="">
 
                       @else
                       <img src="img/prophile_camera.png" alt="">@endif
                     </div>
-                    @if(!$data['properties']->user->avatar)
+                    @if(!\Auth::user()->avatar)
 
                       <a class="prophile_photo_change">
                         Добавить фото или логотип
@@ -273,7 +273,7 @@
                 </div-->
               </div>
 
-              @if($data['properties']->user->getBusinessAccount || $toAccountType=='to_company')
+              @if(\Auth::user()->getBusinessAccount || $toAccountType=='to_company')
               <div class="prophile_main_wrapper d-flex">
                 <div class="col-md-7 flex-column">
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
@@ -281,8 +281,8 @@
                       <input class="checkbox_hidden" type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
-                    @if($data['properties']->user->getBusinessAccount)
-                    <input type="text" class="prophile_main_input" value="{{$data['properties']->user->getBusinessAccount->company_name}}" name="company_name" placeholder="Название компании">
+                    @if(\Auth::user()->getBusinessAccount)
+                    <input type="text" class="prophile_main_input" value="{{\Auth::user()->getBusinessAccount->company_name}}" name="company_name" placeholder="Название компании">
                     @else
                       <input type="text" class="prophile_main_input" name="company_name" placeholder="Название компании">
                       @endif
@@ -295,8 +295,8 @@
                       <input class="checkbox_hidden" type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
-                    @if($data['properties']->user->getBusinessAccount)
-                    <input type="text" class="prophile_main_input" name="regNumber" value="{{$data['properties']->user->getBusinessAccount->reg_number}}" placeholder="Регистрационный номер">
+                    @if(\Auth::user()->getBusinessAccount)
+                    <input type="text" class="prophile_main_input" name="regNumber" value="{{\Auth::user()->getBusinessAccount->reg_number}}" placeholder="Регистрационный номер">
                     @else
                       <input type="text" class="prophile_main_input" name="regNumber" placeholder="Регистрационный номер">
                       @endif
@@ -309,8 +309,8 @@
                       <input class="checkbox_hidden" type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
-                    @if($data['properties']->user->getBusinessAccount)
-                    <input type="text" class="prophile_main_input" name="vatNumber" value="{{$data['properties']->user->getBusinessAccount->vat_number}}" placeholder="VAT номер">
+                    @if(\Auth::user()->getBusinessAccount)
+                    <input type="text" class="prophile_main_input" name="vatNumber" value="{{\Auth::user()->getBusinessAccount->vat_number}}" placeholder="VAT номер">
                       @else
                       <input type="text" class="prophile_main_input" name="vatNumber" placeholder="VAT номер">
 
@@ -327,10 +327,10 @@
                   </p>
                   <div class="prophile_show_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_email" type="checkbox" @if($data['properties']->user->show_email) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_email" type="checkbox" @if(\Auth::user()->show_email) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="email" class="prophile_main_input" placeholder="E-mail" name="email" value="{{$data['properties']->user->email}}">
+                    <input type="email" class="prophile_main_input" placeholder="E-mail" name="email" value="{{\Auth::user()->email}}">
                     <!--a href="#" class="prophile_change_country">
                       Сменить
                     </a-->
@@ -339,12 +339,12 @@
                     Телефон мобильный <span>*</span>
                   </p>
                   <div class="prophile_show_input-wrapper d-flex align-items-center">
-                    <input type="hidden" class="phone_code" value="{{$data['properties']->user->phone_code}}">
+                    <input type="hidden" class="phone_code" value="{{\Auth::user()->phone_code}}">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_phone" type="checkbox" @if($data['properties']->user->show_phone) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_phone" type="checkbox" @if(\Auth::user()->show_phone) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="tel" id="telphone5" name="phone" class="prophile_main_input" value="{{$data['properties']->user->phone}}">
+                    <input type="tel" id="telphone5" name="phone" class="prophile_main_input" value="{{\Auth::user()->phone}}">
 
                     <!--a href="#" class="prophile_change_country">
                       Сменить
@@ -355,10 +355,10 @@
                   </p>
                   <div class="prophile_show_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden"  name="show_additional_phone" type="checkbox" @if($data['properties']->user->show_additional_phone) checked="checked" @endif>
+                      <input class="checkbox_hidden"  name="show_additional_phone" type="checkbox" @if(\Auth::user()->show_additional_phone) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="tel" id="telphone6" name="additional_phone" class="prophile_main_input" value="{{$data['properties']->user->additional_phone}}">
+                    <input type="tel" id="telphone6" name="additional_phone" class="prophile_main_input" value="{{\Auth::user()->additional_phone}}">
                     <!--a href="#" class="prophile_change_country">
                       Сменить
                     </a-->
@@ -374,41 +374,41 @@
                   </div>
                 </div>
               </div>
-              @if($data['properties']->user->getIndividualAccount || $toAccountType=='to_individual'
-              || $data['properties']->user->getOrganisationAccount || $toAccountType=='to_organisation'
-              || $data['properties']->user->getBusinessAccount || $toAccountType=='to_company'
+              @if(\Auth::user()->getIndividualAccount || $toAccountType=='to_individual'
+              || \Auth::user()->getOrganisationAccount || $toAccountType=='to_organisation'
+              || \Auth::user()->getBusinessAccount || $toAccountType=='to_company'
               )
               <div class="prophile_main_wrapper d-flex">
                 <div class="col-md-7 flex-column">
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_skype" type="checkbox" @if($data['properties']->user->show_skype) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_skype" type="checkbox" @if(\Auth::user()->show_skype) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" name="skype" value="{{$data['properties']->user->skype}}" placeholder="Skype ник">
+                    <input type="text" class="prophile_main_input" name="skype" value="{{\Auth::user()->skype}}" placeholder="Skype ник">
 
                   </div>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_facebook" type="checkbox" @if($data['properties']->user->show_facebook) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_facebook" type="checkbox" @if(\Auth::user()->show_facebook) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" name="facebook" value="{{$data['properties']->user->facebook}}" placeholder="Facebook страница">
+                    <input type="text" class="prophile_main_input" name="facebook" value="{{\Auth::user()->facebook}}" placeholder="Facebook страница">
 
                   </div>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_instagram" type="checkbox" @if($data['properties']->user->show_instagram) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_instagram" type="checkbox" @if(\Auth::user()->show_instagram) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input" name="instagram" value="{{$data['properties']->user->instagram}}" placeholder="Instagram страница">
+                    <input type="text" class="prophile_main_input" name="instagram" value="{{\Auth::user()->instagram}}" placeholder="Instagram страница">
                   </div>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">
-                      <input class="checkbox_hidden" name="show_www" type="checkbox" @if($data['properties']->user->show_www) checked="checked" @endif>
+                      <input class="checkbox_hidden" name="show_www" type="checkbox" @if(\Auth::user()->show_www) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    <input type="text" class="prophile_main_input prophile_site" name="www" value="{{$data['properties']->user->www}}" placeholder="Веб сайт">
+                    <input type="text" class="prophile_main_input prophile_site" name="www" value="{{\Auth::user()->www}}" placeholder="Веб сайт">
                     <div class="prophile_site_add">
                       <p class="prophile_www">www.</p>
                     </div>
@@ -417,19 +417,19 @@
               </div>
 
 
-              @if($data['properties']->user->getIndividualAccount || $toAccountType=='to_individual'
-              || $data['properties']->user->getOrganisationAccount || $toAccountType=='to_organisation'
-              || $data['properties']->user->getBusinessAccount || $toAccountType=='to_company'
+              @if(\Auth::user()->getIndividualAccount || $toAccountType=='to_individual'
+              || \Auth::user()->getOrganisationAccount || $toAccountType=='to_organisation'
+              || \Auth::user()->getBusinessAccount || $toAccountType=='to_company'
 
               )
               <div class="prophile_main_wrapper d-flex flex-wrap">
                 <div class="col-md-9 col-lg-5 flex-column">
-                  @if($data['properties']->user->getOrganisationAccount || $toAccountType=='to_organisation'
-                    || $data['properties']->user->getIndividualAccount || $toAccountType=='to_individual')
+                  @if(\Auth::user()->getOrganisationAccount || $toAccountType=='to_organisation'
+                    || \Auth::user()->getIndividualAccount || $toAccountType=='to_individual')
                     <p class="prophile_main_text">
                       Aдрес <span>*</span>
                     </p>
-                    @elseif($data['properties']->user->getBusinessAccount || $toAccountType=='to_company')
+                    @elseif(\Auth::user()->getBusinessAccount || $toAccountType=='to_company')
                     <p class="prophile_main_text">
                       Юридический адрес <span>*</span>
                     </p>
@@ -438,24 +438,24 @@
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container checkbox_unactive">
                       <input class="checkbox_hidden" name="show_business_address" type="checkbox"
-                             @if(isset($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->address
-                             || isset($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->address
+                             @if(isset(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->address
+                             || isset(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->address
                              ) checked="checked" @endif>
                       <span class="checkmark"></span>
                     </label>
-                    @if((null!=($data['properties']->user->getOrganisationAccount)
-                    && $data['properties']->user->getOrganisationAccount->address)
-                    && null==$data['properties']->user->getIndividualAccount
+                    @if((null!=(\Auth::user()->getOrganisationAccount)
+                    && \Auth::user()->getOrganisationAccount->address)
+                    && null==\Auth::user()->getIndividualAccount
                     )
-                    <input type="text" class="prophile_main_input" name="address" value="{{$data['properties']->user->getOrganisationAccount->address}}" placeholder="Адрес">
-@elseif((null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->address)
-&& null==$data['properties']->user->getBusinessAccount
+                    <input type="text" class="prophile_main_input" name="address" value="{{\Auth::user()->getOrganisationAccount->address}}" placeholder="Адрес">
+@elseif((null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->address)
+&& null==\Auth::user()->getBusinessAccount
 )
 
-                      <input type="text" class="prophile_main_input" name="address" value="{{$data['properties']->user->getIndividualAccount->address}}" placeholder="Адрес">
+                      <input type="text" class="prophile_main_input" name="address" value="{{\Auth::user()->getIndividualAccount->address}}" placeholder="Адрес">
 
-                    @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->address)
-                      <input type="text" class="prophile_main_input" name="address" value="{{$data['properties']->user->getBusinessAccount->address}}" placeholder="Адрес">
+                    @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->address)
+                      <input type="text" class="prophile_main_input" name="address" value="{{\Auth::user()->getBusinessAccount->address}}" placeholder="Адрес">
 
                     @else
 
@@ -468,16 +468,16 @@
                     Почт. индекс <span>*</span>
                   </p>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper prophile_postcode d-flex align-items-center flex-column">
-                    @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->post_code
-                    && null==$data['properties']->user->getIndividualAccount
+                    @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->post_code
+                    && null==\Auth::user()->getIndividualAccount
                     )
-                      <input type="text" class="prophile_main_input" name="postCode" value="{{$data['properties']->user->getOrganisationAccount->post_code}}" placeholder="Postcode">
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->post_code
-                      && null==$data['properties']->user->getBusinessAccount
+                      <input type="text" class="prophile_main_input" name="postCode" value="{{\Auth::user()->getOrganisationAccount->post_code}}" placeholder="Postcode">
+                      @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->post_code
+                      && null==\Auth::user()->getBusinessAccount
                       )
-                      <input type="text" class="prophile_main_input" name="postCode" value="{{$data['properties']->user->getIndividualAccount->post_code}}" placeholder="Postcode">
-                    @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->post_code)
-                      <input type="text" class="prophile_main_input" name="postCode" value="{{$data['properties']->user->getBusinessAccount->post_code}}" placeholder="Postcode">
+                      <input type="text" class="prophile_main_input" name="postCode" value="{{\Auth::user()->getIndividualAccount->post_code}}" placeholder="Postcode">
+                    @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->post_code)
+                      <input type="text" class="prophile_main_input" name="postCode" value="{{\Auth::user()->getBusinessAccount->post_code}}" placeholder="Postcode">
 
 
                     @else
@@ -487,7 +487,7 @@
 
                   </div>
                 </div>
-                @if($data['properties']->user->getBusinessAccount || $toAccountType=='to_company')
+                @if(\Auth::user()->getBusinessAccount || $toAccountType=='to_company')
 
                 <div class="col-md-9 col-lg-5 flex-column">
                   <p class="prophile_main_text">
@@ -498,8 +498,8 @@
                       <input class="checkbox_hidden" type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
-               @if($data['properties']->user->getBusinessAccount && $data['properties']->user->getBusinessAccount->phisical_address)
-                    <input type="text" class="prophile_main_input" name="phisical_address" value="{{$data['properties']->user->getBusinessAccount->phisical_address}}" placeholder="Адрес">
+               @if(\Auth::user()->getBusinessAccount && \Auth::user()->getBusinessAccount->phisical_address)
+                    <input type="text" class="prophile_main_input" name="phisical_address" value="{{\Auth::user()->getBusinessAccount->phisical_address}}" placeholder="Адрес">
                     @else
                       <input type="text" class="prophile_main_input" name="phisical_address" placeholder="Адрес">
                  @endif
@@ -513,8 +513,8 @@
                     Почт. индекс
                   </p>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper prophile_postcode d-flex align-items-center flex-column">
-                    @if($data['properties']->user->getBusinessAccount && $data['properties']->user->getBusinessAccount->phisical_post_code)
-                    <input type="text" class="prophile_main_input" name="phisical_post_code" value="{{$data['properties']->user->getBusinessAccount->phisical_post_code}}" placeholder="Postcode">
+                    @if(\Auth::user()->getBusinessAccount && \Auth::user()->getBusinessAccount->phisical_post_code)
+                    <input type="text" class="prophile_main_input" name="phisical_post_code" value="{{\Auth::user()->getBusinessAccount->phisical_post_code}}" placeholder="Postcode">
                     @else
                       <input type="text" class="prophile_main_input" name="phisical_post_code" placeholder="Postcode">
                       @endif
@@ -534,20 +534,20 @@
 
 
 
-                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->post_code
-                    && null==$data['properties']->user->getIndividualAccount
+                      @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->post_code
+                    && null==\Auth::user()->getIndividualAccount
                     )
-                        <input type="checkbox" class="checkbox_hidden" name="show_work_hours" value="{{$data['properties']->user->getOrganisationAccount->show_work_hours}}"
-                        @if($data['properties']->user->getOrganisationAccount->show_work_hours==1)  checked="checked" @endif>
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->show_work_hours
-                      && null==$data['properties']->user->getBusinessAccount
+                        <input type="checkbox" class="checkbox_hidden" name="show_work_hours" value="{{\Auth::user()->getOrganisationAccount->show_work_hours}}"
+                        @if(\Auth::user()->getOrganisationAccount->show_work_hours==1)  checked="checked" @endif>
+                      @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->show_work_hours
+                      && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="checkbox" class="checkbox_hidden" name="show_work_hours" value="{{$data['properties']->user->getIndividualAccount->show_work_hours}}"
-                               @if($data['properties']->user->getIndividualAccount->show_work_hours==1)  checked="checked" @endif>
-                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->post_code)
-                        <input type="checkbox" class="checkbox_hidden" name="show_work_hours" value="{{$data['properties']->user->getBusinessAccount->show_work_hours}}"
-                               @if($data['properties']->user->getBusinessAccount->show_work_hours==1)  checked="checked" @endif>
+                        <input type="checkbox" class="checkbox_hidden" name="show_work_hours" value="{{\Auth::user()->getIndividualAccount->show_work_hours}}"
+                               @if(\Auth::user()->getIndividualAccount->show_work_hours==1)  checked="checked" @endif>
+                      @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->post_code)
+                        <input type="checkbox" class="checkbox_hidden" name="show_work_hours" value="{{\Auth::user()->getBusinessAccount->show_work_hours}}"
+                               @if(\Auth::user()->getBusinessAccount->show_work_hours==1)  checked="checked" @endif>
 
                       @else
                         <input class="checkbox_hidden" type="checkbox" name="show_work_hours" checked="checked">
@@ -572,17 +572,17 @@
                     <div class="quantity">
 
 
-                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->hours_from_weekday
-                   && null==$data['properties']->user->getIndividualAccount
+                      @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->hours_from_weekday
+                   && null==\Auth::user()->getIndividualAccount
                    )
-                        <input type="number" min="1" max="24" step="1" name="hours_from_weekday" value="{{$data['properties']->user->getOrganisationAccount->hours_from_weekday}}">
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->hours_from_weekday
-                      && null==$data['properties']->user->getBusinessAccount
+                        <input type="number" min="1" max="24" step="1" name="hours_from_weekday" value="{{\Auth::user()->getOrganisationAccount->hours_from_weekday}}">
+                      @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->hours_from_weekday
+                      && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="24" step="1" name="hours_from_weekday" value="{{$data['properties']->user->getIndividualAccount->hours_from_weekday}}">
-                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->hours_from_weekday)
-                        <input type="number" min="1" max="24" step="1" name="hours_from_weekday" value="{{$data['properties']->user->getBusinessAccount->hours_from_weekday}}">
+                        <input type="number" min="1" max="24" step="1" name="hours_from_weekday" value="{{\Auth::user()->getIndividualAccount->hours_from_weekday}}">
+                      @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->hours_from_weekday)
+                        <input type="number" min="1" max="24" step="1" name="hours_from_weekday" value="{{\Auth::user()->getBusinessAccount->hours_from_weekday}}">
 
                       @else
                         <input type="number" min="1" max="24" step="1" name="hours_from_weekday" value="1">
@@ -600,17 +600,17 @@
                       :
                     </p>
                     <div class="quantity quantity2">
-                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->minutes_from_weekday
-                && null==$data['properties']->user->getIndividualAccount
+                      @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->minutes_from_weekday
+                && null==\Auth::user()->getIndividualAccount
                 )
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{$data['properties']->user->getOrganisationAccount->minutes_from_weekday}}">
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->minutes_from_weekday
-                      && null==$data['properties']->user->getBusinessAccount
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{\Auth::user()->getOrganisationAccount->minutes_from_weekday}}">
+                      @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->minutes_from_weekday
+                      && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{$data['properties']->user->getIndividualAccount->minutes_from_weekday}}">
-                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->minutes_from_weekday)
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{$data['properties']->user->getBusinessAccount->minutes_from_weekday}}">
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{\Auth::user()->getIndividualAccount->minutes_from_weekday}}">
+                      @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->minutes_from_weekday)
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{\Auth::user()->getBusinessAccount->minutes_from_weekday}}">
 
                       @else
                         <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="1">
@@ -622,17 +622,17 @@
                     <div class="quantity">
 
 
-                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->hours_till_weekday
-                   && null==$data['properties']->user->getIndividualAccount
+                      @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->hours_till_weekday
+                   && null==\Auth::user()->getIndividualAccount
                    )
-                        <input type="number" min="1" max="24" step="1" name="hours_till_weekday" value="{{$data['properties']->user->getOrganisationAccount->hours_till_weekday}}">
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->hours_till_weekday
-                      && null==$data['properties']->user->getBusinessAccount
+                        <input type="number" min="1" max="24" step="1" name="hours_till_weekday" value="{{\Auth::user()->getOrganisationAccount->hours_till_weekday}}">
+                      @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->hours_till_weekday
+                      && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="24" step="1" name="hours_till_weekday" value="{{$data['properties']->user->getIndividualAccount->hours_till_weekday}}">
-                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->hours_till_weekday)
-                        <input type="number" min="1" max="24" step="1" name="hours_till_weekday" value="{{$data['properties']->user->getBusinessAccount->hours_till_weekday}}">
+                        <input type="number" min="1" max="24" step="1" name="hours_till_weekday" value="{{\Auth::user()->getIndividualAccount->hours_till_weekday}}">
+                      @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->hours_till_weekday)
+                        <input type="number" min="1" max="24" step="1" name="hours_till_weekday" value="{{\Auth::user()->getBusinessAccount->hours_till_weekday}}">
 
                       @else
                         <input type="number" min="1" max="24" step="1" name="hours_till_weekday" value="1">
@@ -644,17 +644,17 @@
                     <div class="quantity quantity2">
 
 
-                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->minutes_till_weekday
-               && null==$data['properties']->user->getIndividualAccount
+                      @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->minutes_till_weekday
+               && null==\Auth::user()->getIndividualAccount
                )
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{$data['properties']->user->getOrganisationAccount->minutes_till_weekday}}">
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->minutes_till_weekday
-                      && null==$data['properties']->user->getBusinessAccount
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{\Auth::user()->getOrganisationAccount->minutes_till_weekday}}">
+                      @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->minutes_till_weekday
+                      && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_weekday" value="{{$data['properties']->user->getIndividualAccount->minutes_till_weekday}}">
-                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->minutes_till_weekday)
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_weekday" value="{{$data['properties']->user->getBusinessAccount->minutes_till_weekday}}">
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_weekday" value="{{\Auth::user()->getIndividualAccount->minutes_till_weekday}}">
+                      @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->minutes_till_weekday)
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_weekday" value="{{\Auth::user()->getBusinessAccount->minutes_till_weekday}}">
 
                       @else
                         <input type="number" min="1" max="55" step="5" name="minutes_till_weekday" value="1">
@@ -672,17 +672,17 @@
 
 
 
-                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->hours_from_saturday
-                 && null==$data['properties']->user->getIndividualAccount
+                      @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->hours_from_saturday
+                 && null==\Auth::user()->getIndividualAccount
                  )
-                        <input type="number" min="1" max="24" step="1" name="hours_from_saturday" value="{{$data['properties']->user->getOrganisationAccount->hours_from_saturday}}">
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->hours_from_saturday
-                      && null==$data['properties']->user->getBusinessAccount
+                        <input type="number" min="1" max="24" step="1" name="hours_from_saturday" value="{{\Auth::user()->getOrganisationAccount->hours_from_saturday}}">
+                      @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->hours_from_saturday
+                      && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="24" step="1" name="hours_from_saturday" value="{{$data['properties']->user->getIndividualAccount->hours_from_saturday}}">
-                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->hours_from_saturday)
-                        <input type="number" min="1" max="24" step="1" name="hours_from_saturday" value="{{$data['properties']->user->getBusinessAccount->hours_from_saturday}}">
+                        <input type="number" min="1" max="24" step="1" name="hours_from_saturday" value="{{\Auth::user()->getIndividualAccount->hours_from_saturday}}">
+                      @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->hours_from_saturday)
+                        <input type="number" min="1" max="24" step="1" name="hours_from_saturday" value="{{\Auth::user()->getBusinessAccount->hours_from_saturday}}">
 
                       @else
                         <input type="number" min="1" max="24" step="1" name="hours_from_saturday" value="1">
@@ -697,17 +697,17 @@
                     <div class="quantity quantity2">
 
 
-                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->minutes_from_saturday
-               && null==$data['properties']->user->getIndividualAccount
+                      @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->minutes_from_saturday
+               && null==\Auth::user()->getIndividualAccount
                )
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="{{$data['properties']->user->getOrganisationAccount->minutes_from_saturday}}">
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->minutes_from_saturday
-                      && null==$data['properties']->user->getBusinessAccount
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="{{\Auth::user()->getOrganisationAccount->minutes_from_saturday}}">
+                      @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->minutes_from_saturday
+                      && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="{{$data['properties']->user->getIndividualAccount->minutes_from_saturday}}">
-                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->minutes_from_saturday)
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="{{$data['properties']->user->getBusinessAccount->minutes_from_saturday}}">
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="{{\Auth::user()->getIndividualAccount->minutes_from_saturday}}">
+                      @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->minutes_from_saturday)
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="{{\Auth::user()->getBusinessAccount->minutes_from_saturday}}">
 
                       @else
                         <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="1">
@@ -721,17 +721,17 @@
                     <div class="quantity">
 
 
-                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->hours_till_saturday
-                 && null==$data['properties']->user->getIndividualAccount
+                      @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->hours_till_saturday
+                 && null==\Auth::user()->getIndividualAccount
                  )
-                        <input type="number" min="1" max="24" step="1" name="hours_till_saturday" value="{{$data['properties']->user->getOrganisationAccount->hours_till_saturday}}">
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->hours_till_saturday
-                      && null==$data['properties']->user->getBusinessAccount
+                        <input type="number" min="1" max="24" step="1" name="hours_till_saturday" value="{{\Auth::user()->getOrganisationAccount->hours_till_saturday}}">
+                      @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->hours_till_saturday
+                      && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="24" step="1" name="hours_till_saturday" value="{{$data['properties']->user->getIndividualAccount->hours_till_saturday}}">
-                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->hours_till_saturday)
-                        <input type="number" min="1" max="24" step="1" name="hours_till_saturday" value="{{$data['properties']->user->getBusinessAccount->hours_till_saturday}}">
+                        <input type="number" min="1" max="24" step="1" name="hours_till_saturday" value="{{\Auth::user()->getIndividualAccount->hours_till_saturday}}">
+                      @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->hours_till_saturday)
+                        <input type="number" min="1" max="24" step="1" name="hours_till_saturday" value="{{\Auth::user()->getBusinessAccount->hours_till_saturday}}">
 
                       @else
                         <input type="number" min="1" max="24" step="1" name="hours_till_saturday" value="1">
@@ -746,17 +746,17 @@
 
 
 
-                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->minutes_till_saturday
-               && null==$data['properties']->user->getIndividualAccount
+                      @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->minutes_till_saturday
+               && null==\Auth::user()->getIndividualAccount
                )
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="{{$data['properties']->user->getOrganisationAccount->minutes_till_saturday}}">
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->minutes_till_saturday
-                      && null==$data['properties']->user->getBusinessAccount
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="{{\Auth::user()->getOrganisationAccount->minutes_till_saturday}}">
+                      @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->minutes_till_saturday
+                      && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="{{$data['properties']->user->getIndividualAccount->minutes_till_saturday}}">
-                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->minutes_till_saturday)
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="{{$data['properties']->user->getBusinessAccount->minutes_till_saturday}}">
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="{{\Auth::user()->getIndividualAccount->minutes_till_saturday}}">
+                      @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->minutes_till_saturday)
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="{{\Auth::user()->getBusinessAccount->minutes_till_saturday}}">
 
                       @else
                         <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="1">
@@ -769,17 +769,17 @@
 
                     <div class="quantity">
 
-                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->hours_from_sunday
-                 && null==$data['properties']->user->getIndividualAccount
+                      @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->hours_from_sunday
+                 && null==\Auth::user()->getIndividualAccount
                  )
-                        <input type="number" min="1" max="24" step="1" name="hours_from_sunday" value="{{$data['properties']->user->getOrganisationAccount->hours_from_sunday}}">
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->hours_from_sunday
-                      && null==$data['properties']->user->getBusinessAccount
+                        <input type="number" min="1" max="24" step="1" name="hours_from_sunday" value="{{\Auth::user()->getOrganisationAccount->hours_from_sunday}}">
+                      @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->hours_from_sunday
+                      && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="24" step="1" name="hours_from_sunday" value="{{$data['properties']->user->getIndividualAccount->hours_from_sunday}}">
-                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount-> hours_from_sunday)
-                        <input type="number" min="1" max="24" step="1" name="hours_from_sunday" value="{{$data['properties']->user->getBusinessAccount->hours_from_sunday}}">
+                        <input type="number" min="1" max="24" step="1" name="hours_from_sunday" value="{{\Auth::user()->getIndividualAccount->hours_from_sunday}}">
+                      @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount-> hours_from_sunday)
+                        <input type="number" min="1" max="24" step="1" name="hours_from_sunday" value="{{\Auth::user()->getBusinessAccount->hours_from_sunday}}">
 
                       @else
                         <input type="number" min="1" max="24" step="1" name="hours_from_sunday" value="1">
@@ -792,17 +792,17 @@
                     <div class="quantity quantity2">
 
 
-                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->minutes_from_sunday
-                && null==$data['properties']->user->getIndividualAccount
+                      @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->minutes_from_sunday
+                && null==\Auth::user()->getIndividualAccount
                 )
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="{{$data['properties']->user->getOrganisationAccount->minutes_from_sunday}}">
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->minutes_from_sunday
-                      && null==$data['properties']->user->getBusinessAccount
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="{{\Auth::user()->getOrganisationAccount->minutes_from_sunday}}">
+                      @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->minutes_from_sunday
+                      && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="{{$data['properties']->user->getIndividualAccount->minutes_from_sunday}}">
-                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->minutes_from_sunday)
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="{{$data['properties']->user->getBusinessAccount->minutes_from_sunday}}">
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="{{\Auth::user()->getIndividualAccount->minutes_from_sunday}}">
+                      @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->minutes_from_sunday)
+                        <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="{{\Auth::user()->getBusinessAccount->minutes_from_sunday}}">
 
                       @else
                         <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="1">
@@ -814,17 +814,17 @@
                     <div class="quantity">
 
 
-                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->hours_till_sunday
-                && null==$data['properties']->user->getIndividualAccount
+                      @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->hours_till_sunday
+                && null==\Auth::user()->getIndividualAccount
                 )
-                        <input type="number" min="1" max="24" step="1" name="hours_till_sunday" value="{{$data['properties']->user->getOrganisationAccount->hours_till_sunday}}">
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->hours_till_sunday
-                      && null==$data['properties']->user->getBusinessAccount
+                        <input type="number" min="1" max="24" step="1" name="hours_till_sunday" value="{{\Auth::user()->getOrganisationAccount->hours_till_sunday}}">
+                      @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->hours_till_sunday
+                      && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="24" step="1" name="hours_till_sunday" value="{{$data['properties']->user->getIndividualAccount->hours_till_sunday}}">
-                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->hours_till_sunday)
-                        <input type="number" min="1" max="24" step="1" name="hours_till_sunday" value="{{$data['properties']->user->getBusinessAccount->hours_till_sunday}}">
+                        <input type="number" min="1" max="24" step="1" name="hours_till_sunday" value="{{\Auth::user()->getIndividualAccount->hours_till_sunday}}">
+                      @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->hours_till_sunday)
+                        <input type="number" min="1" max="24" step="1" name="hours_till_sunday" value="{{\Auth::user()->getBusinessAccount->hours_till_sunday}}">
 
                       @else
                         <input type="number" min="1" max="24" step="1" name="hours_till_sunday" value="1">
@@ -835,17 +835,17 @@
                     </p>
                     <div class="quantity quantity2">
 
-                      @if(null!=($data['properties']->user->getOrganisationAccount) && $data['properties']->user->getOrganisationAccount->minutes_till_sunday
-                 && null==$data['properties']->user->getIndividualAccount
+                      @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->minutes_till_sunday
+                 && null==\Auth::user()->getIndividualAccount
                  )
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="{{$data['properties']->user->getOrganisationAccount->minutes_till_sunday}}">
-                      @elseif(null!=($data['properties']->user->getIndividualAccount) && $data['properties']->user->getIndividualAccount->minutes_till_sunday
-                      && null==$data['properties']->user->getBusinessAccount
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="{{\Auth::user()->getOrganisationAccount->minutes_till_sunday}}">
+                      @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->minutes_till_sunday
+                      && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="{{$data['properties']->user->getIndividualAccount->minutes_till_sunday}}">
-                      @elseif(null!=($data['properties']->user->getBusinessAccount) && $data['properties']->user->getBusinessAccount->minutes_till_sunday)
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="{{$data['properties']->user->getBusinessAccount->minutes_till_sunday}}">
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="{{\Auth::user()->getIndividualAccount->minutes_till_sunday}}">
+                      @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->minutes_till_sunday)
+                        <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="{{\Auth::user()->getBusinessAccount->minutes_till_sunday}}">
 
                       @else
                         <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="1">
@@ -860,27 +860,27 @@
                   <img src="/img/data_icon.svg" alt="">Скачать мои данные
                 </a>
 
-                <div style="@if($data['properties']->user->vid_user=='Предприниматель') margin-top:0px;
-                @elseif($data['properties']->user->vid_user=='Частная')margin-top:40px;
+                <div style="@if(\Auth::user()->vid_user=='Предприниматель') margin-top:0px;
+                @elseif(\Auth::user()->vid_user=='Частная')margin-top:40px;
                 @endif position:relative;min-width:280px">
                   <a href="JavaScript:Void(0);" style="position:absolute" class="prophile_change_account">
                   <img src="/img/user_icon_profile.svg" alt="">Сменить вид учётной записи
                   </a>
-                  @if($data['properties']->user->vid_user!='Организация' && $data['properties']->user->vid_user!='Предприниматель' &&
-                  $data['properties']->user->vid_user!='Компания'
+                  @if(\Auth::user()->vid_user!='Организация' && \Auth::user()->vid_user!='Предприниматель' &&
+                  \Auth::user()->vid_user!='Компания'
                   )
                 <div style="clear:both;"> <a href="/private_cabinet/to_organisation" style="position:relative;top:30px;font-weight:200"class="prophile_change_account">
                     <img src="/img/user_icon_profile.svg" alt="">Сменить на Организацию
                   </a></div>
                   @endif
-                  @if( $data['properties']->user->vid_user!='Предприниматель' &&
-                 $data['properties']->user->vid_user!='Компания'
+                  @if( \Auth::user()->vid_user!='Предприниматель' &&
+                 \Auth::user()->vid_user!='Компания'
                  )
                   <div style="clear:both;" ><a href="/private_cabinet/to_individual" style="position:relative;top:40px;font-weight:200"class="prophile_change_account">
                       <img src="/img/user_icon_profile.svg" alt="">Сменить на Предприниматель
                     </a></div>
                   @endif
-                  @if($data['properties']->user->vid_user!='Компания')
+                  @if(\Auth::user()->vid_user!='Компания')
                   <div style="clear:both;" ><a href="/private_cabinet/to_company" style="position:relative;top:50px;font-weight:200"class="prophile_change_account">
                       <img src="/img/user_icon_profile.svg" alt="">Сменить на Компанию
                     </a></div>
@@ -891,7 +891,7 @@
                   <img src="/img/delete_icon_profile.svg" alt="">Удалить регистрацию
                 </a>
 
-                <input type="hidden" name="current_type" value="{{$data['properties']->user->vid_user}}">
+                <input type="hidden" name="current_type" value="{{\Auth::user()->vid_user}}">
                 <button type="submit" class="prophile_save ml-auto">
                   Сохранить
                 </button>
@@ -1444,8 +1444,8 @@ console.log('imgInputakk')
 
       });
 
-      if('{{$data['properties']->user->country }}'!=''){
-          var cnt='{{$data['properties']->user->country }}'
+      if('{{\Auth::user()->country }}'!=''){
+          var cnt='{{\Auth::user()->country }}'
       }
       else{var cnt='gb'}
 
