@@ -145,10 +145,13 @@
             <span class="product_item_foto"><img src="/img/photo_camera_icon.svg" alt="">{{count($product->pictures)}}</span>
             @endif
             @if(!$product->pictures->first())
+                <a href="/ads/{{$product->id}}">
             <img src="/storage/pictures/photo_icon.png" alt="" class="product_item_img">
-
+                    </a>
             @else
+                    <a href="/ads/{{$product->id}}">
               <img src="/storage/messages/{{$product->pictures->first()->photo}}" alt="" class="product_item_img">
+                    </a>
             @endif
           </div>
           <div class="col-sm-3">
