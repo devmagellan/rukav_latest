@@ -35,8 +35,10 @@ class CreateUserAccountAction extends Action
     public function run($data)
     {
         try {
+
+            \Log::info('User from admin=>',array($data));
             if ($data->vid_user == 'Организация') {
-                \Log::info('User from admin=>',array($data));
+
                 if($data->admin_side==1){
                     $user=Apiato::call('User@CreateUserAccountWithOrganisationAccountTask', [$data]);
                 }

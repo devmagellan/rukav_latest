@@ -115,7 +115,8 @@
                     <input type="hidden" id="customer_id" name="customer_id" value="0">
                     <input type="hidden" id="company_id" name="company_id" value="1">
                     <input type="hidden" id="is_client" name="is_client" value="1">
-
+                    <input type="hidden" id="admin_side" name="admin_side" value="1">
+                    <input type="hidden" id="confirmed" name="confirmed" value="0">
 
                   <div class="form-group">
                     <div class="custom-control custom-radio">
@@ -224,10 +225,18 @@
 
                     </div>
 
-                    <div class="form-group">
+                    @if(\Auth::user()->can('manage-roles'))
+                        <div class="form-group">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" name="is_client" id="managerSwitch" >
+                                <label class="custom-control-label" for="managerSwitch">Админ/не админ</label>
+                            </div>
+                        </div>
+                    @endif
+                    <!--div class="form-group">
                         <label class="form-label" for="customer_location">Страна резиденции</label>
                         <input type="text" id="customer_location" name="customer_location" class="form-control" required placeholder="Локация пользователя">
-                    </div>
+                    </div-->
 
                     <div class="form-group">
                         <label class="form-label" for="customer_email">Email</label>
@@ -457,6 +466,13 @@ console.log(777,form[0].checkValidity())
             var customer_id =0;
         }
 
+        if($('#managerSwitch').is(":checked")){
+            var is_client=0;
+        }else{
+            var is_client=1;
+        }
+
+
 
         $.ajax({
             method: 'POST',
@@ -467,7 +483,7 @@ console.log(777,form[0].checkValidity())
                 customer_id: customer_id, firstName: customer_name, lastName: customer_sername,
                 location: customer_location,
                 email: customer_email, is_client:1,reg_number:reg_number,vat_number:vat_number,vid_user:vid_user,admin_side:admin_side,
-              send_notification:send_notification,phone:customer_phone
+              send_notification:send_notification,phone:customer_phone,is_client:is_client
             },
             beforeSend: function () {
             },

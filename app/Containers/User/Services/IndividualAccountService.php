@@ -15,7 +15,8 @@ class IndividualAccountService
           $data=$data->toArray();
       }
       \Log::info('createIndividualAccount',$data);
-    IndividualAccount::create([
+      $isSet=IndividualAccount::where('user_id',$userId)->first();
+    IndividualAccount::updateOrCreate(['id'=>(null!=($isSet)) ? $isSet->pluck('id') : null],[
       'www' => $data['www'],
       'business_name' => $data['business_name'],
       'address' => $data['address'],

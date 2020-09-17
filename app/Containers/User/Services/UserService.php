@@ -14,18 +14,16 @@ class UserService
   {
       $nameAvatar=time() . '.jpg' ;
       \Log::info('UserData=>',array($data));
-      \Log::info('Phone=>'.$data->hide_phone);
       try {
 
 
       $current=\App\Containers\User\Models\User::where('email',$data->email)->withTrashed()->first();
-
-      return User::updateOrCreate([
-      'id'=>($current!=null) ? $current->id : $data->customer_id,
+      \Log::info('CurrentUser=>',array($current));
+      return User::updateOrCreate(['id'=>($current!=null) ? $current->id : $data->customer_id],[
       'name' => $data->firstName,
       'sername' => $data->lastName,
       'email' => $data->email,
-      'password' => ($data->customer_id) ? $data->password : bcrypt($data->password),
+      'password' => ($data->customer_id && $current!=null) ? $current->password : bcrypt($data->password),
       'country' => $data->country,
       'phone' => $data->code.$data->phone,
       'vid_user' => $data->vid_user,
