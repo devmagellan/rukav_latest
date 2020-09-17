@@ -12730,7 +12730,8 @@ class Controller extends WebController
       11 => 'title',
       12 => 'id',
       13 => 'message',
-      14 => 'message'
+      14 => 'message',
+      15 => 'title',
     );
     //Getting the data
 
@@ -12738,7 +12739,7 @@ class Controller extends WebController
     $totalFiltered = $totalData;      // No filter at first so we can assign like this
     // Here are the parameters sent from client for paging
     $start = $request->input('start');           // Skip first start records
-    $length = $request->input('length');   //  Get length record from start
+    $length = $request->input('length')+1;   //  Get length record from start
     /*
      * Where Clause
      */
@@ -12834,6 +12835,7 @@ class Controller extends WebController
           break;
       }
       $rubrik = \App\Containers\Site\Models\ProductCategory::where('id', $ad->category_id)->first();
+        $qnt = \App\Containers\Ad\Models\Ad::where('sender', $ad->sender)->get()->count();
       $nestedData = array();
       $nestedData [0] = '<div><div style="display:inline-block;"><input type="hidden" class="ad_id" value="' . $ad->id . '"><input class="ad_check" type="checkbox" value="0"></div>
  <span class="photoAdsModalOpen" style="display:inline-block;cursor:pointer" ><i class="fal fa-image"></i></span></div>';
@@ -12845,12 +12847,13 @@ class Controller extends WebController
       $nestedData [6] = ($ad->getSender) ? $ad->getSender->email : 'Не известно';
       $nestedData [7] = ($ad->phone) ? $ad->phone : 'нет';
       $nestedData [8] = ($rubrik) ? $rubrik->name : 'NoCategoryName';
-      $nestedData [9] = 'second';
+      $nestedData [9] = 'second2';
       $nestedData [10] = 'third';
       $nestedData [11] = ($ad->updated_at) ? $ad->updated_at->toDateTimeString() : $ad->created_at->toDateTimeString();
       $nestedData [12] = $ad->id;
-      $nestedData [13] = $ad->updated_at;
+      $nestedData [13] = $qnt;
       $nestedData [14] = $ad->id;
+      $nestedData [16] = 'second3';
       $data [] = $nestedData;
     }
     /*

@@ -25,7 +25,7 @@
                             <th>Статус</th>
                             <th>Заголовок</th>
                             <th>Текст</th>
-                            <th>ID Автора</th>
+                            <th>ID Автора/кол.об</th>
                             <th>Автор И.Ф.</th>
                             <th>email</th>
                             <th>телефон</th>
@@ -48,7 +48,7 @@
                                     <td>Статус</td>
                                     <td>{{$message->title}}</td>
                                     <td>Текст</td>
-                                    <td>{{$message->sender}}</td>
+                                    <td>{{$message->sender}}/12</td>
                                     <td>{{$message->getSender->name}} {{$message->getSender->sername}}</td>
                                     <td>{{$message->email}}</td>
                                     <td>{{$message->phone}}</td>
@@ -120,7 +120,7 @@
             });
         });
 
-        var table = $('#dt-basic-example').DataTable(
+     /*   var table = $('#dt-basic-example').DataTable(
             {
                 //responsive: true,
                 orderCellsTop: true,
@@ -128,7 +128,7 @@
                 "processing": true,
                 "serverSide": true,
                 "ajax": "../server_side/scripts/server_processing.php"
-            });
+            });*/
 
     });
 

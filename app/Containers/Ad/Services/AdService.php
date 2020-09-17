@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Containers\Filter\Models\AddFilter;
 use App\Containers\Filter\Models\AddFilterDeals;
 use Carbon\Carbon;
+use Image;
 use App\Containers\HomePage\Services\GlobalService;
 class AdService
 {
@@ -59,9 +60,32 @@ class AdService
     foreach ($data->file('files') as $file) {
 
       $filePath = Storage::disk('public')->put('', $file);
+
       $this->createPicture($filePath, $adId);
+
+        \Log::info('filepath1'.$file);
+        \Log::info('filepath2'.$filePath);
+        $oldPath = storage_path('app/public/messages/').$filePath; // publc/images/1.jpg
+        $newPath = storage_path('app/public/messages/').'small_'.$filePath;
+
+        if (\File::copy($oldPath , $newPath)) {
+            \Log::info('filepath2'.$filePath);
+            $this->createThumbnail($newPath, 200, 200);
+        }
+
     }
+
+
+
   }
+
+    public function createThumbnail($path, $width, $height)
+    {
+        $img = Image::make($path)->resize($width, $height, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        $img->save($path);
+    }
 
   public function saveFilters($data, $adId)
   {
