@@ -21,6 +21,7 @@
         <tbody>
         @foreach($customers as $customer)
             <form>
+                <input type="hidden" name="customer_id" id="customer_id" value="{{$customer->id}}">
         <tr>
             <th class="customer_id" scope="row">{{$customer->id}}</th>
             <td class="customer_name">{{$customer->name}}</td>
@@ -59,50 +60,60 @@
 
     <script>
         $('.PrependChangeCustomer').click(function(){
-            console.log('PrependChangeCustomer1')
+            console.log('PrependChangeCustomer2')
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
-            var manager =  $(this).parent().parent().find('.customer_manager').find('.is_manager').val()
-            console.log(manager);
             //$('#manager_selected').val(1); //<---below this one
-           $.ajax({
-                method: 'POST',
-                dataType: 'json',
-                async:false,
-                url: '/company/users/get',
-                data: {company_id: company_id,customer_id:customer_id
-                },
-                beforeSend: function() {
-                },
-                complete: function() {
-                    reloadData();
-                },
-                success: function (data) {
-                    console.log('PrependChangeCustomer',data)
-                    console.log(data.get_customers_company)
-                    $('#customer_id').val(customer_id)
-                    $('#customer_name').val(data.name)
-                    $('#customer_sername').val(data.sername)
+            console.log('prepare_customer',customer_id)
+                 $.ajax({
+             method: 'POST',
+             dataType: 'json',
+             async:false,
+             url: '/user/get',
+             data: {customer_id:customer_id
+             },
+             beforeSend: function() {
+             },
+             complete: function() {
+             reloadData();
+             },
+             success: function (data) {
+             console.log('PrependChangeCustomer',data)
+             $('#customer_id').val(customer_id)
+             $('#customer_name').val(data.name)
+             $('#confirmed').val(data.confirmed)
+             $('#customer_sername').val(data.sername)
+             $('#admin_side').val(1)
+             $('#customer_email').val(data.email)
+             $('#customer_info').val(data.info)
+             $('#customer_phone').val(data.phone)
+             $('#customer_address').val(data.address)
+             if(data.is_client==0){
+             $('#managerSwitch').prop('checked', true);
+             }
+             else{
+             $('#managerSwitch').prop('checked',false);
+             }
+             reloadData();
+             console.log('success')
 
-                    $('#customer_email').val(data.email)
-                    $('#customer_info').val(data.info)
-                    $('#customer_phone').val(data.get_customers_company.phone)
-                    $('#customer_address').val(data.get_customers_company.address)
-                    $('#select option:selected').removeAttr("selected");
-                    $("#select option[value="+data.get_customers_company.manager_id+"]").attr('selected', 'selected');
-                    if(manager==1){
-                        $('#managerSwitch').prop('checked', true);
-                    }
-                    else{
-                        $('#managerSwitch').prop('checked',false);
-                    }
+             }
+             });
 
-
-                    console.log(data.get_customers_company.manager_id)
-                    reloadData();
-                      console.log('success')
-
-                }
-            });
+             $.ajax({
+             method: 'POST',
+             dataType: 'html',
+             async:false,
+             url: '/user/roles_get',
+             data: {customer_id:customer_id
+             },
+             beforeSend: function() {
+             },
+             complete: function() {
+             },
+             success: function (data) {
+             $('#rolesBlock').html(data)
+             }
+             });
         });
 
         $('.DeleteCustomer').click(function(){

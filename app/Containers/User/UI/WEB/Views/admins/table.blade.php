@@ -11,14 +11,8 @@
         </thead>
         <tbody>
         @foreach($customers as $customer)
-            <form>
-
-                <?
-/*
-                $manager=App\Containers\Manager\Models\Manager::where('id',$customer->getCustomersCompany['manager_id'])->first();
-                if($manager){
-                $manager_user=\App\Containers\User\Models\User::where('id',$manager->user_id)->first();}*/
-                ?>
+        <form>
+            <input type="hidden" name="customer_id" id="customer_id" value="{{$customer->id}}">
         <tr>
             <th class="customer_id" scope="row">{{$customer->id}}</th>
             <td class="customer_name">{{$customer->name}}</td>
@@ -55,6 +49,8 @@
             console.log('PrependChangeCustomer1')
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
             //$('#manager_selected').val(1); //<---below this one
+            console.log('prepare_customer',customer_id)
+            localStorage.setItem('customer_id',customer_id);
            $.ajax({
                 method: 'POST',
                 dataType: 'json',
@@ -69,10 +65,11 @@
                 },
                 success: function (data) {
                     console.log('PrependChangeCustomer',data)
-                    $('#customer_id').val(customer_id)
+                    $('#customer_id').val(data.id)
                     $('#customer_name').val(data.name)
+                    $('#confirmed').val(data.confirmed)
                     $('#customer_sername').val(data.sername)
-
+                    $('#admin_side').val(1)
                     $('#customer_email').val(data.email)
                     $('#customer_info').val(data.info)
                     $('#customer_phone').val(data.phone)
@@ -88,7 +85,7 @@
 
                 }
             });
-
+            console.log('prepare_customer',customer_id)
             $.ajax({
                 method: 'POST',
                 dataType: 'html',

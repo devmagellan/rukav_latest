@@ -156,10 +156,9 @@ class Controller extends WebController
       'remember_token' => Str::random(60)];*/
     $user['attributes']['id'] = ($request->input('customer_id') != 0) ? $request->input('customer_id') : null;
     $changeRole = $user['attributes']['id'];
-    if($request->input('customer_id') != 0){
-    $user = Apiato::call('User@UpdateUserAccountAction', [$request]);}
-    else{$user = Apiato::call('User@CreateUserAccountAction', [$request]);}
-   // $user = UserFacade::updateUser($user);
+    $user = Apiato::call('User@CreateUserAccountAction', [$request]);
+    \Log::info('USER=>',array($user));
+   //$user = UserFacade::updateUser($user);
     if($request->admin_side!=1){
     if ($changeRole == null) {
       $role_data = [
@@ -169,12 +168,12 @@ class Controller extends WebController
       ];
         \App\Containers\Authorization\Models\ModelHasRole::insert($role_data);
     }
-    $string = $request->input('birth_date') . ' 16:34:00';
+/*    $string = $request->input('birth_date') . ' 16:34:00';
     $birth_date = \Carbon\Carbon::createFromFormat('m/d/Y H:i:s', $string, 'Europe/London');
     $birth_date->setTimezone('UTC');
     $start_string = $request->input('start_date') . ' 16:34:00';
     $start_date = \Carbon\Carbon::createFromFormat('m/d/Y H:i:s', $start_string, 'Europe/London');
-    $start_date->setTimezone('UTC');
+    $start_date->setTimezone('UTC');*/
     $customer_tmp = \App\Containers\Customer\Models\Customer::where('user_id', $request->input('customer_id'))->first();}
 /*    $customer['values'] = [
       'user_id' => $user->id,

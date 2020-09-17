@@ -77,7 +77,7 @@ protected $emailCode;
         'instagram',
         'show_instagram',
         'www',
-        'show_www','encripted_password','is_confirmed_phone','verify_token',
+        'show_www','encripted_password','is_confirmed_phone','verify_token','deleted_at'
     ];
 
     protected $casts = [

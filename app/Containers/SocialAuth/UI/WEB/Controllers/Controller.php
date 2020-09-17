@@ -227,8 +227,11 @@ if (!empty($_GET['error'])) {
 				return redirect('/')->withInput()->withErrors(array('user_name' => 'some message'));   
 			}
 		
-        $existingUser = User::where('email', $user->email)->first();
+        $existingUser = User::where('email', $user->email)->withTrashed()->first();
         if($existingUser){
+			if(null!=$existingUser->deleted_at){
+				User::where('email', $user->email)->withTrashed()->update(['deleted_at'=>null]);
+			}
             // log them in
             auth()->login($existingUser, true);
         } else {
@@ -265,8 +268,12 @@ if (!empty($_GET['error'])) {
             return redirect()->to('/');
         }*/
         // check if they're an existing user
-        $existingUser = User::where('email', $user->email)->first();
+        $existingUser = User::where('email', $user->email)->withTrashed()->first();
         if($existingUser){
+			
+			if(null!=$existingUser->deleted_at){
+				User::where('email', $user->email)->withTrashed()->update(['deleted_at'=>null]);
+			}
             // log them in
 \Auth::guard('web')->login($newUser, true);
         } else {
@@ -309,8 +316,13 @@ if (!empty($_GET['error'])) {
             return redirect()->to('/');
         }*/
         // check if they're an existing user
-        $existingUser = User::where('email', $user->email)->first();
+        $existingUser = User::where('email', $user->email)->withTrashed()->first();
+		
         if($existingUser){
+			
+			if(null!=$existingUser->deleted_at){
+				User::where('email', $user->email)->withTrashed()->update(['deleted_at'=>null]);
+			}
             // log them in
             auth()->login($existingUser, true);
         } else {
