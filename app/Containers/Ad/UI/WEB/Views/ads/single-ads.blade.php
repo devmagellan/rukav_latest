@@ -1,5 +1,65 @@
 @extends('ad::layouts.layout_second')
 @section('content')
+<style>
+.slick-slider {
+    margin-bottom: 0;
+    position:relative;
+}
+ul.slickslide {
+    padding-left:0;
+    max-width:100%;
+}
+.slick-slider .slick-track {
+    min-width:100%;
+}
+ul.slickslide li img, .slick-dots button img {
+    width:100%;
+    height:auto;
+}
+.slick-dots {
+    bottom:-100px;
+    top:auto;
+    left:auto;
+    right:auto;
+    position:absolute;
+    line-height:0;
+    background:#fff;
+
+}
+
+.slick-dots li, .slick-dots li button:before {
+   /* width: 100px;
+    height:100px; */
+    margin:0;
+    padding:0;
+}
+.slick-dots li {
+    margin: 5px; border:1px solid #ccc; display:inline-block; width:auto;height:auto;
+}
+
+.slick-slider .slick-track {
+    min-width:100%;
+}
+.slick-dots li button {
+    margin:0;
+    height:auto;
+    width:100%;
+    padding:0;
+
+}
+
+.slick-dots li button.tab { clear:both;   display:block;}
+.slick-dots li button img { width:100%; max-width:80px; height:auto;   }
+.slick-dots li button:before {
+    content:''; border:1px solid #f00;display:block; width:100%;  max-width:150px; overflow:hidden; float:none;  position:absolute;
+    width:100%;
+    height:100%}
+
+.slick-thumbs {
+    position:absolute;
+    left: -9999px;
+}
+</style>
 <article class="product_main_block">
   <div class="container">
     <div class="row">
@@ -61,8 +121,13 @@
       </div>
     </div>
     <div class="row">
-	<div class="col-lg-8 adv_photo_main">
-      <div class="col-lg-12 adv_photo">
+	
+		<div class="col-lg-8 adv_photo_main" style="-webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;">
+      <div class="col-lg-12 adv_photo" style="position: relative;
+  top: 50%;
+  transform: translateY(-50%);">
         <div class="product_slider_main">
           @foreach($ad->pictures as $picture)
             <div class="product_slider_main_item">
@@ -70,7 +135,7 @@
             </div>
           @endforeach
         </div>
-        <div class="product_slider_nav">
+        <div class="product_slider_nav slick-thumbs">
           @foreach($ad->pictures as $picture)
             <div class="product_slider_nav_item">
               <img src="{{asset('/storage/messages/'.$picture->photo)}}" alt="">
@@ -79,6 +144,82 @@
         </div>
       </div>
 	  </div>
+	
+	
+	
+	
+	
+	
+	<!--div class="col-lg-8 adv_photo_main" style="-webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;">
+      <div class="col-lg-12 adv_photo" style="position: relative;
+  top: 50%;
+  transform: translateY(-50%);">
+        <ul class="slickslide product_slider_main">
+          @foreach($ad->pictures as $picture)
+            <li class="product_slider_main_item">
+              <img src="{{asset('/storage/messages/'.$picture->photo)}}" alt="">
+            </li>
+          @endforeach
+        </ul>
+		<div class="slick-thumbs">
+        <ul>
+          @foreach($ad->pictures as $picture)
+            <li class="product_slider_nav_item">
+              <img src="{{asset('/storage/messages/'.$picture->photo)}}" alt="">
+            </li>
+          @endforeach
+        </ul>
+		</div>
+      </div>
+	  </div-->
+	  
+	  <!--div class="container">
+    <p>Here is my header</p>
+    <ul class="slickslide">
+        <li>
+            <img src="http://placehold.it/800x300/200&text=active"  title="img" alt="img" />
+        </li>
+        <li>
+            <img src="http://placehold.it/800x300/300" title="img2" alt="img2" />
+        </li>
+        <li>
+            <img  src="http://placehold.it/800x300/400" title="img" alt="img" />
+        </li>
+         <li>
+            <img src="http://placehold.it/800x300/500"  title="img2" alt="img2" />
+        </li>
+        <li>
+            <img  src="http://placehold.it/800x300/600" title="img" alt="img" />
+        </li>
+    </ul>
+    <div class="slick-thumbs">
+        <ul>
+             <li>
+                <img src="http://placehold.it/150x100/200" />
+            </li>
+            <li>
+                <img src="http://placehold.it/150x100/300" />
+            </li>
+            <li>
+                <img src="http://placehold.it/150x100/400" />
+            </li>
+            <li>
+
+                <img src="http://placehold.it/150x100/500" />
+            </li>
+            <li>
+                <img src="http://placehold.it/150x100/600" />
+            </li>
+        </ul>
+    </div>
+    <hr/>
+     <h3>Featured News</h3>
+
+    <p>Proactively create adaptive schemas vis-a-vis multimedia based synergy. Energistically repurpose cost effective users before economically sound web services. Proactively aggregate fully tested ROI whereas superior benefits. Distinctively exploit mission-critical.</p>
+</div-->
+	  
       <div class="col-lg-4">
         <div class="product_info_block">
           <div class="product_info_block_left">
@@ -249,12 +390,12 @@
 <script async src="https://static.addtoany.com/menu/page.js"></script>
 <!-- AddToAny END -->
       </div>
-      <div class="col-md-6" style="text-align: right">
+      <!--div class="col-md-6" style="text-align: right">
         <img src="/img/tag_icon.png" alt="">
         <p class="product_will_share_tags">Метки: </p>
         <a href="#" class="product_will_share_link">#Автомобили,</a>
         <a href="#" class="product_will_share_link">#Транспорт</a>
-      </div>
+      </div-->
     </div>
 
     <div class="row product_indicators_block">

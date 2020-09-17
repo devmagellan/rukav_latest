@@ -214,7 +214,7 @@ $initAutoComplete = function(){
       })
   })
   
-  $(document).ready(function(){
+/*   $(document).ready(function(){
 	setTimeout(function () {
 	console.log('height',$('.slick-list').height());
 	var h=$('.product_slider_main').height()+80
@@ -227,7 +227,7 @@ $initAutoComplete = function(){
 		$('.adv_photo_main').append(res)
 	}
 	}, 500)
-});
+}); */
   </script>
 
 </head>

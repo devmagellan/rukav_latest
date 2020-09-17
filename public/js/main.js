@@ -284,13 +284,15 @@ $(document).ready(function(){
             console.log('no');
         }
     });
-
-    $('.product_slider_main').slick({
+ 
+     $('.product_slider_main').slick({
+		centerMode: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         infinite: true,
         adaptiveHeight: true,
         fade: true,
+		dots: true,
         prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="/img/slide_icon2.svg" alt=""></a>',
         nextArrow: '<a class="product_slider_icon product_slider_next"><img src="/img/slide_icon1.svg" alt=""></a>',
         asNavFor: '.product_slider_nav',
@@ -298,17 +300,63 @@ $(document).ready(function(){
             breakpoint: 768,
             settings: {
                 slidesToShow: 1,
-                adaptiveHeight: true
+                adaptiveHeight: true,
+				centerMode: true,
+				dots: true,
+				arrows: true,
             }
         }]
-    });
+    }); 
     $('.product_slider_nav').slick({
         slidesToShow: 6,
         slidesToScroll: 1,
+		centerMode: true,
         asNavFor: '.product_slider_main',
         focusOnSelect: true,
         infinite: true
-    });
+    }); 
+	
+	
+	
+	$(document).ready(function (e) {
+
+/*     $('.slickslide').slick({
+      centerMode: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        //infinite: true,
+        adaptiveHeight: true,
+       //fade: true,
+       prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="/img/slide_icon2.svg" alt=""></a>',
+        nextArrow: '<a class="product_slider_icon product_slider_next"><img src="/img/slide_icon1.svg" alt=""></a>',
+        asNavFor: '.slick-thumbs',  
+		dots: true,
+        speed: 500,
+        slide: 'li',
+        cssEase: 'linear',
+        variableWidth: false,
+        autoplay: true,
+        autoplaySpeed: 4000,
+        responsive: [{
+            breakpoint: 1168,
+            settings: {
+                adaptiveHeight: true,
+				centerMode: true,
+				arrows: false,
+                centerPadding: '1140px',
+                variableWidth: false,
+                slidesToShow: 1,
+                dots: true
+            }
+        }],
+        customPaging: function (slider, i) {
+            return '<button class="tab">' + $('.slick-thumbs li:nth-child(' + (i + 1) + ')').html() + '</button>';
+        }
+    }); */
+
+    //$('.slick-thumbs').html('');
+    //$('.slick-dots').appendTo('.slick-thumbs');
+});
 
     $('.product_slider_main_item').zoom({ on:'click' });
 
