@@ -290,7 +290,7 @@
                                                 <th>Коментарии</th>
                                                 <th>Дата послед. измен.</th>
                                                 <th>ID</th>
-                                                <th>Log Link</th>
+                                                <th>Кол-во об</th> <th>Log Link</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -312,6 +312,8 @@
                                                 <th>Коментарии</th>
                                                 <th>Дата послед. измен.</th>
                                                 <th>ID</th>
+
+                                                <th>Кол-во об</th>
                                                 <th>Log Link</th>
                                             </tr>
                                             </tfoot>
@@ -684,7 +686,7 @@
             var dataTable = $('.datatable').DataTable(
                 {
                     "paging": true, // Allow data to be paged
-                    "lengthChange": false,
+                    "lengthChange": true,
                     "orderCellsTop": true,
                     "fixedHeader": true,
                     "searching": true, // Search box and search function will be actived
@@ -727,8 +729,8 @@
                         null,
                         null,
                         null,
-                        null,
-                        { "visible": false }, //The last column will be invisible
+                        null,null,
+                      { "visible": false }//The last column will be invisible
                     ],
 
                 });
