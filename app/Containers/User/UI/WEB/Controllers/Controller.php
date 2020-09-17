@@ -10,6 +10,7 @@ use App\Containers\User\UI\WEB\Requests\GetAllUsersRequest;
 use Apiato\Core\Foundation\Facades\Apiato;
 use App\Containers\User\Services\UserService;
 use App\Containers\User\Services\SmsService;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class Controller
@@ -400,6 +401,28 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
 
     public function refresh(GetAllUsersRequest $request){
         \Auth::guard('web')->loginUsingId($request->input('id'), true);
+        return json_encode(['result'=>'success']);
+    }
+
+    public function userСhangeRole(GetAllUsersRequest $request){
+        if($request->input('state')=='false'){
+            \App\Containers\Authorization\Models\ModelHasRoles::where('role_id',$request->input('role'))->where('model_id',$request->input('user'))->delete();
+        }
+        else{
+            $insert=[
+                'role_id'=>$request->input('role'),
+                'model_type'=>'App\Containers\User\Models\User',
+                'model_id'=>$request->input('user')
+            ];
+            \App\Containers\Authorization\Models\ModelHasRoles::insert($insert);
+        }
+        return json_encode(['result'=>'success']);
+    }
+
+    public function userСhangePassword(GetAllUsersRequest $request){
+        var_dump($request->input());
+        $update=['password'=>Hash::make($request->input('password'))];
+        \App\Containers\User\Models\User::where('id',$request->input('customer_id'))->update($update);
         return json_encode(['result'=>'success']);
     }
 }

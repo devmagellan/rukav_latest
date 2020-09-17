@@ -29,6 +29,24 @@ $router->post('/user/roles_get', [
     ],
 ]);
 
+$router->post('/user/change_role', [
+    'as'   => 'user_change_role',
+    'uses'       => 'Controller@userСhangeRole',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin'
+    ],
+]);
+
+$router->post('/users/change_password', [
+    'as'   => 'user_change_password',
+    'uses'       => 'Controller@userСhangePassword',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin'
+    ],
+]);
+
 
 
 $router->get('/admins_list', [

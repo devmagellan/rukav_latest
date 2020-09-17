@@ -252,9 +252,6 @@
                                     </div>
                                 </div>
                             @endif
-                            @if(\Auth::user()->can('manage-roles'))
-                                <div id="rolesBlock"></div>
-                            @endif
 
                             <!--div class="form-group">
                                 <label class="form-label" for="customer_location">Страна резиденции</label>
@@ -279,6 +276,65 @@
                         <div class="modal-footer">
                             <button type="button" class="customer_create_close btn btn-secondary waves-effect waves-themed" data-dismiss="modal">Закрыть</button>
                             <button type="submit" class="customer_create btn btn-primary waves-effect waves-themed" >Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade default-example-modal-right-lg-roles" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-dialog-right modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title h4">Форма изменения ролей пользователя</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                        </button>
+                    </div>
+
+                    <form class="needs-validation" id="customer_create" novalidate >
+
+                        <div class="modal-body">
+                            <input type="hidden" id="customer_id" name="customer_id" value="0">
+
+                            @if(\Auth::user()->can('manage-roles'))
+                                <div id="rolesBlock"></div>
+                            @endif
+
+                            </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade default-example-modal-right-lg-password" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-dialog-right modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title h4">Форма изменения пароля пользователя</h5>
+                        <button type="button" class="close password_create_close_click" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                        </button>
+                    </div>
+
+                    <form class="needs-validation" id="customer_create" novalidate onsubmit="theSubmitFunctionPassword(); return false;">
+                        <input type="hidden" id="customer_password_id" name="customer_id" value="0">
+
+                        <div class="form-group">
+                            <label class="form-label" for="password">Пароль</label>
+                            <input type="text" id="password_enter" name="password" required class="form-control" placeholder="Пароль">
+
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="confirm_password">Подтвердить Пароль</label>
+                            <input type="text" id="confirm_password" name="confirm_password" required class="form-control" placeholder="Подтвердить Пароль">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="password_create_close btn btn-secondary waves-effect waves-themed" data-dismiss="modal">Закрыть</button>
+                            <button type="submit" class="password_create btn btn-primary waves-effect waves-themed" >Сохранить</button>
                         </div>
                     </form>
                 </div>
@@ -515,7 +571,47 @@ $('#managerSwitch').change(function(){
             }
         }
 
+        function  theSubmitFunctionPassword () {
 
+            var password = $('#password_enter').val()
+            var confirm_password = $('#confirm_password').val()
+            console.log(password,confirm_password,password!==confirm_password)
+            if(password!==confirm_password){
+                console.log(333)
+                alert('Введенные пароли не соответствуют друг другу')
+            }
+            else{
+
+                if($('#customer_password_id').val()){
+                    var customer_id = $('#customer_password_id').val()
+                }
+                else{
+                    var customer_id =0;
+                }
+                console.log($('#customer_password_id').val())
+                $.ajax({
+                    method: 'POST',
+                    dataType: 'json',
+                    async: false,
+                    url: '/users/change_password',
+                    data: {
+                        customer_id: customer_id, password: password
+                    },
+                    beforeSend: function () {
+                    },
+                    complete: function () {
+
+                    },
+                    success: function (data) {
+
+                        console.log('success')
+                        $('.password_create_close').click();
+
+                    }
+                });
+}
+
+        }
 
 
         $.ajaxSetup({

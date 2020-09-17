@@ -27,9 +27,14 @@
                 </select>
             </td>
             <td>
-                <a href="javascript:void(0);" class="ChangeRoles btn btn-danger btn-sm btn-icon waves-effect waves-themed">
+                @if(\Auth::user()->can('manage-roles'))
+                <a href="javascript:void(0);" class="ChangePassword btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".default-example-modal-right-lg-password">
+                    <i class="fal fa-key"></i>
+                </a>
+                <a href="javascript:void(0);" class="ChangeRoles btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".default-example-modal-right-lg-roles">
                     <i class="fal fa-users"></i>
                 </a>
+                @endif
                 <a href="javascript:void(0)" class="PrependChangeCustomer btn btn-primary btn-sm btn-icon waves-effect waves-themed"  data-toggle="modal" data-target=".default-example-modal-right-lg-user">
                     <i class="fal fa-pencil"></i>
                 </a>
@@ -45,6 +50,40 @@
 </div>
 
     <script>
+
+        $('.ChangePassword').click(function(){
+            console.log('ChangeRoles1')
+            var customer_id =  $(this).parent().parent().find('.customer_id').text()
+
+            console.log('prepare_customer',customer_id)
+            $('#customer_password_id').val(customer_id)
+        });
+
+        $('.ChangeRoles').click(function(){
+            console.log('ChangeRoles1')
+            var customer_id =  $(this).parent().parent().find('.customer_id').text()
+
+            console.log('prepare_customer',customer_id)
+            $.ajax({
+                method: 'POST',
+                dataType: 'html',
+                async:false,
+                url: '/user/roles_get',
+                data: {customer_id:customer_id
+                },
+                beforeSend: function() {
+                },
+                complete: function() {
+                },
+                success: function (data) {
+                    $('#rolesBlock').html(data)
+                }
+            });
+        });
+
+
+
+
         $('.PrependChangeCustomer').click(function(){
             console.log('PrependChangeCustomer1')
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
@@ -86,22 +125,7 @@
                 }
             });
             console.log('prepare_customer',customer_id)
-            $.ajax({
-                method: 'POST',
-                dataType: 'html',
-                async:false,
-                url: '/user/roles_get',
-                data: {customer_id:customer_id
-                },
-                beforeSend: function() {
-                },
-                complete: function() {
-                },
-                success: function (data) {
-                    $('#rolesBlock').html(data)
-                }
-            });
-        });
+              });
 
         $('.DeleteCustomer').click(function(){
 

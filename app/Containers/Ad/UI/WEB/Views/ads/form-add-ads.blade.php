@@ -1418,10 +1418,10 @@ $('.cat_name').click(function(){
         }
       });
 
-     $('#add_ads_form').validate({
+    /* $('#add_ads_form').validate({
        ignore: [],
        // any other options and/or rules
-     });
+     });*/
     });
 
 

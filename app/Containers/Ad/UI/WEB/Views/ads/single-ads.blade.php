@@ -25,7 +25,7 @@
 		<div class="row">
       <div class="col-md-8 justify-content-between product_title_block" style="display: flex;">
         <h3 class="product_title">
-         данное объявление временно не демонстрируется
+          К сожалению данное объявление было удалено из-за нарушений правил публикации.
         </h3>
 		</div>
 		</div>
