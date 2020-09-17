@@ -63,6 +63,7 @@ class UserService
 
   public function authenticate($data): bool
   {
+
     if (Auth::attempt(['email' => $data->email, 'password' => $data->password])) {
       return true;
     }

@@ -28,6 +28,8 @@ class WebAdminLoginAction extends Action
 
         Apiato::call('Authentication@CheckIfUserIsConfirmedTask', [], [['setUser' => [$user]]]);
 
+        \Log::info('User=>',array($user));
+        \Log::info('UserHasAdminRole=>'.$user->hasAdminRole());
         if (!$user->hasAdminRole()) {
             throw new UserNotAdminException();
         }

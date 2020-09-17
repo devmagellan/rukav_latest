@@ -58,6 +58,7 @@ class ViewDashboardRequest extends Request
      */
     public function authorize()
     {
+        \Log::info('InRequest=>',array(\Auth::guard('admin')->user()));
         return $this->check([
             'hasAccess',
         ]);

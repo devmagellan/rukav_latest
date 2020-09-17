@@ -121,8 +121,8 @@ class Controller extends WebController
    */
   public function viewDashboardPage(ViewDashboardRequest $request)
   {
-    $result['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
 
+    $result['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
     return view('adminpanel::dashboard.dashboard', $result);
   }
 
@@ -133,7 +133,7 @@ class Controller extends WebController
 
   public function loginAdmin(LoginUserRequest $request)
   {
-	
+      \Log::info('LogoAdminController');
     if($this->service->authenticate($request)){
       if (Auth::user()->hasRole('admin')){
         return redirect(route('get_admin_dashboard_page'));
