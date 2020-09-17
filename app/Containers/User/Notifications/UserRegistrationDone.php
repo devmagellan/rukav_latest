@@ -14,6 +14,7 @@ class UserRegistrationDone extends Notification //implements ShouldQueue
 
 protected $user;
 protected $code;
+public $theme='SomeRegistartion';
 
 public function __construct($company){
     $this->user=$company;
@@ -30,6 +31,7 @@ public function __construct($company){
         $url = url('/verify/'.$this->user->verify_token);
 
         return (new MailMessage)
+            ->subject('Регистрация rukav.co.uk')
             ->greeting('Здравствуйте!')
             ->line('Спасибо за регистрацию на сайте «RUKAV», Британской платформы объявлений для русскоговорящих в UK. Пожалуйста, подтвердите ваш адрес электронной почты, чтобы мы могли отправлять вам уведомления о ваших объявлениях и другие важные новости.!')
             ->action('Подтвердить регистрацию', $url)
