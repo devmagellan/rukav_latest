@@ -38,9 +38,11 @@
                 <a href="javascript:void(0)" class="PrependChangeCustomer btn btn-primary btn-sm btn-icon waves-effect waves-themed"  data-toggle="modal" data-target=".default-example-modal-right-lg-user">
                     <i class="fal fa-pencil"></i>
                 </a>
+                    @if(\Auth::user()->can('delete-users'))
                 <a href="javascript:void(0);" class="DeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed">
                     <i class="fal fa-times"></i>
                 </a>
+                    @endif
             </td>
         </tr>
             </form>
