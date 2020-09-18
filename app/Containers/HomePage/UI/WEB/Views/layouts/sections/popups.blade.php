@@ -1,4 +1,8 @@
-
+<style>
+.modal .socials li:nth-child(2) a {
+    background: #fff;
+}
+</style>
 <div class="modal modal_confirm_email_phone fade" id="youAreNotLeggedIn" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel2" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -87,7 +91,9 @@
         </li>
         <li>
           <a href="{{ route('login.provider.google', 'google') }}">
-            <i class="fab fa-google-plus-g"></i>
+           
+		   <img style="background-color:#fff;width:25px;height:25px;top:-3px;" src="/img/google.png">
+		   
           </a>
         </li>
         <li>
@@ -336,7 +342,7 @@
           </li>
           <li>
             <a href="#">
-              <i class="fab fa-google-plus-g"></i>
+              <i class="fab fa-google"></i>
             </a>
           </li>
           <li>

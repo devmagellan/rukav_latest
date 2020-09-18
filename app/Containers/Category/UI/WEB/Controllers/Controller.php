@@ -42,8 +42,8 @@ class Controller extends WebController
 
     public function moreCategories(GetAllCategoriesRequest $request, $id)
     {
-        $data['properties']=$this->getMainProperties($request);
-        $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
+        $data['properties']=GlobalService::getMainProperties($request)['categories'];
+      $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
         $data['currentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$id)->first();
         $data['parentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$data['currentCat']->parent_id)->first();
         if($data['parentCat']){
