@@ -25,6 +25,7 @@ class Controller extends WebController
     public $all_subcats=[];
     public $all_parcats=[];
     public $level=0;
+    public $childrenCategories=[];
 
     public function similar_key_in_array( $sNeedle , $aHaystack )
     {
@@ -53,6 +54,18 @@ class Controller extends WebController
         // return $link . ' ' . $id;
     }
 
+    public function allChildCategoriesRecursive($id){
+        $data=\App\Containers\Site\Models\ProductCategory::where('id',$id)->with('children')->first();
+        foreach($data->children as $child){
+            $this->childrenCategories[]=$child->id;
+            if(\App\Containers\Site\Models\ProductCategory::where('id',$child->id)->with('children')->first()->children->count()>0){
+                    $this->allChildCategoriesRecursive($child->id);
+            }
+
+        }
+        return $this->childrenCategories;
+    }
+
   /**
    * Show all entities
    *
@@ -60,12 +73,15 @@ class Controller extends WebController
    */
   public function index(GetAllCategoriesRequest $request, $id)
   {
+
 	$deleted_users=\App\Containers\User\Models\User::onlyTrashed()->pluck('id')->toArray();
     //dump($request->input());
       $data['filterDeals']=\App\Containers\Filter\Models\FilterDeals::get();
-	   $data['properties']=GlobalService::getMainProperties($request)['categories'];
+	  $data['properties']=GlobalService::getMainProperties($request)['categories'];
       $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
-	  $data['currentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$id)->first();
+	  $data['currentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$id)->with('children')->first();
+      $childrenCats=$this->allChildCategoriesRecursive($id);
+      //dd($childrenCats);
 	  if(null!=$data['currentCat']){
       $data['parentCat']=\App\Containers\Site\Models\ProductCategory::where('id',$data['currentCat']->parent_id)->first();
       if(null!=$data['parentCat']){
@@ -83,7 +99,15 @@ class Controller extends WebController
       \Illuminate\Pagination\Paginator::currentPageResolver(function () use ($currentPage) {
           return $currentPage;
       });
-      $q= \App\Containers\Ad\Models\Ad::where('category_id',$id)->with('pictures') ->where(function ($query) use($request) {
+      $q= \App\Containers\Ad\Models\Ad::where(function($query) use ($id,$childrenCats) {
+
+          if(count($childrenCats)<1){
+             return $query->where('category_id',$id);
+          }else{
+              return $query->whereIn('category_id',$childrenCats);
+          }
+      })
+      ->with('pictures') ->where(function ($query) use($request) {
           $query->where('message', 'like', '%' . $request->input('search_string') . '%')
               ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
       })
