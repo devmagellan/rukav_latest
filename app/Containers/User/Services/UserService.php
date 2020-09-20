@@ -25,7 +25,7 @@ class UserService
       'name' => $data->firstName,
       'sername' => $data->lastName,
       'email' => $data->email,
-      'password' => ($data->customer_id && $current!=null) ? $current->password : bcrypt($data->password),
+      'password' => ($data->customer_id && $current!=null && $data->admin_side==1 ) ? $current->password : bcrypt($data->password),
       'country' => $data->country,
       'phone' => $data->code.$data->phone,
       'vid_user' => $data->vid_user,

@@ -66,9 +66,9 @@ class Controller extends WebController
 
   public function loginUser(LoginUserRequest $request)
   {
-    $user=\App\Containers\User\Models\User::where('email',$request->email)->where('confirmed',0)->where('is_confirmed_phone',0)->first();
+    $user=User::where('email',$request->email)->where('confirmed',User::STATUS_INACTIVE)->where('is_confirmed_phone',0)->first();
     if(!$user){
-    $user1=\App\Containers\User\Models\User::where('email',$request->email)->where('confirmed',0)->first();}
+    $user1=User::where('email',$request->email)->where('confirmed',User::STATUS_INACTIVE)->first();}
     if($user){
       $this->smsService=new SmsService();
       $message=$this->smsService->store(new \Illuminate\Http\Request(array($user)));
@@ -92,7 +92,7 @@ class Controller extends WebController
 
 
 
-    if (\Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password , 'active' => 1 , 'confirmed' => 1])) {
+    if (\Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password , 'active' => 1 , 'confirmed' => User::STATUS_ACTIVE])) {
       return response(['message' => true], Response::HTTP_OK);
     }
 
@@ -121,6 +121,7 @@ class Controller extends WebController
 
 
         $user->save();
+		\Log::info('Verified user=>',array($user));
         \Auth::guard('web')->loginUsingId($user->id, true);
         $options = array(
             'cluster' => 'eu',

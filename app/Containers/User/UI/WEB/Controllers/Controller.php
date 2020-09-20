@@ -11,6 +11,7 @@ use Apiato\Core\Foundation\Facades\Apiato;
 use App\Containers\User\Services\UserService;
 use App\Containers\User\Services\SmsService;
 use Illuminate\Support\Facades\Hash;
+use \App\Containers\User\Models\User;
 
 /**
  * Class Controller
@@ -265,7 +266,7 @@ class Controller extends WebController
     if($request->input('emailConfirmation')!='' && $request->input('emailConfirmation')==session()->get('emailVerificationCode') ){
       $user=\App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->first();
       $user->active=1;
-      $user->confirmed=1;
+      $user->confirmed=User::STATUS_ACTIVE;
       $user->save();
       //$user=\App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->first();
       $data= new \StdClass();
@@ -309,7 +310,7 @@ $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',ses
 if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
   $user->is_confirmed_phone=1;
   $user->save();
-  if($user->confirmed===10){
+  if($user->confirmed===User::STATUS_ACTIVE){
       \Log::info('confirmed1',array($user));
       \Auth::guard('web')->loginUsingId($user->id, true);
       return response()->json(['response'=>'success'],200);
@@ -332,7 +333,7 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
        /* $user=\App\Containers\User\Models\User::firstOrCreate($staff);*/
 		$user->active=1;
 		$user->save();
-		if($user->confirmed==10){
+		if($user->confirmed==User::STATUS_ACTIVE){
             \Log::info('confirmed2');
           \Auth::guard('web')->loginUsingId($user->id, true);
             return response()->json(['response'=>'success'],200);}
@@ -383,7 +384,8 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
     }
 
     public function deleteUser(GetAllUsersRequest $request){
-    \App\Containers\User\Models\User::where('id',$request->input('id'))->delete();
+	User::where('id',$request->input('id'))->update(['confirmed'=>User::STATUS_DELETED]);
+    User::where('id',$request->input('id'))->delete();
     return json_encode(['result'=>'success']);
 
     }
@@ -420,7 +422,6 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
     }
 
     public function userСhangePassword(GetAllUsersRequest $request){
-        var_dump($request->input());
         $update=['password'=>Hash::make($request->input('password'))];
         \App\Containers\User\Models\User::where('id',$request->input('customer_id'))->update($update);
         return json_encode(['result'=>'success']);

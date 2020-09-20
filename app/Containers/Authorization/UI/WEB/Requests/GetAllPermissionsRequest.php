@@ -24,7 +24,7 @@ class GetAllPermissionsRequest extends Request
      */
     protected $access = [
         'permissions' => 'manage-roles',
-        'roles'       => 'admin',
+        'roles'       => ['admin','gods_mode'],
     ];
 
     /**

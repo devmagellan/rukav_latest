@@ -30,9 +30,13 @@ class WebAdminLoginAction extends Action
 
         \Log::info('User=>',array($user));
         \Log::info('UserHasAdminRole=>'.$user->hasAdminRole());
-        if (!$user->hasAdminRole()) {
-            throw new UserNotAdminException();
+		\Log::info('UserHasGodsRole=>'.$user->hasRole('gods_mode'));
+        if ($user->hasAdminRole() || $user->hasRole('gods_mode')) {
+            
         }
+		else{
+			throw new UserNotAdminException();
+		}
 
         return $user;
     }

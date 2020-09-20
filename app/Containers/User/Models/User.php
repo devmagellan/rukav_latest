@@ -82,7 +82,7 @@ protected $emailCode;
 
     protected $casts = [
         'is_client' => 'boolean',
-        'confirmed' => 'boolean',
+        'confirmed' => 'integer',
       'is_confirmed_phone' => 'boolean',
     ];
 
