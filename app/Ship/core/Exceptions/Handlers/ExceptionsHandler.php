@@ -27,7 +27,7 @@ class ExceptionsHandler extends LaravelExceptionHandler
      */
    public function render($request, \Throwable $exception)
     {
-
+        \Log::info('catched');
         if ($exception instanceof \App\Containers\Authentication\Exceptions\AuthenticationException) {
             return redirect('login');
         }

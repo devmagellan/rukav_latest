@@ -24,12 +24,12 @@ $(document).ready(function () {
         }
 
 
-
         $('#loginErrorsBlock').html('');
         $('.errorBlock').html('');
         if (errors.status === 409) {
           $('#loginErrorsBlock').html(response);
         } else {
+          console.log(response.errors)
           $.each(response.errors, function (key, value) {
             $('#' + key + 'Login').html(value)
           });

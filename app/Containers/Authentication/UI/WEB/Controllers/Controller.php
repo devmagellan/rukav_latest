@@ -66,7 +66,8 @@ class Controller extends WebController
 
   public function loginUser(LoginUserRequest $request)
   {
-    $user=User::where('email',$request->email)->where('confirmed',User::STATUS_INACTIVE)->where('is_confirmed_phone',0)->first();
+
+   $user=User::where('email',$request->email)->where('confirmed',User::STATUS_INACTIVE)->where('is_confirmed_phone',0)->first();
     if(!$user){
     $user1=User::where('email',$request->email)->where('confirmed',User::STATUS_INACTIVE)->first();}
     if($user){
@@ -97,6 +98,12 @@ class Controller extends WebController
     }
 
     return response(['Не правильный логин или пароль'], Response::HTTP_CONFLICT);
+  }
+
+
+  public function accessBlocked(){
+      dd('Ваш IP адресс заблокирован');
+      return view('authentication::access_blocked');
   }
 
   public function logoutUser()

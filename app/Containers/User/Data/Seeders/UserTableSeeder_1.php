@@ -29,7 +29,7 @@ class UserTableSeeder_1 extends Seeder
                 'email'=> 'imediasun@gmail.com',
                 'password'=> Hash::make('sunimedia'),
                 'active'=>true,
-                'confirmed'=>true,
+                'confirmed'=>10,
                 'is_client'=>true,
                 'vid_user'=>'Организация',
                 'avatar'=>'avatar-admin-lg.png'
@@ -44,7 +44,7 @@ class UserTableSeeder_1 extends Seeder
                 'password'=> Hash::make('sunimedia'),
                 'vid_user'=>'Предприниматель',
                 'active'=>true,
-                'confirmed'=>true,
+                'confirmed'=>10,
                 'is_client'=>true,
                 'avatar'=>'avatar-admin-lg.png'
 
@@ -57,7 +57,7 @@ class UserTableSeeder_1 extends Seeder
                 'email'=> 'test_email@gmail.com',
                 'password'=> Hash::make('sunimedia'),
                 'active'=>true,
-                'confirmed'=>true,
+                'confirmed'=>10,
                 'is_client'=>true,
                 'vid_user'=>'Компания',
                 'avatar'=>'avatar-admin-lg.png'
@@ -70,7 +70,7 @@ class UserTableSeeder_1 extends Seeder
                 'email'=> 'senior.dev.php@gmail.com',
                 'password'=> Hash::make('sunimedia'),
                 'active'=>true,
-                'confirmed'=>true,
+                'confirmed'=>10,
                 'is_client'=>true,
                 'vid_user'=>'Частная',
                 'avatar'=>'avatar-admin-lg.png'
