@@ -51,7 +51,7 @@ class AdminMenusSeeder extends Seeder
                 'parent_id' => 0,
                 'name' => 'Роли и пермишены',
                 'icon'=> 'fal fa-info-circle',
-                'link'=> '/admin/roles_and_permissions',
+                'link'=> '/roles_and_permissions',
                 'system_name'=>'roles_and_permissions',
                 'type'=>'linked',
                 'permission'=>'view_roles_and_permissions_menu'
@@ -411,6 +411,24 @@ class AdminMenusSeeder extends Seeder
                 'system_name'=>'view_filter_deals_pages',
                 'type'=>'linked',
                 'permission'=>'view_filter_deals_pages'
+            ],
+            [
+                'parent_id' => 8,
+                'name' => 'Список удаленных пользователей',
+                'icon'=> 'fal fa-window',
+                'link'=> '/users_list/deleted',
+                'system_name'=>'deleted_users_list',
+                'type'=>'linked',
+                'permission'=>null
+            ],
+            [
+                'parent_id' => 8,
+                'name' => 'Список удаленных админов',
+                'icon'=> 'fal fa-window',
+                'link'=> '/admins_list/deleted',
+                'system_name'=>'deleted_admins_list',
+                'type'=>'linked',
+                'permission'=>null
             ],
 
 

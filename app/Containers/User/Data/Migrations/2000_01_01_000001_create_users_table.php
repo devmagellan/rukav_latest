@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
       $table->boolean('show_email')->default(false);
       $table->string('password')->nullable();
       $table->boolean('active')->default(false);
-      $table->boolean('confirmed')->default(false);
+      $table->integer('confirmed')->default(9);
       $table->string('gender')->nullable();
       $table->string('birth')->nullable();
       $table->string('device')->nullable();

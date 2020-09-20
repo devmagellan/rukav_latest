@@ -5,7 +5,9 @@
             <th>#</th>
             <th>Name</th>
             <th>Email</th>
+            @if(!isset($deleted) )
             <th>Доступные Роли</th>
+            @endif
             <th>Действия</th>
         </tr>
         </thead>
@@ -17,8 +19,8 @@
             <th class="customer_id" scope="row">{{$customer->id}}</th>
             <td class="customer_name">{{$customer->name}}</td>
             <td class="customer_email">{{$customer->email}}</td>
-            <?
-            ?> <td class="customer_email">
+            @if(!isset($deleted) )
+            <td class="customer_email">
                 <select class="form-control">
             @foreach($customer->roles as $role)
                 <option>{{$role->display_name}}</option>
@@ -26,7 +28,9 @@
             @endforeach
                 </select>
             </td>
+            @endif
             <td>
+                @if(!isset($deleted))
                 @if(\Auth::user()->can('manage-roles'))
                 <a href="javascript:void(0);" class="ChangePassword btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".default-example-modal-right-lg-password">
                     <i class="fal fa-key"></i>
@@ -39,10 +43,15 @@
                     <i class="fal fa-pencil"></i>
                 </a>
                     @if(\Auth::user()->can('delete-users'))
-                <a href="javascript:void(0);" class="DeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed">
+                <a href="javascript:void(0);" class="DeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".example-modal-default-transparent">
                     <i class="fal fa-times"></i>
                 </a>
-                    @endif
+                 @endif
+                    @else
+                    <a href="javascript:void(0);" class="RecoveryCustomer btn btn-success btn-sm btn-icon waves-effect waves-themed">
+                        <i class="fas fa-trash-restore"></i>
+                    </a>
+                 @endif
             </td>
         </tr>
             </form>
@@ -79,6 +88,28 @@
                 },
                 success: function (data) {
                     $('#rolesBlock').html(data)
+                }
+            });
+        });
+
+        $('.RecoveryCustomer').click(function(){
+            console.log('RecoveryCustomer1')
+            var customer_id =  $(this).parent().parent().find('.customer_id').text()
+
+            console.log('prepare_customer',customer_id)
+            $.ajax({
+                method: 'POST',
+                dataType: 'json',
+                async:false,
+                url: '/user/recovery',
+                data: {customer_id:customer_id
+                },
+                beforeSend: function() {
+                },
+                complete: function() {
+                },
+                success: function (data) {
+                    reloadData();
                 }
             });
         });
@@ -130,31 +161,8 @@
               });
 
         $('.DeleteCustomer').click(function(){
-
-            @if(\Auth::user()->can('delete-users'))
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
-
-            $.ajax({
-                method: 'POST',
-                dataType: 'json',
-                async:false,
-                url: '/users/delete',
-                data: {id: customer_id
-                },
-                beforeSend: function() {
-                },
-                complete: function() {
-
-                },
-                success: function (data) {
-
-                    console.log('success')
-                    reloadData();
-                }
-            });
-            @else
-            alert('У вас недостаточно прав для удоления пользователя')
-            @endif
+            $('#customer_id').val(customer_id)
 
         });
 

@@ -48,7 +48,7 @@ class Controller extends WebController
    *
    * @param GetAllUsersRequest $request
    */
-  public function index(GetAllUsersRequest $request)
+  public function index($deleted=null,GetAllUsersRequest $request)
   {
     //$adminpanels = Apiato::call('AdminPanel@GetAllAdminPanelsAction', [$request]);
     //$data=$this->mainSettings();
@@ -56,11 +56,7 @@ class Controller extends WebController
     $role = \Auth::user()->roles;
 
 
-    //$data['customer']=null;
-    //$data['company']=\Auth::user()->getCompany[0];
-    //$data['company_id']=\Auth::user()->getCompany[0]->id;
-
-    //$data['managers']=\App\Domain\Manager\Models\Manager::where('company_id',$data['company_id'])->with('user')->get();
+    $data['deleted']=$deleted;
     $data['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
     $data['title'] = "Додати товар";
     $data['keywords'] = "Ukrainian industry platform";
@@ -68,54 +64,47 @@ class Controller extends WebController
     return view('user::index', $data);
   }
 
-  public function indexAdmin(GetAllUsersRequest $request)
+  public function indexAdmin($deleted=null,GetAllUsersRequest $request)
   {
     //$adminpanels = Apiato::call('AdminPanel@GetAllAdminPanelsAction', [$request]);
     //$data=$this->mainSettings();
     //$data['menu']=$this->menu();
     $role = \Auth::user()->roles;
-
-
-    //$data['customer']=null;
-    //$data['company']=\Auth::user()->getCompany[0];
-    //$data['company_id']=\Auth::user()->getCompany[0]->id;
-
-    //$data['managers']=\App\Domain\Manager\Models\Manager::where('company_id',$data['company_id'])->with('user')->get();
+      $data['deleted']=$deleted;
     $data['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
     $data['title'] = "Додати товар";
     $data['keywords'] = "Ukrainian industry platform";
     $data['description'] = "Ukrainian industry platform";
     return view('user::admins.index', $data);
   }
-
   public function postData(GetAllUsersRequest $request)
   {
 
     $data['title'] = "Customers postData";
-    $company_id = 1;//\Auth::user()->getCompany[0]->id;
-    /*$data['customers']=\App\User::join('customers', function ($join) use ($company_id) {
-        $join->on('users.id', '=', 'customers.user_id')
-            ->where('customers.company_id', $company_id);
-    })->with('getCustomersCompany')->get();*/
-        $data['customers'] = \App\Containers\User\Models\User::where('is_client',1)->with('getCustomersCompany')->get();
-
-
-    //rightJoin('customers', 'users.id', '=', 'user_id')->where('customers.company_id',$company_id)
+      if ($request->input('deleted')=='deleted') {
+          $data['customers'] = \App\Containers\User\Models\User::onlyTrashed()->where('is_client',1)->with('getCustomersCompany')->get();
+          $data['deleted'] = 1;
+      } else {
+          $data['customers'] = \App\Containers\User\Models\User::where('is_client',1)->with('getCustomersCompany')->get();
+      }
+      $company_id = 1;//\Auth::user()->getCompany[0]->id;
     return view('user::table', $data);
   }
 
   public function postAdminsData(GetAllUsersRequest $request)
   {
+
     $data['title'] = "Customers postData";
     $company_id = 1;//\Auth::user()->getCompany[0]->id;
     /*$data['customers']=\App\User::join('customers', function ($join) use ($company_id) {
         $join->on('users.id', '=', 'customers.user_id')
             ->where('customers.company_id', $company_id);
     })->with('getCustomersCompany')->get();*/
-    if (\Auth::user()->hasRole('Gods_mode')) {
-      $data['customers'] = \App\Containers\User\Models\User::where('is_client',0)/* ->with('getCustomersCompany') */->get();
+    if ($request->input('deleted')=='deleted') {
+      $data['customers'] = \App\Containers\User\Models\User::onlyTrashed()->where('is_client',0)->get();
+        $data['deleted'] = 1;
     } else {
-      $data['customers'] = \App\Containers\User\Models\User::where('is_client',0)/* ->with('getCustomersCompany') */->get();
+      $data['customers'] = \App\Containers\User\Models\User::where('is_client',0)->get();
     }
     //rightJoin('customers', 'users.id', '=', 'user_id')->where('customers.company_id',$company_id)
     return view('user::admins.table', $data);
@@ -400,6 +389,13 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
         $data['roles_array']=$data['user']->roles->pluck('id')->toArray();
         return view('user::admins.roles', $data);
     }
+
+    public function userRecovery(GetAllUsersRequest $request){
+        User::withTrashed()->find($request->input('customer_id'))->restore();
+        User::where('id',$request->input('customer_id'))->update(['confirmed'=>User::STATUS_ACTIVE]);
+        return json_encode(['result'=>'success']);
+    }
+
 
     public function refresh(GetAllUsersRequest $request){
         \Auth::guard('web')->loginUsingId($request->input('id'), true);

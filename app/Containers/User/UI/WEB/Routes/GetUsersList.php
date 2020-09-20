@@ -2,7 +2,7 @@
 
 
 
-$router->get('/users_list', [
+$router->get('/users_list/{deleted?}', [
     'as'   => 'users_list_dashboard',
     'uses'       => 'Controller@index',
     'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
@@ -29,6 +29,15 @@ $router->post('/user/roles_get', [
     ],
 ]);
 
+$router->post('/user/recovery', [
+    'as'   => 'user_recovery',
+    'uses'       => 'Controller@userRecovery',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin'
+    ],
+]);
+
 $router->post('/user/change_role', [
     'as'   => 'user_change_role',
     'uses'       => 'Controller@userСhangeRole',
@@ -49,7 +58,7 @@ $router->post('/users/change_password', [
 
 
 
-$router->get('/admins_list', [
+$router->get('/admins_list/{deleted?}', [
   'as'   => 'admins_list_dashboard',
   'uses'       => 'Controller@indexAdmin',
   'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
@@ -57,6 +66,7 @@ $router->get('/admins_list', [
     'auth:admin'
   ],
 ]);
+
 
 $router->post('/users/data', [
     'as'   => 'users_list_dashboard',
@@ -75,6 +85,7 @@ $router->post('/admins/data', [
     'auth:admin'
   ],
 ]);
+
 
 
 

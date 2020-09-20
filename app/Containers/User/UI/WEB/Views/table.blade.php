@@ -40,16 +40,28 @@
             <td class="customer_phone"></td>
             <td class="customer_phone">{{$customer->country}}</td>
             <td>
-              <a target="_blanc" href="/admin/user_add/adv/{{$customer->id}}" class="PrependAd btn btn-primary btn-sm btn-icon waves-effect waves-themed"  >
-               <i class="far fa-file"></i>
-
-              </a>
-                <a href="javascript:void(0)" class="PrependChangeCustomer btn btn-primary btn-sm btn-icon waves-effect waves-themed"  data-toggle="modal" data-target=".default-example-modal-right-lg-user">
-                    <i class="fal fa-pencil"></i>
-                </a>
-                <a href="javascript:void(0);" class="DeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed">
-                    <i class="fal fa-times"></i>
-                </a>
+                @if(!isset($deleted))
+                    @if(\Auth::user()->can('manage-roles'))
+                        <a href="javascript:void(0);" class="ChangePassword btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".default-example-modal-right-lg-password">
+                            <i class="fal fa-key"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="ChangeRoles btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".default-example-modal-right-lg-roles">
+                            <i class="fal fa-users"></i>
+                        </a>
+                    @endif
+                    <a href="javascript:void(0)" class="PrependChangeCustomer btn btn-primary btn-sm btn-icon waves-effect waves-themed"  data-toggle="modal" data-target=".default-example-modal-right-lg-user">
+                        <i class="fal fa-pencil"></i>
+                    </a>
+                    @if(\Auth::user()->can('delete-users'))
+                        <a href="javascript:void(0);" class="DeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".example-modal-default-transparent">
+                            <i class="fal fa-times"></i>
+                        </a>
+                    @endif
+                @else
+                    <a href="javascript:void(0);" class="RecoveryCustomer btn btn-success btn-sm btn-icon waves-effect waves-themed">
+                        <i class="fas fa-trash-restore"></i>
+                    </a>
+                @endif
             </td>
         </tr>
             </form>
@@ -59,6 +71,37 @@
 </div>
 
     <script>
+
+
+        $('.DeleteCustomer').click(function(){
+            var customer_id =  $(this).parent().parent().find('.customer_id').text()
+            $('#customer_id').val(customer_id)
+
+        });
+
+        $('.RecoveryCustomer').click(function(){
+            console.log('RecoveryCustomer1')
+            var customer_id =  $(this).parent().parent().find('.customer_id').text()
+
+            console.log('prepare_customer',customer_id)
+            $.ajax({
+                method: 'POST',
+                dataType: 'json',
+                async:false,
+                url: '/user/recovery',
+                data: {customer_id:customer_id
+                },
+                beforeSend: function() {
+                },
+                complete: function() {
+                },
+                success: function (data) {
+                    reloadData();
+                }
+            });
+        });
+
+
         $('.PrependChangeCustomer').click(function(){
             console.log('PrependChangeCustomer2')
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
@@ -114,30 +157,6 @@
              $('#rolesBlock').html(data)
              }
              });
-        });
-
-        $('.DeleteCustomer').click(function(){
-            var customer_id =  $(this).parent().parent().find('.customer_id').text()
-console.log(customer_id)
-            $.ajax({
-                method: 'POST',
-                dataType: 'json',
-                async:false,
-                url: '/users/delete',
-                data: {id: customer_id
-                },
-                beforeSend: function() {
-                },
-                complete: function() {
-
-                },
-                success: function (data) {
-
-                    console.log('success')
-                    reloadData();
-                }
-            });
-
         });
 
         $('.customSwitch2').change(function(){

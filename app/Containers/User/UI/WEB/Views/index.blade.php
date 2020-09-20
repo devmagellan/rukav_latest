@@ -57,18 +57,25 @@
         </div>
 
         <div class="demo">
-
+            @if(!isset($deleted))
             <button type="button" onclick="clearCustomerAdding()" class="btn btn-lg btn-primary waves-effect waves-themed" data-toggle="modal" data-target=".default-example-modal-right-lg-user">
                 <span class="fal fa-plus  mr-1"></span>
                 Создать пользователя</button>
+            @endif
         </div>
 
 
         <div id="panel-7" class="panel">
             <div class="panel-hdr">
-                <h2>
-                    Таблица  <span class="fw-300"><i>всех пользователей компании</i></span>
-                </h2>
+                @if($deleted)
+                    <h2>
+                        Таблица  <span class="fw-300"><i>удаленных пользователей компании</i></span>
+                    </h2>
+                @else
+                    <h2>
+                        Таблица  <span class="fw-300"><i>всех пользователей компании</i></span>
+                    </h2>
+                @endif
                 <div class="panel-toolbar">
                </div>
             </div>
@@ -293,13 +300,67 @@
         </div>
       </div>
 
+        <div class="modal fade example-modal-default-transparent" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-transparent" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-white">
+                            Удаление пользователя
+                            <small class="m-0 text-white opacity-70">
+                                Вы действительно желаете удалить пользователя ?
+                            </small>
+                        </h4>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" id="customer_id">
+                        <button type="button" class="btn btn-secondary customer_delete_close" data-dismiss="modal">Закрыть</button>
+                        <button type="button" class="DeleteCustomerModal  btn btn-primary">Удалить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 @endsection
 
 @section('scripts')
     <script src="/templates/smartadmin/js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     <script>
+        $('.DeleteCustomerModal').click(function(){
 
+                    @if(\Auth::user()->can('delete-users'))
+            var customer_id =  $('#customer_id').val()
+
+            $.ajax({
+                method: 'POST',
+                dataType: 'json',
+                async:false,
+                url: '/users/delete',
+                data: {id: customer_id
+                },
+                beforeSend: function() {
+                },
+                complete: function() {
+
+                },
+                success: function (data) {
+
+                    console.log('success')
+                    $('.customer_delete_close').click();
+                    reloadData();
+                }
+            });
+            @else
+            alert('У вас недостаточно прав для удоления пользователя')
+            @endif
+
+        });
 
       $('.vid_user').on('change', function () {
 
@@ -516,12 +577,13 @@ console.log(777,form[0].checkValidity())
 
             var module='admin.company.users.data'
             var url='/users/data';
+            var deleted='{{request()->deleted}}'
             $.ajax({
                 method: 'POST',
                 dataType: 'html',
                 async:true,
                 url: url,
-                data: {module: module},
+                data: {module: module,deleted:deleted},
                 beforeSend: function() {
                     $('#loader').show();
                 },
