@@ -38,6 +38,24 @@ $router->post('/user/recovery', [
     ],
 ]);
 
+$router->post('/user/ban', [
+    'as'   => 'user_ban',
+    'uses'       => 'Controller@userBan',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin'
+    ],
+]);
+
+$router->post('/user/unban', [
+    'as'   => 'user_ban',
+    'uses'       => 'Controller@userUnBan',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin'
+    ],
+]);
+
 $router->post('/user/change_role', [
     'as'   => 'user_change_role',
     'uses'       => 'Controller@userСhangeRole',

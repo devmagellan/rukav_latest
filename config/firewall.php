@@ -78,7 +78,7 @@ return [
      *
      */
 
-    'cache_expire_time' => 60, // minutes
+    'cache_expire_time' => 1, // minutes
 
     /*
      * How long should we keep lists of IP addresses in cache?
@@ -112,7 +112,7 @@ return [
      *
      */
 
-    'enable_range_search' => true,
+    'enable_range_search' => false,
 
     /*
      * Search by country range allow you to store country ids in your

@@ -14,6 +14,7 @@ class AddLastLoginToUsersTable extends Migration
       Schema::table('users', function (Blueprint $table) {
           $table->string('ip')->nullable();
           $table->dateTime('last_login_datetime')->nullable();
+
       });
   }
 

@@ -12,6 +12,7 @@ use App\Containers\User\Services\UserService;
 use App\Containers\User\Services\SmsService;
 use Illuminate\Support\Facades\Hash;
 use \App\Containers\User\Models\User;
+use PragmaRX\Firewall\Vendor\Laravel\Facade as Firewall;
 
 /**
  * Class Controller
@@ -421,5 +422,39 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
         $update=['password'=>Hash::make($request->input('password'))];
         \App\Containers\User\Models\User::where('id',$request->input('customer_id'))->update($update);
         return json_encode(['result'=>'success']);
+    }
+
+    public function userBan(GetAllUsersRequest $request){
+        \Log::info('USER'.$request->input('customer_id'));
+        $user= \App\Containers\User\Models\User::withTrashed()->where('id',intval($request->input('customer_id')))->first();
+
+        if($user->ip){
+            \Log::info('USER',array($user));
+            $result=Firewall::blacklist($user->ip, true);
+            \Log::info('result'.$result);
+            User::withTrashed()->where('id',$request->input('customer_id'))->update(['confirmed'=>User::STATUS_BANNED]);
+            Firewall::blockAccess();
+            return json_encode(['result'=>'success']);
+        }
+        else{
+            return json_encode(['result'=>'no_ip']);
+        }
+    }
+
+    public function userUnBan(GetAllUsersRequest $request){
+        \Log::info('USER'.$request->input('customer_id'));
+        $user= \App\Containers\User\Models\User::withTrashed()->where('id',intval($request->input('customer_id')))->first();
+
+        if($user->ip){
+            \Log::info('USER',array($user));
+            $result=Firewall::whitelist($user->ip);
+            \Log::info('result'.$result);
+            User::withTrashed()->where('id',$request->input('customer_id'))->update(['confirmed'=>User::STATUS_DELETED]);
+            Firewall::blockAccess();
+            return json_encode(['result'=>'success']);
+        }
+        else{
+            return json_encode(['result'=>'no_ip']);
+        }
     }
 }

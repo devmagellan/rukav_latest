@@ -1,3 +1,10 @@
+<style>
+
+    .banned{
+       color:red
+    }
+</style>
+
 <link rel="stylesheet" media="screen, print" href="https://stackpath.bootstrapcdn.com/font-awesome/5.14.0/css/font-awesome.min.css">
 <div class="frame-wrap">
     <table class="table table-sm m-0">
@@ -23,11 +30,11 @@
             <form>
                 <input type="hidden" name="customer_id" id="customer_id" value="{{$customer->id}}">
         <tr>
-            <th class="customer_id" scope="row">{{$customer->id}}</th>
-            <td class="customer_name">{{$customer->name}}</td>
-            <td class="customer_email">{{$customer->email}}</td>
-            <td class="customer_phone">{{$customer->vid_user}}</td>
-            <td class="customer_phone">{{$customer->phone}}</td>
+            <th class="customer_id @if($customer->confirmed==2) banned @endif"  scope="row">{{$customer->id}}</th>
+            <td class="customer_name @if($customer->confirmed==2) banned @endif">{{$customer->name}}</td>
+            <td class="customer_email @if($customer->confirmed==2) banned @endif">{{$customer->email}}</td>
+            <td class="customer_phone @if($customer->confirmed==2) banned @endif">{{$customer->vid_user}}</td>
+            <td class="customer_phone @if($customer->confirmed==2) banned @endif">{{$customer->phone}}</td>
             <td class="customer_phone"></td>
             <td class="customer_phone"></td>
             <td class="customer_phone"></td>
@@ -61,6 +68,15 @@
                     <a href="javascript:void(0);" class="RecoveryCustomer btn btn-success btn-sm btn-icon waves-effect waves-themed">
                         <i class="fas fa-trash-restore"></i>
                     </a>
+                    @if($customer->confirmed==2)
+                        <a href="javascript:void(0);" class="UnBanCustomer btn btn-success btn-sm btn-icon waves-effect waves-themed">
+                            <i class="fa fa-ban"></i>
+                        </a>
+                        @else
+                    <a href="javascript:void(0);" class="BanCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed">
+                        <i class="fa fa-ban"></i>
+                    </a>
+                        @endif
                 @endif
             </td>
         </tr>
@@ -97,6 +113,61 @@
                 },
                 success: function (data) {
                     reloadData();
+                }
+            });
+        });
+        $('.BanCustomer').click(function(){
+            console.log('RecoveryCustomer1')
+            var customer_id =  $(this).parent().parent().find('.customer_id').text()
+
+            console.log('prepare_customer',customer_id)
+            $.ajax({
+                method: 'POST',
+                dataType: 'json',
+                async:false,
+                url: '/user/ban',
+                data: {customer_id:customer_id
+                },
+                beforeSend: function() {
+                },
+                complete: function() {
+                },
+                success: function (data) {
+                    if(data.result=='success'){
+                    reloadData();}
+                    else{
+                        alert('No Client IP')
+                    }
+
+
+                }
+            });
+        });
+
+        $('.UnBanCustomer').click(function(){
+            console.log('RecoveryCustomer1')
+            var customer_id =  $(this).parent().parent().find('.customer_id').text()
+
+            console.log('prepare_customer',customer_id)
+            $.ajax({
+                method: 'POST',
+                dataType: 'json',
+                async:false,
+                url: '/user/unban',
+                data: {customer_id:customer_id
+                },
+                beforeSend: function() {
+                },
+                complete: function() {
+                },
+                success: function (data) {
+                    if(data.result=='success'){
+                        reloadData();}
+                    else{
+                        alert('No Client IP')
+                    }
+
+
                 }
             });
         });
