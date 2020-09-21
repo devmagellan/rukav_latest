@@ -38,6 +38,7 @@ class Controller extends WebController
    */
   public function index(GetAllAdminPanelsRequest $request)
   {
+	 
     $adminpanels = Apiato::call('AdminPanel@GetAllAdminPanelsAction', [$request]);
 
     // ..
@@ -50,6 +51,7 @@ class Controller extends WebController
    */
   public function show(FindAdminPanelByIdRequest $request)
   {
+
     $adminpanel = Apiato::call('AdminPanel@FindAdminPanelByIdAction', [$request]);
 
     // ..
@@ -121,7 +123,11 @@ class Controller extends WebController
    */
   public function viewDashboardPage(ViewDashboardRequest $request)
   {
-
+	  /*  dump(123);
+	   $drozdova=\App\Containers\User\Models\User::where('email','dev.magellan@gmail.com')->first();
+	   dump($drozdova);
+	   dd(\Hash::check('sunimedi',$drozdova->password));
+	   dump($result); */
     $result['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
     return view('adminpanel::dashboard.dashboard', $result);
   }
