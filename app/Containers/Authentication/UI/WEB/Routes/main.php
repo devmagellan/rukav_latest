@@ -1,8 +1,18 @@
 <?php
 
+
+
 $router->post('/loginUser', [
   'as'   => 'login_user',
   'uses' => 'Controller@loginUser',
+    'middleware' => [
+        'fw-block-blacklisted'
+    ],
+]);
+
+$router->get('/accessBlocked', [
+    'as'   => 'logout_user',
+    'uses' => 'Controller@accessBlocked',
 ]);
 
 $router->get('/logoutUser', [

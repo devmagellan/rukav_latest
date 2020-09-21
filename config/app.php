@@ -176,7 +176,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
 		\SocialiteProviders\Manager\ServiceProvider::class,
-		VladimirYuldashev\LaravelQueueRabbitMQ\LaravelQueueRabbitMQServiceProvider::class
+		VladimirYuldashev\LaravelQueueRabbitMQ\LaravelQueueRabbitMQServiceProvider::class,
+        PragmaRX\Firewall\Vendor\Laravel\ServiceProvider::class,
 
     ],
 
@@ -231,6 +232,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Image' => Intervention\Image\ImageManagerStatic::class,
         'Avatar'    => Laravolt\Avatar\Facade::class,
+        'Firewall' => PragmaRX\Firewall\Vendor\Laravel\Facade::class,
         // NOTE: all packages aliases must be registered inside their containers service providers
     ],
 

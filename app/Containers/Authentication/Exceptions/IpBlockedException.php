@@ -7,11 +7,11 @@ use App\Ship\Parents\Requests\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
-class AuthenticationException extends Exception
+class IpBlockedException extends Exception
 {
     public $httpStatusCode = Response::HTTP_UNAUTHORIZED;
 
-    public $message = 'An Exception occurred when trying to authenticate the User.';
+    public $message = 'An Exception occurred when trying to authenticate the User which was blocked.';
 
 
 

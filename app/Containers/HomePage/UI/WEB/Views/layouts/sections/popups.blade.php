@@ -54,6 +54,8 @@
 
       <form class="formModal" action="{{route('login_user')}}" method="post" id="loginForm">
         <div id="loginErrorsBlock" class="errorBlock"></div>
+        <div id="loginErrorsBlockIP" class="errorBlock"></div>
+        <span id="ipLogin" class="errorBlock"></span>
         <input type="text" name="email" placeholder="Телефон или email">
           <span id="emailLogin" class="errorBlock"></span>
         <div class="input_password_wrapper">
