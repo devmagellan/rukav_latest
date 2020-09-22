@@ -90,6 +90,7 @@
 
 
         $('.DeleteCustomer').click(function(){
+            console.log(444)
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
             $('#customer_id').val(customer_id)
 
