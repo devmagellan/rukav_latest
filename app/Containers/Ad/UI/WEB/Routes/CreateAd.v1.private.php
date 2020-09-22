@@ -18,3 +18,12 @@ $router->get('/admin/user_add/adv/{user_id}', [
     'auth:admin',
   ],
 ]);
+
+$router->get('/admin/user_edit/adv/{add_id}', [
+    'as' => 'admin_ad_create',
+    'uses'  => 'Controller@adminAddEdit',
+    'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+    'middleware' => [
+        'auth:admin',
+    ],
+]);

@@ -58,9 +58,11 @@ console.log(notify)
     console.log('login pusher')
     var login_pusher = new Pusher('500e0547867ccfe184af', {
         cluster: 'eu'
+    });recoverylogin_pusher = new Pusher('500e0547867ccfe184af', {
+        cluster: 'eu'
     });
     var login_channel = login_pusher.subscribe('login-channel');
-
+    var recovery_channel = login_pusher.subscribe('recovery-channel');
     Pusher.logToConsole = true;
     //login_channel.unbind();
 
@@ -78,6 +80,12 @@ console.log(notify)
                 }
             }
         });
+
+    });
+
+    login_channel.bind('recovery-event', function(data) {
+        console.log('getPush')
+        window.location.reload();
 
     });
 
@@ -112,3 +120,10 @@ console.log(notify)
 </script>
 
 @yield('scripts')
+
+
+
+<script>
+    console.log(565)
+    $('#passwordRecoveryUpdate').modal({show:true})
+</script>

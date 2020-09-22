@@ -19,6 +19,10 @@
 @component('mail::code')
 {{ $line }}
 @endcomponent
+@elseif(mb_substr($line, 0, 22)=='Email вашего аккаунта:')
+@component('mail::recovery')
+{{ $line }}
+@endcomponent
 @else
 {{ $line }}
 @endif
@@ -55,17 +59,17 @@
 {{ $salutation }}
 @endcomponent
 @else
-    <span class="additional">Вы получили это письмо, потому что зарегистрированы на сайте «RUKAV».
-        Если у вас есть вопросы, воспользуйтесь разделом «Помощь» или напишите нам на support@rukav.co.uk.
-        Если вы больше не хотите получать нашу рассылку, нажмите сюда. Мы будем скучать!</span>
+<span class="additional">Вы получили это письмо, потому что зарегистрированы на сайте «RUKAV».
+Если у вас есть вопросы, воспользуйтесь разделом «Помощь» или напишите нам на support@rukav.co.uk.
+</span>
 @endif
 
 {{-- Subcopy --}}
 @isset($actionText)
 @slot('subcopy')
 @lang(
-    "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser:',
+    " Если у вас не выходит нажать на кнопку \":actionText\", скопируйте этот линк в адресную строку вашего браузера:\n".
+    '',
     [
         'actionText' => $actionText,
     ]

@@ -3,6 +3,14 @@
     background: #fff;
 }
 </style>
+
+@if (\Session::has('password_changed'))
+  <div class="alert alert-success">
+    <ul>
+      <li>{!! \Session::get('password_changed') !!}</li>
+    </ul>
+  </div>
+@endif
 <div class="modal modal_confirm_email_phone fade" id="youAreNotLeggedIn" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel2" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -374,23 +382,22 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
 
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <button type="button" class="close RecoveryPasswordClose" data-dismiss="modal" aria-label="Close">
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
       <h6 class="modalTitle">Востановление пароля</h6>
-      <form class="formModal">
+      <form class="formModal RecoveryPassword">
 
 
         <div class="row">
           <div class="col-sm-12">
-            <input type="text" name="" placeholder="Телефон или email">
+            <input id="recoveryEmail" type="text" name="" placeholder="Email">
           </div>
         </div>
 
         <div class="row">
           <div class="col-sm-6">
-            <button type="submit" data-dismiss="modal" aria-label="Close" data-toggle="modal"
-                    data-target="#passwordRecoveryKod">востановить пароль
+            <button type="submit" >востановить пароль
             </button>
           </div>
           <div class="col-sm-6">
@@ -708,6 +715,58 @@
     </div>
   </div>
 </div>
+
+
+@if(\Session::get('recoveryPasswordEmail'))
+
+  <div class="modal fade" id="passwordRecoveryUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3"
+       aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <img src="{{asset('img/close-icon.svg')}}" alt="">
+        </button>
+        <h6 class="modalTitle">Смена пароля</h6>
+        <form id="idForm" class="formModal" action="/recovery_change_password" method="post">
+          <input type="hidden"  name="email" value="{{\Session::get('recoveryPasswordEmail')}}">
+          <div class="row">
+            <div class="input_password_wrapper col-md-8" style="margin:0 auto">
+              <input type="password"  placeholder="Новый Пароль" class="input_new_password" name="password" >
+              <span id="passwordNewLogin" class="errorBlock"></span>
+              <input type="checkbox" id="show_new_password" >
+              <label for="show_new_password" class="show_new_password"><img src="{{asset('img/hide_password.svg')}}" alt=""></label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <button type="submit" data-toggle="modal">Изменить пароль
+              </button>
+            </div>
+            <div class="col-sm-6">
+              <button type="button" class="buttonHref">вернуться</button>
+            </div>
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+
+  @php
+    \Session::forget('recoveryPasswordEmail')
+  @endphp
+
+
+@endif
+
+
+
+
+
+
 
 
 

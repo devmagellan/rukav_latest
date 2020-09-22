@@ -48,6 +48,11 @@ $router->post('/confirm_email_phone', [
     'as'   => 'confirm_email_phone',
     'uses'       => 'Controller@confirmEmailPhone',
 ]);
+$router->post('/send_recovery_password_link', [
+    'as'   => 'send_recovery_password_link',
+    'uses'       => 'Controller@sendRecoveryPasswordLink',
+]);
+
 
 $router->post('/confirm_phone', [
     'as'   => 'confirm_phone',
@@ -63,6 +68,14 @@ $router->get('/notify', [
 $router->get('/longtime/email_notification', [
     'as'   => 'get_user_home_page',
     'uses' => 'Controller@longtime',
+]);
+
+$router->post('/recovery_change_password', [
+    'as' => 'change_password',
+    'uses'  => 'Controller@userСhangePassword',
+    /*'middleware' => [
+      'auth:web',
+    ],*/
 ]);
 
 

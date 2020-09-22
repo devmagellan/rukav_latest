@@ -13,6 +13,7 @@ use App\Containers\User\Services\SmsService;
 use Illuminate\Support\Facades\Hash;
 use \App\Containers\User\Models\User;
 use PragmaRX\Firewall\Vendor\Laravel\Facade as Firewall;
+use Illuminate\Support\Str;
 
 /**
  * Class Controller
@@ -420,7 +421,12 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
 
     public function userСhangePassword(GetAllUsersRequest $request){
         $update=['password'=>Hash::make($request->input('password'))];
-        \App\Containers\User\Models\User::where('id',$request->input('customer_id'))->update($update);
+        if(null!=$request->input('customer_id')){
+        \App\Containers\User\Models\User::where('id',$request->input('customer_id'))->update($update);}
+        if(null!=$request->input('email')){
+        \App\Containers\User\Models\User::where('email',$request->input('email'))->update($update);
+            return redirect()->back()->with('password_changed', 'Ваш пароль изменен !');
+        }
         return json_encode(['result'=>'success']);
     }
 
@@ -456,5 +462,21 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
         else{
             return json_encode(['result'=>'no_ip']);
         }
+    }
+
+
+    public function sendRecoveryPasswordLink(GetAllUsersRequest $request){
+
+        $user=User::withTrashed()->where('email',$request->input('email'))->first();
+         if($user){
+             $user->verify_token = Str::random();
+             $user->save();
+        dispatch(new \App\Containers\User\Jobs\RecoveryMail($user))->onQueue('queue_name');
+             return json_encode(['response'=>'success']);
+         }
+         else{
+             return json_encode(['response'=>'no_email']);
+         }
+
     }
 }

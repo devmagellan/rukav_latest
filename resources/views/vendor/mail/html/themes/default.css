@@ -312,10 +312,46 @@ img {
     padding-bottom: 0;
 }
 
+.recovery p a {
+    margin: 21px 0;
+    text-decoration: none !important;
+}
+
+.recovery-content p {
+    text-decoration: none;
+}
+
+.recovery-item p a{
+    text-decoration: none;
+}
+
+.recovery-item p:last-of-type {
+    text-decoration: none;
+}
 
 
 /* Utilities */
 
 .break-all {
     word-break: break-all;
+}
+
+a:-webkit-any-link {
+     text-decoration: none !important;
+ }
+
+u + #body a {
+    color: inherit;
+    text-decoration: none !important;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+body > table > tbody > tr > td > table > tbody > tr:nth-child(2) > td > table > tbody > tr > td > div > p > a { text-decoration: none !important;}
+
+.ii a[href] {
+    color: #15c;
+    text-decoration: none !important;
 }

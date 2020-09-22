@@ -29,3 +29,10 @@ $router->get('/verify/{token}', [
     'as'   => 'register.verify',
     'uses' => 'Controller@verify',
 ]);
+
+$router->get('/password_recovery/{token}', [
+    'as'   => 'recovery.verify',
+    'uses' => 'Controller@recoveryVerify',
+]);
+
+

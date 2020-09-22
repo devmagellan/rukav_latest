@@ -12583,6 +12583,34 @@ class Controller extends WebController
     return view('ad::admin.add.index', $result);
   }
 
+    public function adminAddEdit(CreateAdRequest $request,$add_id){
+        $data['properties']=GlobalService::getMainProperties($request)['categories'];
+        $result['categoriesOnlyRoot'] = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
+        $result['locations']=\App\Containers\Ad\Models\BritainRegion::where('parent_id',0)->get();
+        $result['filterDeals']=\App\Containers\Filter\Models\FilterDeals::get();
+        $result['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
+        //$users = Apiato::call('Ad@GetAllAdsDataTableAction', [$request]);
+        $result['ad'] = \App\Containers\Ad\Models\Ad::where('id',$add_id)->first();
+
+        $this->getAllParentsCategoriesRecursive($result['ad']->category_id);
+        if(is_array($this->resultCat)){
+            \Log::info('kapec2');
+            foreach($this->resultCat as $d){
+                $res[]=$d;
+            }
+        }
+        //dd(array_reverse($res));
+        $result['category']='';
+        foreach(array_reverse($res) as $cat){
+            $result['category'].='/'.$cat->name;
+        }
+        $real=\App\Containers\Site\Models\ProductCategory::where('id',$result['ad']->category_id)->first();
+        $result['category'].='/'.$real->name;
+
+        $result['main_rubrics'] = Apiato::call('Site@GetProductCategoriesByParentIdAction', [0], [0]);
+        return view('ad::admin.add.edit', $result);
+    }
+
   public function searchRubrics(FindAdByIdRequest $request)
   {
       $data['properties']=$this->getMainProperties($request);
@@ -12603,12 +12631,13 @@ class Controller extends WebController
    */
   public function store(StoreAdRequest $request)
   {
-      \Log::info('ZASHLI',array($request));
+      \Log::info('ZASHLI STORE',array($request));
 
       if($request->save==1){
     $ad = Apiato::call('Ad@CreateAdAction', [$request]);
     \Log::info('AD1',array($ad));
     if ($ad) {
+
       $request->session()->flash('infoAd', true);
         return back()->with('success', 'Ваше объявление успешно добавлено ! Благодарим за сотрудничество');
     }
@@ -12838,7 +12867,7 @@ class Controller extends WebController
         $qnt = \App\Containers\Ad\Models\Ad::where('sender', $ad->sender)->get()->count();
       $nestedData = array();
       $nestedData [0] = '<div><div style="display:inline-block;"><input type="hidden" class="ad_id" value="' . $ad->id . '"><input class="ad_check" type="checkbox" value="0"></div>
- <span class="photoAdsModalOpen" style="display:inline-block;cursor:pointer" ><i class="fal fa-image"></i></span><div style="display:inline-block;"><a href="/admin/add_edit/{{$ad->id}}" class="btn btn-primary btn-sm btn-icon waves-effect waves-themed"> <i class="fa fa-pencil"></i></a></div></div>';
+ <span class="photoAdsModalOpen" style="display:inline-block;cursor:pointer" ><i class="fal fa-image"></i></span><div style="display:inline-block;"><a href="/admin/user_edit/adv/'.$ad->id.'" class="btn btn-primary btn-sm btn-icon waves-effect waves-themed"> <i class="fa fa-pencil"></i></a></div></div>';
       $nestedData [1] = $status;
       $nestedData [2] = $ad->title;
       $nestedData [3] = '<span style="font-size:9px">' . mb_strimwidth($ad->message, 0, 30, "...") . '</span>';
@@ -13026,7 +13055,7 @@ class Controller extends WebController
       $this->getAllParentsCategoriesRecursive($data->id);
     }
     if($data && $data->parent_id==0){
-      \Log::info('sata',array($this->resultCat));
+      \Log::info('sata2',array($this->resultCat));
       return $this->resultCat;}
   }
 

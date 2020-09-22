@@ -88,6 +88,36 @@ $(document).ready(function () {
 
   });
 
+
+    $(".RecoveryPassword").bind('submit', function (e) {
+        e.preventDefault();
+        console.log('this_ajax')
+        var email=$('#recoveryEmail').val();
+        $.ajax({
+            type: "POST",
+            url: "/send_recovery_password_link",
+            dataType: "json",
+            data: { email: email},
+            success: function (result) {
+                console.log(result);
+                if(result.response=='success' ){
+                    $('.RecoveryPasswordClose').trigger('click');
+                    $('#confirmEmail').modal({show:true});
+                    return true;
+                }
+                else if(result.response=='no_email'){
+                    $('#emailConfirmationForm').text('Пользователя с таким Email не существует!')
+                }
+            },
+            error:function(result){
+                $('#emailConfirmationForm').text('Пользователя с таким Email не существует!')
+            }
+        });
+
+        return false;
+
+    });
+
     $(".emailPhoneConfirmationForm").bind('submit', function (e) {
         e.preventDefault();
         console.log('this_ajax',$('.emailConfirmationWithPhone').val())

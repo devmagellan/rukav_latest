@@ -4,8 +4,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
+<body id="body">
 <style>
+    a:-webkit-any-link {
+        text-decoration: none !important;
+    }
+
+    u + #body a {
+        color: inherit;
+        text-decoration: none !important;
+        font-size: inherit;
+        font-family: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+
 @media only screen and (max-width: 600px) {
 .inner-body {
 width: 100% !important;
