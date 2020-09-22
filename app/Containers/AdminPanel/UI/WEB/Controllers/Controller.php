@@ -123,11 +123,10 @@ class Controller extends WebController
    */
   public function viewDashboardPage(ViewDashboardRequest $request)
   {
-	  /*  dump(123);
-	   $drozdova=\App\Containers\User\Models\User::where('email','dev.magellan@gmail.com')->first();
+	   dump(123);
+	   $drozdova=\App\Containers\User\Models\User::where('email','ykkaradost@gmail.com')->first();
 	   dump($drozdova);
-	   dd(\Hash::check('sunimedi',$drozdova->password));
-	   dump($result); */
+	   dump(\Hash::check('6235669RADA',$drozdova->password));
     $result['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
     return view('adminpanel::dashboard.dashboard', $result);
   }

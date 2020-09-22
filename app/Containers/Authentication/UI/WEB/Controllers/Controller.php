@@ -93,7 +93,7 @@ class Controller extends WebController
 
 
 
-    if (\Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password , 'active' => 1 , 'confirmed' => User::STATUS_ACTIVE])) {
+    if (\Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password , 'confirmed' => User::STATUS_ACTIVE])) {
         \Log::info('IP'.\Request::ip());
         User::where('id',\Auth::user()->id)->update(['ip'=>\Request::ip(),'last_login_datetime'=>\Carbon\Carbon::now()]);
       return response(['message' => true], Response::HTTP_OK);
