@@ -12838,7 +12838,7 @@ class Controller extends WebController
         $qnt = \App\Containers\Ad\Models\Ad::where('sender', $ad->sender)->get()->count();
       $nestedData = array();
       $nestedData [0] = '<div><div style="display:inline-block;"><input type="hidden" class="ad_id" value="' . $ad->id . '"><input class="ad_check" type="checkbox" value="0"></div>
- <span class="photoAdsModalOpen" style="display:inline-block;cursor:pointer" ><i class="fal fa-image"></i></span></div>';
+ <span class="photoAdsModalOpen" style="display:inline-block;cursor:pointer" ><i class="fal fa-image"></i></span><div style="display:inline-block;"><a href="/admin/add_edit/{{$ad->id}}" class="btn btn-primary btn-sm btn-icon waves-effect waves-themed"> <i class="fa fa-pencil"></i></a></div></div>';
       $nestedData [1] = $status;
       $nestedData [2] = $ad->title;
       $nestedData [3] = '<span style="font-size:9px">' . mb_strimwidth($ad->message, 0, 30, "...") . '</span>';

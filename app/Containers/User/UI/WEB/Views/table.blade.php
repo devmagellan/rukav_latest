@@ -59,6 +59,9 @@
                     <a href="javascript:void(0)" class="PrependChangeCustomer btn btn-primary btn-sm btn-icon waves-effect waves-themed"  data-toggle="modal" data-target=".default-example-modal-right-lg-user">
                         <i class="fal fa-pencil"></i>
                     </a>
+                        <a href="/admin/user_add/adv/{{$customer->id}}" class="btn btn-primary btn-sm btn-icon waves-effect waves-themed" >
+                            <i class="fal fa-file"></i>
+                        </a>
                     @if(\Auth::user()->can('delete-users'))
                         <a href="javascript:void(0);" class="DeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".example-modal-default-transparent">
                             <i class="fal fa-times"></i>
