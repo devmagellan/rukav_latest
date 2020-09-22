@@ -149,4 +149,27 @@ class Controller extends WebController
     }
 
 
+    public function recoveryVerify($token)
+    {
+        if (!$user = User::where('verify_token', $token)->first()) {
+            return redirect()->route('login_user')
+                ->with('error', 'Sorry your link cannot be identified.');
+        }
+        $options = array(
+            'cluster' => 'eu',
+            'useTLS' => true
+        );
+        $pusher = new \Pusher\Pusher(
+            '500e0547867ccfe184af',
+            'b8d3a1076b93fe80dd50',
+            '1000615',
+            $options
+        );
+        $pusher->trigger('recovery-channel', /* 'my-event' */'recovery-event',['id'=>$user->id]);
+        session()->put('recoveryPasswordEmail',$user->email);
+        return redirect('/')
+            ->with('recovery', 'Your e-mail is correct You can change password.');
+    }
+
+
 }

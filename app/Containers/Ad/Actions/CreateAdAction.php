@@ -12,7 +12,7 @@ class CreateAdAction extends Action
     {
 
         $ad = Apiato::call('Ad@CreateAdTask', [$request]);
-
+        \Log::info('Ad4',array($ad));
         return $ad;
     }
 }

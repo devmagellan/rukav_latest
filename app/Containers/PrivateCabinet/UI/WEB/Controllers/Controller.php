@@ -12666,7 +12666,7 @@ class Controller extends WebController
     }
 
     public function changePassword(GetAllUsersRequest $request){
-        $user = Apiato::call('User@FindUserByIdAction', [$request]);
+     $user = Apiato::call('User@FindUserByIdAction', [$request]);
         if(\Hash::check($request->input('old_password'), $user->password)){
             $result = Apiato::call('User@UpdateUserAction', [$request]);
             return \Response::json(['status'=>'success']);

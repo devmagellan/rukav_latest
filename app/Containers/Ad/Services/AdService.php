@@ -27,7 +27,7 @@ class AdService
     $mutable = Carbon::now();
     $modifiedMutable = $mutable->add($data->select_time, 'day');
     \Log::info('date_information'.$modifiedMutable);
-    return Ad::create([
+    return Ad::updateOrCreate(['id'=>$data->add_id],[
       'title' => $data->name_ad,
       'email' => $user->email,
       'phone' => ($user->phone) ? $user->phone : '',
@@ -57,6 +57,7 @@ class AdService
           'files' => 'max:500',
       ]);
       \Log::info('AfterbeforeValidation');
+      \Log::info('Files3=>',array($data->file('files')));
     foreach ($data->file('files') as $file) {
 
       $filePath = Storage::disk('public')->put('', $file);
