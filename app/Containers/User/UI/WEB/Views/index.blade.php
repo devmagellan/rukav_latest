@@ -300,6 +300,39 @@
         </div>
       </div>
 
+
+        <div class="modal fade default-example-modal-right-lg-password" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-dialog-right modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title h4">Форма изменения пароля пользователя</h5>
+                        <button type="button" class="close password_create_close_click" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                        </button>
+                    </div>
+
+                    <form class="needs-validation" id="customer_create" novalidate onsubmit="theSubmitFunctionPassword(); return false;">
+                        <input type="hidden" id="customer_password_id" name="customer_id" value="0">
+
+                        <div class="form-group">
+                            <label class="form-label" for="password">Пароль</label>
+                            <input type="text" id="password_enter" name="password" required class="form-control" placeholder="Пароль">
+
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="confirm_password">Подтвердить Пароль</label>
+                            <input type="text" id="confirm_password" name="confirm_password" required class="form-control" placeholder="Подтвердить Пароль">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="password_create_close btn btn-secondary waves-effect waves-themed" data-dismiss="modal">Закрыть</button>
+                            <button type="submit" class="password_create btn btn-primary waves-effect waves-themed" >Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade example-modal-default-transparent" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-transparent" role="document">
                 <div class="modal-content">
@@ -333,6 +366,7 @@
     <script src="/templates/smartadmin/js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     <script>
         $('.DeleteCustomerModal').click(function(){
+            console.log(1234)
 
                     @if(\Auth::user()->can('delete-users'))
             var customer_id =  $('#customer_id').val()
