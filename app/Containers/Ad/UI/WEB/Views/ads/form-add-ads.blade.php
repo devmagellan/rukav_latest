@@ -788,7 +788,7 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <img src="/img/close-icon.svg" alt="">
       </button>
-      <i class="previous_cat fa fa-arrow-left" aria-hidden="true"></i>
+<!--      <i class="previous_cat fa fa-arrow-left" aria-hidden="true"></i>-->
       <div class="row">
 
         <div class="col-md-4 catalogBlock1">

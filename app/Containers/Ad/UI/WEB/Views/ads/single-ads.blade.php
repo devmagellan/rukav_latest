@@ -135,7 +135,7 @@ ul.slickslide li img, .slick-dots button img {
             </div>
           @endforeach
         </div>
-        <div class="product_slider_nav slick-thumbs">
+        <div class="product_slider_nav">
           @foreach($ad->pictures as $picture)
             <div class="product_slider_nav_item">
               <img src="{{asset('/storage/messages/'.$picture->photo)}}" alt="">
