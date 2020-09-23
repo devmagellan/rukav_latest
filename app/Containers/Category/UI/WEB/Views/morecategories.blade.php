@@ -44,13 +44,13 @@ var id='{{$id}}'
     $('.btn_category').trigger('click')
 
     $('.category_dropdown_main_list li').each(function(n,key) {
-        console.log(id)
+        console.log(id);
         var inp=$(this).find('input').val();
-        console.log(inp)
+//        console.log(inp)
         if(inp==id){
             $('.category_dropdown_main_list li').removeClass('category_link_active');
             $('.category_dropdown_main_list ul').hide();
-            $(this).find('p').closest("ul").show();
+                                              $("input[value='"+ id +"']").next().next().show();
             $(this).addClass('category_link_active');
             $(this).closest(".category_dropdown_main_list-li").addClass('category_link_active');
             $(this).next().show();

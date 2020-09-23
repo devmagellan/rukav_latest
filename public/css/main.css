@@ -3479,3 +3479,20 @@ padding-left: 30px;
 .block_main_categories{
     width: 100%!important;
 }
+#passwordUpdate .input_password_wrapper label{
+    position: absolute;
+    right: 32px;
+    top: 3px;
+}
+#passwordUpdate .input_password_wrapper label:before{
+    content: none;
+}
+#passwordUpdate .input_password_wrapper label:after{
+    content: none;
+}
+#passwordUpdate button{
+    margin-top: 40px;
+}
+#passwordUpdate button.close{
+    margin-top: 0!important;
+}
