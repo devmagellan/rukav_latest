@@ -375,12 +375,16 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
     }
 
     public function deleteUser(GetAllUsersRequest $request){
+    if($request->input('delete_type')=='soft'){
 	User::where('id',$request->input('id'))->update(['confirmed'=>User::STATUS_DELETED]);
     User::where('id',$request->input('id'))->delete();
+    }
+    else{
+        User::withTrashed()->where('id',$request->input('id'))->forceDelete();
+    }
     return json_encode(['result'=>'success']);
 
     }
-
     public function getUserData(GetAllUsersRequest $request){
 
         return \App\Containers\User\Models\User::where('id',$request->input('customer_id'))->first();
@@ -421,6 +425,13 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
 
     public function userСhangePassword(GetAllUsersRequest $request){
         $update=['password'=>Hash::make($request->input('password'))];
+        if(null!=$request->input('old_password')){
+            $user=User::where('id',\Auth::user()->id)->first();
+        if(\Hash::check($request->input('old_password'), $user->password)){
+        \App\Containers\User\Models\User::where('id',$user->id)->update($update);
+            return \Response::json(['status'=>'success']);
+        }
+        }
         if(null!=$request->input('customer_id')){
         \App\Containers\User\Models\User::where('id',$request->input('customer_id'))->update($update);}
         if(null!=$request->input('email')){

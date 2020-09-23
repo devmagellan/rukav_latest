@@ -15,6 +15,12 @@ $router->post('/users/delete', [
   'uses' => 'Controller@deleteUser',
 ]);
 
+$router->delete('/user/hard_delete/{user}', [
+    'as'   => 'user_harddelete',
+    'uses' => 'Controller@hardDeleteUser',
+]);
+
+
 $router->post('/refresh', [
     'as'   => 'users_delete',
     'uses' => 'Controller@refresh',
@@ -68,6 +74,14 @@ $router->get('/notify', [
 $router->get('/longtime/email_notification', [
     'as'   => 'get_user_home_page',
     'uses' => 'Controller@longtime',
+]);
+
+$router->post('/change_password', [
+    'as' => 'change_password',
+    'uses'  => 'Controller@userСhangePassword',
+    'middleware' => [
+      'auth:web',
+    ],
 ]);
 
 $router->post('/recovery_change_password', [

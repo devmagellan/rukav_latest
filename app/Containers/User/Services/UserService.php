@@ -42,7 +42,7 @@ class UserService
       }
   }
 
-    public function updateUserInService($data)
+/*    public function updateUserInService($data)
     {
 
         \Log::info('user--=>'.$data['id']);
@@ -59,7 +59,7 @@ class UserService
 
         ]);
         return User::where('id',$data['id'])->first();
-    }
+    }*/
 
   public function authenticate($data): bool
   {

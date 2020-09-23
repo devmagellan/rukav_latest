@@ -8,6 +8,7 @@
             @if(!isset($deleted) )
             <th>Доступные Роли</th>
             @endif
+            <th>Объявлений</th>
             <th>Действия</th>
         </tr>
         </thead>
@@ -29,6 +30,7 @@
                 </select>
             </td>
             @endif
+            <td class="customer_email">{{$customer->adsWithGroup->count()}}</td>
             <td>
                 @if(!isset($deleted))
                 @if(\Auth::user()->can('manage-roles'))
@@ -51,6 +53,13 @@
                     <a href="javascript:void(0);" class="RecoveryCustomer btn btn-success btn-sm btn-icon waves-effect waves-themed">
                         <i class="fas fa-trash-restore"></i>
                     </a>
+                    @if(\Auth::user()->can('delete-users'))
+                        <a href="javascript:void(0);" class="HardDeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".example-modal-default-transparent">
+                            <i class="fal fa-times"></i>
+                        </a>
+                    @endif
+
+
                  @endif
             </td>
         </tr>
@@ -61,6 +70,15 @@
 </div>
 
     <script>
+
+
+        $('.HardDeleteCustomer').click(function(){
+            console.log(444)
+            var customer_id =  $(this).parent().parent().find('.customer_id').text()
+            $('#customer_id').val(customer_id)
+            $('#delete_type').val('hard')
+
+        });
 
         $('.ChangePassword').click(function(){
             console.log('ChangeRoles1')
