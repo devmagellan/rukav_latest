@@ -6,6 +6,7 @@
 </style>
 
 <link rel="stylesheet" media="screen, print" href="https://stackpath.bootstrapcdn.com/font-awesome/5.14.0/css/font-awesome.min.css">
+
 <div class="frame-wrap">
     <table class="table table-sm m-0">
         <thead class="bg-primary-500">
@@ -49,41 +50,43 @@
             <td>
                 @if(!isset($deleted))
                     @if(\Auth::user()->can('manage-roles'))
-                        <a href="javascript:void(0);" class="ChangePassword btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".default-example-modal-right-lg-password">
+                        <button type="button" class="ChangePassword btn btn-danger btn-sm btn-icon waves-effect waves-themed"
+                           data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-original-title="смена пароля"
+                        >
                             <i class="fal fa-key"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="ChangeRoles btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".default-example-modal-right-lg-roles">
+                        </button>
+                        <button type="button" class="ChangeRoles btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-original-title="редактирование ролей">
                             <i class="fal fa-users"></i>
-                        </a>
+                        </button>
                     @endif
-                    <a href="javascript:void(0)" class="PrependChangeCustomer btn btn-primary btn-sm btn-icon waves-effect waves-themed"  data-toggle="modal" data-target=".default-example-modal-right-lg-user">
+                    <button type="button" class="PrependChangeCustomer btn btn-primary btn-sm btn-icon waves-effect waves-themed" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-original-title="редактирование пользователя" >
                         <i class="fal fa-pencil"></i>
-                    </a>
-                        <a href="/admin/user_add/adv/{{$customer->id}}" class="btn btn-primary btn-sm btn-icon waves-effect waves-themed" >
+                    </button>
+                        <a href="/admin/user_add/adv/{{$customer->id}}" class="btn btn-primary btn-sm btn-icon waves-effect waves-themed" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-original-title="создание объявления">
                             <i class="fal fa-file"></i>
                         </a>
                     @if(\Auth::user()->can('delete-users'))
-                        <a href="javascript:void(0);" class="DeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".example-modal-default-transparent">
+                        <a href="javascript:void(0);" class="DeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Пользователь будет перемещен в таблицу удаленных?" data-original-title="soft delete" >
                             <i class="fal fa-times"></i>
                         </a>
                     @endif
                 @else
-                    <a href="javascript:void(0);" class="RecoveryCustomer btn btn-success btn-sm btn-icon waves-effect waves-themed">
+                    <a href="javascript:void(0);" class="RecoveryCustomer btn btn-success btn-sm btn-icon waves-effect waves-themed" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Пользователь будет перемещен в основную таблицу" data-original-title="востановление">
                         <i class="fas fa-trash-restore"></i>
                     </a>
                     @if($customer->confirmed==2)
-                        <a href="javascript:void(0);" class="UnBanCustomer btn btn-success btn-sm btn-icon waves-effect waves-themed">
+                        <a href="javascript:void(0);" class="UnBanCustomer btn btn-success btn-sm btn-icon waves-effect waves-themed" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="IP пользователя будет разблокирован" data-original-title="разабанить">
                             <i class="fa fa-ban"></i>
                         </a>
                         @else
-                    <a href="javascript:void(0);" class="BanCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed">
+                    <a href="javascript:void(0);" class="BanCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="IP пользователя будет заблокирован" data-original-title="забанить">
                         <i class="fa fa-ban"></i>
                     </a>
 
 
                         @endif
                     @if(\Auth::user()->can('delete-users'))
-                        <a href="javascript:void(0);" class="HardDeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".example-modal-default-transparent">
+                        <a href="javascript:void(0);" class="HardDeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Пользователь будет удален навсегда" data-original-title="hard delete">
                             <i class="fal fa-times"></i>
                         </a>
                     @endif
@@ -97,7 +100,19 @@
 </div>
 
     <script>
+
+        $('.ChangePassword').click(function(){
+            $('.default-example-modal-right-lg-password').modal({show:true});
+            $('[data-toggle=popover]').popover('hide');
+        })
+
+        $('.ChangeRoles').click(function(){
+            $('.default-example-modal-right-lg-roles').modal({show:true});
+            $('[data-toggle=popover]').popover('hide');
+        })
         $('.HardDeleteCustomer').click(function(){
+            $('.example-modal-default-transparent').modal({show:true});
+            $('[data-toggle=popover]').popover('hide');
             console.log(444)
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
             $('#customer_id').val(customer_id)
@@ -107,6 +122,9 @@
 
 
         $('.DeleteCustomer').click(function(){
+            $('.example-modal-default-transparent').modal({show:true});
+            $('[data-toggle=popover]').popover('hide');
+
             console.log(444)
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
             $('#customer_id').val(customer_id)
@@ -193,6 +211,10 @@
 
 
         $('.PrependChangeCustomer').click(function(){
+
+
+            $('.default-example-modal-right-lg-user').modal({show:true});
+            $('[data-toggle=popover]').popover('hide');
             console.log('PrependChangeCustomer2')
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
             //$('#manager_selected').val(1); //<---below this one
@@ -276,5 +298,73 @@
 
 
     </script>
+
+<script type="text/javascript">
+    $('body').popover(
+        {
+            selector: '.has-popover'
+        });
+
+
+    function usingSelectorOption()
+    {
+        return $('#use-selector').is(':checked');
+    }
+
+    function updateCodeView()
+    {
+        $('#with-selector-code').toggle(usingSelectorOption());
+        $('#without-selector-code').toggle(!usingSelectorOption());
+    }
+
+    $(function()
+    {
+        // Update code view when checkbox is toggled
+        updateCodeView();
+        $('#use-selector').click(function()
+        {
+            updateCodeView();
+        });
+
+
+        var startedDemo = false;
+        $('#add-button').click(function()
+        {
+            // One-time initialization
+            if (!startedDemo)
+            {
+                if (usingSelectorOption())
+                {
+
+                }
+                else
+                {
+                    $('.has-popover').popover();
+                }
+
+                startedDemo = true;
+            }
+
+            // Disable selector checkbox, put a tooltip on it, and show the buttons panel
+            $('#use-selector').attr('disabled', 'disabled');
+            $('#use-selector-label span').tooltip();
+            $('.js-buttons').show();
+
+            // Add a new button that triggers (or doesn't) a popover, with the appropriate message
+            var button = null;
+            if (usingSelectorOption())
+            {
+                button = $('<button class="btn btn-block btn-success has-popover" data-title="Dynamic" data-content="This button was added dynamically by JavaScript" data-placement="top">Working dynamically added button</button>');
+            }
+            else
+            {
+                button = $('<button class="btn btn-block btn-default has-popover" data-title="Dynamic" data-content="This button was added dynamically by JavaScript" data-placement="top">Non-working dynamically added button</button>');
+            }
+
+            button.appendTo('.js-buttons');
+        });
+    });
+
+</script>
 
 

@@ -56,6 +56,9 @@
             </div>
         </div>
 
+
+
+
         <div class="demo">
             @if(!isset($deleted))
             <button type="button" onclick="clearCustomerAdding()" class="btn btn-lg btn-primary waves-effect waves-themed" data-toggle="modal" data-target=".default-example-modal-right-lg-user">
@@ -672,6 +675,10 @@ function clearCustomerAdding(){
     $('#customer_phone').val("")
 
 }
+
+        $( document ).ajaxComplete(function() {
+            $('[data-toggle="popover"]').popover()
+        })
 
 
     </script>

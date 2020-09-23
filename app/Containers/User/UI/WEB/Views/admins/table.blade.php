@@ -34,27 +34,29 @@
             <td>
                 @if(!isset($deleted))
                 @if(\Auth::user()->can('manage-roles'))
-                <a href="javascript:void(0);" class="ChangePassword btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".default-example-modal-right-lg-password">
-                    <i class="fal fa-key"></i>
-                </a>
-                <a href="javascript:void(0);" class="ChangeRoles btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".default-example-modal-right-lg-roles">
-                    <i class="fal fa-users"></i>
-                </a>
+                        <button type="button" class="ChangePassword btn btn-danger btn-sm btn-icon waves-effect waves-themed"
+                                data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-original-title="смена пароля"
+                        >
+                            <i class="fal fa-key"></i>
+                        </button>
+                        <button type="button" class="ChangeRoles btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-original-title="редактирование ролей">
+                            <i class="fal fa-users"></i>
+                        </button>
                 @endif
-                <a href="javascript:void(0)" class="PrependChangeCustomer btn btn-primary btn-sm btn-icon waves-effect waves-themed"  data-toggle="modal" data-target=".default-example-modal-right-lg-user">
-                    <i class="fal fa-pencil"></i>
-                </a>
+                    <button type="button" class="PrependChangeCustomer btn btn-primary btn-sm btn-icon waves-effect waves-themed" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-original-title="редактирование пользователя" >
+                        <i class="fal fa-pencil"></i>
+                    </button>
                     @if(\Auth::user()->can('delete-users'))
-                <a href="javascript:void(0);" class="DeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".example-modal-default-transparent">
-                    <i class="fal fa-times"></i>
-                </a>
+                        <a href="javascript:void(0);" class="DeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Пользователь будет перемещен в таблицу удаленных" data-original-title="soft delete" >
+                            <i class="fal fa-times"></i>
+                        </a>
                  @endif
                     @else
-                    <a href="javascript:void(0);" class="RecoveryCustomer btn btn-success btn-sm btn-icon waves-effect waves-themed">
+                    <a href="javascript:void(0);" class="RecoveryCustomer btn btn-success btn-sm btn-icon waves-effect waves-themed"  data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Пользователь будет перемещен в основную таблицу" data-original-title="востановление">
                         <i class="fas fa-trash-restore"></i>
                     </a>
                     @if(\Auth::user()->can('delete-users'))
-                        <a href="javascript:void(0);" class="HardDeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="modal" data-target=".example-modal-default-transparent">
+                        <a href="javascript:void(0);" class="HardDeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Пользователь будет удален навсегда" data-original-title="hard delete">
                             <i class="fal fa-times"></i>
                         </a>
                     @endif
@@ -70,10 +72,10 @@
 </div>
 
     <script>
-
-
         $('.HardDeleteCustomer').click(function(){
             console.log(444)
+            $('.example-modal-default-transparent').modal({show:true});
+            $('[data-toggle=popover]').popover('hide');
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
             $('#customer_id').val(customer_id)
             $('#delete_type').val('hard')
@@ -83,12 +85,14 @@
         $('.ChangePassword').click(function(){
             console.log('ChangeRoles1')
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
-
+            $('.default-example-modal-right-lg-password').modal({show:true});
+            $('[data-toggle=popover]').popover('hide');
             console.log('prepare_customer',customer_id)
             $('#customer_password_id').val(customer_id)
         });
-
         $('.ChangeRoles').click(function(){
+            $('.default-example-modal-right-lg-roles').modal({show:true});
+            $('[data-toggle=popover]').popover('hide')
             console.log('ChangeRoles1')
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
 
@@ -136,6 +140,8 @@
 
 
         $('.PrependChangeCustomer').click(function(){
+            $('.default-example-modal-right-lg-user').modal({show:true});
+            $('[data-toggle=popover]').popover('hide');
             console.log('PrependChangeCustomer1')
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
             //$('#manager_selected').val(1); //<---below this one
@@ -179,6 +185,8 @@
               });
 
         $('.DeleteCustomer').click(function(){
+            $('.example-modal-default-transparent').modal({show:true});
+            $('[data-toggle=popover]').popover('hide');
             console.log(444)
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
             $('#customer_id').val(customer_id)
