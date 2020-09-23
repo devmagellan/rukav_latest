@@ -352,6 +352,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" id="customer_id">
+                        <input type="hidden" id="delete_type" name="delete_type">
                         <button type="button" class="btn btn-secondary customer_delete_close" data-dismiss="modal">Закрыть</button>
                         <button type="button" class="DeleteCustomerModal  btn btn-primary">Удалить</button>
                     </div>
@@ -370,13 +371,14 @@
 
                     @if(\Auth::user()->can('delete-users'))
             var customer_id =  $('#customer_id').val()
+            var delete_type =  $('#delete_type').val()
 
             $.ajax({
                 method: 'POST',
                 dataType: 'json',
                 async:false,
                 url: '/users/delete',
-                data: {id: customer_id
+                data: {id: customer_id,delete_type:delete_type
                 },
                 beforeSend: function() {
                 },

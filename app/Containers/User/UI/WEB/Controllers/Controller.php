@@ -375,13 +375,16 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
     }
 
     public function deleteUser(GetAllUsersRequest $request){
-
+    if($request->input('delete_type')=='soft'){
 	User::where('id',$request->input('id'))->update(['confirmed'=>User::STATUS_DELETED]);
     User::where('id',$request->input('id'))->delete();
+    }
+    else{
+        User::withTrashed()->where('id',$request->input('id'))->forceDelete();
+    }
     return json_encode(['result'=>'success']);
 
     }
-
     public function getUserData(GetAllUsersRequest $request){
 
         return \App\Containers\User\Models\User::where('id',$request->input('customer_id'))->first();
