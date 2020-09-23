@@ -87,7 +87,7 @@
 
 @if (\Session::has('success') && \Session::get('success')=='Ваше объявление успешно добавлено ! Благодарим за сотрудничество')
   <div class="alert alert-success">
-    <ul>
+    <ul style="text-align:center;">
       <li class="text-center">Ваше объявление успешно добавлено !</li>
     </ul>
   </div>

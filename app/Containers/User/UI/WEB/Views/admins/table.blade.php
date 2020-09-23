@@ -8,6 +8,7 @@
             @if(!isset($deleted) )
             <th>Доступные Роли</th>
             @endif
+            <th>Объявлений</th>
             <th>Действия</th>
         </tr>
         </thead>
@@ -29,6 +30,7 @@
                 </select>
             </td>
             @endif
+            <td class="customer_email">{{$customer->adsWithGroup->count()}}</td>
             <td>
                 @if(!isset($deleted))
                 @if(\Auth::user()->can('manage-roles'))

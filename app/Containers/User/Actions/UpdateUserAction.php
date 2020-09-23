@@ -25,7 +25,7 @@ class UpdateUserAction extends Action
     {
 
         $userData = [
-            //'password'             => $data->password ? Hash::make($data->password) : Hash::make('PasswordYouCanChangeIT'),
+           // 'password'             => $data->password ? Hash::make($data->password) : null,
             'name'                 => $data->name,
             'phone'                 => $data->phone,
             'additional_phone'                 => $data->additional_phone,

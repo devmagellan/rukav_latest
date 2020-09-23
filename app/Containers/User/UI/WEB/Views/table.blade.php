@@ -15,7 +15,7 @@
             <th>Email</th>
             <th>Вид пользователя</th>
             <th>Телефон</th>
-            <th></th>
+            <th>Объявлений</th>
             <th></th>
             <th></th>
             <th></th>
@@ -35,7 +35,7 @@
             <td class="customer_email @if($customer->confirmed==2) banned @endif">{{$customer->email}}</td>
             <td class="customer_phone @if($customer->confirmed==2) banned @endif">{{$customer->vid_user}}</td>
             <td class="customer_phone @if($customer->confirmed==2) banned @endif">{{$customer->phone}}</td>
-            <td class="customer_phone"></td>
+            <td class="customer_phone">{{$customer->adsWithGroup->count()}}</td>
             <td class="customer_phone"></td>
             <td class="customer_phone"></td>
             <td class="customer_manager">

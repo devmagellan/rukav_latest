@@ -70,6 +70,14 @@ $router->get('/longtime/email_notification', [
     'uses' => 'Controller@longtime',
 ]);
 
+$router->post('/change_password', [
+    'as' => 'change_password',
+    'uses'  => 'Controller@userСhangePassword',
+    'middleware' => [
+      'auth:web',
+    ],
+]);
+
 $router->post('/recovery_change_password', [
     'as' => 'change_password',
     'uses'  => 'Controller@userСhangePassword',
