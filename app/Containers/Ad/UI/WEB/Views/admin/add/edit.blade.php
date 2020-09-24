@@ -163,10 +163,10 @@
         </div>
       @endif
 
-      @if (\Session::has('success'))
+      @if (\Session::has('success') && \Session::get('success')=='Ваше объявление успешно добавлено ! Благодарим за сотрудничество' )
         <div class="alert alert-success">
           <ul>
-            <li>{!! \Session::get('success') !!}</li>
+            <li>Объявление пользователя успешно изменено!</li>
           </ul>
         </div>
       @endif
@@ -201,6 +201,7 @@
                   </h6>
                   <div class="add_advert_block_input1">
                     <input type="hidden" name="add_id" value="{{$ad->id}}">
+                    <input type="hidden" name="sender" value="{{$ad->sender}}">
                     <input type="text" name="name_ad" maxlength="70" placeholder="Название объявления" required value="{{$ad->title}}">
                     <span class="required">*</span>
                     @error('name_ad')
@@ -743,6 +744,8 @@
               $('.all_user_block').hide();
               $('.outUk').show();
               $('.Places').hide();
+              $('#clntInfoEditZip').hide()
+              $('#clntInfoEditAddr1').removeAttr("required");
           });
 
           $('#postcode').on('click', function () {
@@ -750,6 +753,7 @@
               $('.outUk').hide();
               $('.Places').hide();
               $('.postcode_block').show();
+              $('#clntInfoEditZip').show()
           });
 
           $('#all_adress').on('click', function () {
@@ -770,16 +774,34 @@
           });
 
           $('#select_adress').on('click', function () {
+              console.log(434)
               $('#clntInfoEditAddr1').removeAttr("required");
               $('#allUsersClntInfoEditZip').removeAttr("required");
               $('#clntInfoEditOutUk').removeAttr("required");
               $('#clntInfoEditAddrOutUk1').removeAttr("required");
               $('#clntInfoEditZip').removeAttr("required");
-
+              $('#clntInfoEditZip').hide()
               $('.cat_name').prop('required',true);
+              //$('#city').prop('required',true);
               $('.all_user_block').hide().prop('required',false);
               $('.outUk').hide().prop('required',false);
               $('.Places').show();
+
+          });
+
+          $('#all_uk').on('click', function () {
+              console.log(434)
+              $('#clntInfoEditAddr1').removeAttr("required");
+              $('#allUsersClntInfoEditZip').removeAttr("required");
+              $('#clntInfoEditOutUk').removeAttr("required");
+              $('#clntInfoEditAddrOutUk1').removeAttr("required");
+              $('#clntInfoEditZip').removeAttr("required");
+              $('#clntInfoEditZip').hide()
+              $('.all_user_block').hide().prop('required',false);
+              $('.outUk').hide().prop('required',false);
+              $('.Places').hide();
+              $('#city').val('UK')
+              $('#administrative').val('UK')
 
           });
 

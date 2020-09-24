@@ -25,7 +25,7 @@ class ExceptionsHandler extends CoreExceptionsHandler
      */
     public function render($request, Throwable $exception)
     {
-        \Log::info('catched8',array($exception));
+        //\Log::info('catched8',array($exception));
         if ($this->isHttpException($exception)) {
             $categories= \App\Containers\Site\Models\ProductCategory::get();
             $categoriesOnlyRoot = $categories->where('parent_id', 0);
