@@ -37,7 +37,7 @@ class AdService
       'place_id' => $data->place_id,
       'name' => $user->name,
       'category_id' => $data->category_id,
-      'sender' => $user->id,
+      'sender' => (isset($data->sender)) ? $data->sender : $user->id,
       'is_tmp'=>(isset($data->save)) ? false : true,
       'select_time' => $data->select_time,
       'expired' => $modifiedMutable->toDateTimeString(),
@@ -52,29 +52,31 @@ class AdService
 
   public function savePhoto($data, $adId)
   {
-\Log::info('beforeValidation');
+      \Log::info('beforeValidation');
       $validator = \Validator::make($data->all(), [
           'files' => 'max:500',
       ]);
       \Log::info('AfterbeforeValidation');
-      \Log::info('Files3=>',array($data->file('files')));
-    foreach ($data->file('files') as $file) {
+      \Log::info('Files3=>', array($data->file('files')));
+      if ($data->file('files')){
+          foreach ($data->file('files') as $file) {
 
-      $filePath = Storage::disk('public')->put('', $file);
+              $filePath = Storage::disk('public')->put('', $file);
 
-      $this->createPicture($filePath, $adId);
+              $this->createPicture($filePath, $adId);
 
-        \Log::info('filepath1'.$file);
-        \Log::info('filepath2'.$filePath);
-        $oldPath = storage_path('app/public/messages/').$filePath; // publc/images/1.jpg
-        $newPath = storage_path('app/public/messages/').'small_'.$filePath;
+              \Log::info('filepath1' . $file);
+              \Log::info('filepath2' . $filePath);
+              $oldPath = storage_path('app/public/messages/') . $filePath; // publc/images/1.jpg
+              $newPath = storage_path('app/public/messages/') . 'small_' . $filePath;
 
-        if (\File::copy($oldPath , $newPath)) {
-            \Log::info('filepath2'.$filePath);
-            $this->createThumbnail($newPath, 200, 200);
-        }
+              if (\File::copy($oldPath, $newPath)) {
+                  \Log::info('filepath2' . $filePath);
+                  $this->createThumbnail($newPath, 200, 200);
+              }
 
-    }
+          }
+  }
 
 
 

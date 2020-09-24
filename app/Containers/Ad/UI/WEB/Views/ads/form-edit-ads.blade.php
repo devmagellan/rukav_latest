@@ -559,9 +559,12 @@
         $('#allUsersClntInfoEditZip').removeAttr("required");
 
         $('#out_uk').on('click', function () {
+            console.log(569)
             $('.all_user_block').hide();
             $('.outUk').show();
             $('.Places').hide();
+            $('#clntInfoEditZip').hide()
+            $('#clntInfoEditAddr1').removeAttr("required");
         });
 
         $('#postcode').on('click', function () {
@@ -569,6 +572,7 @@
             $('.outUk').hide();
             $('.Places').hide();
             $('.postcode_block').show();
+            $('#clntInfoEditZip').show()
         });
 
         $('#all_adress').on('click', function () {
@@ -589,16 +593,34 @@
         });
 
         $('#select_adress').on('click', function () {
+            console.log(434)
             $('#clntInfoEditAddr1').removeAttr("required");
             $('#allUsersClntInfoEditZip').removeAttr("required");
             $('#clntInfoEditOutUk').removeAttr("required");
             $('#clntInfoEditAddrOutUk1').removeAttr("required");
             $('#clntInfoEditZip').removeAttr("required");
-
+            $('#clntInfoEditZip').hide()
             $('.cat_name').prop('required',true);
+            //$('#city').prop('required',true);
             $('.all_user_block').hide().prop('required',false);
             $('.outUk').hide().prop('required',false);
             $('.Places').show();
+
+        });
+
+        $('#all_uk').on('click', function () {
+            console.log(434)
+            $('#clntInfoEditAddr1').removeAttr("required");
+            $('#allUsersClntInfoEditZip').removeAttr("required");
+            $('#clntInfoEditOutUk').removeAttr("required");
+            $('#clntInfoEditAddrOutUk1').removeAttr("required");
+            $('#clntInfoEditZip').removeAttr("required");
+            $('#clntInfoEditZip').hide()
+            $('.all_user_block').hide().prop('required',false);
+            $('.outUk').hide().prop('required',false);
+            $('.Places').hide();
+            $('#city').val('UK')
+            $('#administrative').val('UK')
 
         });
 

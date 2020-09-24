@@ -12682,8 +12682,8 @@ class Controller extends WebController
   {
 
     //TODO эту переменную сделать в сервис провайдере
-    $data['properties']=$this->getMainProperties($request);
-    $categoriesOnlyRoot = $data['properties']->categories->where('parent_id', 0);
+      $data['properties']=GlobalService::getMainProperties($request)['categories'];
+      $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
     $locations=\App\Containers\Ad\Models\BritainRegion::where('parent_id',0)->get();
     $ad=\App\Containers\Ad\Models\Ad::where('id',$id)->with('pictures')->first();
     $this->getAllParentsCategoriesRecursive($ad->category_id);

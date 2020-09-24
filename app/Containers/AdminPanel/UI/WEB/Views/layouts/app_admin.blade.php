@@ -1428,6 +1428,19 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
       map.panTo(place.geometry.location);
       map.setZoom(15);
       search();
+        ///////////////////////////////////////////////////////////////////////////////
+
+        console.log('777=>',place);
+        console.log(place.place_id)
+        //location=JSON.stringify(location);
+        geocoder = new google.maps.Geocoder();
+        console.log('LOC',place)
+        lat = place['geometry']['location'].lat();
+        lng = place['geometry']['location'].lng();
+        var latlng = new google.maps.LatLng(lat,lng);
+        getCity(latlng);
+        /////////////////////////////////////////////////////
+
     } else {
       document.getElementById('autocomplete').placeholder = 'Enter a city';
     }
