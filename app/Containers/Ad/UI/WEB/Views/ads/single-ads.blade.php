@@ -131,7 +131,15 @@ ul.slickslide li img, .slick-dots button img {
         <div class="product_slider_main">
           @foreach($ad->pictures as $picture)
             <div class="product_slider_main_item">
+                <?
+                $middle_file="storage/messages/middle_{$picture->photo}";
+                ?>
+              @if(file_exists($middle_file))
+              <? dump('middle');?>
+              <img src="{{asset($middle_file)}}" alt="">
+              @else
               <img src="{{asset('/storage/messages/'.$picture->photo)}}" alt="">
+                @endif
             </div>
           @endforeach
         </div>

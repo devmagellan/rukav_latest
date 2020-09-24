@@ -69,10 +69,16 @@ class AdService
               \Log::info('filepath2' . $filePath);
               $oldPath = storage_path('app/public/messages/') . $filePath; // publc/images/1.jpg
               $newPath = storage_path('app/public/messages/') . 'small_' . $filePath;
+              $middlePath = storage_path('app/public/messages/') . 'middle_' . $filePath;
 
               if (\File::copy($oldPath, $newPath)) {
                   \Log::info('filepath2' . $filePath);
                   $this->createThumbnail($newPath, 200, 200);
+              }
+
+              if (\File::copy($oldPath, $middlePath)) {
+                  \Log::info('filepath2' . $filePath);
+                  $this->createThumbnail($middlePath, 800, 800);
               }
 
           }
