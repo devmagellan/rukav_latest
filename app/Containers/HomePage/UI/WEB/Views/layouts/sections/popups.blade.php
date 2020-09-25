@@ -715,7 +715,19 @@
     </div>
   </div>
 </div>
+<style>
+#passwordRecoveryUpdate .input_password_wrapper label {
+    position: absolute;
+    right: 32px;
+    top: 3px;
+}
 
+#passwordRecoveryUpdate input[type="checkbox"] {
+    display: none;
+}
+
+#passwordRecoveryUpdate input[type="checkbox"] + label:before {  display: none;}
+</style>
 
 @if(\Session::get('recoveryPasswordEmail'))
 
@@ -730,15 +742,6 @@
         <h6 class="modalTitle">Смена пароля</h6>
         <form id="idForm" class="formModal" action="/recovery_change_password" method="post">
           <input type="hidden"  name="email" value="{{\Session::get('recoveryPasswordEmail')}}">
-          <!--div class="row">
-            <div class="input_password_wrapper col-md-8" style="margin:0 auto">
-              <input type="password"  placeholder="Новый Пароль" class="input_new_password" name="password" >
-              <span id="passwordNewLogin" class="errorBlock"></span>
-              <input type="checkbox" id="show_new_password" >
-              <label for="show_new_password" class="show_new_password"><img src="{{asset('img/hide_password.svg')}}" alt=""></label>
-            </div>
-          </div-->
-
           <div class="row">
             <div class="input_password_wrapper col-md-8" style="margin:0 auto">
               <input type="password"  placeholder="Новый Пароль" class="input_new_password" name="password" >
@@ -747,7 +750,6 @@
               <label for="show_new_password" class="show_new_password"><img src="{{asset('img/hide_password.svg')}}" alt=""></label>
             </div>
           </div>
-
           <div class="row">
             <div class="col-sm-6">
               <button type="submit" data-toggle="modal">Изменить пароль

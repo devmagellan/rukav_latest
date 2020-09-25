@@ -50,7 +50,16 @@ var id='{{$id}}'
         if(inp==id){
             $('.category_dropdown_main_list li').removeClass('category_link_active');
             $('.category_dropdown_main_list ul').hide();
-                                              $("input[value='"+ id +"']").next().next().show();
+            $("input[value='"+ id +"']").next().next().show();
+            
+            var categoryLink1 = $(this).find("ul").height();
+                                              var categoryLink2 = $(".category_dropdown_main_list").height();
+                                              if(categoryLink1 > categoryLink2){
+                                                  $(".category_dropdown").height(categoryLink1);
+                                              }else{
+                                                  $(".category_dropdown").height(categoryLink2);
+                                              }
+                                              
             $(this).addClass('category_link_active');
             $(this).closest(".category_dropdown_main_list-li").addClass('category_link_active');
             $(this).next().show();

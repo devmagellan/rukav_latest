@@ -296,13 +296,14 @@ $(document).ready(function(){
             console.log('no');
         }
     });
- 
+
+
      $('.product_slider_main').slick({
 		centerMode: true,
         slidesToShow: 1,
         slidesToScroll: 1,
-        infinite: true,
-        adaptiveHeight: true,
+        // infinite: true,
+        // adaptiveHeight: true,
         fade: true,
 		dots: true,
         prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="/img/slide_icon2.svg" alt=""></a>',
@@ -318,14 +319,14 @@ $(document).ready(function(){
 				arrows: true,
             }
         }]
-    }); 
+    });
     $('.product_slider_nav').slick({
-        // slidesToShow: 6,
+        // slidesToShow: 3,
         variableWidth: true,
         slidesToScroll: 1,
 		centerMode: true,
         asNavFor: '.product_slider_main',
-        // focusOnSelect: true,
+        focusOnSelect: true,
         // infinite: true
     });
 	
@@ -679,6 +680,17 @@ $(document).ready(function(){
             $("#location_search").css("display", "inline-block");
             $("header.header").css("padding-bottom","94px");
         }
+    });
+
+    console.log("test7");
+
+    $(".category_dropdown_sub_list .arrow_back_end").on("click", function(){
+        $(this).parent().hide();
+        $(".category_dropdown").height($(this).parent().height());
+    });
+    $('.categoryLink').on('click', function () {
+            console.log($(this).find("ul").height());
+            $(".category_dropdown").height($(this).find("ul").height());
     });
 
 

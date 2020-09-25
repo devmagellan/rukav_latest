@@ -3496,3 +3496,7 @@ padding-left: 30px;
 #passwordUpdate button.close{
     margin-top: 0!important;
 }
+div.product_slider_main div.slick-track{
+    align-items: center;
+    display: flex;
+}
