@@ -13046,8 +13046,8 @@ class Controller extends WebController
     }
 
   public function getAllParentsCategoriesRecursive($id){
-
     $real=\App\Containers\Site\Models\ProductCategory::where('id',$id)->first();
+	if($real){
     $data=\App\Containers\Site\Models\ProductCategory::where('id',$real->parent_id)->first();
     if($data){
       \Log::info('data',array($data));
@@ -13057,6 +13057,7 @@ class Controller extends WebController
     if($data && $data->parent_id==0){
       \Log::info('sata2',array($this->resultCat));
       return $this->resultCat;}
+	}
   }
 
   public function adminAddAds(GetAllAdsDataTableRequest $request){
