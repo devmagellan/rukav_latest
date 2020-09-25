@@ -753,7 +753,8 @@
               $('.outUk').hide();
               $('.Places').hide();
               $('.postcode_block').show();
-              $('#clntInfoEditZip').show()
+              $('#clntInfoEditZip').show();
+              $('#clntInfoEditAddr1').removeAttr("required");
           });
 
           $('#all_adress').on('click', function () {
