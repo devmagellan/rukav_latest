@@ -75,6 +75,7 @@
   <article class="add_advert_block">
     <span data-status_created="{{session('infoAd')}}" id="statusAd"></span>
     <form action="/ads/store" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="add_id" value="{{$ad->id}}">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -416,8 +417,10 @@
                 <div class="add_foto_file_item">
 
                   <div class="upload-file-container-text">
-                      <label style="position: relative;height: 114px;width: 114px;" for="imgInput{{$key+1}}" class="add_foto_file_item_load">
-                          <img style="object-fit: cover;height: 100%;width: 100%;" src="/storage/messages/{{$realPic->photo}}" alt="">
+                      <!--label style="position: relative;height: 114px;width: 114px;" for="imgInput{{$key+1}}" class="add_foto_file_item">
+                          <div class="add_foto_file_img_wrapper">
+                          <img style="object-fit: cover;height: 100%;width: 100%;" class="add_foto_file_item" src="/storage/messages/{{$realPic->photo}}" alt="">
+                          </div>
                           <div class="add_foto_file_block_hover" style="display:block">
                               <label for="imgInput{{$key+1}}" class="add_foto_file_item_load2">
                                   <img src="/img/refresh_icon.svg" alt="">
@@ -426,7 +429,23 @@
                                   <img src="/img/delete-icon.svg" alt="">
                               </div>
                           </div>
-                      </label>
+                      </label-->
+                          <label for="imgInput2" class="add_foto_file_item_load" style="display:none">
+                              <img src="/img/photo-camera-icon.svg" alt="">
+                              <span>Добавить фото</span>
+                          </label>
+                          <div class="add_foto_file_img_wrapper" style="display:inline-block">
+                              <input type="hidden" class="add_id" value="{{$ad->id}}">
+                              <img class="add_foto_file_img" src="/storage/messages/{{$realPic->photo}}" alt="">
+                              <div class="add_foto_file_block_hover">
+                                  <label id="present_{{$key+1}}" for="imgInput{{$key+1}}" class="add_foto_file_item_load2">
+                                      <img src="/img/refresh_icon.svg" alt="">
+                                  </label>
+                                  <div class="add_foto_file_delete_present">
+                                      <img src="/img/delete-icon.svg" alt="">
+                                  </div>
+                              </div>
+                          </div>
                     <input type="file" name="files[]" class="photo" id="imgInput{{$key+1}}"/>
                   </div>
                 </div>

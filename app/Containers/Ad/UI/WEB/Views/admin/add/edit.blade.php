@@ -509,31 +509,46 @@
                   $realCount=count($ad->pictures);
                   ?>
 
+
                 <div class="add_foto_file_wrapper">
-                  @foreach($ad->pictures as $realPic)
+                  @foreach($ad->pictures as $key=>$realPic)
                     <div class="add_foto_file_item">
 
                       <div class="upload-file-container-text">
-
-                        <label style="position: relative;height: 114px;width: 114px;" for="imgInput" class="add_foto_file_item_load">
-                          <img style="object-fit: cover;height: 100%;width: 100%;" src="/storage/messages/{{$realPic->photo}}" alt="">
+                      <!--label style="position: relative;height: 114px;width: 114px;" for="imgInput{{$key+1}}" class="add_foto_file_item">
+                          <div class="add_foto_file_img_wrapper">
+                          <img style="object-fit: cover;height: 100%;width: 100%;" class="add_foto_file_item" src="/storage/messages/{{$realPic->photo}}" alt="">
+                          </div>
+                          <div class="add_foto_file_block_hover" style="display:block">
+                              <label for="imgInput{{$key+1}}" class="add_foto_file_item_load2">
+                                  <img src="/img/refresh_icon.svg" alt="">
+                              </label>
+                              <div class="add_foto_file_delete">
+                                  <img src="/img/delete-icon.svg" alt="">
+                              </div>
+                          </div>
+                      </label-->
+                        <label for="imgInput2" class="add_foto_file_item_load" style="display:none">
+                          <img src="/img/photo-camera-icon.svg" alt="">
+                          <span>Добавить фото</span>
                         </label>
-                        <div class="add_foto_file_img_wrapper">
-                          <img  src="#" alt="" class="add_foto_file_img" />
+                        <div class="add_foto_file_img_wrapper" style="display:inline-block">
+                          <input type="hidden" class="add_id" value="{{$ad->id}}">
+                          <img class="add_foto_file_img" src="/storage/messages/{{$realPic->photo}}" alt="">
                           <div class="add_foto_file_block_hover">
-                            <label for="imgInput" class="add_foto_file_item_load2">
+                            <label id="present_{{$key+1}}" for="imgInput{{$key+1}}" class="add_foto_file_item_load2">
                               <img src="/img/refresh_icon.svg" alt="">
                             </label>
-                            <div class="add_foto_file_delete">
+                            <div class="add_foto_file_delete_present">
                               <img src="/img/delete-icon.svg" alt="">
                             </div>
                           </div>
                         </div>
-                        <input type="file" name="files[]" class="photo" id="imgInput"/>
+                        <input type="file" name="files[]" class="photo" id="imgInput{{$key+1}}"/>
                       </div>
                     </div>
                   @endforeach
-                  @for($i=1;$i<=10-$realCount;$i++)
+                  @for($i=count($ad->pictures)+1;$i<=10+count($ad->pictures)-$realCount;$i++)
                     <div class="add_foto_file_item">
                       <div class="upload-file-container-text">
 
@@ -544,7 +559,7 @@
                         <div class="add_foto_file_img_wrapper">
                           <img  src="#" alt="" class="add_foto_file_img" />
                           <div class="add_foto_file_block_hover">
-                            <label for="imgInput2" class="add_foto_file_item_load2">
+                            <label for="imgInput{{$i}}" class="add_foto_file_item_load2">
                               <img src="/img/refresh_icon.svg" alt="">
                             </label>
                             <div class="add_foto_file_delete">
@@ -552,12 +567,16 @@
                             </div>
                           </div>
                         </div>
-                        <input type="file" name="files[]" class="photo" id="imgInput2"/>
+                        <input type="file" name="files[]" class="photo" id="imgInput{{$i}}"/>
                       </div>
                     </div>
                   @endfor
 
                 </div>
+
+
+
+
               </div>
               <a href="#" class="add_advert_rolls_foto">Привила добавления фото</a>
               @error('files')

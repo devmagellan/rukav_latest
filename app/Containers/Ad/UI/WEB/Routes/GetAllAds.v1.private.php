@@ -96,6 +96,11 @@ $router->get('/save_preview/{id}', [
     'uses'  => 'Controller@savePreview',
 ]);
 
+$router->post('/add_deleted_imgs_to_session', [
+    'as' => 'addDeletedImgsToSession',
+    'uses'  => 'ImgController@addDeletedImgsToSession',
+]);
+
 
 
 

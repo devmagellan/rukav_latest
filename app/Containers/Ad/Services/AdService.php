@@ -10,9 +10,11 @@ use App\Containers\Filter\Models\AddFilter;
 use App\Containers\Filter\Models\AddFilterDeals;
 use Carbon\Carbon;
 use Image;
+use Illuminate\Support\Facades\DB;
 use App\Containers\HomePage\Services\GlobalService;
 class AdService
 {
+    protected $ad;
   public function createAd($data): Ad
   {
 
@@ -27,24 +29,45 @@ class AdService
     $mutable = Carbon::now();
     $modifiedMutable = $mutable->add($data->select_time, 'day');
     \Log::info('date_information'.$modifiedMutable);
-    return Ad::updateOrCreate(['id'=>$data->add_id],[
-      'title' => $data->name_ad,
-      'email' => $user->email,
-      'phone' => ($user->phone) ? $user->phone : '',
-      'price' => $data->price,
-      'message' => $data->description,
-      'city' => $data->city,
-      'place_id' => $data->place_id,
-      'name' => $user->name,
-      'category_id' => $data->category_id,
-      'sender' => (isset($data->sender)) ? $data->sender : $user->id,
-      'is_tmp'=>(isset($data->save)) ? false : true,
-      'select_time' => $data->select_time,
-      'expired' => $modifiedMutable->toDateTimeString(),
-      'administrative' => $data->administrative,
-      'visibility' => false,
-      'show_name' => $user->name
-    ]);
+      DB::transaction(function () use ($data,$user,$modifiedMutable) {
+          if (count(session()->get('deletedImgsToSession')) > 0) {
+              foreach (session()->get('deletedImgsToSession') as $key=>$value) {
+                  \Log::info('IMG=>'.$value['img']);
+                  if(is_array($value)){
+                  $picturePath=explode("/", $value['img']);
+                      $id=$value['id'];
+                  }
+                  else{
+                      $picturePath=explode("/", $value['img']);
+                      $id=$value['id'];
+                  }
+                  \Log::info('IMG2=>',$value);
+                  \Log::info('$picturePath[3]=>'.$picturePath[3]);
+                Picture::where('ads_id',$id)->where('photo',$picturePath[3])->forceDelete();
+              }
+              session()->forget('deletedImgsToSession');
+          }
+
+          $this->ad = Ad::updateOrCreate(['id' => $data->add_id], [
+              'title' => $data->name_ad,
+              'email' => $user->email,
+              'phone' => ($user->phone) ? $user->phone : '',
+              'price' => $data->price,
+              'message' => $data->description,
+              'city' => $data->city,
+              'place_id' => $data->place_id,
+              'name' => $user->name,
+              'category_id' => $data->category_id,
+              'sender' => (isset($data->sender)) ? $data->sender : $user->id,
+              'is_tmp' => (isset($data->save)) ? false : true,
+              'select_time' => $data->select_time,
+              'expired' => $modifiedMutable->toDateTimeString(),
+              'administrative' => $data->administrative,
+              'visibility' => false,
+              'show_name' => $user->name
+          ]);
+      });
+      return $this->ad;
 
   }
 
