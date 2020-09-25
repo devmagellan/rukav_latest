@@ -149,9 +149,20 @@
             <img src="/storage/pictures/photo_icon.png" alt="" class="product_item_img">
                     </a>
             @else
+                    <?
+                    $small_file="storage/messages/small_{$product->pictures->first()->photo}";
+                    ?>
+            @if(file_exists($small_file))
+                <? dump('small');?>
+                        <a href="/ads/{{$product->id}}">
+                            <img src="/storage/messages/small_{{$product->pictures->first()->photo}}" alt="" class="product_item_img">
+                        </a>
+              @else
+              <? dump('big');?>
                     <a href="/ads/{{$product->id}}">
               <img src="/storage/messages/{{$product->pictures->first()->photo}}" alt="" class="product_item_img">
                     </a>
+            @endif
             @endif
           </div>
           <div class="col-sm-3">
