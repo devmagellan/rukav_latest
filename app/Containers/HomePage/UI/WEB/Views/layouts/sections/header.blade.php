@@ -232,6 +232,7 @@
                       }
                       if($parent_id !== 0) {
                           echo '<ul class="category_dropdown_sub_list" >';
+                          echo '<img src="/img/arrow_left.svg" alt="" class="arrow_back_end d-md-none">';
                           echo '<h6>'.$nameSection.'</h6>';
                       }
                       //перебираем в цикле массив и выводим на экран
