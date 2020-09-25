@@ -12633,7 +12633,7 @@ class Controller extends WebController
   {
       \Log::info('ZASHLI STORE',array($request));
 
-      if($request->save==1){
+   if($request->save==1){
     $ad = Apiato::call('Ad@CreateAdAction', [$request]);
     \Log::info('AD1',array($ad));
     if ($ad) {

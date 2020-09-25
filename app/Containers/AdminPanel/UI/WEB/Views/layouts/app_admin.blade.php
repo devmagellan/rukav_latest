@@ -848,15 +848,64 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 
 
 
-
-
-
-
-
 <script type="text/javascript">
     /* Activate smart panels */
     $('#js-page-content').smartPanel();
 
+    $(".add_foto_file_delete_present").on("click", function(){
+        var current_img=$(this).parent().parent().find('.add_foto_file_img').attr('src');
+        console.log('event',current_img);
+        var photo = $(this).closest(".upload-file-container-text").find(".photo");
+
+        $(photo)[0].value = "";
+        $(photo).closest(".upload-file-container-text").find('.add_foto_file_img').attr('src', '');
+        $(photo).closest(".upload-file-container-text").find('.add_foto_file_item_load').show();
+        $(photo).closest(".upload-file-container-text").find('.add_foto_file_img_wrapper').hide();
+        console.log($(photo));
+        var present_id=$($(this).parent().find('.add_foto_file_item_load2')[0])[0].attributes.id.nodeValue.split('_')[1];
+        console.log(present_id)
+
+        $(this).closest('.add_foto_file_item').remove()
+        $('.add_foto_file_wrapper').append( '<div class="add_foto_file_item">'+
+            '<div class="upload-file-container-text">'+
+            '<label for="imgInput2" class="add_foto_file_item_load">'+
+            '<img src="/img/photo-camera-icon.svg" alt="">'+
+            '<span>Добавить фото</span>'+
+            '</label>'+
+            '<div class="add_foto_file_img_wrapper">'+
+            '<img  src="#" alt="" class="add_foto_file_img" />'+
+            '<div class="add_foto_file_block_hover">'+
+            ' <label for="imgInput'+present_id+'" class="add_foto_file_item_load2">'+
+            '<img src="/img/refresh_icon.svg" alt="">'+
+            '</label>'+
+            '<div class="add_foto_file_delete">'+
+            '<img src="/img/delete-icon.svg" alt="">'+
+            '</div>'+
+            '</div>'+
+            '</div>'+
+            '<input type="file" name="files[]" class="photo" id="imgInput'+present_id+'"/>'+
+            '</div>'+
+            '</div>');
+        var add_id=$(this).parent().parent().find('.add_id').val();
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            async: false,
+            url: '/add_deleted_imgs_to_session',
+            data: {img:current_img,id:add_id},
+            success: function (wata) {
+
+            }
+
+        });
+
+
+        current_img
+
+
+
+
+    });
 </script>
 <script src="/templates/smartadmin/js/formplugins/dropzone/dropzone.js"></script>
 <script>
