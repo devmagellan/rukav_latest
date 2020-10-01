@@ -343,7 +343,7 @@ ul.slickslide li img, .slick-dots button img {
               </p>
             </div>
           </div>
-          <a href="/static/safety#theses" class="product_slider_advantage_all">читать все советы</a>
+          <a href="/static/safety#theses" target="_blanc" class="product_slider_advantage_all">читать все советы</a>
         </div>
       </div>
     </div>

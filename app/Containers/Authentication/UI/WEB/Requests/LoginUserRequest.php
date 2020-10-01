@@ -52,6 +52,16 @@ class LoginUserRequest extends Request
             'password' => 'required|between:6,30',
         ];
     }
+	
+	 public function messages()
+    {
+        return [
+            'email.required' => 'Поле email обязательно для авторизации',
+            'email.required' => "В поле email введена почта не правильного формата",
+            'email.exists' => "Указан неверный email",
+
+        ];
+    }
 
     /**
      * Determine if the user is authorized to make this request.

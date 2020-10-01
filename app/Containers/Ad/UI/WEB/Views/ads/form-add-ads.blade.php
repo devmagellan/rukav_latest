@@ -1076,6 +1076,7 @@
             $('.outUk').show();
             $('.Places').hide();
           $('#clntInfoEditZip').hide()
+		  $('#clntInfoEditAddr1').removeAttr("required");
         });
 
         $('#postcode').on('click', function () {
@@ -1084,6 +1085,9 @@
             $('.Places').hide();
             $('.postcode_block').show();
           $('#clntInfoEditZip').show()
+		  $('#clntInfoEditOutUk').removeAttr("required");
+            $('#clntInfoEditAddrOutUk1').removeAttr("required");
+			$('#clntInfoEditAddr1').removeAttr("required");
         });
 
         $('#all_adress').on('click', function () {
