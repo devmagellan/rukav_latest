@@ -30,7 +30,7 @@ class AdService
     $modifiedMutable = $mutable->add($data->select_time, 'day');
     \Log::info('date_information'.$modifiedMutable);
       DB::transaction(function () use ($data,$user,$modifiedMutable) {
-          if (count(session()->get('deletedImgsToSession')) > 0) {
+          if (null!=(session()->get('deletedImgsToSession')) && count(session()->get('deletedImgsToSession')) > 0) {
               foreach (session()->get('deletedImgsToSession') as $key=>$value) {
                   \Log::info('IMG=>'.$value['img']);
                   if(is_array($value)){
