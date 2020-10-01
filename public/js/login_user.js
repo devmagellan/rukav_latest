@@ -8,7 +8,7 @@ $(document).ready(function () {
       url: '/loginUser',
       data: formData,
       success: function (data) {
-        //location.reload();
+        location.reload();
       },
       error: function (errors) {
 
