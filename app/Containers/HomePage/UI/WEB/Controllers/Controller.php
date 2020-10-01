@@ -31,7 +31,6 @@ class Controller extends WebController
      */
     public function index(GetAllHomePagesRequest $request)
     {
-		dump(\Auth::user());
       $data['properties']=GlobalService::getMainProperties($request)['categories'];
       $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
       return view('homepage::index', compact('categoriesOnlyRoot','data'));
