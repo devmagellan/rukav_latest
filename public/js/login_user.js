@@ -2,12 +2,13 @@ $(document).ready(function () {
   $('#loginButton').on('click', function (e) {
     e.preventDefault();
     var formData = $('#loginForm').serialize();
+    console.log('formData=',formData);
     $.ajax({
       method: 'post',
       url: '/loginUser',
       data: formData,
       success: function (data) {
-        location.reload();
+        //location.reload();
       },
       error: function (errors) {
 

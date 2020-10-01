@@ -1,0 +1,80 @@
+version: '3.7'
+
+services:
+  apiato-web:
+    image: nginx:1.10.3
+    container_name: apiato-web
+    ports:
+      - "8080:80"
+      - "443:443"
+    restart: always
+    volumes:
+      - "./docker/nginx/conf.d:/etc/nginx/conf.d:ro"
+      - ".:/var/www/apiato"
+    depends_on:
+      - "apiato-php"
+      - "apiato-mysql"
+    networks:
+      - apiato
+
+  apiato-mysql:
+    image: mysql:5.7.30
+    container_name: apiato-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'apiato'
+      MYSQL_USER: 'apiato'
+      MYSQL_PASSWORD: 'apiato'
+      MYSQL_ROOT_PASSWORD: 'apiato'
+    ports:
+      - '13306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - "./docker/tmp/mysql:/var/lib/mysql"
+    networks:
+      - apiato
+
+  apiato-php:
+    image: devmagellan/wgt-php:latest
+    build:
+      context: ./
+      dockerfile: ./docker/php/Dockerfile
+    container_name: apiato-php
+    environment:
+      APP_ENV: local
+    restart: always
+    working_dir: /var/www/apiato
+    volumes:
+      - "./docker/php:/usr/local/etc/php:ro"
+      - "./docker/php/conf.d:/usr/local/etc/php.conf.d"
+      - ".:/var/www/apiato"
+    networks:
+      - apiato
+    depends_on:
+      - "apiato-mysql"
+    secrets:
+      - source: ssh_key
+        target: /home/docker/.ssh/id_rsa
+
+  selenium:
+    image: selenium/standalone-chrome
+    depends_on:
+      - apiato-php
+    links:
+      - apiato-php:apiato.loc
+    volumes:
+      - /dev/shm:/dev/shm
+    ports:
+      - 4444:4444
+    networks:
+      - apiato
+
+
+networks:
+  apiato:
+    name: apiato
+    driver: bridge
+secrets:
+  ssh_key:
+    file: ~/.ssh/id_rsa
