@@ -1000,9 +1000,9 @@
                   @endif
               </div>
               <div class="choosen_item_text d-flex flex-column">
-                <p class="choosen_item_name">
+                <a href="/ads/{{$ad->id}}"><p class="choosen_item_name">
                  {{$ad->title}}
-                </p>
+                </p></a>
                 <div class="choosen_subitems_wrapper">
                   <div class="choosen_subitem d-flex flex-column">
                     <p class="choosen_subtitle">

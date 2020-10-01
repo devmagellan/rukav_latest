@@ -401,7 +401,7 @@
             </button>
           </div>
           <div class="col-sm-6">
-            <button type="button" class="buttonHref">вернуться</button>
+            <button type="button" class="buttonHref" data-dismiss="modal" aria-label="Close">вернуться</button>
           </div>
         </div>
       </form>
