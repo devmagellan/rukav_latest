@@ -12,7 +12,9 @@ use App\Containers\PrivateCabinet\UI\WEB\Requests\EditPrivateCabinetRequest;
 use App\Containers\User\UI\WEB\Requests\GetAllUsersRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
+use Illuminate\Support\Facades\Storage;
 use Image;
+use App\Containers\Ad\Services\AdService;
 use App\Containers\HomePage\Services\GlobalService;
 
 
@@ -12795,6 +12797,72 @@ class Controller extends WebController
         return view('privatecabinet::messageClean',$data);
     }
 
+  function generateRandomString($length = 10) {
+    return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+  }
+
+  public function checkPhotoData(GetAllPrivateCabinetsRequest $request){
+    $user=\App\Containers\User\Models\User::where('id',$request->input('client_id'))->first();
+    if (preg_match('/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/si', $request->input('text')))
+    {
+      dd("Contains an email");}
+    else{
+      /* Getting file name */
+      if ($_FILES["file"]["error"] > 0)
+      {
+        echo "Apologies, an error has occurred.";
+        echo "Error Code: " . $_FILES["file"]["error"];
+      }
+      else
+      {
+        $newPath = storage_path('app/public/message_images/');
+        $filename=$this->generateRandomString(15).'_image.'.$_FILES["file"]["name"];
+        if(move_uploaded_file($_FILES["file"]["tmp_name"],$newPath.$filename)){
+         AdService::createThumbnail($newPath.$filename, 200, 200);
+          return json_encode(['message'=>'success']);
+        }
+
+
+      }
+  /*    $message=['text'=>'',
+        'receiver_id'=>$user->id,
+        'sender_id'=>\Auth::user()->id,
+        'message_id'=>$request->input('message_id'),
+        'is_viewed'=>0,
+        'photo'=> $filename
+
+      ];
+      $con=\App\Containers\Connect\Models\Connect::insert($message);
+      var_dump('mvp2a');
+      $message['attributes']['id']= null;
+      var_dump('mvp3');
+      if($message){
+        var_dump('mvp4');
+        var_dump('receiver-'.$user->id.'-');
+        $options = array(
+          'cluster' => 'eu',
+          'useTLS' => true
+        );
+        $pusher = new \Pusher\Pusher(
+          '500e0547867ccfe184af',
+          'b8d3a1076b93fe80dd50',
+          '1000615',
+          $options
+        );
+
+        $data['message_id'] = $request->input('message_id');
+        $data['sender_id'] = \Auth::user()->id;
+        $data['text'] = '';
+        $data['photo'] = $filename;
+        $data['created'] = $con->created_at;
+        $pusher->trigger('my-channel', 'receiver-'.$user->id.'-', $data);
+        $notification['created'] = $con->created_at;
+        $pusher->trigger('notification-channel', 'notification-'.$user->id.'-', $notification);
+
+      }*/
+    }
+    return json_encode(['message'=>'success']);
+  }
 
 
 

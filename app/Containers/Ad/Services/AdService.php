@@ -86,7 +86,7 @@ class AdService
 
               $filePath = Storage::disk('public')->put('', $file);
 
-              $this->createPicture($filePath, $adId);
+            self::createPicture($filePath, $adId);
 
               \Log::info('filepath1' . $file);
               \Log::info('filepath2' . $filePath);
@@ -96,12 +96,12 @@ class AdService
 
               if (\File::copy($oldPath, $newPath)) {
                   \Log::info('filepath2' . $filePath);
-                  $this->createThumbnail($newPath, 200, 200);
+                self::createThumbnail($newPath, 200, 200);
               }
 
               if (\File::copy($oldPath, $middlePath)) {
                   \Log::info('filepath2' . $filePath);
-                  $this->createThumbnail($middlePath, 800, 800);
+                  self::createThumbnail($middlePath, 800, 800);
               }
 
           }
@@ -111,7 +111,7 @@ class AdService
 
   }
 
-    public function createThumbnail($path, $width, $height)
+    public static function createThumbnail($path, $width, $height)
     {
         $img = Image::make($path)->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
@@ -148,7 +148,7 @@ class AdService
         ]);
     }
 
-  public function createPicture($path, $adId)
+  public static function createPicture($path, $adId)
   {
     Picture::create([
       'ads_id' => $adId,

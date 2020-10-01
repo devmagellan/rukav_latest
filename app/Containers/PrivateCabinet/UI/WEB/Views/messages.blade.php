@@ -31,7 +31,7 @@
                 </form>
                 @foreach($businessOwnerConversationsList as $list)
 @if(isset($list))
-	
+
                     <div class="message_sidebar_theme" id="message_{{$list->group->id}}">
                         @endif
 
@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="message_sidebar_theme_right">
                                         <p class="message_sidebar_theme_name">
-                                            {{$groupConversations->first()->message->getSender->name}}
+                                           {{$groupConversations->first()->message->getSender->name}}
                                             </p>
                                             <p class="message_sidebar_theme_add">
                                             {{$groupConversations->first()->title}}
@@ -249,6 +249,14 @@
                         <p class="theme_main_text"><b>Основное ({{count($conversations)}})</b></p></div>
                     <div class="message_sidebar_theme_body">
                         @foreach($conversations as $conversation)
+
+                          <? if($conversation->sender_id!=Auth::user()->id){
+                            $opponent=\App\Containers\User\Models\User::where('id',$conversation->sender_id)->first();
+                          }
+                          else{
+                            $opponent=\App\Containers\User\Models\User::where('id',$conversation->receiver_id)->first();
+                          }
+                          ?>
                         <div class="message_sidebar_theme_item " onclick="reloadMessageList('{{$conversation->id}}')" >
                             <div class="message_sidebar_theme_left">
                                 <div class="massage_user_avatar">
@@ -261,7 +269,7 @@
                             </div>
                             <div class="message_sidebar_theme_right">
                                 <p class="message_sidebar_theme_name">
-                                    {{$conversation->author->name}}
+                                  {{$opponent->name}}
                                 </p>
                                 <p class="message_sidebar_theme_add">
                                     {{$conversation->message->title}}
@@ -322,8 +330,8 @@
 
         $('.select2').select2();
         reloadMessageList('{{$conversations[0]->id}}')
-		
-		
+
+
     $('.message_sidebar_theme_head p').click(function () {
         $('.message_sidebar_theme_body').hide();
         console.log('12345');

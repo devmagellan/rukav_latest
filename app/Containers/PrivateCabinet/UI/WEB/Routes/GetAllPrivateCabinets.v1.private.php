@@ -83,6 +83,13 @@ $router->get('/send_message_to_client', [
       'auth:web',]
 ]);
 
+$router->post('/send_photomessage_to_client', [
+  'as' => 'send_message_to_client',
+  'uses'  => 'Controller@checkPhotoData',
+  'middleware' => [
+    'auth:web',]
+]);
+
 
 $router->post('/add_second_messanger_group', [
     'as' => 'add_second_messanger_group',

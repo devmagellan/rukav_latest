@@ -6,6 +6,7 @@ else{
     $recepient=$conversation->first()->receiver_id;
 }
 
+$opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
 ?>
 
 <div class="wrapper_header_message">
@@ -15,7 +16,7 @@ else{
         </div>
     </div>
     <div class="wrapper_header_message_right">
-        <p class="wrapper_header_name">{{$conversation->first()->author->name}}</p>
+        <p class="wrapper_header_name">{{$opponent->name}}</p>
         <p class="wrapper_header_add_name">{{$conversation->first()->message->title}}</p>
         <p class="wrapper_header_add_price">£ {{$conversation->first()->message->price}}</p>
         <p class="wrapper_header_date">Опубликовано: <span>{{$conversation->first()->message->created_at}}</span></p>
@@ -29,6 +30,7 @@ else{
 
 
     @foreach($conversation as $segment)
+     <? dump($segment); ?>
             @if(\Auth::user()->id!=$segment->receiver_id)
 
                 <div class="body_messege_item body_my_messege_item">
@@ -53,17 +55,92 @@ else{
 </div>
 <div class="wrapper_footer_messege">
     <div class="send_message_form">
+      <form enctype="multipart/form-data" id="myformFile">
         <label for="send_message_foto">
             <img src="/img/photo-camera-icon-black.svg" alt="">
         </label>
-        <input type="file" id="send_message_foto" name="send_message_foto" style="display: none;">
+
+        <input type="file" id="send_message_foto" name="send_message_foto[]" style="display: none;">
+      </form>
         <input id="msgr_input" type="text" name="" placeholder="Текст сообщения..." required="">
+
         <button onclick="sendMessage()"><img src="/img/paper-plane-icon.svg" alt=""></button>
     </div>
     <p>RUKAV оставляет за собой право проверять сообщения посланные через наш сервер для того чтобы защитить вас от мошенничества и подозрительных действий.</p>
 </div>
 
 <script>
+  $("#send_message_foto").change(function () {
+    $("#myformFile").submit();
+  })
+  $("#myformFile").submit(function (e) {
+    console.log('got it')
+    e.preventDefault();
+    var fsize = $('#send_message_foto')[0].files[0].size,
+      ftype = $('#send_message_foto')[0].files[0].type,
+      fname = $('#send_message_foto')[0].files[0].name,
+      fextension = fname.substring(fname.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","doc","docx","xls","xlsx","ppt","pptx","txt","zip","rar","gzip"];
+
+    if ($.inArray(fextension, validExtensions) == -1){
+      alert("This type of files are not allowed!");
+      this.value = "";
+      return false;
+    }
+  else{
+
+      var fd = new FormData(this);
+      var files = $('#send_message_foto')[0].files[0];
+      fd.append('file',files);
+
+
+      if(fsize > 3145728){/*1048576-1MB(You can change the size as you want)*/
+        alert("File size too large! Please upload less than 3MB");
+        this.value = "";
+        return false;
+      }
+
+      var url = '/send_photomessage_to_client';
+      var client_id='{{$recepient}}';
+      var message_id='{{$conversation->first()->message_id}}';
+
+      fd.append("client_id ",client_id);
+      fd.append("message_id ",message_id);
+      $.ajax({
+        method: 'POST',
+        async:false,
+        cache : false,
+        contentType: false,
+        processData : false,
+        url: url,
+        data: fd,
+        beforeSend: function() {
+          $('#loader').show();
+        },
+        complete: function() {
+          $('#loader').hide();
+          console.log('complete')
+          $('.wrapper_body_messege_scroll').append(
+            '<div class="body_messege_item body_my_messege_item">'+
+            '<p>'+''+'</p>'+
+            '<span>только что</span>'+
+            '</div>'
+          );
+
+        },
+        success: function (data) {
+          console.log('success')
+          console.log(data)
+          console.log({{$conversation->first()->message_id}})
+          //reloadMessageList({{$conversation->first()->message_id}})
+
+
+        }
+      });
+    }
+  });
+
+
     function sendMessage(){
         console.log('in_function')
         if($('#msgr_input').val().length>0){
@@ -90,23 +167,23 @@ else{
                         '<span>только что</span>'+
                         '</div>'
                     );
-					
+
                 },
                 success: function (data) {
 				console.log('success')
                     console.log(data)
                     console.log({{$conversation->first()->message_id}})
                     //reloadMessageList({{$conversation->first()->message_id}})
-                   
+
 
                 }
             });
         }
     }
-	
-	
-		
-		
+
+
+
+
 
    var pusher = new Pusher('500e0547867ccfe184af', {
       cluster: 'eu'
@@ -121,7 +198,7 @@ console.log(receiver)
 console.log(receiver.length)
 
 channel.bind(receiver, function(data) {
-console.log(data)	
+console.log(data)
 if('{{$conversation->first()->sender_id}}'=={{\Auth::user()->id}}){
 	var sender='{{$conversation->first()->receiver_id}}';
 }
@@ -138,7 +215,7 @@ console.log('{{$conversation->first()->message->id}}')
                         '<span>'+data.created+'</span>'+
                         '</div>'
                     );
-} 
+}
 
 })
 
