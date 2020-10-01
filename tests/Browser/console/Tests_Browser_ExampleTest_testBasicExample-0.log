@@ -1,0 +1,38 @@
+[
+    {
+        "level": "SEVERE",
+        "message": "https:\/\/maps.googleapis.com\/maps\/api\/js?v=3.13&sensor=false&key=AIzaSyDaZXMHQgJkoXZkkBbtelY8SLAwMOasg0Y&libraries=places&callback=initMap&language=en 76:405 \"InvalidValueError: not an instance of HTMLInputElement\"",
+        "source": "console-api",
+        "timestamp": 1601503296695
+    },
+    {
+        "level": "SEVERE",
+        "message": "https:\/\/maps.googleapis.com\/maps\/api\/js?v=3.13&sensor=false&key=AIzaSyDaZXMHQgJkoXZkkBbtelY8SLAwMOasg0Y&libraries=places&callback=initMap&language=en 76:405 \"InvalidValueError: not an instance of HTMLInputElement\"",
+        "source": "console-api",
+        "timestamp": 1601503296698
+    },
+    {
+        "level": "SEVERE",
+        "message": "https:\/\/maps.googleapis.com\/maps\/api\/js?v=3.13&sensor=false&key=AIzaSyDaZXMHQgJkoXZkkBbtelY8SLAwMOasg0Y&libraries=places&callback=initMap&language=en 76:405 \"InvalidValueError: not an instance of HTMLInputElement\"",
+        "source": "console-api",
+        "timestamp": 1601503296699
+    },
+    {
+        "level": "SEVERE",
+        "message": "https:\/\/maps.googleapis.com\/maps\/api\/js?v=3.13&sensor=false&key=AIzaSyDaZXMHQgJkoXZkkBbtelY8SLAwMOasg0Y&libraries=places&callback=initMap&language=en 76:405 \"InvalidValueError: not an instance of HTMLInputElement\"",
+        "source": "console-api",
+        "timestamp": 1601503296700
+    },
+    {
+        "level": "WARNING",
+        "message": "https:\/\/maps.googleapis.com\/maps-api-v3\/api\/js\/42\/6\/util.js 232:26 \"Google Maps JavaScript API warning: RetiredVersion https:\/\/developers.google.com\/maps\/documentation\/javascript\/error-messages#retired-version\"",
+        "source": "console-api",
+        "timestamp": 1601503302995
+    },
+    {
+        "level": "WARNING",
+        "message": "https:\/\/maps.googleapis.com\/maps-api-v3\/api\/js\/42\/6\/util.js 232:26 \"Google Maps JavaScript API warning: SensorNotRequired https:\/\/developers.google.com\/maps\/documentation\/javascript\/error-messages#sensor-not-required\"",
+        "source": "console-api",
+        "timestamp": 1601503302995
+    }
+]

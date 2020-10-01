@@ -31,7 +31,7 @@ class Controller extends WebController
      */
     public function index(GetAllHomePagesRequest $request)
     {
-		
+		dump(\Auth::user());
       $data['properties']=GlobalService::getMainProperties($request)['categories'];
       $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
       return view('homepage::index', compact('categoriesOnlyRoot','data'));
@@ -105,8 +105,8 @@ class Controller extends WebController
 
          // ..
     }
-	
-	
+
+
 		public function allAuthorAds(GetAllHomePagesRequest $request){
 			if(null!=($request->input('id'))){
 				$id=$request->input('id');
@@ -137,7 +137,7 @@ class Controller extends WebController
       $q= \App\Containers\Ad\Models\Ad::with('pictures')->when($id != null, function ($query) use($id) {
           $query->where('sender', $id);
       })
-	  
+
 	  ->where(function ($query) use($request) {
           $query->where('message', 'like', '%' . $request->input('search_string') . '%')
               ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
@@ -167,18 +167,18 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
     $data['pricesLimits'][0]['min_price']=0;
 }
 
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
         // Make sure that you call the static method currentPageResolver()
         // before querying users
         \Illuminate\Pagination\Paginator::currentPageResolver(function () use ($currentPage) {
             return $currentPage;
         });
-		
+
 
 		    $administrative=$request->input('administrative');
             $uk_only=$request->input('uk_only');
@@ -208,11 +208,11 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
 
           ->paginate(10);
 
-		
-/* 		
-		
-		
-		
+
+/*
+
+
+
         $messages= \App\Containers\Ad\Models\Ad::where(function ($query) use($request){
             $query->where('message', 'like', '%' . $request->input('search_string') . '%')
                 ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
@@ -226,13 +226,13 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
         return view('category::catalog',$data);
 
     }
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 	public function search(GetAllHomePagesRequest $request){
 
 
@@ -287,18 +287,18 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
     $data['pricesLimits'][0]['min_price']=0;
 }
 
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
         // Make sure that you call the static method currentPageResolver()
         // before querying users
         \Illuminate\Pagination\Paginator::currentPageResolver(function () use ($currentPage) {
             return $currentPage;
         });
-		
+
 
 		    $administrative=$request->input('administrative');
             $uk_only=$request->input('uk_only');
@@ -328,11 +328,11 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
 
           ->paginate(10);
 
-		
-/* 		
-		
-		
-		
+
+/*
+
+
+
         $messages= \App\Containers\Ad\Models\Ad::where(function ($query) use($request){
             $query->where('message', 'like', '%' . $request->input('search_string') . '%')
                 ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
@@ -352,6 +352,6 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
 	        $isFinal=\App\Containers\Site\Models\ProductCategory::where('parent_id',$request->input('id'))->first();
 	        return json_encode(['response'=>(!$isFinal) ? 'redirect' : $isFinal]);
     }
-	
-	
+
+
 }

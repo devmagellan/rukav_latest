@@ -55,7 +55,7 @@
       @endif
       @if(!\Illuminate\Support\Facades\Auth::user())
         <div class="col-md-1 col-2">
-          <a href="#" id="loginForm" class="user_cabinet" data-toggle="modal" data-target="#ModalIn">
+          <a href="#" id="loginFormGo" class="user_cabinet" data-toggle="modal" data-target="#ModalIn">
             <img src="{{asset('/img/user_icon.svg')}}" alt="">
           </a>
         </div>
@@ -63,9 +63,9 @@
         @if(null!=(\Auth::user()) )
         <div class="col-md-1 col-2">
           <a href="#" class="user_cabinet_login" >
-		  
-		  
-		  
+
+
+
             @if(null!=(\Auth::user()) && \Auth::user()->avatar)
               <img style="height:40px;border-radius: 50%;" src="@if(substr(\Auth::user()->avatar, 0, 4)!='http')/storage/avatars/@endif{{ \Auth::user()->avatar }}" />
               @elseif(null!=(\Auth::user()) && \Auth::user()->name )
