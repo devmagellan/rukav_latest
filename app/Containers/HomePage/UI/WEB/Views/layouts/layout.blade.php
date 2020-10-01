@@ -210,7 +210,7 @@ $initAutoComplete = function(){
   </script>
 
 </head>
-<body>
+<body id="body">
 
 
 @include('homepage::layouts.sections.header')

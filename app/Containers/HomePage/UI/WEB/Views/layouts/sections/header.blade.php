@@ -22,7 +22,7 @@
           <img src="{{asset('/img/pin.svg')}}" alt="" class="form_category_imp-pin">
 
           <div class="search" style="position:relative">
-            <div style="position:absolute;left:250px;top:-20px">
+            <div style="position:absolute;left:230px;top:40px;color:#808080">
             <input type="checkbox" style="display:inline-block !important" id="uk_only" name="uk_only"> <label for="uk_only"> искать только по UK</label></div>
             <input type="text" id="search-field" name="search" class="form_category_search" placeholder="Я ищу...">
             <input type="text" id="location_search" name="location" class="form_category_search-city" placeholder="Ищем по миру :">
@@ -55,7 +55,7 @@
       @endif
       @if(!\Illuminate\Support\Facades\Auth::user())
         <div class="col-md-1 col-2">
-          <a href="#" class="user_cabinet" data-toggle="modal" data-target="#ModalIn">
+          <a href="#" id="loginForm" class="user_cabinet" data-toggle="modal" data-target="#ModalIn">
             <img src="{{asset('/img/user_icon.svg')}}" alt="">
           </a>
         </div>

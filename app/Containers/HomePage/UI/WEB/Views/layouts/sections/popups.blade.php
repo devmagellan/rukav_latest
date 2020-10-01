@@ -95,7 +95,7 @@
       <p class="textform">или войти через </p>
       <ul class="socials">
         <li>
-          <a  href="{{ route('login.provider.fb', 'facebook') }}">
+          <a  id="facebookSocialLoginBtn" href="{{ route('login.provider.fb', 'facebook') }}">
             <i class="fab fa-facebook-f "></i>
           </a>
         </li>

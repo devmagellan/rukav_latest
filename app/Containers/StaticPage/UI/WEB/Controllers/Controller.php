@@ -5,6 +5,7 @@ namespace App\Containers\StaticPage\UI\WEB\Controllers;
 use App\Containers\StaticPage\UI\WEB\Requests\CreateStaticPageRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\DeleteStaticPageRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\GetAllStaticPagesRequest;
+use App\Containers\StaticPage\UI\WEB\Requests\SendAdvRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\FindStaticPageByIdRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\UpdateStaticPageRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\StoreStaticPageRequest;
@@ -270,5 +271,10 @@ var_dump($request->input('form'));
 
         return json_encode(['status'=>'success']);
     }
+	
+	public function sendAdvRequest(SendAdvRequest $request){
+		dispatch(new \App\Containers\User\Jobs\SendAdvRequestJob($request->all()))->onQueue('queue_name');
+		return redirect()->back()->with('success', 'Ваше сообщение отправлено');   
+	}
 
 }

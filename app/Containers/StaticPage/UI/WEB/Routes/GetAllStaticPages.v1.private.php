@@ -115,6 +115,13 @@ $router->post('/staticpages_position', [
     ],
 ]);
 
+$router->post('/adv/connect', [
+    'as'   => 'staticpages_position',
+    'uses'       => 'Controller@sendAdvRequest',
+]);
+
+
+
 
 
 

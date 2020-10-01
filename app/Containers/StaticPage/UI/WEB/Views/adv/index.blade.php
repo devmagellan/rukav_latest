@@ -7,6 +7,23 @@
       box-shadow: 0px 0px 8px 0px rgba(148,145,148,1);}
   </style>
   <main class="main">
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+@if (\Session::has('success'))
+    <div class="alert alert-success">
+        <ul>
+            <li>{!! \Session::get('success') !!}</li>
+        </ul>
+    </div>
+@endif
   <article class="product_main_block">
     <div class="container">
       <div class="row">
@@ -41,7 +58,7 @@
         </div>
         <div class="col-md-5">
           <div class="sendMessageBox" style="width:99%;padding:15px;height:auto;border-radius: 15px;">
-            <form class="formModal needs-validation" action="/adv/connect" method="get" id="contact"  novalidate >
+            <form class="formModal needs-validation" action="/adv/connect" method="post" id="contact"  novalidate >
               <div class="row">
                   <div class="col-md-11">
                     <input type="text" name="sender_name" placeholder="Ваше Имя"> <span class="required">*</span>
