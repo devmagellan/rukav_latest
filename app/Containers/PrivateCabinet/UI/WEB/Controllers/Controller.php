@@ -12560,7 +12560,7 @@ class Controller extends WebController
                 $query->where('receiver_id', \Auth::user()->id)->orWhere('sender_id', \Auth::user()->id);
                     })
             ->with('sender')->with('message')->with('pictures')
-            ->groupBy('message_id','receiver_id')->distinct()->orderBy('created_at')->get();
+          /*->groupBy('message_id','receiver_id')*/->distinct()->orderBy('created_at','desc')->get();
         $tmp_msg=[];
         $tmp=[];
         foreach($conversations as $conver){
@@ -12708,7 +12708,10 @@ class Controller extends WebController
 
 
     public function conversationData(GetAllPrivateCabinetsRequest $request){
-        $example=\App\Containers\Connect\Models\Connect::where('id',$request->input('conversation'))->with('author')->first();
+       $example=\App\Containers\Connect\Models\Connect::where('id',$request->input('conversation'))->with('author')->first();
+      if(\Auth::user()->id==$example->receiver_id){
+        \App\Containers\Connect\Models\Connect::where('id',$request->input('conversation'))->update(['viewed_at'=>Carbon::now()]);
+      }
         //Если хозяин объявления я то тянуть все конекты в которых receiver_id я и sender_id $example->sender_id
         //Иначе тянуть все коннекты в которых receiver_id $example->receiver_id и sender_id я
         $recepients=[$example->sender_id,$example->receiver_id];

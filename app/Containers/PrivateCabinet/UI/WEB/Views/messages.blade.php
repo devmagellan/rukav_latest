@@ -45,7 +45,7 @@
                         <div class="message_sidebar_theme_body" style="display: none;">
 						@if(isset($list->connects))
                             @foreach($list->connects as $cnv)
-                            <div class="message_sidebar_theme_item message_sidebar_theme_item-new" onclick="reloadMessageList('{{$cnv->id}}','{{$list->group_id}}')">
+                            <div class="message_sidebar_theme_item message_sidebar_theme_item-new" id="conv_{{$cnv->id}}" onclick="reloadMessageList('{{$cnv->id}}','{{$list->group_id}}')">
                                 <div class="message_sidebar_theme_left">
                                     <div class="massage_user_avatar massage_user_avatar_online">
                                         <?
@@ -249,7 +249,6 @@
                         <p class="theme_main_text"><b>Основное ({{count($conversations)}})</b></p></div>
                     <div class="message_sidebar_theme_body">
                         @foreach($conversations as $conversation)
-
                           <? if($conversation->sender_id!=Auth::user()->id){
                             $opponent=\App\Containers\User\Models\User::where('id',$conversation->sender_id)->first();
                           }
@@ -257,7 +256,7 @@
                             $opponent=\App\Containers\User\Models\User::where('id',$conversation->receiver_id)->first();
                           }
                           ?>
-                        <div class="message_sidebar_theme_item " onclick="reloadMessageList('{{$conversation->id}}')" >
+                        <div class="message_sidebar_theme_item message_sidebar_theme_item-new" id="conv_id_{{$conversation->id}}" onclick="reloadMessageList('{{$conversation->id}}')" >
                             <div class="message_sidebar_theme_left">
                                 <div class="massage_user_avatar">
                                     <?
@@ -341,7 +340,7 @@
     })
 
     function reloadMessageList(conversation,group_id){
-
+$('#conv_id_'+conversation+'').removeClass('message_sidebar_theme_item-new');
         var module='conversation'
         console.log('conversation',conversation);
         var url='/cabinet/conversation';

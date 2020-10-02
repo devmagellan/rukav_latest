@@ -14,6 +14,7 @@ class EditConnectTables extends Migration
       Schema::table('connects', function (Blueprint $table) {
         $table->string('photo')->nullable();
         $table->bigInteger('message_id')->unsigned()->nullable()->change();
+        $table->datetime('viewed_at')->nullable();
         });
     }
 
@@ -26,6 +27,7 @@ class EditConnectTables extends Migration
     {
       Schema::table('connects', function($table) {
         $table->dropColumn('photo');
+        $table->dropColumn('viewed_at');
 
       });
     }
