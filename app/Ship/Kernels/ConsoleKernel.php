@@ -36,6 +36,7 @@ class ConsoleKernel extends LaravelConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 		$schedule->command('expired:ads')->everyMinute();
+      $schedule->command('sending:messangers')->everyMinute();
     }
 
     /**
