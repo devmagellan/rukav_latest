@@ -109,7 +109,7 @@
           <div class="col-md-12">
             <form class="prophile_form changeUserTypeForm" id="changeRegisterForm" method="post" action="/profile/save">
               <input type="hidden" value="{{\Auth::user()->id}}" name="id">
-              <? 
+              <?
               switch($toAccountType){
                     case 'to_individual':
                       $accountType='Предприниматель';
@@ -1475,8 +1475,7 @@ console.log('imgInputakk')
                   $('#loader2').hide();
               },
               success: function (data) {
-
-                  $('.result_of_messages_table').html(data);
+              $('.result_of_messages_table').html(data);
 
               }
           });

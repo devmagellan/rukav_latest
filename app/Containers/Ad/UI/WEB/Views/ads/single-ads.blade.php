@@ -121,7 +121,7 @@ ul.slickslide li img, .slick-dots button img {
       </div>
     </div>
     <div class="row">
-	
+
 		<div class="col-lg-8 adv_photo_main" style="-webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;">
@@ -152,12 +152,12 @@ ul.slickslide li img, .slick-dots button img {
         </div>
       </div>
 	  </div>
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	<!--div class="col-lg-8 adv_photo_main" style="-webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;">
@@ -182,7 +182,7 @@ ul.slickslide li img, .slick-dots button img {
 		</div>
       </div>
 	  </div-->
-	  
+
 	  <!--div class="container">
     <p>Here is my header</p>
     <ul class="slickslide">
@@ -227,7 +227,7 @@ ul.slickslide li img, .slick-dots button img {
 
     <p>Proactively create adaptive schemas vis-a-vis multimedia based synergy. Energistically repurpose cost effective users before economically sound web services. Proactively aggregate fully tested ROI whereas superior benefits. Distinctively exploit mission-critical.</p>
 </div-->
-	  
+
       <div class="col-lg-4">
         <div class="product_info_block">
           <div class="product_info_block_left">
@@ -258,7 +258,7 @@ ul.slickslide li img, .slick-dots button img {
         </div>
 		@if($ad->getSender->vid_user=='Предприниматель')
         <div class="product_website_block">
-          <img src="/img/internet_icon.svg" alt=""> 
+          <img src="/img/internet_icon.svg" alt="">
 		  <? $link=($ad->getSender->getIndividualAccount) ? ((mb_substr($ad->getSender->getIndividualAccount->www, 0, 4)!=='http' ) ? 'http://'.$ad->getSender->getIndividualAccount->www : $ad->getSender->getIndividualAccount->www) : null; ?>
           <p>Website: <a target="_blanc" href="{{$link}}">{{$link}}</a></p>
         </div>
@@ -267,14 +267,14 @@ ul.slickslide li img, .slick-dots button img {
         <div class="product_website_block">
           <img src="/img/internet_icon.svg" alt="">
 		  <? $link=($ad->getSender->getOrganisationAccount) ? ((mb_substr($ad->getSender->getOrganisationAccount->www, 0, 4)!=='http' ) ? 'http://'.$ad->getSender->getOrganisationAccount->www : $ad->getSender->getOrganisationAccount->www) : null ; ?>
-          <p>Website: <a target="_blanc" href="{{$link}}">{{$link}}</a></p> 
+          <p>Website: <a target="_blanc" href="{{$link}}">{{$link}}</a></p>
         </div>
 		@endif
 		@if($ad->getSender->vid_user=='Компания')
         <div class="product_website_block">
           <img src="/img/internet_icon.svg" alt="">
 		  <? $link=($ad->getSender->getOrganisationAccount) ? ( (mb_substr($ad->getSender->getBusinessAccount->www, 0, 4)!=='http' ) ? 'http://'.$ad->getSender->getBusinessAccount->www : $ad->getSender->getBusinessAccount->www):null; ?>
-          <p>Website: <a target="_blanc" href="{{$link}}">{{$link}}</a></p> 
+          <p>Website: <a target="_blanc" href="{{$link}}">{{$link}}</a></p>
         </div>
 		@endif
         <div class="product_slider_advantage">
@@ -349,10 +349,9 @@ ul.slickslide li img, .slick-dots button img {
     </div>
     <div class="row product_description" style="word-wrap: break-word;">
       <div class="col-sm-12">
-        <h4>Описание</h4>
-        <p>
-          {{$ad->message}}
-        </p>
+        <h4>Описание</h4>123
+        {!! nl2br(e($ad->message)) !!}
+
       </div>
     </div>
 

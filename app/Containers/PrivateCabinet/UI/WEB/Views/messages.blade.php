@@ -9,7 +9,7 @@
                     <span>{{$email}}</span>
                 </p>
                 <hr>
-                <form action="/add_second_messanger_group" method="post">
+                <form action="/add_second_messanger_group" method="post" id="secondMessangerGroups">
 
 
                 <div class=" form-group" style="width:84%;display:inline-block">
@@ -324,6 +324,7 @@
     </div>
 </div>
 <script src="/NewSmartAdmin/js/formplugins/select2/select2.bundle.js"></script>
+
 <script>
 
     $(document).ready(function(){
@@ -387,10 +388,12 @@
         });
     }
 
-    $('.message_item_remove').click(function(){
+    $('.message_sidebar').delegate('.message_item_remove','click',function(e){
+      console.log('message_item_remove')
         var url='/delete_second_group';
         var type=$(this).parent().find('.group_type').val();
         var group_id=$(this).parent().find('.group_id').val();
+console.log(type,group_id)
         $.ajax({
             method: 'POST',
             dataType: 'html',
@@ -411,4 +414,45 @@
         });
     })
 
+</script>
+
+<script>
+  $('#secondMessangerGroups').submit(function(e){
+    e.preventDefault();
+    console.log('secondMessangerGroups')
+    var group_id= $('#single-default option:selected').val()
+    var url='/add_second_messanger_group';
+    console.log('group_id',group_id)
+    if(group_id>0){
+      $.ajax({
+        method: 'POST',
+        dataType: 'json',
+        async:false,
+        url: url,
+        data: {group_id:group_id},
+        beforeSend: function() {
+          $('#loader2').show();
+        },
+        complete: function() {
+          $('#loader2').hide();
+          console.log('complete')
+        },
+        success: function (data) {
+          console.log('success',data.data)
+          $('#secondMessangerGroups').after(
+
+            '<div class="message_sidebar_theme" id="message_'+data.data.id+'">'+
+            '<div class="message_sidebar_theme_head">'+
+            '<input type="hidden" class="group_type" value="business">'+
+            '<input type="hidden" class="group_id" value="'+data.data.id+'">'+
+            '<img src="img/right_icon_black.svg" alt="">'+
+            '<p>'+data.data.group_name+'</p>'+
+            '<button class="message_item_remove"><img src="img/delete-icon-red.svg" alt=""></button>'+
+            '</div>'+
+            '</div>'
+        );
+        }
+      });
+    }
+  })
 </script>
