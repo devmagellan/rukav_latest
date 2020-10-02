@@ -51,7 +51,7 @@
                                         <?
                                         $pht=App\Containers\Ad\Models\Picture::where('ads_id',$cnv->id)->first();
                                         ?>
-                                        <img src="/storage/pictures/{{$pht->photo}}" alt="">
+                                        <img src="/storage/messages/{{$pht->photo}}" alt="">
                                     </div>
 
                                     <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
@@ -139,7 +139,7 @@
                                             <?
                                     $pht=App\Containers\Ad\Models\Picture::where('ads_id',$groupConversations->first()->id)->first();
                                     ?>
-                                            <img src="/storage/pictures/{{$pht->photo}}" alt="">
+                                            <img src="/storage/messages/{{$pht->photo}}" alt="">
                                         </div>
 
                                         <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
@@ -194,7 +194,7 @@
                                                     //$pht=App\Containers\Ad\Models\Picture::where('ads_id',$groupConversations->first()->id)->first();
                                                     ?>
 													@if(isset($finGroupMessage))
-                                                    <img src="/storage/pictures/{{$finGroupMessage->pictures->first()->photo}}" alt="">
+                                                    <img src="/storage/messages/{{$finGroupMessage->pictures->first()->photo}}" alt="">
 												@endif
                                                 </div>
 
@@ -263,7 +263,7 @@
                                     <?
                                     $photo=App\Containers\Ad\Models\Picture::where('ads_id',$conversation->message->id)->first();
                                     ?>
-                                    <img src="/storage/pictures/{{$photo->photo}}" alt="">
+                                    <img src="/storage/messages/{{$photo->photo}}" alt="">
                                 </div>
                                 <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
                             </div>
