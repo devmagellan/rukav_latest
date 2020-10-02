@@ -359,7 +359,7 @@ ul.slickslide li img, .slick-dots button img {
       <div class="col-md-6">
         <p class="product_will_share_desc">Поделиться на:</p>
         <!--ul class="socials">
-          <li>
+          <li>add_foto_file_item_load2
             <a href="http://www.facebook.com/sharer.php?u={{url()->current()}}">
               <i class="fab fa-facebook-f"></i>
             </a>
