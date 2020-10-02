@@ -12770,6 +12770,8 @@ class Controller extends WebController
 
         $second_messanger_group_recipient_item=\App\Containers\Ad\Models\SecondMessangerGroupRecipientItems::where('group_id',$request->input('group_id'))->where('user_id',\Auth::user()->id)->first();
 
+        $response=\App\Containers\Ad\Models\SecondMessangerGroups::where('id',$request->input('group_id'))->first();
+
         if(!$second_messanger_group_recipient_item){
             $data=[
                 'group_id'=>$request->input('group_id'),
@@ -12779,8 +12781,8 @@ class Controller extends WebController
             \App\Containers\Ad\Models\SecondMessangerGroupRecipientItems::insert($data);
         }
 
-
-        return redirect('/private_cabinet#messages');
+      return json_encode(['message'=>'success','data'=>$response]);
+       //return redirect('/private_cabinet#messages');
     }
 
     public function deleteSecondGroup (GetAllPrivateCabinetsRequest $request){
