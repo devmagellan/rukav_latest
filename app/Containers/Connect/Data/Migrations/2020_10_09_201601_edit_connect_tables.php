@@ -12,7 +12,8 @@ class EditConnectTables extends Migration
     public function up()
     {
       Schema::table('connects', function (Blueprint $table) {
-            $table->string('photo')->nullable();
+        $table->string('photo')->nullable();
+        $table->bigInteger('message_id')->unsigned()->nullable()->change();
         });
     }
 

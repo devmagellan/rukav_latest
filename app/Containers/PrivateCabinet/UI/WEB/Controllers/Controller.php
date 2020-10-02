@@ -14,6 +14,8 @@ use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
 use Illuminate\Support\Facades\Storage;
 use Image;
+use Carbon\Carbon;
+use Intervention\Image\ImageManager;
 use App\Containers\Ad\Services\AdService;
 use App\Containers\HomePage\Services\GlobalService;
 
@@ -12752,6 +12754,7 @@ class Controller extends WebController
                 $data['message_id'] = $request->input('message_id');
                 $data['sender_id'] = \Auth::user()->id;
                 $data['text'] = $request->input('text');
+                $data['photo']=null;
                 $data['created'] = $con->created_at;
                 $pusher->trigger('my-channel', /* 'my-event' */'receiver-'.$user->id.'-', $data);
                 $notification['created'] = $con->created_at;
@@ -12803,42 +12806,23 @@ class Controller extends WebController
 
   public function checkPhotoData(GetAllPrivateCabinetsRequest $request){
     $user=\App\Containers\User\Models\User::where('id',$request->input('client_id'))->first();
-    if (preg_match('/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/si', $request->input('text')))
-    {
-      dd("Contains an email");}
-    else{
-      /* Getting file name */
-      if ($_FILES["file"]["error"] > 0)
-      {
-        echo "Apologies, an error has occurred.";
-        echo "Error Code: " . $_FILES["file"]["error"];
-      }
-      else
-      {
-        $newPath = storage_path('app/public/message_images/');
-        $filename=$this->generateRandomString(15).'_image.'.$_FILES["file"]["name"];
-        if(move_uploaded_file($_FILES["file"]["tmp_name"],$newPath.$filename)){
-         AdService::createThumbnail($newPath.$filename, 200, 200);
-          return json_encode(['message'=>'success']);
-        }
+    $filename = $request->file('file');
+    $newPath = storage_path('app/public/message_images/');
+    $file=$this->generateRandomString(5).'_image'.$filename->getClientOriginalName();
+    $location = $newPath.$file;
+        $img = Image::make($filename)->resize(200, 200, function ($constraint) {
+          $constraint->aspectRatio();
+        });
+        $img->save($location);
 
-
-      }
-  /*    $message=['text'=>'',
-        'receiver_id'=>$user->id,
-        'sender_id'=>\Auth::user()->id,
-        'message_id'=>$request->input('message_id'),
-        'is_viewed'=>0,
-        'photo'=> $filename
-
-      ];
-      $con=\App\Containers\Connect\Models\Connect::insert($message);
-      var_dump('mvp2a');
-      $message['attributes']['id']= null;
-      var_dump('mvp3');
-      if($message){
-        var_dump('mvp4');
-        var_dump('receiver-'.$user->id.'-');
+        $con=new \App\Containers\Connect\Models\Connect();
+    $con->text='';
+    $con->receiver_id=$user->id;
+    $con->sender_id=\Auth::user()->id;
+    $con->message_id=$request->input('message_id');
+          $con->photo= $file;
+          $con->created_at=Carbon::now();
+        $con->save();
         $options = array(
           'cluster' => 'eu',
           'useTLS' => true
@@ -12853,15 +12837,12 @@ class Controller extends WebController
         $data['message_id'] = $request->input('message_id');
         $data['sender_id'] = \Auth::user()->id;
         $data['text'] = '';
-        $data['photo'] = $filename;
+        $data['photo'] = $file;
         $data['created'] = $con->created_at;
         $pusher->trigger('my-channel', 'receiver-'.$user->id.'-', $data);
         $notification['created'] = $con->created_at;
         $pusher->trigger('notification-channel', 'notification-'.$user->id.'-', $notification);
-
-      }*/
-    }
-    return json_encode(['message'=>'success']);
+        return json_encode(['message'=>'success','data'=>$data]);
   }
 
 
