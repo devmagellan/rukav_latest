@@ -67,7 +67,7 @@
         <div class="row product_filter">
           <div class="col-sm-2">
             <p class="product_filter_text">
-              Местоположения:
+              Местоположение:
             </p>
             <select class="catalog_select">
               <option value="">Все UK</option>
@@ -201,7 +201,7 @@
               <div class="col-md-2" style="text-align: center"></div>
             @endfor
           @endif
-		@endif  
+		@endif
           <div class="col-sm-1">
             <p class="product_item_price">£ {{$product->price}}</p>
             <p class="product_map_marka d-sm-none">Volkswagen</p>
@@ -229,7 +229,7 @@
           </div>
         </div>
           @endforeach
-		  
+
 
         {{ $products->appends(request()->input())->links() }}
 
