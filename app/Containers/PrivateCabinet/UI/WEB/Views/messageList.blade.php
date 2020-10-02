@@ -30,11 +30,17 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
 
 
     @foreach($conversation as $segment)
-     <? dump($segment); ?>
             @if(\Auth::user()->id!=$segment->receiver_id)
 
+
+
                 <div class="body_messege_item body_my_messege_item">
+                  @if($segment->photo)
+                    <img style="" src="/storage/message_images/{{$segment->photo}}">
+                    @else
                     <p>{{$segment->text}}</p>
+                  @endif
+
                     <span>{{$segment->created_at}}</span>
                 </div>
             @endif
@@ -42,8 +48,11 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
             <!-- start .chat-segment -->
             @if(\Auth::user()->id==$segment->receiver_id)
                     <div class="body_messege_item body_to_messege_item">
-                        <p>{{$segment->text}}
-                        </p>
+                      @if($segment->photo)
+                        <img style="" src="/storage/message_images/{{$segment->photo}}">
+                      @else
+                        <p>{{$segment->text}}</p>
+                      @endif
                         <span>{{$segment->created_at}}</span>
                     </div>
             @endif
@@ -55,12 +64,12 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
 </div>
 <div class="wrapper_footer_messege">
     <div class="send_message_form">
-      <form enctype="multipart/form-data" id="myformFile">
-        <label for="send_message_foto">
-            <img src="/img/photo-camera-icon-black.svg" alt="">
+        <label for="file">
+          <img src="/img/photo-camera-icon-black.svg" alt="">
         </label>
-
-        <input type="file" id="send_message_foto" name="send_message_foto[]" style="display: none;">
+        <form method="post" action="" enctype="multipart/form-data" id="myform" style="display: none;">
+        <input type="file" id="file" name="file" style="display: none;">
+        <input type="button" class="button" value="Upload" id="but_upload" style="display: none;">
       </form>
         <input id="msgr_input" type="text" name="" placeholder="Текст сообщения..." required="">
 
@@ -70,15 +79,16 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
 </div>
 
 <script>
-  $("#send_message_foto").change(function () {
-    $("#myformFile").submit();
+
+  $("#file").change(function () {
+    $("#but_upload").trigger('click')
   })
-  $("#myformFile").submit(function (e) {
+$("#but_upload").click(function(){
     console.log('got it')
-    e.preventDefault();
-    var fsize = $('#send_message_foto')[0].files[0].size,
-      ftype = $('#send_message_foto')[0].files[0].type,
-      fname = $('#send_message_foto')[0].files[0].name,
+    //e.preventDefault();
+    var fsize = $('#file')[0].files[0].size,
+      ftype = $('#file')[0].files[0].type,
+      fname = $('#file')[0].files[0].name,
       fextension = fname.substring(fname.lastIndexOf('.')+1);
     var validExtensions = ["jpg","pdf","jpeg","gif","png","doc","docx","xls","xlsx","ppt","pptx","txt","zip","rar","gzip"];
 
@@ -89,11 +99,9 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
     }
   else{
 
-      var fd = new FormData(this);
-      var files = $('#send_message_foto')[0].files[0];
+      var fd = new FormData();
+      var files = $('#file')[0].files[0];
       fd.append('file',files);
-
-
       if(fsize > 3145728){/*1048576-1MB(You can change the size as you want)*/
         alert("File size too large! Please upload less than 3MB");
         this.value = "";
@@ -104,14 +112,15 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
       var client_id='{{$recepient}}';
       var message_id='{{$conversation->first()->message_id}}';
 
-      fd.append("client_id ",client_id);
-      fd.append("message_id ",message_id);
+      fd.append("client_id",client_id);
+      fd.append("message_id",message_id);
       $.ajax({
         method: 'POST',
         async:false,
         cache : false,
         contentType: false,
         processData : false,
+        dataType: 'json',
         url: url,
         data: fd,
         beforeSend: function() {
@@ -120,17 +129,19 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
         complete: function() {
           $('#loader').hide();
           console.log('complete')
-          $('.wrapper_body_messege_scroll').append(
-            '<div class="body_messege_item body_my_messege_item">'+
-            '<p>'+''+'</p>'+
-            '<span>только что</span>'+
-            '</div>'
-          );
+
 
         },
         success: function (data) {
+          console.log('got Data',data)
+          $('.wrapper_body_messege_scroll').append(
+            '<div class="body_messege_item body_my_messege_item">'+
+            '<img style="" src="/storage/message_images/'+data.data.photo+'">'+
+            '<span>только что</span>'+
+            '</div>'
+          );
           console.log('success')
-          console.log(data)
+
           console.log({{$conversation->first()->message_id}})
           //reloadMessageList({{$conversation->first()->message_id}})
 
@@ -207,15 +218,24 @@ else{
 }
 console.log(sender)
 console.log('{{$conversation->first()->message->id}}')
- if(data.sender_id==sender && '{{$conversation->first()->message->id}}'==data.message_id ){
-	console.log('popali')
+  console.log('popali')
+ if(data.photo==null && data.sender_id==sender && '{{$conversation->first()->message->id}}'==data.message_id ){
+   console.log('popali')
 	 $('.wrapper_body_messege_scroll').append(
                     '<div class="body_messege_item body_to_messege_item">'+
                         '<p>'+data.text+'</p>'+
                         '<span>'+data.created+'</span>'+
                         '</div>'
                     );
-}
+}else if(data.photo!=null && data.sender_id==sender && '{{$conversation->first()->message->id}}'==data.message_id){
+   console.log('popali photo')
+   $('.wrapper_body_messege_scroll').append(
+     '<div class="body_messege_item body_to_messege_item">'+
+     '<img style="" src="/storage/message_images/'+data.photo+'">'+
+     '<span>'+data.created+'</span>'+
+     '</div>'
+   );
+ }
 
 })
 

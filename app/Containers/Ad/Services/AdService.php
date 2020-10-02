@@ -86,22 +86,22 @@ class AdService
 
               $filePath = Storage::disk('public')->put('', $file);
 
-            self::createPicture($filePath, $adId);
+            $this->createPicture($filePath, $adId);
 
               \Log::info('filepath1' . $file);
               \Log::info('filepath2' . $filePath);
-              $oldPath = storage_path('app/public/messages/') . $filePath; // publc/images/1.jpg
+              $oldPath = storage_path('app/public/messages/') . $filePath;
               $newPath = storage_path('app/public/messages/') . 'small_' . $filePath;
               $middlePath = storage_path('app/public/messages/') . 'middle_' . $filePath;
 
               if (\File::copy($oldPath, $newPath)) {
                   \Log::info('filepath2' . $filePath);
-                self::createThumbnail($newPath, 200, 200);
+                $this->createThumbnail($newPath, 200, 200);
               }
 
               if (\File::copy($oldPath, $middlePath)) {
                   \Log::info('filepath2' . $filePath);
-                  self::createThumbnail($middlePath, 800, 800);
+                $this->createThumbnail($middlePath, 800, 800);
               }
 
           }
@@ -111,7 +111,7 @@ class AdService
 
   }
 
-    public static function createThumbnail($path, $width, $height)
+    public function createThumbnail($path, $width, $height)
     {
         $img = Image::make($path)->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
@@ -148,7 +148,7 @@ class AdService
         ]);
     }
 
-  public static function createPicture($path, $adId)
+  public function createPicture($path, $adId)
   {
     Picture::create([
       'ads_id' => $adId,

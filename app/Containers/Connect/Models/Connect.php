@@ -17,6 +17,7 @@ class Connect extends Model
         'sender_email',
         'sender_phone',
         'text',
+      'photo'
     ];
 
     protected $attributes = [
