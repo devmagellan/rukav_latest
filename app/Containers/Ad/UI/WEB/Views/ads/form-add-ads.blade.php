@@ -538,7 +538,7 @@
 
             </div>
           </div>
-          <a href="/static/policies#photo" class="add_advert_rolls_foto">Привила добавления фото</a>
+          <a href="/static/policies#photo" target="_blank" class="add_advert_rolls_foto">Привила добавления фото</a>
         </div>
 
       @else
@@ -755,7 +755,7 @@
                 </div>
               </div>
             </div>
-            <a href="/static/policies#photo" class="add_advert_rolls_foto">Привила добавления фото</a>
+            <a href="/static/policies#photo" target="_blanc" class="add_advert_rolls_foto">Привила добавления фото</a>
             @error('files')
             <div class="alert errorBlock">{{ $message }}</div>
             @enderror
