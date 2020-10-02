@@ -243,7 +243,7 @@ ul.slickslide li img, .slick-dots button img {
 			@if(null!=($ad->getSender->created_at))
             <p class="product_info_user_date">на RUKAVe с {{$ad->getSender->created_at->format('d-m-Y')}}</p>
 		@endif
-            <a href="/all_author_ads?id={{$ad->getSender->id}}" class="product_info_all_add">смотреть все объявления</a>
+            <a href="/all_author_ads?id={{$ad->getSender->id}}" class="product_info_all_add">Все объявления автора</a>
             <p class="product_info_city">{{$ad->city}}</p>
           </div>
           <a href="tel:{{$ad->phone}}" class="product_info_btn_phone">
