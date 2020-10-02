@@ -31,6 +31,27 @@
           border: 2px solid red;
         }
 
+      .add_foto_file_item_load2{
+        position:relative;
+        display:inline-block;
+      }
+        .add_foto_file_item_load2 img{
+          position:absolute;
+          top:9px;
+          left:9px;
+        }
+
+      .add_foto_file_delete{
+        position:relative;
+        display:inline-block;
+        left:9px;
+      }
+
+        .add_foto_file_delete img{
+          position:absolute;
+          top:9px;
+          left:9px;
+        }
     </style>
 @endsection
 
