@@ -122,7 +122,7 @@ class Controller extends WebController
 		->where(function ($query) {
 			$query->whereDate('expired','>',Carbon::now())->orWhere('expired',null);
 		})
-		
+
         ->with('validFilter')
           ->when(null!=($request->input('filterDeals')) && $request->input('filterDeals')!=1 , function($q) use($request) {
               return $q->leftJoin('add_filter_deals', function($join) use($request) {
@@ -157,6 +157,25 @@ class Controller extends WebController
           //dump('high_to_low');
           $q->orderByDesc('ads.price');
       }
+
+    if($request->input('period')){
+      switch ($request->input('period')){
+        case 0 :
+          break;
+        case 1 :
+          $q->where('ads.created_at','>=',Carbon::now()->subHours(24));
+          break;
+        case 2 :
+        $q->where('ads.created_at','>=',Carbon::now()->subDays(2));
+        break;
+        case 3 :
+          $q->where('ads.created_at','>=',Carbon::now()->subDays(7));
+          break;
+      }
+      $q->orderByDesc('ads.price');
+    }
+
+
      foreach($request->input() as $key=>$filter){
         //dump(substr($key, 0, 14));
         if(substr($key, 0, 14)=='sort_by_filter'){
