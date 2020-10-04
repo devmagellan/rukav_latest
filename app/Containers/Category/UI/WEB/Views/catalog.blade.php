@@ -55,12 +55,11 @@
             </h5>
           </div>
           <div class="col-sm-3">
-            <select class="catalog_select catalog_select_filter" id="">
-              <option value="">За все время</option>
-              <option value="">За все время</option>
-              <option>За все время</option>
-              <option>За все время</option>
-              <option>За все время</option>
+            <select class="catalog_select catalog_select_filter" id="" name="period">
+              <option value="1" @if(app('request')->input('period')==1) selected @endif>За 24 часа</option>
+              <option value="2" @if(app('request')->input('period')==2) selected @endif>За 2 дня</option>
+              <option value="3" @if(app('request')->input('period')==3) selected @endif>За 7 дней</option>
+              <option value="0" @if(app('request')->input('period')==0 || null==app('request')->input('period') ) selected @endif >За все время</option>
             </select>
           </div>
         </div>
