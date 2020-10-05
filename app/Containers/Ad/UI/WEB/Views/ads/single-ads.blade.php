@@ -248,7 +248,7 @@ ul.slickslide li img, .slick-dots button img {
           </div>
           <a href="tel:{{$ad->phone}}" class="product_info_btn_phone">
             <img src="/img/info_phone.svg" alt="">
-            <span>{{$ad->phone}}</span>
+            <span>{{print($ad->phone)}}</span>
           </a>
           <a href="#" class="product_info_send_message" data-toggle="modal" data-target="#ModalSendMessage"><img src="/img/telegramm_icon.svg" alt="">отправить сообщение</a>
           <p class="product_info_text_down">

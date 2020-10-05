@@ -310,7 +310,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="needs-validation" id="filter_groups" method="post" action="/filters/add" novalidate onsubmit="theSubmitFunctionFilters(); return false;">
+                        <form class="needs-validation" id="filter_groups_deals" method="post" action="/filters/add" novalidate onsubmit="theSubmitFunctionDealsFilters();return false;">
 
                             <div class="modal-body">
                                 <div class="row">
@@ -1494,10 +1494,10 @@
 
 
         function theSubmitFunctionFilters (){
-          console.log(222)
+          console.log(224)
           var form=$('#filter_groups')
           console.log('cat=>',window.cat_id)
-          console.log(form.serialize())
+          console.log('Form_seriaize=>',form.serialize())
           $.ajax( {
             type: "POST",
             url: '/filters/add',
@@ -1513,8 +1513,29 @@
 
         }
 
+        function theSubmitFunctionDealsFilters (){
+          console.log(223)
+          var form=$('#filter_groups_deals')
+          console.log($('#filter_groups_deals :input'))
+          console.log('cat=>',window.cat_id)
+          console.log('Form_seriaize=>',form.serialize())
+          $.ajax( {
+            type: "POST",
+            url: '/filters/add',
+            data: {cat_id:window.cat_id,filters:form.serialize()},
+            success: function( response ) {
+              console.log( response );
+            }
+          } );
+
+
+
+          $('.filters_groups_close').trigger('click')
+
+        }
+
         function theSubmitFunction (){
-            console.log(222)
+            console.log(226)
             var form=$('#slider_create')
             if (form[0].checkValidity() === false) {
 

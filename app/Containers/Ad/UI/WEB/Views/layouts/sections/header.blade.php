@@ -63,9 +63,9 @@
         @if(isset($data['properties']->user) )
         <div class="col-md-1 col-2">
           <a href="#" class="user_cabinet_login" >
-		  
-		  
-		  
+
+
+
             @if(isset($data['properties']->user) && $data['properties']->user->avatar)
               <img style="height:40px;border-radius: 50%;" src="@if(substr($data['properties']->user->avatar, 0, 4)!='http')/storage/avatars/@endif{{ $data['properties']->user->avatar }}" />
               @elseif(isset($data['properties']->user) && $data['properties']->user->name )
@@ -78,7 +78,7 @@
             <p class="user_cabinet_name">
               {{$data['properties']->user->name}} {{$data['properties']->user->sername}}
             </p>
-            <a href="/private_cabinet#myads" class="user_cabinet_item">
+            <a href="/private_cabinet#myads2" class="user_cabinet_item">
               <div class="user_cabinet_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path class="svg_path" d="M16.4482 14.6094C16.2325 14.6094 16.0576 14.7843 16.0576 15V18.8281C16.0576 19.0435 15.8824 19.2188 15.667 19.2188H2.23047C2.01508 19.2188 1.83985 19.0435 1.83985 18.8281V11.7578C1.83985 11.5421 1.66496 11.3672 1.44922 11.3672C1.23348 11.3672 1.05859 11.5421 1.05859 11.7578V18.8281C1.05859 19.4743 1.5843 20 2.23047 20H15.667C16.3132 20 16.8389 19.4743 16.8389 18.8281V15C16.8389 14.7843 16.664 14.6094 16.4482 14.6094Z" fill="#A269F7"/>

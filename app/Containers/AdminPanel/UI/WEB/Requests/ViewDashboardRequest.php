@@ -12,7 +12,13 @@ use App\Ship\Parents\Requests\Request;
 class ViewDashboardRequest extends Request
 {
 
-    /**
+  public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
+  {
+    \Log::info('InRequest1=>',array(\Auth::guard('admin')->user()));
+    parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
+  }
+
+  /**
      * Define which Roles and/or Permissions has access to this request.
      *
      * @var  array
