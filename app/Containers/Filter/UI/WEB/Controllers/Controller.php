@@ -177,11 +177,15 @@ class Controller extends WebController
     }
 
   public function filtersAdd(GetAllFiltersRequest $request){
-    \App\Containers\Filter\Models\CategoryFilter::where('category_id',$request->input('cat_id'))->delete();
-      \App\Containers\Filter\Models\CategoryFilterDeals::where('category_id',$request->input('cat_id'))->delete();
+
+
     $params = array();
+    \Log::info('Filtersinput'.$request->input('filters'));
+    if($request->input('filters')){
     parse_str($request->input('filters'), $params);
       \Log::info('FilterDeals',$params);
+  if(array_key_exists('filters',$params)){
+    \App\Containers\Filter\Models\CategoryFilter::where('category_id',$request->input('cat_id'))->delete();
        foreach($params['filters'] as $filter){
         $present=\App\Containers\Filter\Models\CategoryFilter::where('category_id',$request->input('cat_id'))->where('filter_id',$filter)->first();
         $companySlider['values']=[
@@ -191,8 +195,10 @@ class Controller extends WebController
         $entityClass=\App\Containers\Filter\Models\CategoryFilter::class;
         $companySlider['attributes']['id']=($present) ? $present->id : null;
         call_user_func("{$entityClass}::query")->updateOrCreate($companySlider['attributes'], $companySlider['values']);
-      }
-
+      }}
+  }
+    if(array_key_exists('filter_deals',$params)){
+      \App\Containers\Filter\Models\CategoryFilterDeals::where('category_id',$request->input('cat_id'))->delete();
       foreach($params['filter_deals'] as $filter){
           $present=\App\Containers\Filter\Models\CategoryFilterDeals::where('category_id',$request->input('cat_id'))->where('filter_id',$filter)->first();
           $companySlider['values']=[
@@ -202,7 +208,7 @@ class Controller extends WebController
           $entityClass=\App\Containers\Filter\Models\CategoryFilterDeals::class;
           $companySlider['attributes']['id']=($present) ? $present->id : null;
           call_user_func("{$entityClass}::query")->updateOrCreate($companySlider['attributes'], $companySlider['values']);
-      }
+      }}
 return json_encode(['result'=>'success']);
   }
 
