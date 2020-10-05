@@ -228,7 +228,7 @@ class Controller extends WebController
         $staff = $tmp_user->toArray();
 		/* $staff['password']=bcrypt($staff['password']);*/
 		$current=\App\Containers\User\Models\User::where('email',$staff['email'])->withTrashed()->first();
-		
+
 		if($current!=null && $current->deleted_at!=null){
 			\App\Containers\User\Models\User::where('email',$staff['email'])->update($staff);
 			$user=\App\Containers\User\Models\User::where('email',$staff['email'])->withTrashed()->first();
@@ -239,7 +239,7 @@ class Controller extends WebController
 		}
 		$user->active=1;
 		$user->save();
-        
+
           //$user=\App\Containers\User\Models\User::where('id',session()->get('emailVerificationCodeUser'))->first();
           $data= new \StdClass();
           $data->email=$user->email;
@@ -301,6 +301,7 @@ $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',ses
 if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
   $user->is_confirmed_phone=1;
   $user->save();
+
   if($user->confirmed===User::STATUS_ACTIVE){
       \Log::info('confirmed1',array($user));
       \Auth::guard('web')->loginUsingId($user->id, true);

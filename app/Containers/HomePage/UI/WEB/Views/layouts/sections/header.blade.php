@@ -78,7 +78,7 @@
             <p class="user_cabinet_name">
               {{\Auth::user()->name}} {{\Auth::user()->sername}}
             </p>
-            <a href="/private_cabinet#myads" class="user_cabinet_item">
+            <a href="/private_cabinet/#myads" class="user_cabinet_item">
               <div class="user_cabinet_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path class="svg_path" d="M16.4482 14.6094C16.2325 14.6094 16.0576 14.7843 16.0576 15V18.8281C16.0576 19.0435 15.8824 19.2188 15.667 19.2188H2.23047C2.01508 19.2188 1.83985 19.0435 1.83985 18.8281V11.7578C1.83985 11.5421 1.66496 11.3672 1.44922 11.3672C1.23348 11.3672 1.05859 11.5421 1.05859 11.7578V18.8281C1.05859 19.4743 1.5843 20 2.23047 20H15.667C16.3132 20 16.8389 19.4743 16.8389 18.8281V15C16.8389 14.7843 16.664 14.6094 16.4482 14.6094Z" fill="#A269F7"/>
@@ -92,7 +92,7 @@
                 Мои объявления
               </p>
             </a>
-            <a href="/private_cabinet#messages" class="user_cabinet_item">
+            <a href="/private_cabinet/#messages" class="user_cabinet_item">
               <div class="user_cabinet_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">
@@ -115,7 +115,7 @@
                 Сообщения
               </p>
             </a>
-            <a href="/private_cabinet#favorits" class="user_cabinet_item">
+            <a href="/private_cabinet/#favorits" class="user_cabinet_item">
               <div class="user_cabinet_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path class="svg_path" d="M17.5 13.737C17.2843 13.737 17.1094 13.9119 17.1094 14.1276V18.9658L10.1803 15.3603C10.0673 15.3015 9.93277 15.3015 9.81969 15.3603L2.89062 18.9658V7.67578C2.89062 7.46004 2.7157 7.28516 2.5 7.28516C2.2843 7.28516 2.10938 7.46004 2.10938 7.67578V19.6093C2.10938 19.7459 2.18063 19.8724 2.2973 19.9433C2.4141 20.0141 2.5593 20.0188 2.68031 19.9559L10 16.1472L17.3197 19.9559C17.3763 19.9853 17.4382 20 17.5 20C17.5704 20 17.6405 19.981 17.7027 19.9433C17.8194 19.8724 17.8906 19.7459 17.8906 19.6093V14.1276C17.8906 13.9119 17.7157 13.737 17.5 13.737Z" fill="white"/>
@@ -131,7 +131,7 @@
                 Избранное
               </p>
             </a>
-            <a href="/private_cabinet#my_profile" class="user_cabinet_item">
+            <a href="/private_cabinet/#my_profile" class="user_cabinet_item">
               <div class="user_cabinet_icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">
