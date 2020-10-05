@@ -68,12 +68,13 @@
             <p class="product_filter_text">
               Местоположение:
             </p>
-            <select class="catalog_select">
-              <option value="">Все UK</option>
-              <option value="">Все UK</option>
-              <option>Все UK</option>
-              <option>Все UK</option>
-              <option>Все UK</option>
+            <select class="catalog_select" name="area">
+              <option value="0">Все UK</option>
+              <option value="1">England</option>
+              <option value="2">Scotland</option>
+              <option value="3">Northern Ireland</option>
+              <option value="4">Wales</option>
+              <option value="5">Вне UK</option>
             </select>
           </div>
           <div class="col-sm-2">
@@ -82,7 +83,6 @@
             </p>
 
 				@if(isset($data) )
-          <? dump(1);?>
               <select id="filterDeals" class="form-control" name="filterDeals">
                   @foreach($data['filterDeals'] as $filter)
                       <option value="{{$filter->id}}">{{$filter->name}}</option>

@@ -175,6 +175,30 @@ class Controller extends WebController
       $q->orderByDesc('ads.price');
     }
 
+    if($request->input('area')){
+      switch ($request->input('area')){
+        case 0 :
+          $q->where('ads.administrative','UK');
+          break;
+        case 1 :
+          $q->where('ads.administrative','England');
+          break;
+        case 2 :
+          $q->where('ads.administrative','Scotland');
+          break;
+        case 3 :
+          $q->where('ads.administrative','Northern Ireland');
+          break;
+        case 4 :
+          $q->where('ads.administrative','Wales');
+          break;
+        case 5 :
+          $q->where('ads.administrative','!=','Wales')->where('ads.administrative','!=','Northern Ireland')->where('ads.administrative','!=','Scotland')->where('ads.administrative','!=','England')->where('ads.administrative','!=','UK');
+          break;
+      }
+      $q->orderByDesc('ads.price');
+    }
+
 
      foreach($request->input() as $key=>$filter){
         //dump(substr($key, 0, 14));
