@@ -77,7 +77,6 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
     </div>
     <p>RUKAV оставляет за собой право проверять сообщения посланные через наш сервер для того чтобы защитить вас от мошенничества и подозрительных действий.</p>
 </div>
-
 <script>
 
   $("#file").change(function () {
@@ -209,7 +208,9 @@ console.log(receiver)
 console.log(receiver.length)
 
 channel.bind(receiver, function(data) {
-console.log(data)
+console.log(data);
+$('.conv_class_'+data.message_id+'').addClass('message_sidebar_theme_item-new')
+
 if('{{$conversation->first()->sender_id}}'=={{\Auth::user()->id}}){
 	var sender='{{$conversation->first()->receiver_id}}';
 }

@@ -256,7 +256,7 @@
                             $opponent=\App\Containers\User\Models\User::where('id',$conversation->receiver_id)->first();
                           }
                           ?>
-                        <div class="message_sidebar_theme_item @if($conversation->viewed_at==null) message_sidebar_theme_item-new @endif" id="conv_id_{{$conversation->id}}" onclick="reloadMessageList('{{$conversation->id}}')" >
+                        <div class="message_sidebar_theme_item conv_class_{{$conversation->message->id}} @if($conversation->viewed_at==null) message_sidebar_theme_item-new @endif" id="conv_id_{{$conversation->id}}" onclick="reloadMessageList('{{$conversation->id}}')" >
                             <div class="message_sidebar_theme_left">
                                 <div class="massage_user_avatar">
                                     <?

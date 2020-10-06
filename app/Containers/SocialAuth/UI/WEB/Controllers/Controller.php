@@ -138,8 +138,8 @@ class Controller extends WebController
 	
 	public function redirectVkontakte()
     {
-        //return Socialite::driver($provider)->redirect();
-		return Socialite::with('vkontakte')->redirect();
+        return Socialite::driver('vkontakte')->redirect();
+		//return Socialite::with('vkontakte')->redirect();
     }
 	
 	public function redirectFacebook()
