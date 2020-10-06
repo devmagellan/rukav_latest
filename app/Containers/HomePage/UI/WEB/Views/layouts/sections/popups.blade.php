@@ -101,9 +101,9 @@
         </li>
         <li>
           <a href="{{ route('login.provider.google', 'google') }}">
-           
+
 		   <img style="background-color:#fff;width:25px;height:25px;top:-3px;" src="/img/google.png">
-		   
+
           </a>
         </li>
         <li>
@@ -341,8 +341,8 @@
         <span>*</span> Для завершения регистрации необходимо подтвердить свой телефон и email адрес
       </p>
 
-      <div class="socials_reg" style="display: none;">
-        <p class="textform">или войти через l</p>
+      <div class="socials_reg" style="/*display: none;*/">
+        <p class="textform">или войти через</p>
 
         <ul class="socials socials_reg">
           <li>
@@ -352,7 +352,8 @@
           </li>
           <li>
             <a href="#">
-              <i class="fab fa-google"></i>
+              <img style="background-color:#fff;width:25px;height:25px;top:-3px;" src="/img/google.png">
+              <!--i class="fab fa-google"></i-->
             </a>
           </li>
           <li>
