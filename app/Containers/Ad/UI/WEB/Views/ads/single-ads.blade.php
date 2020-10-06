@@ -421,4 +421,54 @@ ul.slickslide li img, .slick-dots button img {
   </div>
 </article>
 @endsection
+@section('scripts')
+  <script>
+
+    function wishList(event){
+      var id = $(event).parent('div').find('.wishInputId').val()
+      console.log(id)
+      if($(event).hasClass('active')){
+        console.log('not_active')
+        $(event).find('.hert_icon_filed').hide()
+        $(event).find('.heart_icon').show()
+        var active = 0;
+      }
+      else{
+        console.log('active')
+        $(event).find('.heart_icon').hide()
+        $(event).find('.hert_icon_filed').show()
+
+        var active =1;
+      }
+
+      $.ajax({
+        method: 'POST',
+        dataType: 'json',
+        async:false,
+        url: '/add/wishList',
+        data: {id:id,active:active
+        },
+        beforeSend: function() {
+        },
+        complete: function() {
+          //$('.company_create_close').trigger('click')
+          $('#badges_modal').modal("hide");
+        },
+        success: function (data) {
+
+          $('#badges_modal').modal("hide");
+          //$(".modal-backdrop").remove();
+          //$('.categoryModalClose').trigger('click')
+          //$('.company_create_close').trigger('click')
+          //$('.modal-backdrop').removeClass('show').addClass('hide')
+
+
+
+          console.log('success')
+
+        }
+      });
+    }
+    </script>
+  @endsection
 
