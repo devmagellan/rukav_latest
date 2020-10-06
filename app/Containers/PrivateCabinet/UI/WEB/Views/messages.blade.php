@@ -51,7 +51,7 @@
                                         <?
                                         $pht=App\Containers\Ad\Models\Picture::where('ads_id',$cnv->id)->first();
                                         ?>
-                                        <img src="/storage/pictures/{{$pht->photo}}" alt="">
+                                        <img src="/storage/messages/{{$pht->photo}}" alt="">
                                     </div>
 
                                     <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
@@ -139,7 +139,7 @@
                                             <?
                                     $pht=App\Containers\Ad\Models\Picture::where('ads_id',$groupConversations->first()->id)->first();
                                     ?>
-                                            <img src="/storage/pictures/{{$pht->photo}}" alt="">
+                                            <img src="/storage/messages/{{$pht->photo}}" alt="">
                                         </div>
 
                                         <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
@@ -194,7 +194,7 @@
                                                     //$pht=App\Containers\Ad\Models\Picture::where('ads_id',$groupConversations->first()->id)->first();
                                                     ?>
 													@if(isset($finGroupMessage))
-                                                    <img src="/storage/pictures/{{$finGroupMessage->pictures->first()->photo}}" alt="">
+                                                    <img src="/storage/messages/{{$finGroupMessage->pictures->first()->photo}}" alt="">
 												@endif
                                                 </div>
 
@@ -256,7 +256,7 @@
                             $opponent=\App\Containers\User\Models\User::where('id',$conversation->receiver_id)->first();
                           }
                           ?>
-                        <div class="message_sidebar_theme_item @if($conversation->viewed_at==null) message_sidebar_theme_item-new @endif" id="conv_id_{{$conversation->id}}" onclick="reloadMessageList('{{$conversation->id}}')" >
+                        <div class="message_sidebar_theme_item conv_class_{{$conversation->message->id}} @if($conversation->viewed_at==null) message_sidebar_theme_item-new @endif" id="conv_id_{{$conversation->id}}" onclick="reloadMessageList('{{$conversation->id}}')" >
                             <div class="message_sidebar_theme_left">
                                 <div class="massage_user_avatar">
                                     <?

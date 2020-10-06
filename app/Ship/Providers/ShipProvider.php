@@ -3,7 +3,8 @@
 namespace App\Ship\Providers;
 
 use App\Ship\Parents\Providers\MainProvider;
-
+use Illuminate\Support\Facades\Event;
+use App\Events\PodcastProcessed;
 /**
  * Class ShipProvider
  *
@@ -11,6 +12,7 @@ use App\Ship\Parents\Providers\MainProvider;
  */
 class ShipProvider extends MainProvider
 {
+	
 
     /**
      * Register any Service Providers on the Ship layer (including third party packages).
@@ -29,6 +31,14 @@ class ShipProvider extends MainProvider
      */
     protected $aliases = [];
 
+	protected $listen = [
+    \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+        // add your listeners (aka providers) here
+      'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
+      'SocialiteProviders\\Odnoklassniki\\OdnoklassnikiExtendSocialite@handle',
+      'SocialiteProviders\\Facebook\\FacebookExtendSocialite@handle',
+    ],
+	];
 
     public function __construct()
     {
@@ -50,6 +60,7 @@ class ShipProvider extends MainProvider
     public function boot()
     {
         // ...
+		
         parent::boot();
         // ...
     }
