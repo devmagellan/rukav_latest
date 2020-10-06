@@ -22,7 +22,9 @@ class EventsProvider extends AbstractEventsProvider
    	protected $listen = [
     \SocialiteProviders\Manager\SocialiteWasCalled::class => [
         // add your listeners (aka providers) here
-        'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
+      'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
+      'SocialiteProviders\\Odnoklassniki\\OdnoklassnikiExtendSocialite@handle',
+      'SocialiteProviders\\Facebook\\FacebookExtendSocialite@handle',
     ],
 ];
 
