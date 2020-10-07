@@ -451,6 +451,7 @@ if (!empty($_GET['error'])) {
 			}
 			elseif($provider=='facebook'){
 			$user = $this->createUser($user,$provider);
+      dispatch(new VerifySocialMail($user))->onQueue('queue_name');
 			\Auth::guard('web')->login($user, true);
 			}
         }
@@ -462,19 +463,27 @@ if (!empty($_GET['error'])) {
         $getInfo = Socialite::driver($provider)->user();
 		$existingUser = User::where('email', $user->email)->first();
         $user = $this->createUser($getInfo,$provider);
+      dispatch(new VerifySocialMail($user))->onQueue('queue_name');
         auth()->login($user, true);
         return redirect()->to('/home');
     }
 
 	    function createUser($getInfo,$provider){
+
+        $password="password";
+        $random=Str::random(7);
             $user = User::create([
                 'name'     => $getInfo->name,
                 'email'    => $getInfo->email,
                 'avatar'    => $getInfo->avatar,
 				'department' => 'none',
+            'encripted_password' => openssl_encrypt($random,"AES-128-ECB",$password),
             'active' => 1,
               'confirmed' => User::STATUS_SOCIALACTIVE,
-            'company_id'         => 1
+            'company_id'         => 1,
+              'password'=>Hash::make($random),
+              'verify_token' => Str::random(),
+
             ]);
 
         return $user;
