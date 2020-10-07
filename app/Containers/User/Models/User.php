@@ -38,6 +38,7 @@ protected $emailCode;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
     const STATUS_BANNED = 2;
+    const STATUS_SOCIALACTIVE = 8;
 
     /**
      * The attributes that are mass assignable.

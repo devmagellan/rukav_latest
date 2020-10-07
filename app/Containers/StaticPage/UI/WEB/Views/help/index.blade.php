@@ -1,7 +1,5 @@
 @extends('homepage::layouts.layout')
 @section('content')
-
-123
     <div class="breadcums_wrapper">
         <div class="container">
             <div class="row">

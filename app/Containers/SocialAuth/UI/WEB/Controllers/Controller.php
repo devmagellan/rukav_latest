@@ -33,24 +33,24 @@ class OAuthVK {
 	const URL_AUTHORIZE = 'http://oauth.vk.com/authorize';
 	const URL_GET_TOKEN = 'https://api.vk.com/oauth/access_token';//'https://oauth.vk.com/access_token';
 	const URL_ACCESS_TOKEN = 'https://api.vk.com/method/users.get';
-	
+
 	private static $token;
     public static $userId;
     public static $userData;
-	
+
 	 public static function goToAuth()
     {
        Utils::redirect(self::URL_AUTHORIZE .
-	   
+
             '?client_id=' . self::APP_ID .
 			'&scope=email' .
 			'&response_type=code' .
             '&redirect_uri=' . urlencode(self::URL_CALLBACK)); //Utils::redirect
     }
-	
-	
-	
-	
+
+
+
+
 	    public static function getToken($code) {
 
         $data = array(
@@ -77,8 +77,8 @@ class OAuthVK {
         if (empty($result->access_token)) {
             return false;
         }
-		
-		
+
+
 
         self::$token = $result;
 
@@ -108,13 +108,13 @@ class OAuthVK {
            'fields'       => 'uid,first_name,last_name,screen_name,sex,bdate,photo_big,email',
             'access_token' => self::$token->access_token
         );
- 
+
         $userInfo = json_decode(file_get_contents('https://api.vk.com/method/users.get' . '?' . urldecode(http_build_query($params). "&v=6.0")), true);
         if (isset($userInfo['response'][0]['uid'])) {
-			
+
             $userInfo = $userInfo['response'][0];
             $result = true;
-			
+
         }
 			$userInfo['response'][0]['email']=self::$token->email;
 
@@ -127,8 +127,8 @@ class OAuthVK {
         //self::$userId = $user->user_id;
         return self::$userData = $user;
     }
-	
-	
+
+
 
 
 
@@ -224,11 +224,11 @@ class OAuthOK {
         return self::$userData = $user;
     }
 }
- 
- 
+
+
 class Controller extends WebController
 {
-	
+
     /**
      * @param $provider
      *
@@ -239,33 +239,33 @@ class Controller extends WebController
         //return Socialite::driver($provider)->redirect();
 		return Socialite::with('vkontakte')->redirect();
     }
-	
+
 	public function redirectPinterest()
     {
         //return Socialite::driver($provider)->redirect();
 		return Socialite::with('pinterest')->redirect();
-		
+
     }
-	
+
 	public function redirectVkontakte()
     {
        // return Socialite::driver('vkontakte')->redirect();
 		//return Socialite::with('vkontakte')->redirect();
 		OAuthVK::goToAuth();
     }
-	
+
 	public function redirectFacebook()
     {
         //return Socialite::driver($provider)->redirect();
 		return Socialite::with('facebook')->redirect();
     }
-	
+
 	public function redirectGoogle()
     {
         //return Socialite::driver($provider)->redirect();
 		return Socialite::with('google')->redirect();
     }
-	
+
 	public function redirectOklassniki()
     {
         //return Socialite::driver($provider)->redirect();
@@ -282,20 +282,20 @@ class Controller extends WebController
     {
         return Socialite::driver($provider)->user();
     }
-	
-	
+
+
       /**
      * Obtain the user information from Google.
      *
      * @return \Illuminate\Http\Response
      */
-	 
-	 
+
+
 	 	  public function handleProviderCallbackOk()
     {
 		$provider='odnoklassniki';
-	   try {	
-		
+	   try {
+
 // Пример использования класса:
 if (!empty($_GET['error'])) {
     // Пришёл ответ с ошибкой. Например, юзер отменил авторизацию.
@@ -314,19 +314,19 @@ if (!empty($_GET['error'])) {
      */
 
     $user = OAuthOK::getUser();
-   	
+
 }
-     
-			
+
+
 /* 			$token='tkn1ovDjckqr8uZKJNlHnz2iEw97XAGMYKi3JE8f4vqWR6ayDyEcUwFpYFpGGCQL3bath';
 			$token=urlencode($token.'3a207c89d0ef85167215d9125122ce80');
             $user = Socialite::driver('odnoklassniki')->stateless()->userFromToken($_GET['code']);
 			dump($user);
 			$accessTokenResponseBody = $user->accessTokenResponseBody;
 			dump($accessTokenResponseBody); */
-			
+
         } catch (\Exception $e) {
-			
+
             return redirect('/login');
         }
         // only allow people with @company.com to login
@@ -336,9 +336,9 @@ if (!empty($_GET['error'])) {
         // check if they're an existing user
 			if(!isset($user->email)){
 				session()->put('registration_error','В ваших данных из соцсети не хватает email для регистрации, Мы не смогли Вас зарегистрировать, попробуйте альтернативный способ');
-				return redirect('/')->withInput()->withErrors(array('user_name' => 'some message'));   
+				return redirect('/')->withInput()->withErrors(array('user_name' => 'some message'));
 			}
-		
+
         $existingUser = User::where('email', $user->email)->withTrashed()->first();
         if($existingUser){
 			if(null!=$existingUser->deleted_at){
@@ -347,9 +347,9 @@ if (!empty($_GET['error'])) {
             // log them in
             auth()->login($existingUser, true);
         } else {
-			
-		
-			
+
+
+
 			  $newUser                  = new User;
             $newUser->name            = $user->first_name;
             $newUser->sername            = $user->last_name;
@@ -357,15 +357,15 @@ if (!empty($_GET['error'])) {
             //$newUser->google_id       = $user->id;
             //$newUser->avatar          = $user->pic_1;
             $newUser->active = 1;
-			$newUser->confirmed = User::STATUS_ACTIVE;
+			$newUser->confirmed = User::STATUS_SOCIALACTIVE;
             $newUser->save();
 			$user = $this->createUser($user,$provider);
 			\Auth::guard('web')->login($newUser, true);
-			
+
         }
         return redirect()->to('/');
     }
-	 
+
 /* 	  public function handleProviderCallbackVk()
     {
 		session()->forget('registration_error');
@@ -380,7 +380,7 @@ if (!empty($_GET['error'])) {
 
         $existingUser = User::where('email', $user->email)->withTrashed()->first();
         if($existingUser){
-			
+
 			if(null!=$existingUser->deleted_at){
 				User::where('email', $user->email)->withTrashed()->update(['deleted_at'=>null]);
 			}
@@ -388,9 +388,9 @@ if (!empty($_GET['error'])) {
         } else {
 			if(!$user->user['email']){
 				session()->put('registration_error','В ваших данных из соцсети не хватает email для регистрации, Мы не смогли Вас зарегистрировать, попробуйте альтернативный способ');
-				return redirect('/')->withInput()->withErrors(array('user_name' => 'some message'));   
+				return redirect('/')->withInput()->withErrors(array('user_name' => 'some message'));
 			}
-			
+
 			  $newUser                  = new User;
             $newUser->name            = $user->user['first_name'];
             $newUser->sername            = $user->user['last_name'];
@@ -399,11 +399,11 @@ if (!empty($_GET['error'])) {
             $newUser->active = 1;
             $newUser->save();
 			\Auth::guard('web')->login($newUser, true);
-			
+
         }
         return redirect()->to('/');
     } */
-	 
+
     public function handleProviderCallback($provider)
     {
 
@@ -419,9 +419,9 @@ if (!empty($_GET['error'])) {
         }*/
         // check if they're an existing user
         $existingUser = User::where('email', $user->email)->withTrashed()->first();
-		
+
         if($existingUser){
-			
+
 			if(null!=$existingUser->deleted_at){
 				User::where('email', $user->email)->withTrashed()->update(['deleted_at'=>null]);
 			}
@@ -440,6 +440,7 @@ if (!empty($_GET['error'])) {
             $newUser->login = $user->user['email'];
             $newUser->department = 'none';
             $newUser->active = 1;
+             $newUser->confirmed = User::STATUS_SOCIALACTIVE;
             $newUser->company_id          = 1;
             $newUser->save();
             \Auth::guard('web')->login($newUser, true);
@@ -451,7 +452,7 @@ if (!empty($_GET['error'])) {
         }
         return redirect()->to('/');
     }
-	
+
 	  public function callbackFacebook($provider)
     {
         $getInfo = Socialite::driver($provider)->user();
@@ -460,7 +461,7 @@ if (!empty($_GET['error'])) {
         auth()->login($user, true);
         return redirect()->to('/home');
     }
-	
+
 	    function createUser($getInfo,$provider){
             $user = User::create([
                 'name'     => $getInfo->name,
@@ -468,12 +469,13 @@ if (!empty($_GET['error'])) {
                 'avatar'    => $getInfo->avatar,
 				'department' => 'none',
             'active' => 1,
+              'confirmed' => User::STATUS_SOCIALACTIVE,
             'company_id'         => 1
             ]);
-       
+
         return $user;
     }
-	
+
 		  public function handleProviderCallbackPinterest()
     {
 		session()->forget('registration_error');
@@ -494,14 +496,14 @@ if (!empty($_GET['error'])) {
             // log them in
 \Auth::guard('web')->login($newUser, true);
         } else {
-			
+
 			dd($user);
 			//dd($user);
 			if(!$user->user['email']){
 				session()->put('registration_error','В ваших данных из соцсети не хватает email для регистрации, Мы не смогли Вас зарегистрировать, попробуйте альтернативный способ');
-				return redirect('/')->withInput()->withErrors(array('user_name' => 'some message'));   
+				return redirect('/')->withInput()->withErrors(array('user_name' => 'some message'));
 			}
-			
+
 			  $newUser                  = new User;
             $newUser->name            = $user->user['first_name'];
             $newUser->sername            = $user->user['last_name'];
@@ -516,17 +518,17 @@ if (!empty($_GET['error'])) {
             $newUser->save();
 			//$user = $this->createUser($user,$provider);
 			\Auth::guard('web')->login($newUser, true);
-			
+
         }
         return redirect()->to('/');
     }
-	
-	
+
+
 	public function handleProviderCallbackVk()
     {
 		$provider='vkontakte';
-	   try {	
-		
+	   try {
+
 // Пример использования класса:
 if (!empty($_GET['error'])) {
     // Пришёл ответ с ошибкой. Например, юзер отменил авторизацию.
@@ -546,17 +548,17 @@ if (!empty($_GET['error'])) {
      */
     $user = OAuthVK::getUser();
 }
-     
-			
+
+
 /* 			$token='tkn1ovDjckqr8uZKJNlHnz2iEw97XAGMYKi3JE8f4vqWR6ayDyEcUwFpYFpGGCQL3bath';
 			$token=urlencode($token.'3a207c89d0ef85167215d9125122ce80');
             $user = Socialite::driver('odnoklassniki')->stateless()->userFromToken($_GET['code']);
 			dump($user);
 			$accessTokenResponseBody = $user->accessTokenResponseBody;
 			dump($accessTokenResponseBody); */
-			
+
         } catch (\Exception $e) {
-			
+
             return redirect('/login');
         }
         // only allow people with @company.com to login
@@ -566,9 +568,9 @@ if (!empty($_GET['error'])) {
         // check if they're an existing user
 			if(!isset($user['email'])){
 				session()->put('registration_error','В ваших данных из соцсети не хватает email для регистрации, Мы не смогли Вас зарегистрировать, попробуйте альтернативный способ');
-				return redirect('/')->withInput()->withErrors(array('user_name' => 'some message'));   
+				return redirect('/')->withInput()->withErrors(array('user_name' => 'some message'));
 			}
-		
+
         $existingUser = User::where('email', $user['email'])->withTrashed()->first();
         if($existingUser){
 			if(null!=$existingUser->deleted_at){
@@ -577,7 +579,7 @@ if (!empty($_GET['error'])) {
             // log them in
             auth()->login($existingUser, true);
         } else {
-		
+
 			$newUser                  = new User;
             $newUser->name            = $user['first_name'];
             $newUser->sername         = $user['last_name'];
@@ -585,11 +587,11 @@ if (!empty($_GET['error'])) {
             //$newUser->google_id       = $user->id;
             //$newUser->avatar          = $user->pic_1;
             $newUser->active = 1;
-			$newUser->confirmed = User::STATUS_ACTIVE;
+          $newUser->confirmed = User::STATUS_SOCIALACTIVE;
             $newUser->save();
 			$user = $this->createUser($user,$provider);
 			\Auth::guard('web')->login($newUser, true);
-			
+
         }
         return redirect()->to('/');
     }
