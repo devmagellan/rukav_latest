@@ -23,11 +23,16 @@ $router->get('/logoutUser', [
 /* $router->get('redirect/{driver}', '\App\Containers\Authentication\UI\WEB\Controllers\Controller@redirectToProvider')
     ->name('login.provider')
     ->where('driver', implode('|', config('auth.socialite.drivers')));
-	
+
 	$router->get('/callback/{facebook}', '\App\Containers\Authentication\UI\WEB\Controllers\Controller@handleProviderCallback'); */
 $router->get('/verify/{token}', [
     'as'   => 'register.verify',
     'uses' => 'Controller@verify',
+]);
+
+$router->get('/verify_social/{token}', [
+  'as'   => 'register.verify',
+  'uses' => 'Controller@verifySocial',
 ]);
 
 $router->get('/password_recovery/{token}', [

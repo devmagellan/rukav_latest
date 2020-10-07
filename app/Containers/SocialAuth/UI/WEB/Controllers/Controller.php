@@ -2,11 +2,15 @@
 
 namespace App\Containers\SocialAuth\UI\WEB\Controllers;
 
+use App\Containers\User\Jobs\SendEmailVerification;
+use App\Containers\User\Jobs\VerifyMail;
 use App\Ship\Parents\Controllers\WebController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Containers\User\Models\User;
+use phpseclib\Crypt\Hash;
 use SocialiteProviders\Manager\Config;
-
+use App\Containers\User\Jobs\VerifySocialMail;
+use Illuminate\Support\Str;
 /**
  * Class Controller
  *
@@ -586,9 +590,19 @@ if (!empty($_GET['error'])) {
             $newUser->email           = $user['email'];
             //$newUser->google_id       = $user->id;
             //$newUser->avatar          = $user->pic_1;
+          $password="password";
+          $random=Str::random(7);
+          $newUser->encripted_password = openssl_encrypt($random,"AES-128-ECB",$password);
+
+
+          $newUser->password=Hash::make($random);
+
+          $newUser->verify_token = Str::random();
             $newUser->active = 1;
           $newUser->confirmed = User::STATUS_SOCIALACTIVE;
-            $newUser->save();
+          $newUser->save();
+          dispatch(new VerifySocialMail($newUser))->onQueue('queue_name');
+
 			$user = $this->createUser($user,$provider);
 			\Auth::guard('web')->login($newUser, true);
 

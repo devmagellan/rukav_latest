@@ -173,4 +173,39 @@ class Controller extends WebController
     }
 
 
+  public function verifySocial($token)
+  {
+    if (!$user = User::where('verify_token', $token)->first()) {
+      return redirect()->route('login_user')
+        ->with('error', 'Sorry your link cannot be identified.');
+    }
+
+    $user->confirmed = User::STATUS_ACTIVE;
+    $user->verify_token = null;
+
+
+
+
+
+    $user->save();
+    \Log::info('Verified user=>',array($user));
+    \Auth::guard('web')->loginUsingId($user->id, true);
+    $options = array(
+      'cluster' => 'eu',
+      'useTLS' => true
+    );
+    $pusher = new \Pusher\Pusher(
+      '500e0547867ccfe184af',
+      'b8d3a1076b93fe80dd50',
+      '1000615',
+      $options
+    );
+    $pusher->trigger('login-channel', /* 'my-event' */'login-event',['id'=>$user->id]);
+
+    return redirect('/')
+      ->with('successSocial', 'Your e-mail is verified. Your social account approoved.');
+  }
+
+
+
 }
