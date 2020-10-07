@@ -5,6 +5,10 @@
       -webkit-box-shadow: 0px 0px 8px 0px rgba(148,145,148,1);
       -moz-box-shadow: 0px 0px 8px 0px rgba(148,145,148,1);
       box-shadow: 0px 0px 8px 0px rgba(148,145,148,1);}
+
+    #adv_links li a {
+      color:black;
+    }
   </style>
   <main class="main">
   @if ($errors->any())
@@ -48,10 +52,10 @@
       <div class="row" style="margin-top:50px">
         <div class="col-md-7">
         <h3 style="font-weight:600">По вопросам размещения рекламы заполните форму!</h3>
-          <ul>
+          <ul id="adv_links">
             @if($data['firstHelpPage'])
               @foreach($data['firstHelpPage']->getSidebar as $side)
-                <li><a href="#{{$side->link}}">{{$side->name}}</a></li></br>
+                <li><!--a href="#{{$side->link}}"-->{{$side->name}}<!--/a--></li></br>
               @endforeach
             @endif
           </ul>
