@@ -213,7 +213,7 @@ $initAutoComplete = function(){
           }
       })
   })
-  
+
 /*   $(document).ready(function(){
 	setTimeout(function () {
 	console.log('height',$('.slick-list').height());
@@ -234,10 +234,10 @@ $initAutoComplete = function(){
 <body>
 
 
-@include('ad::layouts.sections.header')
+@include('homepage::layouts.sections.header')
 @yield('content')
 <div id="map" style="display:none"></div>
-@include('ad::layouts.sections.footer')
+@include('homepage::layouts.sections.footer')
 @include('ad::layouts.sections.popups')
 @include('homepage::layouts.sections.scripts')
 

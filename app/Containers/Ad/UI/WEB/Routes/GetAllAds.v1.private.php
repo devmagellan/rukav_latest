@@ -4,9 +4,9 @@
 $router->get('ads', [
     'as' => 'web_ad_index',
     'uses'  => 'Controller@index',
-   /* 'middleware' => [
-      'auth:web',
-    ],*/
+    'middleware' => [
+      'auth:admin',
+    ],
 ]);
 
 $router->post('ads/data', [

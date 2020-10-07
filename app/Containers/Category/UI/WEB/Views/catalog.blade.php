@@ -230,14 +230,14 @@
                 if(\Auth::user()){
                     $wishlist=App\Containers\Ad\Models\Wishlist::where('message_id',$product->id)->where('user_id',\Auth::user()->id)->first();
                     ?>
-            <input type="hidden" class="wishInputId" value="{{$product->id}}">
-            <button onclick="wishList(this)"
-                    class="product_btn_wishlist btn btn-outline-secondary btn-sm btn-wishlist @if(($wishlist && $wishlist->active==1) ) active @endif"
-                    data-toggle="tooltip" title="Whishlist">
-              <img src="/img/heart_icon.svg" alt="asd" class="heart_icon" @if($wishlist && $wishlist->active==1) style="display: none !important"  @else style="display: block !important" @endif>
-              <img src="/img/hert_icon_filed.svg" alt="bsc" class="hert_icon_filed" @if(($wishlist && $wishlist->active!=1) || !$wishlist) style="display: none !important" @else style="display: block !important" @endif>
 
-            </button>
+                  <div class="add_to_favourites">
+                    <input type="hidden" class="wishInputId" value="{{$product->id}}">
+                    <button onclick="wishList(this)" class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist">
+                      <img src="/img/heart_icon.svg" alt="" class="heart_icon" @if($wishlist && $wishlist->active==1) style="display: none"  @else style="display: block !important" @endif>
+                      <img src="/img/hert_icon_filed.svg" alt="" class="hert_icon_filed" @if(($wishlist && $wishlist->active!=1) || !$wishlist) style="display: none" @else style="display: block !important" @endif>
+                    </button>
+                  </div>
                     <? }
 
                     ?>
