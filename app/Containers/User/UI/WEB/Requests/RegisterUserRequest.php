@@ -21,7 +21,7 @@ public function __construct(ValidationFactory $validationFactory)
 				if($notUnique){
 					return false;
 				}
-				
+
                 return true;
             },
             'Sorry, it failed unique_phone validation!'
@@ -75,10 +75,10 @@ public function __construct(ValidationFactory $validationFactory)
       "nameJob" => "required_if:vid_user,Бизнес",
       "address" => "required_if:vid_user,Бизнес",
       "postCode" => "required_if:vid_user,Бизнес",
-      
+
     ];
-	
-	
+
+
     $optionalRules = [
       'regNumber' => 'required',
       'vatNumber' => 'required',
@@ -89,7 +89,19 @@ public function __construct(ValidationFactory $validationFactory)
     }
     return $majorRules;
   }
-  
+
+  public function messages()
+  {
+    return [
+      'firstName.required' => 'Нужно Имя',
+      'lastName.required' => 'Нужна Фамилия',
+      'email.required' => 'Нужен email',
+      'password.required' => 'Нужно указать пароль',
+
+
+    ];
+  }
+
   public function customPhone($phone){
 	  if($phone!==12345){return false;}
 	  return true;

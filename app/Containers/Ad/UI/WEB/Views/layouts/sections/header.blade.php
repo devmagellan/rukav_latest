@@ -22,8 +22,8 @@
           <img src="{{asset('/img/pin.svg')}}" alt="" class="form_category_imp-pin">
 
           <div class="search" style="position:relative">
-            <div style="position:absolute;left:250px;top:-20px">
-            <input type="checkbox" style="display:inline-block !important" id="uk_only" name="uk_only"> <label for="uk_only"> искать только по UK</label></div>
+            <div style="position:absolute;left:250px;top:-20px;display:none !important">
+            <input type="checkbox" style="display:inline-block !important" id="uk_only" name="uk_only"> <label for="uk_only">только по UK</label></div>
             <input type="text" id="search-field" name="search" class="form_category_search" placeholder="Я ищу...">
             <input type="text" id="location_search" name="location" class="form_category_search-city" placeholder="Город или посткод UK">
             <button class="form_category_btn" id="go">Поиск</button>
@@ -40,20 +40,21 @@
       </div>
 
 
-      @if(\Illuminate\Support\Facades\Auth::user()->confirmed==\App\Containers\User\Models\User::STATUS_SOCIALACTIVE)
-        <div class="col-md-2 col-2">
-          <a href="#" class="add_ad" data-toggle="modal" data-target="#youAreNotAuthorized">
-            <span class="plus">+</span>
-            <span>Подать объявление</span>
-          </a>
-        </div>
-      @elseif(!\Illuminate\Support\Facades\Auth::user())
+
+      @if(!\Illuminate\Support\Facades\Auth::user())
       <div class="col-md-2 col-2">
         <a href="#" class="add_ad" data-toggle="modal" data-target="#youAreNotLeggedIn">
           <span class="plus">+</span>
           <span>Подать объявление</span>
         </a>
       </div>
+        @elseif(\Illuminate\Support\Facades\Auth::user()->confirmed==\App\Containers\User\Models\User::STATUS_SOCIALACTIVE)
+          <div class="col-md-2 col-2">
+            <a href="#" class="add_ad" data-toggle="modal" data-target="#youAreNotAuthorized">
+              <span class="plus">+</span>
+              <span>Подать объявление</span>
+            </a>
+          </div>
       @else
         <div class="col-md-2 col-2">
           <a href="{{route('web_ad_create')}}" class="add_ad">

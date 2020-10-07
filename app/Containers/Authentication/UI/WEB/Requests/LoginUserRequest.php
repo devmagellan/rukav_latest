@@ -52,12 +52,13 @@ class LoginUserRequest extends Request
             'password' => 'required|between:6,30',
         ];
     }
-	
+
 	 public function messages()
     {
         return [
             'email.required' => 'Поле email обязательно для авторизации',
-            'email.required' => "В поле email введена почта не правильного формата",
+            'password.required' => "Поле password обязательно для авторизации",
+            'password.between' => "Поле password должно содержать от 6 до 30 символов",
             'email.exists' => "Указан неверный email",
 
         ];
