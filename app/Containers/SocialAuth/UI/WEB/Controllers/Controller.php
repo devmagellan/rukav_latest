@@ -7,7 +7,7 @@ use App\Containers\User\Jobs\VerifyMail;
 use App\Ship\Parents\Controllers\WebController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Containers\User\Models\User;
-use phpseclib\Crypt\Hash;
+use Illuminate\Support\Facades\Hash;
 use SocialiteProviders\Manager\Config;
 use App\Containers\User\Jobs\VerifySocialMail;
 use Illuminate\Support\Str;
@@ -450,6 +450,7 @@ if (!empty($_GET['error'])) {
             \Auth::guard('web')->login($newUser, true);
 			}
 			elseif($provider=='facebook'){
+				\Log::info('Facebook1');
 			$user = $this->createUser($user,$provider);
       dispatch(new VerifySocialMail($user))->onQueue('queue_name');
 			\Auth::guard('web')->login($user, true);
@@ -463,6 +464,7 @@ if (!empty($_GET['error'])) {
         $getInfo = Socialite::driver($provider)->user();
 		$existingUser = User::where('email', $user->email)->first();
         $user = $this->createUser($getInfo,$provider);
+		\Log::info('Facebook2');
       dispatch(new VerifySocialMail($user))->onQueue('queue_name');
         auth()->login($user, true);
         return redirect()->to('/home');
