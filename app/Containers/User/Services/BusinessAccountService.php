@@ -15,7 +15,7 @@ class BusinessAccountService
     if(!is_array($data)) {
         $data=$data->toArray();
     }
-    $isSet=BusinessAccount::where('user_id',$userId)->first()->pluck('id');
+    $isSet=BusinessAccount::where('user_id',$userId)->first();
     \Log::info('Data--=>',$data);
     BusinessAccount::updateOrCreate(['id'=>(null!=($isSet)) ? $isSet->pluck('id') : null],[
       'company_name' => $data['company_name'],

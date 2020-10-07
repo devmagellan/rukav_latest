@@ -376,7 +376,7 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
     }
 
     public function deleteUser(GetAllUsersRequest $request){
-    if($request->input('delete_type')=='soft'){
+    if($request->input('delete_type')!='hard'){
 	User::where('id',$request->input('id'))->update(['confirmed'=>User::STATUS_DELETED]);
     User::where('id',$request->input('id'))->delete();
     }

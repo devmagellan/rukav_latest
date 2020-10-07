@@ -388,7 +388,7 @@
                     @if(\Auth::user()->can('delete-users'))
             var customer_id =  $('#customer_id').val()
             var delete_type =  $('#delete_type').val()
-
+console.log(delete_type);
             $.ajax({
                 method: 'POST',
                 dataType: 'json',
