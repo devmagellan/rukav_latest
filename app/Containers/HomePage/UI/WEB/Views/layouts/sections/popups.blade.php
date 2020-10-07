@@ -94,7 +94,7 @@ Your e-mail is verified. Your social account approoved.
       </button>
 
       <form class="formModal emailPhoneConfirmationForm">
-        <h6 class="modalTitle">Для подачи объявления необходимо быть зарегестрированным пользователем</h6>
+        <h6 class="modalTitle">Для подачи объявления необходимо перейти по ссылке отправленной Вам на email</h6>
 
       </form>
 
