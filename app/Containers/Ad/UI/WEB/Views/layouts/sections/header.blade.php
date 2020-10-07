@@ -38,7 +38,16 @@
         <a href="#" class="btn_search_m"><img src="{{asset('/img/loupe.svg')}}" alt=""
                                               class="form_category_imp-loupe"></a>
       </div>
-      @if(!\Illuminate\Support\Facades\Auth::user())
+
+
+      @if(\Illuminate\Support\Facades\Auth::user()->confirmed==\App\Containers\User\Models\User::STATUS_SOCIALACTIVE)
+        <div class="col-md-2 col-2">
+          <a href="#" class="add_ad" data-toggle="modal" data-target="#youAreNotAuthorized">
+            <span class="plus">+</span>
+            <span>Подать объявление</span>
+          </a>
+        </div>
+      @elseif(!\Illuminate\Support\Facades\Auth::user())
       <div class="col-md-2 col-2">
         <a href="#" class="add_ad" data-toggle="modal" data-target="#youAreNotLeggedIn">
           <span class="plus">+</span>
