@@ -51,14 +51,15 @@
                 },
                 complete: function() {
                     $('#loader').hide();
-					console.log('complete')
+					console.log('complete2')
 					 $('.wrapper_body_messege_scroll').append(
                     '<div class="body_messege_item body_my_messege_item">'+
                         '<p>'+text+'</p>'+
                         '<span>только что</span>'+
                         '</div>'
                     );
-					
+                  $('#msgr_input').empty();
+                  console.log('empty')
                 },
                 success: function (data) {
 				console.log('success')
@@ -69,10 +70,10 @@
             });
         }
     }
-	
-	
-		
-		
+
+
+
+
 
    var pusher = new Pusher('500e0547867ccfe184af', {
       cluster: 'eu'
@@ -87,7 +88,7 @@ console.log(receiver)
 console.log(receiver.length)
 
 channel.bind(receiver, function(data) {
-console.log(data)	
+console.log(data)
 if(''=={{\Auth::user()->id}}){
 	var sender='';
 }
@@ -104,7 +105,7 @@ console.log('')
                         '<span>'+data.created+'</span>'+
                         '</div>'
                     );
-} 
+}
 
 })
 
