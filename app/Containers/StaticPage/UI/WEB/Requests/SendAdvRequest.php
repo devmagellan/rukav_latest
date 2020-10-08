@@ -61,9 +61,10 @@ class SendAdvRequest extends Request
 	public function messages()
     {
         return [
-            'sender_name.required' => 'Вам необходимо ввсети имя отправителя в форму обратной связи',
-            'sender_email.required' => "Вам необходимо ввсети email адрес в форму обратной связи ",
-            'sender_phone.required' => 'Вам необходимо ввсети телефон отправителя в форму обратной связи',
+            'sender_name.required' => ' | Необходимо ввести имя отправителя',
+            'sender_email.required' => " | Необходимо ввести email адрес",
+            'sender_email.email' => " | Емайл указан неверно",
+            'sender_phone.required' => ' | Необходимо ввести телефон',
 
         ];
     }

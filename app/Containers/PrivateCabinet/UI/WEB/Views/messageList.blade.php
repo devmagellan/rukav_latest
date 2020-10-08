@@ -16,8 +16,8 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
         </div>
     </div>
     <div class="wrapper_header_message_right">
-        <p class="wrapper_header_name">{{$opponent->name}}</p>
-        <p class="wrapper_header_add_name">{{$conversation->first()->message->title}}</p>
+      <a  href="/all_author_ads?id={{$opponent->id}}"><p class="wrapper_header_name">{{$opponent->name}}</p></a>
+      <a href="/ads/{{$conversation->message->id}}"><p class="wrapper_header_add_name">{{$conversation->first()->message->title}}</p></a>
         <p class="wrapper_header_add_price">£ {{$conversation->first()->message->price}}</p>
         <p class="wrapper_header_date">Опубликовано: <span>{{$conversation->first()->message->created_at}}</span></p>
         <div class="wrapper_header_setting">

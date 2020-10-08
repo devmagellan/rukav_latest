@@ -8,6 +8,9 @@
 <link rel="mask-icon" href="/NewSmartAdmin/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
 <!-- DEMO related CSS below -->
 <link rel="stylesheet" media="screen, print" href="/NewSmartAdmin/css/fa-brands.css">
+<link rel="stylesheet" href="/css/preloader/normalize.css">
+<link rel="stylesheet" href="/css/preloader/main.css">
+
 @section('content')
 <style>
 
@@ -119,6 +122,10 @@
 @if (\Session::has('success') && \Session::get('success')=='Просмотр объявления')
   <script>
     $(document).ready(function() {
+
+
+
+
       $('#mainPreview').modal({show:true});
 
       $('.close_button_modal_previws').click(function(){
@@ -139,7 +146,10 @@
 
 
 @endif
-
+<div id="loader-wrapper" style="display:none">
+  <div id="loader"></div>
+</div>
+<div id="content">
   <article class="add_advert_block">
     <span data-status_created="{{session('infoAd')}}" id="statusAd"></span>
     <form action="/ads/store" method="post" id="add_ads_form" onsubmit="submitFunction()" enctype="multipart/form-data">
@@ -474,7 +484,7 @@
               @enderror
             </div-->
             <div class="contact_info_wrapper">
-              <div class="input_price_icon">£</div><input type="number" step="1" name="price" placeholder="Цена (не обязательно)" value="@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->price}} @endif">
+              <div class="input_price_icon">£</div><input type="number" step=".01" name="price" placeholder="Цена (не обязательно)" value="@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->price}} @endif">
             </div>
           </div>
         </div>
@@ -793,17 +803,15 @@
               @error('description')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-              <p class="number_of_signs_text"><span>70000</span> знаков остается</p>
+              <p class="number_of_signs_text"><span>7000</span> знаков остается</p>
               <button type="submit" name="save" value="1" id="saveAdsButton">Подать обьявление</button>
               <button type="submit" id="previewAdsButton" name="preview" value="1" class="buttonHref">Предварительный просмотр</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
   </form>
   </article>
-  </div>
     <div class="modal fade modalCatalog" id="mainCatalog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -1047,7 +1055,7 @@
     </div>
   </div>
 </div>
-
+  </div>
 @endsection
 @section('scripts')
   <script src="/NewSmartAdmin/js/formplugins/select2/select2.bundle.js"></script>
@@ -1433,6 +1441,22 @@ $('.cat_name').click(function(){
 
 
    $(document).ready(function() {
+
+     // disable mousewheel on a input number field when in focus
+// (to prevent Cromium browsers change the value when scrolling)
+     $('#add_ads_form').on('focus', 'input[type=number]', function (e) {
+       console.log('preventmousewheel')
+       $(this).on('wheel.disableScroll', function (e) {
+         console.log('preventmousewheel2')
+         e.preventDefault()
+       })
+     })
+     $('#add_ads_form').on('blur', 'input[type=number]', function (e) {
+       console.log('preventmousewheel3')
+       $(this).off('wheel.disableScroll')
+     })
+
+
       $('#allUsersClntInfoEditZip, #clntInfoEditZip, #clntInfoEditAddr1, #autocomplete').bind('keyup blur', function() {
         //alert('In here with' + $(this).val())
         //var regex = new RegExp("/^[a-z ]+$/i");
@@ -1501,10 +1525,16 @@ $('.cat_name').click(function(){
 
     });
 
+    function submitFunction(){
+      console.log('LoadWrapper')
+      $('#loader-wrapper').show();
+    }
+
+
 
 </script>
-
-
+  <script src="/js/preloader/vendor/modernizr-2.6.2.min.js"></script>
+  <script src="/js/preloader/main.js"></script>
 
 
   @endsection
