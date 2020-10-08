@@ -13,6 +13,7 @@
   <link href="{{asset('/css/main.css')}}" rel="stylesheet">
   <link href="{{asset('/css/media.css')}}" rel="stylesheet">
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <link rel="shortcut icon" href="/img/favicon.png" type="image/png">
 
   <script>
   console.log('876')
