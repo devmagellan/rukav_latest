@@ -133,7 +133,7 @@
         $('#mainPreview').removeClass("show");
         $('#mainPreview').hide();
         $('.modal-backdrop').hide();
-        alert('1');
+        alert('Вы нажали отмену публикации');
       });
       $('.preview_btn').click(function(){
         var id='{{\Session::get('ad')->id}}'
@@ -918,107 +918,171 @@
                     <img src="/storage/avatars/{{\Session::get('ad')->getSender->avatar}}" alt="">
                   </div>
                 </div>
-                <div class="product_info_block_right">
-                  <p class="product_info_user_name">{{\Session::get('ad')->name}} <span>Часное лицо</span></p>
-                  @if(\Session::get('ad')->show_name)
-
-                  @endif
+                <p class="product_info_user_name">{{\Session::get('ad')->name}} <span> @if(\Session::get('ad')->getSender->vid_user=='Частная') Частное лицо @else {{\Session::get('ad')->getSender->vid_user}}@endif</span></p>
 
                   <p class="product_info_user_date">на RUKAVe с {{\Session::get('ad')->getSender->created_at}}</p>
-                  <a href="#" class="product_info_all_add">смотреть все обьевления</a>
-                  <p class="product_info_city">12 John Street, Manchester, UA (MN3 2ER)</p>
-                </div>
-                <a href="#" class="product_info_btn_phone">
+                  <a href="#" class="product_info_all_add">Все обьевления автора</a>
+                  <p class="product_info_city">{{\Session::get('ad')->city}}</p>
+              </div>
+                <a href="#" class="product_info_btn_phone preload_view_send_message_btn">
                   <img src="/img/info_phone.svg" alt="">
                   <span>{{\Session::get('ad')->phone}}</span>
                 </a>
-                <a href="#" class="product_info_send_message" data-toggle="modal" data-target="#ModalSendMessage"><img src="/img/telegramm_icon.svg" alt="">отправить сообщение</a>
+                <a href="#"  class="product_info_send_message preload_view_send_message_btn" data-toggle="modal" data-target="#ModalSendMessage"><img src="/img/telegramm_icon.svg" alt="">отправить сообщение</a>
                 <p class="product_info_text_down">
                   <img src="/img/mail-send.svg" alt="">
                   Быстро отвечает
                 </p>
-              </div>
+                @if(\Session::get('ad')->getSender->vid_user=='Предприниматель')
+                  <div class="product_website_block">
+                    <img src="/img/internet_icon.svg" alt="">
+                    <? $link=(\Session::get('ad')->getSender->getIndividualAccount) ? ((mb_substr(\Session::get('ad')->getSender->getIndividualAccount->www, 0, 4)!=='http' ) ? 'http://'.\Session::get('ad')->getSender->getIndividualAccount->www : \Session::get('ad')->getSender->getIndividualAccount->www) : null; ?>
+                    <p>Website: <a target="_blanc" href="{{$link}}">{{$link}}</a></p>
+                  </div>
+                @endif
+                @if(\Session::get('ad')->getSender->vid_user=='Организация')
+                  <div class="product_website_block">
+                    <img src="/img/internet_icon.svg" alt="">
+                    <? $link=(\Session::get('ad')->getSender->getOrganisationAccount) ? ((mb_substr(\Session::get('ad')->getSender->getOrganisationAccount->www, 0, 4)!=='http' ) ? 'http://'.\Session::get('ad')->getSender->getOrganisationAccount->www : \Session::get('ad')->getSender->getOrganisationAccount->www) : null ; ?>
+                    <p>Website: <a target="_blanc" href="{{$link}}">{{$link}}</a></p>
+                  </div>
+                @endif
+                @if(\Session::get('ad')->getSender->vid_user=='Компания')
+                  <div class="product_website_block">
+                    <img src="/img/internet_icon.svg" alt="">
+                    <? $link=(\Session::get('ad')->getSender->getOrganisationAccount) ? ( (mb_substr(\Session::get('ad')->getSender->getBusinessAccount->www, 0, 4)!=='http' ) ? 'http://'.\Session::get('ad')->getSender->getBusinessAccount->www : \Session::get('ad')->getSender->getBusinessAccount->www):null; ?>
+                    <p>Website: <a target="_blanc" href="{{$link}}">{{$link}}</a></p>
+                  </div>
+                @endif
 
-              <div class="product_website_block">
-                <img src="/img/internet_icon.svg" alt="">
-                <p>Website: <a href="#">www.salecar.com</a></p>
-              </div>
-
-              <div class="product_slider_advantage">
-                <div class="product_slider_advantage_slider">
-                  <div class="product_slider_advantage_item">
-                    <img src="/img/advantage_icon1.svg" alt="">
-                    <h6>Безопасность</h6>
-                    <p>
-                      Пользуйтесь доставкой, чтобы уменьшить риск заболеть из-за распространения COVID-19. Если же нужно лично встретиться с покупателем или продавцом, придерживайтесь рекомендованных правил гигиены.
-                    </p>
-                  </div>
-                  <div class="product_slider_advantage_item">
-                    <img src="/img/advantage_icon1.svg" alt="">
-                    <h6>Безопасность2</h6>
-                    <p>
-                      Пользуйтесь доставкой, чтобы уменьшить риск заболеть из-за распространения COVID-19. Если же нужно лично встретиться с покупателем или продавцом, придерживайтесь рекомендованных правил гигиены.
-                    </p>
-                  </div>
-                  <div class="product_slider_advantage_item">
-                    <img src="/img/advantage_icon1.svg" alt="">
-                    <h6>Безопасность3</h6>
-                    <p>
-                      Пользуйтесь доставкой, чтобы уменьшить риск заболеть из-за распространения COVID-19. Если же нужно лично встретиться с покупателем или продавцом, придерживайтесь рекомендованных правил гигиены.
-                    </p>
-                  </div>
+            <div class="product_slider_advantage">
+              <div class="product_slider_advantage_slider">
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Пожалуйста, следуйте последним советам от Государства, чтобы оставаться в безопасности.
+                  </p>
                 </div>
-                <a href="#" class="product_slider_advantage_all">читать все советы</a>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Используйте PayPal при оплате.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Не используйте Western Union, Ukash или Paysafe при покупках на RUKAV.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Не полагайтесь на email адреса, скрытые в тексте или картинках.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Если предложение слишком заманчиво, возможно, это слишком хорошо, чтобы быть правдой.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Задавайте много вопросов о товаре при покупке.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Публикуйте много фотографий при продаже товаров и услуг, а также если сдаете недвижимость в аренду.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Всегда пользуйтесь услугами курьера при доставке.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Жалуйтесь на объявления, которые нарушают правила или кажутся вам подозрительными, с помощью кнопки внизу объявления
+                  </p>
+                </div>
               </div>
+              <a href="/static/safety#theses" target="_blanc" class="product_slider_advantage_all">читать все советы</a>
             </div>
           </div>
-          <div class="row product_description">
-            <div class="col-sm-12">
-              <h4>Описание</h4>
-              <p>
-                {{\Session::get('ad')->message}}
-              </p>
-            </div>
           </div>
+        <div class="row product_description" style="word-wrap: break-word;">
+          <div class="col-sm-12">
+            <h4>Описание</h4>123
+            {!! nl2br(e(\Session::get('ad')->message)) !!}
 
-          <div class="row product_will_share justify-content-between">
-            <div class="col-md-6">
-              <p class="product_will_share_desc">Поделиться на:</p>
-              <ul class="socials">
-                <li>
-                  <a href="#">
-                    <i class="fab fa-facebook-f"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="insta">
-                    <i class="fab fa-instagram"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="twitter">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="pinterest">
-                    <i class="fab fa-pinterest-p"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="envelope">
-                    <i class="fas fa-envelope"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="col-md-6" style="text-align: right">
-              <img src="/img/tag_icon.png" alt="">
-              <p class="product_will_share_tags">Метки: </p>
-              <a href="#" class="product_will_share_link">#Автомобили,</a>
-              <a href="#" class="product_will_share_link">#Транспорт</a>
-            </div>
           </div>
+        </div>
+
+
+        <div class="row product_will_share justify-content-between">
+          <div class="col-md-6">
+            <p class="product_will_share_desc">Поделиться на:</p>
+          <!--ul class="socials">
+          <li>add_foto_file_item_load2
+            <a href="http://www.facebook.com/sharer.php?u={{url()->current()}}">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="insta">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/share?url={{url()->current()}}&amp;text=Simple%20Share%20Buttons&amp;hashtags=simplesharebuttons" class="twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="pinterest">
+              <i class="fab fa-pinterest-p"></i>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:?Subject=Simple Share Buttons&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 {{url()->current()}}" class="envelope">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </li>
+        </ul-->
+            <!-- AddToAny BEGIN -->
+            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+              <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+              <a class="a2a_button_facebook"></a>
+              <a class="a2a_button_twitter"></a>
+              <a class="a2a_button_email"></a>
+              <a class="a2a_button_pinterest"></a>
+              <a class="a2a_button_vk"></a>
+            </div>
+            <script async src="https://static.addtoany.com/menu/page.js"></script>
+            <!-- AddToAny END -->
+          </div>
+          <!--div class="col-md-6" style="text-align: right">
+            <img src="/img/tag_icon.png" alt="">
+            <p class="product_will_share_tags">Метки: </p>
+            <a href="#" class="product_will_share_link">#Автомобили,</a>
+            <a href="#" class="product_will_share_link">#Транспорт</a>
+          </div-->
+        </div>
 
           <div class="row product_indicators_block">
             <div class="col-md-9">

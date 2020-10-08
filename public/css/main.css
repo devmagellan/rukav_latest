@@ -463,7 +463,7 @@ input[type="checkbox"]{
     background: url("../img/tick.svg")  center top no-repeat;
  }
 
-.modal a{
+.modal a:not(.preload_view_send_message_btn){
     font-size: 14px;
     line-height: 17px;
     text-decoration-line: underline;
