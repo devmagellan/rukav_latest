@@ -83,6 +83,42 @@ Your e-mail is verified. Your social account approoved.
   </div>
 </div>
 
+<div class="modal modal_confirm_email_phone fade" id="alert_category_already_present" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <img src="{{asset('img/close-icon.svg')}}" alt="">
+      </button>
+
+      <form class="formModal emailPhoneConfirmationForm">
+        <h6 class="modalTitle">Такая категория уже выбрана из списка</h6>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal modal_confirm_email_phone fade" id="alert_category_not_choosen" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <img src="{{asset('img/close-icon.svg')}}" alt="">
+      </button>
+
+      <form class="formModal emailPhoneConfirmationForm">
+        <h6 class="modalTitle">Вы не выбрали дополнительную категорию из списка</h6>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
 
 <div class="modal modal_confirm_email_phone fade" id="youAreNotAuthorized" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel2" aria-hidden="true">
