@@ -277,7 +277,7 @@ Your e-mail is verified. Your social account approoved.
           </div>
 
           <div class="col-sm-6">
-            <p class="input_text_top">Не виден пользователю</p>
+            <p class="input_text_top">Не виден пользователям</p>
             <input type="text" name="email" placeholder="Контактный email"><span class="required">*</span>
             <span id="email" class="errorBlock"></span>
           </div>

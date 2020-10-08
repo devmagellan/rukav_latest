@@ -137,17 +137,20 @@
                 </div>
             @endforeach
           @if(count($currentFilters)<3)
-            @for($i=1;$i<=3-count($currentFilters);$i++)
+            @for($i=1;$i<=3-count($currentFilters)-1;$i++)
               <div class="col-md-2" style="text-align: center"></div>
+
             @endfor
+              <div class="col-md-3" style="text-align: center"><button class="price_sort   @if( Request::get('sort_by_price')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_price')=='high_to_low') high_to_low @else low_to_high @endif">Цена @if( Request::get('sort_by_price')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_price')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
+        </div>
           @endif
         @else
             <div class="col-md-2" style="text-align: center"></div>
             <div class="col-md-2" style="text-align: center"></div>
-            <div class="col-md-2" style="text-align: center"></div>
-			@endif
-            <div class="col-4 col-sm-1" style="text-align: center"><button class="price_sort   @if( Request::get('sort_by_price')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_price')=='high_to_low') high_to_low @else low_to_high @endif">Цена @if( Request::get('sort_by_price')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_price')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
+            <div class="col-md-3" style="text-align: center"><button class="price_sort   @if( Request::get('sort_by_price')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_price')=='high_to_low') high_to_low @else low_to_high @endif">Цена @if( Request::get('sort_by_price')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_price')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
         </div>
+			@endif
+
 
         @foreach($products as $product)
         <div class="row product_item_wrapper product_item_wrapper_active">
@@ -209,29 +212,54 @@
             </div>
           @endforeach
           @if(count($currentFilters)<3)
-            @for($i=1;$i<=3-count($currentFilters);$i++)
+            @for($i=1;$i<=3-count($currentFilters)-1;$i++)
               <div class="col-md-2" style="text-align: center"></div>
             @endfor
+              <div class="col-md-3">
+                <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
+                <p class="product_map_marka d-sm-none">Volkswagen</p>
+                <p class="product_item_city d-sm-none">
+                  <img src="/img/map_icon.svg" alt="" class="product_map_icon">
+                  {{$product->city}}
+                </p>
+                <div>
+                  @else
+                    <div class="col-md-3">
+                      <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
+                      <p class="product_map_marka d-sm-none">Volkswagen</p>
+                      <p class="product_item_city d-sm-none">
+                        <img src="/img/map_icon.svg" alt="" class="product_map_icon">
+                        {{$product->city}}
+                      </p>
+                      <div>
           @endif
   @else
             <div class="col-md-2" style="text-align: center"></div>
             <div class="col-md-2" style="text-align: center"></div>
-            <div class="col-md-2" style="text-align: center"></div>
+            <div class="col-sm-3">
+              <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
+              <p class="product_map_marka d-sm-none">Volkswagen</p>
+              <p class="product_item_city d-sm-none">
+                <img src="/img/map_icon.svg" alt="" class="product_map_icon">
+                {{$product->city}}
+              </p>
+              <div>
+
 		@endif
-          <div class="col-sm-1">
-            <p class="product_item_price">£ {{$product->price}}</p>
+          <!--div class="col-sm-1">
+            <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
             <p class="product_map_marka d-sm-none">Volkswagen</p>
             <p class="product_item_city d-sm-none">
               <img src="/img/map_icon.svg" alt="" class="product_map_icon">
               {{$product->city}}
             </p>
-            <div>
+            <div-->
                 <?
                 if(\Auth::user()){
                     $wishlist=App\Containers\Ad\Models\Wishlist::where('message_id',$product->id)->where('user_id',\Auth::user()->id)->first();
                     ?>
 
-                  <div class="add_to_favourites">
+                  <div class="add_to_favourites" style="float:right">
                     <input type="hidden" class="wishInputId" value="{{$product->id}}">
                     <button onclick="wishList(this)" class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist">
                       <img src="/img/heart_icon.svg" alt="" class="heart_icon" @if($wishlist && $wishlist->active==1) style="display: none"  @else style="display: block !important" @endif>

@@ -267,12 +267,12 @@
                                 <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
                             </div>
                             <div class="message_sidebar_theme_right">
-                                <p class="message_sidebar_theme_name">
+                                <a  href="/all_author_ads?id={{$opponent->id}}"><p class="message_sidebar_theme_name">
                                   {{$opponent->name}}
-                                </p>
-                                <p class="message_sidebar_theme_add">
+                                </p></a>
+                                <a href="/ads/{{$conversation->message->id}}"><p class="message_sidebar_theme_add">
                                     {{$conversation->message->title}}
-                                </p>
+                                </p></a>
                                 <p class="message_sidebar_theme_date">
                                     {{$conversation->created_at}}
                                 </p>
