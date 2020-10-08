@@ -1241,7 +1241,9 @@
             @foreach($favorits as $favorit)
             <div class="choosen_item-wrapper d-flex" id="favorite_{{$favorit->id}}">
               <div class="choosen_item_img">
+                @if($ad->pictures->first())
                 <img src="/storage/messages/{{$favorit->pictures->first()->photo}}" alt="">
+                  @endif
               </div>
               <div class="choosen_item_text d-flex flex-column">
                 <p class="choosen_item_name">

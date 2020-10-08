@@ -40,8 +40,20 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
                     @else
                     <p>{{$segment->text}}</p>
                   @endif
-
-                    <span>{{$segment->created_at}}</span>
+                    <?
+                    $secondsInDay = 40400; // 3600 * 24
+                    $expired = $segment->created_at->diffInSeconds(\Carbon\Carbon::now()) > $secondsInDay;
+                    if($expired){
+                    ?>
+                    <span>{{\Carbon\Carbon::createFromTimeStamp(strtotime($segment->created_at))->locale('ru')->isoFormat('Do MMMM YY, h:mm a')}}</span>
+                    <?
+                    }else{
+                    ?>
+                    <span>{{\Carbon\Carbon::createFromTimeStamp(strtotime($segment->created_at))->locale('ru')->diffForHumans(['parts' => 1,
+    'join' => true,])}}</span>
+                    <?
+                    }
+                    ?>
                 </div>
             @endif
         <!--  end .chat-segment -->
@@ -53,7 +65,21 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
                       @else
                         <p>{{$segment->text}}</p>
                       @endif
-                        <span>{{$segment->created_at}}</span>
+                      <?
+                        $secondsInDay = 40400; // 3600 * 24
+                        $expired = $segment->created_at->diffInSeconds(\Carbon\Carbon::now()) > $secondsInDay;
+                        if($expired){
+                          ?>
+                          <span>{{\Carbon\Carbon::createFromTimeStamp(strtotime($segment->created_at))->locale('ru')->isoFormat('Do MMMM YY, h:mm a')}}</span>
+                        <?
+                        }else{
+                          ?>
+                        <span>{{\Carbon\Carbon::createFromTimeStamp(strtotime($segment->created_at))->locale('ru')->diffForHumans(['parts' => 1,
+    'join' => true,])}}</span>
+                        <?
+                        }
+                        ?>
+
                     </div>
             @endif
         <!--  end .chat-segment -->
@@ -170,14 +196,14 @@ $("#but_upload").click(function(){
                 },
                 complete: function() {
                     $('#loader').hide();
-					console.log('complete')
+					console.log('complete3')
 					 $('.wrapper_body_messege_scroll').append(
                     '<div class="body_messege_item body_my_messege_item">'+
                         '<p>'+text+'</p>'+
                         '<span>только что</span>'+
                         '</div>'
                     );
-
+                  $('#msgr_input').val('');
                 },
                 success: function (data) {
 				console.log('success')

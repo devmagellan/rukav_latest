@@ -28,6 +28,7 @@ public function __construct($connect){
     {
 
         return (new MailMessage)
+          ->subject('Вам Собщение на Rukav')
             ->greeting('Приветствуем!')
             ->line('Вы получили следующее сообщение на сайте RUKAV.')
           ->line($this->connect->text)
