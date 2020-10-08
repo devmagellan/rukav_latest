@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumbs">
-                        <li><a href="index.html"><img src="/img/home_icon.svg" alt=""></a><img src="/img/back_Icon.svg" alt=""></li>
+                        <li><a href="/"><img src="/img/home_icon.svg" alt=""></a><img src="/img/back_Icon.svg" alt=""></li>
                         <li>{{$data['firstHelpPage']->name}}</li>
                     </ul>
                 </div>
