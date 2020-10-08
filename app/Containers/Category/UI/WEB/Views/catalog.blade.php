@@ -261,7 +261,7 @@
 
                   <div class="add_to_favourites" style="float:right">
                     <input type="hidden" class="wishInputId" value="{{$product->id}}">
-                    <button onclick="wishList(this)" class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist">
+                    <button onclick="wishList(this)" class="btn btn-outline-secondary btn-sm btn-wishlist @if($wishlist && $wishlist->active==1) active @endif" data-toggle="tooltip" title="Whishlist">
                       <img src="/img/heart_icon.svg" alt="" class="heart_icon" @if($wishlist && $wishlist->active==1) style="display: none"  @else style="display: block !important" @endif>
                       <img src="/img/hert_icon_filed.svg" alt="" class="hert_icon_filed" @if(($wishlist && $wishlist->active!=1) || !$wishlist) style="display: none" @else style="display: block !important" @endif>
                     </button>
@@ -314,51 +314,53 @@
 @section('scripts')
 <script>
 
-    function wishList(event){
-        var id = $(event).parent('div').find('.wishInputId').val()
-        console.log(id)
-        if($(event).hasClass('active')){
-            console.log('not_active')
-            $(event).find('.hert_icon_filed').hide()
-            $(event).find('.heart_icon').show()
-            var active = 0;
-        }
-        else{
-            console.log('active')
-            $(event).find('.heart_icon').hide()
-            $(event).find('.hert_icon_filed').show()
-
-            var active =1;
-        }
-
-        $.ajax({
-            method: 'POST',
-            dataType: 'json',
-            async:false,
-            url: '/add/wishList',
-            data: {id:id,active:active
-            },
-            beforeSend: function() {
-            },
-            complete: function() {
-                //$('.company_create_close').trigger('click')
-                $('#badges_modal').modal("hide");
-            },
-            success: function (data) {
-
-                $('#badges_modal').modal("hide");
-                //$(".modal-backdrop").remove();
-                //$('.categoryModalClose').trigger('click')
-                //$('.company_create_close').trigger('click')
-                //$('.modal-backdrop').removeClass('show').addClass('hide')
-
-
-
-                console.log('success')
-
-            }
-        });
+  function wishList(event){
+    var id = $(event).parent('div').find('.wishInputId').val()
+    console.log(id)
+    if($(event).hasClass('active')){
+      console.log('not_active')
+      $(event).find('.hert_icon_filed').hide()
+      $(event).find('.heart_icon').show()
+      var active = 0;
+      $(event).removeClass('active')
     }
+    else{
+      console.log('active')
+      $(event).find('.heart_icon').hide()
+      $(event).find('.hert_icon_filed').show()
+
+      var active =1;
+      $(event).addClass('active')
+    }
+
+    $.ajax({
+      method: 'POST',
+      dataType: 'json',
+      async:false,
+      url: '/add/wishList',
+      data: {id:id,active:active
+      },
+      beforeSend: function() {
+      },
+      complete: function() {
+        //$('.company_create_close').trigger('click')
+        $('#badges_modal').modal("hide");
+      },
+      success: function (data) {
+
+        $('#badges_modal').modal("hide");
+        //$(".modal-backdrop").remove();
+        //$('.categoryModalClose').trigger('click')
+        //$('.company_create_close').trigger('click')
+        //$('.modal-backdrop').removeClass('show').addClass('hide')
+
+
+
+        console.log('success')
+
+      }
+    });
+  }
 
     $( function() {
         console.log({{$pricesLimits[0]['min_price']}})

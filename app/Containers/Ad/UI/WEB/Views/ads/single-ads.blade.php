@@ -104,7 +104,7 @@ ul.slickslide li img, .slick-dots button img {
         <div class="add_to_favourites">
           <input type="hidden" class="wishInputId" value="{{$ad->id}}">
           <span>Добавить в <br> Избранное</span>
-          <button onclick="wishList(this)" class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist">
+          <button onclick="wishList(this)" class="btn btn-outline-secondary btn-sm btn-wishlist @if($wishlist && $wishlist->active==1) active @endif" data-toggle="tooltip" title="Whishlist">
             <img src="/img/heart_icon.svg" alt="" class="heart_icon" @if($wishlist && $wishlist->active==1) style="display: none"  @else style="display: block !important" @endif>
             <img src="/img/hert_icon_filed.svg" alt="" class="hert_icon_filed" @if(($wishlist && $wishlist->active!=1) || !$wishlist) style="display: none" @else style="display: block !important" @endif>
           </button>
@@ -240,9 +240,9 @@ ul.slickslide li img, .slick-dots button img {
             @if($ad->show_name)
 
             @endif
-			@if(null!=($ad->getSender->created_at))
+			    @if(null!=($ad->getSender->created_at))
             <p class="product_info_user_date">на RUKAVe с {{$ad->getSender->created_at->format('d-m-Y')}}</p>
-		@endif
+		      @endif
             <a href="/all_author_ads?id={{$ad->getSender->id}}" class="product_info_all_add">Все объявления автора</a>
             <p class="product_info_city">{{$ad->city}}</p>
           </div>
@@ -432,6 +432,7 @@ ul.slickslide li img, .slick-dots button img {
         $(event).find('.hert_icon_filed').hide()
         $(event).find('.heart_icon').show()
         var active = 0;
+        $(event).removeClass('active')
       }
       else{
         console.log('active')
@@ -439,6 +440,7 @@ ul.slickslide li img, .slick-dots button img {
         $(event).find('.hert_icon_filed').show()
 
         var active =1;
+        $(event).addClass('active')
       }
 
       $.ajax({
