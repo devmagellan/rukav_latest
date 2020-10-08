@@ -27,7 +27,7 @@
 
                 </div>
 
-                <button type="submit" class="message_sidebar_add_them" style="top:7px;position:relative;">+</button>
+                <button type="submit" class="message_sidebar_add_them" data-toggle="tooltip" data-title="Hooray!" style="top:7px;position:relative;">+</button>
                 </form>
                 @foreach($businessOwnerConversationsList as $list)
 @if(isset($list))
@@ -416,6 +416,7 @@ console.log(type,group_id)
 </script>
 
 <script>
+
   $('#secondMessangerGroups').submit(function(e){
     e.preventDefault();
     console.log('secondMessangerGroups')
@@ -438,6 +439,9 @@ console.log(type,group_id)
         },
         success: function (data) {
           console.log('success',data.data)
+          if (($('#message_'+data.data.id+'').length > 0)){
+            $('#alert_category_already_present').modal({show:true});
+          }else{
           $('#secondMessangerGroups').after(
 
             '<div class="message_sidebar_theme" id="message_'+data.data.id+'">'+
@@ -450,8 +454,11 @@ console.log(type,group_id)
             '</div>'+
             '</div>'
         );
-        }
+        }}
       });
+    }
+    else{
+      $('#alert_category_not_choosen').modal({show:true});
     }
   })
 </script>
