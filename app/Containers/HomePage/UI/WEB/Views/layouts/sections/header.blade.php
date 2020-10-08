@@ -39,8 +39,6 @@
                                               class="form_category_imp-loupe"></a>
       </div>
 
-
-<? dump(\Illuminate\Support\Facades\Auth::user()->confirmed==\App\Containers\User\Models\User::STATUS_SOCIALACTIVE);?>
       @if(!\Illuminate\Support\Facades\Auth::user())
       <div class="col-md-2 col-2">
         <a href="#" class="add_ad" data-toggle="modal" data-target="#ModalIn">
@@ -49,7 +47,6 @@
         </a>
       </div>
 	    @elseif(\Illuminate\Support\Facades\Auth::user()->confirmed==\App\Containers\User\Models\User::STATUS_SOCIALACTIVE)
-		333
         <div class="col-md-2 col-2">
           <a href="#" class="add_ad" data-toggle="modal" data-target="#youAreNotAuthorized">
             <span class="plus">+</span>
