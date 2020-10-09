@@ -250,7 +250,11 @@ ul.slickslide li img, .slick-dots button img {
             <img src="/img/info_phone.svg" alt="">
             <span>{{print($ad->phone)}}</span>
           </a>
-          <a href="#" class="product_info_send_message" data-toggle="modal" data-target="#ModalSendMessage"><img src="/img/telegramm_icon.svg" alt="">отправить сообщение</a>
+          @if(\Auth::user())
+          <a href="#" class="product_info_send_message product_info_send_message_authenticated" data-toggle="modal" data-target="#ModalSendMessage"><img src="/img/telegramm_icon.svg" alt="">отправить сообщение</a>
+          @else
+            <a href="#" class="product_info_send_message" onclick="localStorage.setItem('ModalSendMessage', 'Open message modal')" data-toggle="modal" data-target="#ModalIn"><img src="/img/telegramm_icon.svg" alt="">отправить сообщение</a>
+          @endif
           <p class="product_info_text_down">
             <img src="/img/mail-send.svg" alt="">
             Быстро отвечает
@@ -471,6 +475,13 @@ ul.slickslide li img, .slick-dots button img {
         }
       });
     }
+    $(document).ready(function(){
+      if(localStorage.getItem('ModalSendMessage')=='Open message modal'){
+        $('.product_info_send_message_authenticated').trigger('click')
+        localStorage.removeItem('ModalSendMessage');
+      }
+    })
+
     </script>
   @endsection
 
