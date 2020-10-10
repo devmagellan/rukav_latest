@@ -176,7 +176,7 @@
               Заголовок
             </h6>
             <div class="add_advert_block_input1">
-              <input type="text" name="name_ad" maxlength="70" placeholder="Название объявления" required value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->title}} @endif">
+              <input type="text" name="name_ad" maxlength="70" placeholder="Название объявления" required value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->title}} @elseif(!empty(old('name_ad'))) {{old('name_ad')}}  @endif">
               <span class="required"></span>
               @error('name_ad')
               <div class="alert errorBlock">{{ $message }}</div>
@@ -185,9 +185,9 @@
             </div>
             <div class="add_advert_block_input1">
               @if(null!=(\Session::get('catsString')))
-                <input type="text" name="category_ads" placeholder="Выберите категорию" value="{{\Session::get('catsString')}}" class="select_category" required readonly>
+              <input type="text" name="category_ads" placeholder="Выберите категорию" value="@if(null!=(\Session::get('catsString'))) {{\Session::get('catsString')}} @elseif(!empty(old('category_ads'))) {{old('category_ads')}}  @endif" class="select_category" required readonly>
                 @else
-              <input type="text" name="category_ads" placeholder="Выберите категорию" class="select_category" required readonly>
+              <input type="text" name="category_ads" placeholder="Выберите категорию" value="@if(null!=(\Session::get('catsString'))) {{\Session::get('catsString')}} @elseif(!empty(old('category_ads'))) {{old('category_ads')}}  @endif" class="select_category" required readonly>
               @endif
               <img src="/img/ipagination_right.svg" alt="">
               <span class="required"></span>
@@ -225,15 +225,16 @@
         <div class="filters_block"></div>
         <div class="filter_deals_block"></div>
 
-        <input type="hidden" id="category_id" name="category_id" required value="@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->category_id}} @endif">
+        <input type="hidden" id="category_id" name="category_id" required
+               value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->category_id}} @elseif(!empty(old('category_id'))) {{old('category_id')}}  @endif">
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper" id="add_place">
             <h6 class="add_advert_block_wrapper_title">
               Местоположение
             </h6>
-            <input type="hidden" name="city"  id="city">
-            <input type="hidden" name="place_id"  id="place_id">
-            <input type="hidden" name="administrative"  id="administrative">
+            <input type="hidden" name="city"  id="city" value="{{old('city')}}">
+            <input type="hidden" name="place_id"  id="place_id" value="{{old('place_id')}}">
+            <input type="hidden" name="administrative"  id="administrative" value="{{old('administrative')}}">
             <!--div class="hide_location_radio">
               <input type="radio" name="hide_location" value="1" id="hide_location" checked="">
               <label for="hide_location">Показывать</label>
@@ -241,15 +242,15 @@
               <label for="no_hide_location">Не показывать</label>
             </div-->
             <div class="select_location_block">
-              <input type="radio" name="select_addres" value="Полыний адрес" id="all_adress" checked="">
+              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Полыний адрес @endif" id="all_adress" checked="">
               <label for="all_adress">Полный адрес</label>
-              <input type="radio" name="select_addres" value="Только Postcode" id="postcode">
+              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Только посткод @endif" id="postcode">
               <label for="postcode">Только Postcode</label>
-              <input type="radio" name="select_addres" value="Выбрать местоположение" id="select_adress">
+              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Выбрать местоположение @endif" id="select_adress">
               <label for="select_adress">Выбрать место</label>
-              <input type="radio" name="select_addres" value="Весь UK" id="all_uk">
+              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Весь UK @endif" id="all_uk">
               <label for="all_uk">Весь UK</label>
-              <input type="radio" name="select_addres" value="Вне UK" id="out_uk">
+              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Вне UK @endif" id="out_uk">
               <label for="out_uk">Вне UK</label>
             </div>
             <div class="postcode_block" style="display:none">
@@ -436,7 +437,7 @@
 
             </div>
             <div class="place_in_UK" style="display:none">
-              <input type="text" name="address" placeholder="Страна" class="add_advert_input_location InputControl" id="clntInfoEditAddrPlaceUk1" value="{{old('address')}}">
+              <input type="text" name="address2" placeholder="Страна" class="add_advert_input_location InputControl" id="clntInfoEditAddrPlaceUk1" value="{{old('address')}}">
               @error('address')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
@@ -484,7 +485,7 @@
               @enderror
             </div-->
             <div class="contact_info_wrapper">
-              <div class="input_price_icon">£</div><input type="number" step=".01" name="price" placeholder="Цена (не обязательно)" value="@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->price}} @endif">
+              <div class="input_price_icon">£</div><input type="number" step=".01" name="price" placeholder="Цена (не обязательно)" value="{{old('price')}}">
             </div>
           </div>
         </div>
@@ -778,15 +779,15 @@
                   Длительность
                 </h6>
                 <div class="add_advert_block_btn_wrapper">
-                    <input type="radio" name="select_time" value="7" id="7day" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==7) checked="" @endif>
+                    <input type="radio" name="select_time" value="7" id="7day" @if(old('select_time')==7) checked="" @endif>
                     <label for="7day">7 дней</label>
-                    <input type="radio" name="select_time" value="14" id="14day" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==14) checked="" @endif>
+                    <input type="radio" name="select_time" value="14" id="14day" @if(old('select_time')==14) checked="" @endif>
                     <label for="14day">14 дней</label>
-                    <input type="radio" name="select_time" value="30" id="1mon" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==30) checked="" @elseif(null==(\Session::get('ad'))) checked="" @endif>
+                    <input type="radio" name="select_time" value="30" id="1mon" @if(old('select_time')==30) checked="" @elseif(null==(\Session::get('ad'))) checked="" @endif>
                     <label for="1mon">1 месяц</label>
-                    <input type="radio" name="select_time" value="180" id="6mon" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==180) checked="" @endif>
+                    <input type="radio" name="select_time" value="180" id="6mon" @if(old('select_time')==180) checked="" @endif>
                     <label for="6mon">6 месяц</label>
-                    <input type="radio" name="select_time" value="0" id="always" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==0) checked="" @endif>
+                    <input type="radio" name="select_time" value="0" id="always" @if(old('select_time')==0) checked="" @endif>
                     <label for="always">вечно</label>
                 </div>
             </div>
@@ -799,7 +800,7 @@
             <div class="add_advert_desc">
               <p>Текст объявления: на русском языке. Допустимое использование английского не более 20%(термины, названия).</p>
               <p class="end">Транслит не допускается.</p>
-              <textarea name="description" placeholder="Текст объявления" required>@if(null!=(\Session::get('ad')) ) {{\Session::get('ad')->message}} @endif</textarea>
+              <textarea name="description" placeholder="Текст объявления" required>{{old('description')}} </textarea>
               @error('description')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
