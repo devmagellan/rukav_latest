@@ -12781,7 +12781,7 @@ class Controller extends WebController
 
       $statement = "";
       $items = $request->input('columns');
-      $ads = \App\Containers\Ad\Models\Ad::where(function ($query) use ($items, $columns) {
+      $ads = \App\Containers\Ad\Models\Ad::where('is_tmp',0)->where(function ($query) use ($items, $columns) {
         foreach ($items as $key => $column) {
           if (null != $column['search']['value']) {
             if ($key == 1) {
