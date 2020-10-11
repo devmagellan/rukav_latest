@@ -27,7 +27,7 @@
         <div class="row">
           <div class="col-md-4">
             <div class="photoCareer" style="width:90%;height:300px;background-repeat:no-repeat;background-size:100%;border-radius:10px;background-image: url('/storage/pictures/hero-image-text-left-darker 1.png')">
-              
+
             </div>
           </div>
           <div class="col-md-8">
@@ -42,7 +42,7 @@
             </p>
           </div>
         </div>
-        
+
       </div>
       <div class="row" style="margin-top:50px">
         <div class="col-md-7">
@@ -66,7 +66,7 @@
                     <span id="firstName" class="errorBlock"></span>
                   </div>
                   <div class="col-md-11">
-                    <input type="text" name="sender_email" placeholder="Ваш email"> <span class="required">*</span>
+                    <input type="text" name="sender_email" placeholder="Ваш email" > <span class="required">*</span>
                     <span id="lastName" class="errorBlock"></span>
                   </div>
                   <div class="col-md-11" style="margin-top:15px">
@@ -74,7 +74,7 @@
                     <span id="phone" class="errorBlock"></span>
                   </div>
                 <div class="col-md-11">
-                  <textarea name="text" id="msgr_input" placeholder="Текст сообщения"> </textarea>
+                  <textarea name="text" id="msgr_input" placeholder="Текст сообщения карьера"> </textarea>
                   <span id="lastName" class="errorBlock"></span>
                 </div>
               </div>

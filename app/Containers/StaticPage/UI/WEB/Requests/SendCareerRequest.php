@@ -7,7 +7,7 @@ use App\Ship\Parents\Requests\Request;
 /**
  * Class GetAllStaticPagesRequest.
  */
-class SendAdvRequest extends Request
+class SendCareerRequest extends Request
 {
 
     /**
@@ -55,6 +55,7 @@ class SendAdvRequest extends Request
        'sender_name'=>'required',
 			'sender_email' => 'required|email',
 			'sender_phone' => 'required',
+       'file' => 'required|mimes:pdf,docx,doc|max:8000',
         ];
     }
 
@@ -65,6 +66,9 @@ class SendAdvRequest extends Request
             'sender_email.required' => " | Необходимо ввести email адрес",
             'sender_email.email' => " | Емайл указан неверно",
             'sender_phone.required' => ' | Необходимо ввести телефон',
+          'file.required' => ' | Необходимо добавить резюме',
+          'file.mimes' => "| Файл должен быть документом PDF или DOC",
+          'file.max' => "| Максимальный размер файла для загрузки 8MB (8192 KB).",
 
         ];
     }

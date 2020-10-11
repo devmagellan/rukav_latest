@@ -6,6 +6,7 @@ use App\Containers\StaticPage\UI\WEB\Requests\CreateStaticPageRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\DeleteStaticPageRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\GetAllStaticPagesRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\SendAdvRequest;
+use App\Containers\StaticPage\UI\WEB\Requests\SendCareerRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\FindStaticPageByIdRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\UpdateStaticPageRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\StoreStaticPageRequest;
@@ -109,9 +110,9 @@ class Controller extends WebController
 
          // ..
     }
-	
+
 	public function getPage(GetAllStaticPagesRequest $request,$page){
-	
+
         $data['firstHelpPage']=\App\Containers\StaticPage\Models\StaticPage::where('link',$page)->orderBy('position','asc')->with('getSidebar')->first();
         $data['properties']=GlobalService::getMainProperties($request)['categories'];
         switch($data['firstHelpPage']->type){
@@ -271,10 +272,17 @@ var_dump($request->input('form'));
 
         return json_encode(['status'=>'success']);
     }
-	
+
 	public function sendAdvRequest(SendAdvRequest $request){
+      dd($request->file('file'));
 		dispatch(new \App\Containers\User\Jobs\SendAdvRequestJob($request->all()))->onQueue('queue_name');
-		return redirect()->back()->with('success', 'Ваше сообщение отправлено');   
+		return redirect()->back()->with('success', 'Ваше сообщение отправлено');
 	}
+
+  public function sendAdvRequestCareer(SendCareerRequest $request){
+    dd($request->file('file'));
+    dispatch(new \App\Containers\User\Jobs\SendAdvRequestJob($request->all()))->onQueue('queue_name');
+    return redirect()->back()->with('success', 'Ваше сообщение отправлено');
+  }
 
 }
