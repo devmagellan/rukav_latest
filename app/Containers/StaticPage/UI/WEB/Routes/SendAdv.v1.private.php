@@ -5,6 +5,11 @@ $router->post('/adv/connect', [
     'uses'       => 'Controller@sendAdvRequest',
 ]);
 
+$router->post('/adv/connect/career', [
+  'as'   => 'staticpages_adv',
+  'uses'       => 'Controller@sendAdvRequestCareer',
+]);
+
 
 
 
