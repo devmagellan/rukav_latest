@@ -14,6 +14,8 @@ use App\Containers\StaticPage\UI\WEB\Requests\EditStaticPageRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
 use App\Containers\HomePage\Services\GlobalService;
+use Illuminate\Support\Facades\Storage;
+
 /**
  * Class Controller
  *
@@ -274,13 +276,12 @@ var_dump($request->input('form'));
     }
 
 	public function sendAdvRequest(SendAdvRequest $request){
-      dd($request->file('file'));
 		dispatch(new \App\Containers\User\Jobs\SendAdvRequestJob($request->all()))->onQueue('queue_name');
 		return redirect()->back()->with('success', 'Ваше сообщение отправлено');
 	}
 
   public function sendAdvRequestCareer(SendCareerRequest $request){
-    dd($request->file('file'));
+    $filePath = Storage::disk('resume')->put('', $request->file('file'));
     dispatch(new \App\Containers\User\Jobs\SendAdvRequestJob($request->all()))->onQueue('queue_name');
     return redirect()->back()->with('success', 'Ваше сообщение отправлено');
   }
