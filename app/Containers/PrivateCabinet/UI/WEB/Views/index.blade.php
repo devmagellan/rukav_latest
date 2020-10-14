@@ -892,7 +892,13 @@
                 </a>
 
                 <input type="hidden" name="current_type" value="{{\Auth::user()->vid_user}}">
-                <button type="submit" class="prophile_save ml-auto">
+
+                @if(\Auth::user()->vid_user!='Компания')
+                  <button type="submit" formaction="/profile/save/to_company" class="prophile_save ml-auto">
+                  @else
+                  <button type="submit" class="prophile_save ml-auto">
+                @endif
+
                   Сохранить
                 </button>
               </div>
