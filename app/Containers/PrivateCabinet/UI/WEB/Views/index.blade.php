@@ -107,23 +107,21 @@
         </div>
         <div class="row flex">
           <div class="col-md-12">
-            <?
-            switch($toAccountType){
-              case 'to_individual':
-                $accountType='Предприниматель';
-                break;
-              case 'to_organisation':
-                $accountType='Организация';
-                break;
-              case 'to_company':
-                $accountType='Компания';
-                break;
-            }
-            ?>
-            <form class="prophile_form changeUserTypeForm" id="changeRegisterForm" method="post" action="/profile/save"
-            >
+            <form class="prophile_form changeUserTypeForm" id="changeRegisterForm" method="post" action="/profile/save">
               <input type="hidden" value="{{\Auth::user()->id}}" name="id">
-
+              <?
+              switch($toAccountType){
+                    case 'to_individual':
+                      $accountType='Предприниматель';
+                      break;
+                  case 'to_organisation':
+                      $accountType='Организация';
+                      break;
+                  case 'to_company':
+                      $accountType='Компания';
+                      break;
+              }
+              ?>
               <input type="hidden" value="@if(isset($accountType)) {{$accountType}} @endif" name="vid_user">
               <div class="prophile_show-wrapper ">
                 <div class="col-md-12">
@@ -883,7 +881,7 @@
                     </a></div>
                   @endif
                   @if(\Auth::user()->vid_user!='Компания')
-                  <div style="clear:both;" ><a type="submit" formaction="/profile/save/to_company"{{--href="/private_cabinet/to_company"--}} style="position:relative;top:50px;font-weight:200"class="prophile_change_account">
+                  <div style="clear:both;" ><a href="/private_cabinet/to_company" style="position:relative;top:50px;font-weight:200"class="prophile_change_account">
                       <img src="/img/user_icon_profile.svg" alt="">Сменить на Компанию
                     </a></div>
                     @endif

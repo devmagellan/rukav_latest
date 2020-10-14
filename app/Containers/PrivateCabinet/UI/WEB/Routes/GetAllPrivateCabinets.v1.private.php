@@ -1,10 +1,10 @@
 <?php
 
 /** @var Route $router */
-/*$router->get('/private_cabinet/{type?}', [
+$router->get('/private_cabinet/{type?}', [
     'as' => 'web_privatecabinet_index',
     'uses'  => 'Controller@index',
-]);*/
+]);
 
 
 
@@ -34,14 +34,6 @@ $router->post('/profile/save', [
     /*'middleware' => [
       'auth:web',
     ],*/
-]);
-
-$router->get('/private_cabinet/to_company', [
-  'as' => 'web_privatecabinet_index',
-  'uses'  => 'Controller@indexToCompany',
-  'middleware' => [
-    'auth:web',
-  ],
 ]);
 
 $router->post('/profile/save/to_individual', [
