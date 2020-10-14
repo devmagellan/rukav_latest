@@ -120,7 +120,7 @@
                 break;
             }
             ?>
-            <form class="prophile_form changeUserTypeForm" id="changeRegisterForm" method="post" action="/profile/save/{{$toAccountType}}"
+            <form class="prophile_form changeUserTypeForm" id="changeRegisterForm" method="post" action="/profile/save"
             >
               <input type="hidden" value="{{\Auth::user()->id}}" name="id">
 
@@ -883,7 +883,7 @@
                     </a></div>
                   @endif
                   @if(\Auth::user()->vid_user!='Компания')
-                  <div style="clear:both;" ><a href="/private_cabinet/to_company" style="position:relative;top:50px;font-weight:200"class="prophile_change_account">
+                  <div style="clear:both;" ><a type="submit" formaction="/profile/save/to_company"{{--href="/private_cabinet/to_company"--}} style="position:relative;top:50px;font-weight:200"class="prophile_change_account">
                       <img src="/img/user_icon_profile.svg" alt="">Сменить на Компанию
                     </a></div>
                     @endif

@@ -12532,6 +12532,10 @@ class Controller extends WebController
      *
      * @param GetAllPrivateCabinetsRequest $request
      */
+
+    public function indexToCompany(ProfileSaveToCompanyRequest $request){
+
+    }
     public function index(GetAllPrivateCabinetsRequest $request,$type=null)
     {
         $toAccountType='';
