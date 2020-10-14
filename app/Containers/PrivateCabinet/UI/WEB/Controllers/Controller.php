@@ -10,6 +10,9 @@ use App\Containers\PrivateCabinet\UI\WEB\Requests\UpdatePrivateCabinetRequest;
 use App\Containers\PrivateCabinet\UI\WEB\Requests\StorePrivateCabinetRequest;
 use App\Containers\PrivateCabinet\UI\WEB\Requests\EditPrivateCabinetRequest;
 use App\Containers\User\UI\WEB\Requests\GetAllUsersRequest;
+use App\Containers\User\UI\WEB\Requests\ProfileSaveToIndividualRequest;
+use App\Containers\User\UI\WEB\Requests\ProfileSaveToOrganisationRequest;
+use App\Containers\User\UI\WEB\Requests\ProfileSaveToCompanyRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
 use Illuminate\Support\Facades\Storage;
@@ -12669,6 +12672,20 @@ class Controller extends WebController
 
     }
 
+  public function profileSaveToIndividual(ProfileSaveToIndividualRequest $request){
+    $result = Apiato::call('User@UpdateUserAction', [$request]);
+
+  }
+
+  public function profileSaveToOrganisation(ProfileSaveToOrganisationRequest $request){
+    $result = Apiato::call('User@UpdateUserAction', [$request]);
+
+  }
+
+  public function profileSaveToCompany(ProfileSaveToCompanyRequest $request){
+    $result = Apiato::call('User@UpdateUserAction', [$request]);
+
+  }
     public function changePassword(GetAllUsersRequest $request){
      $user = Apiato::call('User@FindUserByIdAction', [$request]);
         if(\Hash::check($request->input('old_password'), $user->password)){
