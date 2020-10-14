@@ -753,5 +753,10 @@ $(this).closest('.add_foto_file_item').remove()
         }
     });
 
+    $("#msgr_file").change(function(){
+        var filename = $(this).val().replace(/.*\\/, "");
+        $(".file_input_span").html(filename);
+    });
+
 
 });

@@ -3500,3 +3500,24 @@ div.product_slider_main div.slick-track{
     align-items: center;
     display: flex;
 }
+
+.msgr_file_class {
+    margin-top: 18px;
+    margin-bottom: 0;
+    background: #A269F7;
+    border: 1px solid #A269F7;
+    box-sizing: border-box;
+    border-radius: 23px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 34px;
+    text-align: center;
+    color: #FFFFFF;
+    transition: all .2s ease-out;
+    padding: 0 20px;
+    margin-right: 10px;
+}
+.file_input_span{
+    font-size: 14px;
+}

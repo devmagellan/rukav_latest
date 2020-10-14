@@ -91,8 +91,11 @@
                   </div>
 
                 <div class="col-md-11">
-                  <input type="file" name="file" id="msgr_file" placeholder="Ваше резюме"/>
+                  <input type="file" name="file" id="msgr_file" style="display: none;" placeholder="Ваше резюме"/>
+                    <label for="msgr_file" class="msgr_file_class"><i class="fas fa-download"></i> Загрузить</label>
+                    <span class="file_input_span">Файл не найден</span>
                   <span id="resume" class="errorBlock"></span>
+                
                 </div>
                 <div class="col-md-11">
                   <textarea name="text" id="msgr_input" placeholder="Текст сообщения"> </textarea>
