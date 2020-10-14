@@ -107,21 +107,23 @@
         </div>
         <div class="row flex">
           <div class="col-md-12">
-            <form class="prophile_form changeUserTypeForm" id="changeRegisterForm" method="post" action="/profile/save">
+            <?
+            switch($toAccountType){
+              case 'to_individual':
+                $accountType='Предприниматель';
+                break;
+              case 'to_organisation':
+                $accountType='Организация';
+                break;
+              case 'to_company':
+                $accountType='Компания';
+                break;
+            }
+            ?>
+            <form class="prophile_form changeUserTypeForm" id="changeRegisterForm" method="post" action="/profile/save/{{$toAccountType}}"
+            >
               <input type="hidden" value="{{\Auth::user()->id}}" name="id">
-              <?
-              switch($toAccountType){
-                    case 'to_individual':
-                      $accountType='Предприниматель';
-                      break;
-                  case 'to_organisation':
-                      $accountType='Организация';
-                      break;
-                  case 'to_company':
-                      $accountType='Компания';
-                      break;
-              }
-              ?>
+
               <input type="hidden" value="@if(isset($accountType)) {{$accountType}} @endif" name="vid_user">
               <div class="prophile_show-wrapper ">
                 <div class="col-md-12">
