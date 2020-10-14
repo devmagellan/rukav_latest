@@ -1,10 +1,13 @@
 <?php
 
 /** @var Route $router */
-/*$router->get('/private_cabinet/{type?}', [
+$router->get('/private_cabinet/{type?}', [
     'as' => 'web_privatecabinet_index',
     'uses'  => 'Controller@index',
-]);*/
+	'middleware' => [
+      'auth:web',
+    ],
+]);
 
 
 
@@ -35,38 +38,6 @@ $router->post('/profile/save', [
       'auth:web',
     ],*/
 ]);
-
-$router->get('/private_cabinet/to_company', [
-  'as' => 'web_privatecabinet_index',
-  'uses'  => 'Controller@indexToCompany',
-  'middleware' => [
-    'auth:web',
-  ],
-]);
-
-$router->post('/profile/save/to_individual', [
-  'as' => 'profile_save',
-  'uses'  => 'Controller@profileSaveToIndividual',
-  'middleware' => [
-    'auth:web',
-  ],
-]);
-
-$router->post('/profile/save/to_organisation', [
-  'as' => 'profile_save',
-  'uses'  => 'Controller@profileSaveToOrganisation',
-  'middleware' => [
-    'auth:web',
-  ],
-]);
-$router->post('/profile/save/to_company', [
-  'as' => 'profile_save',
-  'uses'  => 'Controller@profileSaveToCompany',
-  'middleware' => [
-    'auth:web',
-  ],
-]);
-
 
 $router->post('/upload-profile-image-ajax', [
     'as' => 'upload-profile-image-ajax',
