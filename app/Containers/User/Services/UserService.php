@@ -14,6 +14,7 @@ class UserService
   {
       $nameAvatar=time() . '.jpg' ;
       \Log::info('UserData=>',array($data));
+    \Log::info('UserData2=>',array($data[0]));
       try {
 
 
