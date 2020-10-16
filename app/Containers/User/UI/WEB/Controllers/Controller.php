@@ -336,7 +336,7 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
         return response()->json(['response'=>$error],403);
     }
 
-    public function changeRegisterFromSimpleUser(ChangeFromSimpleUserRequest $request){
+    public function changeRegisterFromSimpleUser($request){
         $this->smsService=new SmsService();
         $message=$this->smsService->store($request);
         session()->put('emailVerificationTelephone',$request->phone);
@@ -345,7 +345,7 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
         return response()->json(['response'=>'success'],200);
     }
 
-    public function changeRegisterFromRestUser(ChangeFromSimpleUserRequest $request){
+    public function changeRegisterFromRestUser($request){
         Apiato::call('User@ChangeUserAccountAction', [$request]);
         session()->flash('message', 'Данные успешно обновлены!');
         return response()->json(['response'=>'success'],200);

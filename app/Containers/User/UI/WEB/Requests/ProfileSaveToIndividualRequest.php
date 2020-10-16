@@ -49,13 +49,22 @@ class ProfileSaveToIndividualRequest extends Request
     /**
      * @return  array
      */
-    public function rules()
-    {
-        return [
-            // 'id' => 'required',
-            // '{user-input}' => 'required|max:255',
-        ];
-    }
+  public function rules()
+  {
+    return [
+      'business_name' => 'required',
+
+    ];
+  }
+
+  public function messages()
+  {
+    return [
+      'business_name.required' => 'Необходимо добавить название бизнеса',
+
+
+    ];
+  }
 
     /**
      * @return  bool

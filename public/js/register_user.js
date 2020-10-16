@@ -169,19 +169,26 @@ $(document).ready(function () {
 
 
     $(".changeUserTypeForm").bind('submit', function (e) {
+      console.log($(this).find("button[type=submit]:focus" )[0].formAction);
         e.preventDefault();
         console.log($(e.target))
+      console.log($(e.target)[0].baseURI);
+
+        var save_url=$(this).find("button[type=submit]:focus" )[0].formAction;
         var current_type = $(e.target).find('input[name="current_type"]').val()
         console.log('changeUserTypeForm', current_type);
-        var formData = $('#changeRegisterForm').serialize();
+        var formData = $('#changeRegisterForm').serializeArray();
+      formData.push({ name: "save_url", value: save_url });
         if (window.location.href.indexOf("to_individual") >= 0 || window.location.href.indexOf("to_company") >= 0 || window.location.href.indexOf("to_organisation")>= 0 ) {
 console.log(window.location.href.indexOf("to_individual")>= 0)
             console.log(window.location.href.indexOf("to_company")>= 0)
             console.log(window.location.href.indexOf("to_organisation")>= 0)
-      if (current_type == 'Частная') {
+
+          formData.push({ name: "vid_userl", value: current_type });
+
             $.ajax({
                 method: 'post',
-                url: '/changeRegisterFromSimpleUser',
+                url: save_url,
                 data: formData,
                 success: function (data) {
                     //location.reload();
@@ -189,6 +196,7 @@ console.log(window.location.href.indexOf("to_individual")>= 0)
                     $('#confirmPhone').modal({show: true})
                 },
                 error: function (errors) {
+                  console.log('Got errors')
                     var response = JSON.parse(errors.responseText);
                     $('.errorBlock').html('');
                     $.each(response.errors, function (key, value) {
@@ -196,22 +204,7 @@ console.log(window.location.href.indexOf("to_individual")>= 0)
                     });
                 }
             });
-        }
-        else{
-            $.ajax({
-                method: 'post',
-                url: '/changeRegisterFromRestUser',
-                data: formData,
-                success: function (data) {
-                    //location.reload();
-                    console.log('Updated To session saved', data)
-                    window.location.href='/private_cabinet'
-                },
-                error: function (errors) {
 
-                }
-            });
-        }
         }
         else{
             $.ajax({

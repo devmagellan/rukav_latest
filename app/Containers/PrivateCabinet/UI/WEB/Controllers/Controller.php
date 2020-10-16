@@ -20,6 +20,7 @@ use Image;
 use Carbon\Carbon;
 use Intervention\Image\ImageManager;
 use App\Containers\Ad\Services\AdService;
+use App\Containers\User\Services\UserService;
 use App\Containers\HomePage\Services\GlobalService;
 
 
@@ -12678,11 +12679,22 @@ class Controller extends WebController
   }
 
   public function profileSaveToOrganisation(ProfileSaveToOrganisationRequest $request){
-    $result = Apiato::call('User@UpdateUserAction', [$request]);
+      if($request->input('vid_user')=='Частная'){
+        $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
+        return $controller->changeRegisterFromSimpleUser($request);
+      }
+      else{
+        $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
+        return $controller->changeRegisterFromRestUser($request);
+      }
+
+
 
   }
 
   public function profileSaveToCompany(ProfileSaveToCompanyRequest $request){
+
+      dd($request->all());
     $result = Apiato::call('User@UpdateUserAction', [$request]);
 
   }

@@ -59,6 +59,17 @@ class ProfileSaveToCompanyRequest extends Request
         ];
     }
 
+  public function messages()
+  {
+    return [
+      'company_name.required' => 'Необходимо добавить название компании',
+      'regNumber.required' => 'Необходимо добавить регистрационный номер ',
+      'vatNumber.required' => 'Необходимо добавить VAT номер',
+
+
+    ];
+  }
+
     /**
      * @return  bool
      */

@@ -192,6 +192,7 @@
                         <input type="text" class="prophile_main_input" name="business_name" value="">
                         @endif
                     </div>
+                    <div style="display:block;color:red" id="business_name" class="errorBlock"></div>
 
                   @endif
                   @if(((\Auth::user()->getOrganisationAccount   && $toAccountType!='to_company' && $toAccountType!='to_individual' && \Auth::user()->vid_user !='Частная'
@@ -283,13 +284,18 @@
                     </label>
                     @if(\Auth::user()->getBusinessAccount)
                     <input type="text" class="prophile_main_input" value="{{\Auth::user()->getBusinessAccount->company_name}}" name="company_name" placeholder="Название компании">
+                      <span id="company_name" class="errorBlock"></span>
                     @else
                       <input type="text" class="prophile_main_input" name="company_name" placeholder="Название компании">
-                      @endif
+                  <br>
+
+
+                    @endif
                     <p class="prophile_required">
                       *
                     </p>
                   </div>
+                  <div style="display:block;color:red" id="company_name" class="errorBlock"></div>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container checkbox_unactive">
                       <input class="checkbox_hidden" type="checkbox" checked="checked">
@@ -304,6 +310,7 @@
                       *
                     </p>
                   </div>
+                  <div style="display:block;color:red" id="regNumber" class="errorBlock"></div>
                   <div class="prophile_show_input-wrapper prophile_id_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container checkbox_unactive">
                       <input class="checkbox_hidden" type="checkbox" checked="checked">
@@ -316,6 +323,7 @@
 
                     @endif
                   </div>
+                  <div style="display:block;color:red" id="vatNumber" class="errorBlock"></div>
                 </div>
               </div>
               @endif
@@ -893,11 +901,22 @@
 
                 <input type="hidden" name="current_type" value="{{\Auth::user()->vid_user}}">
 
-                @if(\Auth::user()->vid_user!='Компания')
-                  <button type="submit" formaction="/profile/save/to_company" class="prophile_save ml-auto">
-                  @else
-                  <button type="submit" class="prophile_save ml-auto">
-                @endif
+                      <?
+                      switch($toAccountType){
+                        case 'to_individual':
+                          echo '<button type="submit" formaction="/profile/save/to_individual" class="prophile_save ml-auto">';
+                          break;
+                        case 'to_organisation':
+                          echo '<button type="submit" formaction="/profile/save/to_organisation" class="prophile_save ml-auto">';
+                          break;
+                        case 'to_company':
+                          echo '<button type="submit" formaction="/profile/save/to_company" class="prophile_save ml-auto">';
+                          break;
+                        default:
+                          echo '<button type="submit" class="prophile_save ml-auto">';
+                      }
+                      ?>
+
 
                   Сохранить
                 </button>
