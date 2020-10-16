@@ -153,6 +153,9 @@
 
 
         @foreach($products as $product)
+      @php
+      \App\Containers\Ad\Models\Ad::where('id',$product->id)->update(['counter'=>$product->counter+1]);
+      @endphp
         <div class="row product_item_wrapper product_item_wrapper_active">
           <div class="col-sm-2">
             @if($product->pictures)
@@ -368,8 +371,8 @@ console.log({{$pricesLimits[0]['max_price']}})
 
         $( "#slider-range" ).slider({
             range: true,
-            min: '{{$pricesLimits[0]['min_price']}}',
-            max: '{{$pricesLimits[0]['max_price']}}',
+            min: Number('{{$pricesLimits[0]['min_price']}}'),
+            max: Number('{{$pricesLimits[0]['max_price']}}'),
             values: [ '{{$pricesLimits[0]['min_price']}}','{{$pricesLimits[0]['max_price']}}' ],
             slide: function( event, ui ) {
                 $( "#amount" ).val( "£ " + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
