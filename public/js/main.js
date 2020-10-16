@@ -646,7 +646,7 @@ $(this).closest('.add_foto_file_item').remove()
     //     $(this).val("+" + $(".country[class*='active']").attr("data-dial-code") + $(this).val());
     // });
 
-    $(function () {
+  /*  $(function () {
         $("#slider-range").slider({
             range: true,
             min: 0,
@@ -662,7 +662,7 @@ $(this).closest('.add_foto_file_item').remove()
             " - " + $("#slider-range").slider("values", 1));
         $("#price_start").val($("#slider-range").slider("values", 0));
         $("#price_end").val($("#slider-range").slider("values", 1));
-    });
+    });*/
 
     $('.message_sidebar_theme_head').click(function () {
         $('.message_sidebar_theme_body').hide();

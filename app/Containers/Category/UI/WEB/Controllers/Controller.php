@@ -89,6 +89,8 @@ class Controller extends WebController
       }
 	  }
       $currentPage = $request->input('page');
+
+
       $from=$request->input('price_start');
       $to=$request->input('price_end');
 

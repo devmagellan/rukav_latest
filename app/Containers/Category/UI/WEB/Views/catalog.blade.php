@@ -368,9 +368,9 @@ console.log({{$pricesLimits[0]['max_price']}})
 
         $( "#slider-range" ).slider({
             range: true,
-            min: {{$pricesLimits[0]['min_price']}},
-            max: {{$pricesLimits[0]['max_price']}},
-            values: [ 75,300 ],
+            min: '{{$pricesLimits[0]['min_price']}}',
+            max: '{{$pricesLimits[0]['max_price']}}',
+            values: [ '{{$pricesLimits[0]['min_price']}}','{{$pricesLimits[0]['max_price']}}' ],
             slide: function( event, ui ) {
                 $( "#amount" ).val( "£ " + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
                 $( "#price_start" ).val( ui.values[ 0 ]);
@@ -538,7 +538,6 @@ console.log('final=>',url+param)
       });
       $('.flag').css('display','block')
     });
-</script>
 </script>
 @endsection
 
