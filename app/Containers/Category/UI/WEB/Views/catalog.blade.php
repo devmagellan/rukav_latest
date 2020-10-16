@@ -105,7 +105,7 @@
 
 
           <div class="col-sm-3">
-            <label for="amount" class="product_price_text">Price range:</label>
+            <label for="amount" class="product_price_text">Диапазон цен:</label>
             <input type="text" id="amount" readonly>
             <input type="hidden" id="price_start" name="price_start" value="" readonly>
             <input type="hidden" id="price_end" name="price_end" value="" readonly>
