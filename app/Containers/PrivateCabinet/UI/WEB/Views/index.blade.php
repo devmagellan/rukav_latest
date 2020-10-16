@@ -1056,12 +1056,12 @@
                       Просмотров
                     </p>
                     <p class="choosen_info">
-                      1256
+                      {{$ad->view_counter}}
                     </p>
                   </div>
                   <div class="choosen_subitem d-flex flex-column">
                     <p class="choosen_subtitle">
-                      Появилось в поиске
+                      {{$ad->counter}}
                     </p>
                     <p class="choosen_info">
                       34567
