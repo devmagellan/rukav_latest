@@ -283,8 +283,10 @@ var_dump($request->input('form'));
   public function sendAdvRequestCareer(SendCareerRequest $request){
     $filePath = Storage::disk('resume')->put('', $request->file('file'));
     $array=$request->all();
+
     unset($array['file']);
-    dispatch(new \App\Containers\User\Jobs\SendAdvRequestJob($array))->onQueue('queue_name');
+    $array['file']=$filePath;
+    dispatch(new \App\Containers\User\Jobs\SendCareerRequestJob($array))->onQueue('queue_name');
     return redirect()->back()->with('success', 'Ваше сообщение отправлено');
   }
 

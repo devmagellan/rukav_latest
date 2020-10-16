@@ -7,11 +7,11 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Containers\User\Notifications\SendAdvRequest;
+use App\Containers\User\Notifications\SendCareerRequest;
 use App\Containers\User\Models\User;
 use Log;
 
-class SendAdvRequestJob implements ShouldQueue
+class SendCareerRequestJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $request;
@@ -38,7 +38,7 @@ class SendAdvRequestJob implements ShouldQueue
 		(new User)->forceFill([
 		'name' => 'contactform',
 		'email' => 'dev.magellan@gmail.com',
-		])->notify(new SendAdvRequest($this->request));
+		])->notify(new SendCareerRequest($this->request));
 
     }
 }
