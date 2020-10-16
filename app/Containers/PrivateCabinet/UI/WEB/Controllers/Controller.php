@@ -12693,8 +12693,6 @@ class Controller extends WebController
   }
 
   public function profileSaveToCompany(ProfileSaveToCompanyRequest $request){
-
-      dd($request->all());
     $result = Apiato::call('User@UpdateUserAction', [$request]);
 
   }
