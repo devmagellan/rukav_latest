@@ -105,7 +105,7 @@
 
 
           <div class="col-sm-3">
-            <label for="amount" class="product_price_text">Price range:</label>
+            <label for="amount" class="product_price_text">Диапазон цен:</label>
             <input type="text" id="amount" readonly>
             <input type="hidden" id="price_start" name="price_start" value="" readonly>
             <input type="hidden" id="price_end" name="price_end" value="" readonly>
@@ -153,6 +153,9 @@
 
 
         @foreach($products as $product)
+      @php
+      \App\Containers\Ad\Models\Ad::where('id',$product->id)->update(['counter'=>$product->counter+1]);
+      @endphp
         <div class="row product_item_wrapper product_item_wrapper_active">
           <div class="col-sm-2">
             @if($product->pictures)
@@ -368,9 +371,9 @@ console.log({{$pricesLimits[0]['max_price']}})
 
         $( "#slider-range" ).slider({
             range: true,
-            min: {{$pricesLimits[0]['min_price']}},
-            max: {{$pricesLimits[0]['max_price']}},
-            values: [ 75,300 ],
+            min: Number('{{$pricesLimits[0]['min_price']}}'),
+            max: Number('{{$pricesLimits[0]['max_price']}}'),
+            values: [ '{{$pricesLimits[0]['min_price']}}','{{$pricesLimits[0]['max_price']}}' ],
             slide: function( event, ui ) {
                 $( "#amount" ).val( "£ " + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
                 $( "#price_start" ).val( ui.values[ 0 ]);
@@ -511,7 +514,8 @@ console.log('final=>',url+param)
     }
 
   $('.product_filter_clear').click(function(){
-      window.location = window.location.href.split("?")[0];
+    console.log(window.location.href.split("?")[0])
+    setTimeout(function(){document.location.href = ''+window.location.href.split("?")[0]+'/'},100);
   })
 
 
@@ -537,7 +541,6 @@ console.log('final=>',url+param)
       });
       $('.flag').css('display','block')
     });
-</script>
 </script>
 @endsection
 

@@ -12547,14 +12547,12 @@ class Controller extends WebController
    */
   public function show(FindAdByIdRequest $request)
   {
-
     $ad = Apiato::call('Ad@FindAdByIdAction', [$request]);
     $receiver=$ad->sender;
     //TODO эту переменную сделать в сервис провайдере
     $data['properties']=GlobalService::getMainProperties($request)['categories'];
     $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
     $breadcrumbsArray=\App\Containers\Site\Services\ProductCategoryService::BreadCrumbs($ad->category_id);
-
 
     return view('ad::ads.single-ads', compact( 'ad','breadcrumbsArray','categoriesOnlyRoot','receiver','data'));
   }

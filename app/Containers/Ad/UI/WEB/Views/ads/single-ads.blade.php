@@ -413,7 +413,7 @@ ul.slickslide li img, .slick-dots button img {
       <div class="col-md-9">
         <p>Добавлено в <span>{{$ad->created_at->format('H:i')}}, {{$ad->created_at->format('d-m-Y')}}</span></p>
         <p>Номер объявления: <span>{{$ad->id}}</span></p>
-        <p>Просмотры: <span>{{rand(1, 100)}}</span></p>
+        <p>Просмотры: <span>{{$ad->counter}}</span></p>
       </div>
       <div class="col-md-3">
         <div class="product_indicators_complain">
