@@ -13,28 +13,29 @@ class UserService
   public function createUser($data): User
   {
       $nameAvatar=time() . '.jpg' ;
-      \Log::info('UserData=>',array($data));
-    \Log::info('UserData2=>',array($data[0]));
+      \Log::info('UserData3=>',array($data));
+    
+	if(is_array($data)){
+		\Log::info('UserData5=>');
+	$data = json_decode(json_encode($data), FALSE);}
       try {
-
-
       $current=\App\Containers\User\Models\User::where('email',$data->email)->withTrashed()->first();
       \Log::info('CurrentUser=>',array($current));
-	  $id=($current!=null) ? $current->id : $data->customer_id;
+	  $id=(property_exists($data, 'customer_id') && $current==null)  ? $data->customer_id : $current->id ;
 	  \Log::info('CurrentUserID=>'.$id);
       return User::withTrashed()->updateOrCreate(['id'=>$id],[
-      'name' => $data->firstName,
-      'sername' => $data->lastName,
+      'name' => (property_exists($data, 'save_url') ) ? $data->name : $data->firstName,
+      'sername' => (property_exists($data, 'save_url') ) ? $data->sername : $data->lastName,
       'email' => $data->email,
-      'password' => ($data->customer_id && $current!=null && $data->admin_side==1 ) ? $current->password : bcrypt($data->password),
+      'password' => (property_exists($data, 'customer_id') && $current!=null && $data->admin_side==1 || null!=($data->save_url) && $current!=null) ? $current->password : bcrypt($data->password),
       'country' => $data->country,
-      'phone' => $data->code.$data->phone,
+      'phone' => (!property_exists($data, 'save_url') ) ? $data->code.$data->phone : $current->phone,
       'vid_user' => $data->vid_user,
-      'avatar'=>($data->customer_id) ? $data->avatar : null,
-      'active'=>($data->customer_id) ? $data->active : 1,
-      'is_client'=>($data->customer_id) ? $data->is_client : 1,
-      'confirmed'=> ($data->customer_id) ? $data->confirmed : User::STATUS_INACTIVE,
-      'is_confirmed_phone'=> ($data->customer_id) ? $data->is_confirmed_phone : 0,
+      'avatar'=>(property_exists($data, 'customer_id')  && $data->customer_id) ? $data->avatar : null,
+      'active'=>(property_exists($data, 'customer_id')  && $data->customer_id) ? $data->active : 1,
+      'is_client'=>(property_exists($data, 'customer_id')  && $data->customer_id) ? $data->is_client : 1,
+      'confirmed'=> (property_exists($data, 'customer_id')  && $data->customer_id) ? $data->confirmed : User::STATUS_INACTIVE,
+      'is_confirmed_phone'=> (property_exists($data, 'customer_id')  && $data->customer_id) ? $data->is_confirmed_phone : 0,
       'verify_token' => Str::random(),
       'deleted_at'=>null
     ]);
