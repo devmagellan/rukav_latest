@@ -4,10 +4,12 @@
 $router->get('/private_cabinet/{type?}', [
     'as' => 'web_privatecabinet_index',
     'uses'  => 'Controller@index',
-    /*'middleware' => [
+	'middleware' => [
       'auth:web',
-    ],*/
+    ],
 ]);
+
+
 
 
 
@@ -36,9 +38,6 @@ $router->post('/profile/save', [
       'auth:web',
     ],*/
 ]);
-
-
-
 
 $router->post('/upload-profile-image-ajax', [
     'as' => 'upload-profile-image-ajax',

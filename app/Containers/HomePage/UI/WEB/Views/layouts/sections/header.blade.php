@@ -39,8 +39,6 @@
                                               class="form_category_imp-loupe"></a>
       </div>
 
-
-
       @if(!\Illuminate\Support\Facades\Auth::user())
       <div class="col-md-2 col-2">
         <a href="#" class="add_ad" data-toggle="modal" data-target="#ModalIn">

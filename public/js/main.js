@@ -741,12 +741,21 @@ $(this).closest('.add_foto_file_item').remove()
     console.log("test7");
 
     $(".category_dropdown_sub_list .arrow_back_end").on("click", function(){
-        $(this).parent().hide();
-        $(".category_dropdown").height($(this).parent().height());
+        if(ScreenWidth < 720){
+            $(this).parent().hide();
+            $(".category_dropdown").height($(this).parent().height());
+        }
     });
     $('.categoryLink').on('click', function () {
+        if(ScreenWidth < 720){
             console.log($(this).find("ul").height());
             $(".category_dropdown").height($(this).find("ul").height());
+        }
+    });
+
+    $("#msgr_file").change(function(){
+        var filename = $(this).val().replace(/.*\\/, "");
+        $(".file_input_span").html(filename);
     });
 
 
