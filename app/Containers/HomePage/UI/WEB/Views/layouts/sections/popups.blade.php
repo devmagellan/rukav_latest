@@ -1006,7 +1006,7 @@ Your e-mail is verified. Your social account approoved.
 
         return true;
       } else {
-        return false;
+        return true;
       }
     });
   });

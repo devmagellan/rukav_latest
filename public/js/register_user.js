@@ -191,9 +191,10 @@ console.log(window.location.href.indexOf("to_individual")>= 0)
                 url: save_url,
                 data: formData,
                 success: function (data) {
-                    //location.reload();
+                    location.reload();
                     console.log('Updated To session saved', data)
-                    $('#confirmPhone').modal({show: true})
+                  if(current_type=='Частная'){
+                    $('#confirmPhone').modal({show: true})}
                 },
                 error: function (errors) {
                   console.log('Got errors')
