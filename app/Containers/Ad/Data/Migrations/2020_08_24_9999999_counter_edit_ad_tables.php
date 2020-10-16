@@ -13,6 +13,7 @@ class CounterEditAdTables extends Migration
     {
       Schema::table('ads', function (Blueprint $table) {
 		$table->boolean('counter')->nullable();
+        $table->boolean('view_counter')->nullable();
 
       });
     }
@@ -23,6 +24,7 @@ class CounterEditAdTables extends Migration
     {
       Schema::table('ads', function($table) {
         $table->dropColumn('counter');
+        $table->dropColumn('view_counter');
       });
     }
 }
