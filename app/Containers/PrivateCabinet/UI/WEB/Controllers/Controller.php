@@ -12674,7 +12674,14 @@ class Controller extends WebController
     }
 
   public function profileSaveToIndividual(ProfileSaveToIndividualRequest $request){
-    $result = Apiato::call('User@UpdateUserAction', [$request]);
+    if($request->input('vid_user')=='Частная'){
+      $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
+      return $controller->changeRegisterFromSimpleUser($request);
+    }
+    else{
+      $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
+      return $controller->changeRegisterFromRestUser($request);
+    }
 
   }
 
@@ -12693,7 +12700,14 @@ class Controller extends WebController
   }
 
   public function profileSaveToCompany(ProfileSaveToCompanyRequest $request){
-    $result = Apiato::call('User@UpdateUserAction', [$request]);
+    if($request->input('vid_user')=='Частная'){
+      $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
+      return $controller->changeRegisterFromSimpleUser($request);
+    }
+    else{
+      $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
+      return $controller->changeRegisterFromRestUser($request);
+    }
 
   }
     public function changePassword(GetAllUsersRequest $request){
