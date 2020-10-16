@@ -12553,7 +12553,7 @@ class Controller extends WebController
     $data['properties']=GlobalService::getMainProperties($request)['categories'];
     $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
     $breadcrumbsArray=\App\Containers\Site\Services\ProductCategoryService::BreadCrumbs($ad->category_id);
-    \App\Containers\Ad\Models\Ad::where('id',$ad->id)->update(['view_counter'=>$ad->view_counter+1]);
+    \App\Containers\Ad\Models\Ad::where('id',$ad->id)->update(['view_counter'=>($ad->view_counter) ? $ad->view_counter+1 : 1]);
     $ad = Apiato::call('Ad@FindAdByIdAction', [$request]);
     return view('ad::ads.single-ads', compact( 'ad','breadcrumbsArray','categoriesOnlyRoot','receiver','data'));
   }
