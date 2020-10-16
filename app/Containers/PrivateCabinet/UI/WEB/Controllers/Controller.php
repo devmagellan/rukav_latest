@@ -12674,7 +12674,7 @@ class Controller extends WebController
     }
 
   public function profileSaveToIndividual(ProfileSaveToIndividualRequest $request){
-    if($request->input('vid_user')=='Частная'){
+    if($request->input('vid_Fuser')=='Частная'){
       $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
       return $controller->changeRegisterFromSimpleUser($request);
     }
