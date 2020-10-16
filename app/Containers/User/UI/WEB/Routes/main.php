@@ -5,6 +5,15 @@ $router->get('/user', [
     'uses' => 'Controller@sayWelcome',
 ]);
 
+$router->get('/businessusers', [
+  'as'   => 'businessusers',
+  'uses' => 'Controller@businessUsers',
+]);
+$router->get('/delete_registration', [
+  'as'   => 'delete_registration',
+  'uses' => 'Controller@deleteRegistration',
+]);
+
 $router->post('/register', [
   'as'   => 'register_user_web',
   'uses' => 'Controller@registerUser',
@@ -92,5 +101,13 @@ $router->post('/recovery_change_password', [
     ],*/
 ]);
 
+
+$router->post('/go_to_business_users', [
+  'as' => '/go_to_business_users',
+  'uses'  => 'Controller@goToBusinessUsers',
+  'middleware' => [
+    'auth:web',
+  ],
+]);
 
 

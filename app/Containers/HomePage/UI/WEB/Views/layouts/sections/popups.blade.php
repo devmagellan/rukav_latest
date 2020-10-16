@@ -11,6 +11,86 @@
     </ul>
   </div>
 @endif
+<div class="modal fade" id="goToBusinessUsersModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel53"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <img src="{{asset('img/close-icon.svg')}}" alt="">
+      </button>
+      <h6 class="modalTitle" ><b>Для того чтобы попасть в список Бизнес-пользователей - пожалуйста заполните:</b></h6>
+      <form id="GoBusinessForm" class="formModal" action="/go_to_business_users" method="post">
+
+<div class="row">
+        <div class="col-sm-12 col-md-3"></div>
+        <div class="col-sm-12 col-md-2">
+          @if(\Auth::user())
+          <label for="imgInputBusiness" class="prophile_photo_picked_wrapper">
+            <img class="prophile_photo_picked" for="imgInputBusiness" src="@if(\Auth::user()->avatar)  storage/avatars/{{\Auth::user()->avatar}} @else img/slide_img1.png @endif " alt="">
+          </label>
+          <label class="prophile_photo_wrapper" for="imgInputBusiness">
+            <div class="prophile_photo_img">
+              @if(\Auth::user())
+                <img src="/storage/avatars/{{\Auth::user()->avatar}}" alt="">
+
+              @else
+                <img src="img/prophile_camera.png" alt="">@endif
+            </div>
+            @if(!\Auth::user()->avatar)
+
+              <a class="prophile_photo_change">
+                Добавить фото или логотип
+              </a>
+            @endif
+@endif
+          </label>
+          <input type="file" name="loadphoto" id="imgInputBusiness">
+        </div>
+</div>
+
+
+
+
+        <input type="hidden" name="id" value="@if(\Auth::user()) {{\Auth::user()->id}} @endif">
+        <div class="row">
+          <div class="input_password_wrapper col-md-12" style="margin:0 auto">
+            <input type="text"  placeholder="Название компании" class="input_password" name="company_name">
+            <span id="company_name" class="errorBlock"></span>
+          </div>
+          <div class="input_password_wrapper col-md-12" style="margin:0 auto">
+            <input type="text"  placeholder="Вид деятельности" class="input_password" name="business_type">
+            <span id="business_type" class="errorBlock"></span>
+          </div>
+          <div class="input_password_wrapper col-md-12" style="margin:0 auto">
+            <input type="text"  placeholder="Местоположение" class="input_password" name="business_location">
+            <span id="business_location" class="errorBlock"></span>
+          </div>
+          <div class="input_password_wrapper col-md-12" style="margin:0 auto">
+            <input type="text"  placeholder="Email" class="input_password" name="email">
+            <span id="email" class="errorBlock"></span>
+          </div>
+          <div class="input_password_wrapper col-md-12" style="margin:0 auto">
+            <input type="text"  placeholder="www" class="input_password" name="www">
+            <span id="www" class="errorBlock"></span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <button type="submit" data-toggle="modal">Опубликовать
+            </button>
+          </div>
+
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+</div>
+
+
 
 @if(\Session::has('successSocial') && \Session::get('successSocial')=='Your e-mail is verified. Your social account approoved.')
   <div class="modal fade" id="passwordUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3"

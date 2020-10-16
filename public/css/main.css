@@ -2720,6 +2720,10 @@ padding-left: 30px;
   #imgInputakk{
    display: none;
   }
+
+#imgInputBusiness{
+  display: none;
+}
   .prophile_photo_picked{
     width: 173px;
     height: 167px;

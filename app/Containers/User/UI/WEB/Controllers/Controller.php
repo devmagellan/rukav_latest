@@ -2,9 +2,12 @@
 
 namespace App\Containers\User\UI\WEB\Controllers;
 
+use App\Containers\HomePage\Services\GlobalService;
 use App\Containers\User\Jobs\ExpiredAdsEmailVerification;
+use App\Containers\User\Models\BusinessUser;
 use App\Containers\User\UI\WEB\Requests\RegisterUserRequest;
 use App\Containers\User\UI\WEB\Requests\ChangeFromSimpleUserRequest;
+use App\Containers\User\UI\WEB\Requests\GoToBusinessUsersRequest;
 use App\Ship\Parents\Controllers\WebController;
 use App\Containers\User\UI\WEB\Requests\GetAllUsersRequest;
 use Apiato\Core\Foundation\Facades\Apiato;
@@ -490,5 +493,36 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
              return json_encode(['response'=>'no_email']);
          }
 
+    }
+
+    public function goToBusinessUsers(GoToBusinessUsersRequest $request){
+    $businessUser=[
+      'company_name'=>$request->input('company_name'),
+      'user_id'=>$request->input('id'),
+      'business_type'=>$request->input('business_type'),
+      'business_location'=>$request->input('business_location'),
+      'email'=>$request->input('email'),
+      'www'=>$request->input('www'),
+    ];
+    \App\Containers\User\Models\BusinessUser::insert($businessUser);
+      \App\Containers\User\Models\User::where('id',$request->input('id'))->update(['business_users_flag'=>1]);
+      return json_encode(['response'=>'success']);
+    }
+
+    public function businessUsers(GetAllUsersRequest $request){
+
+      $data['businessusers']=\App\Containers\User\Models\BusinessUser::paginate(10);
+      $data['properties']=GlobalService::getMainProperties($request)['categories'];
+      $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
+      return view('user::businessuser.index', compact('categoriesOnlyRoot','data'));
+
+    }
+
+    public function deleteRegistration(GetAllUsersRequest $request){
+
+    $user=\Auth::user();
+    $user->delete();
+      \Auth::logout();
+      return redirect()->route('get_main_home_page');
     }
 }

@@ -16,7 +16,13 @@
   </div>
 
   <main>
-
+    @if(\Auth::user()->getBusinessAccount && \Auth::user()->business_users_flag==false)
+<script>
+  $(document).ready(function(){
+    $('#goToBusinessUsersModal').modal({show:true})
+  })
+</script>
+      @endif
     @if(\Session::has('message'))
       <p class="alert {{ \Session::get('alert-class', 'alert-info') }}">{{ \Session::get('message') }}</p>
     @endif
@@ -895,7 +901,7 @@
                     @endif
                 </div>
 
-                <a href="#" class="prophile_delete_registration">
+                <a href="/delete_registration" class="prophile_delete_registration">
                   <img src="/img/delete_icon_profile.svg" alt="">Удалить регистрацию
                 </a>
 
@@ -1423,7 +1429,50 @@
       $(document).ready(function() {
 
           reloadMessages()
+        $('#imgInputBusiness').on('change', function() {
+          console.log('imgInputBusiness')
+          var fileName = '';
+          fileName = $(this).val();
+          $('#file-selected-business').html(fileName);
 
+
+          var imageData = new FormData();
+          imageData.append('image', $('#imgInputBusiness')[0].files[0]);
+
+          //Make ajax call here:
+          $.ajax({
+            url: '/upload-profile-image-ajax',
+            type: 'POST',
+            processData: false, // important
+            contentType: false, // important
+            data: imageData,
+            beforeSend: function() {
+              $("#err").fadeOut();
+            },
+            success: function(result) {
+              if (result == 'invalid file') {
+                // invalid file format.
+                $("#err").html("Invalid File. Image must be JPEG, PNG or GIF.").fadeIn();
+              } else {
+
+                // view uploaded file.
+                // $("#image").attr('src', '/' + result);
+                /* $("#preview").html(data).fadeIn();*/
+                /* $("#form")[0].reset(); */
+                //show the remove image button
+                /*  $('#file-selected').empty();
+                  $("#remove-image").show();
+                  $("#custom-file-upload").hide();
+                  $("#uploadImage").hide();
+                  $("#button").hide();*/
+              }
+            },
+            error: function(result) {
+              $("#err").html("errorcity").fadeIn();
+            }
+          });
+
+        });
           $('#imgInputakk').on('change', function() {
 console.log('imgInputakk')
               var fileName = '';
@@ -1513,6 +1562,32 @@ console.log('imgInputakk')
         console.log(id)
         window.location.href='/ads/'+id+'/edit/'
       })
+
+      $("#GoBusinessForm").submit(function(e) {
+
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: form.serialize(), // serializes the form's elements.
+          success: function(data)
+          {
+            console.log(data); // show response from the php script.
+            if (data.status=='error'){
+              $('#oldPassword').text(data.message)}
+            else{
+              $('#passwordUpdate').modal('hide')
+            }
+            $('#goToBusinessUsersModal').modal('hide')
+          }
+        });
+
+
+      });
 
 
   </script>
