@@ -1061,10 +1061,10 @@
                   </div>
                   <div class="choosen_subitem d-flex flex-column">
                     <p class="choosen_subtitle">
-                      {{$ad->counter}}
+                      Появилось в поиске
                     </p>
                     <p class="choosen_info">
-                      34567
+                    {{$ad->counter}}
                     </p>
                   </div>
                 </div>
@@ -1302,7 +1302,7 @@
                       Просмотров
                     </p>
                     <p class="choosen_info">
-                      1256
+                      {{$ad->view_counter}}
                     </p>
                   </div>
                   <div class="choosen_subitem d-flex flex-column">
@@ -1310,7 +1310,7 @@
                       Появилось в поиске
                     </p>
                     <p class="choosen_info">
-                      34567
+                      {{$ad->counter}}
                     </p>
                   </div>
                 </div>
