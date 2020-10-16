@@ -154,7 +154,7 @@
 
         @foreach($products as $product)
       @php
-      \App\Containers\Ad\Models\Ad::where('id',$product->id)->update(['counter'=>$product->counter+1]);
+      \App\Containers\Ad\Models\Ad::where('id',$product->id)->update(['counter'=>$product->view_counter+1]);
       @endphp
         <div class="row product_item_wrapper product_item_wrapper_active">
           <div class="col-sm-2">
