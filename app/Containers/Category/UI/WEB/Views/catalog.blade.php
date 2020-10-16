@@ -511,7 +511,8 @@ console.log('final=>',url+param)
     }
 
   $('.product_filter_clear').click(function(){
-      window.location = window.location.href.split("?")[0];
+    console.log(window.location.href.split("?")[0])
+    setTimeout(function(){document.location.href = ''+window.location.href.split("?")[0]+'/'},100);
   })
 
 
