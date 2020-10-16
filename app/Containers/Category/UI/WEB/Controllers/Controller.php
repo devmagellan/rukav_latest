@@ -157,6 +157,8 @@ class Controller extends WebController
           //dump('high_to_low');
           $q->orderByDesc('ads.price');
       }
+	  
+	  dump($q);
 
     if($request->input('period')){
       switch ($request->input('period')){
