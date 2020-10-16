@@ -347,6 +347,7 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
 
     public function changeRegisterFromRestUser($request){
         Apiato::call('User@ChangeUserAccountAction', [$request]);
+        \Log::info('RESTUsers');
         session()->flash('message', 'Данные успешно обновлены!');
         return response()->json(['response'=>'success'],200);
     }

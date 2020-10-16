@@ -193,7 +193,8 @@ console.log(window.location.href.indexOf("to_individual")>= 0)
                 success: function (data) {
                     //location.reload();
                     console.log('Updated To session saved', data)
-                    $('#confirmPhone').modal({show: true})
+                  if(){
+                    $('#confirmPhone').modal({show: true})}
                 },
                 error: function (errors) {
                   console.log('Got errors')
