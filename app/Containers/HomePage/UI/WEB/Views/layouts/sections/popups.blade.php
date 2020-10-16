@@ -197,7 +197,7 @@ Your e-mail is verified. Your social account approoved.
         </div>
         <div class="row">
           <div class="col-sm-6">
-            <button type="submit" id="loginButton">Войти</button>
+            <button type="submit" class="default" id="loginButton">Войти</button>
           </div>
           <div class="col-sm-6">
             <button type="button" class="buttonHref button_show_reg">Регистрация</button>
@@ -208,24 +208,24 @@ Your e-mail is verified. Your social account approoved.
       <p class="textform">или войти через </p>
       <ul class="socials">
         <li>
-          <a  id="facebookSocialLoginBtn" href="{{ route('login.provider.fb', 'facebook') }}">
+          <a  id="facebookSocialLoginBtn" class="social_btns" href="{{ route('login.provider.fb', 'facebook') }}">
             <i class="fab fa-facebook-f "></i>
           </a>
         </li>
         <li>
-          <a href="{{ route('login.provider.google', 'google') }}">
+          <a class="social_btns" href="{{ route('login.provider.google', 'google') }}">
 
 		   <img style="background-color:#fff;width:25px;height:25px;top:-3px;" src="/img/google.png">
 
           </a>
         </li>
         <li>
-          <a href="{{ route('login.provider.vk', 'vkontakte') }}">
+          <a class="social_btns" href="{{ route('login.provider.vk', 'vkontakte') }}">
             <i class="fab fa-vk"></i>
           </a>
         </li>
         <li>
-          <a href="{{ route('login.provider.ok', 'odnoklassniki') }}">
+          <a class="social_btns" href="{{ route('login.provider.ok', 'odnoklassniki') }}">
             <i class="fab fa-odnoklassniki"></i>
           </a>
         </li>
@@ -996,5 +996,20 @@ Your e-mail is verified. Your social account approoved.
     </div>
   </div>
 </div>
+
+<script>
+  $(function() {
+    $("#loginForm").keypress(function (e) {
+      console.log('ee')
+      if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+        $('button[type=submit] .default').click();
+
+        return true;
+      } else {
+        return false;
+      }
+    });
+  });
+</script>
 
 
