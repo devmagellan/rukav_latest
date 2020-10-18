@@ -12570,6 +12570,7 @@ class Controller extends WebController
     $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
     $locations=\App\Containers\Ad\Models\BritainRegion::where('parent_id',0)->get();
     $filterDeals=\App\Containers\Filter\Models\FilterDeals::get();
+    \Session::forget('ad_photos');
     return view('ad::ads.form-add-ads', compact( 'categoriesOnlyRoot','locations','data','filterDeals'));
   }
 
@@ -12641,6 +12642,8 @@ class Controller extends WebController
     if ($ad) {
 
       $request->session()->flash('infoAd', true);
+
+      \Session::forget('ad_photos');
         return back()->with('success', 'Ваше объявление успешно добавлено ! Благодарим за сотрудничество');
     }
       }
