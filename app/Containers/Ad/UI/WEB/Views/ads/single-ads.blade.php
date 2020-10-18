@@ -353,7 +353,7 @@ ul.slickslide li img, .slick-dots button img {
     </div>
     <div class="row product_description" style="word-wrap: break-word;">
       <div class="col-sm-12">
-        <h4>Описание</h4>123
+        <h4>Описание</h4>
         {!! nl2br(e($ad->message)) !!}
 
       </div>

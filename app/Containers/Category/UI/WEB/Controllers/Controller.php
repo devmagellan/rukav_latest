@@ -186,7 +186,7 @@ class Controller extends WebController
 	
 	$uri = $_SERVER["REQUEST_URI"];
 $url_components = parse_url($uri);
-
+if(isset($url_components['query'])){
 $parts=explode('&',$url_components['query']);
 $partsCount=count($parts);
       if( $request->input('sort_by_date')=='low_to_high' && $parts[$partsCount-1]=='sort_by_date=low_to_high'){
@@ -206,7 +206,7 @@ $partsCount=count($parts);
           $q->orderByDesc('ads.price');
       }
 
-
+}
 
 
      foreach($request->input() as $key=>$filter){

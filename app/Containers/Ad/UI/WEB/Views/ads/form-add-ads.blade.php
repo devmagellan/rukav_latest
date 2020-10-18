@@ -485,8 +485,13 @@
               @enderror
             </div-->
             <div class="contact_info_wrapper">
-              <div class="input_price_icon">£</div><input type="number" step=".01" name="price" placeholder="Цена (не обязательно)" value="{{old('price')}}">
-            </div>
+			@if(null!=(\Session::get('ad'))) 
+				<div class="input_price_icon">£</div><input type="number" step=".01" name="price" placeholder="Цена (не обязательно)" value="{{\Session::get('ad')->price}}">
+			@else
+				 <div class="input_price_icon">£</div><input type="number" step=".01" name="price" placeholder="Цена (не обязательно)" value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->price}} @endif">
+           
+			@endif
+              </div>
           </div>
         </div>
       @if(null!=(\Session::get('ad')))
@@ -502,7 +507,26 @@
             <div class="add_foto_file_wrapper">
               @foreach(\Session::get('ad')->pictures as $realPic)
                 <div class="add_foto_file_item">
+ <div class="upload-file-container-text">
 
+                    <label style="position: relative;height: 114px;width: 114px;" for="imgInput" class="add_foto_file_item_load">
+                      <img style="object-fit: cover;height: 100%;width: 100%;" src="/storage/messages/{{$realPic->photo}}" alt="">
+                    </label>
+                    <div class="add_foto_file_img_wrapper">
+                      <img  src="#" alt="" class="add_foto_file_img" />
+                      <div class="add_foto_file_block_hover">
+                        <label for="imgInput" class="add_foto_file_item_load2">
+                          <img src="/img/refresh_icon.svg" alt="">
+                        </label>
+                        <div class="add_foto_file_delete">
+                          <img src="/img/delete-icon.svg" alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <input type="file" name="files[]" class="photo" id="imgInput"/>
+                  </div>
+				  
+				  
                   <div class="upload-file-container-text">
 
                     <label style="position: relative;height: 114px;width: 114px;" for="imgInput" class="add_foto_file_item_load">
@@ -800,7 +824,7 @@
             <div class="add_advert_desc">
               <p>Текст объявления: на русском языке. Допустимое использование английского не более 20%(термины, названия).</p>
               <p class="end">Транслит не допускается.</p>
-              <textarea name="description" placeholder="Текст объявления" required>{{old('description')}} </textarea>
+              <textarea name="description" placeholder="Текст объявления" required>@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->message}} @elseif(!empty(old('description'))) {{old('description')}}  @endif</textarea>
               @error('description')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
@@ -813,6 +837,12 @@
       </div>
   </form>
   </article>
+  
+  <style>
+  .product_slider_icon img {margin-top:8px;}
+  </style>
+  
+  
     <div class="modal fade modalCatalog" id="mainCatalog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -916,7 +946,12 @@
               <div class="product_info_block">
                 <div class="product_info_block_left">
                   <div class="product_info_block_avatar">
-                    <img src="/storage/avatars/{{\Session::get('ad')->getSender->avatar}}" alt="">
+				  
+				  @if(null!=(\Auth::user()) && \Auth::user()->avatar)
+              <img style="height:40px;border-radius: 50%;" src="@if(substr(\Session::get('ad')->getSender->avatar, 0, 4)!='http')/storage/avatars/@endif{{ \Session::get('ad')->getSender->avatar }}" />
+              @elseif(null!=(\Auth::user()) && \Auth::user()->name )
+             <img style="height:40px" src="{{ \Avatar::create(\Auth::user()->name.' '.\Auth::user()->sername)->toBase64() }}" />
+            @endif
                   </div>
                 </div>
                 <p class="product_info_user_name">{{\Session::get('ad')->name}} <span> @if(\Session::get('ad')->getSender->vid_user=='Частная') Частное лицо @else {{\Session::get('ad')->getSender->vid_user}}@endif</span></p>
@@ -925,8 +960,11 @@
                   <a href="#" class="product_info_all_add">Все обьевления автора</a>
                   <p class="product_info_city">{{\Session::get('ad')->city}}</p>
               </div>
-                <a href="#" class="product_info_btn_phone preload_view_send_message_btn">
+                <a href="tel:{{\Session::get('ad')->phone}}" class="product_info_btn_phone preload_view_send_message_btn">
                   <img src="/img/info_phone.svg" alt="">
+				  @if(empty(\Session::get('ad')->phone))
+					  <span>Не указан</span>
+				  @endif
                   <span>{{\Session::get('ad')->phone}}</span>
                 </a>
                 <a href="#"  class="product_info_send_message preload_view_send_message_btn" data-toggle="modal" data-target="#ModalSendMessage"><img src="/img/telegramm_icon.svg" alt="">отправить сообщение</a>
@@ -1028,7 +1066,7 @@
           </div>
         <div class="row product_description" style="word-wrap: break-word;">
           <div class="col-sm-12">
-            <h4>Описание</h4>123
+            <h4>Описание</h4>
             {!! nl2br(e(\Session::get('ad')->message)) !!}
 
           </div>
@@ -1088,8 +1126,8 @@
           <div class="row product_indicators_block">
             <div class="col-md-9">
               <p>Добавлено в <span>{{\Session::get('ad')->created_at->format('H:i')}}, {{\Session::get('ad')->created_at->format('d-m-Y')}}</span></p>
-              <p>Номер объявления: <span>{{\Session::get('ad')->id}}</span></p>
-              <p>Просмотры: <span>{{rand(1, 100)}}</span></p>
+              <p>Номер объявления: <span>00</span></p>
+              <p>Просмотры: <span>0</span></p>
             </div>
             <div class="col-md-3">
               <div class="product_indicators_complain">

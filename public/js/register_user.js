@@ -16,7 +16,7 @@ $(document).ready(function () {
         //location.reload();
           console.log(data)
           if(data.message=='account created'){
-              console.log(radioValue)
+              console.log('account created',radioValue)
               if(radioValue=='Частная'){
                   $('#closeReg').trigger('click')
                   $('#confirmEmail').modal({show:true})
