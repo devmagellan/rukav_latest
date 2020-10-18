@@ -567,6 +567,12 @@
                     <img src="/img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
                   </label>
+
+                  @if(null!=\Session::get('ad_photos'))
+                    @foreach(\Session::get('ad_photos') as $photoVal)
+                      <? dump($photoVal);?>
+                      @endforeach
+                  @endif
                   <div class="add_foto_file_img_wrapper">
                     <img  src="#" alt="" class="add_foto_file_img" />
                     <div class="add_foto_file_block_hover">
