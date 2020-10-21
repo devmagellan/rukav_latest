@@ -303,7 +303,9 @@ $(document).ready(function(){
         slidesToScroll: 1,
         // infinite: true,
         // adaptiveHeight: true,
-        fade: true,
+
+         infinite: false,
+         fade: true,
 		dots: true,
         prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="/img/slide_icon2.svg" alt=""></a>',
         nextArrow: '<a class="product_slider_icon product_slider_next"><img src="/img/slide_icon1.svg" alt=""></a>',
@@ -319,15 +321,18 @@ $(document).ready(function(){
             }
         }]
     });
+
     $('.product_slider_nav').slick({
         // slidesToShow: 3,
         variableWidth: true,
         slidesToScroll: 1,
+        infinite: false,
 		centerMode: true,
         asNavFor: '.product_slider_main',
         focusOnSelect: true,
         // infinite: true
     });
+
 
 
 

@@ -128,7 +128,9 @@ ul.slickslide li img, .slick-dots button img {
       <div class="col-lg-12 adv_photo" style="position: relative;
   top: 50%;
   transform: translateY(-50%);">
-        <div class="product_slider_main">
+
+
+        <div class="product_slider_main owl-carousel owl-theme">
           @foreach($ad->pictures as $picture)
             <div class="product_slider_main_item">
                 <?
@@ -144,6 +146,7 @@ ul.slickslide li img, .slick-dots button img {
           @endforeach
         </div>
         <div class="product_slider_nav">
+		
           @foreach($ad->pictures as $picture)
             <div class="product_slider_nav_item">
               <img src="{{asset('/storage/messages/'.$picture->photo)}}" alt="">
