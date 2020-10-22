@@ -92,6 +92,7 @@
               if (results[i].address_components[0].types[0] == "postal_town") {
                   console.log(i + ": postal_town:" + results[i].address_components[0].long_name);
                   result.postal_town = results[i].address_components[0].long_name;
+                $('#city').val(result.postal_town)
               }
               if (results[i].address_components[0].types[0] == "political") {
 
