@@ -12570,8 +12570,9 @@ class Controller extends WebController
     $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
     $locations=\App\Containers\Ad\Models\BritainRegion::where('parent_id',0)->get();
     $filterDeals=\App\Containers\Filter\Models\FilterDeals::get();
-    \Log::info('AdPhotosForget');
-    \Session::forget('ad_photos');
+	  \Log::info('AdPhotosForget');
+	  if(!\Session::get('ad')){
+		\Session::forget('ad_photos');}
     return view('ad::ads.form-add-ads', compact( 'categoriesOnlyRoot','locations','data','filterDeals'));
   }
 

@@ -17,7 +17,8 @@ $(document).ready(function () {
         console.log('response=>',response)
         if(response.message=='Не подтвержденный email'){
           $('#ModalIn').modal('hide');
-          $('#confirmEmailIfRegistered').modal('show');
+          //$('#confirmEmailIfRegistered').modal('show');
+		  $('#confirmEmail').modal('show');
         }
         else if(response.message=='Не подтвержденный email и телефон'){
           $('#ModalIn').modal('hide');

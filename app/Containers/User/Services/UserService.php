@@ -14,14 +14,14 @@ class UserService
   {
       $nameAvatar=time() . '.jpg' ;
       \Log::info('UserData3=>',array($data));
-    
+
 	if(is_array($data)){
 		\Log::info('UserData5=>');
 	$data = json_decode(json_encode($data), FALSE);}
       try {
       $current=\App\Containers\User\Models\User::where('email',$data->email)->withTrashed()->first();
       \Log::info('CurrentUser=>',array($current));
-	  $id=(property_exists($data, 'customer_id') && $current==null)  ? $data->customer_id : $current->id ;
+	  $id=(property_exists($data, 'customer_id') && $current==null)  ? $data->customer_id : ($current!=null) ? $current->id : null ;
 	  \Log::info('CurrentUserID=>'.$id);
       return User::withTrashed()->updateOrCreate(['id'=>$id],[
       'name' => (property_exists($data, 'save_url') ) ? $data->name : $data->firstName,

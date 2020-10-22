@@ -93,7 +93,6 @@ class AdService
               $oldPath = storage_path('app/public/messages/') . $filePath;
               $newPath = storage_path('app/public/messages/') . 'small_' . $filePath;
               $middlePath = storage_path('app/public/messages/') . 'middle_' . $filePath;
-
               if (\File::copy($oldPath, $newPath)) {
                   \Log::info('filepath2' . $filePath);
                 $this->createThumbnail($newPath, 200, 200);
@@ -103,6 +102,10 @@ class AdService
                   \Log::info('filepath2' . $filePath);
                 $this->createThumbnail($middlePath, 800, 800);
               }
+
+
+            \Session::push('ad_photos','small_' . $filePath);
+            \Log::info('SessionPhotosInArray' , \Session::get('ad_photos'));
 
             \Session::push('ad_photos',$newPath);
             \Log::info('SessionPhotosInArray' , \Session::get('ad_photos'));

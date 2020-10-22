@@ -25,7 +25,7 @@ public function __construct($request){
      */
     public function toMail($notifiable)
     {
-\Log::info('CareerRequest',$this->request['file']);
+\Log::info('CareerRequest'.$this->request['file']);
         return (new MailMessage)
             ->subject('Письмо из формы обратной связи')
             ->greeting('Здравствуйте!')
@@ -33,7 +33,11 @@ public function __construct($request){
             ->line('Email отправителя:'.$this->request['sender_email'])
             ->line('Имя отправителя: '.$this->request['sender_name'])
 			->line('Телефон отправителя: '.$this->request['sender_phone'])
-            ->line('Текст сообщения: '.$this->request['text']);
+            ->line('Текст сообщения: '.$this->request['text'])
+			->attach(public_path('/storage/resume/'.$this->request['file']), [
+                        'as' => 'resume.pdf',
+                        'mime' => 'text/pdf',
+                    ]);
 
     }
 

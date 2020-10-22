@@ -143,24 +143,7 @@ class Controller extends WebController
           })
         ->select('ads.*') // Avoid selecting everything from the stocks table
       ;
-      if($request->input('sort_by_date')=='low_to_high'){
-          //dump('low_to_high');
-          $q->orderBy('ads.created_at');
-      }
-      if($request->input('sort_by_date')=='high_to_low'){
-          //dump('high_to_low');
-          $q->orderByDesc('ads.created_at');
-      }
-      if($request->input('sort_by_price')=='low_to_high'){
-          //dump('low_to_high');
-          $q->orderBy('ads.price');
-      }
-      if($request->input('sort_by_price')=='high_to_low'){
-          //dump('high_to_low');
-          $q->orderByDesc('ads.price');
-      }
-
-    if($request->input('period')){
+	      if($request->input('period')){
       switch ($request->input('period')){
         case 0 :
           break;
@@ -200,6 +183,30 @@ class Controller extends WebController
       }
       $q->orderByDesc('ads.price');
     }
+	
+	$uri = $_SERVER["REQUEST_URI"];
+$url_components = parse_url($uri);
+if(isset($url_components['query'])){
+$parts=explode('&',$url_components['query']);
+$partsCount=count($parts);
+      if( $request->input('sort_by_date')=='low_to_high' && $parts[$partsCount-1]=='sort_by_date=low_to_high'){
+          //dump('low_to_high');
+          $q->orderBy('ads.created_at');
+      }
+      if( $request->input('sort_by_date')=='high_to_low' && $parts[$partsCount-1]=='sort_by_date=high_to_low'){
+          //dump('high_to_low');
+          $q->orderByDesc('ads.created_at');
+      } 
+      if( $request->input('sort_by_price')=='low_to_high' && $parts[$partsCount-1]=='sort_by_price=low_to_high'){
+          //dump('low_to_high');
+          $q->orderBy('ads.price');
+      }
+      if( $request->input('sort_by_price')=='high_to_low' && $parts[$partsCount-1]=='sort_by_price=high_to_low'){
+          //dump('high_to_low');
+          $q->orderByDesc('ads.price');
+      }
+
+}
 
 
      foreach($request->input() as $key=>$filter){

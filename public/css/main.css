@@ -1075,7 +1075,7 @@ ul.category_dropdown_sub_list li ul a:hover{
     position: relative;
 }
 .product_slider_main_item:before{
-    content: "";
+    /*content: "";*/
     display: block;
     width: 45px;
     height: 45px;

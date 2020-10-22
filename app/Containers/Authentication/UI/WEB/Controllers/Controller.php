@@ -16,6 +16,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Containers\User\Models\User;
 use App\Containers\User\Jobs\SendEmailVerification;
 use App\Containers\User\Services\SmsService;
+use App\Containers\User\Jobs\VerifyMail;
 
 /**
  * Class Controller
@@ -70,6 +71,7 @@ class Controller extends WebController
    $user=User::where('email',$request->email)->where('confirmed',User::STATUS_INACTIVE)->where('is_confirmed_phone',0)->first();
     if(!$user){
     $user1=User::where('email',$request->email)->where('confirmed',User::STATUS_INACTIVE)->first();}
+	\Log::info('USER1',array($user1));
     if($user){
       $this->smsService=new SmsService();
       $message=$this->smsService->store(new \Illuminate\Http\Request(array($user)));
@@ -82,12 +84,14 @@ class Controller extends WebController
       dispatch(new SendEmailVerification($user))->onQueue('queue_name');
       return response(['message'=>'Не подтвержденный email и телефон','email'=>$request->email,'password'=>$request->password], Response::HTTP_CONFLICT);
     }elseif($user1){
+		$user=$user1;
       $emailCode = rand(1000, 9999);
       $user->emailCode=$emailCode;
       $user->save();
       session()->put('emailVerificationCode',$emailCode);
       session()->put('emailVerificationCodeUser',$user->id);
-      dispatch(new SendEmailVerification($user))->onQueue('queue_name');
+	  dispatch(new VerifyMail($user))->onQueue('queue_name');
+      //dispatch(new SendEmailVerification($user))->onQueue('queue_name');
       return response(['message'=>'Не подтвержденный email','email'=>$request->email,'password'=>$request->password], Response::HTTP_CONFLICT);
     }
 

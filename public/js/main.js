@@ -297,37 +297,42 @@ $(document).ready(function(){
     });
 
 
-     $('.product_slider_main').slick({
-		centerMode: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        // infinite: true,
-        // adaptiveHeight: true,
-        fade: true,
-		dots: true,
-        prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="/img/slide_icon2.svg" alt=""></a>',
-        nextArrow: '<a class="product_slider_icon product_slider_next"><img src="/img/slide_icon1.svg" alt=""></a>',
-        asNavFor: '.product_slider_nav',
-        responsive: [{
-            breakpoint: 768,
-            settings: {
-                slidesToShow: 1,
-                adaptiveHeight: true,
-				centerMode: true,
-				dots: true,
-				arrows: true,
-            }
-        }]
-    });
-    $('.product_slider_nav').slick({
-        // slidesToShow: 3,
-        variableWidth: true,
-        slidesToScroll: 1,
-		centerMode: true,
-        asNavFor: '.product_slider_main',
-        focusOnSelect: true,
-        // infinite: true
-    });
+    //  $('.product_slider_main').slick({
+	// 	centerMode: true,
+    //     slidesToShow: 1,
+    //     slidesToScroll: 1,
+    //     // infinite: true,
+    //     // adaptiveHeight: true,
+    //
+    //      infinite: false,
+    //      fade: true,
+	// 	dots: true,
+    //     prevArrow: '<a class="product_slider_icon product_slider_prev"><img src="/img/slide_icon2.svg" alt=""></a>',
+    //     nextArrow: '<a class="product_slider_icon product_slider_next"><img src="/img/slide_icon1.svg" alt=""></a>',
+    //     asNavFor: '.product_slider_nav',
+    //     responsive: [{
+    //         breakpoint: 768,
+    //         settings: {
+    //             slidesToShow: 1,
+    //             adaptiveHeight: true,
+	// 			centerMode: true,
+	// 			dots: true,
+	// 			arrows: true,
+    //         }
+    //     }]
+    // });
+    //
+    // $('.product_slider_nav').slick({
+    //     // slidesToShow: 3,
+    //     variableWidth: true,
+    //     slidesToScroll: 1,
+    //     infinite: false,
+	// 	centerMode: true,
+    //     asNavFor: '.product_slider_main',
+    //     focusOnSelect: true,
+    //     // infinite: true
+    // });
+
 
 
 
@@ -371,7 +376,7 @@ $(document).ready(function(){
     //$('.slick-dots').appendTo('.slick-thumbs');
 });
 
-    $('.product_slider_main_item').zoom({ on:'click' });
+    // $('.product_slider_main_item').zoom({ on:'click' });
 
     $('.product_slider_advantage_slider').slick({
         slidesToShow: 1,

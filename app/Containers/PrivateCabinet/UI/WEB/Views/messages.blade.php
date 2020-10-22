@@ -1,5 +1,19 @@
 <link rel="stylesheet" media="screen, print" href="/NewSmartAdmin/css/formplugins/select2/select2.bundle.css">
+<style>
+  .custom_tooltip {
+    margin:10px;
+    padding:12px;
+    border:2px solid #ff007f;
+    width:260px;
+    position: absolute;
+    display: none;
+    background-color: #fff;
+    z-index:9999;
+    margin-left:300px;
+    margin-top:15px;
 
+  }
+</style>
 <div class="row">
     <div class="col-md-4">
         <div class="message_sidebar">
@@ -8,6 +22,7 @@
                     <img src="/img/email-icon.svg" alt="">
                     <span>{{$email}}</span>
                 </p>
+              <div class="custom_tooltip">Не выбрана категория в списке!</div>
                 <hr>
                 <form action="/add_second_messanger_group" method="post" id="secondMessangerGroups">
 
@@ -26,9 +41,10 @@
                     </select>
 
                 </div>
+                <button type="submit" class="message_sidebar_add_them" {{--data-toggle="tooltip" data-title="Hooray!" --}}style="top:7px;position:relative;">+</button>
 
-                <button type="submit" class="message_sidebar_add_them" data-toggle="tooltip" data-title="Hooray!" style="top:7px;position:relative;">+</button>
                 </form>
+
                 @foreach($businessOwnerConversationsList as $list)
 @if(isset($list))
 
@@ -249,7 +265,10 @@
                         <p class="theme_main_text"><b>Основное ({{count($conversations)}})</b></p></div>
                     <div class="message_sidebar_theme_body">
                         @foreach($conversations as $conversation)
-                          <? if($conversation->sender_id!=Auth::user()->id){
+
+                          <?
+
+						  if($conversation->sender_id!=Auth::user()->id){
                             $opponent=\App\Containers\User\Models\User::where('id',$conversation->sender_id)->first();
                           }
                           else{
@@ -267,9 +286,11 @@
                                 <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
                             </div>
                             <div class="message_sidebar_theme_right">
+							@if($opponent)
                                 <a  href="/all_author_ads?id={{$opponent->id}}"><p class="message_sidebar_theme_name">
                                   {{$opponent->name}}
                                 </p></a>
+								@endif
                                 <a href="/ads/{{$conversation->message->id}}"><p class="message_sidebar_theme_add">
                                     {{$conversation->message->title}}
                                 </p></a>
@@ -337,6 +358,8 @@
         console.log('12345');
         $(this).parent().next().slideDown();
     });
+
+
     })
 
     function reloadMessageList(conversation,group_id){
@@ -458,7 +481,22 @@ console.log(type,group_id)
       });
     }
     else{
-      $('#alert_category_not_choosen').modal({show:true});
+
+
+      function showBox(e){
+        console.log('click')
+        $('.custom_tooltip').fadeIn().css(({ left:  e.pageX, top: e.pageY }));
+      }
+
+      function hideBox(){
+        $('.custom_tooltip').fadeOut();
+      }
+      console.log('tooltip')
+      //$('#alert_category_not_choosen').modal({show:true});
+      $('.message_sidebar_add_them').click(showBox(e)).mouseleave(hideBox);
+
     }
+
   })
+
 </script>
