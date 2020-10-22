@@ -30,7 +30,7 @@ class UpdateUserAccountWithOrganisationAccountTask
   {
       \Log::info('task2=>',$data);
       DB::transaction(function () use ($data) {
-          $this->user = $this->userService->updateUserInService($data);
+          $this->user = $this->userService->createUser($data);
           \Log::info('task3=>', array($this->user));
           $this->service->createOrganisationAccount($data, $data['id']);
       });
