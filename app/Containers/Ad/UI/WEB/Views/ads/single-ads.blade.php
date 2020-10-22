@@ -129,10 +129,51 @@ ul.slickslide li img, .slick-dots button img {
   top: 50%;
   transform: translateY(-50%);">
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css" rel="stylesheet" />
 
-        <div class="product_slider_main owl-carousel owl-theme">
+<style>
+    .product_slider_nav .swiper-wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .product_slider_nav .swiper-wrapper .swiper-slide:hover{
+        cursor: pointer;
+        opacity: 1;
+    }
+    .product_slider_main .swiper-wrapper{
+        display: flex;
+        align-items: center;
+    }
+    .swiper-slide{
+        text-align: center;
+    }
+    .swiper-button{
+        background-color: rgba(178, 177, 179, 0.7);
+        width: 35px;
+        height: 35px;
+        background-size: 10px;
+        line-height: 34px;
+        text-align: center;
+        border-radius: 48%;
+        z-index: 3;
+        transition: all .2s ease-out;
+        color: #fff;
+    }
+.product_slider_nav .swiper-wrapper .swiper-slide{
+    width: 80px;
+    display: flex;
+    height: 80px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+</style>
+
+<div class="product_slider_main swiper-container">
+        <div class="swiper-wrapper">
           @foreach($ad->pictures as $picture)
-            <div class="product_slider_main_item">
+            <div class="product_slider_main_item swiper-slide">
                 <?
                 $middle_file="storage/messages/middle_{$picture->photo}";
                 ?>
@@ -145,19 +186,46 @@ ul.slickslide li img, .slick-dots button img {
             </div>
           @endforeach
         </div>
-        <div class="product_slider_nav">
+<div class="swiper-button-next swiper-button swiper-button-white"></div>
+<div class="swiper-button-prev swiper-button swiper-button-white"></div>
+</div>
+<div class="product_slider_nav swiper-container">
+        <div class="swiper-wrapper">
 		
           @foreach($ad->pictures as $picture)
-            <div class="product_slider_nav_item">
+            <div class="product_slider_nav_item swiper-slide">
               <img src="{{asset('/storage/messages/'.$picture->photo)}}" alt="">
             </div>
           @endforeach
         </div>
+</div>
       </div>
 	  </div>
 
 
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
+<!-- Initialize Swiper -->
+<script>
+    var galleryThumbs = new Swiper('.product_slider_nav', {
+        spaceBetween: 10,
+        slidesPerView: 6,
+        freeMode: true,
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+    });
+    var galleryTop = new Swiper('.product_slider_main', {
+        spaceBetween: 10,
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        thumbs: {
+            swiper: galleryThumbs
+        }
+    });
+</script>
 
 
 

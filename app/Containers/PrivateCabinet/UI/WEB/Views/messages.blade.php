@@ -249,7 +249,10 @@
                         <p class="theme_main_text"><b>Основное ({{count($conversations)}})</b></p></div>
                     <div class="message_sidebar_theme_body">
                         @foreach($conversations as $conversation)
-                          <? if($conversation->sender_id!=Auth::user()->id){
+						
+                          <? 
+						  
+						  if($conversation->sender_id!=Auth::user()->id){
                             $opponent=\App\Containers\User\Models\User::where('id',$conversation->sender_id)->first();
                           }
                           else{
@@ -267,9 +270,11 @@
                                 <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
                             </div>
                             <div class="message_sidebar_theme_right">
+							@if($opponent)
                                 <a  href="/all_author_ads?id={{$opponent->id}}"><p class="message_sidebar_theme_name">
                                   {{$opponent->name}}
                                 </p></a>
+								@endif
                                 <a href="/ads/{{$conversation->message->id}}"><p class="message_sidebar_theme_add">
                                     {{$conversation->message->title}}
                                 </p></a>
