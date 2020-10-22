@@ -65,8 +65,8 @@ class ProfileSaveToOrganisationRequest extends Request
     return [
       'organisation_name.required' => 'Необходимо добавить название организации',
       'www.required' => 'Необходимо добавить адрес вебсайта',
-      'address.required' => 'Необходимо добавить адрес вебсайта',
-      'post_code.required' => 'Необходимо добавить адрес вебсайта',
+      'address.required' => 'Необходимо добавить адрес организации',
+      'post_code.required' => 'Необходимо добавить почтовый код организации',
 
 
     ];
