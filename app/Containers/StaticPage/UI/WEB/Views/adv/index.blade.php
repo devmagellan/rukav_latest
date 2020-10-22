@@ -87,7 +87,7 @@
               <div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6">
-                  <button type="submit"  >Отправить сообщение
+                  <button class="contact_submit" type="submit"  >Отправить сообщение
                   </button>
                 </div>
 
@@ -106,16 +106,17 @@
 @section('scripts')
   <script>
 
-    $('#contact').on('submit', function(e) {
+    $('.contact_submit').on('click', function(e) {
       e.preventDefault();
       console.log('user?')
-    console.log('{{\Auth::guard('web')->user()}}')
-      if(!'{{\Auth::guard('web')->user()}}'){
+      var user='{{\Auth::guard('web')->user()->id}}'
+    console.log('user=>',user.length<1)
+      if(user.length<1){
         console.log('notA user')
         $('#ModalIn').modal({show:true})
       }
       else{
-        $(this).submit();
+        $('#contact').submit();
       }
     return true;
 

@@ -54,7 +54,7 @@ class SendAdvRequest extends Request
         return [
        'sender_name'=>'required',
 			'sender_email' => 'required|email',
-			'sender_phone' => 'required',
+			'sender_phone' => 'required|min:11|numeric',
         ];
     }
 
@@ -65,6 +65,8 @@ class SendAdvRequest extends Request
             'sender_email.required' => " Необходимо ввести email адрес |",
             'sender_email.email' => " Емайл указан неверно |",
             'sender_phone.required' => ' Необходимо ввести телефон |',
+          'sender_phone.min' => ' Необходимо ввести телефон |',
+          'sender_phone.numeric' => ' Необходимо ввести телефон |',
 
         ];
     }
