@@ -1090,6 +1090,20 @@ Your e-mail is verified. Your social account approoved.
       }
     });
   });
+
+  $(function() {
+    $(".search").keypress(function (e) {
+      console.log('eev')
+      if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+        console.log('searchPress')
+        $('#go').click();
+
+        return true;
+      } else {
+        return true;
+      }
+    });
+  });
 </script>
 
 
