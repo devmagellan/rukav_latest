@@ -24,7 +24,7 @@ class WebLoginTask extends Task
      */
     public function run(string $email, string $password, bool $remember = false) : Authenticatable
     {
-        if (!$user = Auth::guard('admin')->attempt(['email' => $email, 'password' => $password], $remember)) {
+        if (!$user = Auth::guard('admin')->attempt(['email' => $email, 'password' => $password,'is_client'=>0], $remember)) {
             throw new LoginFailedException();
         }
 
