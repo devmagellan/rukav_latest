@@ -488,13 +488,14 @@ $(document).ready(function(){
     });
 
     $(".add_foto_file_delete").on("click", function(){
-        console.log('event')
+        console.log('event2')
         var photo = $(this).closest(".upload-file-container-text").find(".photo");
 
         $(photo)[0].value = "";
         $(photo).closest(".upload-file-container-text").find('.add_foto_file_img').attr('src', '');
         $(photo).closest(".upload-file-container-text").find('.add_foto_file_item_load').show();
         $(photo).closest(".upload-file-container-text").find('.add_foto_file_img_wrapper').hide();
+		$(photo).closest(".upload-file-container-text").find('.add_foto_file_img_wrapper_present').hide();
         console.log($(photo));
     });
 

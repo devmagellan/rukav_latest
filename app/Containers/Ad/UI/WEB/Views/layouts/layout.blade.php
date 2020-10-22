@@ -15,7 +15,7 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 
   <script>
-  console.log('876')
+  console.log('875')
     function initContinued(addr,ajax) {
         console.log('aJax=>',ajax)
         if(!addr.city){

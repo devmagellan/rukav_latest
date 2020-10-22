@@ -16,7 +16,7 @@
   <link rel="shortcut icon" href="/img/favicon.png" type="image/png">
 
   <script>
-  console.log('876')
+  console.log('874')
     function initContinued(addr,ajax) {
         console.log('aJax=>',ajax)
         if(!addr.city){
@@ -85,8 +85,11 @@
                   result.administrative_2 = results[i].address_components[0].long_name;
               }
               if (results[i].address_components[0].types[0] == "postal_town") {
+				  console.log('PostalTownCase');
                   console.log(i + ": postal_town:" + results[i].address_components[0].long_name);
                   result.postal_town = results[i].address_components[0].long_name;
+				   console.log('Postal_town',result.postal_town)
+                $('#city').val(result.postal_town)
               }
               if (results[i].address_components[0].types[0] == "political") {
 
