@@ -49,14 +49,28 @@ class ProfileSaveToOrganisationRequest extends Request
     /**
      * @return  array
      */
-    public function rules()
-    {
-        return [
-            // 'id' => 'required',
-            // '{user-input}' => 'required|max:255',
-        ];
-    }
+  public function rules()
+  {
+    return [
+      'organisation_name' => 'required',
+      'www' => 'required',
+      'address' => 'required',
+      'post_code' => 'required',
 
+    ];
+  }
+
+  public function messages()
+  {
+    return [
+      'organisation_name.required' => 'Необходимо добавить название организации',
+      'www.required' => 'Необходимо добавить адрес вебсайта',
+      'address.required' => 'Необходимо добавить адрес вебсайта',
+      'post_code.required' => 'Необходимо добавить адрес вебсайта',
+
+
+    ];
+  }
     /**
      * @return  bool
      */
