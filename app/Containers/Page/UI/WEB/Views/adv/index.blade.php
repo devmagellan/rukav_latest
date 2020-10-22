@@ -14,7 +14,7 @@
           <ul class="breadcrumbs">
             <li><a href="/"><img src="/img/home_icon.svg" alt=""></a><img src="{{asset('/img/back_Icon.svg')}}" alt=""></li>
 
-            <li>Реклама на рукав</li>
+            <li>Реклама на Рукав</li>
           </ul>
         </div>
       </div>

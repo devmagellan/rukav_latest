@@ -485,11 +485,11 @@
               @enderror
             </div-->
             <div class="contact_info_wrapper">
-			@if(null!=(\Session::get('ad'))) 
+			@if(null!=(\Session::get('ad')))
 				<div class="input_price_icon">£</div><input type="number" step=".01" name="price" placeholder="Цена (не обязательно)" value="{{\Session::get('ad')->price}}">
 			@else
 				 <div class="input_price_icon">£</div><input type="number" step=".01" name="price" placeholder="Цена (не обязательно)" value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->price}} @endif">
-           
+
 			@endif
               </div>
           </div>
@@ -498,8 +498,8 @@
 <style>
     .upload-file-container-text:hover .add_foto_file_block_hover{display:block;}
   </style>
-	  		
-                 
+
+
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
@@ -512,8 +512,8 @@
             <div class="add_foto_file_wrapper">
               @foreach(\Session::get('ad')->pictures as $key=>$realPic)
                 <div class="add_foto_file_item">
- 
-				  
+
+
                   <div class="upload-file-container-text" style="position:relative">
 
                     <label style="position: relative;height: 114px;width: 114px;" for="imgInput{{$key}}" class="add_foto_file_item_load">
@@ -527,7 +527,7 @@
                           <img src="/img/delete-icon.svg" alt="">
                         </div>
                       </div>
-                    
+
                     <input type="file" name="files[]" class="photo" id="imgInput{{$key}}"/>
                   </div>
                 </div>
@@ -567,8 +567,8 @@
             <h6 class="add_advert_block_wrapper_title">
               Фотографии
             </h6>
-			
-	
+
+
             <div class="add_foto_file_wrapper">
               <div class="add_foto_file_item">
 
@@ -825,12 +825,12 @@
       </div>
   </form>
   </article>
-  
+
   <style>
   .product_slider_icon img {margin-top:8px;}
   </style>
-  
-  
+
+
     <div class="modal fade modalCatalog" id="mainCatalog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -934,7 +934,7 @@
               <div class="product_info_block">
                 <div class="product_info_block_left">
                   <div class="product_info_block_avatar">
-				  
+
 				  @if(null!=(\Auth::user()) && \Auth::user()->avatar)
               <img style="height:40px;border-radius: 50%;" src="@if(substr(\Session::get('ad')->getSender->avatar, 0, 4)!='http')/storage/avatars/@endif{{ \Session::get('ad')->getSender->avatar }}" />
               @elseif(null!=(\Auth::user()) && \Auth::user()->name )

@@ -93,10 +93,10 @@ public function __construct(ValidationFactory $validationFactory)
   public function messages()
   {
     return [
-      'firstName.required' => 'Нужно Имя',
-      'lastName.required' => 'Нужна Фамилия',
-      'email.required' => 'Нужен email',
-      'password.required' => 'Нужно указать пароль',
+      'firstName.required' => 'укажите имя',
+      'lastName.required' => 'укажите фамилию',
+      'email.required' => 'укажите email',
+      'password.required' => 'укажите пароль',
 
 
     ];
