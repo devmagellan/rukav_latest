@@ -103,3 +103,22 @@
   </main>
 
 @endsection
+@section('scripts')
+  <script>
+
+    $('#contact').on('submit', function(e) {
+      e.preventDefault();
+      console.log('user?')
+    console.log('{{\Auth::guard('web')->user()}}')
+      if(!'{{\Auth::guard('web')->user()}}'){
+        console.log('notA user')
+        $('#ModalIn').modal({show:true})
+      }
+      else{
+        $(this).submit();
+      }
+    return true;
+
+    });
+  </script>
+@endsection
