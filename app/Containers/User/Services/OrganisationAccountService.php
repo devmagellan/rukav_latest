@@ -15,7 +15,7 @@ class OrganisationAccountService
       if(!is_array($data)) {
           $data=$data->toArray();
       }
-          $isSet=OrganisationAccount::where('user_id',$userId)->first()->pluck('id');
+          $isSet=OrganisationAccount::where('user_id',$userId)->first();
       \Log::info('createOrganisationAccount',array($data));
       OrganisationAccount::updateOrCreate(['id'=>(null!=($isSet)) ? $isSet->pluck('id') : null],[
       'www' => $data['www'],
