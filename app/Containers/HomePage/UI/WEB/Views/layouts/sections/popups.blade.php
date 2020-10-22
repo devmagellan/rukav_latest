@@ -539,23 +539,23 @@ Your e-mail is verified. Your social account approoved.
 
         <ul class="socials socials_reg">
           <li>
-            <a href="#">
+            <a href="#" class="social_btns">
               <i class="fab fa-facebook-f"></i>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" class="social_btns">
               <img style="background-color:#fff;width:25px;height:25px;top:-3px;" src="/img/google.png">
               <!--i class="fab fa-google"></i-->
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" class="social_btns">
               <i class="fab fa-vk"></i>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" class="social_btns">
               <i class="fab fa-odnoklassniki"></i>
             </a>
           </li>
