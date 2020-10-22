@@ -53,6 +53,9 @@ class ProfileSaveToIndividualRequest extends Request
   {
     return [
       'business_name' => 'required',
+      'www' => 'required',
+      'address' => 'required',
+      'postCode' => 'required',
 
     ];
   }
@@ -60,7 +63,10 @@ class ProfileSaveToIndividualRequest extends Request
   public function messages()
   {
     return [
-      'business_name.required' => 'Необходимо добавить название бизнеса',
+      'business_name.required' => 'Необходимо добавить название организации',
+      'www.required' => 'Необходимо добавить адрес вебсайта',
+      'address.required' => 'Необходимо добавить адрес организации',
+      'postCode.required' => 'Необходимо добавить почтовый код организации',
 
 
     ];
