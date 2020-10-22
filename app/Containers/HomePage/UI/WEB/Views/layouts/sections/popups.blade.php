@@ -376,11 +376,11 @@ Your e-mail is verified. Your social account approoved.
         <div class="row">
           <div class="col-sm-6">
             <input type="text" name="firstName" placeholder="Имя"> <span class="required">*</span>
-            <span id="firstName" class="errorBlock"></span>
+            <span style="color:red" id="firstName" class="errorBlock"></span>
           </div>
           <div class="col-sm-6">
             <input type="text" name="lastName" placeholder="Фамилия"> <span class="required">*</span>
-            <span id="lastName" class="errorBlock"></span>
+            <span style="color:red" id="lastName" class="errorBlock"></span>
           </div>
         </div>
         <div class="row">
@@ -395,7 +395,7 @@ Your e-mail is verified. Your social account approoved.
           <div class="col-sm-6">
             <p class="input_text_top">Не виден пользователям</p>
             <input type="text" name="email" placeholder="Контактный email"><span class="required">*</span>
-            <span id="email" class="errorBlock"></span>
+            <span style="color:red" id="email" class="errorBlock"></span>
           </div>
 
         </div>
@@ -497,7 +497,7 @@ Your e-mail is verified. Your social account approoved.
         <div class="row">
           <div class="col-sm-6">
             <input type="text" class="modal_pass" name="password" placeholder="Пароль"><span class="required">*</span>
-            <span id="password" class="errorBlock"></span>
+            <span style="color:red" id="password" class="errorBlock"></span>
           </div>
 
 

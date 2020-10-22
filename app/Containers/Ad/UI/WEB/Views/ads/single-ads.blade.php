@@ -149,7 +149,7 @@ ul.slickslide li img, .slick-dots button img {
         text-align: center;
     }
     .swiper-button{
-        background-color: rgba(178, 177, 179, 0.7);
+        background-color: #A269F7;
         width: 35px;
         height: 35px;
         background-size: 10px;

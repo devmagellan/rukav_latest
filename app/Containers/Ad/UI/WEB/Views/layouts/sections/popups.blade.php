@@ -87,7 +87,7 @@
         <div class="row">
           <div class="col-sm-6">
             <input type="text" name="firstName" placeholder="Имя"> <span class="required">*</span>
-            <span id="firstName" class="errorBlock"></span>
+            <span style="color:red" id="firstName" class="errorBlock"></span>
           </div>
           <div class="col-sm-6">
             <input type="text" name="lastName" placeholder="Фамилия"> <span class="required">*</span>
