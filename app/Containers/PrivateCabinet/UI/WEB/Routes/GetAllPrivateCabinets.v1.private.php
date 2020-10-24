@@ -5,7 +5,9 @@ $router->get('/private_cabinet/{type?}', [
     'as' => 'web_privatecabinet_index',
     'uses'  => 'Controller@index',
 	'middleware' => [
+    'AdminCreatedConfirmation',
       'auth:web',
+
     ],
 ]);
 

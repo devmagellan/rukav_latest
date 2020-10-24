@@ -21,9 +21,9 @@ class UserService
       try {
       $current=\App\Containers\User\Models\User::where('email',$data->email)->withTrashed()->first();
       \Log::info('CurrentUser=>',array($current));
-	  $id=(property_exists($data, 'customer_id') && $current==null)  ? $data->customer_id : ($current!=null) ? $current->id : null ;
+	  $id=(property_exists($data, 'customer_id') && $current==null)  ? $data->customer_id : (($current!=null) ? $current->id : null );
 	  \Log::info('CurrentUserID=>'.$id);
-      return User::withTrashed()->updateOrCreate(['id'=>$id],[
+        $newUser = User::withTrashed()->updateOrCreate(['id'=>$id],[
       'name' => (property_exists($data, 'save_url') ) ? $data->name : $data->firstName,
       'sername' => (property_exists($data, 'save_url') ) ? $data->sername : $data->lastName,
       'email' => $data->email,
@@ -34,11 +34,14 @@ class UserService
       'avatar'=>(property_exists($data, 'customer_id')  && $data->customer_id) ? $data->avatar : null,
       'active'=>(property_exists($data, 'customer_id')  && $data->customer_id) ? $data->active : 1,
       'is_client'=>(property_exists($data, 'customer_id')  && $data->customer_id) ? $data->is_client : 1,
-      'confirmed'=> (property_exists($data, 'customer_id')  && $data->customer_id) ? $data->confirmed : User::STATUS_INACTIVE,
+      'confirmed'=> ($data->admin_side==1) ? User::STATUS_CREATED_BY_ADMIN_NOT_CONFIRMED  :((property_exists($data, 'customer_id')  && $data->customer_id) ? $data->confirmed : User::STATUS_INACTIVE),
       'is_confirmed_phone'=> (property_exists($data, 'customer_id')  && $data->customer_id) ? $data->is_confirmed_phone : 0,
+      'admin_created_confirmation'=>null,
       'verify_token' => Str::random(),
       'deleted_at'=>null
     ]);
+        \Log::info('UserData5=>',array($newUser));
+        return $newUser;
       } catch (\Throwable $exception) {
           \Log::info('exception',array($exception));
       }

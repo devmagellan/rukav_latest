@@ -4,6 +4,7 @@ namespace App\Containers\User\UI\WEB\Controllers;
 
 use App\Containers\HomePage\Services\GlobalService;
 use App\Containers\User\Jobs\ExpiredAdsEmailVerification;
+use App\Containers\User\Jobs\VerifyMail;
 use App\Containers\User\Models\BusinessUser;
 use App\Containers\User\UI\WEB\Requests\RegisterUserRequest;
 use App\Containers\User\UI\WEB\Requests\ChangeFromSimpleUserRequest;
@@ -525,4 +526,16 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
       \Auth::logout();
       return redirect()->route('get_main_home_page');
     }
+
+  public function sendConfirmationEmail(GetAllUsersRequest $request){
+    $user=\Auth::user();
+    dispatch(new VerifyMail($user))->onQueue('queue_name');
+  }
+
+  public function changeEmail(GetAllUsersRequest $request){
+    $user=\Auth::user();
+    $user= \App\Containers\User\Models\User::where('id',\Auth::user()->id)->update(['email'=>$request->email]);
+    dispatch(new VerifyMail($user))->onQueue('queue_name');
+  }
+
 }

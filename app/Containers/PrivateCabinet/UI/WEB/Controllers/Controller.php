@@ -12535,6 +12535,9 @@ class Controller extends WebController
      */
     public function index(GetAllPrivateCabinetsRequest $request,$type=null)
     {
+      \Log::info('SessionHasC1'.\Session::has('ShowWeeklyAdminCreatedConfirmation') );
+      \Log::info('SessionHasC2'.\Session::get('ShowWeeklyAdminCreatedConfirmation') );
+
         $toAccountType='';
         if($type){
             $toAccountType=$type;

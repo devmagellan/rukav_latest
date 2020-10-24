@@ -104,6 +104,13 @@ class Controller extends WebController
       return response(['message' => true], Response::HTTP_OK);
     }
 
+    if (\Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password , 'confirmed' => User::STATUS_CREATED_BY_ADMIN_NOT_CONFIRMED])) {
+      \Log::info('IP'.\Request::ip());
+      User::where('id',\Auth::user()->id)->update(['ip'=>\Request::ip(),'last_login_datetime'=>\Carbon\Carbon::now()]);
+      \Log::info('Auth',array(\Auth::user()));
+      return response(['message' => true], Response::HTTP_OK);
+    }
+
     return response(['Не правильный логин или пароль'], Response::HTTP_CONFLICT);
   }
 

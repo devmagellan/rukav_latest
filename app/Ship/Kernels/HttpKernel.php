@@ -51,6 +51,7 @@ class HttpKernel extends LaravelHttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Ship\Middlewares\Http\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
         ],
 
         'api' => [
@@ -85,6 +86,7 @@ class HttpKernel extends LaravelHttpKernel
         'fw-only-whitelisted' => \PragmaRX\Firewall\Middleware\FirewallWhitelist::class,
         'fw-block-blacklisted' => \App\Containers\Authentication\Middlewares\FirewallBlacklist::class,
         'fw-block-attacks' => \PragmaRX\Firewall\Middleware\BlockAttacks::class,
+      'AdminCreatedConfirmation'     => \App\Ship\Middlewares\Http\AdminCreatedConfirmation::class,
         // 'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         // 'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
     ];
@@ -97,7 +99,9 @@ class HttpKernel extends LaravelHttpKernel
      * @var array
      */
     protected $middlewarePriority = [
+
       \Illuminate\Session\Middleware\StartSession::class,
+
       \Illuminate\View\Middleware\ShareErrorsFromSession::class,
       \App\Ship\Middlewares\Http\Authenticate::class,
       \Illuminate\Routing\Middleware\ThrottleRequests::class,
