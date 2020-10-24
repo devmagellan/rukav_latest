@@ -89,6 +89,81 @@
     </div>
   </div>
 </div>
+@php
+  \Log::info('SessionHasN1'.\Session::has('ShowWeeklyAdminCreatedConfirmation') );
+\Log::info('SessionHasN2'.\Session::get('ShowWeeklyAdminCreatedConfirmation') );
+@endphp
+@if(\Session::has('ShowWeeklyAdminCreatedConfirmation') && \Session::get('ShowWeeklyAdminCreatedConfirmation')==1)
+  @php
+    \Log::info('SessionHas');
+@endphp
+  <div class="modal fade" id="emailUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3"
+       aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+
+        <button type="button" class="close closeEmailUpdate" data-dismiss="modal" aria-label="Close">
+          <img src="{{asset('img/close-icon.svg')}}" alt="">
+        </button>
+        <h6 class="modalTitle">Подтвердите или измените свои данные</h6>
+        <form id="idForm" class="formModal" action="/confirm_email" method="post">
+
+          <h7>если вы не в сети и вам прислали сообщение, оно придет на указанный вами емайл</h7>
+          <input type="hidden" name="id" value="@if(\Auth::user()) {{\Auth::user()->id}} @endif">
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="button" class="changeEmail" data-toggle="modal">Изменить свой email
+              </button>
+
+              <button type="submit" name="confirmEmail" data-toggle="modal">Подтвердить {{\Auth::user()->email}}
+              </button>
+            </div>
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+
+@endif
+
+
+
+<div class="modal fade" id="changeEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <img src="{{asset('img/close-icon.svg')}}" alt="">
+      </button>
+      <h6 class="modalTitle">Смена email</h6>
+      <form id="idForm" class="formModal" action="/change_email" method="post">
+
+        <input type="hidden" name="id" value="@if(\Auth::user()) {{\Auth::user()->id}} @endif">
+        <div class="row">
+          <div class="input_password_wrapper col-md-8" style="margin:0 auto">
+            <input type="email"  placeholder="Новый Email" class="input_new_password" name="email" >
+            <span id="passwordNewLogin" class="errorBlock"></span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <button type="submit" data-toggle="modal">Изменить email
+            </button>
+          </div>
+          <div class="col-sm-6">
+            <button type="button" class="buttonHref">вернуться</button>
+          </div>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+</div>
 
 
 
@@ -1104,6 +1179,8 @@ Your e-mail is verified. Your social account approoved.
       }
     });
   });
+
+
 </script>
 
 

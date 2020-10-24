@@ -738,10 +738,23 @@ $initAutoComplete = function(){
 <script>
 $(document).ready(function(){
 	console.log('777');
+  $('#emailUpdate').modal({show:true});
 $('#ModalIn').modal('show');
 });
 </script>
 {{session()->forget('registration_error')}}
+@endif
+@if(null!=(session()->get('ShowWeeklyAdminCreatedConfirmation')) )
+  <script>
+      console.log('778');
+      $('#emailUpdate').modal({show:true});
 
+
+      $('.changeEmail').click(function(){
+        $('.closeEmailUpdate').trigger('click');
+        $('#changeEmail').modal({show:true});
+      })
+  </script>
+{{session()->forget('ShowWeeklyAdminCreatedConfirmation')}}
 @endif
 

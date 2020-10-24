@@ -13,7 +13,6 @@ use App\Ship\Parents\Requests\Request;
 abstract class WebController extends AbstractWebController
 {
 
-
     public function getMainProperties(Request $request){
         $this->categories= Apiato::call('Site@GetAllProductCategoriesAction', [$request]);
         $this->categoriesOnlyRoot = $this->categories->where('parent_id', 0);

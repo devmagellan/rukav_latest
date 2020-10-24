@@ -110,4 +110,22 @@ $router->post('/go_to_business_users', [
   ],
 ]);
 
+$router->post('/confirm_email', [
+  'as' => 'confirm_email',
+  'uses'  => 'Controller@sendConfirmationEmail',
+  'middleware' => [
+    'auth:web',
+  ],
+]);
+
+$router->post('/change_email', [
+  'as' => 'change_email',
+  'uses'  => 'Controller@changeEmail',
+  'middleware' => [
+    'auth:web',
+  ],
+]);
+
+
+
 
