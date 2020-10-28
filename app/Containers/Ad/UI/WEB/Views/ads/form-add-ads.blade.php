@@ -515,19 +515,23 @@
 
 
                   <div class="upload-file-container-text" style="position:relative">
-
+<label for="imgInput2" class="add_foto_file_item_load" style="display:none">
+                          <img src="/img/photo-camera-icon.svg" alt="">
+                          <span>Добавить фото</span>
+                        </label>
+					<div class="add_foto_file_img_wrapper_present" >	
                     <label style="position: relative;height: 114px;width: 114px;" for="imgInput{{$key}}" class="add_foto_file_item_load">
-                      <img style="object-fit: cover;height: 100%;width: 100%;" src="/storage/messages/{{$realPic->photo}}" alt="">
+                      <img class="add_foto_file_img" style="object-fit: cover;height: 100%;width: 100%;" src="/storage/messages/{{$realPic->photo}}" alt="">
                     </label>
                       <div class="add_foto_file_block_hover" style="position:absolute">
-                        <label for="imgInput{{$key}}" class="add_foto_file_item_load2">
+                        <label for="imgInput{{$key}}" class="add_foto_file_item_load">
                           <img src="/img/refresh_icon.svg" alt="">
                         </label>
                         <div class="add_foto_file_delete">
                           <img src="/img/delete-icon.svg" alt="">
                         </div>
                       </div>
-
+                    </div>
                     <input type="file" name="files[]" class="photo" id="imgInput{{$key}}"/>
                   </div>
                 </div>

@@ -40,7 +40,7 @@
       </div>
 
       <div class="row">
-        <h3 style="font-weight:600" >Карьера</h3>
+        <h3 style="font-weight:600;margin-left:20px" >Карьера</h3>
       </div>
         <div class="row">
           <div class="col-md-4">

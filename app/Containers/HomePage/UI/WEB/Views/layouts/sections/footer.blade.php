@@ -1,3 +1,11 @@
+<style>
+#body > footer > div:nth-child(1) > div > div.col-md-4 > ul > li > a > svg{
+	
+	top:5px;
+	position:relative;
+}
+</style>
+
 <footer class="footer">
   <div class="container">
     <div class="row">

@@ -219,6 +219,7 @@
                       @endif
 
                     </div>
+					<div style="display:block;color:red" id="organisation_name" class="errorBlock"></div>
 
                   @endif
                 </div>
@@ -427,6 +428,7 @@
                       <p class="prophile_www">www.</p>
                     </div>
                   </div>
+				  <div style="display:block;color:red" id="www" class="errorBlock"></div>
                 </div>
               </div>
 
@@ -476,7 +478,9 @@
                       <input type="text" class="prophile_main_input" name="address"  placeholder="Адрес">
                     @endif
                   </div>
+				  <div style="display:block;color:red" id="address" class="errorBlock"></div>
                 </div>
+				
                 <div class="col-md-3 col-lg-7 flex-column">
                   <p class="prophile_main_text prophile_postcode_text prophile_postcode_text_first">
                     Почт. индекс <span>*</span>
@@ -500,7 +504,9 @@
 
 
                   </div>
+				  <div style="display:block;color:red" id="postCode" class="errorBlock"></div>
                 </div>
+				
                 @if(\Auth::user()->getBusinessAccount || $toAccountType=='to_company')
 
                 <div class="col-md-9 col-lg-5 flex-column">
@@ -1067,6 +1073,7 @@
                     {{$ad->counter}}
                     </p>
                   </div>
+				 
                 </div>
               </div>
 
@@ -1278,7 +1285,7 @@
               </div>
               <div class="choosen_item_text d-flex flex-column">
                 <p class="choosen_item_name">
-                  {{$favorit->title}}
+                  <a href="/ads/{{$favorit->id}}">{{$favorit->title}}</a>
                 </p>
                 <div class="choosen_subitems_wrapper">
                   <div class="choosen_subitem d-flex flex-column">
@@ -1313,6 +1320,14 @@
                       {{$ad->counter}}
                     </p>
                   </div>
+				   <div class="choosen_subitem d-flex flex-column">
+                    <p class="choosen_subtitle">
+                      Цена предложения
+                    </p>
+                    <p class="choosen_info">
+                    &pound; {{$favorit->price}}
+                    </p>
+                  </div>
                 </div>
               </div>
               <div class="choosen_button-wrapper d-flex flex-row flex-wrap align-items-center justify-content-between">
@@ -1325,6 +1340,9 @@
          @endforeach
           </div>
         </div>
+		@if(count($favorits)<3)
+			<div style="min-height:300px"></div>
+		@endif
       </div>
     </div>
   </main>

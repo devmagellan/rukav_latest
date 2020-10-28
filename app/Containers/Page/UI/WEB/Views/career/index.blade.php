@@ -23,7 +23,7 @@
       </div>
 
       <div class="row">
-        <h3 style="font-weight:600" >Карьера</h3>
+        <h3 style="font-weight:600;margin-left:50px;" >Карьера</h3>
         <div class="row">
           <div class="col-md-4">
             <div class="photoCareer" style="width:90%;height:300px;background-repeat:no-repeat;background-size:100%;border-radius:10px;background-image: url('/storage/pictures/hero-image-text-left-darker 1.png')">

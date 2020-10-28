@@ -41,7 +41,7 @@
       </div>
 
       <div class="row">
-        <h3 style="font-weight:600" >Реклама на RUKAV</h3>
+        <h3 style="font-weight:600;margin-left:10px;" >Реклама на RUKAV</h3>
         <div class="col-md-12">
           @if($data['firstHelpPage'])
                 <?

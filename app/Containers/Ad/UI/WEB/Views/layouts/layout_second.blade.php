@@ -21,7 +21,7 @@
 
 
 
-  console.log('876')
+  console.log('876 Layout Second')
     function initContinued(addr,ajax) {
         console.log('aJax=>',ajax)
         if(!addr.city){
@@ -92,6 +92,7 @@
               if (results[i].address_components[0].types[0] == "postal_town") {
                   console.log(i + ": postal_town:" + results[i].address_components[0].long_name);
                   result.postal_town = results[i].address_components[0].long_name;
+				  console.log('Postal_town'.result.postal_town)
                 $('#city').val(result.postal_town)
               }
               if (results[i].address_components[0].types[0] == "political") {
@@ -239,7 +240,7 @@ $initAutoComplete = function(){
 @yield('content')
 <div id="map" style="display:none"></div>
 @include('homepage::layouts.sections.footer')
-@include('ad::layouts.sections.popups')
+@include('homepage::layouts.sections.popups')
 @include('homepage::layouts.sections.scripts')
 
 

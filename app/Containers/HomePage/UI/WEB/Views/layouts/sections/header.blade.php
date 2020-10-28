@@ -165,7 +165,7 @@
                 Мой профиль
               </p>
             </a>
-            <a href="/help/1" class="user_cabinet_item">
+            <a href="/static/help" class="user_cabinet_item">
               <div class="user_cabinet_icon">
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path class="svg_path" d="M11 1C5.48577 1 1 5.48577 1 11C1 16.5142 5.48577 21 11 21C16.5142 21 21 16.5142 21 11C21 5.48577 16.5142 1 11 1ZM11 20.2308C5.91038 20.2308 1.76923 16.0896 1.76923 11C1.76923 5.91038 5.91038 1.76923 11 1.76923C16.0896 1.76923 20.2308 5.91038 20.2308 11C20.2308 16.0896 16.0896 20.2308 11 20.2308Z" fill="#A269F7" stroke="#A269F7" stroke-width="0.1"/>
