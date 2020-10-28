@@ -9,6 +9,7 @@ use App\Containers\PrivateCabinet\UI\WEB\Requests\FindPrivateCabinetByIdRequest;
 use App\Containers\PrivateCabinet\UI\WEB\Requests\UpdatePrivateCabinetRequest;
 use App\Containers\PrivateCabinet\UI\WEB\Requests\StorePrivateCabinetRequest;
 use App\Containers\PrivateCabinet\UI\WEB\Requests\EditPrivateCabinetRequest;
+use App\Containers\User\Models\User;
 use App\Containers\User\UI\WEB\Requests\GetAllUsersRequest;
 use App\Containers\User\UI\WEB\Requests\ProfileSaveToIndividualRequest;
 use App\Containers\User\UI\WEB\Requests\ProfileSaveToOrganisationRequest;
@@ -12768,6 +12769,10 @@ class Controller extends WebController
 
     public function checkData(GetAllPrivateCabinetsRequest $request){
         $user=\App\Containers\User\Models\User::where('id',$request->input('client_id'))->first();
+      if(\Auth::user()->confirmed==\App\Containers\User\Models\User::STATUS_CREATED_BY_ADMIN_NOT_CONFIRMED) {
+        \Session::put('ShowWeeklyAdminCreatedConfirmation',1);
+        return response()->json(['error' => 'Email Not confirmed'], 404);
+      }
         if (preg_match('/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/si', $request->input('text')))
         {
             dd("Contains an email");}
@@ -12785,7 +12790,7 @@ class Controller extends WebController
 
                 $entityClass=\App\Containers\Connect\Models\Connect::class;
                 $con=call_user_func("{$entityClass}::query")->updateOrCreate($message['attributes'], $message['values']);
-                var_dump($con);
+                var_dump('con',$con);
                 var_dump('receiver-'.$user->id.'-');
                 $options = array(
                     'cluster' => 'eu',

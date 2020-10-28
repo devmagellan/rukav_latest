@@ -33,7 +33,7 @@
 
 <script>
     function sendMessage(){
-        console.log('in_function')
+        console.log('in_function 2')
         if($('#msgr_input').val().length>0){
 
             var text = $('#msgr_input').val()

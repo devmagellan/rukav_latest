@@ -212,7 +212,18 @@ $("#but_upload").click(function(){
                     //reloadMessageList({{$conversation->first()->message_id}})
 
 
+                },
+              error: function (errors) {
+
+
+                var response = JSON.parse(errors.responseText);
+                console.log('Error',response);
+                if(response.error=='Email Not confirmed'){
+                  $('#emailUpdate').modal({show:true})
                 }
+
+
+              }
             });
         }
     }
