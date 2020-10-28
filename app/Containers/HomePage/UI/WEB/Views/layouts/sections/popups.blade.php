@@ -218,8 +218,6 @@
     \Session::forget('successSocial')
   @endphp
 
-
-Your e-mail is verified. Your social account approoved.
 <div class="modal modal_confirm_email_phone fade" id="youAreNotLeggedIn" tabindex="-1" role="dialog"
            aria-labelledby="exampleModalLabel2" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
