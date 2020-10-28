@@ -18,6 +18,9 @@ class AdminCreatedConfirmation extends Middleware
         if(\Auth::user()->admin_created_confirmation==null && \Auth::user()->confirmed==User::STATUS_CREATED_BY_ADMIN_NOT_CONFIRMED){
           \Auth::user()->admin_created_confirmation=Carbon::now();
           \Auth::user()->save();
+		  \Session::put('ShowWeeklyAdminCreatedConfirmation',1);
+            \Log::info('SESSION=>'.\Session::has('ShowWeeklyAdminCreatedConfirmation'));
+            \Log::info('SESSION=>'.\Session::get('ShowWeeklyAdminCreatedConfirmation') );
 
         }
         elseif($request->path()=='private_cabinet' && (\Auth::user()->admin_created_confirmation!=null && \Auth::user()->confirmed==User::STATUS_CREATED_BY_ADMIN_NOT_CONFIRMED)){

@@ -1,6 +1,8 @@
 <style>
 .modal .socials li:nth-child(2) a {
     background: #fff;
+	top:-1px;
+	position:relative;
 }
 </style>
 
@@ -115,7 +117,7 @@
               <button type="button" class="changeEmail" data-toggle="modal">Изменить свой email
               </button>
 
-              <button type="submit" name="confirmEmail" data-toggle="modal">Подтвердить {{\Auth::user()->email}}
+              <button type="submit" class="confirmEmail" name="confirmEmail" data-toggle="modal">Подтвердить {{\Auth::user()->email}}
               </button>
             </div>
           </div>
@@ -218,8 +220,6 @@
     \Session::forget('successSocial')
   @endphp
 
-
-Your e-mail is verified. Your social account approoved.
 <div class="modal modal_confirm_email_phone fade" id="youAreNotLeggedIn" tabindex="-1" role="dialog"
            aria-labelledby="exampleModalLabel2" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

@@ -319,7 +319,11 @@ ul.slickslide li img, .slick-dots button img {
           </div>
           <a href="tel:{{$ad->phone}}" class="product_info_btn_phone">
             <img src="/img/info_phone.svg" alt="">
+		@if(empty($ad->phone) || strlen($ad->phone)<6 )
+			<span>Не указан</span>
+			@else
             <span>{{print($ad->phone)}}</span>
+		@endif
           </a>
           @if(\Auth::user())
           <a href="#" class="product_info_send_message product_info_send_message_authenticated" onclick="localStorage.removeItem('ModalSendMessage');" data-toggle="modal" data-target="#ModalSendMessage"><img src="/img/telegramm_icon.svg" alt="">отправить сообщение</a>

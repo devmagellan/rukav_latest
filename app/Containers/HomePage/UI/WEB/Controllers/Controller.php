@@ -270,15 +270,29 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
 
           ->where('active',1);
 
-      if($request->input('sort_by_date')=='low_to_high'){
-          dump('low_to_high');
-          $q->orderBy('created_at');
+    	$uri = $_SERVER["REQUEST_URI"];
+$url_components = parse_url($uri);
+if(isset($url_components['query'])){
+$parts=explode('&',$url_components['query']);
+$partsCount=count($parts);
+      if( $request->input('sort_by_date')=='low_to_high' && $parts[$partsCount-1]=='sort_by_date=low_to_high'){
+          //dump('low_to_high');
+          $q->orderBy('ads.created_at');
       }
-      if($request->input('sort_by_date')=='high_to_low'){
-          dump('high_to_low');
-          $q->orderByDesc('created_at');
+      if( $request->input('sort_by_date')=='high_to_low' && $parts[$partsCount-1]=='sort_by_date=high_to_low'){
+          //dump('high_to_low');
+          $q->orderByDesc('ads.created_at');
+      } 
+      if( $request->input('sort_by_price')=='low_to_high' && $parts[$partsCount-1]=='sort_by_price=low_to_high'){
+          //dump('low_to_high');
+          $q->orderBy('ads.price');
+      }
+      if( $request->input('sort_by_price')=='high_to_low' && $parts[$partsCount-1]=='sort_by_price=high_to_low'){
+          //dump('high_to_low');
+          $q->orderByDesc('ads.price');
       }
 
+}
 
 
       $qr=clone($q);

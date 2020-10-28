@@ -749,6 +749,10 @@ $('#ModalIn').modal('show');
       console.log('778');
       $('#emailUpdate').modal({show:true});
 
+	$('.confirmEmail').click(function(){
+        $('.closeEmailUpdate').trigger('click');
+        $('#confirmEmail').modal({show:true});
+      })
 
       $('.changeEmail').click(function(){
         $('.closeEmailUpdate').trigger('click');

@@ -240,7 +240,7 @@ $initAutoComplete = function(){
 @yield('content')
 <div id="map" style="display:none"></div>
 @include('homepage::layouts.sections.footer')
-@include('ad::layouts.sections.popups')
+@include('homepage::layouts.sections.popups')
 @include('homepage::layouts.sections.scripts')
 
 

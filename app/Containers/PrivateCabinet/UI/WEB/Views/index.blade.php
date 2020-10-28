@@ -1073,6 +1073,7 @@
                     {{$ad->counter}}
                     </p>
                   </div>
+				 
                 </div>
               </div>
 
@@ -1284,7 +1285,7 @@
               </div>
               <div class="choosen_item_text d-flex flex-column">
                 <p class="choosen_item_name">
-                  {{$favorit->title}}
+                  <a href="/ads/{{$favorit->id}}">{{$favorit->title}}</a>
                 </p>
                 <div class="choosen_subitems_wrapper">
                   <div class="choosen_subitem d-flex flex-column">
@@ -1319,6 +1320,14 @@
                       {{$ad->counter}}
                     </p>
                   </div>
+				   <div class="choosen_subitem d-flex flex-column">
+                    <p class="choosen_subtitle">
+                      Цена предложения
+                    </p>
+                    <p class="choosen_info">
+                    &pound; {{$favorit->price}}
+                    </p>
+                  </div>
                 </div>
               </div>
               <div class="choosen_button-wrapper d-flex flex-row flex-wrap align-items-center justify-content-between">
@@ -1331,6 +1340,9 @@
          @endforeach
           </div>
         </div>
+		@if(count($favorits)<3)
+			<div style="min-height:300px"></div>
+		@endif
       </div>
     </div>
   </main>
