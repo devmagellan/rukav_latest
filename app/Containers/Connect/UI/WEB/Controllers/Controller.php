@@ -11,6 +11,7 @@ use App\Containers\Connect\UI\WEB\Requests\StoreConnectRequest;
 use App\Containers\Connect\UI\WEB\Requests\EditConnectRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
+use App\Containers\User\Models\User;
 
 /**
  * Class Controller
@@ -64,6 +65,10 @@ class Controller extends WebController
     {
 
         $user=\App\Containers\User\Models\User::where('id',$request->input('client_id'))->first();
+
+        if($user->confirmed==User::) {
+
+        }
         if (preg_match('/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/si', $request->input('text')))
         {
             return json_encode(['message'=>'Contains an email']);
