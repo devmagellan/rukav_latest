@@ -128,6 +128,8 @@
     </div>
   </div>
 
+  @php \Session::put('ShowWeeklyAdminCreatedConfirmation',0)@endphp
+
 @endif
 
 

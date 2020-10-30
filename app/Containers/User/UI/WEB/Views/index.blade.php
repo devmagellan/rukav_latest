@@ -26,6 +26,20 @@
     }
     ?>
     <main id="js-page-content" role="main" class="page-content">
+      <div class="modal fade default-example-modal-show-user-password" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-transparent" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title h4" style="color:#fff">Пароль текущего пользователя</h5>
+              <button type="button" class="close password_create_close_click" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+              </button>
+            </div>
+            <input type="text" name="bookId" id="bookId" value=""/>
+          </div>
+        </div>
+      </div>
+
         <ol class="breadcrumb page-breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0);">SmartAdmin</a></li>
             <li class="breadcrumb-item">Application Intel</li>

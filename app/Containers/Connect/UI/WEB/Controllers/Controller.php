@@ -11,6 +11,7 @@ use App\Containers\Connect\UI\WEB\Requests\StoreConnectRequest;
 use App\Containers\Connect\UI\WEB\Requests\EditConnectRequest;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
+use App\Containers\User\Models\User;
 
 /**
  * Class Controller
@@ -63,7 +64,12 @@ class Controller extends WebController
     public function store(StoreConnectRequest $request)
     {
 
-        $user=\App\Containers\User\Models\User::where('id',$request->input('client_id'))->first();
+        $user=\App\Containers\User\Models\User::where('id',$request->input('sender_id'))->first();
+
+        if($user->confirmed==User::STATUS_CREATED_BY_ADMIN_NOT_CONFIRMED) {
+          \Session::put('ShowWeeklyAdminCreatedConfirmation',1);
+          return redirect('/ads/'.$request->input('message_id').'')->withErrors(['Ваш email не подвержден!', 'The Message']);
+        }
         if (preg_match('/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/si', $request->input('text')))
         {
             return json_encode(['message'=>'Contains an email']);

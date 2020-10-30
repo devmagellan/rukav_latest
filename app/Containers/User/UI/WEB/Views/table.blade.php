@@ -86,11 +86,17 @@
 
                         @endif
                     @if(\Auth::user()->can('delete-users'))
-                        <a href="javascript:void(0);" class="HardDeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Пользователь будет удален навсегда" data-original-title="hard delete">
-                            <i class="fal fa-times"></i>
-                        </a>
-                    @endif
+                  <a href="javascript:void(0);" class="HardDeleteCustomer btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Пользователь будет удален навсегда" data-original-title="hard delete">
+                    <i class="fal fa-times"></i>
+                  </a>
                 @endif
+
+                @endif
+                  @if($customer->confirmed==\App\Containers\User\Models\User::STATUS_CREATED_BY_ADMIN_NOT_CONFIRMED)
+                    <a href="javascript:void(0);" class="ShowUserPassword btn btn-danger btn-sm btn-icon waves-effect waves-themed" data-id="{{openssl_decrypt($customer->encripted_password,"AES-128-ECB",'password')}}" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Показать пароль пользователя" data-original-title="show password">
+                      <i class="fal fa-eye"></i>
+                    </a>
+                  @endif
             </td>
         </tr>
             </form>
@@ -100,6 +106,14 @@
 </div>
 
     <script>
+
+      $('.ShowUserPassword').click(function(){
+
+        $('.default-example-modal-show-user-password').modal({show:true});
+        var myBookId = $(this).data('id');
+        console.log(myBookId);
+        $(".default-example-modal-show-user-password #bookId").val( myBookId );
+      })
 
         $('.ChangePassword').click(function(){
             $('.default-example-modal-right-lg-password').modal({show:true});
