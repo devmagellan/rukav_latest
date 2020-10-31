@@ -12533,10 +12533,10 @@ class Controller extends WebController
    */
   public function index(GetAllAdsDataTableRequest $request)
   {
-
     $result['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
     //$users = Apiato::call('Ad@GetAllAdsDataTableAction', [$request]);
     $result['main_rubrics'] = Apiato::call('Site@GetProductCategoriesByParentIdAction', [0], [0]);
+    $result['input_client_id']=$request->input('client_id');
     return view('ad::index', $result);
   }
 
@@ -12746,7 +12746,13 @@ class Controller extends WebController
   public function adsByGroupDatatables(GetAllAdsDataTableRequest $request)
   {
 
-    $ads = \App\Containers\Ad\Models\Ad::get();
+    if(null!=$request->input('client_id')) {
+      $ads = \App\Containers\Ad\Models\Ad::where('sender',$request->input('client_id'))->get();
+    }
+    else{
+      $ads = \App\Containers\Ad\Models\Ad::get();
+    }
+
     //var_dump($ads);
 // The columns variable is used for sorting
     $columns = array(
@@ -12785,7 +12791,11 @@ class Controller extends WebController
 
       $statement = "";
       $items = $request->input('columns');
-      $ads = \App\Containers\Ad\Models\Ad::where('is_tmp',0)->where(function ($query) use ($items, $columns) {
+      $ads = \App\Containers\Ad\Models\Ad::where('is_tmp',0)
+        ->when(request('client_id') !=null, function ($q) {
+          return $q->where('sender',  request('client_id'));
+        })->
+      where(function ($query) use ($items, $columns) {
         foreach ($items as $key => $column) {
           if (null != $column['search']['value']) {
             if ($key == 1) {
@@ -13068,7 +13078,6 @@ class Controller extends WebController
   }
 
   public function adminAddAds(GetAllAdsDataTableRequest $request){
-
     $result['menu'] = Apiato::call('AdminMenu@GetAllAdminMenusAction', [$request]);
     //$users = Apiato::call('Ad@GetAllAdsDataTableAction', [$request]);
     $result['main_rubrics'] = Apiato::call('Site@GetProductCategoriesByParentIdAction', [0], [0]);

@@ -506,8 +506,84 @@ $('#managerSwitch').change(function(){
 })
 
 
+        $('#customer_phone').change(function(){
+          console.log(334)
+          var company_phone = $('#customer_phone').val()
+
+          $.ajax({
+            url: '/user/phone_check',
+            method: 'POST',
+            dataType: 'json',
+            async: false,
+            data: {
+              'email_check': 1,
+              'phone': company_phone,
+            },
+            success: function (response) {
+              console.log(response )
+              if (response.result == 'taken' && response.belonging!=true) {
+                localStorage.setItem('phone_state',1);
+                console.log(response )
+                $('#customer_phone').addClass("is-invalid");
+                $('#customer_phone').removeClass("is-valid");
+                /*           $('#company_email').parent().removeClass();
+                 $('#company_email').parent().addClass("form_error");
+                 $('#company_email').siblings("span").text('Sorry... Email already taken');*/
+              } else {
+                console.log(response )
+                localStorage.setItem('phone_state',0);
+                $('#customer_phone').removeClass("is-invalid");
+                $('#customer_phone').addClass("is-valid");
+                /*       $('#company_email').parent().removeClass();
+                 $('#company_email').parent().addClass("form_success");
+                 $('#company_email').siblings("span").text('Email available');*/
+              }
+            }
+          });
+        })
+
+        $('#customer_sername').change(function(){
+          console.log(334)
+          var company_sername = $('#customer_sername').val()
+
+          $.ajax({
+            url: '/user/sername_check',
+            method: 'POST',
+            dataType: 'json',
+            async: false,
+            data: {
+              'email_check': 1,
+              'sername': company_sername,
+            },
+            success: function (response) {
+              console.log(response )
+              if (response.result == 'taken' && response.belonging!=true) {
+                localStorage.setItem('sername_state',1);
+                console.log(response )
+                $('#customer_sername').addClass("is-invalid");
+                $('#customer_sername').removeClass("is-valid");
+                /*           $('#company_email').parent().removeClass();
+                 $('#company_email').parent().addClass("form_error");
+                 $('#company_email').siblings("span").text('Sorry... Email already taken');*/
+              } else {
+                console.log(response )
+                localStorage.setItem('sername_state',0);
+                $('#customer_sername').removeClass("is-invalid");
+                $('#customer_sername').addClass("is-valid");
+                /*       $('#company_email').parent().removeClass();
+                 $('#company_email').parent().addClass("form_success");
+                 $('#company_email').siblings("span").text('Email available');*/
+              }
+            }
+          });
+        })
+
+
+
+
 
         $('#customer_email').change(function(){
+          console.log(333)
             var company_email = $('#customer_email').val()
 
             $.ajax({
@@ -521,7 +597,7 @@ $('#managerSwitch').change(function(){
                 },
                 success: function (response) {
                     console.log(response )
-                    if (response == 'taken') {
+                  if (response.result == 'taken' && response.belonging!=true) {
                         localStorage.setItem('email_state',1);
                         console.log(response )
                         $('#customer_email').addClass("is-invalid");
@@ -529,7 +605,7 @@ $('#managerSwitch').change(function(){
                         /*           $('#company_email').parent().removeClass();
                          $('#company_email').parent().addClass("form_error");
                          $('#company_email').siblings("span").text('Sorry... Email already taken');*/
-                    } else if (response == 'not_taken') {
+                    } else {
                         console.log(response )
                         localStorage.setItem('email_state',0);
                         $('#customer_email').removeClass("is-invalid");

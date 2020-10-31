@@ -116,4 +116,22 @@ $router->post('/user/email_check', [
     ],
 ]);
 
+$router->post('/user/sername_check', [
+  'as'   => 'sername_list_dashboard',
+  'uses'       => 'Controller@sernameCheck',
+  'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+  'middleware' => [
+    'auth:admin'
+  ],
+]);
+
+$router->post('/user/phone_check', [
+  'as'   => 'phone_list_dashboard',
+  'uses'       => 'Controller@phoneCheck',
+  'domain' => 'admin.'. parse_url(\Config::get('app.url'))['host'],
+  'middleware' => [
+    'auth:admin'
+  ],
+]);
+
 

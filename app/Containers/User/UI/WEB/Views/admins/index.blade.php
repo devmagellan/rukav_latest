@@ -530,7 +530,7 @@ $('#managerSwitch').change(function(){
             $.ajax({
                 url: '/user/email_check',
                 method: 'POST',
-                dataType: 'json',
+                dataType: 'json'/user/email_check,
                 async: false,
                 data: {
                     'email_check': 1,

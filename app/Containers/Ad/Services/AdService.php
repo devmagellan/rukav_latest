@@ -25,7 +25,7 @@ class AdService
     else{
       $user=Auth::user();
     }
-    \Log::info('data_information',array($data));
+    \Log::info('data_information',array($data->all()));
     $mutable = Carbon::now();
     $modifiedMutable = $mutable->add($data->select_time, 'day');
     \Log::info('date_information'.$modifiedMutable);
@@ -47,7 +47,7 @@ class AdService
               }
               session()->forget('deletedImgsToSession');
           }
-
+        \Log::info('data_address_information'.$data->address);
           $this->ad = Ad::updateOrCreate(['id' => $data->add_id], [
               'title' => $data->name_ad,
               'email' => $user->email,
@@ -58,13 +58,15 @@ class AdService
               'place_id' => $data->place_id,
               'name' => $user->name,
               'category_id' => $data->category_id,
+
               'sender' => (isset($data->sender)) ? $data->sender : $user->id,
               'is_tmp' => (isset($data->save)) ? false : true,
               'select_time' => $data->select_time,
               'expired' => $modifiedMutable->toDateTimeString(),
               'administrative' => $data->administrative,
               'visibility' => false,
-              'show_name' => $user->name
+              'show_name' => $user->name,
+               'address' => $data->address,
           ]);
       });
       return $this->ad;

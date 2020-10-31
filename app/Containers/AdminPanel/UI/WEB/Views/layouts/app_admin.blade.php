@@ -971,6 +971,15 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 
 </script>
 <div id="map" style="display:none"></div>
+
+@php
+  if(isset($ad) ){
+    $placeId=$ad->place_id;
+}
+else{
+    $placeId='ChIJod7tSseifDUR9hXHLFNGMIs';
+}
+@endphp
 @yield('scripts')
 
 <script>
@@ -1244,6 +1253,38 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     }
   };
 
+
+  function getPostcode(latlng) {
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'latLng': latlng}, function (results) {
+      var result = [];
+      for (i = 0; i < results.length; i++) {
+        console.log(results[i].address_components)
+
+        for (var j = 0; j < results[i].address_components.length; j++) {
+          for (var k = 0; k < results[i].address_components[j].types.length; k++) {
+            if (results[i].address_components[j].types[k] == "postal_code") {
+              zipcode = results[i].address_components[j].short_name;
+              console.log('zipcode',zipcode)
+              $('#allUsersClntInfoEditZip').val(zipcode);
+              $('#clntInfoEditZip').val(zipcode);
+
+            }
+          }
+        }
+      }
+
+
+
+
+
+      console.log('result=>', result)
+
+    });
+  }
+
+
+
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: countries['us'].zoom,
@@ -1257,6 +1298,28 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     infoWindow = new google.maps.InfoWindow({
       content: document.getElementById('info-content')
     });
+
+    var service = new google.maps.places.PlacesService(map);
+    console.log('{{$placeId}}')
+    service.getDetails({
+      placeId: '{{$placeId}}'
+    }, function (place, status) {
+      console.log('place',place.geometry.location.lat())
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+
+
+        lat = place.geometry.location.lat();
+        lng = place.geometry.location.lng();
+        // Create marker
+        console.log('lng4',lat,lng)
+
+        var latlng = new google.maps.LatLng(lat,lng);
+        getPostcode(latlng)
+      }
+
+
+
+    })
 
     // Create the autocomplete object and associate it with the UI input control.
     // Restrict the search to the default country, and to place type "cities".
@@ -1656,13 +1719,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     }
   }
 </script>
-<script>
-  /*   $(function(){*/
 
 
-  /*  });*/
-
-</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaZXMHQgJkoXZkkBbtelY8SLAwMOasg0Y&libraries=places&language=en&callback=initMap" async defer></script>
 
 

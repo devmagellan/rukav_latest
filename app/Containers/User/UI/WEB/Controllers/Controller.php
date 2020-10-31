@@ -135,6 +135,42 @@ class Controller extends WebController
     }
   }
 
+  public function phoneCheck(GetAllUsersRequest $request)
+  {
+    $belonging=false;
+    if(null != $request->input('customer_id') && null != ($request->input('phone'))){
+      $belonging = boolval(\App\Containers\User\Models\User::where('id',$request->input('customer_id'))->where('phone', $request->input('phone'))->first());
+    }
+    if (null !== ($request->input('phone'))) {
+      $phone = $request->input('phone');
+      $results = \App\Containers\User\Models\User::where('phone', $phone)->first();
+      if ($results) {
+        return json_encode(["result"=>"taken",'belonging'=>$belonging]);
+      } else {
+        return json_encode(["result"=>'not_taken','belonging'=>$belonging]);
+      }
+
+    }
+  }
+
+  public function sernameCheck(GetAllUsersRequest $request)
+  {
+    $belonging=false;
+    if(null != $request->input('customer_id') && null != ($request->input('sername'))){
+      $belonging = boolval(\App\Containers\User\Models\User::where('id',$request->input('customer_id'))->where('sername', $request->input('sername'))->first());
+    }
+    if (null !== ($request->input('sername'))) {
+      $sername = $request->input('sername');
+      $results = \App\Containers\User\Models\User::where('sername', $sername)->first();
+      if ($results) {
+        return json_encode(["result"=>"taken",'belonging'=>$belonging]);
+      } else {
+        return json_encode(["result"=>'not_taken','belonging'=>$belonging]);
+      }
+
+    }
+  }
+
     public function postUpdate(GetAllUsersRequest $request)
     {
         $user = Apiato::call('User@UpdateUserAction', [$request]);

@@ -36,7 +36,9 @@
             <td class="customer_email @if($customer->confirmed==2) banned @endif">{{$customer->email}}</td>
             <td class="customer_phone @if($customer->confirmed==2) banned @endif">{{$customer->vid_user}}</td>
             <td class="customer_phone @if($customer->confirmed==2) banned @endif">{{$customer->phone}}</td>
-            <td class="customer_phone">{{$customer->adsWithGroup->count()}}</td>
+          <td class="customer_phone"><a href="/ads?client_id={{$customer->id}}" >{{$customer->adsWithGroup->count()}}</a>
+
+            </td>
             <td class="customer_phone"></td>
             <td class="customer_phone"></td>
             <td class="customer_manager">

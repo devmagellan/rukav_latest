@@ -24,7 +24,7 @@
         display:none;
         }
         #dt-basic-example > thead > tr:nth-child(1) > th.dt-center.sorting_asc{ width:17px !important;}
-		
+
 #dt-basic-example {
   table-layout: fixed;
   width: 100% !important;
@@ -704,7 +704,8 @@
                         dataType: 'json',
                         data:{
                             'request':'get_users_invoices',
-                            'csrf_token':$('meta[name=csrf-token]').attr("content")
+                            'csrf_token':$('meta[name=csrf-token]').attr("content"),
+                          'client_id':'{{ $input_client_id }}'
                         },
                         error: function(data){
                             console.log('error',data);

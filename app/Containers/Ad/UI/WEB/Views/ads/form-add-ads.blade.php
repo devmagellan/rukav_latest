@@ -491,7 +491,10 @@
 				 <div class="input_price_icon">£</div><input type="number" step=".01" name="price" placeholder="Цена (не обязательно)" value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->price}} @endif">
 
 			@endif
+
               </div>
+            <label for="checkAgreement">Договорная</label>
+            <input type="checkbox" id="checkAgreement" style="display:inline-block !important">
           </div>
         </div>
       @if(null!=(\Session::get('ad')))
@@ -519,7 +522,7 @@
                           <img src="/img/photo-camera-icon.svg" alt="">
                           <span>Добавить фото</span>
                         </label>
-					<div class="add_foto_file_img_wrapper_present" >	
+					<div class="add_foto_file_img_wrapper_present" >
                     <label style="position: relative;height: 114px;width: 114px;" for="imgInput{{$key}}" class="add_foto_file_item_load">
                       <img class="add_foto_file_img" style="object-fit: cover;height: 100%;width: 100%;" src="/storage/messages/{{$realPic->photo}}" alt="">
                     </label>

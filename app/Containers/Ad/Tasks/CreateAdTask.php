@@ -29,7 +29,7 @@ class CreateAdTask extends Task
       \Log::info('AdFilterDeals',array($data));
     try {
       $ad = $this->service->createAd($data);
-        \Log::info('AdFilterDeals2',array($data));
+        \Log::info('AdFilterDeals2',array($ad));
       $this->service->savePhoto($data, $ad->id);
       \Log::info('SaveFilter',array($data->all()));
       if($data->filter_id){

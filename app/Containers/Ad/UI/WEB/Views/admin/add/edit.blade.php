@@ -275,7 +275,7 @@
                     @enderror
                   </div>
                   <div class="all_user_block">
-                    <input type="text" name="address" placeholder="Адрес" class="add_advert_input_location InputControl" id="clntInfoEditAddr1" required value="{{old('address')}}">
+                    <input type="text" name="address" placeholder="Адрес" class="add_advert_input_location InputControl" id="clntInfoEditAddr1" required value="{{(isset($ad->address))  ? $ad->address : old('address')}}">
                     @error('address')
                     <div class="alert errorBlock">{{ $message }}</div>
                     @enderror
@@ -496,7 +496,7 @@
               @enderror
                       </div-->
                 <div class="contact_info_wrapper">
-                  <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (не обязательно)" value="{{old('price')}}">
+                  <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (не обязательно)" value="{{(isset($ad->price))  ? $ad->price : old('price')}}">
                 </div>
               </div>
             </div>
@@ -505,10 +505,9 @@
                 <h6 class="add_advert_block_wrapper_title">
                   Фотографии
                 </h6>
-                  <?
-                  $realCount=count($ad->pictures);
-                  ?>
-
+                <?
+                $realCount=count($ad->pictures);
+                ?>
 
                 <div class="add_foto_file_wrapper">
                   @foreach($ad->pictures as $key=>$realPic)
@@ -548,18 +547,18 @@
                       </div>
                     </div>
                   @endforeach
-                  @for($i=count($ad->pictures)+1;$i<=10+count($ad->pictures)-$realCount;$i++)
+                  @for($i=1;$i<=10-$realCount;$i++)
                     <div class="add_foto_file_item">
                       <div class="upload-file-container-text">
 
-                        <label for="imgInput2" class="add_foto_file_item_load">
+                        <label for="imgInput{{$i+$realCount}}" class="add_foto_file_item_load">
                           <img src="/img/photo-camera-icon.svg" alt="">
                           <span>Добавить фото</span>
                         </label>
                         <div class="add_foto_file_img_wrapper">
                           <img  src="#" alt="" class="add_foto_file_img" />
                           <div class="add_foto_file_block_hover">
-                            <label for="imgInput{{$i}}" class="add_foto_file_item_load2">
+                            <label for="imgInput{{$i+$realCount}}" class="add_foto_file_item_load2">
                               <img src="/img/refresh_icon.svg" alt="">
                             </label>
                             <div class="add_foto_file_delete">
@@ -567,21 +566,14 @@
                             </div>
                           </div>
                         </div>
-                        <input type="file" name="files[]" class="photo" id="imgInput{{$i}}"/>
+                        <input type="file" name="files[]" class="photo" id="imgInput{{$i+$realCount}}"/>
                       </div>
                     </div>
                   @endfor
 
                 </div>
-
-
-
-
               </div>
-              <a href="#" class="add_advert_rolls_foto">Привила добавления фото</a>
-              @error('files')
-              <div class="alert errorBlock">{{ $message }}</div>
-              @enderror
+              <a href="/static/policies#photo" target="_blank" class="add_advert_rolls_foto">Привила добавления фото</a>
             </div>
 
             <div class="col-sm-12">
@@ -612,7 +604,7 @@
                 <div class="add_advert_desc">
                   <p>Текст объявления: на русском языке. Допустимое использование английского не более 20%(термины, названия).</p>
                   <p class="end">Транслит не допускается.</p>
-                  <textarea name="description" placeholder="Текст объявления" required>{{old('description')}}</textarea>
+                  <textarea name="description" placeholder="Текст объявления" required>{{(isset($ad->message))  ? $ad->message : old('description')}}</textarea>
                   @error('description')
                   <div class="alert errorBlock">{{ $message }}</div>
                   @enderror
@@ -1080,6 +1072,28 @@
       })
   </script>
 
+  <script>
+
+
+
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: countries['us'].zoom,
+        center: countries['us'].center,
+        mapTypeControl: false,
+        panControl: false,
+        language: 'en-GB',
+        zoomControl: false,
+        streetViewControl: false
+      });
+      infoWindow = new google.maps.InfoWindow({
+        content: document.getElementById('info-content')
+      });
+}
+
+
+  </script>
 
 
 @endsection
