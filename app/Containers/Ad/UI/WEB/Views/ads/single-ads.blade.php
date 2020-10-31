@@ -495,7 +495,7 @@ ul.slickslide li img, .slick-dots button img {
       </div>
       <div class="col-md-3">
         <div class="product_indicators_complain">
-          <a href="#"><img src="/img/compain.svg" alt="">Пожаловаться</a>
+          <a href="#" data-toggle="modal" data-target="#ModalComplaining"><img src="/img/compain.svg" alt="">Пожаловаться</a>
         </div>
       </div>
     </div>

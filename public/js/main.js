@@ -214,6 +214,11 @@ $(document).ready(function(){
         input = document.querySelector("#telphone"),
         addressDropdown = document.querySelector("#address-country");
 // init plugin
+  var cntr=$.get("https://ipinfo.io", function(response) {
+    console.log(response.city, response.country);
+    return response.country
+  }, "jsonp");
+  console.log('CNTR=>',cntr)
     var iti = window.intlTelInput(input, {
         separateDialCode: true,
         loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
