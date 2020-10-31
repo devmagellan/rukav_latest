@@ -57,7 +57,7 @@
         <input type="hidden" name="id" value="@if(\Auth::user()) {{\Auth::user()->id}} @endif">
         <div class="row">
           <div class="input_password_wrapper col-md-12" style="margin:0 auto">
-            <input type="text"  placeholder="Название компании" class="input_password" name="company_name">
+            <input type="text"  placeholder="Название компании" class="input_password" id="businessUsersCompanyName" name="company_name">
             <span id="company_name" class="errorBlock"></span>
           </div>
           <div class="input_password_wrapper col-md-12" style="margin:0 auto">
@@ -69,11 +69,11 @@
             <span id="business_location" class="errorBlock"></span>
           </div>
           <div class="input_password_wrapper col-md-12" style="margin:0 auto">
-            <input type="text"  placeholder="Email" class="input_password" name="email">
+            <input type="text"  placeholder="Email" class="input_password" name="email" id="businessUsersCompanyEmail">
             <span id="email" class="errorBlock"></span>
           </div>
           <div class="input_password_wrapper col-md-12" style="margin:0 auto">
-            <input type="text"  placeholder="www" class="input_password" name="www">
+            <input type="text"  placeholder="www" class="input_password" name="www" id="businessUsersCompanyWww">
             <span id="www" class="errorBlock"></span>
           </div>
         </div>
@@ -447,6 +447,15 @@
       <button type="button" class="close" data-dismiss="modal" id="closeReg" aria-label="Close">
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
+      <?
+      $ip = $_SERVER["REMOTE_ADDR"];
+
+      // Use JSON encoded string and converts
+      // it into a PHP variable
+      $ipdat = @json_decode(file_get_contents(
+      "http://www.geoplugin.net/json.gp?ip=" . $ip));
+
+      dump($ipdat->geoplugin_countryCode);?>
       <h6 class="modalTitle">Регистрация</h6>
       <form class="formModal"action="{{route('register_user_web')}}" method="post" id="registerForm">
 

@@ -20,6 +20,10 @@
 <script>
   $(document).ready(function(){
     $('#goToBusinessUsersModal').modal({show:true})
+
+    $('#businessUsersCompanyName').val('{{\Auth::user()->getBusinessAccount['company_name']}}')
+    $('#businessUsersCompanyEmail').val('{{\Auth::user()->email}}')
+    $('#businessUsersCompanyWww').val('{{\Auth::user()->getBusinessAccount['www']}}')
   })
 </script>
       @endif
@@ -487,7 +491,7 @@
                   </div>
 				  <div style="display:block;color:red" id="address" class="errorBlock"></div>
                 </div>
-				
+
                 <div class="col-md-3 col-lg-7 flex-column">
                   <p class="prophile_main_text prophile_postcode_text prophile_postcode_text_first">
                     Почт. индекс <span>*</span>
@@ -513,7 +517,7 @@
                   </div>
 				  <div style="display:block;color:red" id="postCode" class="errorBlock"></div>
                 </div>
-				
+
                 @if(\Auth::user()->getBusinessAccount || $toAccountType=='to_company')
 
                 <div class="col-md-9 col-lg-5 flex-column">
@@ -1080,7 +1084,7 @@
                     {{$ad->counter}}
                     </p>
                   </div>
-				 
+
                 </div>
               </div>
 
