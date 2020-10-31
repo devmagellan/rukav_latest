@@ -447,6 +447,15 @@
       <button type="button" class="close" data-dismiss="modal" id="closeReg" aria-label="Close">
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
+      <?
+      $ip = $_SERVER["REMOTE_ADDR"];
+
+      // Use JSON encoded string and converts
+      // it into a PHP variable
+      $ipdat = @json_decode(file_get_contents(
+      "http://www.geoplugin.net/json.gp?ip=" . $ip));
+
+      dump($ipdat->geoplugin_countryCode);?>
       <h6 class="modalTitle">Регистрация</h6>
       <form class="formModal"action="{{route('register_user_web')}}" method="post" id="registerForm">
 
