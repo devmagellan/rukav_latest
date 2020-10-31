@@ -57,7 +57,7 @@
         <input type="hidden" name="id" value="@if(\Auth::user()) {{\Auth::user()->id}} @endif">
         <div class="row">
           <div class="input_password_wrapper col-md-12" style="margin:0 auto">
-            <input type="text"  placeholder="Название компании" class="input_password" name="company_name">
+            <input type="text"  placeholder="Название компании" class="input_password" id="businessUsersCompanyName" name="company_name">
             <span id="company_name" class="errorBlock"></span>
           </div>
           <div class="input_password_wrapper col-md-12" style="margin:0 auto">
@@ -69,11 +69,11 @@
             <span id="business_location" class="errorBlock"></span>
           </div>
           <div class="input_password_wrapper col-md-12" style="margin:0 auto">
-            <input type="text"  placeholder="Email" class="input_password" name="email">
+            <input type="text"  placeholder="Email" class="input_password" name="email" id="businessUsersCompanyEmail">
             <span id="email" class="errorBlock"></span>
           </div>
           <div class="input_password_wrapper col-md-12" style="margin:0 auto">
-            <input type="text"  placeholder="www" class="input_password" name="www">
+            <input type="text"  placeholder="www" class="input_password" name="www" id="businessUsersCompanyWww">
             <span id="www" class="errorBlock"></span>
           </div>
         </div>
