@@ -214,10 +214,20 @@ $(document).ready(function(){
         input = document.querySelector("#telphone"),
         addressDropdown = document.querySelector("#address-country");
 // init plugin
+$.ajaxSetup({async: false});  
+var jqxhr = $.getJSON( "https://ipinfo.io", function(response) {
+ console.log( "success",response );
+})
+.done(function() { console.log( "second success" ); })
+.fail(function() { console.log( "error" ); })
+.always(function() { console.log( "complete" ); });
+var cntry=jqxhr.complete(function(response) {  console.log( 'RESPO=>',response );return response});
+window.cnt= cntry.responseJSON.country;
+console.log('CNT=>',window.cnt)
     var iti = window.intlTelInput(input, {
         separateDialCode: true,
         loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
-        initialCountry: "gb"
+        initialCountry: window.cnt
     });
 // populate the country dropdown
     for (var i = 0; i < countryData.length; i++) {
