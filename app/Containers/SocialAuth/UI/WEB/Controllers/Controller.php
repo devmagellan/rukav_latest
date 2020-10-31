@@ -261,7 +261,11 @@ class Controller extends WebController
 	public function redirectFacebook()
     {
         //return Socialite::driver($provider)->redirect();
-		return Socialite::with('facebook')->redirect();
+	 	return Socialite::driver('facebook')->fields([
+            'first_name', 'last_name', 'email', 'gender', 'location'
+        ])->scopes([
+            'email'
+        ])->redirect(); 
     }
 
 	public function redirectGoogle()
@@ -412,7 +416,17 @@ if (!empty($_GET['error'])) {
     {
 
         try {
-            $user = Socialite::driver($provider)->stateless()->user();
+			if($provider=='facebook'){
+				$user = Socialite::driver($provider)->stateless()->fields([
+            'first_name', 'last_name', 'email', 'gender', 'location'
+        ])->scopes([
+            'email','location'
+        ])->user();
+			}
+			else{
+				$user = Socialite::driver($provider)->stateless()->user();
+			}
+		
         } catch (\Exception $e) {
 			dd($e);
             return redirect('/login');
@@ -474,11 +488,16 @@ if (!empty($_GET['error'])) {
 
         $password="password";
         $random=Str::random(7);
-            $user = User::create([
-                'name'     => $getInfo->name,
-                'email'    => $getInfo->email,
+		$ip = $_SERVER['REMOTE_ADDR'];
+$details = json_decode(file_get_contents("https://api.ipregistry.co/{$ip}?key=tryout"));
+       $user = User::create([
+                'name'     => $getInfo->user['first_name'],
+				'sername'     => $getInfo->user['last_name'],
+                'email'    => $getInfo->user['email'],
                 'avatar'    => $getInfo->avatar,
+				'vid_user'    => 'Частная',
 				'department' => 'none',
+				'country'=>$details->location->country->code,
             'encripted_password' => openssl_encrypt($random,"AES-128-ECB",$password),
             'active' => 1,
               'confirmed' => User::STATUS_SOCIALACTIVE,
@@ -486,7 +505,7 @@ if (!empty($_GET['error'])) {
               'password'=>Hash::make($random),
               'verify_token' => Str::random(),
 
-            ]);
+            ]); 
 
         return $user;
     }

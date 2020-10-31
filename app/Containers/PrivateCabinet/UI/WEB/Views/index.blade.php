@@ -226,12 +226,19 @@
 
                 <div class="col-sm-12 col-md-5">
                   <label for="imgInputakk" class="prophile_photo_picked_wrapper">
-                    <img class="prophile_photo_picked" for="imgInputakk" src="@if(\Auth::user()->avatar)  storage/avatars/{{\Auth::user()->avatar}} @else img/slide_img1.png @endif " alt="">
+				  <?
+				  if(filter_var(\Auth::user()->avatar, FILTER_VALIDATE_URL)){
+					 $urlAvatar=true;
+				  }else{$urlAvatar=false;
+				  }
+				  
+				  ?>
+                    <img class="prophile_photo_picked" for="imgInputakk" src="@if(\Auth::user()->avatar && $urlAvatar==false)  storage/avatars/{{\Auth::user()->avatar}} @elseif(\Auth::user()->avatar && $urlAvatar==true) {{\Auth::user()->avatar}} @else /img/slide_img1.png @endif " alt="">
                   </label>
                   <label class="prophile_photo_wrapper" for="imgInputakk">
                     <div class="prophile_photo_img">
                       @if(\Auth::user()->avatar)
-                        <img src="/storage/avatars/{{\Auth::user()->avatar}}" alt="">
+                        <img src="@if(\Auth::user()->avatar && $urlAvatar==false)  storage/avatars/{{\Auth::user()->avatar}} @elseif(\Auth::user()->avatar && $urlAvatar==true) {{\Auth::user()->avatar}} @else /img/slide_img1.png @endif " alt="">
 
                       @else
                       <img src="img/prophile_camera.png" alt="">@endif
