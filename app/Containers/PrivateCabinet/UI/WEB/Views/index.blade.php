@@ -887,7 +887,7 @@
               </div>
               @endif
               <div class="prophile_main_wrapper prophile_down_wrapper d-flex align-items-center">
-                <a href="#" class="prophile_mydata d-flex align-items-center">
+                <a href="/export_user_contacts/{{\Auth::user()->id}}" class="prophile_mydata d-flex align-items-center">
                   <img src="/img/data_icon.svg" alt="">Скачать мои данные
                 </a>
 

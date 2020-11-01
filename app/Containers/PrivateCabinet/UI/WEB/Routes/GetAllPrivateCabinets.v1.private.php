@@ -132,6 +132,7 @@ $router->post('/delete_second_group', [
       'auth:web',
     ],*/
 ]);
+$router->get('/export_user_contacts/{user_id}', 'Controller@exportUserContactsCsv');
 
 
 

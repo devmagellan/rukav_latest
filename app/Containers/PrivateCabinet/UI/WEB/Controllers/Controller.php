@@ -14,6 +14,7 @@ use App\Containers\User\UI\WEB\Requests\GetAllUsersRequest;
 use App\Containers\User\UI\WEB\Requests\ProfileSaveToIndividualRequest;
 use App\Containers\User\UI\WEB\Requests\ProfileSaveToOrganisationRequest;
 use App\Containers\User\UI\WEB\Requests\ProfileSaveToCompanyRequest;
+use App\Services\UsersContactsExportService;
 use App\Ship\Parents\Controllers\WebController;
 use Apiato\Core\Foundation\Facades\Apiato;
 use Illuminate\Support\Facades\Storage;
@@ -12897,6 +12898,40 @@ class Controller extends WebController
         $notification['created'] = $con->created_at;
         $pusher->trigger('notification-channel', 'notification-'.$user->id.'-', $notification);
         return json_encode(['message'=>'success','data'=>$data]);
+  }
+
+  public function exportUserContactsCsv(GetAllPrivateCabinetsRequest $request,$user_id){
+
+    $collection=\App\Containers\User\Models\User::where('id',$user_id)->first();
+    $columns = array('Name', 'Sername', 'IP', 'Phone', 'RegistrationDate', 'Email');
+    $callback = function() use($collection, $columns) {
+      \Log::info('collection',array($collection));
+      $file = fopen('php://output', 'w');
+      fputcsv($file, $columns);
+        $row['Name'] = $collection->name;
+        $row['Sername'] = $collection->sername;
+        $row['IP'] = $collection->ip;
+        $row['Phone'] = $collection->phone;
+        $row['RegistrationDate'] = $collection->created_at;
+        $row['Email'] = $collection->email;
+        fputcsv($file, array($row['Name'], $row['Sername'], $row['IP'], $row['Phone'], $row['RegistrationDate'], $row['Email']));
+
+
+
+      fclose($file);
+    };
+    $fileName = 'contacts.csv';
+    $headers = array(
+      "Content-type"        => "text/csv",
+      "Content-Disposition" => "attachment; filename=$fileName",
+      "Pragma"              => "no-cache",
+      "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+      "Expires"             => "0"
+    );
+
+
+    return response()->stream($callback, 200, $headers);
+
   }
 
 
