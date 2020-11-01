@@ -252,16 +252,11 @@
                   </style>
                   <div class="add_second_chat_block_input1" style="margin-top:40px;display:none">
                     <div class="form-group" style="width:60%">
-                      <select class="select2-placeholder-multiple form-control"  multiple="multiple" id="multiple-placeholder">
-                        <optgroup label="Такси Ливерпуля">
-                          <option value="AK">Такси близ Аэропорта Ливерпуль</option>
-                          <option value="HI">Такси Центр Ливерпуль</option>
-                        </optgroup>
-                        <optgroup label="Заказ пасажирских перевозок">
-                          <option value="CA">Перевозки микроавтобусом</option>
-                          <option value="NV">Перевозки групп от 10человек</option>
-                        </optgroup>
-
+                      <select class="select2-placeholder-multiple form-control" name="additional_categories[]" multiple="multiple" id="multiple-placeholder">
+                          <option value="1">Такси близ Аэропорта Ливерпуль</option>
+                          <option value="2">Такси Центр Ливерпуль</option>
+                          <option value="3">Перевозки микроавтобусом</option>
+                          <option value="4">Перевозки групп от 10человек</option>
                       </select>
                     </div>
                   </div>

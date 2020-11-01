@@ -3,7 +3,7 @@
 namespace App\Containers\Ad\UI\WEB\Requests;
 
 use App\Ship\Parents\Requests\Request;
-
+use Illuminate\Validation\Rule;
 /**
  * Class StoreAdRequest.
  */
@@ -58,6 +58,8 @@ class StoreAdRequest extends Request
    */
   public function rules()
   {
+    \Log::info('Request additional_categories=>',(array)$this->request->get("additional_categories"));
+    \Log::info('Request category=>',(array)$this->request->get("category_id"));
     return [
       'name_ad' => 'required|max:70',
 //      'category_ads' => 'required',
@@ -68,7 +70,17 @@ class StoreAdRequest extends Request
         'city' => 'required',
       //'name' => 'required|between:2,10',
       'files.*' => 'required|image|max:8000',
-      'category_id' => 'required'
+      'category_id' => 'required',
+      'additional_categories'  => [
+        "nullable",
+        Rule::requiredIf (
+          function () {
+            \Log::info('Request additional_categories=>',(array)$this->request->get("additional_categories"));
+            \Log::info('Request category=>',(array)$this->request->get("category_id"));
+            return in_array(632, (array)$this->request->get("category_id"));
+          }
+        ),
+      ]
     ];
   }
 
@@ -78,7 +90,8 @@ class StoreAdRequest extends Request
             'city.required' => 'Вам необходимо выбрать местоположение выбрав google location в полях секции Местоположение',
             'files.required' => "You must use the 'Choose file' button to select which file you wish to upload",
             'files.*.max' => "Максимальный размер файла для загрузки 8MB (8192 KB). Если вы загружаете фото, попробуйте уменьшить его разрешение, чтобы сделать его меньше 8MB.",
-            'files.*.image' => "Not an image"
+            'files.*.image' => "Not an image",
+          'additional_categories.required' => "Вы выбрали категорию такси следовательно дополнительные категории для чата должны быть тоже выбраны",
 
         ];
     }

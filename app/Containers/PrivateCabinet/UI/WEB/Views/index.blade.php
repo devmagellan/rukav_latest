@@ -1088,7 +1088,7 @@
                 </div>
               </div>
 
-              <div class="active_or_no choosen_button-wrapper d-flex flex-row flex-wrap align-items-center justify-content-between">
+              <div class="active_or_no choosen_button-wrapper d-flex flex-row flex-wrap align-items-center justify-content-between" style="max-width:333px;">
                 <input type="hidden" class="customSwitch2_id" value="{{$ad->id}}">
                 <label class="switch d-flex">
                   <input class="triggerSwitch" type="checkbox" value="@if($ad->active==1) 1  @else 0 @endif">
@@ -1098,8 +1098,11 @@
                 <p class="choosen_button_text">
                   Активное или нет
                 </p>
-                <button class="choosen_button ml-auto edit_ad">
+                <button class="choosen_button ml-auto edit_ad" style="width: 50%;">
                   Редактировать
+                </button>
+                <button class="choosen_button ml-auto show_ad" style="width: 50%; left: 10px; position: relative;">
+                  Просмотр
                 </button>
               </div>
 

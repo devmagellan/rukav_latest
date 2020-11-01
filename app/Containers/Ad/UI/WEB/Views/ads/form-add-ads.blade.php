@@ -249,7 +249,7 @@
             </style>
             <div class="add_second_chat_block_input1" style="margin-top:40px;display:none">
               <div class="form-group" style="width:60%">
-                <select class="select2-placeholder-multiple form-control"  multiple="multiple" id="multiple-placeholder">
+                <select class="select2-placeholder-multiple form-control" name="additional_categories[]" multiple="multiple" id="multiple-placeholder">
                   <optgroup label="Такси Ливерпуля">
                     <option value="AK">Такси близ Аэропорта Ливерпуль</option>
                     <option value="HI">Такси Центр Ливерпуль</option>
