@@ -761,7 +761,7 @@
 
         $('.edit_rubrics').click(function(){
            var ad_check= $('#dt-basic-example').find('.ad_check')
-            console.log(ad_check.length)
+            console.log('AD check',ad_check.length)
             var checked=[];
             $.each(ad_check, function(index, value) {
                 //console.log(value);
@@ -854,6 +854,7 @@
 
 
         $('.transfer_rubric').click(function(){
+          console.log('Trying to reload page')
 var new_rubric=$(this).parent().find('.hidden_rubric').val()
             $.ajax({
                 method: 'POST',
@@ -876,6 +877,7 @@ var new_rubric=$(this).parent().find('.hidden_rubric').val()
             });
 
             $('#default-example-modal-lg').modal('hide');
+          window.location.reload()
         })
 
         $('.delete_ads').click(function(){

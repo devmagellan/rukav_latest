@@ -1448,7 +1448,8 @@
 
 
         $('.transfer_rubric').click(function(){
-var new_rubric=$(this).parent().find('.hidden_rubric').val()
+          console.log('Trying to reload page')
+          var new_rubric=$(this).parent().find('.hidden_rubric').val()
             $.ajax({
                 method: 'POST',
                 dataType: 'json',
@@ -1470,6 +1471,8 @@ var new_rubric=$(this).parent().find('.hidden_rubric').val()
             });
 
             $('#default-example-modal-lg').modal('hide');
+          window.location.reload()
+
         })
 
         $('.delete_ads').click(function(){
