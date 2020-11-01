@@ -3525,3 +3525,6 @@ div.product_slider_main div.slick-track{
 .file_input_span{
     font-size: 14px;
 }
+#checkAgreement{
+    width: auto!important;
+}

@@ -774,5 +774,17 @@ $(this).closest('.add_foto_file_item').remove()
         $(".file_input_span").html(filename);
     });
 
+    $('#checkAgreement').on('change', function(){
+        if($('#checkAgreement').prop('checked')){
+            $('input[name="price"]').attr('disabled', true);
+            $('input[name="price"]').attr('placeholder', 'Договарная');
+            $("div.contact_info_wrapper div.input_price_icon").append("<input type='hidden' value='0.01' name='price'/>");
+        }else{
+            $('input[name="price"]').attr('disabled', false);
+            $('input[name="price"]').attr('placeholder', 'Цена (не обязательно)');
+        }
+    });
+
+
 
 });
