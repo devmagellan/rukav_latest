@@ -178,7 +178,6 @@ ul.slickslide li img, .slick-dots button img {
                 $middle_file="storage/messages/middle_{$picture->photo}";
                 ?>
               @if(file_exists($middle_file))
-              <? dump('middle');?>
               <img src="{{asset($middle_file)}}" alt="">
               @else
               <img src="{{asset('/storage/messages/'.$picture->photo)}}" alt="">

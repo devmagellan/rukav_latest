@@ -89,8 +89,12 @@ class AdService
               $filePath = Storage::disk('public')->put('', $file);
 
             $this->createPicture($filePath, $adId);
-
-              \Log::info('filepath1' . $file);
+            $img = Image::make(storage_path('app/public/messages/'.$filePath));
+            /* insert watermark at bottom-right corner with 10px offset */
+            $img->insert(public_path('img/logo.png'), 'bottom-right', 15, 15);
+            $img->save(storage_path('app/public/messages/'.$filePath));
+            \Log::info('ImgWithLogo' . $filePath);
+            \Log::info('filepath1' . $file);
               \Log::info('filepath2' . $filePath);
               $oldPath = storage_path('app/public/messages/') . $filePath;
               $newPath = storage_path('app/public/messages/') . 'small_' . $filePath;

@@ -1084,7 +1084,7 @@ ul.category_dropdown_sub_list li ul a:hover{
     right: 20px;
     top: 22px;
 }
-.product_slider_main_item:after{
+/*.product_slider_main_item:after{
     content: "";
     width: 108px;
     height: 28px;
@@ -1095,7 +1095,7 @@ ul.category_dropdown_sub_list li ul a:hover{
     bottom: 22px;
     right: 20px;
     opacity: 0.5;
-}
+}*/
 
 .product_slider_main_item img{
     max-width: 100%;
