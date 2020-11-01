@@ -446,49 +446,49 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
 
-      <button type="button" class="close" data-dismiss="modal" id="closeReg" aria-label="Close">
+      <button type="button" class="close" data-dismiss="modal" id="closeRegComplaining" aria-label="Close">
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
       <h6 class="modalTitle">Пожаловаться</h6>
-      <form class="formModal"action="{{route('register_user_web')}}" method="post" id="registerForm">
+      <form class="formModal"action="\complain" method="post" id="complainingForm">
 
         <div class="row">
           <div class="col-md-12" style="padding:1px;margin-top:5px">
             <input type="radio" style="display:none" name="complain" value="rudeness" id="rudeness" class="radio_input" checked>
             <input type="radio" name="complain" value="rudeness" id="rudeness" class="radio_input" >
-            <label for="private" style="margin-right:0px">Текст некорректный/неуважение/грубость</label>
+            <label for="private" style="margin-right:0px"> Текст некорректный/неуважение/грубость</label>
           </div>
           <div class="col-md-12" style="padding:1px;margin-top:5px">
             <input type="radio" name="complain" value="wrong_contact" id="wrong_contact" class="radio_input" >
-            <label for="private" style="margin-right:0px">Контактная информация неверная</label>
+            <label for="private" style="margin-right:0px"> Контактная информация неверная</label>
           </div>
           <div class="col-md-12" style="padding:1px;margin-top:5px">
             <input type="radio" name="complain" value="sold_out" id="sold_out" class="radio_input" >
-            <label for="private" style="margin-right:0px">Товар продан/ услуга недоступна</label>
+            <label for="private" style="margin-right:0px"> Товар продан/ услуга недоступна</label>
           </div>
 
           <div class="col-md-12" style="padding:1px;margin-top:5px">
             <input type="radio" name="complain" value="forbidden" id="forbidden" class="radio_input">
-            <label for="private" style="margin-right:0px">Запрещенный товар/непристойное содержание</label>
+            <label for="private" style="margin-right:0px"> Запрещенный товар/непристойное содержание</label>
           </div>
 
           <div class="col-md-12" style="padding:1px;margin-top:5px">
             <input type="radio" name="complain" value="big_price" id="big_price" class="radio_input" >
-            <label for="private" style="margin-right:0px">Продавец просит цену выше указанной</label>
+            <label for="private" style="margin-right:0px"> Продавец просит цену выше указанной</label>
           </div>
 
           <div class="col-md-12" style="padding:1px;margin-top:5px">
             <input type="radio" name="complain" value="fraud" id="fraud" class="radio_input" >
-            <label for="private" style="margin-right:0px">Мошенничество/спам</label>
+            <label for="private" style="margin-right:0px"> Мошенничество/спам</label>
           </div>
 
           <div class="col-md-12" style="padding:1px;margin-top:5px">
             <input type="radio" name="complain" value="disparity" id="disparity" class="radio_input" >
-            <label for="private" style="margin-right:0px">Объявление не соответствует рубрике</label>
+            <label for="private" style="margin-right:0px"> Объявление не соответствует рубрике</label>
           </div>
           <div class="col-md-12" style="padding:1px;margin-top:5px">
             <input type="radio" name="complain" value="disparity" id="disparity" class="radio_input" >
-            <label for="private" style="margin-right:0px">В объявлении кто-то указал мой телефон</label>
+            <label for="private" style="margin-right:0px"> В объявлении кто-то указал мой телефон</label>
           </div>
         </div>
 
