@@ -116,7 +116,12 @@ ul.slickslide li img, .slick-dots button img {
       </div>
       <div class="col-md-4">
         <p class="product_price">
-          £ {{$ad->price}}
+		@if($ad->price==0.01)
+			<h5>Цена договорная</h5>
+			@else
+		£ {{$ad->price}}
+	@endif
+          
         </p>
       </div>
     </div>
