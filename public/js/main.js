@@ -785,6 +785,18 @@ $(this).closest('.add_foto_file_item').remove()
         }
     });
 
+    $('.modal input[type="radio"]').on('click', function(){
+        console.log("test2345");
+        $('.my_phone_div').hide();
+        $('#complainingForm textarea').hide();
+        if($('input[name="complain"]:checked').val() == 'my_phone'){
+            $('.my_phone_div').show();
+        }
+        if($('input[name="complain"]:checked').val() == 'other'){
+            $('#complainingForm textarea').show();
+        }
+    });
+
 
 
 });

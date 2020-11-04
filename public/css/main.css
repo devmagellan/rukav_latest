@@ -2840,7 +2840,7 @@ padding-left: 30px;
     display: inline-block;
     margin-left: 6px;
     border: 0;
-    width: 100px;
+    width: 142px;
     font-weight: bold;
     margin-bottom: 18px;
 }
@@ -3527,4 +3527,20 @@ div.product_slider_main div.slick-track{
 }
 #checkAgreement{
     width: auto!important;
+}
+.my_phone_div{
+    display: none;
+}
+#complainingForm textarea{
+    display: none;
+}
+.my_phone_div a{
+    display: inline-block;
+    color: #FFF!important;
+    text-decoration-line: none!important;
+    padding: 2px 15px!important;
+    width: 200px!important;
+    text-align: center;
+    line-height: 28px!important;
+    margin-top: 12px!important;
 }

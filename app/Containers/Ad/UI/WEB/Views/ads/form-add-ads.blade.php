@@ -539,8 +539,8 @@
 			@endif
 
               </div>
-            <label for="checkAgreement">Договорная</label>
-            <input type="checkbox" id="checkAgreement" style="display:inline-block !important">
+            <!--label for="checkAgreement">Договорная</label>
+            <input type="checkbox" id="checkAgreement" style="display:inline-block !important"-->
           </div>
         </div>
       @if(null!=(\Session::get('ad')))

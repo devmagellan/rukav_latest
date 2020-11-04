@@ -62,7 +62,7 @@ class AdService
               'sender' => (isset($data->sender)) ? $data->sender : $user->id,
               'is_tmp' => (isset($data->save)) ? false : true,
               'select_time' => $data->select_time,
-              'expired' => $modifiedMutable->toDateTimeString(),
+              'expired' => ($data->select_time==0) ? null : $modifiedMutable->toDateTimeString(),
               'administrative' => $data->administrative,
               'visibility' => false,
               'show_name' => $user->name,
