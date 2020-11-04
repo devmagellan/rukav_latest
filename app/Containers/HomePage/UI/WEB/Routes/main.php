@@ -19,3 +19,9 @@ $router->get('/all_author_ads', [
     'uses'  => 'Controller@allAuthorAds',
 ]);
 
+$router->post('/getCountryData', [
+    'as' => 'save_preview',
+    'uses'  => 'Controller@getCountryData',
+]);
+
+

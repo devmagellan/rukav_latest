@@ -44,6 +44,7 @@ class OAuthVK {
 
 	 public static function goToAuth()
     {
+		\Log::info('goToAuth');
        Utils::redirect(self::URL_AUTHORIZE .
 
             '?client_id=' . self::APP_ID .
@@ -120,7 +121,13 @@ class OAuthVK {
             $result = true;
 
         }
-			$userInfo['response'][0]['email']=self::$token->email;
+		\Log::info('$token'.!isset(self::$token->email));
+		if(!isset(self::$token->email)){
+			}
+			else{
+				$userInfo['response'][0]['email']=self::$token->email;
+			}
+			
 
         $user = $userInfo['response'][0];
 
@@ -255,13 +262,18 @@ class Controller extends WebController
     {
        // return Socialite::driver('vkontakte')->redirect();
 		//return Socialite::with('vkontakte')->redirect();
+		
 		OAuthVK::goToAuth();
     }
 
 	public function redirectFacebook()
     {
         //return Socialite::driver($provider)->redirect();
-		return Socialite::with('facebook')->redirect();
+	 	return Socialite::driver('facebook')->fields([
+            'first_name', 'last_name', 'email', 'gender', 'location'
+        ])->scopes([
+            'email'
+        ])->redirect(); 
     }
 
 	public function redirectGoogle()
@@ -352,7 +364,8 @@ if (!empty($_GET['error'])) {
             auth()->login($existingUser, true);
         } else {
 
-
+$ip = $_SERVER['REMOTE_ADDR'];
+$details = json_decode(file_get_contents("https://api.ipregistry.co/{$ip}?key=tryout"));
 
 			  $newUser                  = new User;
             $newUser->name            = $user->first_name;
@@ -361,9 +374,12 @@ if (!empty($_GET['error'])) {
             //$newUser->google_id       = $user->id;
             //$newUser->avatar          = $user->pic_1;
             $newUser->active = 1;
+			$newUser->is_client = 1;
+			$newUser->vid_user= 'Частная';
 			$newUser->confirmed = User::STATUS_SOCIALACTIVE;
+			$newUser->country=$details->location->country->code;
             $newUser->save();
-			$user = $this->createUser($user,$provider);
+			//$user = $this->createUser($user,$provider);
 			\Auth::guard('web')->login($newUser, true);
 
         }
@@ -412,7 +428,17 @@ if (!empty($_GET['error'])) {
     {
 
         try {
-            $user = Socialite::driver($provider)->stateless()->user();
+			if($provider=='facebook'){
+				$user = Socialite::driver($provider)->stateless()->fields([
+            'first_name', 'last_name', 'email', 'gender', 'location'
+        ])->scopes([
+            'email','location'
+        ])->user();
+			}
+			else{
+				$user = Socialite::driver($provider)->stateless()->user();
+			}
+		
         } catch (\Exception $e) {
 			dd($e);
             return redirect('/login');
@@ -444,9 +470,12 @@ if (!empty($_GET['error'])) {
             $newUser->login = $user->user['email'];
             $newUser->department = 'none';
             $newUser->active = 1;
+			$newUser->is_client = 1;
+			$newUser->vid_user= 'Частная';
              $newUser->confirmed = User::STATUS_SOCIALACTIVE;
             $newUser->company_id          = 1;
-            $newUser->save();
+            save();
+			
             \Auth::guard('web')->login($newUser, true);
 			}
 			elseif($provider=='facebook'){
@@ -471,22 +500,28 @@ if (!empty($_GET['error'])) {
     }
 
 	    function createUser($getInfo,$provider){
-
+\Log::info('$getInfo',array($getInfo));
         $password="password";
         $random=Str::random(7);
-            $user = User::create([
-                'name'     => $getInfo->name,
-                'email'    => $getInfo->email,
+		$ip = $_SERVER['REMOTE_ADDR'];
+$details = json_decode(file_get_contents("https://api.ipregistry.co/{$ip}?key=tryout"));
+       $user = User::create([
+                'name'     => $getInfo->user['first_name'],
+				'sername'     => $getInfo->user['last_name'],
+                'email'    => $getInfo->user['email'],
                 'avatar'    => $getInfo->avatar,
+				'vid_user'    => 'Частная',
 				'department' => 'none',
+				'country'=>$details->location->country->code,
             'encripted_password' => openssl_encrypt($random,"AES-128-ECB",$password),
             'active' => 1,
+			'is_client' => 1,
               'confirmed' => User::STATUS_SOCIALACTIVE,
             'company_id'         => 1,
               'password'=>Hash::make($random),
               'verify_token' => Str::random(),
 
-            ]);
+            ]); 
 
         return $user;
     }
@@ -529,6 +564,8 @@ if (!empty($_GET['error'])) {
             //$newUser->login = $user->user['email'];
             //$newUser->department = 'none';
             $newUser->active = 1;
+			$newUser->is_client= 1;
+			$newUser->vid_user= 'Частная';
             //$newUser->company_id          = 1;
             $newUser->save();
 			//$user = $this->createUser($user,$provider);
@@ -543,7 +580,7 @@ if (!empty($_GET['error'])) {
     {
 		$provider='vkontakte';
 	   try {
-
+\Log::info('handleProviderCallbackVk');
 // Пример использования класса:
 if (!empty($_GET['error'])) {
     // Пришёл ответ с ошибкой. Например, юзер отменил авторизацию.
@@ -562,6 +599,7 @@ if (!empty($_GET['error'])) {
      * Если да, то можно просто авторизовать его и не запрашивать его данные.
      */
     $user = OAuthVK::getUser();
+	
 }
 
 
@@ -573,7 +611,7 @@ if (!empty($_GET['error'])) {
 			dump($accessTokenResponseBody); */
 
         } catch (\Exception $e) {
-
+			\Log::info('Exception',array($e));
             return redirect('/login');
         }
         // only allow people with @company.com to login
@@ -581,7 +619,12 @@ if (!empty($_GET['error'])) {
             return redirect()->to('/');
         }*/
         // check if they're an existing user
-			if(!isset($user['email'])){
+		\Log::info('user=>',array($user));
+		if($user==false){
+			session()->put('registration_error','В ваших данных из соцсети не хватает email для регистрации, Мы не смогли Вас зарегистрировать, попробуйте альтернативный способ');
+				return redirect('/')->withInput()->withErrors(array('user_name' => 'some message'));
+		}
+			elseif(!array_key_exists('email', $user)){
 				session()->put('registration_error','В ваших данных из соцсети не хватает email для регистрации, Мы не смогли Вас зарегистрировать, попробуйте альтернативный способ');
 				return redirect('/')->withInput()->withErrors(array('user_name' => 'some message'));
 			}
@@ -594,11 +637,14 @@ if (!empty($_GET['error'])) {
             // log them in
             auth()->login($existingUser, true);
         } else {
-
+		$ip = $_SERVER['REMOTE_ADDR'];
+$details = json_decode(file_get_contents("https://api.ipregistry.co/{$ip}?key=tryout"));
 			$newUser                  = new User;
             $newUser->name            = $user['first_name'];
             $newUser->sername         = $user['last_name'];
             $newUser->email           = $user['email'];
+			$newUser->vid_user= 'Частная';
+			$newUser->is_client= 1;
             //$newUser->google_id       = $user->id;
             //$newUser->avatar          = $user->pic_1;
           $password="password";
@@ -611,10 +657,11 @@ if (!empty($_GET['error'])) {
           $newUser->verify_token = Str::random();
             $newUser->active = 1;
           $newUser->confirmed = User::STATUS_SOCIALACTIVE;
+		  $newUser->country=$details->location->country->code;
           $newUser->save();
           dispatch(new VerifySocialMail($newUser))->onQueue('queue_name');
 
-			$user = $this->createUser($user,$provider);
+			//$user = $this->createUser($user,$provider);
 			\Auth::guard('web')->login($newUser, true);
 
         }

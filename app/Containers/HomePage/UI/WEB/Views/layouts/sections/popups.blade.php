@@ -454,42 +454,51 @@
 
         <div class="row">
           <div class="col-md-12" style="padding:1px;margin-top:5px">
-            <input type="radio" style="display:none" name="complain" value="rudeness" id="rudeness" class="radio_input" checked>
-            <input type="radio" name="complain" value="rudeness" id="rudeness" class="radio_input" >
-            <label for="private" style="margin-right:0px"> Текст некорректный/неуважение/грубость</label>
+        
+            <input type="radio" name="complain" value="rudeness" id="rudeness" class="radio_input" checked>
+            <label for="rudeness" style="margin-right:0px"> Текст некорректный/неуважение/грубость</label>
           </div>
           <div class="col-md-12" style="padding:1px;margin-top:5px">
             <input type="radio" name="complain" value="wrong_contact" id="wrong_contact" class="radio_input" >
-            <label for="private" style="margin-right:0px"> Контактная информация неверная</label>
+            <label for="wrong_contact" style="margin-right:0px"> Контактная информация неверная</label>
           </div>
           <div class="col-md-12" style="padding:1px;margin-top:5px">
             <input type="radio" name="complain" value="sold_out" id="sold_out" class="radio_input" >
-            <label for="private" style="margin-right:0px"> Товар продан/ услуга недоступна</label>
+            <label for="sold_out" style="margin-right:0px"> Товар продан/ услуга недоступна</label>
           </div>
 
           <div class="col-md-12" style="padding:1px;margin-top:5px">
             <input type="radio" name="complain" value="forbidden" id="forbidden" class="radio_input">
-            <label for="private" style="margin-right:0px"> Запрещенный товар/непристойное содержание</label>
+            <label for="forbidden" style="margin-right:0px"> Запрещенный товар/непристойное содержание</label>
           </div>
 
           <div class="col-md-12" style="padding:1px;margin-top:5px">
             <input type="radio" name="complain" value="big_price" id="big_price" class="radio_input" >
-            <label for="private" style="margin-right:0px"> Продавец просит цену выше указанной</label>
+            <label for="big_price" style="margin-right:0px"> Продавец просит цену выше указанной</label>
           </div>
 
           <div class="col-md-12" style="padding:1px;margin-top:5px">
             <input type="radio" name="complain" value="fraud" id="fraud" class="radio_input" >
-            <label for="private" style="margin-right:0px"> Мошенничество/спам</label>
+            <label for="fraud" style="margin-right:0px"> Мошенничество/спам</label>
           </div>
 
           <div class="col-md-12" style="padding:1px;margin-top:5px">
             <input type="radio" name="complain" value="disparity" id="disparity" class="radio_input" >
-            <label for="private" style="margin-right:0px"> Объявление не соответствует рубрике</label>
+            <label for="disparity" style="margin-right:0px"> Объявление не соответствует рубрике</label>
           </div>
           <div class="col-md-12" style="padding:1px;margin-top:5px">
-            <input type="radio" name="complain" value="disparity" id="disparity" class="radio_input" >
-            <label for="private" style="margin-right:0px"> В объявлении кто-то указал мой телефон</label>
+            <input type="radio" name="complain" value="my_phone" id="my_phone" class="radio_input" >
+            <label for="my_phone" style="margin-right:0px"> В объявлении кто-то указал мой телефон</label>
+<div class="my_phone_div">
+            <p>Если кто-то разместил объявление с вашим номером телефона без вашего разрешения - вы можите самостоятельно удалить его</p>
+            <a href="#" class="product_info_send_message" >удалить объявление</a>
+</div>
           </div>
+            <div class="col-md-12" style="padding:1px;margin-top:5px">
+              <input type="radio" name="complain" value="other" id="other" class="radio_input" >
+              <label for="other" style="margin-right:0px"> Другое</label>
+                <textarea name="other_name" placeholder="Текст"></textarea>
+            </div>
         </div>
 
         <div class="row">
@@ -1241,6 +1250,19 @@
         return true;
       }
     });
+    
+    $('.modal input[type="radio"]').on('click', function(){
+        
+            $('.my_phone_div').hide();
+            $('#complainingForm textarea').hide();
+            if($('input[name="complain"]:checked').val() == 'my_phone'){
+                $('.my_phone_div').show();
+            }
+            if($('input[name="complain"]:checked').val() == 'other'){
+                $('#complainingForm textarea').show();
+            }
+        });
+    
   });
 
   $(function() {

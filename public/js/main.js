@@ -214,15 +214,20 @@ $(document).ready(function(){
         input = document.querySelector("#telphone"),
         addressDropdown = document.querySelector("#address-country");
 // init plugin
-  var cntr=$.get("https://ipinfo.io", function(response) {
-    console.log(response.city, response.country);
-    return response.country
-  }, "jsonp");
-  console.log('CNTR=>',cntr)
+$.ajaxSetup({async: false});  
+var jqxhr = $.getJSON( "https://ipinfo.io", function(response) {
+ console.log( "success",response );
+})
+.done(function() { console.log( "second success" ); })
+.fail(function() { console.log( "error" ); })
+.always(function() { console.log( "complete" ); });
+var cntry=jqxhr.complete(function(response) {  console.log( 'RESPO=>',response );return response});
+window.cnt= cntry.responseJSON.country;
+console.log('CNT=>',window.cnt)
     var iti = window.intlTelInput(input, {
         separateDialCode: true,
         loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
-        initialCountry: "gb"
+        initialCountry: window.cnt
     });
 // populate the country dropdown
     for (var i = 0; i < countryData.length; i++) {
@@ -768,6 +773,30 @@ $(this).closest('.add_foto_file_item').remove()
         var filename = $(this).val().replace(/.*\\/, "");
         $(".file_input_span").html(filename);
     });
+
+    $('#checkAgreement').on('change', function(){
+        if($('#checkAgreement').prop('checked')){
+            $('input[name="price"]').attr('disabled', true);
+            $('input[name="price"]').attr('placeholder', 'Договарная');
+            $("div.contact_info_wrapper div.input_price_icon").append("<input type='hidden' value='0.01' name='price'/>");
+        }else{
+            $('input[name="price"]').attr('disabled', false);
+            $('input[name="price"]').attr('placeholder', 'Цена (не обязательно)');
+        }
+    });
+
+    $('.modal input[type="radio"]').on('click', function(){
+        console.log("test2345");
+        $('.my_phone_div').hide();
+        $('#complainingForm textarea').hide();
+        if($('input[name="complain"]:checked').val() == 'my_phone'){
+            $('.my_phone_div').show();
+        }
+        if($('input[name="complain"]:checked').val() == 'other'){
+            $('#complainingForm textarea').show();
+        }
+    });
+
 
 
 });

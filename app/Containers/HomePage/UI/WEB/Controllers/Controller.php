@@ -368,4 +368,9 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
     }
 
 
+		public function getCountryData(GetAllHomePagesRequest $request){
+			
+			return 'ok';
+		}
+
 }

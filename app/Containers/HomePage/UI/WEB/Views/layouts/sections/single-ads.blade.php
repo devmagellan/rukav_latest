@@ -116,12 +116,7 @@ ul.slickslide li img, .slick-dots button img {
       </div>
       <div class="col-md-4">
         <p class="product_price">
-		@if($ad->price==0.01)
-			<h5>Цена договорная</h5>
-			@else
-		£ {{$ad->price}}
-	@endif
-          
+          £ {{$ad->price}}
         </p>
       </div>
     </div>
@@ -183,6 +178,7 @@ ul.slickslide li img, .slick-dots button img {
                 $middle_file="storage/messages/middle_{$picture->photo}";
                 ?>
               @if(file_exists($middle_file))
+              <? dump('middle');?>
               <img src="{{asset($middle_file)}}" alt="">
               @else
               <img src="{{asset('/storage/messages/'.$picture->photo)}}" alt="">
@@ -195,7 +191,7 @@ ul.slickslide li img, .slick-dots button img {
 </div>
 <div class="product_slider_nav swiper-container">
         <div class="swiper-wrapper">
-
+		
           @foreach($ad->pictures as $picture)
             <div class="product_slider_nav_item swiper-slide">
               <img src="{{asset('/storage/messages/'.$picture->photo)}}" alt="">
@@ -203,6 +199,7 @@ ul.slickslide li img, .slick-dots button img {
           @endforeach
         </div>
 </div>
+
       </div>
 	  </div>
 
@@ -329,11 +326,8 @@ ul.slickslide li img, .slick-dots button img {
             <span>{{print($ad->phone)}}</span>
 		@endif
           </a>
-          @if(\Auth::user() && \Auth::user()->confirmed==\App\Containers\User\Models\User::STATUS_CREATED_BY_ADMIN_NOT_CONFIRMED)
-            @php \Session::put('ShowWeeklyAdminCreatedConfirmation',1)@endphp
-          <a href="#" class="product_info_send_message product_info_send_message_authenticated" onclick="localStorage.removeItem('ModalSendMessage');" data-toggle="modal" data-target="#emailUpdate"><img src="/img/telegramm_icon.svg" alt="">отправить сообщение</a>
-          @elseif(\Auth::user())
-            <a href="#" class="product_info_send_message product_info_send_message_authenticated" onclick="localStorage.removeItem('ModalSendMessage');" data-toggle="modal" data-target="#ModalSendMessage"><img src="/img/telegramm_icon.svg" alt="">отправить сообщение</a>
+          @if(\Auth::user())
+          <a href="#" class="product_info_send_message product_info_send_message_authenticated" onclick="localStorage.removeItem('ModalSendMessage');" data-toggle="modal" data-target="#ModalSendMessage"><img src="/img/telegramm_icon.svg" alt="">отправить сообщение</a>
           @else
             <a href="#" class="product_info_send_message" onclick="localStorage.setItem('ModalSendMessage', 'Open message modal')" data-toggle="modal" data-target="#ModalIn"><img src="/img/telegramm_icon.svg" alt="">отправить сообщение</a>
           @endif
@@ -499,7 +493,7 @@ ul.slickslide li img, .slick-dots button img {
       </div>
       <div class="col-md-3">
         <div class="product_indicators_complain">
-          <a href="#" data-toggle="modal" data-target="#ModalComplaining"><img src="/img/compain.svg" alt="">Пожаловаться</a>
+          <a href="#"><img src="/img/compain.svg" alt="">Пожаловаться</a>
         </div>
       </div>
     </div>
@@ -561,7 +555,6 @@ ul.slickslide li img, .slick-dots button img {
 
     $(document).ready(function(){
       if(localStorage.getItem('ModalSendMessage')=='Open message modal'){
-        console.log('modalOpened')
         $('.product_info_send_message_authenticated').trigger('click')
 
       }

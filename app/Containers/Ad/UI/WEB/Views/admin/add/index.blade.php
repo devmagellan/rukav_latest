@@ -1563,7 +1563,8 @@
           $('.all_user_block').hide();
           $('.outUk').show();
           $('.Places').hide();
-          $('#clntInfoEditZip').hide()
+          $('#clntInfoEditZip').hide();
+		   $('#clntInfoEditAddr1').removeAttr("required");
         });
 
         $('#postcode').on('click', function () {
@@ -1571,7 +1572,10 @@
           $('.outUk').hide();
           $('.Places').hide();
           $('.postcode_block').show();
-          $('#clntInfoEditZip').show()
+          $('#clntInfoEditZip').show();
+		  $('#clntInfoEditOutUk').removeAttr("required");
+            $('#clntInfoEditAddrOutUk1').removeAttr("required");
+			$('#clntInfoEditAddr1').removeAttr("required");
         });
 
         $('#all_adress').on('click', function () {
@@ -1591,7 +1595,7 @@
           $('.Places').hide();
         });
 
-        $('#select_adress').on('click', function () {
+        $('#select_adress').on('click', function () { 
           console.log(434)
           $('#clntInfoEditAddr1').removeAttr("required");
           $('#allUsersClntInfoEditZip').removeAttr("required");
