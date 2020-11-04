@@ -1292,7 +1292,8 @@
                     "processing": true,  // Show processing
                     "serverSide": true,  // Server side processing
                     "deferLoading": 0, // In this case we want the table load on request so initial automatical load is not desired
-                    "pageLength": 5,    // 5 rows per page
+                    "pageLength": 5,
+                    "stateSave": true,// 5 rows per page
                     "ajax":{
                         url :  '{{ route('serverSide') }}',
                         type : "GET",

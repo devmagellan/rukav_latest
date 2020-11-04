@@ -1286,7 +1286,7 @@
             @foreach($favorits as $favorit)
             <div class="choosen_item-wrapper d-flex" id="favorite_{{$favorit->id}}">
               <div class="choosen_item_img">
-                @if($ad->pictures->first())
+                @if(count($favorit->pictures) > 0 )
                 <img src="/storage/messages/{{$favorit->pictures->first()->photo}}" alt="">
                   @endif
               </div>

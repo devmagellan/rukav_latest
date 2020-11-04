@@ -691,10 +691,11 @@
                     "fixedHeader": true,
                     "searching": true, // Search box and search function will be actived
                     "ordering": true,
-					"scrollX": true,
+					          "scrollX": true,
                     "info": true,
                     "autoWidth": true,
                     "processing": true,  // Show processing
+                    "stateSave": true,
                     "serverSide": true,  // Server side processing
                     "deferLoading": 0, // In this case we want the table load on request so initial automatical load is not desired
                     "pageLength": 5,    // 5 rows per page
