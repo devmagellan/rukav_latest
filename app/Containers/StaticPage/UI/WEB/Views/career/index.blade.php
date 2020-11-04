@@ -130,7 +130,7 @@
     $('.contact_submit').on('click', function(e) {
       e.preventDefault();
       console.log('user?')
-      var user='{{\Auth::guard('web')->user()->id}}'
+      var user='{{(\Auth::guard('web')->user()) ? \Auth::guard('web')->user()->id : ''}}'
       console.log('user=>',user.length<1)
       if(user.length<1){
         console.log('notA user')

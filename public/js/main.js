@@ -214,7 +214,7 @@ $(document).ready(function(){
         input = document.querySelector("#telphone"),
         addressDropdown = document.querySelector("#address-country");
 // init plugin
-$.ajaxSetup({async: false});  
+$.ajaxSetup({async: false});
 var jqxhr = $.getJSON( "https://ipinfo.io", function(response) {
  console.log( "success",response );
 })
@@ -424,7 +424,7 @@ console.log('CNT=>',window.cnt)
             separateDialCode: true,
             hiddenInput: "full_phone",
             loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
-            initialCountry: "gb"
+          initialCountry: window.cnt
         });
 
     input5.addEventListener('countrychange', function(e) {
