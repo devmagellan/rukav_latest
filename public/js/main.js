@@ -510,7 +510,6 @@ console.log('CNT=>',window.cnt)
     });
 
     $(".add_foto_file_delete_present").on("click", function(){
-alert()
         var current_img=$(this).parent().parent().find('.add_foto_file_img').attr('src');
         console.log('event',current_img);
         var photo = $(this).closest(".upload-file-container-text").find(".photo");
@@ -520,7 +519,7 @@ alert()
         $(photo).closest(".upload-file-container-text").find('.add_foto_file_item_load').show();
         $(photo).closest(".upload-file-container-text").find('.add_foto_file_img_wrapper').hide();
         console.log($(photo));
-var present_id=$($(this).parent().find('.add_foto_file_item_load2')[0])[0].attributes.id.nodeValue.split('_')[1];
+        var present_id=$($(this).parent().find('.add_foto_file_item_load2')[0])[0].attributes.id.nodeValue.split('_')[1];
         console.log(present_id)
 
 $(this).closest('.add_foto_file_item').remove()

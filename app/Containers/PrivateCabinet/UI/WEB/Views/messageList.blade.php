@@ -62,6 +62,8 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
                     <div class="body_messege_item body_to_messege_item">
                       @if($segment->photo)
                         <img style="" src="/storage/message_images/{{$segment->photo}}">
+                    <br>
+                       <span class="downloadPhoto" data-photo="/storage/message_images/{{$segment->photo}}"><i style="cursor:pointer" class="fa fa-download "  aria-hidden="true" data-toggle="tooltip" title="Скачать полный размер"></i></span>
                       @else
                         <p>{{$segment->text}}</p>
                       @endif
@@ -70,10 +72,12 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
                         $expired = $segment->created_at->diffInSeconds(\Carbon\Carbon::now()) > $secondsInDay;
                         if($expired){
                           ?>
+
                           <span>{{\Carbon\Carbon::createFromTimeStamp(strtotime($segment->created_at))->locale('ru')->isoFormat('Do MMMM YY, h:mm a')}}</span>
                         <?
                         }else{
                           ?>
+
                         <span>{{\Carbon\Carbon::createFromTimeStamp(strtotime($segment->created_at))->locale('ru')->diffForHumans(['parts' => 1,
     'join' => true,])}}</span>
                         <?
@@ -103,6 +107,23 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
     </div>
     <p>RUKAV оставляет за собой право проверять сообщения посланные через наш сервер для того чтобы защитить вас от мошенничества и подозрительных действий.</p>
 </div>
+<script>
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+
+
+
+  });
+
+  $('.downloadPhoto').click(function(e){
+    var photo_file=$(this).attr('data-photo')
+    console.log(photo_file)
+    e.preventDefault();  //stop the browser from following
+    var ext=photo_file.split('/')[3].split('.')
+    window.location.href = '/downloadChatFile/'+ext[ext.length-2]+'/'+ext[ext.length-1];
+  })
+</script>
+
 <script>
 
   $("#file").change(function () {

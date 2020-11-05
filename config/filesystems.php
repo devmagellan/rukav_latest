@@ -54,6 +54,19 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+      'chatImages' => [
+        'driver' => 'local',
+        'root' => storage_path('app/public/message_images'),
+        'url' => env('APP_URL').'/storage',
+        'visibility' => 'public',
+      ],
+        'chatOriginalImages' => [
+          'driver' => 'local',
+          'root' => storage_path('app/public/message_images_original'),
+          'url' => env('APP_URL').'/storage',
+          'visibility' => 'public',
+        ],
+
       'resume' => [
         'driver' => 'local',
         'root' => storage_path('app/public/resume'),
