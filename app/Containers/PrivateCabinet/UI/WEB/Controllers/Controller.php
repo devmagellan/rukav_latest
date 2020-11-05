@@ -12863,14 +12863,20 @@ class Controller extends WebController
     $user=\App\Containers\User\Models\User::where('id',$request->input('client_id'))->first();
     $filename = $request->file('file');
     $newPath = storage_path('app/public/message_images/');
-    $file=$this->generateRandomString(5).'_image'.$filename->getClientOriginalName();
+    $originalPath = storage_path('app/public/message_images_original/');
+    $rand=$this->generateRandomString(5);
+    $file=$rand.'_m_image'.$filename->getClientOriginalName();
+    $original=$rand.'_o_image'.$filename->getClientOriginalName();
     $location = $newPath.$file;
+    $originalLocation = $originalPath.$original;
         $img = Image::make($filename)->resize(200, 200, function ($constraint) {
-          $constraint->aspectRatio();
-        });
-        $img->save($location);
+      $constraint->aspectRatio();
+    });
+    $img->save($location);
+    $img = Image::make($filename);
+    $img->save($originalLocation);
 
-        $con=new \App\Containers\Connect\Models\Connect();
+    $con=new \App\Containers\Connect\Models\Connect();
     $con->text='';
     $con->receiver_id=$user->id;
     $con->sender_id=\Auth::user()->id;
@@ -12932,6 +12938,17 @@ class Controller extends WebController
 
     return response()->stream($callback, 200, $headers);
 
+  }
+
+  public function downloadChatFile($file,$ext){
+      $filename=$file.'.'.$ext;
+      $ex=explode('_m_',$file);
+    if (Storage::disk('chatOriginalImages')->exists($ex[0].'_o_'.$ex[1].'.'.$ext)) {
+      return Storage::disk('chatOriginalImages')->download($ex[0].'_o_'.$ex[1].'.'.$ext);
+    }
+    else{
+      dd(444);
+    }
   }
 
 

@@ -430,7 +430,7 @@
                               </div>
                           </div>
                       </label-->
-                          <label for="imgInput2" class="add_foto_file_item_load" style="display:none">
+                          <label for="imgInput{{$key+1}}" class="add_foto_file_item_load" style="display:none">
                               <img src="/img/photo-camera-icon.svg" alt="">
                               <span>Добавить фото</span>
                           </label>

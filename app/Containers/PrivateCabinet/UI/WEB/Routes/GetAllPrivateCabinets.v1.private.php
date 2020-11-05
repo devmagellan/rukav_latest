@@ -134,6 +134,16 @@ $router->post('/delete_second_group', [
 ]);
 $router->get('/export_user_contacts/{user_id}', 'Controller@exportUserContactsCsv');
 
+$router->get('/downloadChatFile/{file}/{ext}', [
+  'as' => 'downloadChatFile',
+  'uses'  => 'Controller@downloadChatFile',
+  /*'middleware' => [
+    'auth:web',
+  ],*/
+]);
+
+
+
 
 
 

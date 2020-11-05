@@ -348,6 +348,8 @@ $(document).ready(function(){
         console.log($(photo));
     });
 
+
+
     $('input[name="name_ad"]').on('input', function () {
         console.log(70 - $(this).val().length);
         if(70 - $(this).val().length)
