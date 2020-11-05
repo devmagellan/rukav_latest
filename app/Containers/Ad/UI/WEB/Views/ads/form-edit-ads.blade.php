@@ -430,19 +430,19 @@
                               </div>
                           </div>
                       </label-->
-                          <label for="imgInput2" class="add_foto_file_item_load" style="display:none">
+                          <label for="imgInput{{$key+1}}" class="add_foto_file_item_load" style="display:none">
                               <img src="/img/photo-camera-icon.svg" alt="">
-                              <span>Добавить фото</span>
+                              <span>Добавить фото {{$key+1}}</span>
                           </label>
                           <div class="add_foto_file_img_wrapper" style="display:inline-block">
                               <input type="hidden" class="add_id" value="{{$ad->id}}">
                               <img class="add_foto_file_img" src="/storage/messages/{{$realPic->photo}}" alt="">
                               <div class="add_foto_file_block_hover">
                                   <label id="present_{{$key+1}}" for="imgInput{{$key+1}}" class="add_foto_file_item_load2">
-                                      <img src="/img/refresh_icon.svg" alt="">
+                                      <img style="position:relative;top:8px" src="/img/refresh_icon.svg" alt="">
                                   </label>
                                   <div class="add_foto_file_delete_present">
-                                      <img src="/img/delete-icon.svg" alt="">
+                                      <img style="position:relative;top:8px" src="/img/delete-icon.svg" alt="">
                                   </div>
                               </div>
                           </div>
@@ -454,7 +454,7 @@
               <div class="add_foto_file_item">
                 <div class="upload-file-container-text">
 
-                  <label for="imgInput2" class="add_foto_file_item_load">
+                  <label for="imgInput{{$i}}" class="add_foto_file_item_load">
                     <img src="/img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
                   </label>

@@ -1101,7 +1101,7 @@
                 <button class="choosen_button ml-auto edit_ad" style="width: 50%;">
                   Редактировать
                 </button>
-                <button class="choosen_button ml-auto show_ad" style="width: 50%; left: 10px; position: relative;">
+                <button data-id="{{$ad->id}}" class="choosen_button ml-auto show_ad" style="width: 50%; left: 10px; position: relative;">
                   Просмотр
                 </button>
               </div>
@@ -1621,6 +1621,11 @@ console.log('imgInputakk')
 
       });
 
+
+$('.show_ad').click(function() {
+	console.log($(this).attr("data-id"))
+    document.location.href='/ads/'+$(this).attr('data-id');
+});
 
   </script>
 
