@@ -12,13 +12,18 @@ class RegisterUserRequest extends Request
 
 public function __construct(ValidationFactory $validationFactory)
     {
+		
+		
 
         $validationFactory->extend(
             'custom_phone',
             function ($attribute, $value, $parameters) {
 				$this->fullphone=$this->code.$this->phone;
+				if(strlen($this->fullphone)<10){
+					$this->fullphone='';
+				}
 				$notUnique=\App\Containers\User\Models\User::where('phone',$this->fullphone)->first();
-				if($notUnique){
+				if($notUnique && $this->fullphone!=''){
 					return false;
 				}
 
@@ -69,7 +74,7 @@ public function __construct(ValidationFactory $validationFactory)
       "lastName" => "required|between:2,30","vid_user" => "required|max:30",
       "country" => "required|max:30",
       //"phone" =>  "nullable|unique:users,phone,NULL,id,deleted_at,NULL|required_if:vid_user,Организация|required_if:vid_user,Предприниматель|required_if:vid_user,Компания|max:30",
-      "phone"=>"custom_phone|required_if:vid_user,Организация|required_if:vid_user,Предприниматель|required_if:vid_user,Компания|max:30",
+      "phone"=>"custom_phone|required_if:vid_user,Организация|required_if:vid_user,Предприниматель|required_if:vid_user,Компания|max:14",
 	  "password" => "required|between:6,30",
       "email" => "required|email|unique:users,email,NULL,id,deleted_at,NULL",
       "nameJob" => "required_if:vid_user,Бизнес",
@@ -97,14 +102,10 @@ public function __construct(ValidationFactory $validationFactory)
       'lastName.required' => 'укажите фамилию',
       'email.required' => 'укажите email',
       'password.required' => 'укажите пароль',
+	  'phone.min' => 'минимальная длина 11 цифр',
 
 
     ];
-  }
-
-  public function customPhone($phone){
-	  if($phone!==12345){return false;}
-	  return true;
   }
 
   /**
