@@ -70,7 +70,7 @@ $(document).ready(function(){
           var newVal = oldValue + 5;
         }
         else{
-          var newVal = oldValue + 1; 
+          var newVal = oldValue + 1;
         }
         spinner.find("input").val(newVal);
         spinner.find("input").trigger("change");
@@ -84,7 +84,7 @@ $(document).ready(function(){
             var newVal = oldValue - 5;
           }
           else{
-            var newVal = oldValue - 1; 
+            var newVal = oldValue - 1;
           }
         spinner.find("input").val(newVal);
         spinner.find("input").trigger("change");
@@ -95,20 +95,20 @@ $(document).ready(function(){
 
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-    
+
             reader.onload = function (e) {
-    
+
                 $(input).closest(".prophile_main_wrapper").find('.prophile_photo_picked').attr('src', e.target.result);
                 $(input).closest(".prophile_main_wrapper").find('.prophile_photo_wrapper').hide();
-                
+
                 $(input).closest(".prophile_main_wrapper ").find('.prophile_photo_picked').show();
                 $(input).closest(".prophile_main_wrapper ").find('.prophile_photo_picked').addClass('working');
             };
-    
+
             reader.readAsDataURL(input.files[0]);
         }
     }
-    
+
     $("#imgInputakk").change(function(){
         readURL2(this);
     });
@@ -173,7 +173,7 @@ $(document).ready(function(){
 
 
     var countryData = $.fn.intlTelInput.getCountryData(),
-        telInput = $("#telphone"),
+        telInput = $("#phone"),
         addressDropdown = $("#address-country");
 
     telInput.intlTelInput({
@@ -450,6 +450,6 @@ $(document).ready(function(){
     });
 
 
-   
-    
+
+
 });

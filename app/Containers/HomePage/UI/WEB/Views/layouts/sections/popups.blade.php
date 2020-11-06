@@ -436,6 +436,9 @@
 .modal-open {
   overflow: auto;
 }
+  .form-error{
+    border:1px solid red;
+  }
 
 
 </style>
@@ -454,7 +457,7 @@
 
         <div class="row">
           <div class="col-md-12" style="padding:1px;margin-top:5px">
-        
+
             <input type="radio" name="complain" value="rudeness" id="rudeness" class="radio_input" checked>
             <label for="rudeness" style="margin-right:0px"> Текст некорректный/неуважение/грубость</label>
           </div>
@@ -529,19 +532,21 @@
       // it into a PHP variable
       $ipdat = @json_decode(file_get_contents(
       "http://www.geoplugin.net/json.gp?ip=" . $ip));
+?>
 
-      dump($ipdat->geoplugin_countryCode);?>
       <h6 class="modalTitle">Регистрация</h6>
+
       <form class="formModal"action="{{route('register_user_web')}}" method="post" id="registerForm">
+
 
         <div class="row">
           <div class="col-sm-6">
-            <input type="text" name="firstName" placeholder="Имя"> <span class="required">*</span>
-            <span style="color:red" id="firstName" class="errorBlock"></span>
+            <input type="text"  id="firstName" class="errorInputBlock" name="firstName" placeholder="Имя"> <span class="required">*</span>
+            <span style="color:red" id="firstNameError" class="errorBlock"></span>
           </div>
           <div class="col-sm-6">
-            <input type="text" name="lastName" placeholder="Фамилия"> <span class="required">*</span>
-            <span style="color:red" id="lastName" class="errorBlock"></span>
+            <input type="text" class="errorInputBlock" name="lastName" id="lastName" placeholder="Фамилия"> <span class="required">*</span>
+            <span style="color:red"  class="errorBlock"></span>
           </div>
         </div>
         <div class="row">
@@ -554,21 +559,21 @@
           </div>
 
           <div class="col-sm-6">
-            <p class="input_text_top">Не виден пользователям</p>
-            <input type="text" name="email" placeholder="Контактный email"><span class="required">*</span>
-            <span style="color:red" id="email" class="errorBlock"></span>
+            <p class="input_text_top">не виден пользователям</p>
+            <input type="text" id="contactEmail" class="errorInputBlock" name="email" placeholder="Контактный email"><span class="required">*</span>
+            <span style="color:red" class="errorBlock"></span>
           </div>
 
         </div>
         <div class="row">
           <div class="col-md-12" style="padding:1px;margin-top:5px">
-        <input type="radio" name="vid_user" value="Частная" id="private" class="radio_input" checked>
+        <input type="radio" name="vid_user" value="Частная" id="private" class="radio_input registrationType" checked>
         <label for="private" style="margin-right:0px">Частное лицо</label>
-        <input type="radio" name="vid_user" value="Организация" id="organisation" class="radio_input" >
+        <input type="radio" name="vid_user" value="Организация" id="organisation" class="radio_input registrationType" >
         <label for="organisation" style="margin-right:0px">Организация</label>
-            <input type="radio" name="vid_user" value="Предприниматель" id="individual" class="radio_input" >
+            <input type="radio" name="vid_user" value="Предприниматель" id="individual" class="radio_input registrationType" >
             <label for="individual" style="margin-right:0px">Предприниматель</label>
-            <input type="radio" name="vid_user" value="Компания" id="company" class="radio_input" >
+            <input type="radio" name="vid_user" value="Компания" id="company" class="radio_input registrationType" >
             <label for="company" style="margin-right:0px">Компания</label>
           </div>
         </div>
@@ -587,11 +592,11 @@
 
           <div class="row">
             <div class="col-sm-6">
-              <input type="text" name="address" placeholder="Адрес" class="input-address">
-              <span id="address" class="errorBlock"></span>
+              <input type="text" id="address"name="address" placeholder="Адрес" class="input-address">
+              <span  class="errorBlock"></span>
             </div>
-            <div class="col-sm-6"><input type="text" name="postCode" placeholder="Postcode" class="input-postcode">
-              <span id="postCode" class="errorBlock"></span>
+            <div class="col-sm-6"><input id="postCode" type="text" name="postCode" placeholder="Postcode" class="input-postcode">
+              <span  class="errorBlock"></span>
             </div>
           </div>
         </div>
@@ -608,27 +613,26 @@
 
           <div class="row">
             <div class="col-sm-6">
-              <input type="text" name="address" placeholder="Юридический адрес" class="input-address">
+              <input type="text" id="address" name="address" placeholder="Юридический адрес" class="input-address">
               <span class="required">*</span>
-              <span id="address" class="errorBlock"></span>
+              <span  class="errorBlock"></span>
             </div>
-            <div class="col-sm-6"><input type="text" name="postCode" placeholder="Postcode" class="input-postcode"><span
+            <div class="col-sm-6"><input id="postCode" type="text" name="postCode" placeholder="Postcode" class="input-postcode"><span
                 class="required">*</span>
-              <span id="postCode" class="errorBlock"></span>
+              <span  class="errorBlock"></span>
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-6">
-              <input type="text" name="regNumber" placeholder="Рег.номер"
+              <input type="text" id="regNumber" name="regNumber" placeholder="Рег.номер"
                                          class="input-reg-number">
               <span class="required">*</span>
-              <span id="regNumber" class="errorBlock"></span>
+              <span  class="errorBlock"></span>
             </div>
-            <div class="col-sm-6"><input type="text" name="vatNumber" placeholder="VAT номер"
-                                         class="input-vat-number"><span
-                class="required">*</span>
-              <span id="vatNumber" class="errorBlock"></span>
+            <div class="col-sm-6"><input id="vatNumber" type="text" name="vatNumber" placeholder="VAT номер"
+                                         class="input-vat-number">
+              <span  class="errorBlock"></span>
             </div>
           </div>
         </div>
@@ -645,11 +649,11 @@
 
           <div class="row">
             <div class="col-sm-6">
-              <input type="text" name="address" placeholder="Адрес" class="input-address">
-              <span id="address" class="errorBlock"></span>
+              <input type="text" id="address" name="address" placeholder="Адрес" class="input-address">
+              <span  class="errorBlock"></span>
             </div>
-            <div class="col-sm-6"><input type="text" name="postCode" placeholder="Postcode" class="input-postcode">
-              <span id="postCode" class="errorBlock"></span>
+            <div class="col-sm-6"><input id="postCode" type="text" name="postCode" placeholder="Postcode" class="input-postcode">
+              <span  class="errorBlock"></span>
             </div>
           </div>
 
@@ -657,8 +661,8 @@
 
         <div class="row">
           <div class="col-sm-6">
-            <input type="text" class="modal_pass" name="password" placeholder="Пароль"><span class="required">*</span>
-            <span style="color:red" id="password" class="errorBlock"></span>
+            <input type="text"  id="password" class="modal_pass errorInputBlock" name="password" placeholder="Пароль"><span class="required">*</span>
+            <span style="color:red"  class="errorBlock"></span>
           </div>
 
 
@@ -671,7 +675,7 @@
               <label for="no_hide_phone">Не показывать</label>
             </div>
 
-            <input type="tel" name="phone" id="telphone"><span class="required">*</span>
+            <input type="tel" class="errorInputBlock" name="phone" id="telphone"><span class="required">*</span>
             <span id="phone" class="errorBlock"></span>
 
           </div>
@@ -686,7 +690,7 @@
             <button type="submit" id="registerButton">Зарегистрироваться</button>
           </div>
           <div class="col-sm-6">
-            <button type="button" class="buttonHref" id="enterButton">Вход</button>
+            <button type="button" class="buttonHref" id="enterButton">Назад</button>
           </div>
         </div>
       </form>
@@ -1250,9 +1254,9 @@
         return true;
       }
     });
-    
+
     $('.modal input[type="radio"]').on('click', function(){
-        
+
             $('.my_phone_div').hide();
             $('#complainingForm textarea').hide();
             if($('input[name="complain"]:checked').val() == 'my_phone'){
@@ -1262,7 +1266,7 @@
                 $('#complainingForm textarea').show();
             }
         });
-    
+
   });
 
   $(function() {
