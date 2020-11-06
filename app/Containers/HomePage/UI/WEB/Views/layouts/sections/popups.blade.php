@@ -95,7 +95,7 @@
   \Log::info('SessionHasN1'.\Session::has('ShowWeeklyAdminCreatedConfirmation') );
 \Log::info('SessionHasN2'.\Session::get('ShowWeeklyAdminCreatedConfirmation') );
 @endphp
-@if(\Session::has('ShowWeeklyAdminCreatedConfirmation') && \Session::get('ShowWeeklyAdminCreatedConfirmation')==1)
+@if(\Session::has('ShowWeeklyAdminCreatedConfirmation') && \Session::get('ShowWeeklyAdminCreatedConfirmation')==1 && \Auth::user())
   @php
     \Log::info('SessionHas');
 @endphp
