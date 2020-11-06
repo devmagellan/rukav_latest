@@ -2,6 +2,7 @@
 
 namespace App\Containers\User\Services;
 
+use App\Containers\User\Jobs\VerifyMail;
 use App\Containers\User\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -19,9 +20,12 @@ class UserService
 		\Log::info('UserData5=>');
 	$data = json_decode(json_encode($data), FALSE);}
       try {
+
+
       $current=\App\Containers\User\Models\User::where('email',$data->email)->withTrashed()->first();
       \Log::info('CurrentUser=>',array($current));
 	  $id=(property_exists($data, 'customer_id') && $current==null)  ? $data->customer_id : (($current!=null) ? $current->id : null );
+
 	  \Log::info('CurrentUserID=>'.$id);
         $newUser = User::withTrashed()->updateOrCreate(['id'=>$id],[
       'name' => (property_exists($data, 'save_url') ) ? $data->name : $data->firstName,

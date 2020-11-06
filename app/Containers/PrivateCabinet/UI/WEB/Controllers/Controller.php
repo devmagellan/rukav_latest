@@ -9,6 +9,7 @@ use App\Containers\PrivateCabinet\UI\WEB\Requests\FindPrivateCabinetByIdRequest;
 use App\Containers\PrivateCabinet\UI\WEB\Requests\UpdatePrivateCabinetRequest;
 use App\Containers\PrivateCabinet\UI\WEB\Requests\StorePrivateCabinetRequest;
 use App\Containers\PrivateCabinet\UI\WEB\Requests\EditPrivateCabinetRequest;
+use App\Containers\User\Jobs\VerifyMail;
 use App\Containers\User\Models\User;
 use App\Containers\User\UI\WEB\Requests\GetAllUsersRequest;
 use App\Containers\User\UI\WEB\Requests\ProfileSaveToIndividualRequest;
@@ -12679,7 +12680,14 @@ class Controller extends WebController
 
 
     public function profileSave(GetAllUsersRequest $request){
-        $result = Apiato::call('User@UpdateUserAction', [$request]);
+      $currentById=\App\Containers\User\Models\User::where('id',$request->id)->withTrashed()->first();
+        $user = Apiato::call('User@UpdateUserAction', [$request]);
+      if(isset($request->id)){
+        if($currentById->email!=$user->email){
+          \Session::put('OpenConfirmationModal',1);
+          dispatch(new VerifyMail($user))->onQueue('queue_name');
+        }
+      }
       return redirect()->back()->with('account_saved', 'Ваш аккаунт изменен !');
     }
 
