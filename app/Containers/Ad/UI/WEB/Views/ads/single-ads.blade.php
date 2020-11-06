@@ -323,10 +323,10 @@ ul.slickslide li img, .slick-dots button img {
           </div>
           <a href="tel:{{$ad->phone}}" class="product_info_btn_phone">
             <img src="/img/info_phone.svg" alt="">
-		@if(empty($ad->phone) || strlen($ad->phone)<6 )
+		@if(empty($ad->getSender->phone) || strlen($ad->getSender->phone)<6 )
 			<span>Не указан</span>
 			@else
-            <span>{{print($ad->phone)}}</span>
+            <span>{{print($ad->getSender->phone)}}</span>
 		@endif
           </a>
           @if(\Auth::user() && \Auth::user()->confirmed==\App\Containers\User\Models\User::STATUS_CREATED_BY_ADMIN_NOT_CONFIRMED)
