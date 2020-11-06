@@ -16,6 +16,20 @@
   </div>
 
   <main>
+
+    @if(\Session::has('OpenConfirmationModal') && \Session::get('OpenConfirmationModal')==1 && \Auth::user())
+      <script>
+        $(document).ready(function(){
+          $('#confirmEmail').modal({show:true})
+        })
+      </script>
+      @php \Session::put('OpenConfirmationModal',0)@endphp
+
+    @endif
+
+
+
+
     @if(\Auth::user()->getBusinessAccount && \Auth::user()->business_users_flag==false)
 <script>
   $(document).ready(function(){

@@ -6,6 +6,10 @@
 }
 </style>
 
+
+
+
+
 @if (\Session::has('password_changed'))
   <div class="alert alert-success">
     <ul>
