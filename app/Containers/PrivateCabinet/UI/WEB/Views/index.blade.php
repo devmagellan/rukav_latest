@@ -235,7 +235,7 @@
 					 $urlAvatar=true;
 				  }else{$urlAvatar=false;
 				  }
-				  
+
 				  ?>
                     <img class="prophile_photo_picked" for="imgInputakk" src="@if(\Auth::user()->avatar && $urlAvatar==false)  storage/avatars/{{\Auth::user()->avatar}} @elseif(\Auth::user()->avatar && $urlAvatar==true) {{\Auth::user()->avatar}} @else /img/slide_img1.png @endif " alt="">
                   </label>
@@ -347,7 +347,7 @@
               @endif
 
               <div class="prophile_main_wrapper d-flex">
-                <div class="col-md-7 col-lg-5 flex-column">
+                <div-- class="col-md-7 col-lg-5 flex-column">
                   <p class="prophile_main_text">
                     Ваш e-mail <span>*</span>
                   </p>
@@ -376,7 +376,7 @@
                       Сменить
                     </a-->
                   </div>
-                  <p class="prophile_main_text">
+                  <!--p class="prophile_main_text">
                     Телефон дополнительный
                   </p>
                   <div class="prophile_show_input-wrapper d-flex align-items-center">
@@ -385,10 +385,7 @@
                       <span class="checkmark"></span>
                     </label>
                     <input type="tel" id="telphone6" name="additional_phone" class="prophile_main_input" value="{{\Auth::user()->additional_phone}}">
-                    <!--a href="#" class="prophile_change_country">
-                      Сменить
-                    </a-->
-                  </div>
+                  </div-->
                   <p class="prophile_main_text">
                     Пароль <span>*</span>
                   </p>

@@ -477,7 +477,7 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
         \App\Containers\User\Models\User::where('id',$request->input('customer_id'))->update($update);}
         if(null!=$request->input('email')){
         \App\Containers\User\Models\User::where('email',$request->input('email'))->update($update);
-            return redirect()->back()->with('password_changed', 'Ваш пароль изменен !');
+            return redirect()->back()->with('message', 'Ваш пароль изменен !');
         }
         return json_encode(['result'=>'success']);
     }

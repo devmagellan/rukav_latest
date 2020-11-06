@@ -32,7 +32,13 @@ $(document).ready(function () {
         var response = JSON.parse(errors.responseText);
         $('.errorBlock').html('');
         $.each(response.errors, function (key, value) {
-          $('#' + key).html(value)
+          if(key=='email'){
+            $('#contactEmail').css('border','1px solid red')
+          }
+          if(key=='phone'){
+            $('#telphone').css('border','1px solid red')
+          }
+          $('#' + key).css('border','1px solid red')
         });
       }
     });

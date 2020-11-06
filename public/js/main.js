@@ -43,6 +43,8 @@ $(document).ready(function(){
         $('.user_cabinet_dropdown').toggleClass('user_cabinet_dropdown-active');
     });
 
+
+
     $(document).on('click', function (e) {
         var div = $('.user_cabinet_login');
         if(!div.is(e.target) && div.has(e.target).length === 0){
@@ -795,6 +797,16 @@ $(this).closest('.add_foto_file_item').remove()
             $('#complainingForm textarea').show();
         }
     });
+
+    $('.registrationType').click(function(){
+      $('.errorInputBlock').css('border','1px solid #ced4da')
+    })
+  $('#registerButton').click(function(){
+    //$('.errorInputBlock').css('border','0px solid grey')
+  })
+  $('#enterButton').click(function(){
+    $('.errorInputBlock').css('border','1px solid #ced4da')
+  })
 
 
 

@@ -12564,10 +12564,15 @@ class Controller extends WebController
     public function messagesData(GetAllPrivateCabinetsRequest $request){
 
         $data['title']="Staff postData";
+        $blockedUsers=\App\Containers\PrivateCabinet\Models\BlockedUser::where('user_id',\Auth::user()->id)->pluck('opponent');
         $conversations=\App\Containers\Connect\Models\Connect::whereNull('group_id')->
-            where(function($query)  {
-                $query->where('receiver_id', \Auth::user()->id)->orWhere('sender_id', \Auth::user()->id);
-                    })
+            where(function($query) use($blockedUsers) {
+                $query->where(function($q) use($blockedUsers) {
+                  $q->where('receiver_id', \Auth::user()->id)->whereNotIn('sender_id',$blockedUsers);
+                    })->orWhere(function($qr) use($blockedUsers) {
+                      $qr->where('sender_id', \Auth::user()->id)->whereNotIn('receiver_id',$blockedUsers);
+                });
+            })
             ->with('sender')->with('message')->with('pictures')
           /*->groupBy('message_id','receiver_id')*/->distinct()->orderBy('created_at','desc')->get();
         $tmp_msg=[];
@@ -12675,7 +12680,7 @@ class Controller extends WebController
 
     public function profileSave(GetAllUsersRequest $request){
         $result = Apiato::call('User@UpdateUserAction', [$request]);
-
+      return redirect()->back()->with('account_saved', 'Ваш аккаунт изменен !');
     }
 
   public function profileSaveToIndividual(ProfileSaveToIndividualRequest $request){
@@ -12821,7 +12826,7 @@ class Controller extends WebController
     public function addSecondMessangerGroup(GetAllPrivateCabinetsRequest $request){
         //привязываем категорию к юзеру
 
-        $second_messanger_group_recipient_item=\App\Containers\Ad\Models\SecondMessangerGroupRecipientItems::where('group_id',$request->input('group_id'))->where('user_id',\Auth::user()->id)->first();
+        $second_messanger_group_recipient_item=\App\Containers\Ad\Models\SecondMessangerGroupRecipientItems::where('group_id',$request->input('group_id'))->where('user_id',          \Auth::user()->id)->first();
 
         $response=\App\Containers\Ad\Models\SecondMessangerGroups::where('id',$request->input('group_id'))->first();
 
@@ -12949,6 +12954,12 @@ class Controller extends WebController
     else{
       dd(444);
     }
+  }
+
+  public function blockUser(GetAllPrivateCabinetsRequest $request){
+
+  \App\Containers\PrivateCabinet\Models\BlockedUser::insert(['user_id'=>\Auth::user()->id,'opponent'=>$request->input('opponent')]);
+  return json_encode(['message'=>'success']);
   }
 
 

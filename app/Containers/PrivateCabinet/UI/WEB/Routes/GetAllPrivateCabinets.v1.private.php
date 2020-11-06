@@ -141,6 +141,14 @@ $router->get('/downloadChatFile/{file}/{ext}', [
     'auth:web',
   ],*/
 ]);
+$router->post('/block_user', [
+  'as' => 'block_user',
+  'uses'  => 'Controller@blockUser',
+ 'middleware' => [
+    'auth:web',
+  ],
+]);
+
 
 
 
