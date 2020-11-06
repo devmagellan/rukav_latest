@@ -12566,7 +12566,7 @@ class Controller extends WebController
         $data['title']="Staff postData";
         $blockedUsers=\App\Containers\PrivateCabinet\Models\BlockedUser::where('user_id',\Auth::user()->id)->pluck('opponent');
         $conversations=\App\Containers\Connect\Models\Connect::whereNull('group_id')->
-            where(function($query) use($blockedUsers) {
+         where(function($query) use($blockedUsers) {
                 $query->where(function($q) use($blockedUsers) {
                   $q->where('receiver_id', \Auth::user()->id)->whereNotIn('sender_id',$blockedUsers);
                     })->orWhere(function($qr) use($blockedUsers) {
@@ -12732,8 +12732,8 @@ class Controller extends WebController
     }
 
     public function uploadProfileImageAjax(GetAllPrivateCabinetsRequest $request){
-        var_dump($request->hasFile('image'));
-        var_dump($_FILES);
+        //var_dump($request->hasFile('image'));
+        //var_dump($_FILES);
 
         if ($request->hasFile('image')) {
             $image      = $request->file('image');
@@ -12774,7 +12774,7 @@ class Controller extends WebController
     }
 
     public function checkData(GetAllPrivateCabinetsRequest $request){
-        $user=\App\Containers\User\Models\User::where('id',$request->input('client_id'))->first();
+      $user=\App\Containers\User\Models\User::where('id',$request->input('client_id'))->first();
       if(\Auth::user()->confirmed==\App\Containers\User\Models\User::STATUS_CREATED_BY_ADMIN_NOT_CONFIRMED) {
         \Session::put('ShowWeeklyAdminCreatedConfirmation',1);
         return response()->json(['error' => 'Email Not confirmed'], 404);
@@ -12796,8 +12796,8 @@ class Controller extends WebController
 
                 $entityClass=\App\Containers\Connect\Models\Connect::class;
                 $con=call_user_func("{$entityClass}::query")->updateOrCreate($message['attributes'], $message['values']);
-                var_dump('con',$con);
-                var_dump('receiver-'.$user->id.'-');
+                //var_dump('con',$con);
+                //var_dump('receiver-'.$user->id.'-');
                 $options = array(
                     'cluster' => 'eu',
                     'useTLS' => true
