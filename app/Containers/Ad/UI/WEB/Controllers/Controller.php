@@ -12851,8 +12851,16 @@ class Controller extends WebController
     }
     // Get the real count after being filtered by Where Clause
     $totalFiltered = $ads->count();
-    // Data to client
-    $jobs = $ads->skip($start)->take($length);
+    // Here are the parameters sent from client for paging
+    $start = $request->input ( 'start' );           // Skip first start records
+    $length = $request->input ( 'length' );
+
+    // Get the real count after being filtered by Where Clause
+    $totalFiltered = $ads->count ();
+
+
+
+    $ads = $ads->skip($start)->take($length);
 
     /*
      * Execute the query
@@ -12905,6 +12913,7 @@ class Controller extends WebController
     /*
     * This below structure is required by Datatables
     */
+    \Log::info('DRAW=>'.intval($request->input('draw')));
     $tableContent = array(
       "draw" => intval($request->input('draw')), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw.
       "recordsTotal" => intval($totalData), // total number of records
