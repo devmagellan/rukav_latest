@@ -17,6 +17,7 @@
 
   <main>
 
+
     @if(\Session::has('OpenConfirmationModal') && \Session::get('OpenConfirmationModal')==1 && \Auth::user())
       <script>
         $(document).ready(function(){
@@ -194,7 +195,7 @@
                       <span class="checkmark"></span>
                     </label>
                     <input type="hidden" class="prophile_main_input" name="country" value="{{\Auth::user()->country}}">
-                    <input type="text" disabled class="prophile_main_input" name="country_view" value="{{\Auth::user()->country}}">
+                    <input type="text" disabled class="prophile_main_input" name="country_view" value="{{$countrycode}}">
                     <!--a href="#" class="prophile_change_country" >
                       Сменить
                     </a-->

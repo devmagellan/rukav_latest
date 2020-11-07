@@ -37,6 +37,21 @@
   overflow: hidden;
 }
 
+        .sticky {
+          position: fixed;
+          top: 0;
+          background:#fff;
+          width: 100%;
+          z-index:999;
+        }
+        .contentTable {
+          z-index:998;
+        }
+
+        .sticky + .contentTable {
+          padding-top: 102px;
+        }
+
     </style>
 @endsection
 
@@ -269,10 +284,12 @@
                                 <div class="panel-container show">
                                     <div class="panel-content">
 
-
+                                      <div id="stickEdits">
                                         <button type="button" class="btn btn-primary edit_rubrics" >Редактировать рубрики</button>
                                         <button type="button" class="btn btn-default edit" >Прочее редактирование</button>
-                                        <button type="button" class="btn btn-danger delete" data-toggle="modal" data-target="#example-modal-alert">Удалить</button>
+                                        <button type="button" class="btn btn-danger delete" style="display:inline-block" data-toggle="modal" data-target="#example-modal-alert">Удалить</button>
+                                      </div>
+                                      <div class="contentTable">
                                         <!-- datatable start -->
                                         <table id="dt-basic-example" class="datatable mdl-data-table dataTable table table-bordered table-hover table-striped w-100" aria-describedby="dt-basic-example_info">
                                             <thead class="bg-highlight">
@@ -319,6 +336,7 @@
                                             </tfoot>
                                         </table>
                                         <!-- datatable end -->
+                                      </div>
                                     </div>
                                 </div>
                             </div>
@@ -688,7 +706,13 @@
                     "paging": true, // Allow data to be paged
                     "lengthChange": true,
                     "orderCellsTop": true,
-                    "fixedHeader": true,
+                    "fixedHeader": {
+                      headerOffset: 40,
+
+                    },
+                  dom: "<'row'<'col-sm-3'l><'col-sm-3'f><'col-sm-6'p>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
                     "searching": true, // Search box and search function will be actived
                     "ordering": true,
 					          "scrollX": true,
@@ -698,8 +722,9 @@
                     "stateSave": true,
                     "serverSide": true,  // Server side processing
                     "deferLoading": 0, // In this case we want the table load on request so initial automatical load is not desired
-                    "pageLength": 5,    // 5 rows per page
-                    "ajax":{
+                  "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                  "pageLength": 5,
+                  "ajax":{
                         url :  '{{ route('serverSide') }}',
                         type : "GET",
                         dataType: 'json',
@@ -752,7 +777,8 @@
             } );
 
 
-
+$('#dt-basic-example_paginate').appendTo('#stickEdits')
+          $('#dt-basic-example_paginate').css('display','inline-block')
 
 
         });
@@ -952,6 +978,22 @@ var new_rubric=$(this).parent().find('.hidden_rubric').val()
              });
         });
 
+    </script>
+
+    <script>
+      window.onscroll = function() {myFunction()};
+
+      var header = document.getElementById("stickEdits");
+      var sticky = header.offsetTop;
+
+      function myFunction() {
+        console.log('..')
+        if (window.pageYOffset > sticky) {
+          header.classList.add("sticky");
+        } else {
+          header.classList.remove("sticky");
+        }
+      }
     </script>
 
 @endsection
