@@ -73,7 +73,6 @@ class Controller extends WebController
    */
   public function index(GetAllCategoriesRequest $request, $id)
   {
-
 	$deleted_users=\App\Containers\User\Models\User::onlyTrashed()->pluck('id')->toArray();
     //dump($request->input());
       $data['filterDeals']=\App\Containers\Filter\Models\FilterDeals::get();
