@@ -255,9 +255,9 @@
                     <img class="prophile_photo_picked" for="imgInputakk" src="@if(\Auth::user()->avatar && $urlAvatar==false)  storage/avatars/{{\Auth::user()->avatar}} @elseif(\Auth::user()->avatar && $urlAvatar==true) {{\Auth::user()->avatar}} @else /img/slide_img1.png @endif " alt="">
                   </label>
                   <label class="prophile_photo_wrapper" for="imgInputakk">
-                    <div class="prophile_photo_img">
+                    <div class="prophile_photo_img" style="width:100%;height:100%">
                       @if(\Auth::user()->avatar)
-                        <img src="@if(\Auth::user()->avatar && $urlAvatar==false)  storage/avatars/{{\Auth::user()->avatar}} @elseif(\Auth::user()->avatar && $urlAvatar==true) {{\Auth::user()->avatar}} @else /img/slide_img1.png @endif " alt="">
+                        <img style="width:100%;height:100%" src="@if(\Auth::user()->avatar && $urlAvatar==false)  storage/avatars/{{\Auth::user()->avatar}} @elseif(\Auth::user()->avatar && $urlAvatar==true) {{\Auth::user()->avatar}} @else /img/slide_img1.png @endif " alt="">
 
                       @else
                       <img src="img/prophile_camera.png" alt="">@endif
@@ -1049,7 +1049,11 @@
 
           <div class="col-md-12" >
             @if(count($ads)<1)
+				<br>
+              <h3 style="color:grey">Вы еще не подавали объявления</h3>
             <div class="choosen_item-wrapper d-flex" style="height:300px"></div>
+		
+		
             @endif
             @foreach($ads as $ad)
             <div class="choosen_item-wrapper d-flex">
@@ -1302,6 +1306,11 @@
         </div>
         <div class="row">
           <div class="col-md-12">
+		  @if(count($favorits)<1)
+			  <br>
+              <h3 style="color:grey">Вы еще не добавляли объявления в Избранное</h3>
+			  <div class="choosen_item-wrapper d-flex" style="height:300px"></div>
+              @endif
             @foreach($favorits as $favorit)
             <div class="choosen_item-wrapper d-flex" id="favorite_{{$favorit->id}}">
               <div class="choosen_item_img">
@@ -1592,12 +1601,21 @@ console.log('imgInputakk')
                   $('#loader2').show();
               },
               complete: function() {
+				  console.log(778)
                   $('#loader2').hide();
               },
               success: function (data) {
+				  console.log(777)
               $('.result_of_messages_table').html(data);
 
-              }
+              },error: function (error) {
+              console.log(768)
+              $('.result_of_messages_table').html('<br>'+
+              '<h3 style="color:grey">Вам пока нет сообщений</h3>'+
+			  '<div class="choosen_item-wrapper d-flex" style="height:300px"></div>'
+			  );
+
+            }
           });
       }
 

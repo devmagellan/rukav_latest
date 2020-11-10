@@ -56,6 +56,7 @@ class Controller extends WebController
 
     public function allChildCategoriesRecursive($id){
         $data=\App\Containers\Site\Models\ProductCategory::where('id',$id)->with('children')->first();
+		if($data){
         foreach($data->children as $child){
             $this->childrenCategories[]=$child->id;
             if(\App\Containers\Site\Models\ProductCategory::where('id',$child->id)->with('children')->first()->children->count()>0){
@@ -63,7 +64,8 @@ class Controller extends WebController
             }
 
         }
-        return $this->childrenCategories;
+        return $this->childrenCategories;}
+		else{ return false;}
     }
 
   /**
@@ -102,7 +104,7 @@ class Controller extends WebController
       });
       $q= \App\Containers\Ad\Models\Ad::where(function($query) use ($id,$childrenCats) {
 
-          if(count($childrenCats)<1){
+          if(!$childrenCats || count($childrenCats)<1){
              return $query->where('category_id',$id);
           }else{
               return $query->whereIn('category_id',$childrenCats);

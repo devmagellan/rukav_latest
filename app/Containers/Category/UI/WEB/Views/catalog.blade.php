@@ -74,7 +74,7 @@
               <option value="2">Scotland</option>
               <option value="3">Northern Ireland</option>
               <option value="4">Wales</option>
-              <option value="5">Вне UK</option>
+              <option value="5">вне UK</option>
             </select>
           </div>
           <div class="col-sm-2">
@@ -123,7 +123,7 @@
 
           <div class="col-sm-4 d-none d-sm-block"><button>Объявления </button></div>
           <div class="col-4 col-sm-1" style="text-align: center"><button class="data_sort   @if( Request::get('sort_by_date')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_date')=='high_to_low') high_to_low @else low_to_high @endif">Дата @if( Request::get('sort_by_date')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_date')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
-			@if(isset($data))
+			@if(isset($data) )
             <?
 
             $currentFilters=\App\Containers\Filter\Models\CategoryFilter::with('filter')->where('category_id',$data['currentCat']->id)->get();
@@ -136,21 +136,24 @@
                   <button class="filter_sort @if( Request::get($filter_variant)=='lo_to_high') lo_to_high @elseif(Request::get($filter_variant)=='high_to_low') high_to_low @else low_to_high @endif">{{$filter->filter->name}} @if( Request::get($filter_variant)=='lo_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get($filter_variant)=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img src="/img/play_button_img.svg" alt=""> @endif </button>
                 </div>
             @endforeach
+			
           @if(count($currentFilters)<3)
             @for($i=1;$i<=3-count($currentFilters)-1;$i++)
               <div class="col-md-2" style="text-align: center"></div>
 
             @endfor
+ 
               <div class="col-md-3" style="text-align: center"><button style="float:right" class="price_sort   @if( Request::get('sort_by_price')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_price')=='high_to_low') high_to_low @else low_to_high @endif">Цена @if( Request::get('sort_by_price')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_price')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
-        </div>
-          @endif
-        @else
+          @elseif(count($currentFilters)==3)
+		  <div class="col-md-1" style="text-align: center"><button style="float:right" class="price_sort @if( Request::get('sort_by_price')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_price')=='high_to_low') high_to_low @else low_to_high @endif">Цена @if( Request::get('sort_by_price')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_price')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
+        
+		@else
             <div class="col-md-2" style="text-align: center"></div>
             <div class="col-md-2" style="text-align: center"></div>
             <div class="col-md-3" style="text-align: center"><button style="float:right" class="price_sort @if( Request::get('sort_by_price')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_price')=='high_to_low') high_to_low @else low_to_high @endif">Цена @if( Request::get('sort_by_price')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_price')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
-        </div>
+        @endif
 			@endif
-
+</div>
 
         @foreach($products as $product)
       @php
@@ -170,12 +173,10 @@
                     $small_file="storage/messages/small_{$product->pictures->first()->photo}";
                     ?>
             @if(file_exists($small_file))
-                <? dump('small');?>
                         <a href="/ads/{{$product->id}}">
                             <img src="/storage/messages/small_{{$product->pictures->first()->photo}}" alt="" class="product_item_img">
                         </a>
               @else
-              <? dump('big');?>
                     <a href="/ads/{{$product->id}}">
               <img src="/storage/messages/{{$product->pictures->first()->photo}}" alt="" class="product_item_img">
                     </a>
@@ -226,7 +227,7 @@
             @for($i=1;$i<=3-count($currentFilters)-1;$i++)
               <div class="col-md-2" style="text-align: center"></div>
             @endfor
-              <div class="col-md-3">
+             <div class="col-md-3">
                 <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
                 <p class="product_map_marka d-sm-none">Volkswagen</p>
                 <p class="product_item_city d-sm-none">
@@ -234,6 +235,8 @@
                   {{$product->city}}
                 </p>
                 <div>
+				@elseif(count($currentFilters)==3)
+				
                   @else
                     <div class="col-md-3">
                       <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
@@ -257,14 +260,15 @@
               <div>
 
 		@endif
+		</div>
           <!--div class="col-sm-1">
             <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
             <p class="product_map_marka d-sm-none">Volkswagen</p>
             <p class="product_item_city d-sm-none">
               <img src="/img/map_icon.svg" alt="" class="product_map_icon">
               {{$product->city}}
-            </p>
-            <div-->
+            </p-->
+            <div>
                 <?
                 if(\Auth::user()){
                     $wishlist=App\Containers\Ad\Models\Wishlist::where('message_id',$product->id)->where('user_id',\Auth::user()->id)->first();

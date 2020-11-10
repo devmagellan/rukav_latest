@@ -6,7 +6,49 @@
 }
 </style>
 
+<div class="modal fade" id="contactFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel53"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
 
+      <button type="button" class="close contactFormModalClose" data-dismiss="modal" aria-label="Close">
+        <img src="{{asset('img/close-icon.svg')}}" alt="">
+      </button>
+      <h6 class="modalTitle" ><b>Связаться с нами</b></h6>
+      <form id="GoContactFormModal" class="formModal" action="/contactForm" method="post">
+        <input type="hidden" name="id" value="@if(\Auth::user()) {{\Auth::user()->id}} @endif">
+        <div class="row">
+          <div class="input_password_wrapper col-md-12" style="margin:0 auto">
+            <input type="text"  placeholder="Полное имя" class="input_password" name="name"><span class="required">*</span>
+            <span id="name" style="color:red" class="errorBlock"></span>
+          </div>
+          <div class="input_password_wrapper col-md-12" style="margin:0 auto">
+            <input type="text"  placeholder="Ваш Email" class="input_password" name="email" ><span class="required">*</span>
+            <span id="email" style="color:red" class="errorBlock"></span>
+          </div>
+          <div class="input_password_wrapper col-md-12" style="margin:0 auto">
+            <input type="text"  placeholder="ID объявления" class="input_password" name="add_id" >
+            <span id="add_id" style="color:red" class="errorBlock"></span>
+          </div>
+		   <div class="input_password_wrapper col-md-12" style="margin:0 auto">
+            <textarea  name="text" >Пожалуйста дайте как можно больше деталей</textarea><span class="required">*</span>
+            <span id="text" style="color:red" class="errorBlock"></span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <button type="submit" data-toggle="modal">Отправить сообщение
+            </button>
+          </div>
+
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+</div>
 
 
 

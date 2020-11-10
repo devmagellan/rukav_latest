@@ -122,11 +122,11 @@
             @if($page->group==2)
               @if(mb_substr($page->link, 0, 6)=='mailto')
                 <li>
-                  <a href="{{$page->link}}">{{$page->name}}</a>
+                  <a class="footer_link" href="{{$page->link}}">{{$page->name}}</a>
                 </li>
               @else
               <li>
-                <a href="/static/{{$page->link}}">{{$page->name}}</a>
+                <a class="footer_link" href="/static/{{$page->link}}">{{$page->name}}</a>
               </li>
                 @endif
             @endif
@@ -176,4 +176,13 @@ function topFunction() {
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
+
+
+$('.footer_link').click(function(e){
+	if($(this).attr('href')=='/static/support'){
+		e.preventDefault();
+		$('#contactFormModal').modal({show:true})
+	}
+	
+})
 </script>

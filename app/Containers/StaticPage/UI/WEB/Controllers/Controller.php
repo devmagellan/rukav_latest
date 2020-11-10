@@ -6,6 +6,7 @@ use App\Containers\StaticPage\UI\WEB\Requests\CreateStaticPageRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\DeleteStaticPageRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\GetAllStaticPagesRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\SendAdvRequest;
+use App\Containers\StaticPage\UI\WEB\Requests\SendContactRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\SendCareerRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\FindStaticPageByIdRequest;
 use App\Containers\StaticPage\UI\WEB\Requests\UpdateStaticPageRequest;
@@ -289,5 +290,11 @@ var_dump($request->input('form'));
     dispatch(new \App\Containers\User\Jobs\SendCareerRequestJob($array))->onQueue('queue_name');
     return redirect()->back()->with('success', 'Ваше сообщение отправлено');
   }
+  
+  
+  public function sendContactRequest(SendContactRequest $request){
+		dispatch(new \App\Containers\User\Jobs\SendContactRequestJob($request->all()))->onQueue('queue_name');
+		return \Response::json(['result'=>'success']);
+	}
 
 }

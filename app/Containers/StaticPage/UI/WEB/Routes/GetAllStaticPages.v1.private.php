@@ -115,10 +115,16 @@ $router->post('/staticpages_position', [
     ],
 ]);
 
+$router->post('/contactForm', [
+    'as'   => 'contactForm',
+    'uses'       => 'Controller@sendContactRequest',
+]);
+
 $router->post('/adv/connect', [
     'as'   => 'staticpages_position',
     'uses'       => 'Controller@sendAdvRequest',
 ]);
+
 
 
 

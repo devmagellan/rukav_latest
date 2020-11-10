@@ -1,6 +1,33 @@
 
 $(document).ready(function () {
 
+  $('#GoContactFormModal').submit( function (e) {
+    e.preventDefault();
+    var formData = $('#GoContactFormModal').serialize();
+    console.log('HERE')
+
+    $.ajax({
+      type: 'post',
+      url: '/contactForm',
+      dataType: "json",
+      data: formData,
+      success: function (data) {
+        //location.reload();
+          console.log(data)
+		$('.contactFormModalClose').trigger('click')
+      },
+      error: function (errors) {
+        var response = JSON.parse(errors.responseText);
+        $('.errorBlock').html('');
+        $.each(response.errors, function (key, value) {
+          $('#' + key).html(value)
+        });
+      }
+    });
+  });
+
+
+
   $('#registerForm').submit( function (e) {
       var radioValue = $("input[name='vid_user']:checked"). val();
     e.preventDefault();

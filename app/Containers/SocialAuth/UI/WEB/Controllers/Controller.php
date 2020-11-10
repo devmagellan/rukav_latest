@@ -432,7 +432,7 @@ $details = json_decode(file_get_contents("https://api.ipregistry.co/{$ip}?key=tr
 				$user = Socialite::driver($provider)->stateless()->fields([
             'first_name', 'last_name', 'email', 'gender', 'location'
         ])->scopes([
-            'email','location'
+            'email'
         ])->user();
 			}
 			else{

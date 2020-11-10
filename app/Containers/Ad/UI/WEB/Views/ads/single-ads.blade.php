@@ -307,7 +307,7 @@ ul.slickslide li img, .slick-dots button img {
         <div class="product_info_block">
           <div class="product_info_block_left">
             <div class="product_info_block_avatar">
-              <img src="/storage/avatars/{{$ad->getSender->avatar}}" alt="">
+              <img src="@if(substr($ad->getSender->avatar, 0, 4)!='http')/storage/avatars/@endif{{ $ad->getSender->avatar }}" />
             </div>
           </div>
           <div class="product_info_block_right">
@@ -440,7 +440,55 @@ ul.slickslide li img, .slick-dots button img {
 
       </div>
     </div>
+	<?
 
+    $currentFilters=\App\Containers\Filter\Models\CategoryFilter::with('filter')->where('category_id',$ad->category_id)->get();
+	$sliceFilters=array_slice($currentFilters->toArray(), 1);
+	if(count($currentFilters)>0){
+    ?>
+	<div class="row" style="margin-top:30px;">
+	<div class="col-md-6">
+	<div class="row">
+	<div class="col-md-6">
+	<h6 style="color:grey">Страна Резиденции :</h6>
+	</div>
+	<div class="col-md-6">
+	{{$ad->getSender->country}}
+	</div></div>
+	<div class="row">
+	<div class="col-md-6">
+	<h6 style="color:grey">{{$currentFilters[0]->filter->name}} :</h6>
+	</div>
+	<div class="col-md-6">
+	<?
+	$firstFilterValue= \App\Containers\Filter\Models\AddFilter::where('add_id',$ad->id)->where('filter_id',$currentFilters[0]->filter_id)->first();
+	if($firstFilterValue){
+	?>
+	{{$firstFilterValue->value}}
+	<?}?>
+	</div>
+	</div>
+	
+	</div>
+	<div class="col-md-6">
+	@foreach($sliceFilters as $filter)
+	<div class="row">
+	<div class="col-md-6">
+	<h6 style="color:grey">{{$filter['filter']['name']}} :</h6>
+	</div>
+	<div class="col-md-6">
+	<?
+	$firstFilterValue= \App\Containers\Filter\Models\AddFilter::where('add_id',$ad->id)->where('filter_id',$filter['filter_id'])->first();
+	?>
+	@if($firstFilterValue)
+	{{$firstFilterValue->value}}
+	@endif
+	</div>
+	</div>
+	@endforeach
+	</div>
+	</div>
+	<?}?>
     <div class="row product_will_share justify-content-between">
       <div class="col-md-6">
         <p class="product_will_share_desc">Поделиться на:</p>

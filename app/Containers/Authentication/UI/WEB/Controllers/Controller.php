@@ -200,7 +200,8 @@ class Controller extends WebController
 
     $user->save();
     \Log::info('Verified user=>',array($user));
-    \Auth::guard('web')->loginUsingId($user->id, true);
+    //\Auth::guard('web')->loginUsingId($user->id, true);
+	\Auth::guard('web')->login($user,true);
     $options = array(
       'cluster' => 'eu',
       'useTLS' => true
@@ -211,7 +212,7 @@ class Controller extends WebController
       '1000615',
       $options
     );
-    $pusher->trigger('login-channel', /* 'my-event' */'login-event',['id'=>$user->id]);
+    //$pusher->trigger('login-channel', /* 'my-event' */'login-event',['id'=>$user->id]);
 
     return redirect('/')
       ->with('successSocial', 'Your e-mail is verified. Your social account approoved.');
