@@ -1081,7 +1081,7 @@
                       Добавлено
                     </p>
                     <p class="choosen_info">
-                      {{$ad->created_at}}
+                      {{$ad->created_at->locale('ru_RU')->isoFormat('Do MMM YYYY')}}
                     </p>
                   </div>
                   <div class="choosen_subitem d-flex flex-column">
@@ -1105,6 +1105,8 @@
               </div>
 
               <div class="active_or_no choosen_button-wrapper d-flex flex-row flex-wrap align-items-center justify-content-between" style="max-width:333px;">
+
+                <p class="wrapper_header_add_price">£ {{$ad->price}}</p>
                 <input type="hidden" class="customSwitch2_id" value="{{$ad->id}}">
                 <label class="switch d-flex">
                   <input class="triggerSwitch" type="checkbox" value="@if($ad->active==1) 1  @else 0 @endif">

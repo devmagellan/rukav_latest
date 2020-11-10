@@ -200,8 +200,7 @@ class Controller extends WebController
 
     $user->save();
     \Log::info('Verified user=>',array($user));
-    //\Auth::guard('web')->loginUsingId($user->id, true);
-	\Auth::guard('web')->login($user,true);
+    \Auth::guard('web')->login($user,true);
     $options = array(
       'cluster' => 'eu',
       'useTLS' => true

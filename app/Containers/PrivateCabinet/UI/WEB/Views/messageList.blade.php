@@ -10,12 +10,16 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
 ?>
 
 <div class="wrapper_header_message">
+
     <div class="wrapper_header_message_left">
         <div class="massage_user_avatar massage_user_avatar_online">
             <img src="/img/messeg_img.svg" alt="">
         </div>
+
     </div>
+
     <div class="wrapper_header_message_right">
+
       <a  href="/all_author_ads?id={{$opponent->id}}"><p class="wrapper_header_name">{{$opponent->name}}</p></a>
       <a href="/ads/{{$conversation->first()->message->id}}"><p class="wrapper_header_add_name">{{$conversation->first()->message->title}}</p></a>
         <p class="wrapper_header_add_price">£ {{$conversation->first()->message->price}}</p>
