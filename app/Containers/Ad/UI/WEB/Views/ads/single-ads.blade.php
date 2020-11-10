@@ -121,7 +121,7 @@ ul.slickslide li img, .slick-dots button img {
 			@else
 		£ {{$ad->price}}
 	@endif
-          
+
         </p>
       </div>
     </div>
@@ -472,15 +472,31 @@ ul.slickslide li img, .slick-dots button img {
           </li>
         </ul-->
 		<!-- AddToAny BEGIN -->
-<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-<a class="a2a_button_facebook"></a>
-<a class="a2a_button_twitter"></a>
-<a class="a2a_button_email"></a>
-<a class="a2a_button_pinterest"></a>
-<a class="a2a_button_vk"></a>
-</div>
-<script async src="https://static.addtoany.com/menu/page.js"></script>
+        <!-- AddToAny BEGIN -->
+        <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+          <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+          <a class="a2a_button_facebook"></a>
+          <a class="a2a_button_whatsapp"></a>
+          <a class="a2a_button_google_gmail"></a>
+          <a class="a2a_button_odnoklassniki"></a>
+          <a class="a2a_button_vk"></a>
+        </div>
+        <script>
+          var a2a_config = a2a_config || {};
+          a2a_config.onclick = 1;
+          a2a_config.locale = "ru";
+          a2a_config.exclude_services = ["gmail","Pocket","reddit","myspace", "linkedin",
+          "telegram","mix","amazon_wish_list","blogger","aol_mail","balatarin","bitty_browser","bibsonomy","tumblr",
+            "blogmarks","box_net","buffer","bookmarks_fr","citeulike","design_float","diaspora","copy_link","diigo","digg","douban",
+            "dzone","evernote","draugiem","facebook","fark","folkd","flipboard","diary_ru","google_classroom","hacker_news","houzz","hatena","instapaper",
+            "google_bookmarks","kakao","care2_news","kindle_it","lite","known","kik","livejournal","mastodon","meneame","mewe",
+            "line","mixi","netvouz","papaly","outlook_com","pinboard","mendeley","print","pusha","plurk","printfriendly","protopage_bookmarks",
+            "qzone","refind","renren","sina_weibo","sitejot","rediff","svejo","slashdot","stockwits","symbaloo_bookmarks","trello","viadeo","stocktwits",
+            "tuenti","threema","typepad_post","twiddla","wanelo","wordpress","xing","wykop","wechat","yahoo_mail","yummly","yoolink"
+          ];
+        </script>
+        <script async src="https://static.addtoany.com/menu/page.js"></script>
+        <!-- AddToAny END -->
 <!-- AddToAny END -->
       </div>
       <!--div class="col-md-6" style="text-align: right">
