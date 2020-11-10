@@ -100,6 +100,11 @@
 
         <ul class="menu_footer">
           @foreach($staticPages as $page)
+		  @if($page->name=='Наши партнеры')
+			  <li>
+                  <a href="/businessusers">{{$page->name}}</a>
+                </li>
+			 @else
             @if($page->group==1)
               @if(mb_substr($page->link, 0, 6)=='mailto')
                 <li>
@@ -111,6 +116,7 @@
           </li>
                 @endif
             @endif
+			 @endif
          @endforeach
           </li>
         </ul>

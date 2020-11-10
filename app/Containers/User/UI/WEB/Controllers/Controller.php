@@ -547,7 +547,6 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
     }
 
     public function businessUsers(GetAllUsersRequest $request){
-
       $data['businessusers']=\App\Containers\User\Models\BusinessUser::paginate(10);
       $data['properties']=GlobalService::getMainProperties($request)['categories'];
       $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];

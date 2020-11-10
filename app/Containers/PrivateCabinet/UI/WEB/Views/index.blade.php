@@ -903,34 +903,28 @@
                   <img src="/img/data_icon.svg" alt="">Скачать мои данные
                 </a>
 
-                <div style="@if(\Auth::user()->vid_user=='Предприниматель') margin-top:0px;
-                @elseif(\Auth::user()->vid_user=='Частная')margin-top:40px;
-                @endif position:relative;min-width:280px">
-                  <a href="JavaScript:Void(0);" style="position:absolute" class="prophile_change_account">
-                  <img src="/img/user_icon_profile.svg" alt="">Сменить вид учётной записи
-                  </a>
-                  @if(\Auth::user()->vid_user!='Организация' && \Auth::user()->vid_user!='Предприниматель' &&
+				<select name="forma" style="position:relative;padding-right:10px;" onchange="location = this.value;">
+				<option selected disabled value="Home.php" class="prophile_change_account" style="background-image:url(/img/user_icon_profile.svg);">Сменить вид учётной записи</option>
+@if(\Auth::user()->vid_user!='Организация' && \Auth::user()->vid_user!='Предприниматель' &&
                   \Auth::user()->vid_user!='Компания'
-                  )
-                <div style="clear:both;"> <a href="/private_cabinet/to_organisation" style="position:relative;top:30px;font-weight:200"class="prophile_change_account">
-                    <img src="/img/user_icon_profile.svg" alt="">Сменить на Организацию
-                  </a></div>
-                  @endif
+                  )					
+
+					<option class="prophile_change_account" value="/private_cabinet/to_organisation">Сменить на Организацию</option>
+					
+					@endif
                   @if( \Auth::user()->vid_user!='Предприниматель' &&
                  \Auth::user()->vid_user!='Компания'
                  )
-                  <div style="clear:both;" ><a href="/private_cabinet/to_individual" style="position:relative;top:40px;font-weight:200"class="prophile_change_account">
-                      <img src="/img/user_icon_profile.svg" alt="">Сменить на Предприниматель
-                    </a></div>
-                  @endif
-                  @if(\Auth::user()->vid_user!='Компания')
-                  <div style="clear:both;" ><a href="/private_cabinet/to_company" style="position:relative;top:50px;font-weight:200"class="prophile_change_account">
-                      <img src="/img/user_icon_profile.svg" alt="">Сменить на Компанию
-                    </a></div>
-                    @endif
-                </div>
+					 <option class="prophile_change_account" value="/private_cabinet/to_individual">Сменить на Предприниматель</option>
+				@endif
+                  @if(\Auth::user()->vid_user!='Компания')	 
+					 
+					 <option class="prophile_change_account" value="/private_cabinet/to_company">Сменить на Компанию</option>
+					 @endif
+				</select>
+    
 
-                <a href="/delete_registration" class="prophile_delete_registration">
+                <a href="/delete_registration" style="padding-left:20px;" class="prophile_delete_registration">
                   <img src="/img/delete_icon_profile.svg" alt="">Удалить регистрацию
                 </a>
 
@@ -1059,8 +1053,11 @@
             <div class="choosen_item-wrapper d-flex">
 
               <div class="choosen_item_img">
+			  
                 @if($ad->pictures->first())
+				<a href="/ads/{{$ad->id}}">
                 <img src="/storage/messages/{{$ad->pictures->first()->photo}}" alt="">
+				</a>
                   @endif
               </div>
               <div class="choosen_item_text d-flex flex-column">
@@ -1081,7 +1078,7 @@
                       Добавлено
                     </p>
                     <p class="choosen_info">
-                      {{$ad->created_at->locale('ru_RU')->isoFormat('Do MMM YYYY')}}
+                      {{$ad->created_at}}
                     </p>
                   </div>
                   <div class="choosen_subitem d-flex flex-column">
@@ -1105,8 +1102,6 @@
               </div>
 
               <div class="active_or_no choosen_button-wrapper d-flex flex-row flex-wrap align-items-center justify-content-between" style="max-width:333px;">
-
-                <p class="wrapper_header_add_price">£ {{$ad->price}}</p>
                 <input type="hidden" class="customSwitch2_id" value="{{$ad->id}}">
                 <label class="switch d-flex">
                   <input class="triggerSwitch" type="checkbox" value="@if($ad->active==1) 1  @else 0 @endif">
@@ -1317,7 +1312,9 @@
             <div class="choosen_item-wrapper d-flex" id="favorite_{{$favorit->id}}">
               <div class="choosen_item_img">
                 @if(count($favorit->pictures) > 0 )
+				<a href="/ads/{{$ad->id}}">
                 <img src="/storage/messages/{{$favorit->pictures->first()->photo}}" alt="">
+				</a>
                   @endif
               </div>
               <div class="choosen_item_text d-flex flex-column">
