@@ -433,13 +433,7 @@ ul.slickslide li img, .slick-dots button img {
         </div>
       </div>
     </div>
-    <div class="row product_description" style="word-wrap: break-word;">
-      <div class="col-sm-12">
-        <h4>Описание</h4>
-        {!! nl2br(e($ad->message)) !!}
-
-      </div>
-    </div>
+    
 	<?
 
     $currentFilters=\App\Containers\Filter\Models\CategoryFilter::with('filter')->where('category_id',$ad->category_id)->get();
@@ -489,6 +483,15 @@ ul.slickslide li img, .slick-dots button img {
 	</div>
 	</div>
 	<?}?>
+	
+	<div class="row product_description" style="word-wrap: break-word;">
+      <div class="col-sm-12">
+        <h4>Описание</h4>
+        {!! nl2br(e($ad->message)) !!}
+
+      </div>
+    </div>
+	
     <div class="row product_will_share justify-content-between">
       <div class="col-md-6">
         <p class="product_will_share_desc">Поделиться на:</p>

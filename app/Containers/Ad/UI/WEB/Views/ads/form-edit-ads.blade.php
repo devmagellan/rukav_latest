@@ -8,6 +8,7 @@
 <link rel="mask-icon" href="/NewSmartAdmin/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
 <!-- DEMO related CSS below -->
 <link rel="stylesheet" media="screen, print" href="/NewSmartAdmin/css/fa-brands.css">
+<link rel="stylesheet" href="/css/preloader/main.css">
 @section('content')
 <style>
 
@@ -54,6 +55,141 @@
   }
 
 </style>
+
+<style>
+
+  .block_main_categories {
+    width: 24%;
+    height: 350px;
+    border: 1px solid #0000cc;
+    overflow-y: auto;
+    display: inline-block;
+  }
+  .cat_block {
+    padding: 10px 15px;
+  }
+
+  .select2-search {
+    display: block;
+  }
+
+  .select2-container--default .select2-selection--multiple{
+    border-radius: 20px;
+  }
+
+  .select2-container--default .select2-selection--multiple .select2-container--open{
+   border-radius: 20px !important;
+  }
+
+  #chooseGumtreeButton {
+    float:right;
+    background: #A269F7;
+    border: 1px solid #A269F7;
+    box-sizing: border-box;
+    border-radius: 23px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 36px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    transition: all .2s ease-out;
+    margin-top: 20px;
+    width: 220px;
+    margin-right: 18px;
+  }
+  .mainPreviewmodal-dialog {
+    max-width: 1567px !important;
+    margin: 0 auto;
+  }
+
+  .redBorder{
+    border: 2px solid red;
+  }
+
+  #search-field {
+    max-width: 21.875rem;
+     height: 2.425rem !important;
+     line-height: 34px !important;
+    border-radius: 34px 0px 0px 34px !important;
+    background: transparent;
+   border: 1px solid #E4E4E4 !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+     font-size: 14px !important;
+    padding-left: 48px !important;
+}
+
+
+  .add_foto_file_item_load2{
+    position:relative;
+    display:inline-block;
+  }
+  .add_foto_file_item_load2 img{
+    position:absolute;
+    top:9px;
+    left:9px;
+  }
+
+  .add_foto_file_delete{
+    position:relative;
+    display:inline-block;
+    top:-8px;
+  }
+
+  .add_foto_file_delete img{
+    position:absolute;
+    top:9px;
+    left:9px;
+  }
+
+
+
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css" rel="stylesheet" />
+
+<style>
+    .product_slider_nav .swiper-wrapper{
+        display: flex;
+        justify-content: center;
+    }
+    .product_slider_nav .swiper-wrapper .swiper-slide:hover{
+        cursor: pointer;
+        opacity: 1;
+    }
+    .product_slider_main .swiper-wrapper{
+        display: flex;
+        align-items: center;
+    }
+    .swiper-slide{
+        text-align: center;
+    }
+    .swiper-button{
+        background-color: #A269F7;
+        width: 35px;
+        height: 35px;
+        background-size: 10px;
+        line-height: 34px;
+        text-align: center;
+        border-radius: 48%;
+        z-index: 3;
+        transition: all .2s ease-out;
+        color: #fff;
+    }
+.product_description{
+        margin-top: 90px;
+}
+.product_slider_nav .swiper-wrapper .swiper-slide{
+    width: 80px;
+    display: flex;
+    height: 80px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+</style>
+
 @if ($errors->any())
   <div class="alert alert-danger">
     <ul>
@@ -172,7 +308,7 @@
               @enderror
             </div>
             <div class="all_user_block">
-              <input type="text" name="address" placeholder="Адрес" class="add_advert_input_location InputControl" id="clntInfoEditAddr1" required value="{{old('address')}}">
+              <input type="text" name="address" placeholder="Адрес" class="add_advert_input_location InputControl" id="clntInfoEditAddr1" required value="{{(isset($ad->address))  ? $ad->address : old('address')}}">
               @error('address')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
@@ -393,7 +529,7 @@
               @enderror
             </div-->
             <div class="contact_info_wrapper">
-              <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (не обязательно)" value="{{old('price')}}">
+              <div class="input_price_icon">£</div><input type="text" name="price" placeholder="Цена (не обязательно)" value="{{(isset($ad->price))  ? $ad->price : old('price')}}">
             </div>
           </div>
         </div>
@@ -510,12 +646,12 @@
             <div class="add_advert_desc">
               <p>Текст объявления: на русском языке. Допустимое использование английского не более 20%(термины, названия).</p>
               <p class="end">Транслит не допускается.</p>
-              <textarea name="description" placeholder="Текст объявления" required>{{old('description')}}</textarea>
+              <textarea name="description" placeholder="Текст объявления" required>{{(isset($ad->message))  ? $ad->message : old('description')}}</textarea>
               @error('description')
               <div class="alert errorBlock">{{ $message }}</div>
               @enderror
-              <button type="submit" id="saveAdsButton">Подать обьявление</button>
-              <button type="button" class="buttonHref">Предварительный просмотр</button>
+              <button type="submit" name="save" value="1" id="saveAdsButton">Подать обьявление</button>
+              <button type="submit" id="previewAdsButton" name="preview" value="1" class="buttonHref">Предварительный просмотр</button>
             </div>
           </div>
         </div>
@@ -524,6 +660,292 @@
     </div>
   </form>
   </article>
+  
+  <div class="modal fade mainPreview" id="mainPreview" tabindex="-1" role="dialog" aria-labelledby="mainPreview1" aria-hidden="true">
+  <div class="mainPreviewmodal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <button type="button" class="close close_button_modal_previws" data-dismiss="modal" aria-label="Close">
+      <img src="https://rukav.co.uk/img/close-icon.svg" alt="">
+    </button>
+@if(null!=(\Session::get('ad')))
+      <article class="product_main_block">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 justify-content-between product_title_block" style="display: flex;">
+              <h3 class="product_title">
+                {{\Session::get('ad')->title}}
+              </h3>
+
+              <?
+              if(\Auth::user()){
+              $wishlist=App\Containers\Ad\Models\Wishlist::where('message_id',\Session::get('ad')->id)->where('user_id',\Auth::user()->id)->first();
+              ?>
+
+              <div class="add_to_favourites">
+                <input type="hidden" class="wishInputId" value="{{\Session::get('ad')->id}}">
+                <span>Добавить в <br> Избранное</span>
+                <button onclick="wishList(this)" class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist">
+                  <img src="/img/heart_icon.svg" alt="" class="heart_icon" @if($wishlist && $wishlist->active==1) style="display: none"  @else style="display: block !important" @endif>
+                  <img src="/img/hert_icon_filed.svg" alt="" class="hert_icon_filed" @if(($wishlist && $wishlist->active!=1) || !$wishlist) style="display: none" @else style="display: block !important" @endif>
+                </button>
+              </div>
+              <? }
+
+              ?>
+
+            </div>
+            <div class="col-md-4">
+              <p class="product_price">
+                £ {{\Session::get('ad')->price}}
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-8">
+
+              <div class="product_slider_main swiper-container">
+                    <div class="swiper-wrapper">
+                        @foreach(\Session::get('ad')->pictures as $picture)
+                          <div class="product_slider_main_item swiper-slide">
+                            <img src="{{asset('/storage/messages/'.$picture->photo)}}" alt="">
+                          </div>
+                        @endforeach
+                    </div>
+<div class="swiper-button-next swiper-button swiper-button-white"></div>
+<div class="swiper-button-prev swiper-button swiper-button-white"></div>
+              </div>
+
+              <div class="product_slider_nav swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach(\Session::get('ad')->pictures as $picture)
+                      <div class="product_slider_nav_item swiper-slide">
+                        <img src="{{asset('/storage/messages/'.$picture->photo)}}" alt="">
+                      </div>
+                    @endforeach
+                </div>
+              </div>
+
+            </div>
+            <div class="col-lg-4">
+              <div class="product_info_block">
+                <div class="product_info_block_left">
+                  <div class="product_info_block_avatar">
+
+				  @if(null!=(\Auth::user()) && \Auth::user()->avatar)
+              <img style="height:40px;border-radius: 50%;" src="@if(substr(\Session::get('ad')->getSender->avatar, 0, 4)!='http')/storage/avatars/@endif{{ \Session::get('ad')->getSender->avatar }}" />
+              @elseif(null!=(\Auth::user()) && \Auth::user()->name )
+             <img style="height:40px" src="{{ \Avatar::create(\Auth::user()->name.' '.\Auth::user()->sername)->toBase64() }}" />
+            @endif
+                  </div>
+                </div>
+                <p class="product_info_user_name">{{\Session::get('ad')->name}} <span> @if(\Session::get('ad')->getSender->vid_user=='Частная') Частное лицо @else {{\Session::get('ad')->getSender->vid_user}}@endif</span></p>
+
+                  <p class="product_info_user_date">на RUKAVe с {{\Session::get('ad')->getSender->created_at}}</p>
+                  <a href="#" class="product_info_all_add">Все обьевления автора</a>
+                  <p class="product_info_city">{{\Session::get('ad')->city}}</p>
+              </div>
+                <a href="tel:{{\Session::get('ad')->phone}}" class="product_info_btn_phone preload_view_send_message_btn">
+                  <img src="/img/info_phone.svg" alt="">
+				  @if(empty(\Session::get('ad')->phone))
+					  <span>Не указан</span>
+				  @endif
+                  <span>{{\Session::get('ad')->phone}}</span>
+                </a>
+                <a href="#"  class="product_info_send_message preload_view_send_message_btn" data-toggle="modal" data-target="#ModalSendMessage"><img src="/img/telegramm_icon.svg" alt="">отправить сообщение</a>
+                <p class="product_info_text_down">
+                  <img src="/img/mail-send.svg" alt="">
+                  Быстро отвечает
+                </p>
+                @if(\Session::get('ad')->getSender->vid_user=='Предприниматель')
+                  <div class="product_website_block">
+                    <img src="/img/internet_icon.svg" alt="">
+                    <? $link=(\Session::get('ad')->getSender->getIndividualAccount) ? ((mb_substr(\Session::get('ad')->getSender->getIndividualAccount->www, 0, 4)!=='http' ) ? 'http://'.\Session::get('ad')->getSender->getIndividualAccount->www : \Session::get('ad')->getSender->getIndividualAccount->www) : null; ?>
+                    <p>Website: <a target="_blanc" href="{{$link}}">{{$link}}</a></p>
+                  </div>
+                @endif
+                @if(\Session::get('ad')->getSender->vid_user=='Организация')
+                  <div class="product_website_block">
+                    <img src="/img/internet_icon.svg" alt="">
+                    <? $link=(\Session::get('ad')->getSender->getOrganisationAccount) ? ((mb_substr(\Session::get('ad')->getSender->getOrganisationAccount->www, 0, 4)!=='http' ) ? 'http://'.\Session::get('ad')->getSender->getOrganisationAccount->www : \Session::get('ad')->getSender->getOrganisationAccount->www) : null ; ?>
+                    <p>Website: <a target="_blanc" href="{{$link}}">{{$link}}</a></p>
+                  </div>
+                @endif
+                @if(\Session::get('ad')->getSender->vid_user=='Компания')
+                  <div class="product_website_block">
+                    <img src="/img/internet_icon.svg" alt="">
+                    <? $link=(\Session::get('ad')->getSender->getOrganisationAccount) ? ( (mb_substr(\Session::get('ad')->getSender->getBusinessAccount->www, 0, 4)!=='http' ) ? 'http://'.\Session::get('ad')->getSender->getBusinessAccount->www : \Session::get('ad')->getSender->getBusinessAccount->www):null; ?>
+                    <p>Website: <a target="_blanc" href="{{$link}}">{{$link}}</a></p>
+                  </div>
+                @endif
+
+            <div class="product_slider_advantage">
+              <div class="product_slider_advantage_slider">
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Пожалуйста, следуйте последним советам от Государства, чтобы оставаться в безопасности.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Используйте PayPal при оплате.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Не используйте Western Union, Ukash или Paysafe при покупках на RUKAV.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Не полагайтесь на email адреса, скрытые в тексте или картинках.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Если предложение слишком заманчиво, возможно, это слишком хорошо, чтобы быть правдой.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Задавайте много вопросов о товаре при покупке.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Публикуйте много фотографий при продаже товаров и услуг, а также если сдаете недвижимость в аренду.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Всегда пользуйтесь услугами курьера при доставке.
+                  </p>
+                </div>
+                <div class="product_slider_advantage_item">
+                  <img src="/img/advantage_icon1.svg" alt="">
+                  <h6>Безопасность</h6>
+                  <p>
+                    Жалуйтесь на объявления, которые нарушают правила или кажутся вам подозрительными, с помощью кнопки внизу объявления
+                  </p>
+                </div>
+              </div>
+              <a href="/static/safety#theses" target="_blanc" class="product_slider_advantage_all">читать все советы</a>
+            </div>
+          </div>
+          </div>
+        <div class="row product_description" style="word-wrap: break-word;">
+          <div class="col-sm-12">
+            <h4>Описание</h4>
+            {!! nl2br(e(\Session::get('ad')->message)) !!}
+
+          </div>
+        </div>
+
+
+        <div class="row product_will_share justify-content-between">
+          <div class="col-md-6">
+            <p class="product_will_share_desc">Поделиться на:</p>
+          <!--ul class="socials">
+          <li>add_foto_file_item_load2
+            <a href="http://www.facebook.com/sharer.php?u={{url()->current()}}">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="insta">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/share?url={{url()->current()}}&amp;text=Simple%20Share%20Buttons&amp;hashtags=simplesharebuttons" class="twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="pinterest">
+              <i class="fab fa-pinterest-p"></i>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:?Subject=Simple Share Buttons&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 {{url()->current()}}" class="envelope">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </li>
+        </ul-->
+            <!-- AddToAny BEGIN -->
+            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+              <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+              <a class="a2a_button_facebook"></a>
+              <a class="a2a_button_whatsapp"></a>
+              <a class="a2a_button_gmail"></a>
+              <a class="a2a_button_ok"></a>
+              <a class="a2a_button_vk"></a>
+            </div>
+            <script async src="https://static.addtoany.com/menu/page.js"></script>
+            <!-- AddToAny END -->
+          </div>
+          <!--div class="col-md-6" style="text-align: right">
+            <img src="/img/tag_icon.png" alt="">
+            <p class="product_will_share_tags">Метки: </p>
+            <a href="#" class="product_will_share_link">#Автомобили,</a>
+            <a href="#" class="product_will_share_link">#Транспорт</a>
+          </div-->
+        </div>
+
+          <div class="row product_indicators_block">
+            <div class="col-md-9">
+              <p>Добавлено в <span>{{\Session::get('ad')->created_at->format('H:i')}}, {{\Session::get('ad')->created_at->format('d-m-Y')}}</span></p>
+              <p>Номер объявления: <span>00</span></p>
+              <p>Просмотры: <span>0</span></p>
+            </div>
+            <div class="col-md-3">
+              <div class="product_indicators_complain">
+                <a href="#"><img src="/img/compain.svg" alt="">Пожаловаться</a>
+              </div>
+            </div>
+          </div>
+
+        <div class="row justify-content-end preview_btn_wrapper">
+            <div class="col-md-2">
+                <button type="button" class="preview_btn_close close_button_modal_previws">Отмена</button>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="preview_btn">Опубликовать</button>
+            </div>
+        </div>
+
+        </div>
+      </article>
+@else
+  <? dump('NoT Ad');?>
+   @endif
+
+
+
+
+
+    </div>
+  </div>
+</div>
+  
+  
+  
+  
   </div>
     <div class="modal fade modalCatalog" id="mainCatalog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -569,6 +991,61 @@
 @endsection
 @section('scripts')
   <script src="/NewSmartAdmin/js/formplugins/select2/select2.bundle.js"></script>
+
+<style>
+.product_slider_main .slick-list.draggable{
+    height: auto!important;
+}
+.preview_btn_wrapper button{
+    display: block;
+    width: 100%;
+    line-height: 36px;
+    padding: 0 30px;
+    border: 1px solid #A269F7;
+    color: #A269F7;
+    background: #fff;
+    border-radius: 40px;
+    margin: 20px 0;
+    margin-top: 40px;
+}
+.preview_btn_wrapper .preview_btn{
+    background: #A269F7;
+    color: #fff;
+}
+#controls{
+    width: 636px;
+}
+#filterDeals{
+    width: 100%;
+    background: #fff;
+    box-shadow: none;
+    border-radius: 30px;
+}
+</style>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var galleryThumbs = new Swiper('.product_slider_nav', {
+        spaceBetween: 10,
+        slidesPerView: 6,
+        freeMode: true,
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+    });
+    var galleryTop = new Swiper('.product_slider_main', {
+        spaceBetween: 10,
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        thumbs: {
+            swiper: galleryThumbs
+        }
+    });
+</script>
 
 <script>
 
@@ -902,6 +1379,36 @@ $('.cat_name').click(function(){
 </script>
 
 
+@if (\Session::has('success') && \Session::get('success')=='Просмотр объявления')
+  <script>
+    $(document).ready(function() {
+
+
+
+
+      $('#mainPreview').modal({show:true});
+
+      $('.close_button_modal_previws').click(function(){
+        $('#mainPreview').modal({show:false});
+        $('#mainPreview').removeClass("show");
+        $('#mainPreview').hide();
+        $('.modal-backdrop').hide();
+        alert('Вы нажали отмену публикации');
+      });
+      $('.preview_btn').click(function(){
+        var id='{{\Session::get('ad')->id}}'
+       window.location.href='/save_preview/'+id;
+      });
+
+
+    });
+  </script>
+
+
+@endif
+
+  <script src="/js/preloader/vendor/modernizr-2.6.2.min.js"></script>
+  <script src="/js/preloader/main.js"></script>
 
   @endsection
 
