@@ -267,13 +267,54 @@
 
           </div>
         </div>
+      </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="add_advert_block_wrapper">
+                <div class="add_second_chat_block_input" style="margin-top:40px;">
+                  <h6 class="add_advert_block_wrapper_title">
+                    Языки объявления
+                  </h6>
+                  <div class="form-group" style="width:100%">
+                    <select class="select2-placeholder-language-multiple form-control" name="language_filter[]" multiple="multiple" id="multiple-filter-placeholder">
+>
+                      <option value="рус" selected="selected" locked="locked">Русский</option>
+                      <option value="анг">Английский</option>
+                      <option value="лат">Латышский</option>
+                      <option value="лит">Литовский</option>
+                      <option value="эст">Эстонский</option>
+                      <option value="укр">Украинский</option>
+                      <option value="пол">Польский</option>
+                      <option value="бол">Болгарский</option>
+                      <option value="рум">Румынский</option>
+                      <option value="вен">Венгерский</option>
+                      <option value="чеш">Чешский</option>
+                      <option value="сло">Словацкий</option>
+                      <option value="нем">Немецкий</option>
+                      <option value="фра">Французский</option>
+                      <option value="ита">Итальянский</option>
+                      <option value="фин">Финский</option>
+                      <option value="тур">Турецкий</option>
+                      <option value="др.">Другие</option>
+                    </select>
+                  </div>
+                </div>
 
+
+              </div>
+            </div>
+          </div>
+
+        <div class="row">
         <div class="filters_block"></div>
-        <div class="filter_deals_block"></div>
 
+        <div class="filter_deals_block"></div>
+        </div>
         <input type="hidden" id="category_id" name="category_id" required
                value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->category_id}} @elseif(!empty(old('category_id'))) {{old('category_id')}}  @endif">
-        <div class="col-sm-12">
+
+      <div class="row">
+      <div class="col-sm-12">
           <div class="add_advert_block_wrapper" id="add_place">
             <h6 class="add_advert_block_wrapper_title">
               Местоположение
@@ -977,8 +1018,8 @@
                           </div>
                         @endforeach
                     </div>
-<div class="swiper-button-next swiper-button swiper-button-white"></div>
-<div class="swiper-button-prev swiper-button swiper-button-white"></div>
+                  <div class="swiper-button-next swiper-button swiper-button-white"></div>
+                  <div class="swiper-button-prev swiper-button swiper-button-white"></div>
               </div>
 
               <div class="product_slider_nav swiper-container">
@@ -1355,6 +1396,10 @@
                 {
                     placeholder: "Выберите дополнительную группу для общения"
                 });
+          $(".select2-placeholder-language-multiple").select2(
+            {
+              placeholder: "Выберите дополнительную языки для объявления"
+            });
         });
 
     });
@@ -1707,7 +1752,30 @@ $('.cat_name').click(function(){
       $('#loader-wrapper').show();
     }
 
-
+    $(function() {
+      $('.select2-placeholder-language-multiple').select2({
+        tags: true,
+        placeholder: 'Select an option',
+        templateSelection : function (tag, container){
+          // here we are finding option element of tag and
+          // if it has property 'locked' we will add class 'locked-tag'
+          // to be able to style element in select
+          var $option = $('.select2-placeholder-language-multiple option[value="'+tag.id+'"]');
+          if ($option.attr('locked')){
+            $(container).addClass('locked-tag');
+            tag.locked = true;
+          }
+          return tag.text;
+        },
+      })
+        .on('select2:unselecting', function(e){
+          // before removing tag we check option element of tag and
+          // if it has property 'locked' we will create error to prevent all select2 functionality
+          if ($(e.params.args.data.element).attr('locked')) {
+            e.preventDefault();
+          }
+        });
+    });
 
 </script>
   <script src="/js/preloader/vendor/modernizr-2.6.2.min.js"></script>

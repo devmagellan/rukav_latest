@@ -12655,8 +12655,6 @@ class Controller extends WebController
           if ($ad) {
               $request->session()->flash('infoAd', true);
               $ad=\App\Containers\Ad\Models\Ad::where('id',$ad->id)->with('filterDeals')->first();
-//dd($ad->category_id);
-
               $this->getAllParentsCategoriesRecursive($ad->category_id);
               $catsString='';
               foreach(array_reverse($this->resultCat) as $value){

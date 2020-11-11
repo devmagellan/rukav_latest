@@ -319,7 +319,7 @@ ul.slickslide li img, .slick-dots button img {
             <p class="product_info_user_date">на RUKAVe с {{$ad->getSender->created_at->format('d-m-Y')}}</p>
 		      @endif
             <a href="/all_author_ads?id={{$ad->getSender->id}}" class="product_info_all_add">Все объявления автора</a>
-            <p class="product_info_city">{{$ad->city}}</p>
+            <p class="product_info_city">{{($ad->address) ? $ad->address : ''}}, {{$ad->city}}</p>
           </div>
           <a href="tel:{{$ad->phone}}" class="product_info_btn_phone">
             <img src="/img/info_phone.svg" alt="">
@@ -433,7 +433,7 @@ ul.slickslide li img, .slick-dots button img {
         </div>
       </div>
     </div>
-    
+
 	<?
 
     $currentFilters=\App\Containers\Filter\Models\CategoryFilter::with('filter')->where('category_id',$ad->category_id)->get();
@@ -441,29 +441,7 @@ ul.slickslide li img, .slick-dots button img {
 	if(count($currentFilters)>0){
     ?>
 	<div class="row" style="margin-top:30px;">
-	<div class="col-md-6">
-	<div class="row">
-	<div class="col-md-6">
-	<h6 style="color:grey">Страна Резиденции :</h6>
-	</div>
-	<div class="col-md-6">
-	{{$ad->getSender->country}}
-	</div></div>
-	<div class="row">
-	<div class="col-md-6">
-	<h6 style="color:grey">{{$currentFilters[0]->filter->name}} :</h6>
-	</div>
-	<div class="col-md-6">
-	<?
-	$firstFilterValue= \App\Containers\Filter\Models\AddFilter::where('add_id',$ad->id)->where('filter_id',$currentFilters[0]->filter_id)->first();
-	if($firstFilterValue){
-	?>
-	{{$firstFilterValue->value}}
-	<?}?>
-	</div>
-	</div>
-	
-	</div>
+
 	<div class="col-md-6">
 	@foreach($sliceFilters as $filter)
 	<div class="row">
@@ -481,9 +459,40 @@ ul.slickslide li img, .slick-dots button img {
 	</div>
 	@endforeach
 	</div>
+
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
+          <h6 style="color:grey">Страна Резиденции :</h6>
+        </div>
+        <div class="col-md-6">
+          {{\App\Containers\PrivateCabinet\Services\PrivateCabinetService::code_to_country($ad->getSender->country)}}
+        </div></div>
+      <div class="row">
+        <div class="col-md-6">
+          <h6 style="color:grey">Язык :</h6>
+        </div>
+        <div class="col-md-6">
+          <?
+          $languageFilterValue= json_decode($ad->language_filter);?>
+          @foreach($languageFilterValue as $key=>$value)
+          @if(count($languageFilterValue)==1 && $key==0)
+
+          {{$value}}
+            @elseif($key>0 && $key<2)
+                , {{$value}}
+            @else
+                {{$value}}
+          @endif
+          @endforeach
+        </div>
+      </div>
+
+    </div>
+
 	</div>
 	<?}?>
-	
+
 	<div class="row product_description" style="word-wrap: break-word;">
       <div class="col-sm-12">
         <h4>Описание</h4>
@@ -491,7 +500,7 @@ ul.slickslide li img, .slick-dots button img {
 
       </div>
     </div>
-	
+
     <div class="row product_will_share justify-content-between">
       <div class="col-md-6">
         <p class="product_will_share_desc">Поделиться на:</p>

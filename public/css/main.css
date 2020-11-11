@@ -3417,8 +3417,10 @@ padding-left: 30px;
     text-align: center;
     transition: all .2s ease-out;
     width: 24px;
+
     border-radius: 50%;
 }
+.viber-icon img{height:30px;}
 
 .message_sidebar_theme_head p.theme_main_text{
     color: #A269F7;

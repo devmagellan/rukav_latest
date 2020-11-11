@@ -56,9 +56,9 @@ class AdService
               'message' => $data->description,
               'city' => $data->city,
               'place_id' => $data->place_id,
+              'language_filter'=>json_encode($data->language_filter),
               'name' => $user->name,
               'category_id' => $data->category_id,
-
               'sender' => (isset($data->sender)) ? $data->sender : $user->id,
               'is_tmp' => (isset($data->save)) ? false : true,
               'select_time' => $data->select_time,
@@ -66,7 +66,7 @@ class AdService
               'administrative' => $data->administrative,
               'visibility' => false,
               'show_name' => $user->name,
-               'address' => $data->address,
+              'address' => $data->address,
           ]);
       });
       return $this->ad;
