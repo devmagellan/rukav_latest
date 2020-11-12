@@ -53,6 +53,8 @@ class AdService
               'email' => $user->email,
               'phone' => ($user->phone) ? $user->phone : '',
               'price' => $data->price,
+            'age' => $data->age,
+            'payment' => $data->payment,
               'message' => $data->description,
               'city' => $data->city,
               'place_id' => $data->place_id,

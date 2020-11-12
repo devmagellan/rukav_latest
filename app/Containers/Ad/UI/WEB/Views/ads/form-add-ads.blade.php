@@ -537,9 +537,17 @@
         </div>
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
-            <h6 class="add_advert_block_wrapper_title">
+            <h6 class="add_advert_block_wrapper_title price_section_title">
               Цена
-            </h6><br>
+            </h6>
+
+            <h6 class="add_advert_block_wrapper_title payment_section_title" style="display:none">
+              Оплата
+            </h6>
+            <h6 class="add_advert_block_wrapper_title age_section_title" style="display:none">
+              Возраст
+            </h6>
+            <br>
             <!--div class="contact_info_wrapper">
               <p>Email для сообщений (скрыт)</p>
               <input type="email" name="email" placeholder="Email" required value="{{old('email')}}">
@@ -572,14 +580,16 @@
               @enderror
             </div-->
             <div class="contact_info_wrapper">
-			@if(null!=(\Session::get('ad')))
-				<div class="input_price_icon">£</div><input type="number" step=".01" name="price" placeholder="Цена (не обязательно)" value="{{\Session::get('ad')->price}}">
-			@else
-				 <div class="input_price_icon">£</div><input type="number" step=".01" name="price" placeholder="Цена (не обязательно)" value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->price}} @endif">
-
-			@endif
-
+            <div class="price_section">
+				    <div class="input_price_icon">£</div><input type="number" step=".01" name="price" placeholder="Цена (не обязательно)" value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->price}} @endif">
+            </div>
+              <div class="payment_section" style="display:none">
+                <div class="input_price_icon">£</div><input type="number" step=".01" name="payment" placeholder="Оплата (не обязательно)" value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->price}} @endif">
               </div>
+              <div class="age_section" style="display:none">
+                <input type="number" step="1" name="age" placeholder="Возраст (не обязательно)" value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->price}} @endif">
+              </div>
+          </div>
             <!--label for="checkAgreement">Договорная</label>
             <input type="checkbox" id="checkAgreement" style="display:inline-block !important"-->
           </div>
@@ -1667,10 +1677,30 @@ $('.cat_name').click(function(){
         console.log('Услуги/Перевозки/Такси')
         $('.add_second_chat_block_input1').show()
       }
-      else if{
+      else if($(this).val().indexOf("Работа/Вакансии") >= 0 || $(this).val().indexOf('Работа/Ищу работу')>= 0){
+        $('.payment_section').show()
+        $('.price_section').hide()
+        $('.age_section').hide()
+        $('.price_section_title').hide()
+        $('.payment_section_title').show()
+        $('.age_section_title').hide()
+      }
+      else if($(this).val().indexOf("/Знакомства") >= 0){
+        $('.payment_section').hide()
+        $('.price_section').hide()
+        $('.age_section').show()
 
+        $('.price_section_title').hide()
+        $('.payment_section_title').hide()
+        $('.age_section_title').show()
       }
       else{
+        $('.payment_section').hide()
+        $('.price_section').show()
+        $('.age_section').hide()
+        $('.price_section_title').show()
+        $('.payment_section_title').hide()
+        $('.age_section_title').hide()
         $('.add_second_chat_block_input1').hide()
       }
 

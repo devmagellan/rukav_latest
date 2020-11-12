@@ -907,22 +907,22 @@
 				<option selected disabled value="Home.php" class="prophile_change_account" style="background-image:url(/img/user_icon_profile.svg);">Сменить вид учётной записи</option>
 @if(\Auth::user()->vid_user!='Организация' && \Auth::user()->vid_user!='Предприниматель' &&
                   \Auth::user()->vid_user!='Компания'
-                  )					
+                  )
 
 					<option class="prophile_change_account" value="/private_cabinet/to_organisation">Сменить на Организацию</option>
-					
+
 					@endif
                   @if( \Auth::user()->vid_user!='Предприниматель' &&
                  \Auth::user()->vid_user!='Компания'
                  )
 					 <option class="prophile_change_account" value="/private_cabinet/to_individual">Сменить на Предприниматель</option>
 				@endif
-                  @if(\Auth::user()->vid_user!='Компания')	 
-					 
+                  @if(\Auth::user()->vid_user!='Компания')
+
 					 <option class="prophile_change_account" value="/private_cabinet/to_company">Сменить на Компанию</option>
 					 @endif
 				</select>
-    
+
 
                 <a href="/delete_registration" style="padding-left:20px;" class="prophile_delete_registration">
                   <img src="/img/delete_icon_profile.svg" alt="">Удалить регистрацию
@@ -1046,14 +1046,14 @@
 				<br>
               <h3 style="color:grey">Вы еще не подавали объявления</h3>
             <div class="choosen_item-wrapper d-flex" style="height:300px"></div>
-		
-		
+
+
             @endif
             @foreach($ads as $ad)
             <div class="choosen_item-wrapper d-flex">
 
               <div class="choosen_item_img">
-			  
+
                 @if($ad->pictures->first())
 				<a href="/ads/{{$ad->id}}">
                 <img src="/storage/messages/{{$ad->pictures->first()->photo}}" alt="">
@@ -1102,7 +1102,15 @@
               </div>
 
               <div class="active_or_no choosen_button-wrapper d-flex flex-row flex-wrap align-items-center justify-content-between" style="max-width:333px;">
+                @if(null!=$ad->price)
 			  <p class="wrapper_header_add_price">£ {{$ad->price}}</p>
+                @elseif(null!=$ad->payment)
+                  <p class="wrapper_header_add_price">£ {{$ad->payment}}</p>
+                @elseif(null!=$ad->age)
+                  <p class="wrapper_header_add_price">{{$ad->age}}</p>
+                  @else
+                @endif
+
                 <input type="hidden" class="customSwitch2_id" value="{{$ad->id}}">
                 <label class="switch d-flex">
                   <input class="triggerSwitch" type="checkbox" value="@if($ad->active==1) 1  @else 0 @endif">
@@ -1356,11 +1364,31 @@
                     </p>
                   </div>
 				   <div class="choosen_subitem d-flex flex-column">
-                    <p class="choosen_subtitle">
-                      Цена предложения
-                    </p>
+             @if(null!=$favorit->price)
+               <p class="choosen_subtitle">
+                 Цена предложения
+               </p>
+             @elseif(null!=$favorit->payment)
+               <p class="choosen_subtitle">
+                 Оплата
+               </p>
+             @elseif(null!=$favorit->age)
+               <p class="choosen_subtitle">
+                 Возраст
+               </p>
+             @else
+             @endif
+
                     <p class="choosen_info">
-                    &pound; {{$favorit->price}}
+
+             @if(null!=$favorit->price)
+               £ {{$favorit->price}}
+             @elseif(null!=$favorit->payment)
+               £ {{$favorit->payment}}
+             @elseif(null!=$favorit->age)
+               {{$favorit->age}}
+               @else
+               @endif
                     </p>
                   </div>
                 </div>
