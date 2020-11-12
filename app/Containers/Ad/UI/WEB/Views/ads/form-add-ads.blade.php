@@ -1661,6 +1661,26 @@ $('.cat_name').click(function(){
   })
 
 
+    $('.select_category').change(function(){
+      //Услуги/Перевозки/Такси
+      if($(this).val()=='Услуги/Перевозки/Такси'){
+        console.log('Услуги/Перевозки/Такси')
+        $('.add_second_chat_block_input1').show()
+      }
+      else if{
+
+      }
+      else{
+        $('.add_second_chat_block_input1').hide()
+      }
+
+
+      var cat_id=window.cat_id
+
+
+    })
+
+
 
    $(document).ready(function() {
 
