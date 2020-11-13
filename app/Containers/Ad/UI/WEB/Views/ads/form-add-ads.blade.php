@@ -535,6 +535,7 @@
             </div>
           </div>
         </div>
+      <div class="row">
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title price_section_title">
@@ -594,12 +595,13 @@
             <input type="checkbox" id="checkAgreement" style="display:inline-block !important"-->
           </div>
         </div>
+      </div>
       @if(null!=(\Session::get('ad')))
 <style>
     .upload-file-container-text:hover .add_foto_file_block_hover{display:block;}
   </style>
 
-
+    <div class="row">
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
@@ -664,8 +666,10 @@
           </div>
           <a href="/static/policies#photo" target="_blank" class="add_advert_rolls_foto">Привила добавления фото</a>
         </div>
+    </div>
 
       @else
+    <div class="row">
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
@@ -888,7 +892,9 @@
             @enderror
           </div>
         </div>
+    </div>
       @endif
+      <div class="row">
         <div class="col-sm-12">
             <div class="add_advert_block_wrapper">
                 <h6 class="add_advert_block_wrapper_title">
@@ -908,6 +914,8 @@
                 </div>
             </div>
         </div>
+      </div>
+      <div class="row">
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper" id="add_description">
             <h6 class="add_advert_block_wrapper_title">
@@ -926,6 +934,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
   </form>
   </article>

@@ -584,7 +584,18 @@
 
       <form class="formModal"action="{{route('register_user_web')}}" method="post" id="registerForm">
 
-
+        <div class="row">
+          <div class="col-md-12" style="padding:1px;margin-top:5px">
+            <input type="radio" name="vid_user" value="Частная" id="private" class="radio_input registrationType" checked>
+            <label for="private" style="margin-right:0px">Частное лицо</label>
+            <input type="radio" name="vid_user" value="Организация" id="organisation" class="radio_input registrationType" >
+            <label for="organisation" style="margin-right:0px">Организация</label>
+            <input type="radio" name="vid_user" value="Предприниматель" id="individual" class="radio_input registrationType" >
+            <label for="individual" style="margin-right:0px">Предприниматель</label>
+            <input type="radio" name="vid_user" value="Компания" id="company" class="radio_input registrationType" >
+            <label for="company" style="margin-right:0px">Компания</label>
+          </div>
+        </div>
         <div class="row">
           <div class="col-sm-6">
             <input type="text"  id="firstName" class="errorInputBlock" name="firstName" placeholder="Имя"> <span class="required">*</span>
@@ -597,8 +608,8 @@
         </div>
         <div class="row">
           <div class="col-sm-6">
-            <p>Страна резиденции</p>
-            <div class="selectWrapper">
+            <p style="margin-top:15px">Страна резиденции</p>
+            <div class="selectWrapper" >
               <select class="form-control select_form custom-select" id="address-country" name="country"></select><span
                 class="required">*</span>
             </div>
@@ -611,18 +622,7 @@
           </div>
 
         </div>
-        <div class="row">
-          <div class="col-md-12" style="padding:1px;margin-top:5px">
-        <input type="radio" name="vid_user" value="Частная" id="private" class="radio_input registrationType" checked>
-        <label for="private" style="margin-right:0px">Частное лицо</label>
-        <input type="radio" name="vid_user" value="Организация" id="organisation" class="radio_input registrationType" >
-        <label for="organisation" style="margin-right:0px">Организация</label>
-            <input type="radio" name="vid_user" value="Предприниматель" id="individual" class="radio_input registrationType" >
-            <label for="individual" style="margin-right:0px">Предприниматель</label>
-            <input type="radio" name="vid_user" value="Компания" id="company" class="radio_input registrationType" >
-            <label for="company" style="margin-right:0px">Компания</label>
-          </div>
-        </div>
+
 
         <div class="organisation_modal_block" style="display:none">
           <div class="row">
@@ -707,7 +707,7 @@
 
         <div class="row">
           <div class="col-sm-6">
-            <input type="text"  id="password" class="modal_pass errorInputBlock" name="password" placeholder="Пароль"><span class="required">*</span>
+            <input type="text"  style="margin-top:45px" id="password" class="modal_pass errorInputBlock" name="password" placeholder="Пароль"><span class="required">*</span>
             <span style="color:red"  class="errorBlock"></span>
           </div>
 

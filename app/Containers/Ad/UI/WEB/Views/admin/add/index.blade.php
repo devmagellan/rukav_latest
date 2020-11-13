@@ -1326,6 +1326,7 @@
                         null,
                         null,
                         null,
+                    null,
                         { "visible": false }, //The last column will be invisible
                     ],
 
@@ -1595,7 +1596,7 @@
           $('.Places').hide();
         });
 
-        $('#select_adress').on('click', function () { 
+        $('#select_adress').on('click', function () {
           console.log(434)
           $('#clntInfoEditAddr1').removeAttr("required");
           $('#allUsersClntInfoEditZip').removeAttr("required");

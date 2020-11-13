@@ -12770,8 +12770,10 @@ class Controller extends WebController
       11 => 'title',
       12 => 'id',
       13 => 'message',
-      14 => 'message',
+      14 => 'title',
       15 => 'title',
+      16 => 'title',
+      17 => 'email',
     );
     //Getting the data
 
@@ -12829,7 +12831,39 @@ class Controller extends WebController
                 $categoryArray[] = $category->id;
               }
               $query->whereIn('category_id', $categoryArray);
-            } else {
+            }
+            elseif ($key == 14) {
+
+              \Log::info('$namesArray0'.$column['search']['value']);
+              $namesArray = \App\Containers\User\Models\User::where('email', 'LIKE', "%" . $column['search']['value'] . "%")
+                ->get();
+                \Log::info('$namesArray',array($namesArray));
+              $namesArray = \DB::table('users')->select('users.*')
+                ->join('business_accounts', function($join) use($column)
+                {
+                  $join->on('business_accounts.user_id', '=', 'users.id')
+                    ->where('business_accounts.www', 'like', "%{$column['search']['value'] }%");
+                })
+                ->leftJoin('individual_accounts', function($join) use($column)
+                {
+                  $join->on('individual_accounts.user_id', '=', 'users.id')
+                    ->where('individual_accounts.www', 'like', "%{$column['search']['value'] }%");
+                })
+                ->leftJoin('organisation_accounts', function($join) use($column)
+                {
+                  $join->on('organisation_accounts.user_id', '=', 'users.id')
+                    ->where('organisation_accounts.www', 'like', "%{$column['search']['value'] }%");
+                })
+                ->get();
+              \Log::info('$namesArray2',array($namesArray));
+              //var_dump($namesArray);
+              $usersArray = [];
+              foreach ($namesArray as $user) {
+                $usersArray[] = $user->id;
+              }
+              $query->whereIn('sender', $usersArray);
+            }
+            else {
               $query->where($columns[$key], 'LIKE', "%" . $column['search']['value'] . "%");
             }
 
@@ -12891,6 +12925,29 @@ class Controller extends WebController
       $nestedData = array();
       $nestedData [0] = '<div><div style="display:inline-block;"><input type="hidden" class="ad_id" value="' . $ad->id . '"><input class="ad_check" type="checkbox" value="0"></div>
  <span class="photoAdsModalOpen" style="display:inline-block;cursor:pointer" ><i class="fal fa-image"></i></span><div style="display:inline-block;"><a href="/admin/user_edit/adv/'.$ad->id.'" class="btn btn-primary btn-sm btn-icon waves-effect waves-themed"> <i class="fa fa-pencil"></i></a></div></div>';
+
+      if($ad->getSender && $ad->getSender['id']==3){\Log::info('USER=>=>',array($ad));}
+      else{\Log::info('USER=>=>=>',array($ad->getSender));
+        \Log::info('USER=>=>=>===',array($ad));
+      }
+if(null!=$ad->getSender ){
+
+  \Log::info('USER=>'.$ad->getSender['id']);
+      if($businessAccount=\App\Containers\User\Models\BusinessAccount::where('user_id',$ad->getSender['id'])->first()){
+
+        $www=$businessAccount->www;
+      }
+      elseif($individualAccount=\App\Containers\User\Models\IndividualAccount::where('user_id',$ad->getSender['id'])->first()){
+        $www=$individualAccount->www;
+      }
+      elseif($organisaionAccount=\App\Containers\User\Models\IndividualAccount::where('user_id',$ad->getSender['id'])->first()){
+        $www=$organisaionAccount->www;
+      }
+      else{
+        $www='vdn';
+      }}else{
+  \Log::info('USER=>=>=>',array($ad->getSender));
+  $www='vbn';}
       $nestedData [1] = $status;
       $nestedData [2] = $ad->title;
       $nestedData [3] = '<span style="font-size:9px">' . mb_strimwidth($ad->message, 0, 30, "...") . '</span>';
@@ -12904,8 +12961,9 @@ class Controller extends WebController
       $nestedData [11] = ($ad->updated_at) ? $ad->updated_at->toDateTimeString() : $ad->created_at->toDateTimeString();
       $nestedData [12] = $ad->id;
       $nestedData [13] = $qnt;
-      $nestedData [14] = $ad->id;
+      $nestedData [14] = $www;
       $nestedData [16] = 'second3';
+      $nestedData [17] = $www ;
       $data [] = $nestedData;
     }
     /*

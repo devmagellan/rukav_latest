@@ -307,7 +307,7 @@
                                                 <th>Коментарии</th>
                                                 <th>Дата послед. измен.</th>
                                                 <th>ID</th>
-                                                <th>Кол-во об</th> <th>Log Link</th>
+                                                <th>Кол-во об</th><th>www</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -330,8 +330,8 @@
                                                 <th>Дата послед. измен.</th>
                                                 <th>ID</th>
 
-                                                <th>Кол-во об</th>
-                                                <th>Log Link</th>
+                                                <th>Кол-во об</th><th>www</th>
+
                                             </tr>
                                             </tfoot>
                                         </table>
@@ -756,8 +756,7 @@
                         null,
                         null,
                         null,
-                        null,null,
-                      { "visible": false }//The last column will be invisible
+                        null,null,null
                     ],
 
                 });
