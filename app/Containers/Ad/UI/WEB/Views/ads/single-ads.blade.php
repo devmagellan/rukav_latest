@@ -475,6 +475,7 @@ ul.slickslide li img, .slick-dots button img {
         <div class="col-md-6">
           <?
           $languageFilterValue= json_decode($ad->language_filter);?>
+		  @if($languageFilterValue)
           @foreach($languageFilterValue as $key=>$value)
           @if(count($languageFilterValue)==1 && $key==0)
 
@@ -485,6 +486,7 @@ ul.slickslide li img, .slick-dots button img {
                 {{$value}}
           @endif
           @endforeach
+		  @endif
         </div>
       </div>
 
