@@ -1,7 +1,7 @@
 @extends('adminpanel::layouts.app_admin')
 
 @section('styles')
-<body class="scrollbar-external_wrapper">
+
   <link rel="stylesheet" href="/css/style.css" />
 
 
@@ -10,144 +10,6 @@
   <link rel="stylesheet" href="/css/nestable.css" />
 
   <link rel="stylesheet" media="screen, print" href="/templates/smartadmin/css/formplugins/select2/select2.bundle.css">
-
-  <style type="text/css">
-    /*************** SCROLLBAR BASE CSS ***************/
-
-    .scroll-wrapper {
-      overflow: hidden !important;
-      padding: 0 !important;
-      position: relative;
-    }
-
-    .scroll-wrapper > .scroll-content {
-      border: none !important;
-      box-sizing: content-box !important;
-      height: auto;
-      left: 0;
-      margin: 0;
-      max-height: none;
-      max-width: none !important;
-      overflow: scroll !important;
-      padding: 0;
-      position: relative !important;
-      top: 0;
-      width: auto !important;
-    }
-
-    .scroll-wrapper > .scroll-content::-webkit-scrollbar {
-      height: 0;
-      width: 0;
-    }
-
-    .scroll-element {
-      display: none;
-    }
-    .scroll-element, .scroll-element div {
-      box-sizing: content-box;
-    }
-
-    .scroll-element.scroll-x.scroll-scrollx_visible,
-    .scroll-element.scroll-y.scroll-scrolly_visible {
-      display: block;
-    }
-
-    .scroll-element .scroll-bar,
-    .scroll-element .scroll-arrow {
-      cursor: default;
-    }
-
-    .scroll-textarea {
-      border: 1px solid #cccccc;
-      border-top-color: #999999;
-    }
-    .scroll-textarea > .scroll-content {
-      overflow: hidden !important;
-    }
-    .scroll-textarea > .scroll-content > textarea {
-      border: none !important;
-      box-sizing: border-box;
-      height: 100% !important;
-      margin: 0;
-      max-height: none !important;
-      max-width: none !important;
-      overflow: scroll !important;
-      outline: none;
-      padding: 2px;
-      position: relative !important;
-      top: 0;
-      width: 100% !important;
-    }
-    .scroll-textarea > .scroll-content > textarea::-webkit-scrollbar {
-      height: 0;
-      width: 0;
-    }
-
-
-
-
-    .scrollbar-external_wrapper {
-      height: 450px !important;
-      position: relative;
-      width: auto !important;
-    }
-    .scrollbar-external {
-      height: 600px;
-      overflow: auto;
-      width: 90%;
-      left:10px;
-    }
-
-    /******************* EXTERNAL SCROLLBAR *******************/
-
-    .external-scroll_x,
-    .external-scroll_y {
-      border: solid 1px #9999fc;
-      cursor: pointer;
-      display: none;
-      position: absolute;
-    }
-
-    .external-scroll_x.scroll-scrollx_visible {
-      display: block;
-      height: 10px;
-      left: 0;
-      top: 410px;
-      width: 200px;
-    }
-
-    .external-scroll_y.scroll-scrolly_visible {
-      display: block;
-      height: 200px;
-      left: 610px;
-      top: 0;
-      width: 10px;
-    }
-
-    .external-scroll_x div,
-    .external-scroll_y div
-    {
-      height: 100%;
-      left: 0;
-      top: 0;
-      position: absolute;
-      width: 100%;
-    }
-
-    .external-scroll_x .scroll-bar,
-    .external-scroll_y .scroll-bar {
-      background: #9999fc;
-      z-index: 12;
-    }
-
-    .external-scroll_x .scroll-bar {
-      width: 100px;
-    }
-    .external-scroll_y .scroll-bar {
-      height: 100px;
-    }
-
-  </style>
 
     <style>
 
@@ -164,6 +26,7 @@
      div.container {
         min-width: 980px;
         margin: 0 auto;
+       z-index:999;
       }
 
       table.dataTable th, table.dataTable td {
@@ -173,16 +36,13 @@
       table.dataTable {
         table-layout: fixed;
       }
-      tfoot tr{
-        color:black !important;
-      }
 
 
 
 
 
 
-
+/*
        #dt-basic-example_filter{
             display:none;
         }
@@ -209,15 +69,9 @@
 
     table.dataTable.fixedHeader-floating {
       display: none !important; !* Hide the fixedHeader since we dont need it*!
-    }
+    }*/
 
-    .FixedHeader_Header{
-      position: fixed;
-      top: 50px !important;
-      left: -3.65625px;
-      z-index: 104;
-      width: 1740px;
-    }
+
     .dataTables_scrollHeadInner{
       margin-left: 0px;
       width: 100% !important;
@@ -227,24 +81,6 @@
       margin-right: 1px;
       background: white;
       z-index: 1000;
-      left:84px;
-    }
-
-    .FixedHeader_Cloned{
-      position: fixed;
-      top: 50px !important;
-      left: -3.65625px;
-      z-index: 104;
-      width: 1740px;
-    }
-    .dataTables_scrollFoot{
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      background-color: red;
-      color: white;
-      text-align: center;
       left:84px;
     }
 
@@ -314,7 +150,7 @@
 
     $main_rubrics=Apiato::call('Site@GetProductCategoriesByParentIdAction',[0], [0]);
     ?>
-    <!--div class="modal modal-alert fade" id="example-modal-alert" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal modal-alert fade" id="example-modal-alert" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -332,10 +168,10 @@
                 </div>
             </div>
         </div>
-    </div-->
+    </div>
 
     <!-- Modal Large -->
-    <!--div class="modal fade" id="default-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="default-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -370,9 +206,9 @@
                 </div>
             </div>
         </div>
-    </div-->
+    </div>
 
-    <!--div class="modal fade" id="default-example-modal-rest" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="default-example-modal-rest" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -425,9 +261,9 @@
                 </div>
             </div>
         </div>
-    </div-->
+    </div>
 
-    <!--div class="modal fade" id="default-example-modal-photos" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="default-example-modal-photos" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -445,7 +281,7 @@
                 </div>
             </div>
         </div>
-    </div-->
+    </div>
 
 
     <div class="row">
@@ -460,34 +296,12 @@
                 <button type="button" class="btn btn-default edit" >Прочее редактирование</button>
                 <button type="button" class="btn btn-danger delete" style="display:inline-block" data-toggle="modal" data-target="#example-modal-alert">Удалить</button>
               </div>
+              <div class="container" style="width:90%">
+                <div class="horizontal">
 
-              <div class="container2" >
-
-             {{--   <table id="example" class="table table-hover table-bordered table-condensed table-striped">
-                  <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Salary</th>
-                  </tr>
-                  </thead>
-                  <tfoot>
-                  <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Salary</th>
-                  </tr>
-                  </tfoot>
-                </table>--}}
-
-                <!--div class="horizontal">
-
-                </div-->
+                </div>
                 <!-- datatable start -->
-
-         <table id="dt-basic-example" class="table table-hover table-bordered table-condensed table-striped ">
+                <table id="dt-basic-example" class="table table-hover table-bordered table-condensed table-striped <!--datatable mdl-data-table dataTable table table-bordered table-hover table-striped w-100-->">
                   <thead class="bg-highlight">
                   <tr>
                     <th style="width:8px;"></th>
@@ -531,9 +345,6 @@
                   </tr>
                   </tfoot>
                 </table>
-               </div>
-
-
                 <!-- datatable end -->
               </div>
             </div>
@@ -541,16 +352,9 @@
         </div>
       </div>
     </div>
-      <div class="external-scroll_x">
-        <div class="scroll-element_outer">
-          <div class="scroll-element_size"></div>
-          <div class="scroll-element_track"></div>
-          <div class="scroll-bar"></div>
-        </div>
-      </div>
 
 
-</body>
+
 @endsection
 
 @section('scripts')
@@ -883,10 +687,10 @@
       });*/
 
 
+
       var opts=
         {
 
-          //"scrollX": true,
           "ajax":{
             url :  '{{ route('serverSide') }}',
             type : "GET",
@@ -900,6 +704,21 @@
               console.log('error',data);
             }
           },
+         /*"searching": true,
+          "ordering": true,
+          "processing": true,
+          "orderCellsTop": true,
+          "stateSave": true,
+          "info": true,
+          "scrollX": true,
+          "paging": true, // Allow data to be paged
+          "lengthChange": true,*/
+          // aoColumnDefs allow us to specify which column we want to make
+          // sortable or column's alignment
+          "aoColumnDefs": [
+            { 'bSortable': false, 'aTargets': [0] }    ,
+            { className: "dt-center", "aTargets": [0,1,2,3] },
+          ],
           "columns": [
             { "bSearchable": false, 'aTargets': [0,1] },
             null,
@@ -915,17 +734,31 @@
             null,
             null,null,null
           ],
-
           //retrieve: true,
           displayLength: 100,
           stateSave: true,
           colResize: {
-            "scrollX": true,
+           /* "info": true,
+            "searching": true,
+            "ordering": true,
+            "processing": true,
+            "orderCellsTop": true,
+            "stateSave": true,
+            //"scrollX": true,
+            "paging": true, // Allow data to be paged
+            "lengthChange": true,*/
             "fixedHeader": {
-              headerOffset: 40,
-              "scrollX": true,
+              //"headerOffset": "180px",
               "bottom": true,
-              top:true,
+             // "info": true,
+              /*"searching": true,
+              "ordering": true,
+              "processing": true,
+              "orderCellsTop": true,
+              "scrollX": true,
+              "stateSave": true,
+              "paging": true, // Allow data to be paged
+              "lengthChange": true,
               "initComplete": function(settings, json){
 
                 $('.dataTables_scrollBody').on('scroll',function(){
@@ -946,7 +779,7 @@
 
                   $('.dataTables_scrollHeadInner').css({"top" : header_pos});
                 });
-              }
+              }*/
             },
           },
           dom: 'Jrtip',
@@ -958,23 +791,20 @@
 
 
 
-      var dt = $('#dt-basic-example').DataTable( opts );
+      var dataTable = $('#dt-basic-example').DataTable( opts );
 
 
-      var colResize = dt.settings()[0].colResize;
+      var colResize = dataTable.settings()[0].colResize;
       var fixedHeader = colResize.dom.fixedHeader;
       console.log(colResize);
       console.log(fixedHeader);
-     dt.on('colResizeInitCompleted', function(e, obj){
+      dataTable.on('colResizeInitCompleted', function(e, obj){
         colResize = obj;
         fixedHeader = obj.dom.fixedHeader;
 
         console.log(colResize);
         console.log(fixedHeader);
       });
-
-
-
       //dataTable.ajax.url('{{route('serverSide',['group_id'=>':group_id'])}}').load();
       //dataTable.draw();
       $('#button').on('click',  function () {
@@ -986,8 +816,8 @@
         /*
          * Change the URL of dataTable and call ajax to load new data
          */
-        //dataTable.ajax.url(targetUrl).load();
-        //dataTable.draw();
+        dataTable.ajax.url(targetUrl).load();
+        dataTable.draw();
       } );
 
 
@@ -1210,7 +1040,6 @@
     }
 
 
-
     $(document).ready(function () {
       var $horizontal = $('.horizontal');
       var startPosition = $horizontal.position().left;
@@ -1223,17 +1052,8 @@
         });
       });
     });
-    jQuery(document).ready(function(){
-      jQuery('.scrollbar-external').scrollbar({
-        "autoScrollSize": false,
-        "scrollx": $('.external-scroll_x'),
-        //"scrollx": $('.horizontal'),
-        //"scrolly": $('.external-scroll_y')
-      });
-    });
+
 
   </script>
 
-
 @endsection
-

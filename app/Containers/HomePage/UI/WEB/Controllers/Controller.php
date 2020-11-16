@@ -234,7 +234,6 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
 
 	public function search(GetAllHomePagesRequest $request){
 
-
   $data['properties']=$this->getMainProperties($request);
   $data['categoriesOnlyRoot'] = $data['properties']->categories->where('parent_id', 0);
   $data['filterDeals']=\App\Containers\Filter\Models\FilterDeals::get();
@@ -257,18 +256,46 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
           return $currentPage;
       });
 
-      '';
-      $q= \App\Containers\Ad\Models\Ad::with('pictures')->where(function ($query) use($request) {
+
+
+    $ql= \App\Containers\Ad\Models\Ad::with(['pictures','validFilter'])
+      ->where(function ($query) use($request) {
+        $query->where('message', 'like', '%' . $request->input('search_string') . '%')
+          ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
+      })
+
+    ->orWhere(function ($query) use($request) {
+
+      $query->whereHas('validFilter', function ($query2) use ($request) {
+        $query2->where('value', 'like', '%' . $request->input('search_string') . '%');
+      });
+    })
+      ->where(function ($query) use($request) {
+        $query->where('message', 'like', '%' . $request->input('rubric_search') . '%')
+          ->orWhere('title', 'like', '%' . $request->input('rubric_search') . '%');
+      })
+
+      ->where('active',1);
+
+
+
+      $q= \App\Containers\Ad\Models\Ad::with(['pictures','validFilter'])/*->where(function ($query) use($request) {
           $query->where('message', 'like', '%' . $request->input('search_string') . '%')
               ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
-      })
-          ->where(function ($query) use($request) {
+      })*/
+        ->where(function ($query) use($request) {
+
+          $query->whereHas('validFilter', function ($query2) use ($request) {
+            $query2->where('value', 'like', '%' . $request->input('search_string') . '%');
+          });
+            })
+        /*  ->where(function ($query) use($request) {
               $query->where('message', 'like', '%' . $request->input('rubric_search') . '%')
                   ->orWhere('title', 'like', '%' . $request->input('rubric_search') . '%');
-          })
+          })*/
 
 
-          ->where('active',1);
+          /*->where('active',1)*/;
 
     	$uri = $_SERVER["REQUEST_URI"];
 $url_components = parse_url($uri);
@@ -325,6 +352,7 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
   })->where(function ($query) use($request){
             $query->where('message', 'like', '%' . $request->input('search_string') . '%')
                 ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
+
         })->where('city', 'like', '%' . $request->input('city') . '%')
                   ->where(function($query) use ($administrative,$uk_only)  {
                       if(isset($administrative)&&$administrative!=0 && $uk_only=="checked") {
@@ -337,12 +365,36 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
 
 
 
-            ->where('active',1)
+           ->where('active',1)
 
 
           ->paginate(10);
 
+    $messages=$ql->where(function ($query) use($from,$to) {
+      if(!empty($from) && !empty($to)){
+        $query->where('price','>=',$from)
+          ->where('price','<=',$to);
+      }
+    })/*->where(function ($query) use($request){
+      $query->where('message', 'like', '%' . $request->input('search_string') . '%')
+        ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
 
+    })*/->where('city', 'like', '%' . $request->input('city') . '%')
+      ->where(function($query) use ($administrative,$uk_only)  {
+        if(isset($administrative)&&$administrative!=0 && $uk_only=="checked") {
+          $query->where('administrative',$administrative);
+        }
+        elseif($uk_only=="checked"){
+          $query->whereIn('administrative',['England','Nothern Irland','Scotland','Wales']);
+        }
+      })
+
+
+
+      ->where('active',1)
+
+
+      ->paginate(10);
 /*
 
 
