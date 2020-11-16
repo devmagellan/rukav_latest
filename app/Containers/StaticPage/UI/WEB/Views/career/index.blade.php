@@ -82,7 +82,7 @@
                     <span id="firstName" class="errorBlock"></span>
                   </div>
                   <div class="col-md-11">
-                    <input type="text" name="sender_email" placeholder="Ваш email 4"> <span class="required">*</span>
+                    <input type="text" name="sender_email" placeholder="Ваш email"> <span class="required">*</span>
                     <span id="lastName" class="errorBlock"></span>
                   </div>
                   <div class="col-md-11" style="margin-top:15px">
@@ -98,7 +98,7 @@
 
                 </div>
                 <div class="col-md-11">
-                  <textarea name="text" id="msgr_input" placeholder="Текст сообщения"> </textarea>
+                  <textarea name="text" id="msgr_input" placeholder="Дополнительная информация"></textarea>
                   <span id="lastName" class="errorBlock"></span>
                 </div>
               </div>
@@ -108,7 +108,7 @@
               <div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6">
-                  <button class="contact_submit" type="submit"  >Отправить сообщение
+                  <button class="contact_submit" type="submit"  >Отправить
                   </button>
                 </div>
 

@@ -69,7 +69,7 @@
                     <span id="firstName" class="errorBlock"></span>
                   </div>
                   <div class="col-md-11">
-                    <input type="text" name="sender_email" placeholder="Ваш email 6"> <span class="required">*</span>
+                    <input type="text" name="sender_email" placeholder="Ваш email"> <span class="required">*</span>
                     <span id="lastName" class="errorBlock"></span>
                   </div>
                   <div class="col-md-11" style="margin-top:15px">

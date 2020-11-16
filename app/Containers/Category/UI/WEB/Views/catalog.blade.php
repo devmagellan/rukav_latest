@@ -12,6 +12,7 @@
     .flag > svg {
       position:absolute;
       background-size: 20px 30px;
+	  height: auto!important;
     }
   </style>
 
@@ -134,7 +135,7 @@
 
 
           <div class="col-sm-4 d-none d-sm-block"><button>Объявления </button></div>
-			if(isset($data) )
+			@if(isset($data) )
             <?
 
             $currentFilters=\App\Containers\Filter\Models\CategoryFilter::with('filter')->where('category_id',$data['currentCat']->id)->get();
@@ -154,7 +155,7 @@
                 </div>
             @endforeach
 
-          @if(isset($currentFilters) && count($currentFilters)<3 && count($currentFilters)!=0)
+		@if(isset($currentFilters) && count($currentFilters)<3 && count($currentFilters)!=0)
             @for($i=1;$i<=3-count($currentFilters)-1;$i++)
               <div class="col-md-2" style="text-align: center"></div>
 
@@ -166,8 +167,8 @@
 
               @else
               <div class="col-md-3" style="text-align: center"><button style="float:right" class="price_sort   @if( Request::get('sort_by_price')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_price')=='high_to_low') high_to_low @else low_to_high @endif">Цена @if( Request::get('sort_by_price')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_price')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
-         @endif
-          @elseif(isset($currentFilters) && count($currentFilters)==3)
+			  @endif
+        @elseif(isset($currentFilters) && count($currentFilters)==3)
 		  <div class="col-md-1" style="text-align: center"><button style="float:right" class="price_sort @if( Request::get('sort_by_price')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_price')=='high_to_low') high_to_low @else low_to_high @endif">Цена @if( Request::get('sort_by_price')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_price')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
         @elseif(isset($currentFilters) && count($currentFilters)!=0)
             <div class="col-md-2" style="text-align: center"></div>
@@ -181,9 +182,9 @@
 
                 @else
 			<div class="col-md-3" style="text-align: center"><button style="float:right" class="price_sort @if( Request::get('sort_by_price')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_price')=='high_to_low') high_to_low @else low_to_high @endif">Цена @if( Request::get('sort_by_price')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_price')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
-		@endif
-                @endif
-		@elseif(!isset($currentFilters))
+				@endif
+        @endif
+		@if(!isset($currentFilters))
             @if(isset($age) && $age==1)
               <div class="col-md-3" style="text-align: center"><button style="float:right" class="age_sort   @if( Request::get('sort_by_age')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_age')=='high_to_low') high_to_low @else low_to_high @endif">Возраст @if( Request::get('sort_by_age')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_age')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
             @elseif(isset($payment) && $payment==1)
@@ -191,8 +192,9 @@
 
             @else
 		<div class="col-md-3" style="text-align: center"><button style="float:right" class="price_sort @if( Request::get('sort_by_price')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_price')=='high_to_low') high_to_low @else low_to_high @endif">Цена @if( Request::get('sort_by_price')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_price')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
-@endif
 			@endif
+		@endif
+		@endif
 </div>
 
         @foreach($products as $product)

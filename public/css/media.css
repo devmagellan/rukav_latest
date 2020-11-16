@@ -168,6 +168,31 @@
     }
 }
 @media (max-width: 768px) {
+    .prophile_delete_registration{
+      padding-left: 0!important;
+    }
+    #ModalReg .col-sm-6{
+      padding-left: 4px;
+    }
+  .formModal p{
+    padding-left: 8px;
+  }
+  input[type="radio"] + label:after {
+    left: 5px;
+    top: 10px;
+    width: 8px;
+    height: 8px;
+  }
+  input[type="radio"] + label:before{
+    width: 18px;
+    height: 18px;
+  }
+  input[type="radio"] + label:before {
+    margin-right: 5px!important;
+  }
+  .formModal input[type="radio"] + label{
+    margin-right: 5px!important;
+  }
     .block_main_categories{
         width: 100%!important;
     }
@@ -402,6 +427,9 @@
     .add_advert_block_title{
         font-size: 22px;
         margin-top: 10px;
+    }
+    .sendMessageBox{
+      margin-top: 20px!important;
     }
     .add_advert_block_input1{
         width: 100%;
