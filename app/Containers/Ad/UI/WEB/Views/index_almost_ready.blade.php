@@ -211,13 +211,13 @@
       display: none !important; !* Hide the fixedHeader since we dont need it*!
     }
 
-    .FixedHeader_Header{
-      position: fixed;
-      top: 50px !important;
-      left: -3.65625px;
-      z-index: 104;
-      width: 1740px;
-    }
+.FixedHeader_Header{
+  position: fixed;
+  top: 40px !important;
+  left: -3.65625px;
+  z-index: 104;
+  width: 1740px;
+}
     .dataTables_scrollHeadInner{
       margin-left: 0px;
       width: 100% !important;
@@ -232,7 +232,7 @@
 
     .FixedHeader_Cloned{
       position: fixed;
-      top: 50px !important;
+      top: 40px !important;
       left: -3.65625px;
       z-index: 104;
       width: 1740px;
@@ -314,7 +314,7 @@
 
     $main_rubrics=Apiato::call('Site@GetProductCategoriesByParentIdAction',[0], [0]);
     ?>
-    <!--div class="modal modal-alert fade" id="example-modal-alert" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal modal-alert fade" id="example-modal-alert" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -332,10 +332,10 @@
                 </div>
             </div>
         </div>
-    </div-->
+    </div>
 
     <!-- Modal Large -->
-    <!--div class="modal fade" id="default-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="default-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -370,9 +370,9 @@
                 </div>
             </div>
         </div>
-    </div-->
+    </div>
 
-    <!--div class="modal fade" id="default-example-modal-rest" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="default-example-modal-rest" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -425,9 +425,9 @@
                 </div>
             </div>
         </div>
-    </div-->
+    </div>
 
-    <!--div class="modal fade" id="default-example-modal-photos" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="default-example-modal-photos" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -445,9 +445,9 @@
                 </div>
             </div>
         </div>
-    </div-->
+    </div>
 
-
+    <div class="scrollbar-external" style="top:40px">
     <div class="row">
       <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -1210,7 +1210,7 @@
     }
 
 
-
+/*
     $(document).ready(function () {
       var $horizontal = $('.horizontal');
       var startPosition = $horizontal.position().left;
@@ -1223,11 +1223,11 @@
         });
       });
     });
+*/
     jQuery(document).ready(function(){
       jQuery('.scrollbar-external').scrollbar({
         "autoScrollSize": false,
         "scrollx": $('.external-scroll_x'),
-        //"scrollx": $('.horizontal'),
         //"scrolly": $('.external-scroll_y')
       });
     });
