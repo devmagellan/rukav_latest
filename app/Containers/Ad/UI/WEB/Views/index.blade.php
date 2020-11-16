@@ -504,6 +504,10 @@
                     <th>Дата послед. измен.</th>
                     <th>ID</th>
                     <th>Кол-во об</th><th>www</th>
+                    <th>www</th>
+                    <th>www</th>
+                    <th>www</th>
+                    <th>www</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -527,6 +531,10 @@
                     <th>ID</th>
 
                     <th>Кол-во об</th><th>www</th>
+                    <th>www</th>
+                    <th>www</th>
+                    <th>www</th>
+                    <th>www</th>
 
                   </tr>
                   </tfoot>
@@ -913,6 +921,7 @@
             null,
             null,
             null,
+            null,null,null, null,
             null,null,null
           ],
 
