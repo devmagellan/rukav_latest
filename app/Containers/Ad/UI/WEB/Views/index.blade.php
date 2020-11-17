@@ -94,7 +94,7 @@
         margin: 0 10px;
     }
     .scrollbar-external {
-      
+
       width: 100%;
       left:10px;
     }
@@ -874,7 +874,7 @@
       })
 
       // Setup - add a text input to each footer cell
-/*     $('#dt-basic-example thead tr').clone(true).appendTo('#dt-basic-example thead');
+    $('#dt-basic-example thead tr').clone(true).appendTo('#dt-basic-example thead');
       $('#dt-basic-example thead tr:eq(1) th').each(function(i)
       {
         var title = $(this).text();
@@ -890,13 +890,13 @@
               .draw();
           }
         });
-      });*/
+      });
 
 
       var opts=
         {
-                      "scrollY": '600',
-                    "scrollX": true,
+        "scrollY": '600',
+        "scrollX": true,
           //"scrollX": true,
           "ajax":{
             url :  '{{ route('serverSide') }}',
@@ -1242,9 +1242,9 @@
         //"scrollx": $('.horizontal'),
         //"scrolly": $('.external-scroll_y')
       });
-             
-        
-                           
+
+
+
     });
 
   </script>
