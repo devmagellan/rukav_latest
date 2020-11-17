@@ -18,6 +18,7 @@
       overflow: hidden !important;
       padding: 0 !important;
       position: relative;
+    width: 100%;
     }
 
     .scroll-wrapper > .scroll-content {
@@ -87,14 +88,14 @@
 
 
     .scrollbar-external_wrapper {
-      height: 450px !important;
+      height: 100% !important;
       position: relative;
       width: auto !important;
+        margin: 0 10px;
     }
     .scrollbar-external {
-      height: 600px;
-      overflow: auto;
-      width: 90%;
+      
+      width: 100%;
       left:10px;
     }
 
@@ -111,8 +112,8 @@
     .external-scroll_x.scroll-scrollx_visible {
       display: block;
       height: 10px;
-      left: 0;
-      top: 410px;
+        left: 15px;
+        bottom: -20px;
       width: 200px;
     }
 
@@ -198,6 +199,7 @@
 
       #dt-basic-example {
         table-layout: fixed;
+        margin-left: 0px;
       }
       #dt-basic-example td,
       #dt-basic-example th{
@@ -219,37 +221,37 @@
       width: 1740px;
     }
     .dataTables_scrollHeadInner{
-      margin-left: 0px;
-      width: 100% !important;
-      position: fixed;
-      display: block;
-      overflow: hidden;
-      margin-right: 1px;
-      background: white;
-      z-index: 1000;
-      left:84px;
+//      margin-left: 0px;
+//      width: 100% !important;
+//      position: fixed;
+//      display: block;
+//      overflow: hidden;
+//      margin-right: 1px;
+//      background: white;
+//      z-index: 1000;
+//      left:84px;
     }
 
     .FixedHeader_Cloned{
       position: fixed;
-      top: 50px !important;
+      top: 40px !important;
       left: -3.65625px;
       z-index: 104;
       width: 1740px;
     }
     .dataTables_scrollFoot{
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      background-color: red;
-      color: white;
-      text-align: center;
-      left:84px;
+//      position: fixed;
+//      left: 0;
+//      bottom: 0;
+//      width: 100%;
+//      background-color: red;
+//      color: white;
+//      text-align: center;
+//      left:84px;
     }
 
     .dataTables_scrollBody{
-      padding-top: 60px;
+//      padding-top: 60px;
     }
 
         .sticky {
@@ -487,7 +489,7 @@
                 </div-->
                 <!-- datatable start -->
 
-         <table id="dt-basic-example" class="table table-hover table-bordered table-condensed table-striped ">
+         <table id="dt-basic-example" class="table table-hover table-bordered table-condensed table-striped " >
                   <thead class="bg-highlight">
                   <tr>
                     <th style="width:8px;"></th>
@@ -893,7 +895,8 @@
 
       var opts=
         {
-
+                      "scrollY": '600',
+                    "scrollX": true,
           //"scrollX": true,
           "ajax":{
             url :  '{{ route('serverSide') }}',
@@ -1239,6 +1242,9 @@
         //"scrollx": $('.horizontal'),
         //"scrolly": $('.external-scroll_y')
       });
+             
+        
+                           
     });
 
   </script>
