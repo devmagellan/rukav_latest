@@ -1,4 +1,4 @@
-@extends('adminpanel::layouts.app_admin')
+@extends('adminpanel::layouts.app_admin_ads')
 
 @section('styles')
 <body class="scrollbar-external_wrapper">
@@ -868,7 +868,7 @@
               .draw();
           }
         });
-      }); 
+      });
 
 
       var opts=
@@ -884,7 +884,7 @@
                     "autoWidth": true,
                     "processing": true,  // Show processing
                     "stateSave": true,
-                    "serverSide": true, 
+                    "serverSide": true,
           "ajax":{
             url :  '{{ route('serverSide') }}',
             type : "GET",
@@ -932,7 +932,7 @@
                     "autoWidth": true,
                     "processing": true,  // Show processing
                     "stateSave": true,
-                    "serverSide": true, 
+                    "serverSide": true,
               top:true,
               "initComplete": function(settings, json){
 
@@ -954,8 +954,8 @@
 
                   $('.dataTables_scrollHeadInner').css({"top" : header_pos});
                 });
-				
-			
+
+
               }
             },
           },
