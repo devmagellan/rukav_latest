@@ -316,7 +316,7 @@
 
     $main_rubrics=Apiato::call('Site@GetProductCategoriesByParentIdAction',[0], [0]);
     ?>
-    <div class="modal modal-alert fade" id="example-modal-alert" tabindex="-1" role="dialog" aria-hidden="true">
+    <!--div class="modal modal-alert fade" id="example-modal-alert" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -334,10 +334,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div-->
 
     <!-- Modal Large -->
-    <div class="modal fade" id="default-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <!--div class="modal fade" id="default-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -372,9 +372,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div-->
 
-    <div class="modal fade" id="default-example-modal-rest" tabindex="-1" role="dialog" aria-hidden="true">
+    <!--div class="modal fade" id="default-example-modal-rest" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -427,9 +427,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div-->
 
-    <div class="modal fade" id="default-example-modal-photos" tabindex="-1" role="dialog" aria-hidden="true">
+    <!--div class="modal fade" id="default-example-modal-photos" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -447,7 +447,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div-->
 
 
     <div class="row">
@@ -457,7 +457,7 @@
           <div class="panel-container show">
             <div class="panel-content">
 
-              <div id="stickEdits">
+              <div id="stickEdits" style="display:none">
                 <button type="button" class="btn btn-primary edit_rubrics" >Редактировать рубрики</button>
                 <button type="button" class="btn btn-default edit" >Прочее редактирование</button>
                 <button type="button" class="btn btn-danger delete" style="display:inline-block" data-toggle="modal" data-target="#example-modal-alert">Удалить</button>
@@ -465,6 +465,28 @@
 
               <div class="container2" >
 
+             {{--   <table id="example" class="table table-hover table-bordered table-condensed table-striped">
+                  <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Salary</th>
+                  </tr>
+                  </thead>
+                  <tfoot>
+                  <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Salary</th>
+                  </tr>
+                  </tfoot>
+                </table>--}}
+
+                <!--div class="horizontal">
+
+                </div-->
                 <!-- datatable start -->
 
          <table id="dt-basic-example" class="table table-hover table-bordered table-condensed table-striped " >
@@ -487,7 +509,7 @@
                     <th>www</th>
                     <th>www</th>
                     <th>www</th>
-
+                    <th>www</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -514,7 +536,7 @@
                     <th>www</th>
                     <th>www</th>
                     <th>www</th>
-
+                    <th>www</th>
 
                   </tr>
                   </tfoot>
@@ -852,7 +874,7 @@
       })
 
       // Setup - add a text input to each footer cell
-     $('#dt-basic-example thead tr').clone(true).appendTo('#dt-basic-example thead');
+/*     $('#dt-basic-example thead tr').clone(true).appendTo('#dt-basic-example thead');
       $('#dt-basic-example thead tr:eq(1) th').each(function(i)
       {
         var title = $(this).text();
@@ -860,15 +882,15 @@
 
         $('input', this).on('keyup change', function()
         {
-          if (dt.column(i).search() !== this.value)
+          if (dataTable.column(i).search() !== this.value)
           {
-            dt
+            dataTable
               .column(i)
               .search(this.value)
               .draw();
           }
         });
-      }); 
+      }); */
 
 
       var opts=
@@ -912,7 +934,7 @@
             null,
             null,
             null,null,null, null,
-            null,null
+            null,null,null
           ],
 
           //retrieve: true,
@@ -985,8 +1007,8 @@
 
 
 
-      dt.ajax.url('{{route('serverSide',['group_id'=>':group_id'])}}').load();
-      dt.draw();
+      //dataTable.ajax.url('{{route('serverSide',['group_id'=>':group_id'])}}').load();
+      //dataTable.draw();
       $('#button').on('click',  function () {
         var resourceURL = "{{route('serverSide',['group_id'=>':group_id'])}}";
         var group_id = 1;
@@ -996,8 +1018,8 @@
         /*
          * Change the URL of dataTable and call ajax to load new data
          */
-        dt.ajax.url(targetUrl).load();
-        dt.draw();
+        //dataTable.ajax.url(targetUrl).load();
+        //dataTable.draw();
       } );
 
 
