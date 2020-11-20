@@ -12,6 +12,15 @@ $router->get('/private_cabinet/{type?}', [
 ]);
 
 
+$router->get('/private_cabinet/screen/{type}', [
+  'as' => 'web_privatecabinet_index',
+  'uses'  => 'Controller@show',
+  'middleware' => [
+    'AdminCreatedConfirmation',
+    'auth:web',
+
+  ],
+]);
 
 
 
