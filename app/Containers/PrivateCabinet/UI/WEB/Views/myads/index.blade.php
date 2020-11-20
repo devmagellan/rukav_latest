@@ -166,7 +166,7 @@
                       Добавлено
                     </p>
                     <p class="choosen_info">
-                      {{$ad->created_at}}
+                      {{\Carbon\Carbon::createFromTimeStamp(strtotime($ad->created_at))->locale('ru')->isoFormat('Do MMMM YY, h:mm')}}
                     </p>
                   </div>
                   <div class="choosen_subitem d-flex flex-column">
