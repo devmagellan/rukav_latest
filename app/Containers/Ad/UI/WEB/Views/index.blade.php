@@ -11,6 +11,8 @@
 
   <link rel="stylesheet" media="screen, print" href="/templates/smartadmin/css/formplugins/select2/select2.bundle.css">
 
+
+
   <style type="text/css">
     /*************** SCROLLBAR BASE CSS ***************/
 
@@ -280,7 +282,36 @@
       top: 50px;
       z-index:999;
     }
-
+.bottom{
+          width: 100%;
+                      }
+    #stickEdits #dt-basic-example_paginate{
+            top: 14px;
+            margin-left: 14px;
+            position: relative;
+    }
+                      .show{
+                      opacity: 1!important;
+                      }
+                      .modal-backdrop{
+                      background-color: rgba(0,0,0,0.4)!important;
+                      }
+                      .bottom .dataTables_paginate.paging_simple_numbers li{
+                        padding: 0!important;
+                      margin: 0;
+                      }
+                      .modal.fade .modal-dialog {
+                          -webkit-transition: initial!important;
+                          -o-transition: initial!important;
+                          transition: initial!important;
+                          -webkit-transform: initial!important;
+                          -ms-transform: initial!important;
+                          -o-transform: initial!important;
+                          transform: initial!important;
+                      }
+                      #dt-basic-example_length{
+                        margin: 10px 0;
+                      }
     </style>
 @endsection
 
@@ -458,6 +489,7 @@
             <div class="panel-content">
 
               <div id="stickEdits">
+                <a htef="" OnClick="history.back();" style="background: #886ab5; color: #fff;" class="btn btn-primary edit_rubrics">Назад</a>
                 <button type="button" class="btn btn-primary edit_rubrics" >Редактировать рубрики</button>
                 <button type="button" class="btn btn-default edit" >Прочее редактирование</button>
                 <button type="button" class="btn btn-danger delete" style="display:inline-block" data-toggle="modal" data-target="#example-modal-alert">Удалить</button>
@@ -484,9 +516,15 @@
                     <th>Дата послед. измен.</th>
                     <th>ID</th>
                     <th>Кол-во об</th><th>www</th>
-                    <th>www</th>
-                    <th>www</th>
-                    <th>www</th>
+                    <th>Цена/Возраст</th>
+                    <th>Срок</th>
+                    <th>expired_sent</th>
+					<th>в поиске</th>
+					<th>просмотры</th>
+					<th>адрес</th>
+					<th>языки</th>
+					<th>адм.не подтвержден</th>
+					<th>статус польз.</th>
 
                   </tr>
                   </thead>
@@ -511,9 +549,15 @@
                     <th>ID</th>
 
                     <th>Кол-во об</th><th>www</th>
-                    <th>www</th>
-                    <th>www</th>
-                    <th>www</th>
+                    <th>Цена/Возраст</th>
+                    <th>Срок</th>
+                    <th>expired_sent</th>
+					<th>в поиске</th>
+					<th>просмотры</th>
+					<th>адрес</th>
+					<th>языки</th>
+					<th>адм.не подтвержден</th>
+					<th>статус польз.</th>
 
 
                   </tr>
@@ -550,6 +594,10 @@
 
   <script src="/js/nestable.js"></script>
   <script src="/js/page-nestable.js"></script>
+                      
+                   
+                      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   <script>
     // Class definition
@@ -873,7 +921,7 @@
 
       var opts=
         {
-        "scrollY": '600',
+        "scrollY": '500',
         "scrollX": true,
 		"paging": true, // Allow data to be paged
                     "lengthChange": true,
@@ -913,11 +961,14 @@
             null,
             null,null,null, null,
             null,null
+			,null,null
+			,null
+			,null,null,null
           ],
 
           //retrieve: true,
           displayLength: 100,
-          stateSave: true,
+          //stateSave: true,
           colResize: {
             "scrollX": true,
             "fixedHeader": {
@@ -931,7 +982,7 @@
                     "info": true,
                     "autoWidth": true,
                     "processing": true,  // Show processing
-                    "stateSave": true,
+                    //"stateSave": true,
                     "serverSide": true,
               top:true,
               "initComplete": function(settings, json){
@@ -959,7 +1010,8 @@
               }
             },
           },
-          dom: 'Jrtip',
+         dom: '<"top"Jflrtp<"clear">><"bottom"ip>',
+//       dom: '<"top"Jfl<"clear">>rt<"bottom"ip>',
           order: [[1, 'asc']]
 
 

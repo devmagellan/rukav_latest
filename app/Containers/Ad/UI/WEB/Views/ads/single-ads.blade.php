@@ -439,10 +439,10 @@ ul.slickslide li img, .slick-dots button img {
     $currentFilters=\App\Containers\Filter\Models\CategoryFilter::with('filter')->where('category_id',$ad->category_id)->get();
 	$sliceFilters=array_slice($currentFilters->toArray(), 1);
 	if(count($currentFilters)>0){
-    ?>
+    ?><hr>
 	<div class="row" style="margin-top:30px;">
 
-	<div class="col-md-6">
+	<div class="col-md-5">
 	@foreach($sliceFilters as $filter)
 	<div class="row">
 	<div class="col-md-6">
@@ -460,19 +460,22 @@ ul.slickslide li img, .slick-dots button img {
 	@endforeach
 	</div>
 
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div class="row">
-        <div class="col-md-6">
-          <h6 style="color:grey">Страна Резиденции :</h6>
+        <div class="col-md-5">
+          <h6 style="color:grey;margin-left:-20px">Страна Резиденции:</h6>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
+		<span style="margin-left:-58px">
           {{\App\Containers\PrivateCabinet\Services\PrivateCabinetService::code_to_country($ad->getSender->country)}}
+		  </span>
         </div></div>
       <div class="row">
-        <div class="col-md-6">
-          <h6 style="color:grey">Язык :</h6>
+        <div class="col-md-4">
+          <h6 style="color:grey;float:right">Язык:</h6>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
+		<span style="margin-left:-18px">
           <?
           $languageFilterValue= json_decode($ad->language_filter);?>
 		  @if($languageFilterValue)
@@ -487,6 +490,7 @@ ul.slickslide li img, .slick-dots button img {
           @endif
           @endforeach
 		  @endif
+		  </span>
         </div>
       </div>
 
@@ -494,7 +498,7 @@ ul.slickslide li img, .slick-dots button img {
 
 	</div>
 	<?}?>
-
+<hr>
 	<div class="row product_description" style="word-wrap: break-word;">
       <div class="col-sm-12">
         <h4>Описание</h4>

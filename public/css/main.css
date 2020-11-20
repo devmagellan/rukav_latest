@@ -205,7 +205,6 @@ a.search_all{
     margin-top: 15px;
 }
 a.search_all:hover{
-    transform: translateY(-2px);
     margin-left: 0;
 }
 .cart_item-last {
@@ -327,13 +326,13 @@ footer p{
     text-align: center;
     margin-right: 3px;
     transition: all .2s ease-out;
+    line-height: 36px;
 }
 .socials li:last-child a{
     background: #000;
 }
 .socials li a:hover{
     box-shadow: 0 0.22rem 0.525rem rgba(59,89,152,.4), 0 0.0625rem 0.385rem rgba(59, 89, 152, 0.54);
-    transform: translateY(-2px);
 }
 .socials li:last-child a:hover{
     box-shadow: 0 0.22rem 0.525rem rgba(0,0,0,.4), 0 0.0625rem 0.385rem rgba(0, 0, 0, 0.54);
@@ -366,7 +365,6 @@ footer ul.menu_footer li a:hover{
 }
 .link_footer:hover{
     box-shadow: 0 0.22rem 0.525rem rgba(0,0,0,.4), 0 0.0625rem 0.385rem rgba(0, 0, 0, 0.54);
-    transform: translateY(-2px);
 }
 footer hr{
     margin-top: 50px;
@@ -2619,7 +2617,6 @@ padding-left: 30px;
   }
   .choosen_button:hover{
     box-shadow: 0 0.22rem 0.525rem rgba(162,105,247,.4), 0 0.0625rem 0.385rem rgba(162, 105, 247, 0.54);
-    transform: translateY(-2px);
   }
 
   .prophile_save{

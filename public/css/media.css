@@ -715,11 +715,11 @@
         padding-right: 0;
         padding-left: 0;
         border: 0;
-        height: 100%;
     }
     ul.category_dropdown_sub_list h6{
         margin-right: 15px;
         text-align: right;
+      padding-left: 50px;
     }
     .category_dropdown_sub_list .arrow_back_end{
         position: absolute;
@@ -730,6 +730,10 @@
         left: 0;
         width: 100%;
         height: 114%;
+    }
+    .category_dropdown{
+      min-height: initial!important;
+      overflow: hidden;
     }
 }
 
@@ -778,6 +782,9 @@
     .prophile_hours_text{
         font-size: 12px;
     }
+  .socials li a{
+    line-height: 26px;
+  }
 }
 
 @media (max-width: 576px) {

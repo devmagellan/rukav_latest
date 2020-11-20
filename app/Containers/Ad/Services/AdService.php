@@ -91,10 +91,7 @@ class AdService
               $filePath = Storage::disk('public')->put('', $file);
 
             $this->createPicture($filePath, $adId);
-            $img = Image::make(storage_path('app/public/messages/'.$filePath));
-            /* insert watermark at bottom-right corner with 10px offset */
-            $img->insert(public_path('img/logo.png'), 'bottom-right', 15, 15);
-            $img->save(storage_path('app/public/messages/'.$filePath));
+            
             \Log::info('ImgWithLogo' . $filePath);
             \Log::info('filepath1' . $file);
               \Log::info('filepath2' . $filePath);
@@ -109,6 +106,11 @@ class AdService
               if (\File::copy($oldPath, $middlePath)) {
                   \Log::info('filepath2' . $filePath);
                 $this->createThumbnail($middlePath, 800, 800);
+				
+				$img = Image::make(storage_path('app/public/messages/'.'middle_' .$filePath));
+            /* insert watermark at bottom-right corner with 10px offset */
+            $img->insert(public_path('img/logo.png'), 'bottom-right', 15, 15);
+            $img->save(storage_path('app/public/messages/'.'middle_' .$filePath));
               }
 
 

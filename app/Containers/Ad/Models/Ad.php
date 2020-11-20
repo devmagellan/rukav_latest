@@ -57,6 +57,12 @@ class Ad extends Model
         return $this->hasOneThrough('App\Domain\Manager\Models\Manager', 'App\Domain\Customer\Models\Customer','user_id','id','addressant','manager_id');
 
     }
+	
+	public function getBusinessAccount(){
+
+        return $this->hasOneThrough('\App\Containers\User\Models\BusinessAccount', '\App\Containers\User\Models\User','id','user_id','sender','id');
+
+    }
 
     public function pictures(){
         return $this->hasMany(\App\Containers\Ad\Models\Picture::class, 'ads_id', 'id');

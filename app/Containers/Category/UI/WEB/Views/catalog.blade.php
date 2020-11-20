@@ -602,8 +602,10 @@ console.log('final=>',url+param)
           .css('background-color', 'white');
 
       });
-      $('.flag').css('display','block')
+      $('.flag').css('display','block');
+      
     });
+
 </script>
 @endsection
 

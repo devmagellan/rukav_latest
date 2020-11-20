@@ -770,6 +770,11 @@ $(this).closest('.add_foto_file_item').remove()
         }
     });
 
+  if(ScreenWidth < 720){
+    console.log($(this).find("ul").height());
+    $(".category_dropdown").height($('.categoryLink.category_link_active').find("ul").height());
+  }
+
     $("#msgr_file").change(function(){
         var filename = $(this).val().replace(/.*\\/, "");
         $(".file_input_span").html(filename);

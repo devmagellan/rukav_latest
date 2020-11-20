@@ -6,6 +6,9 @@
       -moz-box-shadow: 0px 0px 8px 0px rgba(148, 145, 148, 1);
       box-shadow: 0px 0px 8px 0px rgba(148, 145, 148, 1);
     }
+    .product_main_block p{
+      text-indent: 0!important;
+    }
   </style>
   <main class="main">
     <article class="product_main_block">

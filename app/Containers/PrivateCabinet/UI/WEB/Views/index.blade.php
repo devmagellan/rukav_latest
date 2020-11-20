@@ -1315,7 +1315,7 @@
 		  @if(count($favorits)<1)
 			  <br>
               <h3 style="color:grey">Вы еще не добавляли объявления в Избранное</h3>
-			  <div class="choosen_item-wrapper d-flex" style="height:300px"></div>
+			  <div class="choosen_item-wrapper d-flex" style="height:150px"></div>
               @endif
             @foreach($favorits as $favorit)
             <div class="choosen_item-wrapper d-flex" id="favorite_{{$favorit->id}}">
