@@ -234,8 +234,12 @@
 
       $(document).ready(function(){
           $('.triggerSwitch').each(function(indx,element){
+            var message=$(this).parent().parent().find('.customSwitch2_id').val()
+            var state = $(this).is(":checked")
+            console.log('Active or no',state)
               console.log('triggerSwitch',$(element).val())
-              if($(element).val()==1){
+              if($(element).val()==1 && !state){
+                console.log('VAL=>1',message)
                   $(element).parent().find('.slider').trigger('click')
               }
           })
@@ -253,7 +257,7 @@
           $.ajax({
               method: 'POST',
               dataType: 'json',
-              async:true,
+              async:false,
               url: '/ad/message_activity_set',
               data: {message: message,state:state
               },
