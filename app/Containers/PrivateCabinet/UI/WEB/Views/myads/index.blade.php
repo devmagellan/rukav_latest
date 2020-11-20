@@ -135,10 +135,7 @@
           <div class="col-md-12" >
             @if(count($ads)<1)
 				<br>
-              <h3 style="color:grey">Вы еще не подавали объявления</h3>
-            <div class="choosen_item-wrapper d-flex" style="height:300px"></div>
-
-
+              <h3 style="color:grey;margin-top:150px">Вы еще не подавали объявления</h3>
             @endif
             @foreach($ads as $ad)
             <div class="choosen_item-wrapper d-flex">

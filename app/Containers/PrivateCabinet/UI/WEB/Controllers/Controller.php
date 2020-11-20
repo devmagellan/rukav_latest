@@ -91,7 +91,7 @@ class Controller extends WebController
     }
 
     $countrycode = \App\Containers\PrivateCabinet\Services\PrivateCabinetService::code_to_country(\Auth::user()->country);
-    return view('privatecabinet::index', compact('categoriesOnlyRoot', 'ads', 'favorits', 'data', 'toAccountType', 'countrycode'));
+    return view('privatecabinet::my_profile.index', compact('categoriesOnlyRoot', 'ads', 'favorits', 'data', 'toAccountType', 'countrycode'));
   }
 
   public function messagesData(GetAllPrivateCabinetsRequest $request)
