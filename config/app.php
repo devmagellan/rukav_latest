@@ -178,7 +178,8 @@ return [
         Laravolt\Avatar\ServiceProvider::class,
 		VladimirYuldashev\LaravelQueueRabbitMQ\LaravelQueueRabbitMQServiceProvider::class,
         PragmaRX\Firewall\Vendor\Laravel\ServiceProvider::class,
-      \SocialiteProviders\Manager\ServiceProvider::class
+      \SocialiteProviders\Manager\ServiceProvider::class,
+      Maatwebsite\Excel\ExcelServiceProvider::class
     ],
 
     /*
