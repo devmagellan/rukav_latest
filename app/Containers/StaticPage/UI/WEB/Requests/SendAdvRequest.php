@@ -35,7 +35,7 @@ class SendAdvRequest extends Request
           return $body->success;
         }
       },
-      'Sorry, it failed unique_phone validation!'
+      'reCaptcha бязательно для заполнения!'
     );
 
   }
