@@ -223,7 +223,7 @@ var jqxhr = $.getJSON( "https://ipinfo.io", function(response) {
 .done(function() { console.log( "second success" ); })
 .fail(function() { console.log( "error" ); })
 .always(function() { console.log( "complete" ); });
-var cntry=jqxhr.complete(function(response) {  console.log( 'RESPO=>',response );return response});
+var cntry=jqxhr.done(function(response) {  console.log( 'RESPO=>',response );return response});
 window.cnt= cntry.responseJSON.country;
 console.log('CNT=>',window.cnt)
     var iti = window.intlTelInput(input, {

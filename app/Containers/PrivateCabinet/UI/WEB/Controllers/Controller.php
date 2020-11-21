@@ -37,7 +37,7 @@ class Controller extends WebController
 {
 
 
-  public function show(GetAllPrivateCabinetsRequest $request, $type = null)
+  public function showCabinetPage(GetAllPrivateCabinetsRequest $request , $type = null )
   {
     \Log::info('SessionHasC1' . \Session::has('ShowWeeklyAdminCreatedConfirmation'));
     \Log::info('SessionHasC2' . \Session::get('ShowWeeklyAdminCreatedConfirmation'));

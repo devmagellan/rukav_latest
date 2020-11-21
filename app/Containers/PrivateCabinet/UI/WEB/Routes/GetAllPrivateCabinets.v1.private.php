@@ -12,11 +12,11 @@ $router->get('/private_cabinet/{type?}', [
 ]);
 
 
-$router->get('/private_cabinet/screen/{type}', [
+$router->get('/private_cabinet/screen/{type?}', [
   'as' => 'web_privatecabinet_index',
-  'uses'  => 'Controller@show',
+  'uses'  => 'Controller@showCabinetPage',
   'middleware' => [
-    'AdminCreatedConfirmation',
+   'AdminCreatedConfirmation',
     'auth:web',
 
   ],
