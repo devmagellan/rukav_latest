@@ -3,12 +3,43 @@
 namespace App\Containers\StaticPage\UI\WEB\Requests;
 
 use App\Ship\Parents\Requests\Request;
-
+use Illuminate\Validation\Factory as ValidationFactory;
+use GuzzleHttp\Client;
 /**
  * Class GetAllStaticPagesRequest.
  */
 class SendAdvRequest extends Request
 {
+
+  public function __construct(ValidationFactory $validationFactory)
+  {
+
+
+
+    $validationFactory->extend(
+      'recaptcha',
+      function ($attribute, $value, $parameters) {
+        {
+          $client = new Client;
+          $response = $client->post('https://www.google.com/recaptcha/api/siteverify',
+            [
+              'form_params' =>
+                [
+                  'secret' => env('GOOGLE_RECAPTCHA_SECRET'),
+                  'response' => $value
+                ]
+            ]
+          );
+
+          $body = json_decode((string)$response->getBody());
+          return $body->success;
+        }
+      },
+      'Sorry, it failed unique_phone validation!'
+    );
+
+  }
+
 
     /**
      * The assigned Transporter for this Request
@@ -55,6 +86,7 @@ class SendAdvRequest extends Request
        'sender_name'=>'required',
 			'sender_email' => 'required|email',
 			'sender_phone' => 'required|min:11|numeric',
+          'g-recaptcha-response' => 'required|recaptcha'
         ];
     }
 
