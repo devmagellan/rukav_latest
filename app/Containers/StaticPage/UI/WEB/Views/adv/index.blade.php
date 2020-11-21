@@ -84,6 +84,13 @@
               <p class="form_modal_text_bottom">
 
               </p>
+
+              @if(env('GOOGLE_RECAPTCHA_KEY'))
+                <div class="g-recaptcha"
+                     data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+                </div>
+              @endif
+
               <div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6">
@@ -104,6 +111,7 @@
 
 @endsection
 @section('scripts')
+  <script src='https://www.google.com/recaptcha/api.js'></script>
   <script>
 
     $('.contact_submit').on('click', function(e) {
