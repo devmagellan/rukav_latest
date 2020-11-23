@@ -127,7 +127,7 @@ class OAuthVK {
 			else{
 				$userInfo['response'][0]['email']=self::$token->email;
 			}
-			
+
 
         $user = $userInfo['response'][0];
 
@@ -262,7 +262,7 @@ class Controller extends WebController
     {
        // return Socialite::driver('vkontakte')->redirect();
 		//return Socialite::with('vkontakte')->redirect();
-		
+
 		OAuthVK::goToAuth();
     }
 
@@ -273,7 +273,7 @@ class Controller extends WebController
             'first_name', 'last_name', 'email', 'gender', 'location'
         ])->scopes([
             'email'
-        ])->redirect(); 
+        ])->redirect();
     }
 
 	public function redirectGoogle()
@@ -438,7 +438,7 @@ $details = json_decode(file_get_contents("https://api.ipregistry.co/{$ip}?key=tr
 			else{
 				$user = Socialite::driver($provider)->stateless()->user();
 			}
-		
+
         } catch (\Exception $e) {
 			dd($e);
             return redirect('/login');
@@ -475,7 +475,7 @@ $details = json_decode(file_get_contents("https://api.ipregistry.co/{$ip}?key=tr
              $newUser->confirmed = User::STATUS_SOCIALACTIVE;
             $newUser->company_id          = 1;
             save();
-			
+
             \Auth::guard('web')->login($newUser, true);
 			}
 			elseif($provider=='facebook'){
@@ -521,7 +521,7 @@ $details = json_decode(file_get_contents("https://api.ipregistry.co/{$ip}?key=tr
               'password'=>Hash::make($random),
               'verify_token' => Str::random(),
 
-            ]); 
+            ]);
 
         return $user;
     }
@@ -599,7 +599,7 @@ if (!empty($_GET['error'])) {
      * Если да, то можно просто авторизовать его и не запрашивать его данные.
      */
     $user = OAuthVK::getUser();
-	
+
 }
 
 
@@ -657,7 +657,7 @@ $details = json_decode(file_get_contents("https://api.ipregistry.co/{$ip}?key=tr
           $newUser->verify_token = Str::random();
             $newUser->active = 1;
           $newUser->confirmed = User::STATUS_SOCIALACTIVE;
-		  $newUser->country=$details->location->country->code;
+		      $newUser->country=$details->location->country->code;
           $newUser->save();
           dispatch(new VerifySocialMail($newUser))->onQueue('queue_name');
 
