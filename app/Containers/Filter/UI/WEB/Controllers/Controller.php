@@ -143,9 +143,19 @@ class Controller extends WebController
     }
 
   public function postSave(GetAllFiltersRequest $request){
+    $values=[];
+      if(null!=$request->input('values')){
+
+        foreach($request->input('values') as $value){
+          $values[]=$value['value'];
+        }
+      }
     $companySlider['values']=[
       'name'=>$request->input('filter_name'),
       'active'=>($request->input('active')=='true') ? 1 : 0,
+      'format'=>$request->input('format'),
+      'default_value'=>$request->input('default_value'),
+      'values'=>json_encode($values),
       ];
     $entityClass=\App\Containers\Filter\Models\Filter::class;
     $companySlider['attributes']['id']=($request->input('filter_id')&& $request->input('filter_id')!=0) ? $request->input('filter_id') : null;

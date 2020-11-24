@@ -7,7 +7,7 @@ use App\Ship\Parents\Models\Model;
 class Filter extends Model
 {
     protected $fillable = [
-'name','active'
+'name','active','format','default_value','values'
     ];
 
     protected $attributes = [
