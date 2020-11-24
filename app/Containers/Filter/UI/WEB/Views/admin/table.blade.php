@@ -60,9 +60,9 @@
             var manager =  $(this).parent().parent().find('.customer_manager').find('.is_manager').val()
             var name= $(this).parent().parent().find('.customer_name').text()
 			var link= $(this).parent().parent().find('.staticpage_link').text()
-            $('#staticpage_name').val(name)
+            $('#filter_name').val(name)
 			$('#staticpage_link').val(link)
-            var active= $(this).parent().parent().find('.company_switch').find('.custom-switch').find('.active_static_page_switch')[0].checked;
+            var active= $(this).parent().parent().find('.company_switch').find('.custom-switch').find('.active_filter_switch')[0].checked;
             console.log(active)
             console.log($(this).parent().find('input').val())
             var text= $(this).parent().find('.staticpage_text').val()
@@ -77,46 +77,6 @@
                 $('#managerSwitch').prop('checked',false);
             }
             console.log(name);
-            //$('#manager_selected').val(1); //<---below this one
- /*          $.ajax({
-                method: 'POST',
-                dataType: 'json',
-                async:false,
-                url: '/company/users/get',
-                data: {company_id: company_id,customer_id:customer_id
-                },
-                beforeSend: function() {
-                },
-                complete: function() {
-                    reloadData();
-                },
-                success: function (data) {
-                    console.log('PrependChangeCustomer',data)
-                    console.log(data.get_customers_company)
-                    $('#customer_id').val(customer_id)
-                    $('#customer_name').val(data.name)
-                    $('#customer_sername').val(data.sername)
-
-                    $('#customer_email').val(data.email)
-                    $('#customer_info').val(data.info)
-                    $('#customer_phone').val(data.get_customers_company.phone)
-                    $('#customer_address').val(data.get_customers_company.address)
-                    $('#select option:selected').removeAttr("selected");
-                    $("#select option[value="+data.get_customers_company.manager_id+"]").attr('selected', 'selected');
-                    if(manager==1){
-                        $('#managerSwitch').prop('checked', true);
-                    }
-                    else{
-                        $('#managerSwitch').prop('checked',false);
-                    }
-
-
-                    console.log(data.get_customers_company.manager_id)
-                    reloadData();
-                      console.log('success')
-
-                }
-            });*/
         });
 
 

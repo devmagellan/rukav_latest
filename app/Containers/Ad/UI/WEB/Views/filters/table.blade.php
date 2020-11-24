@@ -9,6 +9,7 @@
 
       @foreach ($filters as $key=>$filter)
       @if($filter->filter->active==1)
+        @if($filter->filter->format=='input')
       <div class="add_advert_block_input1">
         <input type="text" name="filter_value[{{$key}}]" maxlength="70" placeholder="{{$filter->filter->name}}" required value="">
         <input type="hidden" name="filter_id[{{$key}}]" value="{{$filter->filter->id}}">
@@ -18,6 +19,22 @@
         @enderror
         <p class="number_of_signs"><span>Укажите ваше значение данного фильтра</span> </p>
       </div>
+          @elseif($filter->filter->format=='dropdown')
+            <div class="add_advert_block_input1">
+              <select name="filter_value[{{$key}}]">
+                <option selected value="{{$filter->filter->default_value}}">{{$filter->filter->default_value}}</option>
+                @foreach(json_decode($filter->filter->values) as $val)
+                  <option value="{{$val}}">{{$val}}</option>
+                  @endforeach
+              </select>
+              <input type="hidden" name="filter_id[{{$key}}]" value="{{$filter->filter->id}}">
+              <span class="required">*</span>
+              @error('filter_ad')
+              <div class="alert errorBlock">{{ $message }}</div>
+              @enderror
+              <p class="number_of_signs"><span>Укажите ваше значение данного фильтра</span> </p>
+            </div>
+          @endif
       @endif
       @endforeach
 

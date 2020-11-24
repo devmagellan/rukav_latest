@@ -8,8 +8,15 @@
     <?
     $createdAt = \Carbon\Carbon::now();
     $today=$createdAt->format('m/d/Y');
-
+    $html='';
     ?>
+{{--    @foreach($values as $value) {
+      @php $html.='<div><input name="values[]" value="'.$value.'" class="form-control" style="width:250px;"><a href="#" class="remove_field">Удалить</a></div>'; @endphp
+    }
+    @endforeach--}}
+
+
+
 
 
 @endsection
@@ -73,7 +80,7 @@
         <div class="modal-dialog modal-dialog-right modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title h4">Форма добавления фильтра</h5>
+                    <h5 class="modal-title h4">Форма добавления фильтра 2</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="fal fa-times"></i></span>
                     </button>
@@ -98,10 +105,47 @@
 
                     <div class="form-group">
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="managerSwitch" >
+                            <input type="checkbox" class="custom-control-input" id="managerSwitch" checked>
                             <label class="custom-control-label" for="managerSwitch">Активна/не активна</label>
                         </div>
                     </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="customer_name">Формат ввода</label>
+
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input vid_user" id="dropdown" value="dropdown" name="format" checked="">
+                      <label class="custom-control-label" for="dropdown">Дропдаун</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input vid_user" id="input" value="input" name="format" >
+                      <label class="custom-control-label" for="input">Ввод</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input vid_user" id="multiple_choice" value="multiple_choice" name="format" >
+                      <label class="custom-control-label" for="multiple_choice">Мульти выбор</label>
+                    </div>
+
+
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="filter_name">Значение по умолчанию</label>
+                    <input type="text" id="default_value" name="default_value" value="-" required class="form-control" placeholder="Значение по умолчанию">
+
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="input_fields_wrap">
+                          <button style="width:300px;" class="add_field_button">+ Добавить дополнительное значение</button>
+                          <div class="folder_deals">
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="filter_create_close btn btn-secondary waves-effect waves-themed" data-dismiss="modal">Закрыть</button>
@@ -119,6 +163,29 @@
 
 @section('scripts')
     <script src="/NewSmartAdmin/js/formplugins/summernote/summernote.js"></script>
+
+    <script>
+
+      $(document).ready(function() {
+        var max_fields      = 30; //maximum input boxes allowed
+        var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+        var add_button      = $(".add_field_button"); //Add button ID
+        var x = 1; //initlal text box count
+        $(add_button).click(function(e){ //on add input button click
+          e.preventDefault();
+          if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<? print($html);?>'); //add input box
+          }
+        });
+
+        $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+          e.preventDefault(); $(this).parent('div').remove(); x--;
+        })
+      });
+    </script>
+
+
     <script>
         var autoSave = $('#autoSave');
         var interval;
@@ -272,7 +339,15 @@ $('#managerSwitch').change(function(){
     console.log('Manager1',$(this).is(':checked'))
 })
 
-
+        $('#filter_create').find('input[name="format"]').click(function(){
+          console.log($(this))
+          if($(this).val()=='input'){
+            $('.input_fields_wrap').hide()
+          }
+          else{
+            $('.input_fields_wrap').show()
+          }
+        })
 
 /*$('.staticpage_create').click(function(){*/
         function  theSubmitFunction () {
@@ -287,7 +362,14 @@ $('#managerSwitch').change(function(){
             }
             else {
               console.log(777)
-                $('#filter_create').addClass('was-validated')
+              $('#filter_create').addClass('was-validated')
+              var format=$('#filter_create').find('input[name="format"]:checked').val()
+              console.log('format',format)
+              var default_value=$('#filter_create').find('input[name="default_value"]').val()
+              console.log('default_value',default_value)
+
+              var values=$( "input[name^='values']" ).serializeArray();
+              console.log('values',values)
                 var filter_name = $('#filter_name').val()
                 var active =$('#managerSwitch')[0].checked
                 var filter_id=$('#filter_id').val()
@@ -299,7 +381,10 @@ $('#managerSwitch').change(function(){
                     data: {
                         filter_name: filter_name,
                         active:active,
-                        filter_id:filter_id
+                        filter_id:filter_id,
+                        format:format,
+                      default_value:default_value,
+                      values:values
 
                     },
                     beforeSend: function () {
@@ -400,7 +485,7 @@ function clearCustomerAdding(){
                 e.preventDefault();
                 if(x < max_fields){ //max input box allowed
                     x++; //text box increment
-                    $(wrapper).append('<div><input type="text" name="link[]"/><input type="text" name="name[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                    $(wrapper).append('<div><input type="text" style="width:300px" name="values[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
                 }
             });
 
