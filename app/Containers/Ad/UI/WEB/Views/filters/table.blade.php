@@ -34,7 +34,40 @@
               @enderror
               <p class="number_of_signs"><span>Укажите ваше значение данного фильтра</span> </p>
             </div>
-          @endif
+        @elseif($filter->filter->format=='multiple_choice')
+          <div class="add_advert_block_input1">
+            <div class="add_second_chat_block_input1" style="margin-top:40px;">
+              <div class="form-group" style="width:100%">
+                <select class="select2-placeholder-multiple-f form-control" name="filter_value[{{$key}}][]" multiple="multiple" id="multiple-placeholder">
+                  @foreach(json_decode($filter->filter->values) as $val)
+                    <option value="{{$val}}">{{$val}}</option>
+                  @endforeach
+
+                </select>
+              </div>
+            </div>
+            <input type="hidden" name="filter_id[{{$key}}]" value="{{$filter->filter->id}}">
+            <span class="required">*</span>
+            @error('filter_ad')
+            <div class="alert errorBlock">{{ $message }}</div>
+            @enderror
+            <p class="number_of_signs"><span>Укажите ваше значение данного фильтра</span> </p>
+          </div>
+
+          <script>
+            $(function () {
+
+              $(".select2-placeholder-multiple-f").select2(
+                {
+                  placeholder: "{{$filter->filter->name}}"
+                });
+              $(".select2-placeholder-language-multiple-f").select2(
+                {
+                  placeholder: "{{$filter->filter->name}}"
+                });
+            });
+          </script>
+        @endif
       @endif
       @endforeach
 

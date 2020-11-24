@@ -91,7 +91,7 @@ class AdService
               $filePath = Storage::disk('public')->put('', $file);
 
             $this->createPicture($filePath, $adId);
-            
+
             \Log::info('ImgWithLogo' . $filePath);
             \Log::info('filepath1' . $file);
               \Log::info('filepath2' . $filePath);
@@ -106,7 +106,7 @@ class AdService
               if (\File::copy($oldPath, $middlePath)) {
                   \Log::info('filepath2' . $filePath);
                 $this->createThumbnail($middlePath, 800, 800);
-				
+
 				$img = Image::make(storage_path('app/public/messages/'.'middle_' .$filePath));
             /* insert watermark at bottom-right corner with 10px offset */
             $img->insert(public_path('img/logo.png'), 'bottom-right', 15, 15);
@@ -149,9 +149,22 @@ class AdService
       \Log::info('FilterSave=>key',array($filter));
       $filterId=$data->input('filter_id')[$key];
       \Log::info('Error=>key'.$key);
-      \Log::info('EndError=>key'.$data->input('filter_value')[$key]);
-      $filterValue=$data->input('filter_value')[$key];
-      $this->createFilter($filterId,$filterValue, $adId);
+      if(is_array($data->input('filter_value')[$key])){
+        foreach ($data->input('filter_value')[$key] as $key2=>$filter2) {
+          \Log::info('FilterSave=>key',array($filter2));
+          $filterId=$data->input('filter_id')[$key];
+          \Log::info('Error=>key'.$key2);
+            \Log::info('EndError=>key',$data->input('filter_value')[$key]);
+            $filterValue=$filter2;
+            $this->createFilter($filterId,$filterValue, $adId);
+        }
+      }else{
+        \Log::info('EndError=>key'.$data->input('filter_value')[$key]);
+        $filterValue=$data->input('filter_value')[$key];
+        $this->createFilter($filterId,$filterValue, $adId);
+      }
+
+
     }
   }
 
