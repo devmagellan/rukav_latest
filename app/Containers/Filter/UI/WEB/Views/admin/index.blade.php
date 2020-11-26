@@ -119,7 +119,11 @@
                     </div>
                     <div class="custom-control custom-radio">
                       <input type="radio" class="custom-control-input vid_user" id="input" value="input" name="format" >
-                      <label class="custom-control-label" for="input">Ввод</label>
+                      <label class="custom-control-label" for="input">Ввод текста</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input vid_user" id="input_digits" value="input_digits" name="format" >
+                      <label class="custom-control-label" for="input_digits">Ввод цифр</label>
                     </div>
                     <div class="custom-control custom-radio">
                       <input type="radio" class="custom-control-input vid_user" id="multiple_choice" value="multiple_choice" name="format" >
@@ -134,6 +138,12 @@
                     <input type="text" id="default_value" name="default_value" value="-" required class="form-control" placeholder="Значение по умолчанию">
 
                   </div>
+                  <div class="form-group" id="text_value_block">
+                    <label class="form-label" for="filter_name"><span style="display:none" id="text_value_name">Текстовое значение</span><span style="display:none" id="digital_value_name">Цифровое значение</span></label>
+                    <input type="text" style="width:40%;display:none" id="text_value" disabled  value="" class="form-control" placeholder="Англ-Русс max 70 знаков">
+                    <input type="text" style="width:40%;display:none" id="digital_value" disabled  value="" class="form-control" placeholder="0-9 max 1000">
+                  </div>
+
                   <div class="form-group">
                     <div class="row">
                       <div class="col-md-5">
@@ -343,9 +353,27 @@ $('#managerSwitch').change(function(){
           console.log($(this))
           if($(this).val()=='input'){
             $('.input_fields_wrap').hide()
+
+            $('#text_value_block').show()
+            $('#text_value').show()
+            $('#digital_value').hide()
+            $('#text_value_name').show()
+            $('#digital_value_name').hide()
+          }
+          else if($(this).val()=='input_digits'){
+            $('.input_fields_wrap').hide()
+
+            $('#text_value_block').show()
+            $('#digital_value').show()
+            $('#text_value').hide()
+            $('#digital_value_name').show()
+            $('#text_value_name').hide()
           }
           else{
             $('.input_fields_wrap').show()
+            $('#text_value').hide()
+            $('#digital_value').hide()
+            $('#text_value_block').hide()
           }
         })
 
