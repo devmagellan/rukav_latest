@@ -67,9 +67,9 @@ class Controller extends WebController
         return $this->childrenCategories;}
 		else{ return false;}
     }
-	
-	
-	
+
+
+
 		public function allAuthorAds(GetAllCategoriesRequest $request){
 			if(null!=($request->input('id'))){
 				$id=$request->input('id');
@@ -307,7 +307,7 @@ $pricesLimits=$data['pricesLimits'];
       }
       $q->orderByDesc('ads.price');
     }
-	
+
 	$uri = $_SERVER["REQUEST_URI"];
 $url_components = parse_url($uri);
 if(isset($url_components['query'])){
@@ -320,7 +320,7 @@ $partsCount=count($parts);
       if( $request->input('sort_by_date')=='high_to_low' && $parts[$partsCount-1]=='sort_by_date=high_to_low'){
           //dump('high_to_low');
           $q->orderByDesc('ads.created_at');
-      } 
+      }
       if( $request->input('sort_by_price')=='low_to_high' && $parts[$partsCount-1]=='sort_by_price=low_to_high'){
           //dump('low_to_high');
           $q->orderBy('ads.price');
@@ -361,7 +361,7 @@ $partsCount=count($parts);
 
       if(!empty($from) && !empty($to)){
           $query->where('price','>=',$from)
-              ->where('price','<=',$to);
+          ->where('price','<=',$to);
       }
   }) /*->where('status',1) */
           /*->where('city',$request->input('city'))->where('administrative',$request->input('administrative'))*/
