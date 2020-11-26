@@ -192,6 +192,7 @@ class Controller extends WebController
     $params = array();
     \Log::info('Filtersinput'.$request->input('filters'));
     if($request->input('filters')){
+      \Log::info('Filtersinput2'.$request->input('filters'));
     parse_str($request->input('filters'), $params);
       \Log::info('FilterDeals',$params);
   if(array_key_exists('filters',$params)){
@@ -207,6 +208,11 @@ class Controller extends WebController
         call_user_func("{$entityClass}::query")->updateOrCreate($companySlider['attributes'], $companySlider['values']);
       }}
   }
+    else{
+      \App\Containers\Filter\Models\CategoryFilter::where('category_id',$request->input('cat_id'))->delete();
+      \Log::info('FiltersCatID'.$request->input('cat_id'));
+
+    }
     if(array_key_exists('filter_deals',$params)){
       \App\Containers\Filter\Models\CategoryFilterDeals::where('category_id',$request->input('cat_id'))->delete();
       foreach($params['filter_deals'] as $filter){
