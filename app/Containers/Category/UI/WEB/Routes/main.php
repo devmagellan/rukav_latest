@@ -17,6 +17,12 @@ $router->get('edit_categories', [
     ],
 ]);
 
+$router->get('/all_author_ads', [
+    'as' => 'save_preview',
+    'uses'  => 'Controller@allAuthorAds',
+]);
+
+
 
 $router->post('/show_subcat_all_levels', [
     'as' => 'show_subcat_all_levels',

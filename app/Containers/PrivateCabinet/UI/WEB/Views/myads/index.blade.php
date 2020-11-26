@@ -257,7 +257,7 @@
           $.ajax({
               method: 'POST',
               dataType: 'json',
-              async:false,
+              async:true,
               url: '/ad/message_activity_set',
               data: {message: message,state:state
               },

@@ -145,6 +145,42 @@
     text-align: center;
     justify-content: center;
 }
+  #add_second_chat1{
+    width: 638px;
+  }
+  select[name="filter_value[1]"]{
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    width: 100%;
+    background: #fff;
+    box-shadow: none;
+    border-radius: 30px;
+  }
+  .filters_block{
+    width: 100%;
+  }
+  .filter_deals_block{
+    width: 100%;
+  }
+  @media(max-width: 800px){
+    #add_second_chat1{
+      width: 100%;
+    }
+    #controls{
+      width: 100%;
+    }
+  }
 </style>
 
 @if ($errors->any())
@@ -271,7 +307,7 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="add_advert_block_wrapper">
-                <div class="add_second_chat_block_input" style="margin-top:40px;">
+                <div id="add_second_chat1" class="add_second_chat_block_input" style="margin-top:40px;">
                   <h6 class="add_advert_block_wrapper_title">
                     Языки объявления
                   </h6>
@@ -1420,8 +1456,6 @@
               placeholder: "Выберите дополнительную языки для объявления"
             });
         });
-
-
 
     });
 

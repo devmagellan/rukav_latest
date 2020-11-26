@@ -111,13 +111,14 @@
       position: absolute;
     }
 
-    .external-scroll_x.scroll-scrollx_visible {
-      display: block;
-      height: 10px;
-        left: 15px;
-        bottom: -20px;
-      width: 200px;
-    }
+.external-scroll_x.scroll-scrollx_visible {
+    display: block;
+    height: 10px;
+    bottom: auto;
+    width: 200px;
+    top: 122px;
+    left: 200px;
+}
 
     .external-scroll_y.scroll-scrolly_visible {
       display: block;

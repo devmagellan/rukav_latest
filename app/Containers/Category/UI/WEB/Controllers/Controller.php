@@ -67,6 +67,129 @@ class Controller extends WebController
         return $this->childrenCategories;}
 		else{ return false;}
     }
+	
+	
+	
+		public function allAuthorAds(GetAllCategoriesRequest $request){
+			if(null!=($request->input('id'))){
+				$id=$request->input('id');
+			}
+		$data['properties']=GlobalService::getMainProperties($request)['categories'];
+      $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
+        $data['spacial_customer_id']=null;
+        $data['title']="Додати товар";
+        $data['user']=(\Auth::user()) ? \Auth::user() : null;
+        $data['category_name']='Результаты Вашего поиска';
+        $data['keywords']="Ukrainian industry platform";
+        $data['description']="Ukrainian industry platform";
+		$data['allAuthorAds']=1;
+        $currentPage = $request->input('page');
+
+      $currentPage = $request->input('page');
+      $from=$request->input('price_start');
+      $to=$request->input('price_end');
+      $sort_by_date=$request->input('sort_by_date');
+      // Make sure that you call the static method currentPageResolver()
+      // before querying users
+      \Illuminate\Pagination\Paginator::currentPageResolver(function () use ($currentPage) {
+          return $currentPage;
+      });
+
+      '';
+      $q= \App\Containers\Ad\Models\Ad::with('pictures')->when($id != null, function ($query) use($id) {
+          $query->where('sender', $id);
+      })
+
+	  ->where(function ($query) use($request) {
+          $query->where('message', 'like', '%' . $request->input('search_string') . '%')
+              ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
+      })
+          ->where(function ($query) use($request) {
+              $query->where('message', 'like', '%' . $request->input('rubric_search') . '%')
+                  ->orWhere('title', 'like', '%' . $request->input('rubric_search') . '%');
+          })
+
+
+          ->where('active',1);
+
+      if($request->input('sort_by_date')=='low_to_high'){
+          dump('low_to_high');
+          $q->orderBy('created_at');
+      }
+      if($request->input('sort_by_date')=='high_to_low'){
+          dump('high_to_low');
+          $q->orderByDesc('created_at');
+      }
+
+
+
+      $qr=clone($q);
+$data['pricesLimits']=$qr->select( \DB::raw("MAX(ads.price) AS max_price"), \DB::raw("MIN(ads.price) AS min_price"))->get()->toArray();
+if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price']){
+    $data['pricesLimits'][0]['min_price']=0;
+}
+
+
+$pricesLimits=$data['pricesLimits'];
+
+
+
+
+        // Make sure that you call the static method currentPageResolver()
+        // before querying users
+        \Illuminate\Pagination\Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
+
+
+		    $administrative=$request->input('administrative');
+            $uk_only=$request->input('uk_only');
+
+		      $messages=$q->where(function ($query) use($from,$to) {
+      if(!empty($from) && !empty($to)){
+          $query->where('price','>=',$from)
+              ->where('price','<=',$to);
+      }
+  })->where(function ($query) use($request){
+            $query->where('message', 'like', '%' . $request->input('search_string') . '%')
+                ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
+        })->where('city', 'like', '%' . $request->input('city') . '%')
+                  ->where(function($query) use ($administrative,$uk_only)  {
+                      if(isset($administrative)&&$administrative!=0 && $uk_only=="checked") {
+                          $query->where('administrative',$administrative);
+                      }
+                     elseif($uk_only=="checked"){
+                          $query->whereIn('administrative',['England','Nothern Irland','Scotland','Wales']);
+                      }
+                  })
+
+
+
+            ->where('active',1)
+
+
+          ->paginate(10);
+
+
+/*
+
+
+
+        $messages= \App\Containers\Ad\Models\Ad::where(function ($query) use($request){
+            $query->where('message', 'like', '%' . $request->input('search_string') . '%')
+                ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
+        })->where('city',$request->input('city'))->where('administrative',$request->input('administrative'))
+            ->where('active',1)
+            ->paginate(3); */
+        $products=$messages;
+		$data['filterDeals']=\App\Containers\Filter\Models\FilterDeals::get();
+        $data['search_string']=$request->input('search_string');
+        $data['city']=$request->input('city');
+        $data['administrative']=$request->input('administrative');
+        return view('category::catalog', compact('categoriesOnlyRoot','pricesLimits','data','products'));
+
+    }
+
 
   /**
    * Show all entities
