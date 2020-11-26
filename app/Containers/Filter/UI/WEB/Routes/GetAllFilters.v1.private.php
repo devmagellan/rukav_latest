@@ -118,4 +118,9 @@ $router->post('/search_for_filter_deals', [
     'uses'  => 'Controller@searchForFilterDeals',
 ]);
 
+$router->post('/filter/get', [
+  'as' => 'get_for_filter',
+  'uses'  => 'Controller@filterGet',
+]);
+
 

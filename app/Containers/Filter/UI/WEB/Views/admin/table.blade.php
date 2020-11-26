@@ -55,11 +55,13 @@
 
     <script>
         $('.PrependChangeCustomer').click(function(){
-            console.log('PrependChangeCustomer1')
+            console.log('PrependChangeCustomer73')
             var customer_id =  $(this).parent().parent().find('.customer_id').text()
+          console.log('customer_id',customer_id)
             var manager =  $(this).parent().parent().find('.customer_manager').find('.is_manager').val()
             var name= $(this).parent().parent().find('.customer_name').text()
 			var link= $(this).parent().parent().find('.staticpage_link').text()
+          $('#filter_id').val($(this).parent().parent().find('.customer_id').text())
             $('#filter_name').val(name)
 			$('#staticpage_link').val(link)
             var active= $(this).parent().parent().find('.company_switch').find('.custom-switch').find('.active_filter_switch')[0].checked;
@@ -76,6 +78,68 @@
             else{
                 $('#managerSwitch').prop('checked',false);
             }
+
+          $.ajax({
+            method: 'POST',
+            dataType: 'json',
+            async:false,
+            url: '/filter/get',
+            data: {id:customer_id
+            },
+            beforeSend: function() {
+            },
+            complete: function() {
+              reloadData();
+            },
+            success: function (data) {
+              console.log('PrependChangeCustomer',data);
+
+              $('#default_value').val(data.filter.default_value)
+              var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+              switch (data.filter.format){
+                case 'dropdown':
+                  console.log('point7')
+                  $('#dropdown').prop("checked", true);
+                  $('#input').prop('checked',false);
+                  $('#input_digits').prop('checked',false);
+                  $('#multiple_choice').prop('checked',false);
+                  $('.input_fields_wrap').show()
+                  $('.input_fields_wrap').empty();
+                  $(wrapper).append('<button style="width:300px;" class="add_field_button">+ Добавить дополнительное значение</button>');
+                    $.each(JSON.parse(data.filter.values), function (key, val) {
+                      console.log('current_values=>', key + val);
+
+                      $(wrapper).append('<div><input type="text" style="width:300px" value="'+val+'" name="values[]"/><a href="#" class="remove_field">Remove</a></div>');
+                    });
+
+                  break;
+                case 'input':
+                  console.log('point8')
+                  $('#input').prop('checked',true);
+                  $('.input_fields_wrap').hide()
+                  break;
+                case 'input_digits':
+                  console.log('point9')
+                  $('#input_digits').prop('checked',true);
+                  $('.input_fields_wrap').hide()
+                  break;
+                case 'multiple_choice':
+                  console.log('point6')
+                  $('#multiple_choice').prop('checked',true);
+                  $('.input_fields_wrap').show()
+                  $('.input_fields_wrap').empty();
+                  $(wrapper).append('<button style="width:300px;" class="add_field_button">+ Добавить дополнительное значение</button>');
+                  $.each(JSON.parse(data.filter.values), function (key, val) {
+                    console.log('current_values=>', key + val);
+
+                    $(wrapper).append('<div><input type="text" style="width:300px" value="'+val+'" name="values[]"/><a href="#" class="remove_field">Remove</a></div>');
+                  });
+                  break;
+              }
+            }
+          });
+
+
             console.log(name);
         });
 

@@ -232,4 +232,12 @@ return json_encode(['result'=>'success']);
         $data['filters']=\App\Containers\Filter\Models\CategoryFilterDeals::where('category_id',$request->input('cat_id'))->with('filter')->get();
         return view('ad::filters.table_deals', $data);
     }
+
+    public function filterGet(GetAllFiltersRequest $request){
+      $filter=\App\Containers\Filter\Models\Filter::where('id',$request->input('id'))->first();
+
+       $current_values=\App\Containers\Filter\Models\AddFilter::where('filter_id',$filter->id)->get();
+
+      return json_encode(['result'=>'success','filter'=>$filter,'current_values'=>$current_values]);
+    }
 }

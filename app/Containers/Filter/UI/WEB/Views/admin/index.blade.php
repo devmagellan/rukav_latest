@@ -89,7 +89,7 @@
                 <form class="needs-validation" id="filter_create" novalidate onsubmit="theSubmitFunction(); return false;">
 
                 <div class="modal-body">
-                    <input type="hidden" id="staticpage_id" name="filter_id" value="0">
+                    <input type="hidden" id="filter_id" name="filter_id" value="0">
                     <input type="hidden" id="company_id" name="company_id" value="1">
 
 
