@@ -740,7 +740,7 @@
                 console.log('window.parent_cat_id=<=>',window.parent_cat_id)
                 var id_cat=window.parent_cat_id
             }
-
+console.log('strange=>action',action)
             $.ajax({
                 url: '/admin/change_category_name', // point to server-side PHP script
                 dataType: 'json',  // what to expect back from the PHP script, if anything

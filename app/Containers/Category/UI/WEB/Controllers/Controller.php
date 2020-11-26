@@ -628,9 +628,12 @@ $partsCount=count($parts);
             else{
                 $data['position']=$last->position+1;
             }
+            \Log::info('SomeCategory=>',$data);
+            //$data['id']=null;
             \App\Containers\Site\Models\ProductCategory::insert($data);
         }
         else{
+          \Log::info('SomeCategory=>Update');
         \App\Containers\Site\Models\ProductCategory::where('id',$request->input('id'))->update($data);
 		\Cache::forget('all_categories_');
 		\Cache::forget('root_categories_');

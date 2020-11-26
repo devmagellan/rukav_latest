@@ -6,6 +6,7 @@ use App\Ship\Parents\Models\Model;
 
 class ProductCategory extends Model
 {
+  protected $primaryKey = 'id';
   protected $fillable = [
     'parent_id', 'name', 'icon', 'link', 'photo'
 
