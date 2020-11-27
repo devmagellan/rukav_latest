@@ -308,7 +308,7 @@ ul.slickslide li img, .slick-dots button img {
           <div class="product_info_block_left">
             <div class="product_info_block_avatar">
                <img src="@if($ad->getSender->avatar==null && null!=$ad->getSender->name ) {{ \Avatar::create($ad->getSender->name.' '.$ad->getSender->sername)->toBase64() }} @elseif(substr($ad->getSender->avatar, 0, 4)!='http')/storage/avatars/@endif{{ $ad->getSender->avatar }}" />
-          
+
             </div>
           </div>
           <div class="product_info_block_right">
@@ -437,15 +437,20 @@ ul.slickslide li img, .slick-dots button img {
 
 	<?
 
-    $currentFilters=\App\Containers\Filter\Models\CategoryFilter::with('filter')->where('category_id',$ad->category_id)->get();
-	$sliceFilters=array_slice($currentFilters->toArray(), 1);?>
+    $currentFilters=\App\Containers\Filter\Models\CategoryFilter::with('filter')->where('category_id',$ad->category_id)->take(3)->get()->toArray();
+  /*    if(count($currentFilters)>1){
+    $sliceFilters=array_slice($currentFilters->toArray(), 3);}
+      else{$sliceFilters=$currentFilters->toArray();}
+
+      dump($sliceFilters);*/
+	?>
+
 	<hr>
 	<div class="row" style="margin-top:30px;">
 
-@if(count($currentFilters)>0){
-    
+@if(count($currentFilters)>0)
 	<div class="col-md-5">
-	@foreach($sliceFilters as $filter)
+	@foreach($currentFilters as $filter)
 	<div class="row">
 	<div class="col-md-6">
 	<h6 style="color:grey">{{$filter['filter']['name']}} :</h6>
@@ -503,7 +508,7 @@ ul.slickslide li img, .slick-dots button img {
     </div>
 
 	</div>
-	
+
 <hr>
 	<div class="row product_description" style="word-wrap: break-word;">
       <div class="col-sm-12">
