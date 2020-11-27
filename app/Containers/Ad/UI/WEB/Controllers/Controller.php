@@ -30,7 +30,7 @@ class Controller extends WebController
 
     public $result;
   public $resultCat;
-  
+
 /**
    * Show all entities
    *
@@ -456,8 +456,6 @@ if(null!=$ad->getSender ){
       if($businessAccount){
         $www=$businessAccount->www;
 		$address=$businessAccount->address;
-		\Log::info('USER=>'.$ad->getSender['id']);
-		\Log::info('USER=>'.$address);
       }
       elseif($individualAccount){
         $www=$individualAccount->www;
@@ -474,10 +472,8 @@ if(null!=$ad->getSender ){
   $www='Не определено';
   $address='Не определено';}
   $str=json_decode($ad->language_filter);
-  if($str!=null){ 
-	 // \Log::info('JSON=>',json_decode($ad->language_filter)); 
-	 
-	   \Log::info('JSON=>',$str); 
+  if($str!=null){
+	 // \Log::info('JSON=>',json_decode($ad->language_filter));
   }
 if($ad->getSender!=null){
 switch($ad->getSender->confirmed){
@@ -503,7 +499,7 @@ switch($ad->getSender->confirmed){
 	$userStatus='-------';
 }
   }
-      $nestedData [1] = $status; 
+      $nestedData [1] = $status;
       $nestedData [2] = $ad->title;
       $nestedData [3] = '<span style="font-size:9px">' . mb_strimwidth($ad->message, 0, 30, "...") . '</span>';
       $nestedData [4] = $ad->sender;
@@ -531,7 +527,6 @@ switch($ad->getSender->confirmed){
     /*
     * This below structure is required by Datatables
     */
-    \Log::info('DRAW=>'.intval($request->input('draw')));
     $tableContent = array(
       "draw" => intval($request->input('draw')), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw.
       "recordsTotal" => intval($totalData), // total number of records
