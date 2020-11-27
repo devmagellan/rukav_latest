@@ -216,7 +216,7 @@
       \App\Containers\Ad\Models\Ad::where('id',$product->id)->update(['counter'=>$product->view_counter+1]);
       @endphp
         <div class="row product_item_wrapper product_item_wrapper_active">
-          <div class="col-sm-2">
+         <div class="col-sm-2">
             @if($product->pictures)
             <span class="product_item_foto"><img src="/img/photo_camera_icon.svg" alt="">{{count($product->pictures)}}</span>
             @endif
@@ -322,15 +322,25 @@
               <div>
 
 		@endif
-		</div>
-          <!--div class="col-sm-1">
+                @if(isset($currentFilters) && count($currentFilters)>0)
+             <div class="col-sm-1">
+                  <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
+                  <p class="product_map_marka d-sm-none">Volkswagen</p>
+                  <p class="product_item_city d-sm-none">
+                    <img src="/img/map_icon.svg" alt="" class="product_map_icon">
+                    {{$product->city}}
+                  </p>
+                  <div>
+                    @endif
+		<!--/div-->
+          {{--<div class="col-sm-1">
             <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
             <p class="product_map_marka d-sm-none">Volkswagen</p>
             <p class="product_item_city d-sm-none">
               <img src="/img/map_icon.svg" alt="" class="product_map_icon">
               {{$product->city}}
-            </p-->
-            <div>
+            </p>
+            <div>--}}
                 <?
                 if(\Auth::user()){
                     $wishlist=App\Containers\Ad\Models\Wishlist::where('message_id',$product->id)->where('user_id',\Auth::user()->id)->first();
