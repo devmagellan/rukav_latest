@@ -634,7 +634,9 @@
     <?php
     $html='<div><select name="filters[]" class="form-control" style="width:150px;">';
     foreach($filters as $filter) {
-      $html.='<option value="'.$filter->id.'">'.$filter->name.'</option>';
+      if($filter->pointer){$point='('.$filter->pointer.')';}
+      else{$point='';}
+      $html.='<option value="'.$filter->id.'">'.$filter->name.' '.$point.'</option>';
 
     }
     $html.='</select><a href="#" class="remove_field">Удалить</a></div>';

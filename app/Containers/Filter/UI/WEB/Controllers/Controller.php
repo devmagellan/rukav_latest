@@ -155,6 +155,7 @@ class Controller extends WebController
       'active'=>($request->input('active')=='true') ? 1 : 0,
       'format'=>$request->input('format'),
       'default_value'=>$request->input('default_value'),
+      'pointer'=>$request->input('pointer'),
       'values'=>json_encode($values),
       ];
     $entityClass=\App\Containers\Filter\Models\Filter::class;
