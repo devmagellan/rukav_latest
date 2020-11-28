@@ -14,13 +14,13 @@
           <ul class="breadcrumbs">
             <li><a href="/"><img src="/img/home_icon.svg" alt=""></a><img src="{{asset('/img/back_Icon.svg')}}" alt=""></li>
 
-            <li>Реклама на Рукав</li>
+            <li>Реклама на RUKAV</li>
           </ul>
         </div>
       </div>
 
       <div class="row">
-        <h3 style="font-weight:600" >Реклама на RUKAV 3</h3>
+        <h3 style="font-weight:600" >Реклама на RUKAV</h3>
         @if($data['firstHelpPage'])
               <?
               print($data['firstHelpPage']->content);

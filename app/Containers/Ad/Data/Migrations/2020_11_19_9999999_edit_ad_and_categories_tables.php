@@ -11,7 +11,7 @@ class EditAdAndCategoriesTables extends Migration
      */
     public function up()
     {
-      Schema::table('ads', function (Blueprint $table) {
+ /*     Schema::table('ads', function (Blueprint $table) {
 
         $table->dropForeign('ads_category_id_foreign');
     });
@@ -43,7 +43,7 @@ class EditAdAndCategoriesTables extends Migration
 
         $table->unsignedBigInteger('category_id')->index()->change();
         $table->foreign('category_id')->references('id')->on('product_categories')->onDelete('cascade');
-      });
+      });*/
     }
 
     /**

@@ -12,6 +12,7 @@ class EditFilterTables extends Migration
       $table->string('format')->nullable()->default('input');
       $table->json('values')->nullable()->default(null);
       $table->string('default_value')->nullable()->default(null);
+      $table->string('pointer')->nullable()->default(null);
     });
   }
   /**
@@ -23,6 +24,7 @@ class EditFilterTables extends Migration
       $table->dropColumn('format');
       $table->dropColumn('values');
       $table->dropColumn('default_value');
+      $table->dropColumn('pointer');
     });
   }
 }

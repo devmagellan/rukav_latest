@@ -101,6 +101,11 @@
                         <input type="text" id="filter_name" name="filter_name" required class="form-control" placeholder="Название фильтра">
 
                     </div>
+                  <div class="form-group">
+                    <label class="form-label" for="filter_name">Произвольный уникальный указатель категории</label>
+                    <input type="text" id="pointer" name="pointer" class="form-control" placeholder="Произвольный уникальный указатель категории">
+
+                  </div>
 
 
                     <div class="form-group">
@@ -394,6 +399,7 @@ $('#managerSwitch').change(function(){
               var format=$('#filter_create').find('input[name="format"]:checked').val()
               console.log('format',format)
               var default_value=$('#filter_create').find('input[name="default_value"]').val()
+              var pointer=$('#filter_create').find('input[name="pointer"]').val()
               console.log('default_value',default_value)
 
               var values=$( "input[name^='values']" ).serializeArray();
@@ -412,7 +418,8 @@ $('#managerSwitch').change(function(){
                         filter_id:filter_id,
                         format:format,
                       default_value:default_value,
-                      values:values
+                      values:values,
+                      pointer:pointer
 
                     },
                     beforeSend: function () {
