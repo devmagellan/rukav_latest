@@ -17,7 +17,7 @@ class VerifyMail implements ShouldQueue
 
     public function __construct($user)
     {
-		Log::info('SendEmailVerification.php: '.date("Y-m-d H:i:s").
+		Log::info('VerifyMail.php: '.date("Y-m-d H:i:s").
 			'start process construct 22string');
 			
 			Log::info('user: ',array($user));
