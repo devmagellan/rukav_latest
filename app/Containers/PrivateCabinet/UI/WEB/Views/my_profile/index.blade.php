@@ -411,7 +411,7 @@
                     </a>
                   </div>
                 </div>
-              </div>
+              <!--/div-->
               @if(\Auth::user()->getIndividualAccount || $toAccountType=='to_individual'
               || \Auth::user()->getOrganisationAccount || $toAccountType=='to_organisation'
               || \Auth::user()->getBusinessAccount || $toAccountType=='to_company'
@@ -931,6 +931,7 @@
                 <input type="hidden" name="current_type" value="{{\Auth::user()->vid_user}}">
 
                       <?
+                dump($toAccountType);
                       switch($toAccountType){
                         case 'to_individual':
                           echo '<button type="submit" formaction="/profile/save/to_individual" class="prophile_save ml-auto">';
@@ -948,7 +949,7 @@
 
 
                   Сохранить
-                </button>
+                <!--/button-->
               </div>
             </form>
           </div>
@@ -1075,7 +1076,7 @@
 
       $(document).ready(function() {
 
-          reloadMessages()
+         // reloadMessages()
         $('#imgInputBusiness').on('change', function() {
           console.log('imgInputBusiness')
           var fileName = '';
@@ -1180,7 +1181,7 @@ console.log('imgInputakk')
 //)
 
 
-      function reloadMessages(){
+     /* function reloadMessages(){
 
           var module='staff.roles'
           console.log();
@@ -1211,7 +1212,7 @@ console.log('imgInputakk')
 
             }
           });
-      }
+      }*/
 
       $('.edit_ad').click(function(){
         var id = $(this).parent().find('.customSwitch2_id').val()

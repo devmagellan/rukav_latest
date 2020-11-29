@@ -64,6 +64,7 @@ class UpdateUserAction extends Action
             'post_code'=>$data->postCode
         ];
         if($data->current_type=='Организация'){
+          \Log::info('OrganisationAccount',$additional);
             $additional['organisation_name']=$data->organisation_name;
         \App\Containers\User\Models\OrganisationAccount::where('user_id',$data->id)->update($additional);
         }

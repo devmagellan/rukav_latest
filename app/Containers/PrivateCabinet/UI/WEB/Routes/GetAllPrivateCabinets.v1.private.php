@@ -45,9 +45,9 @@ $router->post('/cabinet/deleteFromFavorites', [
 $router->post('/profile/save', [
     'as' => 'profile_save',
     'uses'  => 'Controller@profileSave',
-    /*'middleware' => [
+    'middleware' => [
       'auth:web',
-    ],*/
+    ],
 ]);
 
 $router->post('/profile/save/to_individual', [
@@ -59,7 +59,7 @@ $router->post('/profile/save/to_individual', [
 ]);
 
 $router->post('/profile/save/to_organisation', [
-  'as' => 'profile_save',
+  'as' => 'profile_save_to_organisation',
   'uses'  => 'Controller@profileSaveToOrganisation',
   'middleware' => [
     'auth:web',

@@ -51,6 +51,7 @@ class ProfileSaveToOrganisationRequest extends Request
      */
   public function rules()
   {
+    \Log::info('to_organisation_request');
     return [
       'organisation_name' => 'required',
       'www' => 'required',

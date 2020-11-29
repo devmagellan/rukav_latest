@@ -70,8 +70,9 @@ class Controller extends WebController
    */
   public function index(GetAllPrivateCabinetsRequest $request, $type = null)
   {
-    \Log::info('SessionHasC1' . \Session::has('ShowWeeklyAdminCreatedConfirmation'));
-    \Log::info('SessionHasC2' . \Session::get('ShowWeeklyAdminCreatedConfirmation'));
+
+    \Log::info('SessionHasC2' . \Session::has('ShowWeeklyAdminCreatedConfirmation'));
+    \Log::info('SessionHasC3' . \Session::get('ShowWeeklyAdminCreatedConfirmation'));
 
     $toAccountType = '';
     if ($type) {
@@ -203,8 +204,10 @@ class Controller extends WebController
 
   public function profileSave(GetAllUsersRequest $request)
   {
+    \Log::info('user_after_save');
     $currentById = \App\Containers\User\Models\User::where('id', $request->id)->withTrashed()->first();
     $user = Apiato::call('User@UpdateUserAction', [$request]);
+    \Log::info('user_after_save',$user);
     if (isset($request->id)) {
       if ($currentById->email != $user->email) {
         \Session::put('OpenConfirmationModal', 1);
@@ -228,6 +231,7 @@ class Controller extends WebController
 
   public function profileSaveToOrganisation(ProfileSaveToOrganisationRequest $request)
   {
+    \Log::info('user_after_save_to_organisation');
     if ($request->input('vid_user') == 'Частная') {
       $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
       return $controller->changeRegisterFromSimpleUser($request);
