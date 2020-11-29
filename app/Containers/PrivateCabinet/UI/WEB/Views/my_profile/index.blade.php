@@ -1027,7 +1027,7 @@
 </script>
 
   <style>
-    select[name="forma"]{
+    #my-profile > div > div.row.flex > div.prophile_main_wrapper.prophile_down_wrapper.d-flex.align-items-center > select{
       height: calc(1.5em + .75rem + 2px);
       padding: .375rem .75rem;
       font-size: 1rem;

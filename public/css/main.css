@@ -1046,7 +1046,6 @@ ul.category_dropdown_sub_list li ul a:hover{
     transition: all .2s ease-out;
 }
 .product_indicators_complain a:hover{
-    transform: scale(1.05);
     opacity: 0.9;
 }
 .product_indicators_complain a img{
@@ -1242,7 +1241,6 @@ ul.category_dropdown_sub_list li ul a:hover{
 }
 .product_info_btn_phone:hover{
     color: #A269F7;
-    transform: scale(1.05);
 }
 .product_info_btn_phone img{
     margin-right: 10px;
@@ -1267,7 +1265,6 @@ ul.category_dropdown_sub_list li ul a:hover{
 }
 .product_info_send_message:hover{
     color: #FFFFFF;
-    transform: scale(1.05);
 }
 .product_info_text_down{
     text-align: center;
@@ -3078,7 +3075,6 @@ padding-left: 30px;
 
 .wrapper_header_setting:hover{
     cursor: pointer;
-    transform: scale(1.05);
 }
 
 .wrapper_body_messege{

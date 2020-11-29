@@ -84,7 +84,7 @@ class SendAdvRequest extends Request
     {
         return [
        'sender_name'=>'required',
-			'sender_email' => 'required|email',
+			'sender_email' => 'required|email:rfc,dns',
 			'sender_phone' => 'required|min:11|numeric',
           'g-recaptcha-response' => 'required|recaptcha'
         ];
