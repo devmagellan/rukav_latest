@@ -11,7 +11,8 @@
       @if($filter->filter->active==1)
         @if($filter->filter->format=='input')
       <div class="add_advert_block_input1">
-        <input type="text" name="filter_value[{{$key}}]" maxlength="20" pattern="^[A-Za-zА-Яа-я\s]+$" placeholder="{{$filter->filter->name}}" required value="{{$filter->filter->default_value}}">
+        <input type="text" name="filter_value[{{$key}}]" maxlength="20" pattern="^[A-Za-zА-Яа-я\s]+$" placeholder="{{$filter->filter->default_value}}" >
+        <input type="hidden" name="filter_default[{{$key}}]" value="{{$filter->filter->default_value}}">
         <input type="hidden" name="filter_id[{{$key}}]" value="{{$filter->filter->id}}">
         <span class="required">*</span>
         @error('filter_ad')
@@ -21,7 +22,8 @@
       </div>
             @elseif($filter->filter->format=='input_digits')
               <div class="add_advert_block_input1">
-                <input type="number" name="filter_value[{{$key}}]" max="1000"  placeholder="{{$filter->filter->name}}" required value="{{$filter->filter->default_value}}">
+                <input type="number" name="filter_value[{{$key}}]" max="1000"  placeholder="{{$filter->filter->default_value}}" >
+                <input type="hidden" name="filter_default[{{$key}}]" value="{{$filter->filter->default_value}}">
                 <input type="hidden" name="filter_id[{{$key}}]" value="{{$filter->filter->id}}">
                 <span class="required">*</span>
                 @error('filter_ad')

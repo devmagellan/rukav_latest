@@ -4,7 +4,8 @@
         <tr>
             <th>#</th>
             <th>Название</th>
-
+          <th>Метка</th>
+          <th>Вид</th>
             <th>Активeн/неактивeн</th>
             <th>Действия</th>
 
@@ -13,7 +14,6 @@
         <tbody>
         <? $last=count($filters);?>
         @foreach($filters as $key=>$filter)
-
             <form class="staticpage_form">
 
 
@@ -23,6 +23,12 @@
             <td class="customer_name">{{$filter->name}}
 
             </td>
+          <td class="customer_pointer">{{$filter->pointer}}
+
+          </td>
+          <td class="customer_format">{{$filter->format}}
+
+          </td>
 
             <td class="company_switch">
                 <div class="custom-control custom-switch">
