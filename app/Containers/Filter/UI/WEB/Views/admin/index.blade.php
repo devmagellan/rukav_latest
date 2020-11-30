@@ -400,12 +400,13 @@ $('#managerSwitch').change(function(){
               console.log('format',format)
               var default_value=$('#filter_create').find('input[name="default_value"]').val()
               var pointer=$('#filter_create').find('input[name="pointer"]').val()
+              console.log('pointer',pointer)
               console.log('default_value',default_value)
 
               var values=$( "input[name^='values']" ).serializeArray();
               console.log('values',values)
                 var filter_name = $('#filter_name').val()
-                var active =$('#managerSwitch')[0].checked
+                //var active =$('#managerSwitch')[0].checked
                 var filter_id=$('#filter_id').val()
                 $.ajax({
                     method: 'POST',
@@ -414,7 +415,7 @@ $('#managerSwitch').change(function(){
                     url: '/filter/create',
                     data: {
                         filter_name: filter_name,
-                        active:active,
+                        //active:active,
                         filter_id:filter_id,
                         format:format,
                       default_value:default_value,

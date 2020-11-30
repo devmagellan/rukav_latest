@@ -71,7 +71,7 @@ class Controller extends WebController
    $user=User::where('email',$request->email)->where('confirmed',User::STATUS_INACTIVE)->where('is_confirmed_phone',0)->first();
     if(!$user){
     $user1=User::where('email',$request->email)->where('confirmed',User::STATUS_INACTIVE)->first();}
-	\Log::info('USER1',array($user1));
+	//\Log::info('USER1',array($user1));
     if($user){
       $this->smsService=new SmsService();
       $message=$this->smsService->store(new \Illuminate\Http\Request(array($user)));

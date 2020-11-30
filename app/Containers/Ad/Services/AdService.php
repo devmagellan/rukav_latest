@@ -151,16 +151,20 @@ class AdService
       \Log::info('Error=>key'.$key);
       if(is_array($data->input('filter_value')[$key])){
         foreach ($data->input('filter_value')[$key] as $key2=>$filter2) {
+
+
           \Log::info('FilterSave=>key',array($filter2));
           $filterId=$data->input('filter_id')[$key];
           \Log::info('Error=>key'.$key2);
             \Log::info('EndError=>key',$data->input('filter_value')[$key]);
-            $filterValue=$filter2;
+            \Log::info('$filter2==>'.$filter2);
+            if(null!=$filter2){$filterValue=$filter2;}else{ $filterValue=$data->input('filter_default')[$key];}
             $this->createFilter($filterId,$filterValue, $adId);
         }
       }else{
         \Log::info('EndError=>key'.$data->input('filter_value')[$key]);
-        $filterValue=$data->input('filter_value')[$key];
+        \Log::info('$filter2==>'.$data->input('filter_value')[$key]);
+        if(null!=$data->input('filter_value')[$key]){$filterValue=$data->input('filter_value')[$key];}else{ $filterValue=$data->input('filter_default')[$key];}
         $this->createFilter($filterId,$filterValue, $adId);
       }
 
