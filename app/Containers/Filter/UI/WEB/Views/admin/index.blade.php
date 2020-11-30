@@ -102,18 +102,18 @@
 
                     </div>
                   <div class="form-group">
-                    <label class="form-label" for="filter_name">Произвольный уникальный указатель категории</label>
-                    <input type="text" id="pointer" name="pointer" class="form-control" placeholder="Произвольный уникальный указатель категории">
+                    <label class="form-label" for="filter_name">Метка фильтра</label>
+                    <input type="text" id="pointer" name="pointer" class="form-control" >
 
                   </div>
 
 
-                    <div class="form-group">
+                    <!--div class="form-group">
                         <div class="custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="managerSwitch" checked>
                             <label class="custom-control-label" for="managerSwitch">Активна/не активна</label>
                         </div>
-                    </div>
+                    </div-->
 
                   <div class="form-group">
                     <label class="form-label" for="customer_name">Формат ввода</label>
@@ -140,13 +140,13 @@
 
                   <div class="form-group">
                     <label class="form-label" for="filter_name">Значение по умолчанию</label>
-                    <input type="text" id="default_value" name="default_value" value="-" required class="form-control" placeholder="Значение по умолчанию">
+                    <input type="text" id="default_value" name="default_value" value="-" required class="form-control" placeholder="-">
 
                   </div>
                   <div class="form-group" id="text_value_block">
                     <label class="form-label" for="filter_name"><span style="display:none" id="text_value_name">Текстовое значение</span><span style="display:none" id="digital_value_name">Цифровое значение</span></label>
-                    <input type="text" style="width:40%;display:none" id="text_value" disabled  value="" class="form-control" placeholder="Англ-Русс max 70 знаков">
-                    <input type="text" style="width:40%;display:none" id="digital_value" disabled  value="" class="form-control" placeholder="0-9 max 1000">
+                    <input type="text" maxlength="20" style="width:40%;display:none" id="text_value" disabled  value="" class="form-control" placeholder="Англ-Русс max 20 знаков">
+                    <input type="number" max="1000" style="width:40%;display:none" id="digital_value" disabled  value="" class="form-control" placeholder="0-1000 max 20 знаков">
                   </div>
 
                   <div class="form-group">
