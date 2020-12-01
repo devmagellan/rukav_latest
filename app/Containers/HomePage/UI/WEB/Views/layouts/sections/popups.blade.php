@@ -39,7 +39,7 @@
           <div class="g-recaptcha"
                data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
           </div>
-        @else
+        @endif
         <div class="row">
           <div class="col-sm-12">
             <button type="submit" data-toggle="modal">Отправить сообщение
