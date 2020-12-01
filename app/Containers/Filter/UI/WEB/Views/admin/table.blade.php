@@ -87,10 +87,10 @@
           console.log('customer_id',customer_id)
             var manager =  $(this).parent().parent().find('.customer_manager').find('.is_manager').val()
             var name= $(this).parent().parent().find('.customer_name').text()
-			var link= $(this).parent().parent().find('.staticpage_link').text()
+			  var link= $(this).parent().parent().find('.staticpage_link').text()
           $('#filter_id').val($(this).parent().parent().find('.customer_id').text())
             $('#filter_name').val(name)
-			$('#staticpage_link').val(link)
+			  $('#staticpage_link').val(link)
             var active= $(this).parent().parent().find('.company_switch').find('.custom-switch').find('.active_filter_switch')[0].checked;
             console.log('Active=>',active)
             console.log($(this).parent().find('input').val())
@@ -120,9 +120,10 @@
             },
             success: function (data) {
               console.log('PrependChangeCustomer',data);
-
-              $('#default_value').val(data.filter.default_value)
-              var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+               if(!data.filter.default_value) {$('#default_value').val('-')}else{
+              $('#default_value').val(data.filter.default_value)}
+              $('#pointer').val(data.filter.pointer);
+              var wrapper = $(".input_fields_wrap"); //Fields wrapper
               switch (data.filter.format){
                 case 'dropdown':
                   console.log('point7')
@@ -132,6 +133,7 @@
                   $('#multiple_choice').prop('checked',false);
                   $('.input_fields_wrap').show()
                   $('.input_fields_wrap').empty();
+
 
                   $(wrapper).append('<button type="button" style="width:300px;" class="add_field_button">+ Добавить дополнительное значение</button>');
                   $.each(JSON.parse(data.filter.values), function (key, val) {
