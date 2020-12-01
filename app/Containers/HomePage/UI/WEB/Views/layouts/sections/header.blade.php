@@ -1,3 +1,29 @@
+<style>
+  .notification {
+    color: white;
+    text-decoration: none;
+    padding: 15px 26px;
+    position: relative;
+    display: inline-block;
+  }
+  .notification img {
+    position:absolute;
+    top:-2px;
+  }
+  .notification:hover {
+  }
+
+  .notification .badge {
+    position: absolute;
+    top: -10px;
+    right: -23px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+  }
+</style>
+
 
 <header class="header">
   <div class="container">
@@ -70,14 +96,24 @@
       @else
         @if(null!=(\Auth::user()) )
         <div class="col-md-1 col-2">
-          <a href="#" class="user_cabinet_login" >
+          <a href="#" class="user_cabinet_login notification" >
 
 
-
+           <span>
             @if(null!=(\Auth::user()) && \Auth::user()->avatar)
               <img style="height:40px;border-radius: 50%;" src="@if(substr(\Auth::user()->avatar, 0, 4)!='http')/storage/avatars/@endif{{ \Auth::user()->avatar }}" />
               @elseif(null!=(\Auth::user()) && \Auth::user()->name )
              <img style="height:40px" src="{{ \Avatar::create(\Auth::user()->name.' '.\Auth::user()->sername)->toBase64() }}" />
+            @endif
+            </span>
+
+            <?
+            $connects=\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->where('viewed_at',null)->get();
+            ?>
+            @if(count($connects)>0 && count($connects)<99 )
+              <span class="badge">{{count($connects)}}</span>
+              @elseif(count($connects)>=99 )
+            <span class="badge">99<span style="font-size:15px">+</span></span>
             @endif
           </a>
           <div class="user_cabinet_dropdown">
