@@ -154,7 +154,7 @@
                     <div class="row">
                       <div class="col-md-5">
                         <div class="input_fields_wrap">
-                          <button style="width:300px;" class="add_field_button">+ Добавить дополнительное значение</button>
+                          <button type="button" style="width:300px;" class="add_field_button">+ Добавить дополнительное значение</button>
                           <div class="folder_deals">
 
                           </div>
@@ -385,6 +385,7 @@ $('#managerSwitch').change(function(){
 
 /*$('.staticpage_create').click(function(){*/
         function  theSubmitFunction () {
+          console.log('SubMit')
             $('.has_been_taken_message').hide();
             var form = $('#filter_create')
             if (form[0].checkValidity() === false || localStorage.getItem('email_state') == 1) {
