@@ -3,12 +3,42 @@
 namespace App\Containers\StaticPage\UI\WEB\Requests;
 
 use App\Ship\Parents\Requests\Request;
+use GuzzleHttp\Client;
+use Illuminate\Validation\Factory as ValidationFactory;
 
 /**
  * Class GetAllStaticPagesRequest.
  */
 class SendContactRequest extends Request
 {
+  public function __construct(ValidationFactory $validationFactory)
+  {
+
+
+
+    $validationFactory->extend(
+      'recaptcha',
+      function ($attribute, $value, $parameters) {
+        {
+          $client = new Client;
+          $response = $client->post('https://www.google.com/recaptcha/api/siteverify',
+            [
+              'form_params' =>
+                [
+                  'secret' => env('GOOGLE_RECAPTCHA_SECRET'),
+                  'response' => $value
+                ]
+            ]
+          );
+
+          $body = json_decode((string)$response->getBody());
+          return $body->success;
+        }
+      },
+      'reCaptcha бязательно для заполнения!'
+    );
+
+  }
 
     /**
      * The assigned Transporter for this Request
@@ -55,6 +85,7 @@ class SendContactRequest extends Request
        'name'=>'required',
 			'email' => 'required|email',
 			'text' => 'required',
+          'g-recaptcha-response' => 'required|recaptcha'
         ];
     }
 

@@ -35,7 +35,11 @@
             <span id="text" style="color:red" class="errorBlock"></span>
           </div>
         </div>
-
+        @if(env('GOOGLE_RECAPTCHA_KEY'))
+          <div class="g-recaptcha"
+               data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+          </div>
+        @else
         <div class="row">
           <div class="col-sm-12">
             <button type="submit" data-toggle="modal">Отправить сообщение
