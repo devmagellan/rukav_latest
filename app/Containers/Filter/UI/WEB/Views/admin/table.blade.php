@@ -26,9 +26,29 @@
           <td class="customer_pointer">{{$filter->pointer}}
 
           </td>
-          <td class="customer_format">{{$filter->format}}
+          @switch($filter->format)
+            @case('input')
+          <td class="customer_format">текстовый
 
           </td>
+          @break
+            @case('dropdown')
+            <td class="customer_format">дропдаун
+
+            </td>
+            @break
+            @case('multiple_choice')
+            <td class="customer_format">мультивыбор
+
+            </td>
+            @break
+            @case('input_digits')
+            <td class="customer_format">цифровой
+
+            </td>
+            @break
+          @endswitch
+
 
             <td class="company_switch">
                 <div class="custom-control custom-switch">
