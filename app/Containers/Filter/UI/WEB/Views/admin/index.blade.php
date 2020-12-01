@@ -385,10 +385,16 @@ $('#managerSwitch').change(function(){
 
 /*$('.staticpage_create').click(function(){*/
         function  theSubmitFunction () {
-          console.log('SubMit')
+         if (this.isSubmitted) {
+            evt.preventDefault();
+            return false;
+          }
+          this.isSubmitted = true;
+          console.log('SubMit2')
             $('.has_been_taken_message').hide();
             var form = $('#filter_create')
             if (form[0].checkValidity() === false || localStorage.getItem('email_state') == 1) {
+              console.log(333);
                 if (localStorage.getItem('email_state') == 1) {
                     console.log(555)
                     $('#filter_create').removeClass('was-validated')
