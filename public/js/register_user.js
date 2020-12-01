@@ -18,6 +18,7 @@ $(document).ready(function () {
       },
       error: function (errors) {
         var response = JSON.parse(errors.responseText);
+		console.log('response.errors',response.errors)
         $('.errorBlock').html('');
         $.each(response.errors, function (key, value) {
           $('#' + key).html(value)
