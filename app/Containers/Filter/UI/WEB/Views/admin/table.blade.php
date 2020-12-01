@@ -91,7 +91,7 @@
             $('#filter_name').val(name)
 			$('#staticpage_link').val(link)
             var active= $(this).parent().parent().find('.company_switch').find('.custom-switch').find('.active_filter_switch')[0].checked;
-            console.log(active)
+            console.log('Active=>',active)
             console.log($(this).parent().find('input').val())
             var text= $(this).parent().find('.staticpage_text').val()
             console.log('text',text)

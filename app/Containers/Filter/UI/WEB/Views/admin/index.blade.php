@@ -96,6 +96,7 @@
 
 
 
+
                     <div class="form-group">
                         <label class="form-label" for="filter_name">Название страницы</label>
                         <input type="text" id="filter_name" name="filter_name" required class="form-control" placeholder="Название фильтра">
@@ -406,7 +407,8 @@ $('#managerSwitch').change(function(){
               var values=$( "input[name^='values']" ).serializeArray();
               console.log('values',values)
                 var filter_name = $('#filter_name').val()
-                //var active =$('#managerSwitch')[0].checked
+              //var active =$('#managerSwitch')[0].checked
+              console.log()
                 var filter_id=$('#filter_id').val()
                 $.ajax({
                     method: 'POST',
