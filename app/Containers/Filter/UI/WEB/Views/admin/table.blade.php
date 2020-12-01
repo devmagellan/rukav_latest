@@ -1,3 +1,4 @@
+<?$html='';?>
 <div class="frame-wrap">
     <table class="table table-sm m-0">
         <thead class="bg-primary-500">
@@ -131,12 +132,29 @@
                   $('#multiple_choice').prop('checked',false);
                   $('.input_fields_wrap').show()
                   $('.input_fields_wrap').empty();
-                  $(wrapper).append('<button style="width:300px;" class="add_field_button">+ Добавить дополнительное значение</button>');
-                    $.each(JSON.parse(data.filter.values), function (key, val) {
-                      console.log('current_values=>', key + val);
 
-                      $(wrapper).append('<div><input type="text" style="width:300px" value="'+val+'" name="values[]"/><a href="#" class="remove_field">Remove</a></div>');
-                    });
+                  $(wrapper).append('<button type="button" style="width:300px;" class="add_field_button">+ Добавить дополнительное значение</button>');
+                  $.each(JSON.parse(data.filter.values), function (key, val) {
+                    console.log('current_values=>', key + val);
+
+                    $(wrapper).append('<div><input type="text" style="width:300px" value="'+val+'" name="values[]"/><a href="#" class="remove_field">Remove</a></div>');
+                  });
+
+                  var max_fields      = 30; //maximum input boxes allowed
+                  var add_button      = $(".add_field_button"); //Add button ID
+                  var x = JSON.parse(data.filter.values).length; //initlal text box count
+                  console.log(x)
+                  $(wrapper).delegate( add_button, "click", function(e) {
+                    e.preventDefault();
+                    console.log(1,x)
+                    if(x < max_fields){ //max input box allowed
+                      x++; //text box increment
+                      console.log(2,x)
+                      $(wrapper).append('<div><input type="text" style="width:300px"  name="values[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                    }
+                  });
+
+
 
                   break;
                 case 'input':
@@ -154,12 +172,27 @@
                   $('#multiple_choice').prop('checked',true);
                   $('.input_fields_wrap').show()
                   $('.input_fields_wrap').empty();
-                  $(wrapper).append('<button style="width:300px;" class="add_field_button">+ Добавить дополнительное значение</button>');
+                  $(wrapper).append('<button type="button" style="width:300px;" class="add_field_button">+ Добавить дополнительное значение</button>');
                   $.each(JSON.parse(data.filter.values), function (key, val) {
                     console.log('current_values=>', key + val);
 
                     $(wrapper).append('<div><input type="text" style="width:300px" value="'+val+'" name="values[]"/><a href="#" class="remove_field">Remove</a></div>');
                   });
+
+                  var max_fields      = 30; //maximum input boxes allowed
+                  var add_button      = $(".add_field_button"); //Add button ID
+                  var x = JSON.parse(data.filter.values).length; //initlal text box count
+                  console.log(x)
+                  $(wrapper).delegate( add_button, "click", function(e) {
+                    e.preventDefault();
+                    console.log(1,x)
+                    if(x < max_fields){ //max input box allowed
+                      x++; //text box increment
+                      console.log(2,x)
+                      $(wrapper).append('<div><input type="text" style="width:300px" name="values[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                    }
+                  });
+
                   break;
               }
             }
