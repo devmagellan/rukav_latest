@@ -144,15 +144,18 @@ class Controller extends WebController
 
   public function postSave(GetAllFiltersRequest $request){
     $values=[];
+    var_dump($request->input('active'));
       if(null!=$request->input('values')){
 
         foreach($request->input('values') as $value){
           $values[]=$value['value'];
         }
       }
+   $active= \App\Containers\Filter\Models\Filter::where('id',$request->input('filter_id'))->first();
+
     $companySlider['values']=[
       'name'=>$request->input('filter_name'),
-      'active'=>($request->input('active')=='true') ? 1 : 0,
+      'active'=>($active) ? $active->active : 1,//$request->input('active')=='true'
       'format'=>$request->input('format'),
       'default_value'=>$request->input('default_value'),
       'pointer'=>$request->input('pointer'),
