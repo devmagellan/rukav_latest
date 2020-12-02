@@ -333,10 +333,11 @@ class Controller extends WebController
 
         $entityClass = \App\Containers\Connect\Models\Connect::class;
         $con = call_user_func("{$entityClass}::query")->updateOrCreate($message['attributes'], $message['values']);
-//var_dump('con',$con);
+		$connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$user->id)->where('message_id',$request->input('message_id'))->where('viewed_at',null)->get();
+									
 //var_dump('receiver-'.$user->id.'-');
         $options = array(
-          'cluster' => 'eu',
+          'cluster' => 'eu', 
           'useTLS' => true
         );
         $pusher = new \Pusher\Pusher(
@@ -348,7 +349,8 @@ class Controller extends WebController
 
         $data['message_id'] = $request->input('message_id');
         $data['sender_id'] = \Auth::user()->id;
-        $data['text'] = $request->input('text');
+        $data['text'] = $request->input('text'); 
+		$data['viewed'] = (count($connects)>0) ? count($connects) : null;
         $data['photo'] = null;
         $data['created'] = $con->created_at;
         $pusher->trigger('my-channel', /* 'my-event' */ 'receiver-' . $user->id . '-', $data);
