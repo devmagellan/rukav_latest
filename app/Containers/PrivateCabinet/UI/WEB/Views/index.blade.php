@@ -1514,7 +1514,7 @@
       $(document).ready(function() {
 
           reloadMessages()
-        $('#imgInputBusiness').on('change', function() {
+        $('#imgInputBusiness').on('change', function() { 
           console.log('imgInputBusiness')
           var fileName = '';
           fileName = $(this).val();

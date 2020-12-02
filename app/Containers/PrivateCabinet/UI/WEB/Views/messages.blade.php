@@ -13,6 +13,24 @@
     margin-top:15px;
 
   }
+  .new_notification{
+	  position:relative;
+  }
+  
+    .new_notification .badge {
+    position: absolute;
+    top: -10px;
+    right: -23px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+  }
+  
+  .remove-bar::before {
+     content: none; 
+}
+
 </style>
 <div class="row">
     <div class="col-md-4">
@@ -62,7 +80,9 @@
 						@if(isset($list->connects))
                             @foreach($list->connects as $cnv)
                             <div class="message_sidebar_theme_item message_sidebar_theme_item-new" id="conv_{{$cnv->id}}" onclick="reloadMessageList('{{$cnv->id}}','{{$list->group_id}}')">
-                                <div class="message_sidebar_theme_left">
+
+								
+								<div class="message_sidebar_theme_left">
                                     <div class="massage_user_avatar massage_user_avatar_online">
                                         <?
                                         $pht=App\Containers\Ad\Models\Picture::where('ads_id',$cnv->id)->first();
@@ -150,7 +170,10 @@
                                 @if($groupConversations->first())
 
                                     <div class="message_sidebar_theme_item message_sidebar_theme_item-new" onclick="reloadMessageList('{{$groupConversations->first()->id}}','{{$groupConversations->first()->group_id}}')">
-                                    <div class="message_sidebar_theme_left">
+                                    
+									
+									
+									<div class="message_sidebar_theme_left">
                                         <div class="massage_user_avatar massage_user_avatar_online">
                                             <?
                                     $pht=App\Containers\Ad\Models\Picture::where('ads_id',$groupConversations->first()->id)->first();
@@ -204,7 +227,8 @@
 
                                     @if($recepient->adsWithGroup->first())
                                         <div class="message_sidebar_theme_item message_sidebar_theme_item-new" onclick="reloadCleanMessageList('{{$recepient->adsWithGroup->first()->id}}')">
-                                            <div class="message_sidebar_theme_left">
+                                           
+										   <div class="message_sidebar_theme_left">
                                                 <div class="massage_user_avatar massage_user_avatar_online">
                                                     <?
                                                     //$pht=App\Containers\Ad\Models\Picture::where('ads_id',$groupConversations->first()->id)->first();
@@ -275,8 +299,39 @@
                             $opponent=\App\Containers\User\Models\User::where('id',$conversation->receiver_id)->first();
                           }
                           ?>
-                        <div class="message_sidebar_theme_item conv_class_{{$conversation->message->id}} @if($conversation->viewed_at==null) message_sidebar_theme_item-new @endif" id="conv_id_{{$conversation->id}}" onclick="reloadMessageList('{{$conversation->id}}')" >
-                            <div class="message_sidebar_theme_left">
+                        <div class="new_notification message_sidebar_theme_item conv_class_{{$conversation->message->id}} @if($conversation->viewed_at==null) message_sidebar_theme_item-new @endif" id="conv_id_{{$conversation->id}}" onclick="reloadMessageList('{{$conversation->id}}');cleanCounter('{{$conversation->message->id}}')" >
+                            
+							        <?
+									$connects=\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->where('message_id',$conversation->message->id)->where('viewed_at',null)->get();
+									?>
+									@if(count($connects)>0 && count($connects)<99 )
+										
+									<style>  
+							   .conv_class_{{$conversation->message->id}}:before{
+								content: "{{count($connects)}}";
+								display: block;
+								position: absolute;
+								right: 12px;
+								top: 12px;
+								font-weight: 500;
+								font-size: 10px;
+								line-height: 14px;
+								color: #FFFFFF;
+								width: 44px;
+								text-align: center;
+								background: red;
+								border-radius: 30px;
+							} 
+							.conv_class_{{$conversation->message->id}}.nobefore:before{
+								display:none;
+							}
+							</style>
+									
+									
+										  <!--span class="badge">{{count($connects)}}</span-->
+									@endif
+							
+							<div class="message_sidebar_theme_left">
                                 <div class="massage_user_avatar">
                                     <?
                                     $photo=App\Containers\Ad\Models\Picture::where('ads_id',$conversation->message->id)->first();
@@ -351,6 +406,7 @@
 
         $('.select2').select2();
         reloadMessageList('{{$conversations[0]->id}}')
+		console.log('reloadMessageListFinished');
 
 
     $('.message_sidebar_theme_head p').click(function () {
@@ -362,10 +418,15 @@
 
     })
 
+function cleanCounter(message_id){
+	$('.conv_class_'+message_id+'').addClass('nobefore')
+}
+
     function reloadMessageList(conversation,group_id){
 $('#conv_id_'+conversation+'').removeClass('message_sidebar_theme_item-new');
         var module='conversation'
-        console.log('conversation',conversation);
+        console.log('conversation>',conversation);
+		
         var url='/cabinet/conversation';
         $.ajax({
             method: 'POST',
@@ -380,7 +441,7 @@ $('#conv_id_'+conversation+'').removeClass('message_sidebar_theme_item-new');
                 $('#loader2').hide();
             },
             success: function (data) {
-//console.log(data)
+            console.log('data>',data)
                 $('.result_of_messageList_table').html(data);
 
             }
@@ -498,5 +559,7 @@ console.log(type,group_id)
     }
 
   })
+
+
 
 </script>

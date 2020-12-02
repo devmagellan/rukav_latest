@@ -325,8 +325,30 @@ console.log(receiver)
 console.log(receiver.length)
 
 channel.bind(receiver, function(data) {
-console.log(data);
+console.log('data>',data);
 $('.conv_class_'+data.message_id+'').addClass('message_sidebar_theme_item-new')
+$('.conv_class_'+data.message_id+'').append( 
+'<style>'+
+							   '.conv_class_'+data.message_id+':before{'+
+								'content: "'+data.viewed+'";'+
+								'display: block;'+
+								'position: absolute;'+
+								'right: 12px;'+
+								'top: 12px;'+
+								'font-weight: 500;'+
+								'font-size: 10px;'+
+								'line-height: 14px;'+
+								'color: #FFFFFF;'+
+								'width: 44px;'+
+								'text-align: center;'+
+								'background: red;'+
+								'border-radius: 30px;'+
+							'} '+
+							'.conv_class_'+data.message_id+'.nobefore:before{'+
+								'display:none;'+
+							'}'+
+							'</style>'
+)
 
 if('{{$conversation->first()->sender_id}}'=={{\Auth::user()->id}}){
 	var sender='{{$conversation->first()->receiver_id}}';
@@ -334,7 +356,7 @@ if('{{$conversation->first()->sender_id}}'=={{\Auth::user()->id}}){
 else{
 	var sender='{{$conversation->first()->sender_id}}'
 }
-console.log(sender)
+console.log('sender>',sender)
 console.log('{{$conversation->first()->message->id}}')
   console.log('popali')
  if(data.photo==null && data.sender_id==sender && '{{$conversation->first()->message->id}}'==data.message_id ){
