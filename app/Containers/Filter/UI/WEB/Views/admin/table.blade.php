@@ -139,7 +139,7 @@
                   $.each(JSON.parse(data.filter.values), function (key, val) {
                     console.log('current_values=>', key + val);
 
-                    $(wrapper).append('<div><input type="text" class="drop_field" style="width:300px" value="'+val+'" name="values[]"/><a href="#" class="remove_field">Remove</a></div>');
+                    $(wrapper).append('<div><input type="text" class="drop_field" style="width:300px" value="'+val+'" name="values[]"/><a href="#" class="remove_field">Удалить</a></div>');
                   });
 
                   var max_fields      = 30; //maximum input boxes allowed
@@ -152,7 +152,7 @@
                     if(x < max_fields){ //max input box allowed
                       x++; //text box increment
                       console.log(2,x)
-                      $(wrapper).append('<div><input type="text" style="width:300px"  name="values[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                      $(wrapper).append('<div><input type="text" style="width:300px"  name="values[]"/><a href="#" class="remove_field">Удалить</a></div>'); //add input box
                     }
                   });
 
@@ -178,7 +178,7 @@
                   $.each(JSON.parse(data.filter.values), function (key, val) {
                     console.log('current_values=>', key + val);
 
-                    $(wrapper).append('<div><input type="text" style="width:300px" value="'+val+'" name="values[]"/><a href="#" class="remove_field">Remove</a></div>');
+                    $(wrapper).append('<div><input type="text" style="width:300px" value="'+val+'" name="values[]"/><a href="#" class="remove_field">Удалить</a></div>');
                   });
 
                   var max_fields      = 30; //maximum input boxes allowed
@@ -191,7 +191,7 @@
                     if(x < max_fields){ //max input box allowed
                       x++; //text box increment
                       console.log(2,x)
-                      $(wrapper).append('<div><input type="text" style="width:300px" name="values[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                      $(wrapper).append('<div><input type="text" style="width:300px" name="values[]"/><a href="#" class="remove_field">Удалить</a></div>'); //add input box
                     }
                   });
 

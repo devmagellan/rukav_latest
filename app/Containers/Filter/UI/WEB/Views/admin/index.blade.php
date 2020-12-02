@@ -98,7 +98,7 @@
 
 
                     <div class="form-group">
-                        <label class="form-label" for="filter_name">Название страницы</label>
+                        <label class="form-label" for="filter_name">Название фильтра</label>
                         <input type="text" id="filter_name" name="filter_name" required class="form-control" placeholder="Название фильтра">
 
                     </div>
@@ -146,7 +146,7 @@
                   </div>
                   <div class="form-group" id="text_value_block">
                     <label class="form-label" for="filter_name"><span style="display:none" id="text_value_name">Текстовое значение</span><span style="display:none" id="digital_value_name">Цифровое значение</span></label>
-                    <input type="text" maxlength="20" style="width:40%;display:none" id="text_value" disabled  value="" class="form-control" placeholder="Англ-Русс max 20 знаков">
+                    <input type="text" maxlength="20" style="width:40%;display:none" id="text_value" disabled  value="" class="form-control" placeholder="А-яА-z9-0 max 20 знаков">
                     <input type="number" max="1000" style="width:40%;display:none" id="digital_value" disabled  value="" class="form-control" placeholder="0-1000 max 20 знаков">
                   </div>
 
@@ -530,7 +530,7 @@ function clearCustomerAdding(){
                 e.preventDefault();
                 if(x < max_fields){ //max input box allowed
                     x++; //text box increment
-                    $(wrapper).append('<div><input type="text" style="width:300px" name="values[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                    $(wrapper).append('<div><input type="text" style="width:300px" name="values[]"/><a href="#" class="remove_field">Удалить</a></div>'); //add input box
                 }
             });
 
