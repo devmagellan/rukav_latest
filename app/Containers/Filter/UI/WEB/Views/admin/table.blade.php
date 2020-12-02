@@ -135,18 +135,18 @@
                   $('.input_fields_wrap').empty();
 
 
-                  $(wrapper).append('<button type="button" style="width:300px;" class="add_field_button">+ Добавить дополнительное значение</button>');
+                  $(wrapper).append('<button id="fb_'+customer_id+'" type="button" style="width:300px;" class="add_field_button">+ Добавить дополнительное значение</button>');
                   $.each(JSON.parse(data.filter.values), function (key, val) {
                     console.log('current_values=>', key + val);
 
-                    $(wrapper).append('<div><input type="text" style="width:300px" value="'+val+'" name="values[]"/><a href="#" class="remove_field">Remove</a></div>');
+                    $(wrapper).append('<div><input type="text" class="drop_field" style="width:300px" value="'+val+'" name="values[]"/><a href="#" class="remove_field">Remove</a></div>');
                   });
 
                   var max_fields      = 30; //maximum input boxes allowed
-                  var add_button      = $(".add_field_button"); //Add button ID
+                  var add_button      = $("#fb_"+customer_id+":not(input)"); //Add button ID
                   var x = JSON.parse(data.filter.values).length; //initlal text box count
-                  console.log(x)
-                  $(wrapper).delegate( add_button, "click", function(e) {
+                  console.log('add_button>',x,add_button)
+                  $("#fb_"+customer_id+"").delegate($(wrapper) , "click", function(e) {
                     e.preventDefault();
                     console.log(1,x)
                     if(x < max_fields){ //max input box allowed
@@ -185,7 +185,7 @@
                   var add_button      = $(".add_field_button"); //Add button ID
                   var x = JSON.parse(data.filter.values).length; //initlal text box count
                   console.log(x)
-                  $(wrapper).delegate( add_button, "click", function(e) {
+                  add_button.delegate( $(wrapper), "click", function(e) {
                     e.preventDefault();
                     console.log(1,x)
                     if(x < max_fields){ //max input box allowed
