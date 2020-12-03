@@ -160,7 +160,7 @@
                       break;
               }
               ?>
-              <input type="hidden" value="{{\Auth::user()->vid_user}} @endif" name="vid_user">
+              <input type="hidden" value="{{\Auth::user()->vid_user}}" name="vid_user">
               <div class="prophile_show-wrapper ">
                 <div class="col-md-12">
                   <p class="prophile_show_title">
