@@ -161,6 +161,7 @@
               }
               ?>
               <input type="hidden" value="{{\Auth::user()->vid_user}}" name="vid_user">
+              <input type="hidden" name="code" id="code" value="0">
               <div class="prophile_show-wrapper ">
                 <div class="col-md-12">
                   <p class="prophile_show_title">
@@ -1265,6 +1266,10 @@ $('.show_ad').click(function() {
 	console.log($(this).attr("data-id"))
     document.location.href='/ads/'+$(this).attr('data-id');
 });
+$('#telphone5').focusout(function() {
+  var code = $('.iti__selected-dial-code').text().split('+')[1]
+  $('#code').val('+'+code)
+})
 
   </script>
 
