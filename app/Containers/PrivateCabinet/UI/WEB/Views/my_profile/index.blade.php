@@ -29,6 +29,9 @@
     @endif
 
       @if(\Session::has('updating_from_simpleUser') && \Session::get('updating_from_simpleUser')==1 && \Auth::user())
+        @php
+          \Log::info('updating_from_simpleUserGET'.\Session::get('updating_from_simpleUser'));
+          @endphp
         <script>
           $(document).ready(function(){
             $('#confirmPhone').modal({show:true})
