@@ -32,9 +32,6 @@ class UserService
 
           }*/
         }
-        \Log::info('property_exists($data, \'a\')=>'.property_exists($data, 'admin_side'));
-        \Log::info('array_exists($data, \'a\')=>'.isset($data->admin_side));
-        \Log::info('property_exists($data, \'a\')=>'.$data->admin_side);
 	  \Log::info('CurrentUserID=>'.$id);
         $newUser = User::withTrashed()->updateOrCreate(['id'=>$id],[
       'name' => (property_exists($data, 'save_url') ) ? $data->name : $data->firstName,

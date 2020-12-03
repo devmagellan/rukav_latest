@@ -25,7 +25,7 @@
           <div class="input_password_wrapper col-md-12" style="margin:0 auto">
             <input type="text"  placeholder="Ваш Email" class="input_password" name="email" ><span class="required">*</span>
             <span id="email" style="color:red" class="errorBlock"></span>
-			
+
           </div>
           <div class="input_password_wrapper col-md-12" style="margin:0 auto">
             <input type="text"  placeholder="ID объявления" class="input_password" name="add_id" >
@@ -34,7 +34,7 @@
 		   <div class="input_password_wrapper col-md-12" style="margin:0 auto">
             <textarea  name="text" >Пожалуйста дайте как можно больше деталей</textarea><span class="required">*</span>
             <span id="text" style="color:red" class="errorBlock"></span>
-			
+
           </div>
 		   <div class="input_password_wrapper col-md-12" style="margin:0 auto">
 		  <span id="g-recaptcha-response" style="color:red" class="errorBlock"></span></div>
@@ -42,14 +42,14 @@
 		   @if(env('GOOGLE_RECAPTCHA_KEY'))
           <div class="g-recaptcha" style="width: 100%;margin-top:15px;margin-left: 95px;"
                data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
-			   
+
           </div>
-		 
+
 		  @else
 			  no recaptcha key
         @endif
-		
-       
+
+
         <div class="row">
           <div class="col-sm-12">
             <button type="submit" data-toggle="modal">Отправить сообщение
@@ -901,7 +901,7 @@
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
       <img src="{{asset('')}}img/modalIconPhone.svg" alt="" class="moadal_img">
-      <h6 class="modalTitle">Подтвердите свой телефонный номер</h6>
+      <h6 class="modalTitle">Подтвердите свой телефонный номер 44</h6>
       <form class="formModal phoneConfirmationForm">
 
         <div class="row">
