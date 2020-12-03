@@ -377,7 +377,7 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
     }
 
     public function changeRegisterFromSimpleUser($request){
-      \Log::info('user_after_save_to_organisation'.$request->input());
+      \Log::info('user_after_save_to_organisation',$request->input());
         $this->smsService=new SmsService();
         $message=$this->smsService->store($request);
         session()->put('updating_from_simpleUser',1);
