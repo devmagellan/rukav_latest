@@ -327,7 +327,7 @@
                         </button>
                     </div>
 
-                    <form class="needs-validation" id="customer_create" novalidate onsubmit="theSubmitFunctionPassword(); return false;">
+                    <form class="needs-validation" id="customer_create" novalidate onsubmit="theSubmitFunctionPassword (); ">
                         <input type="hidden" id="customer_password_id" name="customer_id" value="0">
 
                         <div class="form-group">

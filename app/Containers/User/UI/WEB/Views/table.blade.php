@@ -117,10 +117,14 @@
         $(".default-example-modal-show-user-password #bookId").val( myBookId );
       })
 
-        $('.ChangePassword').click(function(){
-            $('.default-example-modal-right-lg-password').modal({show:true});
-            $('[data-toggle=popover]').popover('hide');
-        })
+      $('.ChangePassword').click(function(){
+        console.log('ChangeRoles1')
+        var customer_id =  $(this).parent().parent().find('.customer_id').text()
+        $('.default-example-modal-right-lg-password').modal({show:true});
+        $('[data-toggle=popover]').popover('hide');
+        console.log('prepare_customer',customer_id)
+        $('#customer_password_id').val(customer_id)
+      });
 
         $('.ChangeRoles').click(function(){
             $('.default-example-modal-right-lg-roles').modal({show:true});

@@ -32,6 +32,9 @@ class UserService
 
           }*/
         }
+        \Log::info('property_exists($data, \'a\')=>'.property_exists($data, 'admin_side'));
+        \Log::info('array_exists($data, \'a\')=>'.isset($data->admin_side));
+        \Log::info('property_exists($data, \'a\')=>'.$data->admin_side);
 	  \Log::info('CurrentUserID=>'.$id);
         $newUser = User::withTrashed()->updateOrCreate(['id'=>$id],[
       'name' => (property_exists($data, 'save_url') ) ? $data->name : $data->firstName,
@@ -44,7 +47,7 @@ class UserService
       'avatar'=>(property_exists($data, 'customer_id')  && $data->customer_id) ? $data->avatar : null,
       'active'=>(property_exists($data, 'customer_id')  && $data->customer_id) ? $data->active : 1,
       'is_client'=>(property_exists($data, 'customer_id')  && $data->customer_id) ? $data->is_client : 1,
-      'confirmed'=> (isset($currentById) && $currentById->email!=$data->email) ? User::STATUS_INACTIVE :  ((property_exists($data, 'a') && $data->admin_side==1) ? User::STATUS_CREATED_BY_ADMIN_NOT_CONFIRMED  :((property_exists($data, 'customer_id')  && $data->customer_id) ? $data->confirmed : User::STATUS_INACTIVE)),
+      'confirmed'=> (isset($currentById) && $currentById->email!=$data->email) ? User::STATUS_INACTIVE :  ((isset($data->admin_side) && $data->admin_side==1) ? User::STATUS_CREATED_BY_ADMIN_NOT_CONFIRMED  :((property_exists($data, 'customer_id')  && $data->customer_id) ? $data->confirmed : User::STATUS_INACTIVE)),
       'is_confirmed_phone'=> (property_exists($data, 'customer_id')  && $data->customer_id) ? $data->is_confirmed_phone : 0,
       'admin_created_confirmation'=>null,
       'verify_token' => Str::random(),

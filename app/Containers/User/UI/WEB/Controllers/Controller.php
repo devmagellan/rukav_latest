@@ -466,6 +466,7 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
 
     public function userСhangePassword(GetAllUsersRequest $request){
         $update=['password'=>Hash::make($request->input('password'))];
+      $update=['encripted_password' => openssl_encrypt($request->input('password'),"AES-128-ECB",'password')];
         if(null!=$request->input('old_password')){
             $user=User::where('id',\Auth::user()->id)->first();
         if(\Hash::check($request->input('old_password'), $user->password)){

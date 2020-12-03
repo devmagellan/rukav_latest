@@ -328,7 +328,7 @@
                         </button>
                     </div>
 
-                    <form class="needs-validation" id="customer_create" novalidate onsubmit="theSubmitFunctionPassword(); return false;">
+                    <form class="needs-validation" id="customer_create" novalidate onsubmit="theSubmitFunctionPassword(); return false; 2">
                         <input type="hidden" id="customer_password_id" name="customer_id" value="0">
 
                         <div class="form-group">
@@ -692,6 +692,52 @@ console.log(777,form[0].checkValidity())
     }
 }
       /*  })*/
+
+
+
+        function  theSubmitFunctionPassword () {
+
+          var password = $('#password_enter').val()
+          var confirm_password = $('#confirm_password').val()
+          console.log(password,confirm_password,password!==confirm_password)
+          if(password!==confirm_password){
+            console.log(333)
+            alert('Введенные пароли не соответствуют друг другу')
+          }
+          else{
+
+            if($('#customer_password_id').val()){
+              var customer_id = $('#customer_password_id').val()
+            }
+            else{
+              var customer_id =0;
+            }
+            console.log('customer_password_id',$('#customer_password_id').val())
+            $.ajax({
+              method: 'POST',
+              dataType: 'json',
+              async: false,
+              url: '/users/change_password',
+              data: {
+                customer_id: customer_id, password: password
+              },
+              beforeSend: function () {
+              },
+              complete: function () {
+
+              },
+              success: function (data) {
+
+                console.log('success')
+                $('.password_create_close').click();
+
+                reloadData();
+              }
+            });
+          }
+
+        }
+
 
 
 
