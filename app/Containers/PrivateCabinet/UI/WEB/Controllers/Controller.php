@@ -231,7 +231,7 @@ class Controller extends WebController
 
   public function profileSaveToOrganisation(ProfileSaveToOrganisationRequest $request)
   {
-    \Log::info('user_after_save_to_organisation');
+    \Log::info('user_after_save_to_organisation'.$request->input('vid_user'));
     if ($request->input('vid_user') == 'Частная') {
       \Log::info('fromPrivate');
       $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
