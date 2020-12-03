@@ -380,6 +380,7 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
         $this->smsService=new SmsService();
         $message=$this->smsService->store($request);
         session()->put('updating_from_simpleUser',1);
+        \Log::info('updating_from_simpleUserPUT');
         session()->put('emailVerificationTelephone',$request->phone);
         $collection=$request->all();
         session()->put('updatedUser',$collection);
