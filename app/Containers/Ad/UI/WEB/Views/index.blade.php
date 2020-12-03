@@ -491,6 +491,7 @@
 
               <div id="stickEdits">
                 <a htef="" OnClick="history.back();" style="background: #886ab5; color: #fff;" class="btn btn-primary edit_rubrics">Назад</a>
+                <a htef="" OnClick="reloadWithoutSetState();" style="background: #886ab5; color: #fff;" class="btn btn-primary edit_rubrics">Перегрузить</a>
                 <button type="button" class="btn btn-primary edit_rubrics" >Редактировать рубрики</button>
                 <button type="button" class="btn btn-default edit" >Прочее редактирование</button>
                 <button type="button" class="btn btn-danger delete" style="display:inline-block" data-toggle="modal" data-target="#example-modal-alert">Удалить</button>
@@ -595,14 +596,17 @@
 
   <script src="/js/nestable.js"></script>
   <script src="/js/page-nestable.js"></script>
-                      
-                   
+
+
                       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
                       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   <script>
     // Class definition
-
+function reloadWithoutSetState(){
+  window.dt.state.clear();
+  window.location.reload();
+}
     var controls = {
       leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
       rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
@@ -934,6 +938,9 @@
                     "processing": true,  // Show processing
                     "stateSave": true,
                     "serverSide": true,
+          drawCallback: function() {
+
+          },
           "ajax":{
             url :  '{{ route('serverSide') }}',
             type : "GET",
@@ -1021,14 +1028,13 @@
 
 
 
-      var dt = $('#dt-basic-example').DataTable( opts );
+      window.dt = $('#dt-basic-example').DataTable( opts );
 
-
-      var colResize = dt.settings()[0].colResize;
+      var colResize = window.dt.settings()[0].colResize;
       var fixedHeader = colResize.dom.fixedHeader;
       console.log(colResize);
       console.log(fixedHeader);
-     dt.on('colResizeInitCompleted', function(e, obj){
+      window.dt.on('colResizeInitCompleted', function(e, obj){
         colResize = obj;
         fixedHeader = obj.dom.fixedHeader;
 
@@ -1038,8 +1044,8 @@
 
 
 
-      dt.ajax.url('{{route('serverSide',['group_id'=>':group_id'])}}').load();
-      dt.draw();
+      window.dt.ajax.url('{{route('serverSide',['group_id'=>':group_id'])}}').load();
+      window.dt.draw();
       $('#button').on('click',  function () {
         var resourceURL = "{{route('serverSide',['group_id'=>':group_id'])}}";
         var group_id = 1;
@@ -1049,8 +1055,8 @@
         /*
          * Change the URL of dataTable and call ajax to load new data
          */
-        dt.ajax.url(targetUrl).load();
-        dt.draw();
+        window.dt.ajax.url(targetUrl).load();
+        window.dt.draw();
       } );
 
 
