@@ -468,13 +468,16 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
         $update=['password'=>Hash::make($request->input('password'))];
       $update=['encripted_password' => openssl_encrypt($request->input('password'),"AES-128-ECB",'password')];
         if(null!=$request->input('old_password')){
+          \Log::info('HashCheckOldPAssword'.$update=['password']);
             $user=User::where('id',\Auth::user()->id)->first();
         if(\Hash::check($request->input('old_password'), $user->password)){
+          \Log::info('HashCheckOldPAssword'.$update=['password']);
         \App\Containers\User\Models\User::where('id',$user->id)->update($update);
             return \Response::json(['status'=>'success']);
         }
         }
         if(null!=$request->input('customer_id')){
+          \Log::info('customer_id'.$update=['password']);
         \App\Containers\User\Models\User::where('id',$request->input('customer_id'))->update($update);}
         if(null!=$request->input('email')){
         \App\Containers\User\Models\User::where('email',$request->input('email'))->update($update);
