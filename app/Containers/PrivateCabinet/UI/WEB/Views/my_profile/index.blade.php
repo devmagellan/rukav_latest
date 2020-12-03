@@ -266,12 +266,12 @@
 				  }
 
 				  ?>
-                    <img class="prophile_photo_picked" for="imgInputakk" src="@if(\Auth::user()->avatar && $urlAvatar==false)  storage/avatars/{{\Auth::user()->avatar}} @elseif(\Auth::user()->avatar && $urlAvatar==true) {{\Auth::user()->avatar}} @else /img/slide_img1.png @endif " alt="">
+                    <img class="prophile_photo_picked" for="imgInputakk" src="@if(\Auth::user()->avatar && $urlAvatar==false)  /storage/avatars/{{\Auth::user()->avatar}} @elseif(\Auth::user()->avatar && $urlAvatar==true) {{\Auth::user()->avatar}} @else /img/slide_img1.png @endif " alt="">
                   </label>
                   <label class="prophile_photo_wrapper" for="imgInputakk">
                     <div class="prophile_photo_img" style="width:100%;height:100%">
                       @if(\Auth::user()->avatar)
-                        <img style="width:100%;height:100%" src="@if(\Auth::user()->avatar && $urlAvatar==false)  storage/avatars/{{\Auth::user()->avatar}} @elseif(\Auth::user()->avatar && $urlAvatar==true) {{\Auth::user()->avatar}} @else /img/slide_img1.png @endif " alt="">
+                        <img style="width:100%;height:100%" src="@if(\Auth::user()->avatar && $urlAvatar==false)  /storage/avatars/{{\Auth::user()->avatar}} @elseif(\Auth::user()->avatar && $urlAvatar==true) {{\Auth::user()->avatar}} @else /img/slide_img1.png @endif " alt="">
 
                       @else
                       <img src="img/prophile_camera.png" alt="">@endif
