@@ -1,33 +1,33 @@
 <style>
 #body > footer > div:nth-child(1) > div > div.col-md-4 > ul > li > a > svg{
-	
+
 	top:5px;
 	position:relative;
-	
-}	
+
+}
 #myBtn {
-  display: none; 
-  position: fixed; 
-  bottom: 20px; 
-  right: 30px; 
-  z-index: 99; 
-  border: none; 
-  outline: none; 
-  background-color: #A269F7; 
-  color: white; 
-  cursor: pointer; 
-  padding: 15px; 
-  border-radius: 10px; 
-  font-size: 18px; 
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #A269F7;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 70px;
+  font-size: 18px;
 }
 
 #myBtn:hover {
-  background-color: #555; 
+  background-color: #555;
 }
-	
+
 
 </style>
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
 <footer class="footer">
   <div class="container">
     <div class="row">
@@ -189,6 +189,6 @@ $('.footer_link').click(function(e){
 		e.preventDefault();
 		$('#contactFormModal').modal({show:true})
 	}
-	
+
 })
 </script>
