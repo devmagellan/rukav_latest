@@ -28,6 +28,16 @@
 
     @endif
 
+      @if(\Session::has('updating_from_simpleUser') && \Session::get('updating_from_simpleUser')==1 && \Auth::user())
+        <script>
+          $(document).ready(function(){
+            $('#confirmPhone').modal({show:true})
+          })
+        </script>
+        @php \Session::put('updating_from_simpleUser',0)@endphp
+
+      @endif
+
 
 
 

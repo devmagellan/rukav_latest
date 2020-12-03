@@ -379,6 +379,7 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
     public function changeRegisterFromSimpleUser($request){
         $this->smsService=new SmsService();
         $message=$this->smsService->store($request);
+        session()->put('updating_from_simpleUser',1);
         session()->put('emailVerificationTelephone',$request->phone);
         $collection=$request->all();
         session()->put('updatedUser',$collection);

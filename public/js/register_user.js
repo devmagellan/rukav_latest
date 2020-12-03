@@ -227,8 +227,8 @@ console.log(window.location.href.indexOf("to_individual")>= 0)
                 success: function (data) {
                     location.reload();
                     console.log('Updated To session saved', data)
-                  if(current_type=='Частная'){
-                    $('#confirmPhone').modal({show: true})}
+                 /* if(current_type=='Частная'){
+                    $('#confirmPhone').modal({show: true})}*/
                 },
                 error: function (errors) {
                   console.log('Got errors')
