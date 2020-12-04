@@ -405,6 +405,7 @@
                       Сменить
                     </a-->
                   </div>
+				  <div style="display:block;color:red" id="phone" class="errorBlock"></div>
                   <!--p class="prophile_main_text">
                     Телефон дополнительный
                   </p>

@@ -57,6 +57,7 @@ class ProfileSaveToOrganisationRequest extends Request
       'www' => 'required',
       'address' => 'required',
       'postCode' => 'required',
+	  'phone' => 'required',
 
     ];
   }
@@ -68,6 +69,7 @@ class ProfileSaveToOrganisationRequest extends Request
       'www.required' => 'Необходимо добавить адрес вебсайта',
       'address.required' => 'Необходимо добавить адрес организации',
       'postCode.required' => 'Необходимо добавить почтовый код организации',
+	  'phone.required' => 'Необходимо добавить телефон организации',
 
 
     ];

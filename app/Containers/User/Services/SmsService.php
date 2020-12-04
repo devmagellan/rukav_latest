@@ -36,7 +36,7 @@ class SmsService
         $reqArray=[];
         $reqArray['code']=$code;
         $reqArray['phone']=$request->all()['phone'];
-          $reqArray['phonecode']=$request->all()['code'];
+        $reqArray['phonecode']=$request->all()['code'];
         $data['store']=$this->smsVerifcation->store($reqArray)['id'];
 
         $data['message']=$this->sendSms($reqArray);

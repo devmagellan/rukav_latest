@@ -377,7 +377,7 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
     }
 
     public function changeRegisterFromSimpleUser($request){
-      \Log::info('user_after_save_to_organisation'.$request->input());
+      \Log::info('user_after_save_to_organisation',$request->input());
         $this->smsService=new SmsService();
         $message=$this->smsService->store($request);
         session()->put('updating_from_simpleUser',1);
@@ -469,9 +469,9 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
 
     public function userСhangePassword(GetAllUsersRequest $request){
         $update=['password'=>Hash::make($request->input('password'))];
-      $update=['encripted_password' => openssl_encrypt($request->input('password'),"AES-128-ECB",'password')];
+      $update['encripted_password'] = openssl_encrypt($request->input('password'),"AES-128-ECB",'password');
         if(null!=$request->input('old_password')){
-          \Log::info('HashCheckOldPAssword'.$update=['password']);
+          \Log::info('HashCheckOldPAssword',$update);
             $user=User::where('id',\Auth::user()->id)->first();
         if(\Hash::check($request->input('old_password'), $user->password)){
           \Log::info('HashCheckOldPAssword'.$update=['password']);
@@ -480,7 +480,7 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
         }
         }
         if(null!=$request->input('customer_id')){
-          \Log::info('customer_id'.$update=['password']);
+          \Log::info('customer_id',$update);
         \App\Containers\User\Models\User::where('id',$request->input('customer_id'))->update($update);}
         if(null!=$request->input('email')){
         \App\Containers\User\Models\User::where('email',$request->input('email'))->update($update);
