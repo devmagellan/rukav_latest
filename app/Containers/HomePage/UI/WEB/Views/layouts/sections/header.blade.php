@@ -22,6 +22,11 @@
     background: red;
     color: white;
   }
+
+  .conv_class_.nobefore:before{
+  display:none;
+  }
+
 </style>
 
 
@@ -96,7 +101,7 @@
       @else
         @if(null!=(\Auth::user()) )
         <div class="col-md-1 col-2">
-          <a href="#" class="user_cabinet_login notification" >
+          <a href="#" class="user_cabinet_login notification conv_head_class" >
 
 
            <span>
@@ -107,14 +112,14 @@
             @endif
             </span>
 
-            <?
+          {{--  <?
             $connects=\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->where('viewed_at',null)->get();
             ?>
             @if(count($connects)>0 && count($connects)<99 )
               <span class="badge">{{count($connects)}}</span>
               @elseif(count($connects)>=99 )
             <span class="badge">99<span style="font-size:15px">+</span></span>
-            @endif
+            @endif--}}
           </a>
           <div class="user_cabinet_dropdown">
 
@@ -316,6 +321,64 @@
   </div>
 
 </header>
+@if(\Auth::user())
+<script>
 
 
+  var pusher = new Pusher('500e0547867ccfe184af', {
+    cluster: 'eu'
+  });
+  var channel = pusher.subscribe('my-channel');
+
+  Pusher.logToConsole = true;
+  var user='{{\Auth::user()->id}}'
+  console.log('header_receiver - mid=>',window.message_id)
+  var receiver='receiver-'+user+'-'//+window.message_id
+  console.log('header_receiver',receiver)
+  console.log('header_receiver_length',receiver.length)
+  channel.bind(receiver, function(data) {
+    console.log('data>',data);
+    $('.conv_head_class').append(
+      '<style>'+
+      '.conv_head_class:before{'+
+      'content: "'+data.all_viewed+'";'+
+      'display: block;'+
+      'position: absolute;'+
+      'right: -25px;'+
+      'top: -9px;'+
+      'font-weight: 500;'+
+      'font-size: 10px;'+
+      'line-height: 14px;'+
+      'color: #FFFFFF;'+
+      'width: 44px;'+
+      'text-align: center;'+
+      'background: red;'+
+      'border-radius: 30px;'+
+      'z-index:999'+
+      '} '+
+      '.conv_head_class.nobefore:before{'+
+      'display:none;'+
+      '}'+
+      '</style>'
+    )
+  })
+</script>
+  @endif
+
+.conv_head_class:before{
+content: "99+";
+display: block;
+position: absolute;
+right: -25px;
+top: -9px;
+font-weight: 500;
+font-size: 10px;
+line-height: 14px;
+color: #FFFFFF;
+width: 24px;
+text-align: center;
+background: red;
+border-radius: 30px;
+z-index:999;
+}
 

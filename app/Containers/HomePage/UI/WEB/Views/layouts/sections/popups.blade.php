@@ -514,7 +514,7 @@
 
         <div class="row">
           <div class="col-md-12" style="padding:1px;margin-top:5px">
-
+            <input class="modal-body-add_id" type="hidden" name="add_id">
             <input type="radio" name="complain" value="rudeness" id="rudeness" class="radio_input" checked>
             <label for="rudeness" style="margin-right:0px"> Текст некорректный/неуважение/грубость</label>
           </div>

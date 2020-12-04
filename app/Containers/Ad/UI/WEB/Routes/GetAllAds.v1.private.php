@@ -101,6 +101,11 @@ $router->post('/add_deleted_imgs_to_session', [
     'uses'  => 'ImgController@addDeletedImgsToSession',
 ]);
 
+$router->post('/complain', [
+  'as' => 'addComplaining',
+  'uses'  => 'Controller@complain',
+]);
+
 
 
 

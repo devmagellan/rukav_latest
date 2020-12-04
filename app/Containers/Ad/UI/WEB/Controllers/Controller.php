@@ -706,4 +706,35 @@ switch($ad->getSender->confirmed){
     return view('ad::admin.add.index', $result);
   }
 
+  public function complain(GetAllAdsRequest $request){
+    foreach($request->all() as $key=>$req){
+      if($key=='complain'){
+        switch($req){
+          case 'rudeness':
+            $rq['complain']='Текст некорректный/неуважение/грубость';
+            break;
+          case 'wrong_contact':
+          $rq['complain']='Контактная информация неверная';
+          break;
+          case 'sold_out':
+            $rq['complain']='Товар продан/ услуга недоступна';
+            break;
+          case 'forbidden':
+            $rq['complain']='Запрещенный товар/непристойное содержание';
+            break;
+          case 'big_price':
+          $rq['complain']='Продавец просит цену выше указанной';
+          break;
+          case 'fraud':
+            $rq['complain']='Мошенничество/спам';
+            break;
+          case 'disparity':
+            $rq['complain']='Объявление не соответствует рубрике';
+            break;
+        }
+      }
+    }
+    dispatch(new \App\Containers\User\Jobs\SendComplainRequestJob($request->all()))->onQueue('queue_name');
+  }
+
 }

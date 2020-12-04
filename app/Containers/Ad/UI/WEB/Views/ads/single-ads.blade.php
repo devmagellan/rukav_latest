@@ -590,17 +590,64 @@ ul.slickslide li img, .slick-dots button img {
         <p>Номер объявления: <span>{{$ad->id}}</span></p>
         <p>Просмотры: <span>{{$ad->view_counter}}</span></p>
       </div>
-      <div class="col-md-3">
-        <div class="product_indicators_complain">
-          <a href="#" data-toggle="modal" data-target="#ModalComplaining"><img src="/img/compain.svg" alt="">Пожаловаться</a>
+
+
+
+
+      @if(!\Illuminate\Support\Facades\Auth::user())
+        <div class="col-md-3">
+          <div class="product_indicators_complain">
+            <a href="#" data-add_id="{{$ad->id}}" data-toggle="modal" data-target="#ModalIn"><img src="/img/compain.svg" alt="">Пожаловаться</a>
+          </div>
         </div>
-      </div>
+      @elseif(\Illuminate\Support\Facades\Auth::user()->confirmed==\App\Containers\User\Models\User::STATUS_SOCIALACTIVE)
+        <div class="col-md-2 col-2">
+          <a href="#" class="add_ad" data-toggle="modal" data-target="#youAreNotAuthorized">
+            <span class="plus">+</span>
+            <span>Подать объявление</span>
+          </a>
+        </div>
+
+        <div class="col-md-3">
+          <div class="product_indicators_complain">
+            <a href="#" data-add_id="{{$ad->id}}" data-toggle="modal" data-target="#youAreNotAuthorized"><img src="/img/compain.svg" alt="">Пожаловаться</a>
+          </div>
+        </div>
+      @else
+        <div class="col-md-3">
+          <div class="product_indicators_complain">
+            <a href="#" data-add_id="{{$ad->id}}" data-toggle="modal" data-target="#ModalComplaining"><img src="/img/compain.svg" alt="">Пожаловаться</a>
+          </div>
+        </div>
+      @endif
+
+
+
+
+
+
+
+
+
+
     </div>
 	@endif
   </div>
 </article>
 @endsection
 @section('scripts')
+  <script>
+    $('#ModalComplaining').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var add_id = button.data('add_id') // Extract info from data-* attributes
+      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      var modal = $(this)
+      console.log('add_id',add_id);
+      modal.find('.modal-body-add_id').val(add_id)
+    })
+  </script>
+
   <script>
 
     function wishList(event){
