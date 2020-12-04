@@ -299,7 +299,32 @@ class Controller extends WebController
   {
     $example = \App\Containers\Connect\Models\Connect::where('id', $request->input('conversation'))->with('author')->first();
     if (\Auth::user()->id == $example->receiver_id) {
-      \App\Containers\Connect\Models\Connect::where('id', $request->input('conversation'))->update(['viewed_at' => Carbon::now()]);
+		\Log::info('conversationData'.date("Y-m-d H:i:s"));
+		\Log::info('conversationID'.$request->input('conversation'));
+		
+      $res=\App\Containers\Connect\Models\Connect::select('message_id','receiver_id')->where('id', $request->input('conversation'))->first()->toArray();
+	  \Log::info('conversationIDRes',$res);
+	  \App\Containers\Connect\Models\Connect::where('message_id',$res['message_id'])->where('receiver_id',$res['receiver_id'])->update(['viewed_at' => Carbon::now()]);
+	$all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->where('viewed_at',null)->get();  
+	    $options = array(
+          'cluster' => 'eu',
+          'useTLS' => true
+        );
+        $pusher = new \Pusher\Pusher(
+          '500e0547867ccfe184af',
+          'b8d3a1076b93fe80dd50',
+          '1000615',
+          $options
+        );
+
+        //$data['message_id'] = $request->input('message_id');
+        $data['sender_id'] = \Auth::user()->id;
+        //$data['text'] = $request->input('text');
+		//$data['viewed'] = (count($connects)>0) ? count($connects) : null;
+		$data['all_viewed'] = (count($all_connects)>0) ? count($all_connects) : null;
+        //$data['photo'] = null;
+        //$data['created'] = $con->created_at;
+        $pusher->trigger('my-channel-header', /* 'my-event' */ 'receiver-' . \Auth::user()->id . '-', $data);
     }
 //Если хозяин объявления я то тянуть все конекты в которых receiver_id я и sender_id $example->sender_id
 //Иначе тянуть все коннекты в которых receiver_id $example->receiver_id и sender_id я
@@ -313,6 +338,7 @@ class Controller extends WebController
 
   public function checkData(GetAllPrivateCabinetsRequest $request)
   {
+	  \Log::info('checkData'.date("Y-m-d H:i:s"));
     $user = \App\Containers\User\Models\User::where('id', $request->input('client_id'))->first();
     if (\Auth::user()->confirmed == \App\Containers\User\Models\User::STATUS_CREATED_BY_ADMIN_NOT_CONFIRMED) {
       \Session::put('ShowWeeklyAdminCreatedConfirmation', 1);
@@ -335,6 +361,7 @@ class Controller extends WebController
         $entityClass = \App\Containers\Connect\Models\Connect::class;
         $con = call_user_func("{$entityClass}::query")->updateOrCreate($message['attributes'], $message['values']);
 		$connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$user->id)->where('message_id',$request->input('message_id'))->where('viewed_at',null)->get();
+$all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$user->id)->where('viewed_at',null)->get();
 
 //var_dump('receiver-'.$user->id.'-');
         $options = array(
@@ -352,6 +379,7 @@ class Controller extends WebController
         $data['sender_id'] = \Auth::user()->id;
         $data['text'] = $request->input('text');
 		$data['viewed'] = (count($connects)>0) ? count($connects) : null;
+		$data['all_viewed'] = (count($all_connects)>0) ? count($all_connects) : null;
         $data['photo'] = null;
         $data['created'] = $con->created_at;
         $pusher->trigger('my-channel', /* 'my-event' */ 'receiver-' . $user->id . '-', $data);
@@ -478,6 +506,10 @@ class Controller extends WebController
 
     \App\Containers\PrivateCabinet\Models\BlockedUser::insert(['user_id' => \Auth::user()->id, 'opponent' => $request->input('opponent')]);
     return json_encode(['message' => 'success']);
+  }
+  
+  public function avatarRrefresh(){
+	  return count(\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->where('viewed_at',null)->get());
   }
 
 

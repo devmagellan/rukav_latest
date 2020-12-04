@@ -1,3 +1,4 @@
+
 <style>
   .notification {
     color: white;
@@ -321,10 +322,52 @@
   </div>
 
 </header>
-@if(\Auth::user())
 <script>
+$(document).ready(function(){
+	        $.ajax({
+            method: 'POST',
+            url: '/avatar_refresh',
+            dataType: 'json',
+			async:true,
+            success: function(data) {
+			console.log('avatar_refresh',data);
+    console.log('data>',data);
+    $('.conv_head_class').append(
+      '<style>'+
+      '.conv_head_class:before{'+
+      'content: "'+data+'";'+
+      'display: block;'+
+      'position: absolute;'+
+      'right: -25px;'+
+      'top: -9px;'+
+      'font-weight: 500;'+
+      'font-size: 10px;'+
+      'line-height: 14px;'+
+      'color: #FFFFFF;'+
+      'width: 24px;'+
+      'text-align: center;'+
+      'background: red;'+
+      'border-radius: 30px;'+
+      'z-index:999'+
+      '} '+
+      '.conv_head_class.nobefore:before{'+
+      'display:none;'+
+      '}'+
+      '</style>'
+    )
+            }
+        });
+})
 
 
+
+</script>
+
+
+
+@if(\Auth::user())
+	<script src="https://js.pusher.com/6.0/pusher.min.js"></script>
+<script>
   var pusher = new Pusher('500e0547867ccfe184af', {
     cluster: 'eu'
   });
@@ -332,7 +375,6 @@
 
   Pusher.logToConsole = true;
   var user='{{\Auth::user()->id}}'
-  console.log('header_receiver - mid=>',window.message_id)
   var receiver='receiver-'+user+'-'//+window.message_id
   console.log('header_receiver',receiver)
   console.log('header_receiver_length',receiver.length)
@@ -350,7 +392,7 @@
       'font-size: 10px;'+
       'line-height: 14px;'+
       'color: #FFFFFF;'+
-      'width: 44px;'+
+      'width: 24px;'+
       'text-align: center;'+
       'background: red;'+
       'border-radius: 30px;'+
@@ -361,6 +403,44 @@
       '}'+
       '</style>'
     )
+	
+
   })
+  var pusher_header = new Pusher('500e0547867ccfe184af', {
+    cluster: 'eu'
+  });
+   	var channel_header = pusher_header.subscribe('my-channel-header');
+
+  Pusher.logToConsole = true;
+  var user_header='{{\Auth::user()->id}}'
+  var receiver_header='receiver-'+user_header+'-'//+window.message_id
+  console.log('header_receiver',receiver_header)
+  console.log('header_receiver_length',receiver_header.length)
+  channel_header.bind(receiver_header, function(data_header) {
+    console.log('data>',data_header);
+    $('.conv_head_class').append(
+      '<style>'+
+      '.conv_head_class:before{'+
+      'content: "'+data_header.all_viewed+'";'+
+      'display: block;'+
+      'position: absolute;'+
+      'right: -25px;'+
+      'top: -9px;'+
+      'font-weight: 500;'+
+      'font-size: 10px;'+
+      'line-height: 14px;'+
+      'color: #FFFFFF;'+
+      'width: 24px;'+
+      'text-align: center;'+
+      'background: red;'+
+      'border-radius: 30px;'+
+      'z-index:999'+
+      '} '+
+      '.conv_head_class.nobefore:before{'+
+      'display:none;'+
+      '}'+
+      '</style>'
+    ) ;
+	 })
 </script>
   @endif

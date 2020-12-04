@@ -160,6 +160,16 @@ $router->post('/block_user', [
 
 
 
+$router->post('/avatar_refresh', [
+  'as' => 'avatar_refresh',
+  'uses'  => 'Controller@avatarRrefresh',
+ 'middleware' => [
+    'auth:web',
+  ],
+]);
+
+
+
 
 
 
