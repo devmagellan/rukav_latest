@@ -38,7 +38,7 @@ class SendComplainRequestJob implements ShouldQueue
 		(new User)->forceFill([
 		'name' => 'contactform',
 		'email' => 'dev.magellan@gmail.com',
-		])->notify(new SendAdvRequest($this->request));
+		])->notify(new SendComplainRequest($this->request));
 
     }
 }

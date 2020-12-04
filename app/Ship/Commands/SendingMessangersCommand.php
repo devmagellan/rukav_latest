@@ -51,7 +51,8 @@ class SendingMessangersCommand extends ConsoleCommand
 	 foreach($connects as $connect){
 		 //\Log::info('ArrayDays',array($user->getSender));
 		 dispatch(new SendingMessangersEmailNotification($connect))->onQueue('queue_name');
-     $connect->viewed_at=$mutable;
+		 \Log::info('$mutable'.date("Y-m-d H:i:s"));
+     //$connect->viewed_at=$mutable;
      $connect->save();
 	 }}
 
