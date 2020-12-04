@@ -364,21 +364,3 @@
   })
 </script>
   @endif
-
-.conv_head_class:before{
-content: "99+";
-display: block;
-position: absolute;
-right: -25px;
-top: -9px;
-font-weight: 500;
-font-size: 10px;
-line-height: 14px;
-color: #FFFFFF;
-width: 24px;
-text-align: center;
-background: red;
-border-radius: 30px;
-z-index:999;
-}
-
