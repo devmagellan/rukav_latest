@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Containers\User\Notifications\SendAdvRequest;
+use App\Containers\User\Notifications\SendComplainRequest;
 use App\Containers\User\Models\User;
 use Log;
 

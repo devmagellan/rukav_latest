@@ -731,10 +731,23 @@ switch($ad->getSender->confirmed){
           case 'disparity':
             $rq['complain']='Объявление не соответствует рубрике';
             break;
+			case 'my_phone':
+            $rq['complain']='В объявлении кто-то указал мой телефон';
+            break;
+			case 'other':
+            $rq['complain']=$request->input('other_name');
+            break;
+			
         }
       }
+	  elseif($key=='add_id'){
+		  
+		  $rq['add_link']='https://rukav.co.uk/ads/'.$request->input('add_id');
+	  }
     }
-    dispatch(new \App\Containers\User\Jobs\SendComplainRequestJob($request->all()))->onQueue('queue_name');
+	$rq['email']=\App\Containers\User\Models\User::select('email')->where('id',\Auth::user()->id)->first();
+    dispatch(new \App\Containers\User\Jobs\SendComplainRequestJob($rq))->onQueue('queue_name');
+	return back()->with('success', 'Жалоба отправлена');
   }
 
 }

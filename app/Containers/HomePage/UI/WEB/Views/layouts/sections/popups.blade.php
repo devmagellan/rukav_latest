@@ -550,8 +550,9 @@
             <input type="radio" name="complain" value="my_phone" id="my_phone" class="radio_input" >
             <label for="my_phone" style="margin-right:0px"> В объявлении кто-то указал мой телефон</label>
 <div class="my_phone_div">
-            <p>Если кто-то разместил объявление с вашим номером телефона без вашего разрешения - вы можите самостоятельно удалить его</p>
-            <a href="#" class="product_info_send_message" >удалить объявление</a>
+            <!--p>Если кто-то разместил объявление с вашим номером телефона без вашего разрешения - вы можите самостоятельно удалить его</p>
+            <!--a href="#" class="product_info_send_message" >удалить объявление</a-->
+			<span style="color:red">Эта услуга пока не доступна</span>
 </div>
           </div>
             <div class="col-md-12" style="padding:1px;margin-top:5px">
@@ -958,7 +959,6 @@
     </div>
   </div>
 </div-->
-
 
 <div class="modal fade" id="confirmEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
      aria-hidden="true">

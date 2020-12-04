@@ -30,10 +30,9 @@ public function __construct($request){
             ->subject('Новая жалоба с сайта RUKAV')
             ->greeting('Здравствуйте!')
             ->line('Мы получили новую жалобу с сайта RUKAV')
-            ->line('Email отправителя:'.$this->request['sender_email'])
-            ->line('Имя отправителя: '.$this->request['sender_name'])
-			->line('Телефон отправителя: '.$this->request['sender_phone'])
-            ->line('Текст сообщения: '.$this->request['text']);
+            ->line('Email отправителя:'.$this->request['email'])
+            ->line('объявление: '.$this->request['add_link'])
+            ->line('Текст жалобы: '.$this->request['complain']);
 
     }
 

@@ -60,6 +60,33 @@ ul.slickslide li img, .slick-dots button img {
     left: -9999px;
 }
 </style>
+ @if(\Session::has('success'))
+	 
+ <div class="modal fade" id="complainEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <button type="button" class="close confirmEmailClose" data-dismiss="modal" aria-label="Close">
+        <img src="{{asset('img/close-icon.svg')}}" alt="">
+      </button>
+      <img src="{{asset('img/modalIconEmail.svg')}}" alt="" class="moadal_img">
+      <h6 class="modalTitle">Отлично!</h6>
+      <h6 class="modalTitle">Ваше сообщение успешно отправлено</h6>
+      <form class="formModal emailConfirmationForm">
+      </form>
+
+    </div>
+  </div>
+</div>
+      <!--p class="alert {{ \Session::get('alert-class', 'alert-info') }}">{{ \Session::get('success') }}</p-->
+  <script>
+  console.log('111555')
+   $(document).ready(function() {
+   $('#complainEmail').modal({show:true});})
+  </script>
+  
+ @endif
 <article class="product_main_block">
   <div class="container">
     <div class="row">
