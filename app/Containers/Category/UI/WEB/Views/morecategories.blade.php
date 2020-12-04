@@ -71,9 +71,14 @@ var id='{{$id}}'
   ScreenWidth = screen.width;
 
   if(ScreenWidth < 720){
-    console.log("test56test");
-    console.log($(this).find("ul").height());
-    $(".category_dropdown").height($('.categoryLink.category_link_active').find("ul").height());
+    console.log("test456test");
+    $(".category_dropdown").height($(".categoryLink.category_link_active .category_dropdown_sub_list").outerHeight());
+  }
+
+  if(ScreenWidth < 720) {
+  $('.categoryLink').on('click', function () {
+      $(".category_dropdown").height($(".categoryLink.category_link_active .category_dropdown_sub_list").outerHeight());
+  });
   }
 
 })
