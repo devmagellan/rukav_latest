@@ -322,6 +322,7 @@
 
 </header>
 @if(\Auth::user())
+
 <script>
 
 
