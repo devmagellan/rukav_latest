@@ -164,8 +164,8 @@
 
       });
   }
-  
-  
+
+
     function getPostcode(latlng) {
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({'latLng': latlng}, function (results) {
@@ -353,9 +353,9 @@ else{
         infoWindow = new google.maps.InfoWindow({
             content: document.getElementById('info-content')
         });
-		
-		
-		
+
+
+
 		 var service = new google.maps.places.PlacesService(map);
     console.log('{{$placeId}}')
     service.getDetails({
