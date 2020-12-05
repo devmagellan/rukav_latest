@@ -142,7 +142,7 @@
                     $(wrapper).append('<div><input type="text" class="drop_field" style="width:300px" value="'+val+'" name="values[]"/><a href="#" class="remove_field">Удалить</a></div>');
                   });
 
-                  var max_fields      = 30; //maximum input boxes allowed
+                  var max_fields      = 50; //maximum input boxes allowed
                   var add_button      = $("#fb_"+customer_id+":not(input)"); //Add button ID
                   var x = JSON.parse(data.filter.values).length; //initlal text box count
                   console.log('add_button>',x,add_button)
@@ -181,7 +181,7 @@
                     $(wrapper).append('<div><input type="text" style="width:300px" value="'+val+'" name="values[]"/><a href="#" class="remove_field">Удалить</a></div>');
                   });
 
-                  var max_fields      = 30; //maximum input boxes allowed
+                  var max_fields      = 50; //maximum input boxes allowed
                   var add_button      = $(".add_field_button"); //Add button ID
                   var x = JSON.parse(data.filter.values).length; //initlal text box count
                   console.log(x)

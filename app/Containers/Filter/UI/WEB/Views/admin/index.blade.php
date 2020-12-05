@@ -183,7 +183,7 @@
     <script>
 
       $(document).ready(function() {
-        var max_fields      = 30; //maximum input boxes allowed
+        var max_fields      = 50; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
         var x = 1; //initlal text box count
@@ -521,7 +521,7 @@ function clearCustomerAdding(){
 }
 
         $(document).ready(function() {
-            var max_fields      = 10; //maximum input boxes allowed
+            var max_fields      = 50; //maximum input boxes allowed
             var wrapper         = $(".input_fields_wrap"); //Fields wrapper
             var add_button      = $(".add_field_button"); //Add button ID
 
