@@ -25,7 +25,7 @@
             <img src="/img/photo-camera-icon-black.svg" alt="">
         </label>
         <input type="file" id="send_message_foto" name="send_message_foto" style="display: none;">
-        <input id="msgr_input" type="text" name="" placeholder="Текст сообщения..." required="">
+        <input id="msgr_input" type="text" name="" onfocus="reloadMessageList('{{$conversation->id}}');cleanCounter('{{$conversation->message->id}}')" placeholder="Текст сообщения..." required="">
         <button onclick="sendMessage()"><img src="/img/paper-plane-icon.svg" alt=""></button>
     </div>
     <p>RUKAV оставляет за собой право проверять сообщения посланные через наш сервер для того чтобы защитить вас от мошенничества и подозрительных действий.</p>

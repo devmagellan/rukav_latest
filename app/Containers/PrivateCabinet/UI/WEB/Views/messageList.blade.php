@@ -130,7 +130,7 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
         <input type="file" id="file" name="file" style="display: none;">
         <input type="button" class="button" value="Upload" id="but_upload" style="display: none;">
       </form>
-        <input id="msgr_input" type="text" name="" placeholder="Текст сообщения..." required="">
+        <input id="msgr_input" type="text" name="" onfocus="reloadMessageList('{{$conversation->id}}');cleanCounter('{{$conversation->message->id}}')" placeholder="Текст сообщения..." required="">
 
         <button onclick="sendMessage()"><img src="/img/paper-plane-icon.svg" alt=""></button>
     </div>
@@ -327,7 +327,7 @@ console.log(receiver.length)
 channel.bind(receiver, function(data) {
 console.log('data>',data);
 $('.conv_class_'+data.message_id+'').addClass('message_sidebar_theme_item-new')
-$('.conv_class_'+data.message_id+'').append( 
+$('.conv_class_'+data.message_id+'').append(
 '<style>'+
 							   '.conv_class_'+data.message_id+':before{'+
 								'content: "'+data.viewed+'";'+
