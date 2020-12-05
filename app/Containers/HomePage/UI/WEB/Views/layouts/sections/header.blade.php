@@ -332,6 +332,8 @@ $(document).ready(function(){
             success: function(data) {
 			console.log('avatar_refresh',data);
     console.log('data>',data);
+	if(data > 0){
+		console.log('Data>0',data)
     $('.conv_head_class').append(
       '<style>'+
       '.conv_head_class:before{'+
@@ -354,7 +356,7 @@ $(document).ready(function(){
       'display:none;'+
       '}'+
       '</style>'
-    )
+    )}
             }
         });
 })
@@ -379,7 +381,9 @@ $(document).ready(function(){
   console.log('header_receiver',receiver)
   console.log('header_receiver_length',receiver.length)
   channel.bind(receiver, function(data) {
-    console.log('data>',data);
+    console.log('data.all_viewed>',data.all_viewed);
+	if(data.all_viewed>0){
+	$('.conv_head_class').removeClass('nobefore')
     $('.conv_head_class').append(
       '<style>'+
       '.conv_head_class:before{'+
@@ -403,6 +407,9 @@ $(document).ready(function(){
       '}'+
       '</style>'
     )
+	}else{
+		$('.conv_head_class').addClass('nobefore')
+	}
 
 
   })
@@ -418,6 +425,9 @@ $(document).ready(function(){
   console.log('header_receiver_length',receiver_header.length)
   channel_header.bind(receiver_header, function(data_header) {
     console.log('data>',data_header);
+	
+	if(data_header.all_viewed>0){
+	$('.conv_head_class').removeClass('nobefore')
     $('.conv_head_class').append(
       '<style>'+
       '.conv_head_class:before{'+
@@ -441,6 +451,8 @@ $(document).ready(function(){
       '}'+
       '</style>'
     ) ;
+		
+	}else{$('.conv_head_class').addClass('nobefore')}
 	 })
 </script>
   @endif

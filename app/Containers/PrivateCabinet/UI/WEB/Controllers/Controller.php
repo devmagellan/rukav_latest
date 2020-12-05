@@ -297,13 +297,17 @@ class Controller extends WebController
 
   public function conversationData(GetAllPrivateCabinetsRequest $request)
   {
+	  $data['conversationId']=$request->input('conversation');
+	 $res=\App\Containers\Connect\Models\Connect::select('message_id','receiver_id')->where('id', $request->input('conversation'))->first()->toArray();
+   $data['messageId']=$res['message_id'];
     $example = \App\Containers\Connect\Models\Connect::where('id', $request->input('conversation'))->with('author')->first();
     if (\Auth::user()->id == $example->receiver_id) {
 		\Log::info('conversationData'.date("Y-m-d H:i:s"));
 		\Log::info('conversationID'.$request->input('conversation'));
 		
-      $res=\App\Containers\Connect\Models\Connect::select('message_id','receiver_id')->where('id', $request->input('conversation'))->first()->toArray();
+      
 	  \Log::info('conversationIDRes',$res);
+	  
 	  \App\Containers\Connect\Models\Connect::where('message_id',$res['message_id'])->where('receiver_id',$res['receiver_id'])->update(['viewed_at' => Carbon::now()]);
 	$all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->where('viewed_at',null)->get();  
 	    $options = array(
@@ -332,7 +336,6 @@ class Controller extends WebController
     $q = \App\Containers\Connect\Models\Connect::where('group_id', $request->input('group_id'))->where('message_id', $example->message_id)->whereIn('receiver_id', $recepients)->whereIn('sender_id', $recepients)->with('message')->with('author');
 
     $data['conversation'] = $q->orderBy('created_at')->get();
-//dump($data['conversation']);
     return view('privatecabinet::messageList', $data);
   }
 

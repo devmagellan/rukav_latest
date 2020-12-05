@@ -54,9 +54,9 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
 
     </div>
 </div>
-<div class="wrapper_body_messege">
-    <div class="wrapper_body_messege_scroll">
-
+<div>
+<div  class="wrapper_body_messege" onclick="reloadMessageList('{{$conversationId}}');cleanCounter('{{$messageId}}')" required="">
+    <div id="messageBlock" class="wrapper_body_messege_scroll">
 
     @foreach($conversation as $segment)
             @if(\Auth::user()->id!=$segment->receiver_id)
@@ -130,13 +130,26 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
         <input type="file" id="file" name="file" style="display: none;">
         <input type="button" class="button" value="Upload" id="but_upload" style="display: none;">
       </form>
-        <input id="msgr_input" type="text" name="" onfocus="reloadMessageList('{{$conversation->id}}');cleanCounter('{{$conversation->message->id}}')" placeholder="Текст сообщения..." required="">
+        <input id="msgr_input" type="text" name=""  placeholder="Текст сообщения..." >
 
         <button onclick="sendMessage()"><img src="/img/paper-plane-icon.svg" alt=""></button>
     </div>
     <p>RUKAV оставляет за собой право проверять сообщения посланные через наш сервер для того чтобы защитить вас от мошенничества и подозрительных действий.</p>
 </div>
+</div>
 <script>
+function scrollToBottom(id){
+  div_height = $("#"+id).height();
+  div_offset = $("#"+id).offset().top;
+  window_height = $("#"+id).height();//$(window).height();
+  console.log('div_height',div_height);
+  $("#"+id).animate({
+    scrollTop: div_offset-window_height+div_height+(div_height*3)
+  },'slow');
+}
+$(document).ready(function(){
+	scrollToBottom('messageBlock');
+})
   $('.blockUser').click(function(e){
     e.preventDefault()
     var opponent=$(this).attr('data-opponent')
@@ -326,8 +339,9 @@ console.log(receiver.length)
 
 channel.bind(receiver, function(data) {
 console.log('data>',data);
+$('.conv_class_'+data.message_id+'').addClass('nobefore')
 $('.conv_class_'+data.message_id+'').addClass('message_sidebar_theme_item-new')
-$('.conv_class_'+data.message_id+'').append(
+$('body').append(
 '<style>'+
 							   '.conv_class_'+data.message_id+':before{'+
 								'content: "'+data.viewed+'";'+
@@ -350,6 +364,7 @@ $('.conv_class_'+data.message_id+'').append(
 							'</style>'
 )
 
+$('.conv_class_'+data.message_id+'').removeClass('nobefore')
 if('{{$conversation->first()->sender_id}}'=={{\Auth::user()->id}}){
 	var sender='{{$conversation->first()->receiver_id}}';
 }
