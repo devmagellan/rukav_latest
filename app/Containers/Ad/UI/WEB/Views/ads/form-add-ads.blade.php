@@ -309,10 +309,10 @@
               <div class="add_advert_block_wrapper">
                 <div id="add_second_chat1" class="add_second_chat_block_input" style="margin-top:40px;">
                   <h6 class="add_advert_block_wrapper_title">
-                    Языки объявления
+                    Мои языки
                   </h6>
                   <div class="form-group" style="width:100%">
-                    <select class="select2-placeholder-language-multiple form-control" name="language_filter[]" multiple="multiple" id="multiple-filter-placeholder">
+                    <select class="select2-placeholder-language-multiple form-control" data-maximum-selection-length="4" name="language_filter[]" multiple="multiple" id="multiple-filter-placeholder">
 >
                       <option value="рус" selected="selected" locked="locked">Русский</option>
                       <option value="анг">Английский</option>
@@ -1849,6 +1849,7 @@ $('.cat_name').click(function(){
 
     $(function() {
       $('.select2-placeholder-language-multiple').select2({
+        maximumSelectionLength: 3,
         tags: true,
         placeholder: 'Select an option',
         templateSelection : function (tag, container){

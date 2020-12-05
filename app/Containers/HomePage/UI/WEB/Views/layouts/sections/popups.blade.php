@@ -14,16 +14,16 @@
       <button type="button" class="close contactFormModalClose" data-dismiss="modal" aria-label="Close">
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
-      <h6 class="modalTitle" ><b>Связаться с нами 2</b></h6>
+      <h6 class="modalTitle" ><b>Связаться с нами</b></h6>
       <form id="GoContactFormModal" class="formModal" action="/contactForm" method="post">
         <input type="hidden" name="id" value="@if(\Auth::user()) {{\Auth::user()->id}} @endif">
         <div class="row">
           <div class="input_password_wrapper col-md-12" style="margin:0 auto">
-            <input type="text"  placeholder="Полное имя" class="input_password" name="name"><span class="required">*</span>
+            <input type="text"  placeholder="Полное имя" class="input_password" value="@if(\Auth::user()) {{\Auth::user()->name}}  {{\Auth::user()->sername}} @endif" name="name"><span class="required">*</span>
             <span id="name" style="color:red" class="errorBlock"></span>
           </div>
           <div class="input_password_wrapper col-md-12" style="margin:0 auto">
-            <input type="text"  placeholder="Ваш Email" class="input_password" name="email" ><span class="required">*</span>
+            <input type="text"  placeholder="Ваш Email" class="input_password" value="@if(\Auth::user()) {{\Auth::user()->email}}  @endif" name="email" ><span class="required">*</span>
             <span id="email" style="color:red" class="errorBlock"></span>
 
           </div>
@@ -31,8 +31,10 @@
             <input type="text"  placeholder="ID объявления" class="input_password" name="add_id" >
             <span id="add_id" style="color:red" class="errorBlock"></span>
           </div>
+          <label style="left:15px;top:15px;position:relative;" for="textMessage" >Чем мы можем вам помочь?  &nbsp; <span class="required">  *</span></label>
 		   <div class="input_password_wrapper col-md-12" style="margin:0 auto">
-            <textarea  name="text" >Пожалуйста дайте как можно больше деталей</textarea><span class="required">*</span>
+
+            <textarea  id="textMessage" name="text" placeholder="Пожалуйста дайте как можно больше деталей"></textarea>
             <span id="text" style="color:red" class="errorBlock"></span>
 
           </div>
