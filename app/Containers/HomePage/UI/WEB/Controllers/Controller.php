@@ -304,5 +304,17 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
 
 			return 'ok';
 		}
+		
+		public function telcheck(GetAllHomePagesRequest $request){
+			$service_id = 522811;
+    $secret_key = "57rrACnUHb9avZK7bVmEmxDKI1DrL1tj";
+    $client_phone = '380965441120';
+    $code = 7777;
+
+    $request = file_get_contents('https://api.ucaller.ru/v1.0/initCall?service_id=522811&key=57rrACnUHb9avZK7bVmEmxDKI1DrL1tj&phone=380965441120&code=', true);
+    $request = json_decode($request, true);
+	dd($request);
+error_log(''.print_r($request, TRUE));	
+		}
 
 }

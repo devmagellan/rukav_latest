@@ -20,4 +20,9 @@ $router->post('/getCountryData', [
     'uses'  => 'Controller@getCountryData',
 ]);
 
+$router->get('/telcheck', [
+    'as' => 'telcheck',
+    'uses'  => 'Controller@telcheck',
+]);
+
 
