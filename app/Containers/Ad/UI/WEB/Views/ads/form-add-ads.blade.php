@@ -1275,11 +1275,11 @@
               <p>Номер объявления: <span>00</span></p>
               <p>Просмотры: <span>0</span></p>
             </div>
-            <div class="col-md-3">
-              <div class="product_indicators_complain">
-                <a href="#"><img src="/img/compain.svg" alt="">Пожаловаться</a>
+              <div class="col-md-3">
+                <div class="product_indicators_complain">
+                  <a href="#" {{--data-add_id="{{$ad->id}}"--}} data-toggle="modal" data-target="#ModalComplaining"><img src="/img/compain.svg" alt="">Пожаловаться</a>
+                </div>
               </div>
-            </div>
           </div>
 
         <div class="row justify-content-end preview_btn_wrapper">

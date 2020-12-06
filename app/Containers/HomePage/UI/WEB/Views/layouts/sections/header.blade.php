@@ -370,19 +370,19 @@ $(document).ready(function(){
 @if(\Auth::user())
 	<script src="https://js.pusher.com/6.0/pusher.min.js"></script>
 <script>
-  var pusher = new Pusher('500e0547867ccfe184af', {
+  var pusher_header_2 = new Pusher('500e0547867ccfe184af', {
     cluster: 'eu'
   });
-  var channel = pusher.subscribe('my-channel');
+  var channel_header_2 = pusher.subscribe('my-channel-header-2');
 
   Pusher.logToConsole = true;
   var user='{{\Auth::user()->id}}'
-  var receiver='receiver-'+user+'-'//+window.message_id
-  console.log('header_receiver',receiver)
-  console.log('header_receiver_length',receiver.length)
-  channel.bind(receiver, function(data) {
-    console.log('data.all_viewed>',data.all_viewed);
-	if(data.all_viewed>0){
+  var receiver_header_2='receiver-'+user+'-'//+window.message_id
+  console.log('header_receiver',receiver_header_2)
+  console.log('header_receiver_length',receiver_header_2.length)
+  channel.bind(receiver_header_2, function(data_header_2) {
+    console.log('data.all_viewed>',data_header_2.all_viewed);
+	if(data.all_header_2_viewed>0){
 	$('.conv_head_class').removeClass('nobefore')
     $('.conv_head_class').append(
       '<style>'+
@@ -425,7 +425,7 @@ $(document).ready(function(){
   console.log('header_receiver_length',receiver_header.length)
   channel_header.bind(receiver_header, function(data_header) {
     console.log('data>',data_header);
-	
+
 	if(data_header.all_viewed>0){
 	$('.conv_head_class').removeClass('nobefore')
     $('.conv_head_class').append(
@@ -451,7 +451,7 @@ $(document).ready(function(){
       '}'+
       '</style>'
     ) ;
-		
+
 	}else{$('.conv_head_class').addClass('nobefore')}
 	 })
 </script>
