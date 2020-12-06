@@ -422,7 +422,7 @@ function cleanCounter(message_id){
 	$('.conv_class_'+message_id+'').addClass('nobefore')
 }
 
-    function reloadMessageList(conversation,group_id){
+    function reloadMessageList(conversation,group_id,flag=false){
 $('#conv_id_'+conversation+'').removeClass('message_sidebar_theme_item-new');
         var module='conversation'
         console.log('conversation>',conversation);
@@ -433,7 +433,7 @@ $('#conv_id_'+conversation+'').removeClass('message_sidebar_theme_item-new');
             dataType: 'html',
             async:false,
             url: url,
-            data: {module: module, conversation:conversation,group_id:group_id},
+            data: {module: module, conversation:conversation,group_id:group_id,flag:flag},
             beforeSend: function() {
                 $('#loader2').show();
             },
