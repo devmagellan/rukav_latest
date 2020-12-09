@@ -76,6 +76,7 @@ class Controller extends WebController
         }
         else{
             Apiato::call('Connect@CreateConnectAction', [$request]);
+
             return redirect('/ads/'.$request->input('message_id').'')->withErrors(['Ваше сообщение было успешно доставлено!', 'The Message']);
         }
 
