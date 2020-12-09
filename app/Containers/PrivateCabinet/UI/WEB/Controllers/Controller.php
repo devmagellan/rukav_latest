@@ -297,18 +297,22 @@ class Controller extends WebController
 
   public function conversationData(GetAllPrivateCabinetsRequest $request)
   {
+	  \Log::info('flag'.$request->input('flag'));
 	  $data['conversationId']=$request->input('conversation');
-	 $res=\App\Containers\Connect\Models\Connect::select('message_id','receiver_id')->where('id', $request->input('conversation'))->first()->toArray();
+ $res=\App\Containers\Connect\Models\Connect::select('message_id','receiver_id')->where('id', $request->input('conversation'))->first()->toArray();
    $data['messageId']=$res['message_id'];
     $example = \App\Containers\Connect\Models\Connect::where('id', $request->input('conversation'))->with('author')->first();
-    if (\Auth::user()->id == $example->receiver_id) {
+	\Log::info('conversationIDRes',$res);
+	\Log::info('conversationExample'.$example->receiver_id);
+	\Log::info('conversationAuth'.\Auth::user()->id); 
+    if (/* \Auth::user()->id == $example->receiver_id &&  */$request->input('flag')=='true') {
 		\Log::info('conversationData'.date("Y-m-d H:i:s"));
 		\Log::info('conversationID'.$request->input('conversation'));
 		
       
-	  \Log::info('conversationIDRes',$res);
+	 	
 	  
-	  \App\Containers\Connect\Models\Connect::where('message_id',$res['message_id'])->where('receiver_id',$res['receiver_id'])->update(['viewed_at' => Carbon::now()]);
+	  \App\Containers\Connect\Models\Connect::where('message_id',$res['message_id'])->where('receiver_id',\Auth::user()->id)->update(['viewed_at' => Carbon::now()]);
 	$all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->where('viewed_at',null)->get();  
 	    $options = array(
           'cluster' => 'eu',
@@ -336,6 +340,7 @@ class Controller extends WebController
     $q = \App\Containers\Connect\Models\Connect::where('group_id', $request->input('group_id'))->where('message_id', $example->message_id)->whereIn('receiver_id', $recepients)->whereIn('sender_id', $recepients)->with('message')->with('author');
 
     $data['conversation'] = $q->orderBy('created_at')->get();
+	
     return view('privatecabinet::messageList', $data);
   }
 
@@ -386,6 +391,8 @@ $all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$user-
         $data['photo'] = null;
         $data['created'] = $con->created_at;
         $pusher->trigger('my-channel', /* 'my-event' */ 'receiver-' . $user->id . '-', $data);
+		$pusher->trigger('my-channel-header-2', /* 'my-event' */ 'receiver-' . $user->id . '-', $data);
+		
         $notification['created'] = $con->created_at;
         $pusher->trigger('notification-channel', /* 'my-event' */ 'notification-' . $user->id . '-', $notification);
 
