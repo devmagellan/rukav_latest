@@ -63,6 +63,8 @@ class Controller extends WebController
      */
     public function store(StoreConnectRequest $request)
     {
+		\Log::info('message store1',$request->all());
+		\Log::info('message store'.$request->input('sender_id'));
 
         $user=\App\Containers\User\Models\User::where('id',$request->input('sender_id'))->first();
 
@@ -76,6 +78,32 @@ class Controller extends WebController
         }
         else{
             Apiato::call('Connect@CreateConnectAction', [$request]);
+			
+		$connects=\App\Containers\Connect\Models\Connect::where('sender_id',\Auth::user()->id)->where('receiver_id',$request->input('receiver_id'))->where('message_id',$request->input('message_id'))->where('viewed_at',null)->get();
+		$all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$request->input('receiver_id'))->where('viewed_at',null)->get();  
+	    $options = array(
+          'cluster' => 'eu',
+          'useTLS' => true
+        );
+        $pusher = new \Pusher\Pusher(
+          '500e0547867ccfe184af',
+          'b8d3a1076b93fe80dd50',
+          '1000615',
+          $options
+        );
+
+        $data['message_id'] = $request->input('message_id');
+        $data['sender_id'] = \Auth::user()->id;
+        $data['text'] = $request->input('text');
+		$data['viewed'] = (count($connects)>0) ? count($connects) : null;
+		$data['all_viewed'] = (count($all_connects)>0) ? count($all_connects) : null;
+        //$data['photo'] = null;
+        //$data['created'] = $con->created_at;
+        $pusher->trigger('my-channel-header', /* 'my-event' */ 'receiver-' . $request->input('receiver_id') . '-', $data);
+		
+		$pusher->trigger('my-channel', /* 'my-event' */ 'receiver-' . $request->input('receiver_id') . '-', $data);
+		\Log::info('trigger');
+			
             return redirect('/ads/'.$request->input('message_id').'')->withErrors(['Ваше сообщение было успешно доставлено!', 'The Message']);
         }
 

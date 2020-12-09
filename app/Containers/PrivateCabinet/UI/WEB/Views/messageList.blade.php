@@ -339,11 +339,11 @@ console.log(receiver.length)
 
 channel.bind(receiver, function(data) {
 console.log('data>',data);
-$('.conv_class_'+data.message_id+'').addClass('nobefore')
-$('.conv_class_'+data.message_id+'').addClass('message_sidebar_theme_item-new')
+$('.conv_notify_class_'+data.message_id+'_'+data.sender_id+'').addClass('nobefore')
+$('.conv_notify_class_'+data.message_id+'_'+data.sender_id+'').addClass('message_sidebar_theme_item-new')
 $('body').append(
 '<style>'+
-							   '.conv_class_'+data.message_id+':before{'+
+							   '.conv_notify_class_'+data.message_id+'_'+data.sender_id+':before{'+
 								'content: "'+data.viewed+'";'+
 								'display: block;'+
 								'position: absolute;'+
@@ -358,13 +358,13 @@ $('body').append(
 								'background: red;'+
 								'border-radius: 30px;'+
 							'} '+
-							'.conv_class_'+data.message_id+'.nobefore:before{'+
+							'.conv_notify_class_'+data.message_id+'_'+data.sender_id+'.nobefore:before{'+
 								'display:none;'+
 							'}'+
 							'</style>'
 )
 
-$('.conv_class_'+data.message_id+'').removeClass('nobefore')
+$('.conv_notify_class_'+data.message_id+'_'+data.sender_id+'').removeClass('nobefore')
 if('{{$conversation->first()->sender_id}}'=={{\Auth::user()->id}}){
 	var sender='{{$conversation->first()->receiver_id}}';
 }

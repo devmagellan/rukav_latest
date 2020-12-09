@@ -299,15 +299,15 @@
                             $opponent=\App\Containers\User\Models\User::where('id',$conversation->receiver_id)->first();
                           }
                           ?>
-                        <div class="new_notification message_sidebar_theme_item conv_class_{{$conversation->message->id}} @if($conversation->viewed_at==null) message_sidebar_theme_item-new @endif" id="conv_id_{{$conversation->id}}" onclick="reloadMessageList('{{$conversation->id}}');cleanCounter('{{$conversation->message->id}}')" >
+                        <div class="new_notification message_sidebar_theme_item conv_notify_class_{{$conversation->message->id}}_{{$conversation->sender_id}} conv_class_{{$conversation->message->id}} @if($conversation->viewed_at==null) message_sidebar_theme_item-new @endif" id="conv_id_{{$conversation->id}}" onclick="reloadMessageList('{{$conversation->id}}');cleanCounter('{{$conversation->message->id}}')" >
                             
 							        <?
-									$connects=\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->where('message_id',$conversation->message->id)->where('viewed_at',null)->get();
+									$connects=\App\Containers\Connect\Models\Connect::where('sender_id',$conversation->sender_id)->where('receiver_id',\Auth::user()->id)->where('message_id',$conversation->message->id)->where('viewed_at',null)->get();
 									?>
 									@if(count($connects)>0 && count($connects)<99 )
 										
 									<style>  
-							   .conv_class_{{$conversation->message->id}}:before{
+							   .conv_notify_class_{{$conversation->message->id}}_{{$conversation->sender_id}}:before{
 								content: "{{count($connects)}}";
 								display: block;
 								position: absolute;
