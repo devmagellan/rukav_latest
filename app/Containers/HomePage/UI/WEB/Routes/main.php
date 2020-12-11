@@ -26,3 +26,9 @@ $router->get('/telcheck', [
 ]);
 
 
+$router->post('/cabinet/header_notify_clean', [
+    'as' => 'header_notify_clean',
+    'uses'  => 'Controller@headerNotifyClean',
+]);
+
+

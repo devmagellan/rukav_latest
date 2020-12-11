@@ -1137,6 +1137,7 @@ function reloadWithoutSetState(){
 
   <script>
 
+      $(".panel-body ul .panel-body ul").hide();
     $('.dropdown-icon.glyphicon.glyphicon-minus-sign').on("click", function(){
       $(this).siblings("ul").toggle();
     })
@@ -1192,8 +1193,7 @@ function reloadWithoutSetState(){
       });
 
       $('#default-example-modal-lg').modal('hide');
-	  window.dt.ajax.reload(null,false);
-     // window.location.reload()
+      window.location.reload()
     })
 
     $('.delete_ads').click(function(){

@@ -56,7 +56,7 @@ dump($recepient);
     </div>
 </div>
 <div>
-<div  class="wrapper_body_messege" onclick="reloadMessageList('{{$conversationId}}',null,true);cleanCounter('{{$messageId}}')" required="">
+<div  class="wrapper_body_messege" onclick="reloadMessageList('{{$conversationId}}',null,'{{\Auth::user()->id}}');cleanCounter('{{$messageId}}')" required="">
     <div id="messageBlock_{{$messageId}}_{{$recepient}}" class="wrapper_body_messege_scroll">
 
     @foreach($conversation as $segment)

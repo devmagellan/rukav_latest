@@ -300,7 +300,7 @@
                             $opponent=\App\Containers\User\Models\User::where('id',$conversation->receiver_id)->first();
                           }
                           ?>
-                        <div class="new_notification message_sidebar_theme_item conv_notify_class_{{$conversation->message->id}}_{{$conversation->sender_id}} conv_class_{{$conversation->message->id}} @if($conversation->viewed_at==null) message_sidebar_theme_item-new @endif" id="conv_id_{{$conversation->id}}" onclick="reloadMessageList('{{$conversation->id}}',null,'{{$opponent->id}}');cleanCounter('{{$conversation->message->id}}')" >
+                        <div class="new_notification message_sidebar_theme_item conv_notify_class_{{$conversation->message->id}}_{{$conversation->sender_id}} conv_class_{{$conversation->message->id}} @if($conversation->viewed_at==null) message_sidebar_theme_item-new @endif" id="conv_id_{{$conversation->id}}" onclick="reloadMessageList('{{$conversation->id}}',null,'{{$opponent->id}}');cleanCounter('{{$conversation->message->id}}','{{$opponent->id}}')" >
                             
 							        <?
 									$connects=\App\Containers\Connect\Models\Connect::where('sender_id',$conversation->sender_id)->where('receiver_id',\Auth::user()->id)->where('message_id',$conversation->message->id)->where('viewed_at',null)->get();
@@ -423,12 +423,17 @@
 
     })
 
-function cleanCounter(message_id){
-	$('.conv_class_'+message_id+'').addClass('nobefore')
-}
+	function cleanCounter(message_id,sender_id){
+		$('.conv_notify_class_'+message_id+'_'+sender_id+'').addClass('nobefore')
+		
+		
+		
+	}
+
+
 
     function reloadMessageList(conversation,group_id,flag_sender){
-$('#conv_id_'+conversation+'').removeClass('message_sidebar_theme_item-new');
+ $('#conv_id_'+conversation+'').removeClass('message_sidebar_theme_item-new');
         var module='conversation'
         console.log('conversation>',conversation);
 		
@@ -450,7 +455,7 @@ $('#conv_id_'+conversation+'').removeClass('message_sidebar_theme_item-new');
                 $('.result_of_messageList_table').html(data);
 
             }
-        });
+        }); 
     }
 
     function reloadCleanMessageList(ad_id){

@@ -369,7 +369,7 @@ class Controller extends WebController
 
         $entityClass = \App\Containers\Connect\Models\Connect::class;
         $con = call_user_func("{$entityClass}::query")->updateOrCreate($message['attributes'], $message['values']);
-		$connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$user->id)->where('message_id',$request->input('message_id'))->where('viewed_at',null)->get();
+		$connects=\App\Containers\Connect\Models\Connect::where('sender_id',\Auth::user()->id)->where('receiver_id',$user->id)->where('message_id',$request->input('message_id'))->where('viewed_at',null)->get();
 $all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$user->id)->where('viewed_at',null)->get();
 
 //var_dump('receiver-'.$user->id.'-');
