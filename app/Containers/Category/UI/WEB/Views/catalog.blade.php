@@ -280,23 +280,28 @@
             </div>
           @endforeach
           @if(count($currentFilters)<3)
+
             @for($i=1;$i<=3-count($currentFilters)-1;$i++)
               <div class="col-md-2" style="text-align: center"></div>
             @endfor
              <div class="col-md-3">
                @if(isset($age) && $age==1)
-                 <p class="product_item_price">{{number_format($product->age, 0, '.', ' ')}}</p>
+                 <p class="product_item_price">2{{number_format($product->age, 0, '.', ' ')}}</p>
                @elseif(isset($payment) && $payment==1)
-                 <p class="product_item_price">{{number_format($product->payment, 0, '.', ' ')}} £</p>
+                 <p class="product_item_price">2{{number_format($product->payment, 0, '.', ' ')}} £</p>
                @else
-                <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
+                <p class="product_item_price">2{{number_format($product->price, 0, '.', ' ')}} £</p>
                @endif
                 <p class="product_map_marka d-sm-none">Volkswagen</p>
                 <p class="product_item_city d-sm-none">
                   <img src="/img/map_icon.svg" alt="" class="product_map_icon">
                   {{$product->city}}
                 </p>
-                <div>
+				@if(count($currentFilters)<3 && count($currentFilters)>0)
+<div>
+				@else
+				<div>	
+				@endif
 				@elseif(count($currentFilters)==3)
 
                   @else
@@ -322,15 +327,17 @@
               <div>
 
 		@endif
-                @if(isset($currentFilters) && count($currentFilters)>0)
+             @if(isset($currentFilters) && count($currentFilters)>0 && count($currentFilters)!=1)
              <div class="col-sm-1">
-                  <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
+                  <p class="product_item_price">1{{number_format($product->price, 0, '.', ' ')}} £</p>
                   <p class="product_map_marka d-sm-none">Volkswagen</p>
                   <p class="product_item_city d-sm-none">
                     <img src="/img/map_icon.svg" alt="" class="product_map_icon">
                     {{$product->city}}
                   </p>
                   <div>
+				  @else
+
                     @endif
 		<!--/div-->
           {{--<div class="col-sm-1">
@@ -357,8 +364,11 @@
 
                     ?>
             </div>
-          </div>
+		       </div>
         </div>
+
+   
+
           @endforeach
 
 

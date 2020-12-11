@@ -7,6 +7,7 @@ else{
 }
 
 $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
+dump($recepient);
 ?>
 
 <div class="wrapper_header_message">
@@ -56,7 +57,7 @@ $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
 </div>
 <div>
 <div  class="wrapper_body_messege" onclick="reloadMessageList('{{$conversationId}}',null,true);cleanCounter('{{$messageId}}')" required="">
-    <div id="messageBlock" class="wrapper_body_messege_scroll">
+    <div id="messageBlock_{{$messageId}}_{{$recepient}}" class="wrapper_body_messege_scroll">
 
     @foreach($conversation as $segment)
             @if(\Auth::user()->id!=$segment->receiver_id)
@@ -148,7 +149,7 @@ function scrollToBottom(id){
   },'slow');
 }
 $(document).ready(function(){
-	scrollToBottom('messageBlock');
+	//scrollToBottom('messageBlock');
 })
   $('.blockUser').click(function(e){
     e.preventDefault()
@@ -322,76 +323,5 @@ $("#but_upload").click(function(){
     }
 
 
-
-
-
-   var pusher = new Pusher('500e0547867ccfe184af', {
-      cluster: 'eu'
-    });
-var channel = pusher.subscribe('my-channel');
-
-Pusher.logToConsole = true;
-var user='{{\Auth::user()->id}}'
-console.log('receiver - mid=>',window.message_id)
-var receiver='receiver-'+user+'-'//+window.message_id
-console.log(receiver)
-console.log(receiver.length)
-
-channel.bind(receiver, function(data) {
-console.log('data>',data);
-$('.conv_notify_class_'+data.message_id+'_'+data.sender_id+'').addClass('nobefore')
-$('.conv_notify_class_'+data.message_id+'_'+data.sender_id+'').addClass('message_sidebar_theme_item-new')
-$('body').append(
-'<style>'+
-							   '.conv_notify_class_'+data.message_id+'_'+data.sender_id+':before{'+
-								'content: "'+data.viewed+'";'+
-								'display: block;'+
-								'position: absolute;'+
-								'right: 12px;'+
-								'top: 12px;'+
-								'font-weight: 500;'+
-								'font-size: 10px;'+
-								'line-height: 14px;'+
-								'color: #FFFFFF;'+
-								'width: 44px;'+
-								'text-align: center;'+
-								'background: red;'+
-								'border-radius: 30px;'+
-							'} '+
-							'.conv_notify_class_'+data.message_id+'_'+data.sender_id+'.nobefore:before{'+
-								'display:none;'+
-							'}'+
-							'</style>'
-)
-
-$('.conv_notify_class_'+data.message_id+'_'+data.sender_id+'').removeClass('nobefore')
-if('{{$conversation->first()->sender_id}}'=={{\Auth::user()->id}}){
-	var sender='{{$conversation->first()->receiver_id}}';
-}
-else{
-	var sender='{{$conversation->first()->sender_id}}'
-}
-console.log('sender>',sender)
-console.log('{{$conversation->first()->message->id}}')
-  console.log('popali')
- if(data.photo==null && data.sender_id==sender && '{{$conversation->first()->message->id}}'==data.message_id ){
-   console.log('popali')
-	 $('.wrapper_body_messege_scroll').append(
-                    '<div class="body_messege_item body_to_messege_item">'+
-                        '<p>'+data.text+'</p>'+
-                        '<span>'+data.created+'</span>'+
-                        '</div>'
-                    );
-}else if(data.photo!=null && data.sender_id==sender && '{{$conversation->first()->message->id}}'==data.message_id){
-   console.log('popali photo')
-   $('.wrapper_body_messege_scroll').append(
-     '<div class="body_messege_item body_to_messege_item">'+
-     '<img style="" src="/storage/message_images/'+data.photo+'">'+
-     '<span>'+data.created+'</span>'+
-     '</div>'
-   );
- }
-
-})
 
 </script>
