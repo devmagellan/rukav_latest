@@ -76,6 +76,8 @@ class GenerateProductCategoriesViewTask extends Task
 
 
                 echo  $arr[$parent_id][$i]['name'];
+                $rootCatsArray=\App\Containers\Site\Models\ProductCategory::where('parent_id',0)->pluck('id');
+                dump($rootCatsArray);
                 if($parent_id !== 0){
                     echo"
                      <div style='float:right' class=\"btn-group pull-right\">
