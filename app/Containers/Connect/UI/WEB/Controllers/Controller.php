@@ -78,9 +78,9 @@ class Controller extends WebController
         }
         else{
             Apiato::call('Connect@CreateConnectAction', [$request]);
-			
+
 		$connects=\App\Containers\Connect\Models\Connect::where('sender_id',\Auth::user()->id)->where('receiver_id',$request->input('receiver_id'))->where('message_id',$request->input('message_id'))->where('viewed_at',null)->get();
-		$all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$request->input('receiver_id'))->where('viewed_at',null)->get();  
+		$all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$request->input('receiver_id'))->where('viewed_at',null)->get();
 	    $options = array(
           'cluster' => 'eu',
           'useTLS' => true
@@ -100,10 +100,10 @@ class Controller extends WebController
         //$data['photo'] = null;
         //$data['created'] = $con->created_at;
         $pusher->trigger('my-channel-header', /* 'my-event' */ 'receiver-' . $request->input('receiver_id') . '-', $data);
-		
+
 		$pusher->trigger('my-channel', /* 'my-event' */ 'receiver-' . $request->input('receiver_id') . '-', $data);
 		\Log::info('trigger');
-			
+
             return redirect('/ads/'.$request->input('message_id').'')->withErrors(['Ваше сообщение было успешно доставлено!', 'The Message']);
         }
 

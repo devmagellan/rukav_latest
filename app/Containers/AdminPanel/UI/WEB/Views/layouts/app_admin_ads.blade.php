@@ -55,7 +55,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 <script src="/templates/smartadmin/js/formplugins/select2/select2.bundle.js" ></script>
 <script src="https://rawgit.com/DataTables/Plugins/master/integration/bootstrap/3/dataTables.bootstrap.js" ></script>
 <script src="/js/FixedHeader.nightly.js" ></script>
-<script src="https://rawgit.com/maca88/datatables.plugins/master/Source/dataTables.colResize.js" ></script>
+<!--script src="https://rawgit.com/maca88/datatables.plugins/master/Source/dataTables.colResize.js" ></script-->
+<script src="/js/dataTables.colResize_.js" ></script>
 <!-- Place favicon.ico in the root directory -->
 <link rel="apple-touch-icon" sizes="180x180" href="/templates/smartadmin/img/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/templates/smartadmin/img/favicon/favicon-32x32.png">

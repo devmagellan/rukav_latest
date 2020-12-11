@@ -529,6 +529,7 @@
           // remove the drag (mousemove) event listener
           $(document).off("mousemove", mouseMoveFunc);
           $(that._table).trigger($.Event( "column-resized.dt" ), [$col.index(), $col.data(that.DATA_TAG_ITEM).outerWidth()] );
+          console.log('Resized')
           that._dtInstance.state.save();
         }).on("mousemove", mouseMoveFunc);  //on mousemove
         return false;   // stop text highlighting

@@ -85,7 +85,7 @@ class SendContactRequest extends Request
        'name'=>'required',
 			'email' => 'required|email',
 			'text' => 'required',
-          'g-recaptcha-response' => 'required|recaptcha'
+      'g-recaptcha-response' => 'required|recaptcha'
         ];
     }
 

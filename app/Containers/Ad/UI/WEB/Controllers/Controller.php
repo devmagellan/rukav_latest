@@ -296,7 +296,8 @@ class Controller extends WebController
     /*
      * Where Clause
      */
-
+\Log::info('TextLengthCol'.intval($request->input('col')));
+    \Log::info('TextLengthArray',$request->all());
     if ($request->has('search')) {
 
 
@@ -501,7 +502,7 @@ switch($ad->getSender->confirmed){
   }
       $nestedData [1] = $status;
       $nestedData [2] = $ad->title;
-      $nestedData [3] = '<span style="font-size:9px">' . mb_strimwidth($ad->message, 0, 30, "...") . '</span>';
+      $nestedData [3] = '<span style="font-size:9px">' . mb_strimwidth($ad->message, 0, (null!=$request->input('col_width')) ? intval($request->input('col_width'))/5 : 30, "...") . '</span>';
       $nestedData [4] = $ad->sender;
       $nestedData [5] = ($ad->getSender) ? $ad->getSender->name . ' ' . $ad->getSender->sername : 'Не известно';
       $nestedData [6] = ($ad->getSender) ? $ad->getSender->email : 'Не известно';
@@ -737,11 +738,11 @@ switch($ad->getSender->confirmed){
 			case 'other':
             $rq['complain']=$request->input('other_name');
             break;
-			
+
         }
       }
 	  elseif($key=='add_id'){
-		  
+
 		  $rq['add_link']='https://rukav.co.uk/ads/'.$request->input('add_id');
 	  }
     }
