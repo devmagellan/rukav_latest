@@ -79,7 +79,8 @@
                         <div class="message_sidebar_theme_body" style="display: none;">
 						@if(isset($list->connects))
                             @foreach($list->connects as $cnv)
-                            <div class="message_sidebar_theme_item message_sidebar_theme_item-new" id="conv_{{$cnv->id}}" onclick="reloadMessageList('{{$cnv->id}}','{{$list->group_id}}')">
+
+                            <div class="message_sidebar_theme_item message_sidebar_theme_item-new" id="conv_{{$cnv->id}}" onclick="reloadMessageList('{{$cnv->id}}','{{$list->group_id}}','{{\Auth::user()->id}}')">
 
 								
 								<div class="message_sidebar_theme_left">
@@ -169,7 +170,7 @@
 
                                 @if($groupConversations->first())
 
-                                    <div class="message_sidebar_theme_item message_sidebar_theme_item-new" onclick="reloadMessageList('{{$groupConversations->first()->id}}','{{$groupConversations->first()->group_id}}')">
+                                    <div class="message_sidebar_theme_item message_sidebar_theme_item-new" onclick="reloadMessageList('{{$groupConversations->first()->id}}','{{$groupConversations->first()->group_id}}','{{\Auth::user()->id}}')">
                                     
 									
 									
@@ -299,7 +300,7 @@
                             $opponent=\App\Containers\User\Models\User::where('id',$conversation->receiver_id)->first();
                           }
                           ?>
-                        <div class="new_notification message_sidebar_theme_item conv_notify_class_{{$conversation->message->id}}_{{$conversation->sender_id}} conv_class_{{$conversation->message->id}} @if($conversation->viewed_at==null) message_sidebar_theme_item-new @endif" id="conv_id_{{$conversation->id}}" onclick="reloadMessageList('{{$conversation->id}}');cleanCounter('{{$conversation->message->id}}')" >
+                        <div class="new_notification message_sidebar_theme_item conv_notify_class_{{$conversation->message->id}}_{{$conversation->sender_id}} conv_class_{{$conversation->message->id}} @if($conversation->viewed_at==null) message_sidebar_theme_item-new @endif" id="conv_id_{{$conversation->id}}" onclick="reloadMessageList('{{$conversation->id}}',null,'{{$opponent->id}}');cleanCounter('{{$conversation->message->id}}')" >
                             
 							        <?
 									$connects=\App\Containers\Connect\Models\Connect::where('sender_id',$conversation->sender_id)->where('receiver_id',\Auth::user()->id)->where('message_id',$conversation->message->id)->where('viewed_at',null)->get();
@@ -336,7 +337,11 @@
                                     <?
                                     $photo=App\Containers\Ad\Models\Picture::where('ads_id',$conversation->message->id)->first();
                                     ?>
+									@if($photo)
                                     <img src="/storage/messages/{{$photo->photo}}" alt="">
+									@else
+									<img src="/storage/pictures/photo_icon2.png" alt="">
+									@endif
                                 </div>
                                 <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
                             </div>
@@ -422,7 +427,7 @@ function cleanCounter(message_id){
 	$('.conv_class_'+message_id+'').addClass('nobefore')
 }
 
-    function reloadMessageList(conversation,group_id,flag=false){
+    function reloadMessageList(conversation,group_id,flag_sender){
 $('#conv_id_'+conversation+'').removeClass('message_sidebar_theme_item-new');
         var module='conversation'
         console.log('conversation>',conversation);
@@ -433,7 +438,7 @@ $('#conv_id_'+conversation+'').removeClass('message_sidebar_theme_item-new');
             dataType: 'html',
             async:false,
             url: url,
-            data: {module: module, conversation:conversation,group_id:group_id,flag:flag},
+            data: {module: module, conversation:conversation,group_id:group_id,flag_sender:flag_sender},
             beforeSend: function() {
                 $('#loader2').show();
             },
@@ -560,6 +565,77 @@ console.log(type,group_id)
 
   })
 
+
+
+
+   var pusher = new Pusher('500e0547867ccfe184af', {
+      cluster: 'eu'
+    });
+var channel = pusher.subscribe('my-channel');
+
+Pusher.logToConsole = true;
+var user='{{\Auth::user()->id}}'
+console.log('receiver - mid=>',window.message_id)
+var receiver='receiver-'+user+'-'//+window.message_id
+console.log(receiver)
+console.log(receiver.length)
+
+channel.bind(receiver, function(data) {
+console.log('data#>',data);
+$('.conv_notify_class_'+data.message_id+'_'+data.sender_id+'').addClass('nobefore')
+$('.conv_notify_class_'+data.message_id+'_'+data.sender_id+'').addClass('message_sidebar_theme_item-new')
+$('body').append(
+'<style>'+
+							   '.conv_notify_class_'+data.message_id+'_'+data.sender_id+':before{'+
+								'content: "'+data.viewed+'";'+
+								'display: block;'+
+								'position: absolute;'+
+								'right: 12px;'+
+								'top: 12px;'+
+								'font-weight: 500;'+
+								'font-size: 10px;'+
+								'line-height: 14px;'+
+								'color: #FFFFFF;'+
+								'width: 44px;'+
+								'text-align: center;'+
+								'background: red;'+
+								'border-radius: 30px;'+
+							'} '+
+							'.conv_notify_class_'+data.message_id+'_'+data.sender_id+'.nobefore:before{'+
+								'display:none;'+
+							'}'+
+							'</style>'
+)
+
+$('.conv_notify_class_'+data.message_id+'_'+data.sender_id+'').removeClass('nobefore')
+if('{{$conversation->first()->sender_id}}'=={{\Auth::user()->id}}){
+	var sender='{{$conversation->first()->receiver_id}}';
+}
+else{
+	var sender='{{$conversation->first()->sender_id}}'
+}
+console.log('sender>',sender)
+console.log('{{$conversation->first()->message->id}}')
+  console.log('popali')
+ if(data.photo==null && /* data.sender_id==sender && */ '{{$conversation->first()->message->id}}'==data.message_id ){
+   console.log('popali##messageBlock_'+data.message_id+'_'+data.sender_id+'')
+	 $('#messageBlock_'+data.message_id+'_'+data.sender_id+'').append(//old version $('.wrapper_body_messege_scroll')
+                    '<div class="body_messege_item body_to_messege_item">'+
+                        '<p>'+data.text+'</p>'+
+                        '<span>'+data.created+'</span>'+
+                        '</div>'
+                    );
+}else if(data.photo!=null && /* data.sender_id==sender && */ '{{$conversation->first()->message->id}}'==data.message_id){
+   console.log('popali photo')
+   $('#messageBlock_'+data.message_id+'_'+data.sender_id+'').append( //old version $('.wrapper_body_messege_scroll')
+     '<div class="body_messege_item body_to_messege_item">'+
+     '<img style="" src="/storage/message_images/'+data.photo+'">'+
+     '<span>'+data.created+'</span>'+
+     '</div>'
+   );
+ }
+
+})
 
 
 </script>

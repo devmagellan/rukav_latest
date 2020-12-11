@@ -102,7 +102,7 @@
       @else
         @if(null!=(\Auth::user()) )
         <div class="col-md-1 col-2">
-          <a href="#" class="user_cabinet_login notification conv_head_class" >
+          <a href="#" class="user_cabinet_login conv_head_class" >
 
 
            <span>
@@ -423,7 +423,7 @@ $(document).ready(function(){
   var receiver_header='receiver-'+user_header+'-'//+window.message_id
   console.log('header__receiver',receiver_header)
   console.log('header__receiver_length',receiver_header.length)
-  channel_header.bind(receiver_header, function(data_header) {
+   channel_header.bind(receiver_header, function(data_header) {
     console.log('dataheader>',data_header);
 
 	if(data_header.all_viewed>0){
@@ -453,6 +453,6 @@ $(document).ready(function(){
     ) ;
 
 	}else{$('.conv_head_class').addClass('nobefore')}
-	 })
+	 }) 
 </script>
   @endif

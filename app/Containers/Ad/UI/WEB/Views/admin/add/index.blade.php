@@ -1870,6 +1870,11 @@
         $('.categories').hide();
       })
 
+      $('.dropdown-icon.glyphicon.glyphicon-minus-sign').on("click", function(){
+        $('#default-example-modal-lg > div > div > div.modal-body > form > div > div > div.panel-body > div > ul > li:nth-child(1) > span > div > div > ul > li:nth-child(1) > span > div > div > ul').toggle();
+      })
+
+    alert("test456");
 
       $('.cat_block_1 .cat_block').click(function(){
         console.log('this=>',$(this))

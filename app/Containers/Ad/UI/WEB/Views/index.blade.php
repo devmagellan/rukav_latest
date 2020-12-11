@@ -1136,6 +1136,11 @@ function reloadWithoutSetState(){
   </script>
 
   <script>
+
+    $('.dropdown-icon.glyphicon.glyphicon-minus-sign').on("click", function(){
+      $(this).siblings("ul").toggle();
+    })
+
     $('.ad_edit_rest_submit').click(function(){
       var status=$('#status-result').val();
       var author=$('#author-result').val();
@@ -1187,7 +1192,8 @@ function reloadWithoutSetState(){
       });
 
       $('#default-example-modal-lg').modal('hide');
-      window.location.reload()
+	  window.dt.ajax.reload(null,false);
+     // window.location.reload()
     })
 
     $('.delete_ads').click(function(){

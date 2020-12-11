@@ -297,7 +297,7 @@ class Controller extends WebController
 
   public function conversationData(GetAllPrivateCabinetsRequest $request)
   {
-	  \Log::info('flag'.$request->input('flag'));
+	  
 	  $data['conversationId']=$request->input('conversation');
  $res=\App\Containers\Connect\Models\Connect::select('message_id','receiver_id')->where('id', $request->input('conversation'))->first()->toArray();
    $data['messageId']=$res['message_id'];
@@ -305,14 +305,14 @@ class Controller extends WebController
 	\Log::info('conversationIDRes',$res);
 	\Log::info('conversationExample'.$example->receiver_id);
 	\Log::info('conversationAuth'.\Auth::user()->id); 
-    if (/* \Auth::user()->id == $example->receiver_id &&  */$request->input('flag')=='true') {
+    /*if ( \Auth::user()->id == $example->receiver_id &&  $request->input('flag')=='true') {*/
 		\Log::info('conversationData'.date("Y-m-d H:i:s"));
 		\Log::info('conversationID'.$request->input('conversation'));
-		
-      
-	 	
+ 	\Log::info('flag_sender'.$request->input('flag_sender'));
+	  \Log::info('message_id'.$res['message_id']);
+	  \Log::info('receiver_id'.\Auth::user()->id);
 	  
-	  \App\Containers\Connect\Models\Connect::where('message_id',$res['message_id'])->where('receiver_id',\Auth::user()->id)->update(['viewed_at' => Carbon::now()]);
+	  \App\Containers\Connect\Models\Connect::where('message_id',$res['message_id'])->where('sender_id',$request->input('flag_sender'))->where('receiver_id',\Auth::user()->id)->update(['viewed_at' => Carbon::now()]);
 	$all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->where('viewed_at',null)->get();  
 	    $options = array(
           'cluster' => 'eu',
@@ -333,7 +333,7 @@ class Controller extends WebController
         //$data['photo'] = null;
         //$data['created'] = $con->created_at;
         $pusher->trigger('my-channel-header', /* 'my-event' */ 'receiver-' . \Auth::user()->id . '-', $data);
-    }
+/*     } */
 //Если хозяин объявления я то тянуть все конекты в которых receiver_id я и sender_id $example->sender_id
 //Иначе тянуть все коннекты в которых receiver_id $example->receiver_id и sender_id я
     $recepients = [$example->sender_id, $example->receiver_id];
@@ -347,6 +347,7 @@ class Controller extends WebController
   public function checkData(GetAllPrivateCabinetsRequest $request)
   {
 	  \Log::info('checkData'.date("Y-m-d H:i:s"));
+	   \Log::info('checkDataUser'.$request->input('client_id'));
     $user = \App\Containers\User\Models\User::where('id', $request->input('client_id'))->first();
     if (\Auth::user()->confirmed == \App\Containers\User\Models\User::STATUS_CREATED_BY_ADMIN_NOT_CONFIRMED) {
       \Session::put('ShowWeeklyAdminCreatedConfirmation', 1);
