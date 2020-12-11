@@ -1038,7 +1038,7 @@ function reloadWithoutSetState(){
         colResize = obj;
         fixedHeader = obj.dom.fixedHeader;
 
-        console.log(colResize);
+        console.log('colResizeNew',colResize);
         console.log(fixedHeader);
       });
 
@@ -1046,6 +1046,7 @@ function reloadWithoutSetState(){
 
       window.dt.ajax.url('{{route('serverSide',['group_id'=>':group_id'])}}').load();
       window.dt.draw();
+      //window.dt.columns.adjust().console.log('333')
       $('#button').on('click',  function () {
         var resourceURL = "{{route('serverSide',['group_id'=>':group_id'])}}";
         var group_id = 1;
@@ -1277,6 +1278,9 @@ function reloadWithoutSetState(){
 
     function myFunction() {
       console.log('..')
+     // window.dt.ajax.url('{{route('serverSide',['column_width'=>'1222'])}}').load();
+
+
       if (window.pageYOffset > sticky) {
         header.classList.add("sticky");
       } else {
