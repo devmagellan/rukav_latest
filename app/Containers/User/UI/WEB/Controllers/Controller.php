@@ -2,6 +2,7 @@
 
 namespace App\Containers\User\UI\WEB\Controllers;
 
+use App\Containers\Ad\UI\WEB\Requests\DeleteAdRequest;
 use App\Containers\HomePage\Services\GlobalService;
 use App\Containers\User\Jobs\ExpiredAdsEmailVerification;
 use App\Containers\User\Jobs\VerifyMail;
@@ -578,6 +579,13 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
     $user=\Auth::user();
     $user= \App\Containers\User\Models\User::where('id',\Auth::user()->id)->update(['email'=>$request->email]);
     dispatch(new VerifyMail($user))->onQueue('queue_name');
+  }
+
+
+  public function postDelete(GetAllUsersRequest $request)
+  {
+    \App\Containers\User\Models\User::whereIn('id', $request->input('ids'))->delete();
+
   }
 
 }

@@ -24,6 +24,11 @@ $router->post('/users/delete', [
   'uses' => 'Controller@deleteUser',
 ]);
 
+$router->post('/users/softdelete', [
+  'as'   => 'users_delete',
+  'uses' => 'Controller@postDelete',
+]);
+
 $router->delete('/user/hard_delete/{user}', [
     'as'   => 'user_harddelete',
     'uses' => 'Controller@hardDeleteUser',
@@ -123,6 +128,14 @@ $router->post('/change_email', [
   'uses'  => 'Controller@changeEmail',
   'middleware' => [
     'auth:web',
+  ],
+]);
+
+$router->get('userServerSide', [
+  'as' => 'userServerSide',
+  'uses'  => 'UsersDatatableController@usersByGroupDatatables',
+  'middleware' => [
+    'auth:admin',
   ],
 ]);
 

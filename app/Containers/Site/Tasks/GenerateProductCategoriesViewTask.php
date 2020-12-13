@@ -81,13 +81,13 @@ class GenerateProductCategoriesViewTask extends Task
                 $rootCatsArray=\App\Containers\Site\Models\ProductCategory::where('parent_id',0)->pluck('id');
                 dump($rootCatsArray);
                 if($parent_id !== 0){
-					if(!in_array($arr[$parent_id][$i]['id'],$this->rootCatsArray)){
+					/*if(!in_array($arr[$parent_id][$i]['id'],$this->rootCatsArray)){*/
                     echo"
                      <div style='float:right' class=\"btn-group pull-right\">
                      <input type='hidden' class='hidden_rubric' value='".$arr[$parent_id][$i]['id']."'>
                       <button type=\"button\" class=\"btn btn-danger btn-xs transfer_rubric\">Переместить сюда</button>
                     </div>
-                    ";}
+                    ";/*}*/
                 }
                 //рекурсия - проверяем нет ли дочерних категорий
                 $this->view_cat($arr, $arr[$parent_id][$i]['id'], 1,$parents_approved);

@@ -25,7 +25,7 @@ class UserService
 
       $current=\App\Containers\User\Models\User::where('email',$data->email)->withTrashed()->first();
       \Log::info('CurrentUser=>',array($current));
-	  $id=(property_exists($data, 'customer_id') && $current==null)  ? $data->customer_id : (($current!=null) ? $current->id : null );
+	  $id=(null!=($data->customer_id)/* && $current==null*/)  ? $data->customer_id : (($current!=null) ? $current->id : null );
         if(isset($data->id)){
           $currentById=\App\Containers\User\Models\User::where('id',$data->id)->withTrashed()->first();
        /*   if($currentById->email!=$user->email){
