@@ -908,6 +908,7 @@ function reloadWithoutSetState(){
      $('#dt-basic-example thead tr').clone(true).appendTo('#dt-basic-example thead');
       $('#dt-basic-example thead tr:eq(1) th').each(function(i)
       {
+        if(i!=0 ){
         var title = $(this).text();
         $(this).html('<input type="text" class="form-control form-control-sm" placeholder="Search ' + title + '" />');
 
@@ -921,6 +922,10 @@ function reloadWithoutSetState(){
               .draw();
           }
         });
+        }
+        else{
+          $(this).html('<input type="checkbox" class="form-control form-control-sm check_all" />');
+        }
       });
 
 
@@ -1069,6 +1074,28 @@ function reloadWithoutSetState(){
   </script>
 
   <script>
+
+    $( "body" ).delegate('.check_all','click', function(){
+      console.log('deligate')
+      var ad_check= $('#dt-basic-example').find('.ad_check')
+      if($(this).is(':checked') ){
+
+        console.log('checked')
+        $.each(ad_check, function(index, value) {
+         console.log(value);
+          $(value).prop("checked",true)
+
+        });
+      }
+      else{
+        console.log('not_checked')
+        $.each(ad_check, function(index, value) {
+          //console.log(value);
+          $(value).prop("checked", false)
+
+        });
+      }
+    })
 
     $('.edit_rubrics').click(function(){
       var ad_check= $('#dt-basic-example').find('.ad_check')

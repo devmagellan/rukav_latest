@@ -79,7 +79,6 @@ class GenerateProductCategoriesViewTask extends Task
 
                 echo  $arr[$parent_id][$i]['name'];
                 $rootCatsArray=\App\Containers\Site\Models\ProductCategory::where('parent_id',0)->pluck('id');
-                dump($rootCatsArray);
                 if($parent_id !== 0){
 					/*if(!in_array($arr[$parent_id][$i]['id'],$this->rootCatsArray)){*/
                     echo"

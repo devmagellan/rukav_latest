@@ -171,9 +171,6 @@
         </div>
       @endif
 
-
-
-
       <article class="add_advert_block">
         <span data-status_created="{{session('infoAd')}}" id="statusAd"></span>
         <form action="/admin/ads/store" method="post" enctype="multipart/form-data">
