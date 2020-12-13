@@ -7,7 +7,6 @@ else{
 }
 
 $opponent=\App\Containers\User\Models\User::where('id',$recepient)->first();
-dump($recepient);
 ?>
 
 <div class="wrapper_header_message">
@@ -58,7 +57,7 @@ dump($recepient);
 <div>
 <div  class="wrapper_body_messege" onclick="reloadMessageList('{{$conversationId}}',null,'{{\Auth::user()->id}}');cleanCounter('{{$messageId}}')" required="">
     <div id="messageBlock_{{$messageId}}_{{$recepient}}" class="wrapper_body_messege_scroll">
-
+<div class="scrolling_height">
     @foreach($conversation as $segment)
             @if(\Auth::user()->id!=$segment->receiver_id)
 
@@ -119,7 +118,7 @@ dump($recepient);
         <!--  end .chat-segment -->
 
         @endforeach
-
+</div>
     </div>
 </div>
 <div class="wrapper_footer_messege">
@@ -144,12 +143,13 @@ function scrollToBottom(id){
   div_offset = $("#"+id).offset().top;
   window_height = $("#"+id).height();//$(window).height();
   console.log('div_height',div_height);
+  console.log('scrolling_height',$('.scrolling_height').height())
   $("#"+id).animate({
-    scrollTop: div_offset-window_height+div_height+(div_height*3)
+    scrollTop: div_offset-window_height+div_height+($('.scrolling_height').height())
   },'slow');
 }
 $(document).ready(function(){
-	//scrollToBottom('messageBlock');
+	scrollToBottom('messageBlock_{{$messageId}}_{{$recepient}}');
 })
   $('.blockUser').click(function(e){
     e.preventDefault()
