@@ -180,7 +180,7 @@ class Controller extends WebController
 
   public function savePreview($id){
       \App\Containers\Ad\Models\Ad::where('id',$id)->update(['is_tmp'=>0]);
-      return redirect('/private_cabinet#myads');
+      return redirect('/private_cabinet/screen/myads');
   }
 
   /**
