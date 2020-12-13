@@ -16,7 +16,7 @@
     </div>
 
     <main>
-        <div class="container">
+        <div class="container" style="min-height:500px;">
 <div class="row">
       <div class="col-md-4">
         <ul style="margin-top:50px;color:#A269F7">
