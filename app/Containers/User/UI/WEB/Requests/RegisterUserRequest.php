@@ -12,8 +12,8 @@ class RegisterUserRequest extends Request
 
 public function __construct(ValidationFactory $validationFactory)
     {
-		
-		
+
+
 
         $validationFactory->extend(
             'custom_phone',
@@ -75,6 +75,7 @@ public function __construct(ValidationFactory $validationFactory)
       "country" => "required|max:30",
       //"phone" =>  "nullable|unique:users,phone,NULL,id,deleted_at,NULL|required_if:vid_user,Организация|required_if:vid_user,Предприниматель|required_if:vid_user,Компания|max:30",
       "phone"=>"custom_phone|required_if:vid_user,Организация|required_if:vid_user,Предприниматель|required_if:vid_user,Компания|max:14",
+      "business_name"=>"required_if:vid_user,Предприниматель",
 	  "password" => "required|between:6,30",
       "email" => "required|email|unique:users,email,NULL,id,deleted_at,NULL",
       "nameJob" => "required_if:vid_user,Бизнес",

@@ -552,7 +552,7 @@
             <input type="radio" name="complain" value="my_phone" id="my_phone" class="radio_input" >
             <label for="my_phone" style="margin-right:0px"> В объявлении кто-то указал мой телефон</label>
 <div class="my_phone_div">
-            <!--p>Если кто-то разместил объявление с вашим номером телефона без вашего разрешения - вы можите самостоятельно удалить его</p>
+            <!--p>Если кто-то разместил объявление с вашим номером телефона без вашего разрешения - вы можите самостоятельно удалить его</p-->
             <!--a href="#" class="product_info_send_message" >удалить объявление</a-->
 			<span style="color:red">Эта услуга пока не доступна</span>
 </div>
@@ -700,7 +700,7 @@
         <div class="individual_modal_block" style="display:none">
           <div class="row">
             <div class="col-sm-6">
-              <input type="text" name="business_name" placeholder="Название бизнеса" class="input-address"><span class="required">*</span>
+              <input type="text" id="business_name" name="business_name" placeholder="Название бизнеса" class="errorInputBlock"><span class="required">*</span><!--input-address -->
             </div>
             <div class="col-sm-6">
               <input type="text" name="www" placeholder="Веб страница" class="input-address">
