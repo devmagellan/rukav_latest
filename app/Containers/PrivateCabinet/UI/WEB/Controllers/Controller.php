@@ -483,12 +483,39 @@ $all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$user-
       $options
     );
 
+		$connects=\App\Containers\Connect\Models\Connect::where('sender_id',\Auth::user()->id)->where('receiver_id',$user->id)->where('message_id',$request->input('message_id'))->where('viewed_at',null)->get();
+$all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$user->id)->where('viewed_at',null)->get();
+
+//var_dump('receiver-'.$user->id.'-');
+        $options = array(
+          'cluster' => 'eu',
+          'useTLS' => true
+        );
+        $pusher = new \Pusher\Pusher(
+          '500e0547867ccfe184af',
+          'b8d3a1076b93fe80dd50',
+          '1000615',
+          $options
+        );
+
+
+		
+
+
+
+
+
     $data['message_id'] = $request->input('message_id');
     $data['sender_id'] = \Auth::user()->id;
     $data['text'] = '';
+			$data['viewed'] = (count($connects)>0) ? count($connects) : null;
+		$data['all_viewed'] = (count($all_connects)>0) ? count($all_connects) : null;
     $data['photo'] = $file;
     $data['created'] = $con->created_at;
+	
+	
     $pusher->trigger('my-channel', 'receiver-' . $user->id . '-', $data);
+	$pusher->trigger('my-channel-header-2', /* 'my-event' */ 'receiver-' . $user->id . '-', $data);
     $notification['created'] = $con->created_at;
     $pusher->trigger('notification-channel', 'notification-' . $user->id . '-', $notification);
     return json_encode(['message' => 'success', 'data' => $data]);

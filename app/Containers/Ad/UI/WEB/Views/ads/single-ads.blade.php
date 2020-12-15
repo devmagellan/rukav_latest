@@ -354,6 +354,7 @@ ul.slickslide li img, .slick-dots button img {
 		@if(empty($ad->getSender->phone) || strlen($ad->getSender->phone)<6 )
 			<span>Не указан</span>
 			@else
+				111
             <span>{{print($ad->getSender->phone)}}</span>
 		@endif
           </a>

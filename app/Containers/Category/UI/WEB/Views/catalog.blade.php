@@ -147,7 +147,17 @@
 		  @endif
           <div class="col-4 col-sm-1" style="text-align: center"><button class="data_sort   @if( Request::get('sort_by_date')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_date')=='high_to_low') high_to_low @else low_to_high @endif">Дата @if( Request::get('sort_by_date')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_date')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
 			@if(isset($currentFilters))
+			@if(count($currentFilters )==3)	
             @foreach($currentFilters as $filter)
+                <div class="col-md-2" style="text-align: center;max-width:170px">
+                <input type="hidden" class="filter_variant" value="{{$filter->filter->id}}">
+                  <? $filter_variant='sort_by_filter_'.$filter->filter->id;
+                  ?>
+                  <button class="filter_sort @if( Request::get($filter_variant)=='lo_to_high') lo_to_high @elseif(Request::get($filter_variant)=='high_to_low') high_to_low @else low_to_high @endif">{{$filter->filter->name}} @if( Request::get($filter_variant)=='lo_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get($filter_variant)=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img src="/img/play_button_img.svg" alt=""> @endif </button>
+                </div>
+            @endforeach
+			@else
+				@foreach($currentFilters as $filter)
                 <div class="col-md-2" style="text-align: center">
                 <input type="hidden" class="filter_variant" value="{{$filter->filter->id}}">
                   <? $filter_variant='sort_by_filter_'.$filter->filter->id;
@@ -155,6 +165,7 @@
                   <button class="filter_sort @if( Request::get($filter_variant)=='lo_to_high') lo_to_high @elseif(Request::get($filter_variant)=='high_to_low') high_to_low @else low_to_high @endif">{{$filter->filter->name}} @if( Request::get($filter_variant)=='lo_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get($filter_variant)=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img src="/img/play_button_img.svg" alt=""> @endif </button>
                 </div>
             @endforeach
+			@endif
 			@endif
 		@if(isset($currentFilters) && count($currentFilters)<3 && count($currentFilters)!=0)
             @for($i=1;$i<=3-count($currentFilters)-1;$i++)
@@ -269,7 +280,19 @@
           ?>
 
 @if(isset($currentFilters))
+	@if(count($currentFilters)==3)
           @foreach($currentFilters as $key=>$filter)
+            <?
+            $filterValue[$key]=\App\Containers\Filter\Models\AddFilter::where('add_id',$product->id)->where('filter_id',$filter->filter_id)->first();
+            ?>
+            <div class="col-md-2" style="text-align: center;max-width:170px">
+              @if($filterValue[$key])
+              <p class="product_map_marka d-none d-sm-block">{{$filterValue[$key]->value}}</p>
+              @endif
+            </div>
+          @endforeach
+	@else	  
+		@foreach($currentFilters as $key=>$filter)
             <?
             $filterValue[$key]=\App\Containers\Filter\Models\AddFilter::where('add_id',$product->id)->where('filter_id',$filter->filter_id)->first();
             ?>
@@ -279,6 +302,7 @@
               @endif
             </div>
           @endforeach
+	@endif
           @if(count($currentFilters)<3)
 
             @for($i=1;$i<=3-count($currentFilters)-1;$i++)
@@ -286,11 +310,11 @@
             @endfor
              <div class="col-md-3">
                @if(isset($age) && $age==1)
-                 <p class="product_item_price">2{{number_format($product->age, 0, '.', ' ')}}</p>
+                 <p class="product_item_price">{{number_format($product->age, 0, '.', ' ')}}</p>
                @elseif(isset($payment) && $payment==1)
-                 <p class="product_item_price">2{{number_format($product->payment, 0, '.', ' ')}} £</p>
+                 <p class="product_item_price">{{number_format($product->payment, 0, '.', ' ')}} £</p>
                @else
-                <p class="product_item_price">2{{number_format($product->price, 0, '.', ' ')}} £</p>
+                <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
                @endif
                 <p class="product_map_marka d-sm-none">Volkswagen</p>
                 <p class="product_item_city d-sm-none">
@@ -329,7 +353,7 @@
 		@endif
              @if(isset($currentFilters) && count($currentFilters)>0 && count($currentFilters)!=1)
              <div class="col-sm-1">
-                  <p class="product_item_price">1{{number_format($product->price, 0, '.', ' ')}} £</p>
+                  <p class="product_item_price" style="min-width:130px;font-size:14px;text-align:center;margin-top:43px">{{number_format($product->price, 0, '.', ' ')}} £</p>
                   <p class="product_map_marka d-sm-none">Volkswagen</p>
                   <p class="product_item_city d-sm-none">
                     <img src="/img/map_icon.svg" alt="" class="product_map_icon">

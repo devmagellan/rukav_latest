@@ -34,7 +34,7 @@ class VerifyMail implements ShouldQueue
      */
     public function handle() 
     {
-	\Log::info('emailVerificationCodeinSession2'.session()->get('emailVerificationCode'));
+	\Log::info('emailVerificationCodeinSession3'.session()->get('emailVerificationCode'));
 		//\Log::info('emailVerificationCodeinObject'.$this->user->emailCode);
 		\Log::info('emailVerificationCodeinObject',array($this->user));
 		Log::info('handle: '.date("Y-m-d H:i:s"));
