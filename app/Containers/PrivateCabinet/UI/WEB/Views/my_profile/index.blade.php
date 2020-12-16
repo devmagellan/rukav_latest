@@ -669,17 +669,17 @@
                       @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->minutes_from_weekday
                 && null==\Auth::user()->getIndividualAccount
                 )
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{\Auth::user()->getOrganisationAccount->minutes_from_weekday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_from_weekday" value="{{\Auth::user()->getOrganisationAccount->minutes_from_weekday}}">
                       @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->minutes_from_weekday
                       && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{\Auth::user()->getIndividualAccount->minutes_from_weekday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_from_weekday" value="{{\Auth::user()->getIndividualAccount->minutes_from_weekday}}">
                       @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->minutes_from_weekday)
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{\Auth::user()->getBusinessAccount->minutes_from_weekday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_from_weekday" value="{{\Auth::user()->getBusinessAccount->minutes_from_weekday}}">
 
                       @else
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="1">
+                        <input type="number" min="0" max="59" step="1" name="minutes_from_weekday" value="1">
                       @endif
                     </div>
                     <p class="prophile_day_text prophile_day_divider prophile_day_adddivider">
@@ -713,17 +713,17 @@
                       @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->minutes_till_weekday
                && null==\Auth::user()->getIndividualAccount
                )
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_weekday" value="{{\Auth::user()->getOrganisationAccount->minutes_till_weekday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_from_weekday" value="{{\Auth::user()->getOrganisationAccount->minutes_till_weekday}}">
                       @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->minutes_till_weekday
                       && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_weekday" value="{{\Auth::user()->getIndividualAccount->minutes_till_weekday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_till_weekday" value="{{\Auth::user()->getIndividualAccount->minutes_till_weekday}}">
                       @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->minutes_till_weekday)
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_weekday" value="{{\Auth::user()->getBusinessAccount->minutes_till_weekday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_till_weekday" value="{{\Auth::user()->getBusinessAccount->minutes_till_weekday}}">
 
                       @else
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_weekday" value="1">
+                        <input type="number" min="0" max="59" step="1" name="minutes_till_weekday" value="1">
                       @endif
 
 
@@ -766,17 +766,17 @@
                       @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->minutes_from_saturday
                && null==\Auth::user()->getIndividualAccount
                )
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="{{\Auth::user()->getOrganisationAccount->minutes_from_saturday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_from_saturday" value="{{\Auth::user()->getOrganisationAccount->minutes_from_saturday}}">
                       @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->minutes_from_saturday
                       && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="{{\Auth::user()->getIndividualAccount->minutes_from_saturday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_from_saturday" value="{{\Auth::user()->getIndividualAccount->minutes_from_saturday}}">
                       @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->minutes_from_saturday)
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="{{\Auth::user()->getBusinessAccount->minutes_from_saturday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_from_saturday" value="{{\Auth::user()->getBusinessAccount->minutes_from_saturday}}">
 
                       @else
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_saturday" value="1">
+                        <input type="number" min="0" max="59" step="1" name="minutes_from_saturday" value="1">
                       @endif
 
 
@@ -815,17 +815,17 @@
                       @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->minutes_till_saturday
                && null==\Auth::user()->getIndividualAccount
                )
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="{{\Auth::user()->getOrganisationAccount->minutes_till_saturday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_till_saturday" value="{{\Auth::user()->getOrganisationAccount->minutes_till_saturday}}">
                       @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->minutes_till_saturday
                       && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="{{\Auth::user()->getIndividualAccount->minutes_till_saturday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_till_saturday" value="{{\Auth::user()->getIndividualAccount->minutes_till_saturday}}">
                       @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->minutes_till_saturday)
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="{{\Auth::user()->getBusinessAccount->minutes_till_saturday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_till_saturday" value="{{\Auth::user()->getBusinessAccount->minutes_till_saturday}}">
 
                       @else
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_saturday" value="1">
+                        <input type="number" min="0" max="59" step="1" name="minutes_till_saturday" value="1">
                       @endif
 
                     </div>
@@ -861,17 +861,17 @@
                       @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->minutes_from_sunday
                 && null==\Auth::user()->getIndividualAccount
                 )
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="{{\Auth::user()->getOrganisationAccount->minutes_from_sunday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_from_sunday" value="{{\Auth::user()->getOrganisationAccount->minutes_from_sunday}}">
                       @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->minutes_from_sunday
                       && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="{{\Auth::user()->getIndividualAccount->minutes_from_sunday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_from_sunday" value="{{\Auth::user()->getIndividualAccount->minutes_from_sunday}}">
                       @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->minutes_from_sunday)
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="{{\Auth::user()->getBusinessAccount->minutes_from_sunday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_from_sunday" value="{{\Auth::user()->getBusinessAccount->minutes_from_sunday}}">
 
                       @else
-                        <input type="number" min="1" max="55" step="5" name="minutes_from_sunday" value="1">
+                        <input type="number" min="0" max="59" step="1" name="minutes_from_sunday" value="1">
                       @endif
                     </div>
                     <p class="prophile_day_text prophile_day_divider prophile_day_adddivider">
@@ -904,17 +904,17 @@
                       @if(null!=(\Auth::user()->getOrganisationAccount) && \Auth::user()->getOrganisationAccount->minutes_till_sunday
                  && null==\Auth::user()->getIndividualAccount
                  )
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="{{\Auth::user()->getOrganisationAccount->minutes_till_sunday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_till_sunday" value="{{\Auth::user()->getOrganisationAccount->minutes_till_sunday}}">
                       @elseif(null!=(\Auth::user()->getIndividualAccount) && \Auth::user()->getIndividualAccount->minutes_till_sunday
                       && null==\Auth::user()->getBusinessAccount
                       )
 
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="{{\Auth::user()->getIndividualAccount->minutes_till_sunday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_till_sunday" value="{{\Auth::user()->getIndividualAccount->minutes_till_sunday}}">
                       @elseif(null!=(\Auth::user()->getBusinessAccount) && \Auth::user()->getBusinessAccount->minutes_till_sunday)
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="{{\Auth::user()->getBusinessAccount->minutes_till_sunday}}">
+                        <input type="number" min="0" max="59" step="1" name="minutes_till_sunday" value="{{\Auth::user()->getBusinessAccount->minutes_till_sunday}}">
 
                       @else
-                        <input type="number" min="1" max="55" step="5" name="minutes_till_sunday" value="1">
+                        <input type="number" min="0" max="59" step="1" name="minutes_till_sunday" value="1">
                       @endif
                     </div>
                   </div>
