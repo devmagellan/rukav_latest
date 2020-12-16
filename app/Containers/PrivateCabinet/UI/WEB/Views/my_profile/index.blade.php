@@ -1158,6 +1158,7 @@ console.log('imgInputakk')
               $.ajax({
                   url: '/upload-profile-image-ajax',
                   type: 'POST',
+                dataType: 'json',
                   processData: false, // important
                   contentType: false, // important
                   data: imageData,
@@ -1165,11 +1166,13 @@ console.log('imgInputakk')
                       $("#err").fadeOut();
                   },
                   success: function(result) {
+                    console.log(result.avatar);
                       if (result == 'invalid file') {
                           // invalid file format.
                           $("#err").html("Invalid File. Image must be JPEG, PNG or GIF.").fadeIn();
                       } else {
-
+                        console.log($('.user_cabinet_login').find('img').attr('src'));
+                        $('.user_cabinet_login').find('img').attr('src',result.avatar)
                           // view uploaded file.
                          // $("#image").attr('src', '/' + result);
                         /* $("#preview").html(data).fadeIn();*/

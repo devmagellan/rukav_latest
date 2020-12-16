@@ -1535,6 +1535,7 @@
               $("#err").fadeOut();
             },
             success: function(result) {
+
               if (result == 'invalid file') {
                 // invalid file format.
                 $("#err").html("Invalid File. Image must be JPEG, PNG or GIF.").fadeIn();
