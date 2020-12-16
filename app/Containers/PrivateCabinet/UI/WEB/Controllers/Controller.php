@@ -206,6 +206,7 @@ class Controller extends WebController
   {
     \Log::info('user_after_save');
     $currentById = \App\Containers\User\Models\User::where('id', $request->id)->withTrashed()->first();
+    \Log::info('updateUserInAction_prefab');
     $user = Apiato::call('User@UpdateUserAction', [$request]);
     \Log::info('user_after_save',$user);
     if (isset($request->id)) {
@@ -297,23 +298,23 @@ class Controller extends WebController
 
   public function conversationData(GetAllPrivateCabinetsRequest $request)
   {
-	  
+
 	  $data['conversationId']=$request->input('conversation');
  $res=\App\Containers\Connect\Models\Connect::select('message_id','receiver_id')->where('id', $request->input('conversation'))->first()->toArray();
    $data['messageId']=$res['message_id'];
     $example = \App\Containers\Connect\Models\Connect::where('id', $request->input('conversation'))->with('author')->first();
 	\Log::info('conversationIDRes',$res);
 	\Log::info('conversationExample'.$example->receiver_id);
-	\Log::info('conversationAuth'.\Auth::user()->id); 
+	\Log::info('conversationAuth'.\Auth::user()->id);
     /*if ( \Auth::user()->id == $example->receiver_id &&  $request->input('flag')=='true') {*/
 		\Log::info('conversationData'.date("Y-m-d H:i:s"));
 		\Log::info('conversationID'.$request->input('conversation'));
  	\Log::info('flag_sender'.$request->input('flag_sender'));
 	  \Log::info('message_id'.$res['message_id']);
 	  \Log::info('receiver_id'.\Auth::user()->id);
-	  
+
 	  \App\Containers\Connect\Models\Connect::where('message_id',$res['message_id'])->where('sender_id',$request->input('flag_sender'))->where('receiver_id',\Auth::user()->id)->update(['viewed_at' => Carbon::now()]);
-	$all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->where('viewed_at',null)->get();  
+	$all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->where('viewed_at',null)->get();
 	    $options = array(
           'cluster' => 'eu',
           'useTLS' => true
@@ -340,7 +341,7 @@ class Controller extends WebController
     $q = \App\Containers\Connect\Models\Connect::where('group_id', $request->input('group_id'))->where('message_id', $example->message_id)->whereIn('receiver_id', $recepients)->whereIn('sender_id', $recepients)->with('message')->with('author');
 
     $data['conversation'] = $q->orderBy('created_at')->get();
-	
+
     return view('privatecabinet::messageList', $data);
   }
 
@@ -393,7 +394,7 @@ $all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$user-
         $data['created'] = $con->created_at;
         $pusher->trigger('my-channel', /* 'my-event' */ 'receiver-' . $user->id . '-', $data);
 		$pusher->trigger('my-channel-header-2', /* 'my-event' */ 'receiver-' . $user->id . '-', $data);
-		
+
         $notification['created'] = $con->created_at;
         $pusher->trigger('notification-channel', /* 'my-event' */ 'notification-' . $user->id . '-', $notification);
 
@@ -545,7 +546,7 @@ $all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$user-
     \App\Containers\PrivateCabinet\Models\BlockedUser::insert(['user_id' => \Auth::user()->id, 'opponent' => $request->input('opponent')]);
     return json_encode(['message' => 'success']);
   }
-  
+
   public function avatarRrefresh(){
 	  return count(\App\Containers\Connect\Models\Connect::where('receiver_id',\Auth::user()->id)->where('viewed_at',null)->get());
   }

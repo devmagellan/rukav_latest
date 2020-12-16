@@ -21,9 +21,9 @@ class UpdateUserAction extends Action
      *
      * @return  \App\Containers\User\Models\User
      */
-    public function run(DataTransporter $data): User
+    public function run(/*DataTransporter */$data): User
     {
-
+      \Log::info('updateUserInAction0',array($data));
         $userData = [
            // 'password'             => $data->password ? Hash::make($data->password) : null,
             'name'                 => $data->name,
@@ -55,14 +55,29 @@ class UpdateUserAction extends Action
         'show_www'=>$data->show_www,
         ];
         // remove null values and their keys
+      \Log::info('updateUserInAction1',$userData);
         $userData = array_filter($userData);
+      \Log::info('updateUserInAction2',$userData);
 
         $user = Apiato::call('User@UpdateUserTask', [$userData, $data->id]);
+
         $additional=[
             'www'=>$data->www,
             'address'=>$data->address,
             'post_code'=>$data->postCode
         ];
+      $additional['hours_from_weekday']=$data->hours_from_weekday;
+      $additional['minutes_from_weekday']=$data->minutes_from_weekday;
+      $additional['hours_till_weekday']=$data->hours_till_weekday;
+      $additional['minutes_till_weekday']=$data->minutes_till_weekday;
+      $additional['hours_from_saturday']=$data->hours_from_saturday;
+      $additional['minutes_from_saturday']=$data->minutes_from_saturday;
+      $additional['hours_till_saturday']=$data->hours_till_saturday;
+      $additional['minutes_till_saturday']=$data->minutes_till_saturday;
+      $additional['hours_from_sunday']=$data->hours_from_sunday;
+      $additional['minutes_from_sunday']=$data->minutes_from_sunday;
+      $additional['hours_till_sunday']=$data->hours_till_sunday;
+      $additional['minutes_till_sunday']=$data->minutes_till_sunday;
         if($data->current_type=='Организация'){
           \Log::info('OrganisationAccount',$additional);
             $additional['organisation_name']=$data->organisation_name;
@@ -73,11 +88,14 @@ class UpdateUserAction extends Action
             \App\Containers\User\Models\IndividualAccount::where('user_id',$data->id)->update($additional);
         }
         elseif($data->current_type=='Компания'){
-            $additional['company_name']=$data->business_name;
+          \Log::info('popali to company');
             $additional['phisical_address']=$data->phisical_address;
             $additional['phisical_post_code']=$data->phisical_post_code;
             $additional['reg_number']=$data->regNumber;
             $additional['vat_number']=$data->vatNumber;
+
+          $additional['company_name']=$data->company_name;
+
             \App\Containers\User\Models\BusinessAccount::where('user_id',$data->id)->update($additional);
         }
         return $user;

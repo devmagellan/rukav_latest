@@ -18,6 +18,7 @@ class UpdateUserAccountTask
 
   public function run($data)
   {
+    \Log::info('updateUserInService',array($data));
     return $this->service->updateUserInService($data);
   }
 }
