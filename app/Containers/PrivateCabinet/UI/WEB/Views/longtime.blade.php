@@ -141,10 +141,12 @@ console.log('imgInputakk')
                       $("#err").fadeOut();
                   },
                   success: function(result) {
+                    console.log(result);
                       if (result == 'invalid file') {
                           // invalid file format.
                           $("#err").html("Invalid File. Image must be JPEG, PNG or GIF.").fadeIn();
                       } else {
+                        console.log($('.user_cabinet_login').find('img').attr('src'));
 
                           // view uploaded file.
                          // $("#image").attr('src', '/' + result);

@@ -271,9 +271,6 @@ class Controller extends WebController
 
   public function uploadProfileImageAjax(GetAllPrivateCabinetsRequest $request)
   {
-//var_dump($request->hasFile('image'));
-//var_dump($_FILES);
-
     if ($request->hasFile('image')) {
       $image = $request->file('image');
       $fileName = time() . '.' . $image->getClientOriginalExtension();
@@ -291,8 +288,10 @@ class Controller extends WebController
 
       \App\Containers\User\Models\User::where('id', \Auth::user()->id)->update(['avatar' => $fileName]);
 
-
+      return json_encode(['message' => 'success','avatar'=>'/storage/avatars/'. $fileName]);
     }
+
+
   }
 
 
