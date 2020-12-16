@@ -68,6 +68,9 @@ class Controller extends WebController
     $data['title'] = "Додати товар";
     $data['keywords'] = "Ukrainian industry platform";
     $data['description'] = "Ukrainian industry platform";
+    if($deleted){
+      return view('user::index_old', $data);
+    }
     return view('user::index', $data);
   }
 
