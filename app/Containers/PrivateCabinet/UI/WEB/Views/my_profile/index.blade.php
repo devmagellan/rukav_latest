@@ -165,7 +165,15 @@
               <div class="prophile_show-wrapper ">
                 <div class="col-md-12">
                   <p class="prophile_show_title">
+                    @if(\Auth::user()->vid_user=='Компания')
                     Профиль компании
+                      @elseif(\Auth::user()->vid_user=='Частная')
+                      Профиль частного лица
+                    @elseif(\Auth::user()->vid_user=='Организация')
+                      Профиль организации
+                    @else
+                      Профиль предпринимателя
+                      @endif
                   </p>
                   <div class="prophile_show_input-wrapper d-flex align-items-center">
                     <label class="checkbox_container">

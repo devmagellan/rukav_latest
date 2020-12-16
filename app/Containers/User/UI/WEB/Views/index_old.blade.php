@@ -3,14 +3,10 @@
     <link rel="stylesheet" media="screen, print" href="/templates/smartadmin/css/formplugins/bootstrap-datepicker/bootstrap-datepicker.css">
 @endsection
 @section('theme_scripts')
-
-
     <?
     $createdAt = \Carbon\Carbon::now();
     $today=$createdAt->format('m/d/Y');
     ?>
-
-
 @endsection
 @section('content')
 
