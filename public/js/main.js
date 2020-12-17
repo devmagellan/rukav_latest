@@ -173,6 +173,9 @@ $(document).ready(function(){
         $('.individual_modal_block').hide();
         $('.socials_reg').show();
         $('.phoneDiv').hide();
+        $('.req_phone').hide();
+        console.log(333)
+
     });
 
     $('#organisation').on('click', function () {
@@ -181,12 +184,16 @@ $(document).ready(function(){
         $('.individual_modal_block').hide();
         $('.socials_reg').show();
         $('.phoneDiv').show();
+      $('.req_phone').show();
         $('.company_modal_block').find('input[name="www"]').prop( "disabled", true );
         $('.company_modal_block').find('input[name="address"]').prop( "disabled", true );
         $('.company_modal_block').find('input[name="postCode"]').prop( "disabled", true );
         $('.individual_modal_block').find('input[name="www"]').prop( "disabled", true );
         $('.individual_modal_block').find('input[name="address"]').prop( "disabled", true );
         $('.individual_modal_block').find('input[name="postCode"]').prop( "disabled", true );
+      $('.organisation_modal_block').find('input[name="www"]').prop( "disabled", false );
+      $('.organisation_modal_block').find('input[name="address"]').prop( "disabled", false );
+      $('.organisation_modal_block').find('input[name="postCode"]').prop( "disabled", false );
 
     });
 
@@ -196,12 +203,16 @@ $(document).ready(function(){
         $('.individual_modal_block').hide();
         $('.socials_reg').show();
         $('.phoneDiv').show();
+      $('.req_phone').show();
         $('.organisation_modal_block').find('input[name="www"]').prop( "disabled", true );
         $('.organisation_modal_block').find('input[name="address"]').prop( "disabled", true );
         $('.organisation_modal_block').find('input[name="postCode"]').prop( "disabled", true );
         $('.individual_modal_block').find('input[name="www"]').prop( "disabled", true );
         $('.individual_modal_block').find('input[name="address"]').prop( "disabled", true );
         $('.individual_modal_block').find('input[name="postCode"]').prop( "disabled", true );
+      $('.company_modal_block').find('input[name="www"]').prop( "disabled", false );
+      $('.company_modal_block').find('input[name="address"]').prop( "disabled", false );
+      $('.company_modal_block').find('input[name="postCode"]').prop( "disabled", false );
     });
 
     $('#individual').on('click', function () {
@@ -210,6 +221,17 @@ $(document).ready(function(){
         $('.individual_modal_block').show();
         $('.socials_reg').show();
         $('.phoneDiv').show();
+      $('.req_phone').show();
+
+      $('.organisation_modal_block').find('input[name="www"]').prop( "disabled", true );
+      $('.organisation_modal_block').find('input[name="address"]').prop( "disabled", true );
+      $('.organisation_modal_block').find('input[name="postCode"]').prop( "disabled", true );
+      $('.individual_modal_block').find('input[name="www"]').prop( "disabled", false );
+      $('.individual_modal_block').find('input[name="address"]').prop( "disabled", false );
+      $('.individual_modal_block').find('input[name="postCode"]').prop( "disabled", false );
+      $('.company_modal_block').find('input[name="www"]').prop( "disabled", true );
+      $('.company_modal_block').find('input[name="address"]').prop( "disabled", true );
+      $('.company_modal_block').find('input[name="postCode"]').prop( "disabled", true );
     });
 
     var countryData = window.intlTelInputGlobals.getCountryData(),
