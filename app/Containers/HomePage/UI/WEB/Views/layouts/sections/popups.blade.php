@@ -735,8 +735,8 @@
               <label for="no_hide_phone">Не показывать</label>
             </div>
 
-            <input type="tel" class="errorInputBlock" name="phone" id="telphone"><span class="required">*</span>
-            <span id="phone" class="errorBlock"></span>
+            <input type="tel" class="errorInputBlock" name="phone" id="telphone"><span class="required req_phone" style="display:none">*</span>
+            <!--span id="phone" class="errorBlock"></span-->
 
           </div>
 

@@ -366,7 +366,7 @@
             </button>
           </div>
 
-          <form class="needs-validation" id="customer_create" novalidate onsubmit="theSubmitFunctionPassword(); return false; 2">
+          <form class="needs-validation" id="customer_create_password" novalidate onsubmit="theSubmitFunctionPassword(); return false; 2">
             <input type="hidden" id="customer_password_id" name="customer_id" value="0">
 
             <div class="form-group">
@@ -1637,15 +1637,18 @@
 
       $('.has_been_taken_message').hide();
       var form=$('#customer_create')
+      console.log('form',form)
+      console.log('form',localStorage.getItem('email_state'))
       if (form[0].checkValidity() === false || localStorage.getItem('email_state') == 1) {
-
+        form.find( ":invalid" ).first().focus();
+        console.log(form.find( ":invalid" ).first())
         if(localStorage.getItem('email_state') == 1 ){
           console.log(555)
           $('#customer_email').closest('.form-control').removeClass('is-valid').addClass('is-invalid')
           $('#customer_create').removeClass('was-validated')
           $('.has_been_taken_message').show();
         }
-        console.log(777,form[0].checkValidity())
+        console.log('checkValidaty=>'+777,form[0].checkValidity())
       }
       else {
 
