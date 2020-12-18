@@ -91,7 +91,7 @@
                                         <img src="/storage/messages/{{$pht->photo}}" alt="">
                                     </div>
 
-                                    <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                                    <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                                 </div>
                                 <div class="message_sidebar_theme_right">
                                     <p class="message_sidebar_theme_name">
@@ -182,7 +182,7 @@
                                             <img src="/storage/messages/{{$pht->photo}}" alt="">
                                         </div>
 
-                                        <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                                        <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                                     </div>
                                     <div class="message_sidebar_theme_right">
                                         <p class="message_sidebar_theme_name">
@@ -239,7 +239,7 @@
 												@endif
                                                 </div>
 
-                                                <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                                                <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                                             </div>
                                             <div class="message_sidebar_theme_right">
                                                 <p class="message_sidebar_theme_name">
@@ -343,7 +343,7 @@
 									<img src="/storage/pictures/photo_icon2.png" alt="">
 									@endif
                                 </div>
-                                <a href="#" class="viber-icon"><img src="img/viber-icon.svg" alt=""></a>
+                                <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                             </div>
                             <div class="message_sidebar_theme_right">
 							@if($opponent)

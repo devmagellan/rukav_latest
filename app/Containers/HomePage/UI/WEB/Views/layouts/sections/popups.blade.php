@@ -903,7 +903,7 @@
       <button type="button" class="close confirmPhoneClose" data-dismiss="modal" aria-label="Close">
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
-      <img src="{{asset('')}}img/modalIconPhone.svg" alt="" class="moadal_img">
+      <img src="{{asset('')}}img/modalIconPhone.svg" alt=""  class="moadal_img">
       <h6 class="modalTitle">Подтвердите свой телефонный номер 44</h6>
       <form class="formModal phoneConfirmationForm">
 
@@ -968,9 +968,9 @@
     <div class="modal-content">
 
       <button type="button" class="close confirmEmailClose" data-dismiss="modal" aria-label="Close">
-        <img src="{{asset('img/close-icon.svg')}}" alt="">
+        <img src="{{asset('img/close-icon.svg')}}" alt="" >
       </button>
-      <img src="{{asset('img/modalIconEmail.svg')}}" alt="" class="moadal_img">
+      <img src="{{asset('img/modalIconEmail.svg')}}" alt="" style="height:100px" class="moadal_img">
       <h6 class="modalTitle">Мы отправили Вам письмо </h6>
       <h6 class="modalTitle">Подтвердите свой email перейдя по ссылке в сообщении</h6>
       <form class="formModal emailConfirmationForm">
@@ -1066,7 +1066,7 @@
       <button type="button" class="close confirmEmailClose" data-dismiss="modal" aria-label="Close">
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
-      <img src="{{asset('img/modalIconEmail.svg')}}" alt="" class="moadal_img">
+      <img src="{{asset('img/modalIconEmail.svg')}}" alt="" style="height:100px" class="moadal_img">
       <h6 class="modalTitle">Подтвердите свой email</h6>
       <form class="formModal emailConfirmationFormIfRegistered">
 

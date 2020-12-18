@@ -150,13 +150,13 @@ $buttons.= '<a href="javascript:void(0);" class="ShowUserPassword btn btn-danger
 
       $buttons.='</div>';
 
-//\Log::info('AdsWithGroup'.count($ad->adsWithGroup));
+$ads_not_tmp=$ad->adsWithGroup->where('is_tmp', 0);
       $nestedData [1] = $ad->id;
       $nestedData [2] = $ad->name;
       $nestedData [3] = $ad->email;
       $nestedData [4] = $ad->vid_user;
       $nestedData [5] = ($ad->phone) ? $ad->phone  : 'Не известно';
-      $nestedData [6] = '<a href="/ads?client_id='.$ad->id.'" >'.count($ad->adsWithGroup).'</a>';
+      $nestedData [6] = '<a href="/ads?client_id='.$ad->id.'" >'.count($ads_not_tmp).'</a>';
       $nestedData [7] = ($ad->country) ? $ad->country : 'нет';
       $nestedData [8] =  $buttons;
       $data [] = $nestedData;

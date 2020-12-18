@@ -70,7 +70,7 @@ ul.slickslide li img, .slick-dots button img {
       <button type="button" class="close confirmEmailClose" data-dismiss="modal" aria-label="Close">
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
-      <img src="{{asset('img/modalIconEmail.svg')}}" alt="" class="moadal_img">
+      <img src="{{asset('img/modalIconEmail.svg')}}" alt="" style="height:100px" class="moadal_img">
       <h6 class="modalTitle">Отлично!</h6>
       <h6 class="modalTitle">Ваше сообщение успешно отправлено</h6>
       <form class="formModal emailConfirmationForm">
@@ -354,6 +354,7 @@ ul.slickslide li img, .slick-dots button img {
 		@if(empty($ad->getSender->phone) || strlen($ad->getSender->phone)<6 )
 			<span>Не указан</span>
 			@else
+				111
             <span>{{print($ad->getSender->phone)}}</span>
 		@endif
           </a>

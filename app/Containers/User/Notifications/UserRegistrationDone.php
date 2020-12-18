@@ -18,6 +18,7 @@ public $theme='SomeRegistartion';
 
 public function __construct($company){
     $this->user=$company;
+	\Log::info('emailVerificationCodeinObject4',array($this->user));
 }
     /**
      * Get the mail representation of the notification.
@@ -27,6 +28,7 @@ public function __construct($company){
      */
     public function toMail($notifiable)
     {
+		\Log::info('emailVerificationCodeinObject5',array($this->user));
 
         $url = url('/verify/'.$this->user->verify_token);
 
