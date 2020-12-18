@@ -27,7 +27,7 @@ class BusinessAccount extends Model
 'phisical_address',
 'phisical_post_code',
 'reg_number',
-'vat_number'
+'vat_number','user_id'
   ];
 
 

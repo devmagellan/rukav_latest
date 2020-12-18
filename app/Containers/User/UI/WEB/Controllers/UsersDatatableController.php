@@ -150,7 +150,7 @@ $buttons.= '<a href="javascript:void(0);" class="ShowUserPassword btn btn-danger
 
       $buttons.='</div>';
 
-\Log::info('AdsWithGroup'.count($ad->adsWithGroup));
+//\Log::info('AdsWithGroup'.count($ad->adsWithGroup));
       $nestedData [1] = $ad->id;
       $nestedData [2] = $ad->name;
       $nestedData [3] = $ad->email;

@@ -191,6 +191,7 @@ class Controller extends WebController
       'non_hashed' => 'PasswordYouCanChangeIT',
       'active' => 1,
       'remember_token' => Str::random(60)];*/
+    \Log::info('RequestUserUpdate=>',array($request));
     $user['attributes']['id'] = ($request->input('customer_id') != 0) ? $request->input('customer_id') : null;
     $changeRole = $user['attributes']['id'];
     $user = Apiato::call('User@CreateUserAccountAction', [$request]);

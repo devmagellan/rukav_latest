@@ -582,7 +582,7 @@ $('#managerSwitch').change(function(){
                 var confirmed =$('#confirmed').val()
                 var vid_user=$('#customer_create').find('input[name="vid_user"]:checked').val()
                 SetVid(vid_user)
-                console.log('VID',vid_user)
+                console.log('VID=>',vid_user)
                 var customer_name = $('#customer_name').val()
                 var admin_side=1;
                 var customer_sername = $('#customer_sername').val()

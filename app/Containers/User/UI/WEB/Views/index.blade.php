@@ -508,7 +508,7 @@
               <div id="organisation_information" class="organisation_modal_block">
                 <div class="form-group">
                   <label class="form-label" for="organisation_name">Название организации</label>
-                  <input type="text" id="business_name" name="business_name" class="form-control" placeholder="Название организации">
+                  <input type="text" id="organisation_name" name="organisation_name" class="form-control" placeholder="Название организации">
 
                 </div>
                 <div class="form-group">
@@ -1487,6 +1487,64 @@
 
     });
 
+
+
+
+
+    function SetVid(vid_user) {
+      if(vid_user=='Компания'){
+        $('.organisation_modal_block').hide();
+        $('.company_modal_block').show();
+        $('.individual_modal_block').hide();
+        $('.organisation_modal_block').find('input[name="www"]').prop( "disabled", true );
+        $('.organisation_modal_block').find('input[name="address"]').prop( "disabled", true );
+        $('.organisation_modal_block').find('input[name="postCode"]').prop( "disabled", true );
+        $('.individual_modal_block').find('input[name="www"]').prop( "disabled", true );
+        $('.individual_modal_block').find('input[name="address"]').prop( "disabled", true );
+        $('.individual_modal_block').find('input[name="postCode"]').prop( "disabled", true );
+        window.www=$('.company_modal_block').find('input[name="www"]').val();
+        window.address=$('.company_modal_block').find('input[name="address"]').val();
+        window.postCode=$('.company_modal_block').find('input[name="postCode"]').val();
+        $('.company_modal_block').find('input[name="www"]').prop( "disabled", false );
+        $('.company_modal_block').find('input[name="address"]').prop( "disabled", false );
+        $('.company_modal_block').find('input[name="postCode"]').prop( "disabled", false );
+      }
+      else if(vid_user=='Предприниматель'){
+        $('.organisation_modal_block').hide();
+        $('.company_modal_block').hide();
+        $('.individual_modal_block').show();
+        $('.organisation_modal_block').find('input[name="www"]').prop( "disabled", true );
+        $('.organisation_modal_block').find('input[name="address"]').prop( "disabled", true );
+        $('.organisation_modal_block').find('input[name="postCode"]').prop( "disabled", true );
+        $('.comany_modal_block').find('input[name="www"]').prop( "disabled", true );
+        $('.comany_modal_block').find('input[name="address"]').prop( "disabled", true );
+        $('.comany_modal_block').find('input[name="postCode"]').prop( "disabled", true );
+        window.www=$('.individual_modal_block').find('input[name="www"]').val();
+        window.address=$('.individual_modal_block').find('input[name="address"]').val();
+        window.postCode=$('.individual_modal_block').find('input[name="postCode"]').val();
+        $('.individual_modal_block').find('input[name="www"]').prop( "disabled", false );
+        $('.individual_modal_block').find('input[name="address"]').prop( "disabled", false );
+        $('.individual_modal_block').find('input[name="postCode"]').prop( "disabled", false );
+      }
+      else if(vid_user=='Организация'){
+        $('.organisation_modal_block').show();
+        $('.company_modal_block').hide();
+        $('.individual_modal_block').hide();
+        $('.individual_modal_block').find('input[name="www"]').prop( "disabled", true );
+        $('.individual_modal_block').find('input[name="address"]').prop( "disabled", true );
+        $('.individual_modal_block').find('input[name="postCode"]').prop( "disabled", true );
+        $('.comany_modal_block').find('input[name="www"]').prop( "disabled", true );
+        $('.comany_modal_block').find('input[name="address"]').prop( "disabled", true );
+        $('.comany_modal_block').find('input[name="postCode"]').prop( "disabled", true );
+        window.www=$('.organisation_modal_block').find('input[name="www"]').val();
+        window.address=$('.organisation_modal_block').find('input[name="address"]').val();
+        window.postCode=$('.organisation_modal_block').find('input[name="postCode"]').val();
+        $('.organisation_modal_block').find('input[name="www"]').prop( "disabled", false );
+        $('.organisation_modal_block').find('input[name="address"]').prop( "disabled", false );
+        $('.organisation_modal_block').find('input[name="postCode"]').prop( "disabled", false );
+      }
+    }
+
     // Class definition
 
     var controls = {
@@ -1656,6 +1714,7 @@
         var customer_email = $('#customer_email').val()
         var customer_phone =$('#customer_phone').val()
         var vid_user=$('#customer_create').find('input[name="vid_user"]:checked').val()
+        SetVid(vid_user)
         console.log('VID',vid_user)
         var customer_name = $('#customer_name').val()
         var admin_side=1;
@@ -1664,6 +1723,15 @@
         var reg_number = $('#reg_namber').val()
         var vat_number = $('#vat_namber').val()
         var send_notification = $('#customer_create').find('input[name="send_notification"]').val()
+
+
+
+        var company_name = $('#company_name').val()
+        var business_name = $('#business_name').val()
+        var address=window.address
+        var postCode=window.postCode
+        var organisation_name = $('#organisation_name').val()
+        var www = window.www
         if($('#customer_id').val()){
           var customer_id = $('#customer_id').val()
         }
@@ -1671,6 +1739,10 @@
           var customer_id =0;
         }
         console.log('customer_id',customer_id)
+        console.log('www=>',www);
+        console.log('address=>',address);
+        console.log('postCode=>',postCode);
+        console.log('org=>',organisation_name);
 
         if($('#managerSwitch').is(":checked")){
           var is_client=0;
@@ -1689,7 +1761,8 @@
             customer_id: customer_id, firstName: customer_name, lastName: customer_sername,
             location: customer_location,
             email: customer_email, reg_number:reg_number,vat_number:vat_number,vid_user:vid_user,admin_side:admin_side,
-            send_notification:send_notification,phone:customer_phone,is_client:is_client
+            send_notification:send_notification,phone:customer_phone,is_client:is_client,www:www,company_name:company_name,business_name:business_name,
+            organisation_name:organisation_name,address:address,postCode:postCode
           },
           beforeSend: function () {
           },
