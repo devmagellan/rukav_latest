@@ -149,6 +149,7 @@ $buttons.= '<a href="javascript:void(0);" class="ShowUserPassword btn btn-danger
       }
 
       $buttons.='</div>';
+
 $ads_not_tmp=$ad->adsWithGroup->where('is_tmp', 0);
       $nestedData [1] = $ad->id;
       $nestedData [2] = $ad->name;

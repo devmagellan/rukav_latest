@@ -25,7 +25,8 @@ class OrganisationAccount extends Model
     'organisation_name',
     'www',
     'address',
-    'post_code'
+    'post_code',
+    'user_id'
   ];
   public function users()
   {

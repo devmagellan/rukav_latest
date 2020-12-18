@@ -25,7 +25,7 @@ class IndividualAccount extends Model
     'business_name',
 'www',
 'address',
-'post_code'
+'post_code','user_id'
   ];
   public function users()
   {
