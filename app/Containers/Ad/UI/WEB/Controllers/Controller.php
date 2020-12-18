@@ -500,6 +500,9 @@ switch($ad->getSender->confirmed){
 	$userStatus='-------';
 }
   }
+  else{
+	  $userStatus='-------';
+  }
       $nestedData [1] = $status;
       $nestedData [2] = $ad->title;
       $nestedData [3] = '<span style="font-size:9px">' . mb_strimwidth($ad->message, 0, (null!=$request->input('col_width')) ? intval($request->input('col_width'))/5 : 30, "...") . '</span>';
