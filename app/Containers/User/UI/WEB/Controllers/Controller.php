@@ -387,13 +387,14 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
         $message=$this->smsService->store($request);
         session()->put('updating_from_simpleUser',1);
         \Log::info('updating_from_simpleUserPUT');
-        session()->put('emailVerificationTelephone',$request->phone);
+        session()->put('emailVerificationTelephone',$request->code.$request->phone);
         $collection=$request->all();
         session()->put('updatedUser',$collection);
         return response()->json(['response'=>'success'],200);
     }
 
     public function changeRegisterFromRestUser($request){
+		\Log::info('user_after_save_to_organisation_from_rest',$request->input());
         Apiato::call('User@ChangeUserAccountAction', [$request]);
         session()->flash('message', 'Данные успешно обновлены!');
         return response()->json(['response'=>'success'],200);
@@ -402,6 +403,7 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
     public function confirmPhone(GetAllUsersRequest $request){
         \Log::info('emailVerificationTelephone'.session()->get('emailVerificationTelephone'));
         $error=[];
+		\Log::info('smsVerifyCodeinSession'.session()->get('emailVerificationTelephone'));
         $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',session()->get('emailVerificationTelephone'))->orderBy('id','desc')->first();
         if($request->input('phoneConfirmation')!='' && $request->input('phoneConfirmation')==$smsCode->code ){
             \Log::info('emailVerificationTelephoneConfirm');
