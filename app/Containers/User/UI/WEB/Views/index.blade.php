@@ -1719,8 +1719,8 @@
         var admin_side=1;
         var customer_sername = $('#customer_sername').val()
         var customer_location = $('#customer_location').val()
-        var reg_number = $('#reg_namber').val()
-        var vat_number = $('#vat_namber').val()
+        var reg_number = $('#reg_number').val()
+        var vat_number = $('#vat_number').val()
         var send_notification = $('#customer_create').find('input[name="send_notification"]').val()
 
 
@@ -1738,7 +1738,8 @@
           var customer_id =0;
         }
         console.log('customer_id',customer_id)
-        console.log('www=>',www);
+        console.log('reg_number=>',reg_number);
+        console.log('vat_number=>',vat_number);
         console.log('address=>',address);
         console.log('postCode=>',postCode);
         console.log('org=>',organisation_name);
@@ -1761,7 +1762,7 @@
             location: customer_location,
             email: customer_email, reg_number:reg_number,vat_number:vat_number,vid_user:vid_user,admin_side:admin_side,
             send_notification:send_notification,phone:customer_phone,is_client:is_client,www:www,company_name:company_name,business_name:business_name,
-            organisation_name:organisation_name,address:address,postCode:postCode
+            organisation_name:organisation_name,address:address,postCode:postCode,regNumber:reg_number,vatNumber:vat_number
           },
           beforeSend: function () {
           },
