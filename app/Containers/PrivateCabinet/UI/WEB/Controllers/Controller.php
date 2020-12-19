@@ -220,7 +220,7 @@ class Controller extends WebController
 
   public function profileSaveToIndividual(ProfileSaveToIndividualRequest $request)
   {
-    if ($request->input('vid_Fuser') == 'Частная') {
+    if ($request->input('vid_user') == 'Частная') {
       $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
       return $controller->changeRegisterFromSimpleUser($request);
     } else {
@@ -234,10 +234,16 @@ class Controller extends WebController
   {
     \Log::info('user_after_save_to_organisation',$request->input());
     if ($request->input('vid_user') == 'Частная') {
+      $request->merge([
+        'vid_user' => 'Организация',
+      ]);
       \Log::info('fromPrivate');
       $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
       return $controller->changeRegisterFromSimpleUser($request);
     } else {
+      $request->merge([
+        'vid_user' => 'Организация',
+      ]);
       $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
       return $controller->changeRegisterFromRestUser($request);
     }
@@ -499,7 +505,7 @@ $all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$user-
         );
 
 
-		
+
 
 
 
@@ -512,8 +518,8 @@ $all_connects=\App\Containers\Connect\Models\Connect::where('receiver_id',$user-
 		$data['all_viewed'] = (count($all_connects)>0) ? count($all_connects) : null;
     $data['photo'] = $file;
     $data['created'] = $con->created_at;
-	
-	
+
+
     $pusher->trigger('my-channel', 'receiver-' . $user->id . '-', $data);
 	$pusher->trigger('my-channel-header-2', /* 'my-event' */ 'receiver-' . $user->id . '-', $data);
     $notification['created'] = $con->created_at;
