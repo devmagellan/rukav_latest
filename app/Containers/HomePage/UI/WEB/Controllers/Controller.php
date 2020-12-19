@@ -33,7 +33,7 @@ class Controller extends WebController
     {
 
       $data['properties']=GlobalService::getMainProperties($request)['categories'];
-	  
+
       $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
       return view('homepage::index' , compact('categoriesOnlyRoot','data') );
     }
@@ -141,7 +141,18 @@ class Controller extends WebController
 
 
     $ql= \App\Containers\Ad\Models\Ad::with(['pictures','validFilter'])
+
+      ->where(function ($query) use($from,$to) {
+        if(!empty($from) && !empty($to)){
+          $query->where('price','>=',intval($from))
+            ->where('price','<=',intval($to));
+        }
+      })
+      ->where('active',1)
       ->where(function ($query) use($request) {
+
+
+        $query->where(function ($query) use($request) {
         $query->where('message', 'like', '%' . $request->input('search_string') . '%')
           ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
       })
@@ -155,9 +166,11 @@ class Controller extends WebController
       ->where(function ($query) use($request) {
         $query->where('message', 'like', '%' . $request->input('rubric_search') . '%')
           ->orWhere('title', 'like', '%' . $request->input('rubric_search') . '%');
-      })
+      });
 
-      ->where('active',1);
+
+      })
+    ;
 
 
 
@@ -212,10 +225,6 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
 
 
 
-
-
-
-
         // Make sure that you call the static method currentPageResolver()
         // before querying users
         \Illuminate\Pagination\Paginator::currentPageResolver(function () use ($currentPage) {
@@ -228,6 +237,7 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
 
 		      $messages=$q->where(function ($query) use($from,$to) {
       if(!empty($from) && !empty($to)){
+
           $query->where('price','>=',$from)
               ->where('price','<=',$to);
       }
@@ -251,7 +261,6 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
 
 
           ->paginate(10);
-
     $messages=$ql->where(function ($query) use($from,$to) {
       if(!empty($from) && !empty($to)){
         $query->where('price','>=',$from)
@@ -302,13 +311,13 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
     }
 
 
-		
+
 
 		public function getCountryData(GetAllHomePagesRequest $request){
 
 			return 'ok';
 		}
-		
-	
+
+
 
 }
