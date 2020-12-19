@@ -954,7 +954,6 @@
                 <input type="hidden" name="current_type" value="{{\Auth::user()->vid_user}}">
 
                       <?
-                dump($toAccountType);
                       switch($toAccountType){
                         case 'to_individual':
                           echo '<button type="submit" formaction="/profile/save/to_individual" class="prophile_save ml-auto">';
