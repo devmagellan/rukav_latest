@@ -35,7 +35,7 @@ class SendAdvRequest extends Request
           return $body->success;
         }
       },
-      'reCaptcha бязательно для заполнения!'
+      'reCaptcha обязательна для заполнения!'
     );
 
   }
@@ -99,7 +99,7 @@ class SendAdvRequest extends Request
             'sender_phone.required' => ' Необходимо ввести телефон |',
           'sender_phone.min' => ' Необходимо ввести телефон |',
           'sender_phone.numeric' => ' Необходимо ввести телефон |',
-          'g-recaptcha-response.required'=>'reCaptcha бязательно для заполнения!'
+          'g-recaptcha-response.required'=>'reCaptcha обязательна для заполнения!'
 
         ];
     }

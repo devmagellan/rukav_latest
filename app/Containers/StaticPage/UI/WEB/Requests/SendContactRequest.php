@@ -35,7 +35,7 @@ class SendContactRequest extends Request
           return $body->success;
         }
       },
-      'reCaptcha бязательно для заполнения!'
+      'reCaptcha обязательна для заполнения!'
     );
 
   }
@@ -96,7 +96,7 @@ class SendContactRequest extends Request
             'email.required' => "Необходимо ввести email адрес",
             'email.email' => "Емайл указан неверно",
             'text.required' => 'Необходимо ввести текст',
-			'g-recaptcha-response.required'=>'reCaptcha бязательно для заполнения!'
+			'g-recaptcha-response.required'=>'reCaptcha обязательна для заполнения!'
 
         ];
     }
