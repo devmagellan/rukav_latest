@@ -983,6 +983,17 @@
 
 @endsection
 @section('scripts')
+
+<script>
+       var input = document.querySelector("#telphone5");
+    var iti = window.intlTelInput(input, {
+        separateDialCode: true,
+        loadUtils: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/13.0.2/js/utils.js",
+        initialCountry: window.cnt
+    });
+console.log(iti);
+iti.setNumber("{{\Auth::user()->code}}"+"{{\Auth::user()->phone}}");
+</script>
   <script>
 
 

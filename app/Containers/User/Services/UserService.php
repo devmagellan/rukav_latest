@@ -25,13 +25,15 @@ class UserService
 
       $current=\App\Containers\User\Models\User::where('email',$data->email)->withTrashed()->first();
       \Log::info('CurrentUser=>',array($current));
-	  $id=(null!=($data->customer_id)/* && $current==null*/)  ? $data->customer_id : (($current!=null) ? $current->id : null );
-        if(isset($data->id)){
+	    if(isset($data->id) && null!=($data->id)){
           $currentById=\App\Containers\User\Models\User::where('id',$data->id)->withTrashed()->first();
+		  $id=$data->id;
        /*   if($currentById->email!=$user->email){
 
           }*/
-        }
+        }else{
+	  $id=(null!=($data->customer_id)/* && $current==null*/)  ? $data->customer_id : (($current!=null) ? $current->id : null );
+		}
 	  \Log::info('CurrentUserID=>'.$id);
         $newUser = User::withTrashed()->updateOrCreate(['id'=>$id],[
       'name' => (property_exists($data, 'save_url') ) ? $data->name : $data->firstName,
@@ -39,7 +41,7 @@ class UserService
       'email' => $data->email,
       'password' => (property_exists($data, 'customer_id') && $current!=null && $data->admin_side==1 || null!=($data->save_url) && $current!=null) ? $current->password : bcrypt($data->password),
       'country' => $data->country,
-      'phone' => (!property_exists($data, 'save_url') ) ? $data->code.$data->phone : $current->phone,
+      'phone' => /* (!property_exists($data, 'save_url') ) ? */ (substr($data->phone, 0, 1) === '+') ? $data->phone : $data->code.$data->phone  /* : $current->phone */,
       'vid_user' => $data->vid_user,
       'avatar'=>(property_exists($data, 'customer_id')  && $data->customer_id) ? $data->avatar : null,
       'active'=>(property_exists($data, 'customer_id')  && $data->customer_id) ? $data->active : 1,

@@ -904,7 +904,7 @@
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
       <img src="{{asset('')}}img/modalIconPhone.svg" alt=""  class="moadal_img">
-      <h6 class="modalTitle">Подтвердите свой телефонный номер 44</h6>
+      <h6 class="modalTitle">Подтвердите свой телефонный номер</h6>
       <form class="formModal phoneConfirmationForm">
 
         <div class="row">
