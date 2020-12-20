@@ -16,6 +16,7 @@
       </button>
       <h6 class="modalTitle" ><b>Связаться с нами</b></h6>
       <form id="GoContactFormModal" class="formModal" action="/contactForm" method="post">
+	  @csrf
         <input type="hidden" name="id" value="@if(\Auth::user()) {{\Auth::user()->id}} @endif">
         <div class="row">
           <div class="input_password_wrapper col-md-12" style="margin:0 auto">
@@ -41,12 +42,13 @@
 		   <div class="input_password_wrapper col-md-12" style="margin:0 auto">
 		  <span id="g-recaptcha-response" style="color:red" class="errorBlock"></span></div>
         </div>
-		   @if(env('GOOGLE_RECAPTCHA_KEY'))
-          <div class="g-recaptcha" style="width: 100%;margin-top:15px;margin-left: 95px;"
+		   @if(env("GOOGLE_RECAPTCHA_KEY"))
+          <!--div class="g-recaptcha" style="width: 100%;margin-top:15px;margin-left: 95px;"
                data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
 
-          </div>
-
+          </div-->
+			
+		{!! NoCaptcha::display() !!}
 		  @else
 			  no recaptcha key
         @endif
@@ -65,6 +67,7 @@
     </div>
   </div>
 </div>
+
 
 
 
@@ -1300,7 +1303,8 @@
     </div>
   </div>
 </div>
- <script src='https://www.google.com/recaptcha/api.js'></script>
+{!! NoCaptcha::renderJs('ru', true, 'recaptchaCallback') !!}
+ <!--script src='https://www.google.com/recaptcha/api.js'></script-->
 <script>
   $(function() {
     $("#loginForm").keypress(function (e) {
@@ -1342,6 +1346,26 @@
     });
   });
 
+
+$("#GoContactFormModal").submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+    var form = $(this);
+    var url = form.attr('action');
+    console.log(form.serialize());
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: form.serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+               alert(data); // show response from the php script.
+           }
+         });
+
+    
+});
 
 </script>
 

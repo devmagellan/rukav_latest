@@ -169,7 +169,6 @@
                                 ?>
 
                                 @if($groupConversations->first())
-
                                     <div class="message_sidebar_theme_item message_sidebar_theme_item-new" onclick="reloadMessageList('{{$groupConversations->first()->id}}','{{$groupConversations->first()->group_id}}','{{\Auth::user()->id}}')">
 
 
@@ -343,7 +342,7 @@
 									<img src="/storage/pictures/photo_icon2.png" alt="">
 									@endif
                                 </div>
-                                <a href="#" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
+                                <a href="tel:{{$opponent->phone}}" class="viber-icon"><img src="/img/viber-icon.svg" alt=""></a>
                             </div>
                             <div class="message_sidebar_theme_right">
 							@if($opponent)

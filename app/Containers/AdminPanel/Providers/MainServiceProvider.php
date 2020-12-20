@@ -18,7 +18,7 @@ class MainServiceProvider extends MainProvider
      */
     public $serviceProviders = [
         // InternalServiceProviderExample::class,
-        \Yajra\Datatables\DatatablesServiceProvider::class
+        \Yajra\DataTables\DatatablesServiceProvider::class
     ];
 
     /**
