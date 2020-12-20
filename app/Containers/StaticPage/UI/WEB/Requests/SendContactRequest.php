@@ -14,52 +14,32 @@ class SendContactRequest extends Request
 {
   public function __construct(ValidationFactory $validationFactory)
   {
-var_dump(Req::all());
+
+$recaptcha=Req::input('recaptcha');
     $validationFactory->extend(
       'recaptcha',
-      function ($attribute, $value, $parameters) {
+      function ($attribute, $value, $parameters) use ($recaptcha)  {
         {
-			
-			
-/*           $client = new Client;
-		  $ip = $_SERVER['REMOTE_ADDR'];
+          $client = new Client;
           $response = $client->post('https://www.google.com/recaptcha/api/siteverify',
             [
-			'headers' => ['Content-Type' => 'application/x-www-form-urlencoded'],
               'form_params' =>
                 [
                   'secret' => env('GOOGLE_RECAPTCHA_SECRET'),
-                  'response' => $value,
-				  'remoteip'=>$ip
+                  'response' => $recaptcha
                 ]
             ]
           );
-          $body = json_decode((string)$response->getBody());
-var_dump($body);
-          return $body->success; */
-		  
-		  var_dump($attribute, $value, $parameters);
-    $secreto=env('GOOGLE_RECAPTCHA_SECRET');
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL,"https://www.google.com/recaptcha/api/siteverify?");
-    curl_setopt($ch, CURLOPT_POST, 1);
-    $campos=array('secret'=>$secreto,'response'=>$attribute);
-    curl_setopt($ch, CURLOPT_POSTFIELDS,$campos);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $ch_exec = curl_exec($ch);
-    $respuesta_google = json_decode($ch_exec,true);
-    var_dump($ch_exec);
-    var_dump($respuesta_google);
-    curl_close ($ch);
-    exit;
-    return $respuesta_google;
-        } 
 
+          $body = json_decode((string)$response->getBody());
+          return $body->success;
+        }
       },
-      'reCaptcha обязательна3 для заполнения!'
+      'reCaptcha обязательна для заполнения!'
     );
 
   }
+
 
     /**
      * The assigned Transporter for this Request
@@ -106,7 +86,7 @@ var_dump($body);
        'name'=>'required',
 			'email' => 'required|email',
 			'text' => 'required',
-      'g-recaptcha-response' => 'recaptcha'
+      'recaptcha' => 'required|recaptcha'
         ];
     }
 
@@ -117,7 +97,7 @@ var_dump($body);
             'email.required' => "Необходимо ввести email адрес",
             'email.email' => "Емайл указан неверно",
             'text.required' => 'Необходимо ввести текст',
-			//'g-recaptcha-response.required'=>'reCaptcha обязательна2 для заполнения!'
+			'recaptcha.required'=>'reCaptcha обязательна для заполнения!'
 
         ];
     }

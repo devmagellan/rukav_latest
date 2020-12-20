@@ -5,6 +5,7 @@ namespace App\Containers\StaticPage\UI\WEB\Requests;
 use App\Ship\Parents\Requests\Request;
 use Illuminate\Validation\Factory as ValidationFactory;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Request as Req;
 /**
  * Class GetAllStaticPagesRequest.
  */
@@ -14,11 +15,10 @@ class SendAdvRequest extends Request
   public function __construct(ValidationFactory $validationFactory)
   {
 
-
-
+$recaptcha=Req::input('recaptcha');
     $validationFactory->extend(
       'recaptcha',
-      function ($attribute, $value, $parameters) {
+      function ($attribute, $value, $parameters) use ($recaptcha)  {
         {
           $client = new Client;
           $response = $client->post('https://www.google.com/recaptcha/api/siteverify',
@@ -26,7 +26,7 @@ class SendAdvRequest extends Request
               'form_params' =>
                 [
                   'secret' => env('GOOGLE_RECAPTCHA_SECRET'),
-                  'response' => $value
+                  'response' => $recaptcha
                 ]
             ]
           );
@@ -86,7 +86,7 @@ class SendAdvRequest extends Request
        'sender_name'=>'required',
 			'sender_email' => 'required|email:rfc,dns',
 			'sender_phone' => 'required|min:11|numeric',
-          'g-recaptcha-response' => 'required|recaptcha'
+          'recaptcha' => 'required|recaptcha'
         ];
     }
 
@@ -99,7 +99,7 @@ class SendAdvRequest extends Request
             'sender_phone.required' => ' Необходимо ввести телефон |',
           'sender_phone.min' => ' Необходимо ввести телефон |',
           'sender_phone.numeric' => ' Необходимо ввести телефон |',
-          'g-recaptcha-response.required'=>'reCaptcha обязательна для заполнения!'
+          'recaptcha.required'=>'reCaptcha обязательна для заполнения!'
 
         ];
     }

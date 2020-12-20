@@ -173,7 +173,7 @@ return [
         Apiato\Core\Providers\ApiatoProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 		Spatie\Fractal\FractalServiceProvider::class,
-		Yajra\DataTables\DatatablesServiceProvider::class,
+		Yajra\DataTables\DataTablesServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
 		VladimirYuldashev\LaravelQueueRabbitMQ\LaravelQueueRabbitMQServiceProvider::class,

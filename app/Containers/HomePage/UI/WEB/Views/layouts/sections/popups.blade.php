@@ -17,7 +17,7 @@
       <h6 class="modalTitle" ><b>Связаться с нами</b></h6>
       <form id="GoContactFormModal" class="formModal" action="/contactForm" method="post">
 	  @csrf
-        <input type="hidden" name="id" value="@if(\Auth::user()) {{\Auth::user()->id}} @endif">
+        <input type="hidden" name="id" value="@if(\Auth::user()) {{\Auth::user()->id}} @endif"/>
         <div class="row">
           <div class="input_password_wrapper col-md-12" style="margin:0 auto">
             <input type="text"  placeholder="Полное имя" class="input_password" value="@if(\Auth::user()) {{\Auth::user()->name}}  {{\Auth::user()->sername}} @endif" name="name"><span class="required">*</span>
@@ -43,12 +43,11 @@
 		  <span id="g-recaptcha-response" style="color:red" class="errorBlock"></span></div>
         </div>
 		   @if(env("GOOGLE_RECAPTCHA_KEY"))
-          <!--div class="g-recaptcha" style="width: 100%;margin-top:15px;margin-left: 95px;"
+          <div class="g-recaptcha" data-callback="captcha_onclick" style="width: 100%;margin-top:15px;margin-left: 95px;"
                data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
 
-          </div-->
-			
-		{!! NoCaptcha::display() !!}
+          </div>
+		  <input type="hidden" name="recaptcha" id="recaptchaValidator" />
 		  @else
 			  no recaptcha key
         @endif
@@ -1303,9 +1302,12 @@
     </div>
   </div>
 </div>
-{!! NoCaptcha::renderJs('ru', true, 'recaptchaCallback') !!}
- <!--script src='https://www.google.com/recaptcha/api.js'></script-->
+ <script src='https://www.google.com/recaptcha/api.js'></script>
 <script>
+
+function captcha_onclick() {
+    document.getElementById('recaptchaValidator').value = grecaptcha.getResponse();
+}
   $(function() {
     $("#loginForm").keypress(function (e) {
       console.log('ee')
@@ -1347,25 +1349,6 @@
   });
 
 
-$("#GoContactFormModal").submit(function(e) {
-
-    e.preventDefault(); // avoid to execute the actual submit of the form.
-
-    var form = $(this);
-    var url = form.attr('action');
-    console.log(form.serialize());
-    $.ajax({
-           type: "POST",
-           url: url,
-           data: form.serialize(), // serializes the form's elements.
-           success: function(data)
-           {
-               alert(data); // show response from the php script.
-           }
-         });
-
-    
-});
 
 </script>
 

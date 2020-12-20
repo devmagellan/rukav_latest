@@ -85,12 +85,15 @@
 
               </p>
 
-              @if(env('GOOGLE_RECAPTCHA_KEY'))
-                <div class="g-recaptcha"
-                     data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
-                </div>
-				@else
-              @endif
+             @if(env("GOOGLE_RECAPTCHA_KEY"))
+          <div class="g-recaptcha" data-callback="captcha_onclick" style="width: 100%;margin-top:15px;margin-left: 45px;"
+               data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+
+          </div>
+		  <input type="hidden" name="recaptcha" id="recaptchaValidator" />
+		  @else
+			  no recaptcha key
+        @endif
 
               <div class="row">
                 <div class="col-sm-3"></div>
