@@ -16,7 +16,7 @@
   .new_notification{
 	  position:relative;
   }
-  
+
     .new_notification .badge {
     position: absolute;
     top: -10px;
@@ -26,9 +26,9 @@
     background: red;
     color: white;
   }
-  
+
   .remove-bar::before {
-     content: none; 
+     content: none;
 }
 
 </style>
@@ -82,7 +82,7 @@
 
                             <div class="message_sidebar_theme_item message_sidebar_theme_item-new" id="conv_{{$cnv->id}}" onclick="reloadMessageList('{{$cnv->id}}','{{$list->group_id}}','{{\Auth::user()->id}}')">
 
-								
+
 								<div class="message_sidebar_theme_left">
                                     <div class="massage_user_avatar massage_user_avatar_online">
                                         <?
@@ -171,9 +171,9 @@
                                 @if($groupConversations->first())
 
                                     <div class="message_sidebar_theme_item message_sidebar_theme_item-new" onclick="reloadMessageList('{{$groupConversations->first()->id}}','{{$groupConversations->first()->group_id}}','{{\Auth::user()->id}}')">
-                                    
-									
-									
+
+
+
 									<div class="message_sidebar_theme_left">
                                         <div class="massage_user_avatar massage_user_avatar_online">
                                             <?
@@ -228,7 +228,7 @@
 
                                     @if($recepient->adsWithGroup->first())
                                         <div class="message_sidebar_theme_item message_sidebar_theme_item-new" onclick="reloadCleanMessageList('{{$recepient->adsWithGroup->first()->id}}')">
-                                           
+
 										   <div class="message_sidebar_theme_left">
                                                 <div class="massage_user_avatar massage_user_avatar_online">
                                                     <?
@@ -301,13 +301,13 @@
                           }
                           ?>
                         <div class="new_notification message_sidebar_theme_item conv_notify_class_{{$conversation->message->id}}_{{$conversation->sender_id}} conv_class_{{$conversation->message->id}} @if($conversation->viewed_at==null) message_sidebar_theme_item-new @endif" id="conv_id_{{$conversation->id}}" onclick="reloadMessageList('{{$conversation->id}}',null,'{{$opponent->id}}');cleanCounter('{{$conversation->message->id}}','{{$opponent->id}}')" >
-                            
+
 							        <?
 									$connects=\App\Containers\Connect\Models\Connect::where('sender_id',$conversation->sender_id)->where('receiver_id',\Auth::user()->id)->where('message_id',$conversation->message->id)->where('viewed_at',null)->get();
 									?>
 									@if(count($connects)>0 && count($connects)<99 )
-										
-									<style>  
+
+									<style>
 							   .conv_notify_class_{{$conversation->message->id}}_{{$conversation->sender_id}}:before{
 								content: "{{count($connects)}}";
 								display: block;
@@ -322,16 +322,16 @@
 								text-align: center;
 								background: red;
 								border-radius: 30px;
-							} 
+							}
 							.conv_class_{{$conversation->message->id}}.nobefore:before{
 								display:none;
 							}
 							</style>
-									
-									
+
+
 										  <!--span class="badge">{{count($connects)}}</span-->
 									@endif
-							
+
 							<div class="message_sidebar_theme_left">
                                 <div class="massage_user_avatar">
                                     <?
@@ -425,9 +425,9 @@
 
 	function cleanCounter(message_id,sender_id){
 		$('.conv_notify_class_'+message_id+'_'+sender_id+'').addClass('nobefore')
-		
-		
-		
+
+
+
 	}
 
 
@@ -436,7 +436,7 @@
  $('#conv_id_'+conversation+'').removeClass('message_sidebar_theme_item-new');
         var module='conversation'
         console.log('conversation>',conversation);
-		
+
         var url='/cabinet/conversation';
         $.ajax({
             method: 'POST',
@@ -455,7 +455,7 @@
                 $('.result_of_messageList_table').html(data);
 
             }
-        }); 
+        });
     }
 
     function reloadCleanMessageList(ad_id){

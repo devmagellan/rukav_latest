@@ -30,7 +30,6 @@ class SendContactRequest extends Request
                 ]
             ]
           );
-
           $body = json_decode((string)$response->getBody());
           return $body->success;
         }
