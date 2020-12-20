@@ -55,7 +55,7 @@ class ProfileSaveToCompanyRequest extends Request
             'company_name' => 'required',
           'regNumber' => 'required',
           'vatNumber' => 'required',
-          'phone' => 'required|regex:/[0-9]{9}/',
+          'phone' => 'required|numeric|size:9',
 
         ];
     }
@@ -67,7 +67,8 @@ class ProfileSaveToCompanyRequest extends Request
       'regNumber.required' => 'Необходимо добавить регистрационный номер ',
       'vatNumber.required' => 'Необходимо добавить VAT номер',
       'phone.required' => 'Необходимо добавить телефон организации',
-      'phone.regex' => 'Телефон содержит не верное количество цифр',
+      'phone.size' => 'Телефон содержит не верное количество цифр',
+      'phone.numeric' => 'Телефон содержит не верные символы',
 
 
     ];
