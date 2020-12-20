@@ -62,7 +62,8 @@
     "twilio/sdk": "^6.9",
     "vinkla/hashids": "8.1.0",
     "vladimir-yuldashev/laravel-queue-rabbitmq": "^10.2.2",
-    "yajra/laravel-datatables-oracle": "~9.10.0"
+    "yajra/laravel-datatables-oracle": "~9.10.0",
+	"buzz/laravel-google-captcha": "2.*"
   },
   "require-dev": {
     "facade/ignition": "^2.0",

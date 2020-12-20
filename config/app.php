@@ -179,7 +179,8 @@ return [
 		VladimirYuldashev\LaravelQueueRabbitMQ\LaravelQueueRabbitMQServiceProvider::class,
         PragmaRX\Firewall\Vendor\Laravel\ServiceProvider::class,
       \SocialiteProviders\Manager\ServiceProvider::class,
-      Maatwebsite\Excel\ExcelServiceProvider::class
+      Maatwebsite\Excel\ExcelServiceProvider::class,
+	  Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
     ],
 
     /*
@@ -234,7 +235,8 @@ return [
         'Image' => Intervention\Image\ImageManagerStatic::class,
         'Avatar'    => Laravolt\Avatar\Facade::class,
         'Firewall' => PragmaRX\Firewall\Vendor\Laravel\Facade::class,
-		'Socialite' => Laravel\Socialite\Facades\Socialite::class
+		'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+		'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
         // NOTE: all packages aliases must be registered inside their containers service providers
     ],
 
