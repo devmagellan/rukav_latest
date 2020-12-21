@@ -188,6 +188,43 @@
     text-align: center;
     justify-content: center;
 }
+
+    #add_second_chat1{
+      width: 638px;
+    }
+    select[name="filter_value[1]"]{
+      display: block;
+      width: 100%;
+      height: calc(1.5em + .75rem + 2px);
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+      transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+      width: 100%;
+      background: #fff;
+      box-shadow: none;
+      border-radius: 30px;
+    }
+    .filters_block{
+      width: 100%;
+    }
+    .filter_deals_block{
+      width: 100%;
+    }
+    @media(max-width: 800px){
+      #add_second_chat1{
+        width: 100%;
+      }
+      #controls{
+        width: 100%;
+      }
+    }
 </style>
 
 @if ($errors->any())
@@ -277,6 +314,47 @@
           </div>
         </div>
         <input type="hidden" id="category_id" name="category_id" value="{{$ad->category_id}}">
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="add_advert_block_wrapper">
+            <div id="add_second_chat1" class="add_second_chat_block_input" style="margin-top:40px;">
+              <h6 class="add_advert_block_wrapper_title">
+                Мои языки
+              </h6>
+              <div class="form-group" style="width:100%">
+                <?
+                $languages=json_decode($ad->language_filter);
+                ?>
+                <select class="select2-placeholder-language-multiple form-control" data-maximum-selection-length="4" name="language_filter[]" multiple="multiple" id="multiple-filter-placeholder">
+                  >
+                  <option value="рус" selected="selected" locked="locked">Русский</option>
+                  <option value="анг" @if(in_array('анг',$languages)) selected="selected" @endif>Английский</option>
+                  <option value="лат" @if(in_array('лат',$languages)) selected="selected"  @endif>Латышский</option>
+                  <option value="лит" @if(in_array('лит',$languages)) selected="selected"  @endif>Литовский</option>
+                  <option value="эст" @if(in_array('эст',$languages)) selected="selected"  @endif>Эстонский</option>
+                  <option value="укр" @if(in_array('укр',$languages)) selected="selected"  @endif>Украинский</option>
+                  <option value="пол" @if(in_array('пол',$languages)) selected="selected"  @endif>Польский</option>
+                  <option value="бол" @if(in_array('бол',$languages)) selected="selected"  @endif>Болгарский</option>
+                  <option value="рум" @if(in_array('рум',$languages)) selected="selected"  @endif>Румынский</option>
+                  <option value="вен" @if(in_array('вен',$languages)) selected="selected"  @endif>Венгерский</option>
+                  <option value="чеш" @if(in_array('чеш',$languages)) selected="selected"  @endif>Чешский</option>
+                  <option value="сло" @if(in_array('сло',$languages)) selected="selected"  @endif>Словацкий</option>
+                  <option value="нем" @if(in_array('нем',$languages)) selected="selected"  @endif>Немецкий</option>
+                  <option value="фра" @if(in_array('фра',$languages)) selected="selected"  @endif>Французский</option>
+                  <option value="ита" @if(in_array('ита',$languages)) selected="selected"  @endif>Итальянский</option>
+                  <option value="фин" @if(in_array('фин',$languages)) selected="selected"  @endif>Финский</option>
+                  <option value="тур" @if(in_array('тур',$languages)) selected="selected"  @endif>Турецкий</option>
+                  <option value="др." @if(in_array('др.',$languages)) selected="selected"  @endif>Другие</option>
+                </select>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
@@ -494,6 +572,7 @@
             </div>
           </div>
         </div>
+      <div class="row">
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
@@ -535,7 +614,9 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-12">
+    </div>
+      <div class="row">
+      <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
               Фотографии
@@ -619,7 +700,8 @@
             <div class="alert errorBlock">{{ $message }}</div>
             @enderror
           </div>
-
+      </div>
+      <div class="row">
       <div class="col-sm-12">
         <div class="add_advert_block_wrapper">
           <h6 class="add_advert_block_wrapper_title">
@@ -639,7 +721,8 @@
           </div>
         </div>
       </div>
-
+      </div>
+      <div class="row">
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
@@ -657,7 +740,6 @@
             </div>
           </div>
         </div>
-    </div>
       </div>
     </div>
   </form>
@@ -1385,9 +1467,6 @@ $('.cat_name').click(function(){
   <script>
     $(document).ready(function() {
 
-
-
-
       $('#mainPreview').modal({show:true});
 
       $('.close_button_modal_previws').click(function(){
@@ -1404,11 +1483,41 @@ $('.cat_name').click(function(){
 
 
     });
+
+
+
   </script>
 
 
 @endif
+<script>
 
+  $(function() {
+    $('.select2-placeholder-language-multiple').select2({
+      maximumSelectionLength: 3,
+      tags: true,
+      placeholder: 'Select an option',
+      templateSelection : function (tag, container){
+        // here we are finding option element of tag and
+        // if it has property 'locked' we will add class 'locked-tag'
+        // to be able to style element in select
+        var $option = $('.select2-placeholder-language-multiple option[value="'+tag.id+'"]');
+        if ($option.attr('locked')){
+          $(container).addClass('locked-tag');
+          tag.locked = true;
+        }
+        return tag.text;
+      },
+    })
+      .on('select2:unselecting', function(e){
+        // before removing tag we check option element of tag and
+        // if it has property 'locked' we will create error to prevent all select2 functionality
+        if ($(e.params.args.data.element).attr('locked')) {
+          e.preventDefault();
+        }
+      });
+  });
+</script>
   <script src="/js/preloader/vendor/modernizr-2.6.2.min.js"></script>
   <script src="/js/preloader/main.js"></script>
 
