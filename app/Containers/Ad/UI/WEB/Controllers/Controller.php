@@ -60,6 +60,7 @@ class Controller extends WebController
     $breadcrumbsArray=\App\Containers\Site\Services\ProductCategoryService::BreadCrumbs($ad->category_id);
     \App\Containers\Ad\Models\Ad::where('id',$ad->id)->update(['view_counter'=>($ad->view_counter) ? $ad->view_counter+1 : 1]);
     $ad = Apiato::call('Ad@FindAdByIdAction', [$request]);
+
     return view('ad::ads.single-ads', compact( 'ad','breadcrumbsArray','categoriesOnlyRoot','receiver','data'));
   }
 
@@ -196,6 +197,7 @@ class Controller extends WebController
       $categoriesOnlyRoot = GlobalService::getMainProperties($request)['categoriesOnlyRoot'];
     $locations=\App\Containers\Ad\Models\BritainRegion::where('parent_id',0)->get();
     $ad=\App\Containers\Ad\Models\Ad::where('id',$id)->with('pictures')->first();
+    session()->put('AdEdit#',$ad);
     $this->getAllParentsCategoriesRecursive($ad->category_id);
     if(is_array($this->resultCat)){
       \Log::info('kapec');

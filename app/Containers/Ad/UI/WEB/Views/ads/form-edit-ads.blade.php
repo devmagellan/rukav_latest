@@ -355,6 +355,11 @@
         </div>
       </div>
       <div class="row">
+        <div class="filters_block"></div>
+
+        <div class="filter_deals_block"></div>
+      </div>
+      <div class="row">
         <div class="col-sm-12">
           <div class="add_advert_block_wrapper">
             <h6 class="add_advert_block_wrapper_title">
@@ -1517,9 +1522,36 @@ $('.cat_name').click(function(){
         }
       });
   });
+
+  window.cat_id='{{$ad->category_id}}';
+  console.log('filters_category',window.cat_id);
+  $.ajax({
+    type: "POST",
+    dataType: 'html',
+    async: false,
+    url: '/search_for_filters',
+    data: {cat_id:window.cat_id}, // serializes the form's elements.
+    beforeSend: function() {
+
+    },
+    complete:function(){
+
+    },
+    success: function (data) {
+      console.log()
+      $('.filters_block').html(data)
+    }
+
+
+  });
+
+
+
 </script>
   <script src="/js/preloader/vendor/modernizr-2.6.2.min.js"></script>
   <script src="/js/preloader/main.js"></script>
 
   @endsection
+
+
 
