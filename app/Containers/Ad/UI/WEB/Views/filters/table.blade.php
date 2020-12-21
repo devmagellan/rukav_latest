@@ -1,3 +1,7 @@
+<?
+$ad=session()->get('AdEdit#');
+?>
+
 @if(count($filters)>0)
 <div class="row">
   <div class="col-sm-12">
@@ -10,9 +14,12 @@
       @foreach ($filters as $key=>$filter)
       @if($filter->filter->active==1)
         @if($filter->filter->format=='input')
+
+          <? $filter_ad_value=\App\Containers\Filter\Models\AddFilter::where('filter_id',$filter->filter->id)->where('add_id',$ad->id)->pluck('value');
+          ?>
       <div class="add_advert_block_input1">
-        <input type="text" name="filter_value[{{$key}}]" maxlength="20" pattern="^[A-Za-zА-Яа-я\s]+$" placeholder="{{$filter->filter->default_value}}" >
-        <input type="hidden" name="filter_default[{{$key}}]" value="{{$filter->filter->default_value}}">
+        <input type="text" name="filter_value[{{$key}}]" maxlength="20" pattern="^[A-Za-zА-Яа-я\s]+$" placeholder="@if($ad->id) {{$filter_ad_value[0]}} @else {{$filter->filter->default_value}} @endif" >
+        <input type="hidden" name="filter_default[{{$key}}]" value="@if($ad->id) {{$filter_ad_value[0]}} @else {{$filter->filter->default_value}} @endif">
         <input type="hidden" name="filter_id[{{$key}}]" value="{{$filter->filter->id}}">
         <span class="required">*</span>
         @error('filter_ad')
@@ -22,8 +29,8 @@
       </div>
             @elseif($filter->filter->format=='input_digits')
               <div class="add_advert_block_input1">
-                <input type="number" name="filter_value[{{$key}}]" max="1000"  placeholder="{{$filter->filter->default_value}}" >
-                <input type="hidden" name="filter_default[{{$key}}]" value="{{$filter->filter->default_value}}">
+                <input type="number" name="filter_value[{{$key}}]" max="1000"  placeholder="@if($ad->id) {{$filter_ad_value[0]}} @else {{$filter->filter->default_value}} @endif" >
+                <input type="hidden" name="filter_default[{{$key}}]" value="@if($ad->id) {{$filter_ad_value[0]}} @else {{$filter->filter->default_value}} @endif">
                 <input type="hidden" name="filter_id[{{$key}}]" value="{{$filter->filter->id}}">
                 <span class="required">*</span>
                 @error('filter_ad')
@@ -34,7 +41,7 @@
           @elseif($filter->filter->format=='dropdown')
             <div class="add_advert_block_input1">
               <select name="filter_value[{{$key}}]">
-                <option selected value="{{$filter->filter->default_value}}">{{$filter->filter->default_value}}</option>
+                <option selected value="@if($ad->id) {{$filter_ad_value[0]}} @else {{$filter->filter->default_value}} @endif">@if($ad->id) {{$filter_ad_value[0]}} @else {{$filter->filter->default_value}} @endif</option>
                 @foreach(json_decode($filter->filter->values) as $val)
                   <option value="{{$val}}">{{$val}}</option>
                   @endforeach
@@ -51,8 +58,10 @@
             <div class="add_second_chat_block_input1" style="margin-top:40px;">
               <div class="form-group" style="width:100%">
                 <select class="select2-placeholder-multiple-f form-control" name="filter_value[{{$key}}][]" multiple="multiple" id="multiple-placeholder">
+
+
                   @foreach(json_decode($filter->filter->values) as $val)
-                    <option value="{{$val}}">{{$val}}</option>
+                    <option value="{{$val}}" @if(in_array($val,array($filter_ad_value)) ) selected='selected' @endif>{{$val}}</option>
                   @endforeach
 
                 </select>
@@ -89,6 +98,8 @@
   </div>
 </div>
   @endif
+
+<?session()->forget('AdEdit#');?>
 
 
 
