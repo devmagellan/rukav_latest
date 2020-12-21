@@ -171,7 +171,7 @@
     geocoder.geocode({'latLng': latlng}, function (results) {
       var result = [];
       for (i = 0; i < results.length; i++) {
-        console.log(results[i].address_components)
+        console.log('here',results[i].address_components)
 
         for (var j = 0; j < results[i].address_components.length; j++) {
           for (var k = 0; k < results[i].address_components[j].types.length; k++) {
@@ -181,6 +181,11 @@
               $('#allUsersClntInfoEditZip').val(zipcode);
               $('#clntInfoEditZip').val(zipcode);
 
+            }
+            else if(results[i].address_components[j].types[k]=='postal_town'){
+             // console.log(results[i].address_components[j].short_name)
+              postal_town=results[i].address_components[j].short_name
+              $('#city').val(postal_town);
             }
           }
         }

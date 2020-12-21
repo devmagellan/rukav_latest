@@ -292,13 +292,15 @@
               <label for="no_hide_location">Не показывать</label>
             </div>
             <div class="select_location_block">
-              <input type="radio" name="select_addres" value="Полыний адрес" id="all_adress" checked="">
+              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Полыний адрес @endif" id="all_adress" checked="">
               <label for="all_adress">Полный адрес</label>
-              <input type="radio" name="select_addres" value="Только Postcode" id="postcode">
+              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Только посткод @endif" id="postcode">
               <label for="postcode">Только Postcode</label>
-              <input type="radio" name="select_addres" value="Выбрать местоположение" id="select_adress">
-              <label for="select_adress">Выбрать местоположение</label>
-              <input type="radio" name="select_addres" value="Вне UK" id="out_uk">
+              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Выбрать местоположение @endif" id="select_adress">
+              <label for="select_adress">Выбрать место</label>
+              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Весь UK @endif" id="all_uk">
+              <label for="all_uk">Весь UK</label>
+              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Вне UK @endif" id="out_uk">
               <label for="out_uk">Вне UK</label>
             </div>
             <div class="postcode_block" style="display:none">
@@ -660,7 +662,7 @@
     </div>
   </form>
   </article>
-  
+
   <div class="modal fade mainPreview" id="mainPreview" tabindex="-1" role="dialog" aria-labelledby="mainPreview1" aria-hidden="true">
   <div class="mainPreviewmodal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -942,10 +944,10 @@
     </div>
   </div>
 </div>
-  
-  
-  
-  
+
+
+
+
   </div>
     <div class="modal fade modalCatalog" id="mainCatalog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
