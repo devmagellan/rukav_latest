@@ -3,12 +3,15 @@
 namespace App\Containers\User\UI\WEB\Requests;
 
 use App\Ship\Parents\Requests\Request;
+use Illuminate\Support\Facades\Request as Req;
 
 /**
  * Class GetAllAdminPanelsRequest.
  */
 class ProfileSaveToOrganisationRequest extends Request
 {
+	
+	
 
     /**
      * The assigned Transporter for this Request
@@ -51,13 +54,13 @@ class ProfileSaveToOrganisationRequest extends Request
      */
   public function rules()
   {
-    \Log::info('to_organisation_request');
+    \Log::info('to_organisation_request',array(Req::all()));
     return [
       'organisation_name' => 'required',
       'www' => 'required',
       'address' => 'required',
       'postCode' => 'required',
-	  'phone' => 'required|numeric|size:9',
+	  'phone' => 'required|numeric|digits:9',
 
     ];
   }
@@ -70,7 +73,7 @@ class ProfileSaveToOrganisationRequest extends Request
       'address.required' => 'Необходимо добавить адрес организации',
       'postCode.required' => 'Необходимо добавить почтовый код организации',
 	  'phone.required' => 'Необходимо добавить телефон организации',
-      'phone.size' => 'Телефон содержит не верное количество цифр',
+      'phone.digits' => 'Телефон содержит не верное количество цифр',
       'phone.numeric' => 'Телефон содержит не верные символы',
 
 

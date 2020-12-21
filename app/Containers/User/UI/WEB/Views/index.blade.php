@@ -1761,8 +1761,8 @@
             customer_id: customer_id, firstName: customer_name, lastName: customer_sername,
             location: customer_location,
             email: customer_email, reg_number:reg_number,vat_number:vat_number,vid_user:vid_user,admin_side:admin_side,
-            send_notification:send_notification,phone:customer_phone,is_client:is_client/* ,www:www,company_name:company_name,business_name:business_name,
-            organisation_name:organisation_name,address:address,postCode:postCode,regNumber:reg_number,vatNumber:vat_number */
+            send_notification:send_notification,phone:customer_phone,is_client:is_client ,www:www,company_name:company_name,business_name:business_name,
+            organisation_name:organisation_name,address:address,postCode:postCode,regNumber:reg_number,vatNumber:vat_number 
           },
           beforeSend: function () {
           },
