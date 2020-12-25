@@ -1259,6 +1259,7 @@ function reloadWithoutSetState(){
         complete: function() {
           $('#loader').hide();
           $('.close').trigger('click');
+          location.reload();
         },
         success: function (data) {
 
