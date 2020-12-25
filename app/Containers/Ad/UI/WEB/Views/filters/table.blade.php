@@ -15,7 +15,9 @@ $ad=session()->get('AdEdit#');
       @if($filter->filter->active==1)
         @if($filter->filter->format=='input')
 
-          <? $filter_ad_value=\App\Containers\Filter\Models\AddFilter::where('filter_id',$filter->filter->id)->where('add_id',$ad->id)->pluck('value');
+          <? 
+		  var_dump($filter->filter->id);
+		  $filter_ad_value=\App\Containers\Filter\Models\AddFilter::where('filter_id',$filter->filter->id)->where('add_id',$ad->id)->pluck('value');
           ?>
       <div class="add_advert_block_input1">
         <input type="text" name="filter_value[{{$key}}]" maxlength="20" pattern="^[A-Za-zА-Яа-я\s]+$" placeholder="@if($ad->id) {{$filter_ad_value[0]}} @else {{$filter->filter->default_value}} @endif" >
@@ -36,7 +38,7 @@ $ad=session()->get('AdEdit#');
                 @error('filter_ad')
                 <div class="alert errorBlock">{{ $message }}</div>
                 @enderror
-                <p class="number_of_signs"><span>Укажите ваше значение фильтра {{$filter->filter->name}}</span> </p>
+                <!--p class="number_of_signs"><span>Укажите ваше значение фильтра {{$filter->filter->name}}</span> </p-->
               </div>
           @elseif($filter->filter->format=='dropdown')
             <div class="add_advert_block_input1">

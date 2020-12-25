@@ -124,7 +124,7 @@ return [
         'google',
 		'facebook',
 		'vkontakte',
-		'odnoklassniki'
+		'odnoklassniki','apple'
     ],
 ],
 
