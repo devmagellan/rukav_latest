@@ -44,6 +44,7 @@ class MainServiceProvider extends MainProvider
       'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
       'SocialiteProviders\\Odnoklassniki\\OdnoklassnikiExtendSocialite@handle',
       'SocialiteProviders\\Facebook\\FacebookExtendSocialite@handle',
+      'SocialiteProviders\\Apple\\AppleExtendSocialite@handle',
     ],
 ];
 

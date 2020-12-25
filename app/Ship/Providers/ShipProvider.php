@@ -12,7 +12,7 @@ use App\Events\PodcastProcessed;
  */
 class ShipProvider extends MainProvider
 {
-	
+
 
     /**
      * Register any Service Providers on the Ship layer (including third party packages).
@@ -37,13 +37,14 @@ class ShipProvider extends MainProvider
       'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
       'SocialiteProviders\\Odnoklassniki\\OdnoklassnikiExtendSocialite@handle',
       'SocialiteProviders\\Facebook\\FacebookExtendSocialite@handle',
+      'SocialiteProviders\\Apple\\AppleExtendSocialite@handle',
     ],
 	];
 
     public function __construct()
     {
         parent::__construct(app());
-        
+
         if (class_exists('Barryvdh\Debugbar\ServiceProvider')) {
             $this->serviceProviders[] = \Barryvdh\Debugbar\ServiceProvider::class;
         }
@@ -60,7 +61,7 @@ class ShipProvider extends MainProvider
     public function boot()
     {
         // ...
-		
+
         parent::boot();
         // ...
     }
@@ -81,6 +82,7 @@ class ShipProvider extends MainProvider
 
         parent::register();
     }
+
 	
 	    public function bootBladeDirective()
     {
@@ -120,7 +122,8 @@ class ShipProvider extends MainProvider
 EOF;
         });
     }
-	
 
-    
+
+
+
 }
