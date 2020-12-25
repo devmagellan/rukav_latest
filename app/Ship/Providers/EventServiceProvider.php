@@ -21,6 +21,7 @@ class EventServiceProvider extends ServiceProvider
       'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
       'SocialiteProviders\\Odnoklassniki\\OdnoklassnikiExtendSocialite@handle',
       'SocialiteProviders\\Facebook\\FacebookExtendSocialite@handle',
+         'SocialiteProviders\\Apple\\AppleExtendSocialite@handle',
     ],
     ];
 

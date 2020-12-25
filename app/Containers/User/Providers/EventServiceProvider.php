@@ -44,11 +44,12 @@ class EventServiceProvider extends MainProvider
         // do your binding here..
         // $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
     }
-	
+
 	protected $listen = [
     \SocialiteProviders\Manager\SocialiteWasCalled::class => [
         // add your listeners (aka providers) here
         'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
+      'SocialiteProviders\\Apple\\AppleExtendSocialite@handle',
     ],
 ];
 }

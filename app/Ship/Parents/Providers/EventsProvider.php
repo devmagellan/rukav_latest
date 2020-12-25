@@ -25,6 +25,7 @@ class EventsProvider extends AbstractEventsProvider
       'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
       'SocialiteProviders\\Odnoklassniki\\OdnoklassnikiExtendSocialite@handle',
       'SocialiteProviders\\Facebook\\FacebookExtendSocialite@handle',
+      'SocialiteProviders\\Apple\\AppleExtendSocialite@handle',
     ],
 ];
 
