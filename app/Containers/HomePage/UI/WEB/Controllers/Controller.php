@@ -129,8 +129,8 @@ class Controller extends WebController
         $currentPage = $request->input('page');
 
       $currentPage = $request->input('page');
-      $from=$request->input('price_start');
-      $to=$request->input('price_end');
+      $from=($request->input('price_start')==null) ? null : (($request->input('price_start')>0) ? $request->input('price_start') : 1) ;
+      $to=($request->input('price_end')==null) ? null : (($request->input('price_end')>0) ? $request->input('price_end') : 1);
       $sort_by_date=$request->input('sort_by_date');
       // Make sure that you call the static method currentPageResolver()
       // before querying users
@@ -138,18 +138,16 @@ class Controller extends WebController
           return $currentPage;
       });
 
-
-
     $ql= \App\Containers\Ad\Models\Ad::with(['pictures','validFilter'])
 
       ->where(function ($query) use($from,$to) {
-        if(!empty($from) && !empty($to)){
+        if(!empty($from) && !empty($to) && null!=$from && null!=$to){
           $query->where('price','>=',intval($from))
             ->where('price','<=',intval($to));
         }
       })
       ->where('active',1)
-      ->where(function ($query) use($request) {
+     ->where(function ($query) use($request) {
 
 
         $query->where(function ($query) use($request) {
@@ -217,14 +215,11 @@ $partsCount=count($parts);
 }
 
 
-      $qr=clone($q);
+      $qr=clone($ql);
 $data['pricesLimits']=$qr->select( \DB::raw("MAX(ads.price) AS max_price"), \DB::raw("MIN(ads.price) AS min_price"))->get()->toArray();
 if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price']){
     $data['pricesLimits'][0]['min_price']=0;
 }
-
-
-
         // Make sure that you call the static method currentPageResolver()
         // before querying users
         \Illuminate\Pagination\Paginator::currentPageResolver(function () use ($currentPage) {
