@@ -52,5 +52,9 @@ return [
 	'client_public' => 'CPBCJPJGDIHBABABA',
     'redirect' => 'https://rukav.co.uk/ok/callback'
 ],
+"sign-in-with-apple" => [
+        "client_id" => env('SIGN_IN_WITH_APPLE_CLIENT_ID'),
+        "client_secret" => env('SIGN_IN_WITH_APPLE_CLIENT_SECRET'),
+    ],
 
 ];
