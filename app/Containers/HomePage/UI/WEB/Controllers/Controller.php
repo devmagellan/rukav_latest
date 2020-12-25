@@ -129,8 +129,8 @@ class Controller extends WebController
         $currentPage = $request->input('page');
 
       $currentPage = $request->input('page');
-      $from=($request->input('price_start')==null) ? null : (($request->input('price_start')>0) ? $request->input('price_start') : 1) ;
-      $to=($request->input('price_end')==null) ? null : (($request->input('price_end')>0) ? $request->input('price_end') : 1);
+      $from=($request->input('price_start')==null) ? null : $request->input('price_start')  ;
+      $to=($request->input('price_end')==null) ? null : $request->input('price_end');
       $sort_by_date=$request->input('sort_by_date');
       // Make sure that you call the static method currentPageResolver()
       // before querying users
