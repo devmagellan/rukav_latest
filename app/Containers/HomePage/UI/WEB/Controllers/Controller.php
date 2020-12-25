@@ -281,6 +281,7 @@ if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price'])
 
 
       ->paginate(10);
+
 /*
 
 

@@ -579,7 +579,7 @@
             <div class="panel-content">
 
               <div id="stickEdits">
-                <a htef="" OnClick="history.back();" style="background: #886ab5; color: #fff;" class="btn btn-primary edit_rubrics">Назад</a>
+                <a href="/dashboard"  style="background: #886ab5; color: #fff;" class="btn btn-primary edit_rubrics">Назад</a>
                 <a htef="" OnClick="reloadWithoutSetState();" style="background: #886ab5; color: #fff;" class="btn btn-primary edit_rubrics">Перегрузить</a>
                 <button type="button" onclick="clearCustomerAdding()" class="btn btn-lg btn-primary waves-effect waves-themed" data-toggle="modal" data-target=".default-example-modal-right-lg-user">
                   <span class="fal fa-plus  mr-1"></span>
@@ -1728,7 +1728,7 @@
         var company_name = $('#company_name').val()
         var business_name = $('#business_name').val()
         var address=window.address
-        var postCode=window.postCode
+        var postCode=(window.postCode !='undefined') ? window.postCode : null
         var organisation_name = $('#organisation_name').val()
         var www = window.www
         if($('#customer_id').val()){
@@ -1761,8 +1761,8 @@
             customer_id: customer_id, firstName: customer_name, lastName: customer_sername,
             location: customer_location,
             email: customer_email, reg_number:reg_number,vat_number:vat_number,vid_user:vid_user,admin_side:admin_side,
-            send_notification:send_notification,phone:customer_phone,is_client:is_client,www:www,company_name:company_name,business_name:business_name,
-            organisation_name:organisation_name,address:address,postCode:postCode,regNumber:reg_number,vatNumber:vat_number
+            send_notification:send_notification,phone:customer_phone,is_client:is_client ,www:www,company_name:company_name,business_name:business_name,
+            organisation_name:organisation_name,address:address,postCode:postCode,regNumber:reg_number,vatNumber:vat_number 
           },
           beforeSend: function () {
           },

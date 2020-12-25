@@ -56,7 +56,7 @@ class ProfileSaveToIndividualRequest extends Request
       'www' => 'required',
       'address' => 'required',
       'postCode' => 'required',
-      'phone' => 'required|numeric|size:9',
+      'phone' => 'required|numeric|digits:9',
 
     ];
   }
@@ -69,7 +69,7 @@ class ProfileSaveToIndividualRequest extends Request
       'address.required' => 'Необходимо добавить адрес организации',
       'postCode.required' => 'Необходимо добавить почтовый код организации',
       'phone.required' => 'Необходимо добавить телефон организации',
-      'phone.size' => 'Телефон содержит не верное количество цифр',
+      'phone.digits' => 'Телефон содержит не верное количество цифр',
       'phone.numeric' => 'Телефон содержит не верные символы',
 
 

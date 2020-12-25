@@ -68,6 +68,16 @@ var id='{{$id}}'
         }
     });
 
+  $('.categoryLink').on('click', function () {
+    var categoryLink3 = $(this).find("ul").height();
+    var categoryLink4 = $(".category_dropdown").height();
+    if(categoryLink3 > categoryLink4){
+      $(".category_dropdown").height(categoryLink3);
+    }else{
+      $(".category_dropdown").height(categoryLink4);
+    }
+  });
+
   ScreenWidth = screen.width;
 
   if(ScreenWidth < 720){
