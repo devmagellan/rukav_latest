@@ -386,8 +386,14 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
         $this->smsService=new SmsService();
         $message=$this->smsService->store($request);
         session()->put('updating_from_simpleUser',1);
+		$phone=$request->code.$request->phone;
         \Log::info('updating_from_simpleUserPUT');
-        session()->put('emailVerificationTelephone',$request->code.$request->phone);
+			if(substr_count($phone, '+')>1){
+			$explode=explode('+',$phone);
+			\Log::info('ExplodePhoneNumber',$explode);
+			$phone='+'.$explode[2];
+		}
+        session()->put('emailVerificationTelephone',$phone);
         $collection=$request->all();
         session()->put('updatedUser',$collection);
         return response()->json(['response'=>'success'],200);
@@ -401,16 +407,22 @@ if( $user/* && $emailConfirmed*/ && $phoneConfirmed){
     }
 
     public function confirmPhone(GetAllUsersRequest $request){
+		\Log::info('smsVerifyRequest',array($request));
         \Log::info('emailVerificationTelephone'.session()->get('emailVerificationTelephone'));
         $error=[];
 		\Log::info('smsVerifyCodeinSession'.session()->get('emailVerificationTelephone'));
         $smsCode=\App\Containers\Authorization\Models\SmsVerification::where('phone',session()->get('emailVerificationTelephone'))->orderBy('id','desc')->first();
-        if($request->input('phoneConfirmation')!='' && $request->input('phoneConfirmation')==$smsCode->code ){
-            \Log::info('emailVerificationTelephoneConfirm');
-
+\Log::info('smsVerifySmSCode',array($smsCode));       
+	   if($request->input('phoneConfirmation')!='' && $request->input('phoneConfirmation')==$smsCode->code ){
+            \Log::info('emailVerificationTelephoneConfirm',array(\Auth::user()));
+			$updated=session()->get('updatedUser');
+			$updated['confirmedPhone']=1;
+			session()->put('updatedUser',$updated);
+			User::where('id',\Auth::user()->id)->update(['is_confirmed_phone'=>1]);
             $phoneConfirmed=true;
         }
         else{
+			\Log::info('emailVerificationTelephoneNotConfirmed');
             $phoneConfirmed=false;
             $error[]='error SmsCode';
         }

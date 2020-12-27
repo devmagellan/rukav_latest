@@ -220,10 +220,17 @@ class Controller extends WebController
 
   public function profileSaveToIndividual(ProfileSaveToIndividualRequest $request)
   {
+	  \Log::info('user_after_save_to_individual',$request->input());
     if ($request->input('vid_user') == 'Частная') {
+		$request->merge([
+        'vid_user' => 'Предприниматель',
+      ]);
       $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
       return $controller->changeRegisterFromSimpleUser($request);
     } else {
+		$request->merge([
+        'vid_user' => 'Предприниматель',
+      ]);
       $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
       return $controller->changeRegisterFromRestUser($request);
     }
@@ -253,10 +260,18 @@ class Controller extends WebController
 
   public function profileSaveToCompany(ProfileSaveToCompanyRequest $request)
   {
+	\Log::info('user_after_save_to_company',$request->input());
     if ($request->input('vid_user') == 'Частная') {
+		$request->merge([
+        'vid_user' => 'Компания',
+      ]);
+      \Log::info('fromPrivate');
       $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
       return $controller->changeRegisterFromSimpleUser($request);
     } else {
+		 $request->merge([
+        'vid_user' => 'Компания',
+      ]);
       $controller = new \App\Containers\User\UI\WEB\Controllers\Controller(new UserService());
       return $controller->changeRegisterFromRestUser($request);
     }

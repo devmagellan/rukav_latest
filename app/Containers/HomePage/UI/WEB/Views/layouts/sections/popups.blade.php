@@ -930,7 +930,7 @@
       <button type="button" class="close confirmPhoneClose" data-dismiss="modal" aria-label="Close">
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
-      <img src="{{asset('')}}img/modalIconPhone.svg" alt=""  class="moadal_img">
+      <img src="{{asset('')}}img/modalIconPhone.svg" alt=""  style="height:90px" class="moadal_img">
       <h6 class="modalTitle">Подтвердите свой телефонный номер</h6>
       <form class="formModal phoneConfirmationForm">
 

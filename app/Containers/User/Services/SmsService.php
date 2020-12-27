@@ -52,6 +52,13 @@ class SmsService
     public function sendSms($request)
     {
         \Log::info('PhoneNumber'.$request['phonecode'].$request['phone']);
+		$phone=$request['phonecode'].$request['phone'];
+		if(substr_count($phone, '+')>1){
+			$explode=explode('+',$phone);
+			\Log::info('ExplodePhoneNumber',$explode);
+			$phone='+'.$explode[2];
+		}
+
         $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
         $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
         $authTelephone = config('app.twilio')['TWILIO_PHONE'];
@@ -64,7 +71,7 @@ class SmsService
             $token  = $authToken;
             $twilio = new Client($sid, $token);
             $message = $twilio->messages
-                ->create($request['phonecode'].$request['phone'], // to
+                ->create($phone, // to
                     ["body" => "Hi there! your confirmation code is ".$request['code'], "from" => $authTelephone]
                 );
 
@@ -86,6 +93,7 @@ class SmsService
         if($request->code == $smsVerifcation->code)
         {
             $request["status"] = 'verified';
+			
             return $smsVerifcation->updateModel($request);
             $msg["message"] = "verified";
             return $msg;
