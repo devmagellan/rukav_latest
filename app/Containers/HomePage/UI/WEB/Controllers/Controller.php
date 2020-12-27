@@ -137,17 +137,16 @@ class Controller extends WebController
       \Illuminate\Pagination\Paginator::currentPageResolver(function () use ($currentPage) {
           return $currentPage;
       });
-
     $ql= \App\Containers\Ad\Models\Ad::with(['pictures','validFilter'])
 
       ->where(function ($query) use($from,$to) {
-        if(!empty($from) && !empty($to) && null!=$from && null!=$to){
+        if((!empty($from) && !empty($to)  && null!=$from && null!=$to) || (0==$from && !empty($to)  && null!=$from && null!=$to) ){
           $query->where('price','>=',intval($from))
             ->where('price','<=',intval($to));
-        }
+         } 
       })
       ->where('active',1)
-     ->where(function ($query) use($request) {
+      ->where(function ($query) use($request) {
 
 
         $query->where(function ($query) use($request) {
@@ -167,21 +166,31 @@ class Controller extends WebController
       });
 
 
-      })
+      }) 
     ;
 
+      $q= \App\Containers\Ad\Models\Ad::with(['pictures','validFilter'])
+	      ->where(function ($query) use($request) {
 
 
-      $q= \App\Containers\Ad\Models\Ad::with(['pictures','validFilter'])/*->where(function ($query) use($request) {
-          $query->where('message', 'like', '%' . $request->input('search_string') . '%')
-              ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
-      })*/
-        ->where(function ($query) use($request) {
+        $query->where(function ($query) use($request) {
+        $query->where('message', 'like', '%' . $request->input('search_string') . '%')
+          ->orWhere('title', 'like', '%' . $request->input('search_string') . '%')
+		  
+		          ->orWhere(function ($query) use($request) {
 
           $query->whereHas('validFilter', function ($query2) use ($request) {
             $query2->where('value', 'like', '%' . $request->input('search_string') . '%');
           });
-            })
+            });
+		  
+      });
+		  });
+/*->where(function ($query) use($request) {
+          $query->where('message', 'like', '%' . $request->input('search_string') . '%')
+              ->orWhere('title', 'like', '%' . $request->input('search_string') . '%');
+      })*/
+
         /*  ->where(function ($query) use($request) {
               $query->where('message', 'like', '%' . $request->input('rubric_search') . '%')
                   ->orWhere('title', 'like', '%' . $request->input('rubric_search') . '%');
@@ -197,29 +206,36 @@ $parts=explode('&',$url_components['query']);
 $partsCount=count($parts);
       if( $request->input('sort_by_date')=='low_to_high' && $parts[$partsCount-1]=='sort_by_date=low_to_high'){
           //dump('low_to_high');
-          $q->orderBy('ads.created_at');
+          $ql->orderBy('ads.created_at');
       }
       if( $request->input('sort_by_date')=='high_to_low' && $parts[$partsCount-1]=='sort_by_date=high_to_low'){
           //dump('high_to_low');
-          $q->orderByDesc('ads.created_at');
+          $ql->orderByDesc('ads.created_at');
       }
       if( $request->input('sort_by_price')=='low_to_high' && $parts[$partsCount-1]=='sort_by_price=low_to_high'){
           //dump('low_to_high');
-          $q->orderBy('ads.price');
+          $ql->orderBy('ads.price');
       }
       if( $request->input('sort_by_price')=='high_to_low' && $parts[$partsCount-1]=='sort_by_price=high_to_low'){
           //dump('high_to_low');
-          $q->orderByDesc('ads.price');
+          $ql->orderByDesc('ads.price');
       }
 
 }
-
-
-      $qr=clone($ql);
+      $qr=clone($q);
+	
 $data['pricesLimits']=$qr->select( \DB::raw("MAX(ads.price) AS max_price"), \DB::raw("MIN(ads.price) AS min_price"))->get()->toArray();
+
 if($data['pricesLimits'][0]['max_price']==$data['pricesLimits'][0]['min_price']){
     $data['pricesLimits'][0]['min_price']=0;
 }
+else{
+	$data['pricesLimits'][0]['min_price']=0;
+}
+
+  if(null==$from){
+		  $data['pricesLimits'][0]['min_price']=0;
+	  } 
         // Make sure that you call the static method currentPageResolver()
         // before querying users
         \Illuminate\Pagination\Paginator::currentPageResolver(function () use ($currentPage) {

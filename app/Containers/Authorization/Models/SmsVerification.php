@@ -11,7 +11,13 @@ class SmsVerification extends Model
     ];
     public function store($request)
     {
-      $request['phone']=$request['phonecode'].$request['phone'];
+	  $request['phone']=$request['phonecode'].$request['phone'];
+		if(substr_count($request['phone'], '+')>1){
+			$explode=explode('+',$request['phone']);
+			\Log::info('ExplodePhoneNumberInVarification',$explode);
+			$request['phone']='+'.$explode[2];
+		}
+	  
       $req=(is_array($request)) ? $request : $request->all();
         $this->fill($req);
         $sms=[];

@@ -930,7 +930,7 @@
       <button type="button" class="close confirmPhoneClose" data-dismiss="modal" aria-label="Close">
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
-      <img src="{{asset('')}}img/modalIconPhone.svg" alt=""  class="moadal_img">
+      <img src="{{asset('')}}img/modalIconPhone.svg" alt=""  style="height:90px" class="moadal_img">
       <h6 class="modalTitle">Подтвердите свой телефонный номер</h6>
       <form class="formModal phoneConfirmationForm">
 
@@ -1281,7 +1281,7 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
-      <h6 class="modalTitle">Сообщение</h6>
+      <h6 class="modalTitle">Сообщение 2</h6>
       <form class="formModal needs-validation" action="/connects/store" method="get" id="contact"  novalidate >
         <input type="hidden" name="message_id" value="{{\Request::segment(2)}}">
        @if(isset($receiver))

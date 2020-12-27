@@ -310,11 +310,11 @@
             @endfor
              <div class="col-md-3">
                @if(isset($age) && $age==1)
-                 <p class="product_item_price">{{number_format($product->age, 0, '.', ' ')}}</p>
+                 <p class="product_item_price">{{number_format(floor($product->age), 0, '.', ' ')}}</p>
                @elseif(isset($payment) && $payment==1)
-                 <p class="product_item_price">{{number_format($product->payment, 0, '.', ' ')}} £</p>
+                 <p class="product_item_price">{{number_format(floor($product->payment), 0, '.', ' ')}} £</p>
                @else
-                <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
+                <p class="product_item_price">{{number_format(floor($product->price), 0, '.', ' ')}} £</p>
                @endif
                 <p class="product_map_marka d-sm-none">Volkswagen</p>
                 <p class="product_item_city d-sm-none">
@@ -330,7 +330,7 @@
 
                   @else
                     <div class="col-md-3">
-                      <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
+                      <p class="product_item_price">{{number_format(floor($product->price), 0, '.', ' ')}} £</p>
                       <p class="product_map_marka d-sm-none">Volkswagen</p>
                       <p class="product_item_city d-sm-none">
                         <img src="/img/map_icon.svg" alt="" class="product_map_icon">
@@ -342,7 +342,7 @@
             <div class="col-md-2" style="text-align: center"></div>
             <div class="col-md-2" style="text-align: center"></div>
             <div class="col-sm-3">
-              <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
+              <p class="product_item_price">{{number_format(floor($product->price), 0, '.', ' ')}} £</p>
               <p class="product_map_marka d-sm-none">Volkswagen</p>
               <p class="product_item_city d-sm-none">
                 <img src="/img/map_icon.svg" alt="" class="product_map_icon">
@@ -353,7 +353,7 @@
 		@endif
              @if(isset($currentFilters) && count($currentFilters)>0 && count($currentFilters)!=1)
              <div class="col-sm-1">
-                  <p class="product_item_price" style="min-width:130px;font-size:14px;text-align:center;margin-top:43px">{{number_format($product->price, 0, '.', ' ')}} £</p>
+                  <p class="product_item_price" style="min-width:130px;font-size:14px;text-align:center;margin-top:43px">{{number_format(floor($product->price), 0, '.', ' ')}} £</p>
                   <p class="product_map_marka d-sm-none">Volkswagen</p>
                   <p class="product_item_city d-sm-none">
                     <img src="/img/map_icon.svg" alt="" class="product_map_icon">
@@ -365,7 +365,7 @@
                     @endif
 		<!--/div-->
           {{--<div class="col-sm-1">
-            <p class="product_item_price">{{number_format($product->price, 0, '.', ' ')}} £</p>
+            <p class="product_item_price">{{number_format(floor($product->price), 0, '.', ' ')}} £</p>
             <p class="product_map_marka d-sm-none">Volkswagen</p>
             <p class="product_item_city d-sm-none">
               <img src="/img/map_icon.svg" alt="" class="product_map_icon">
@@ -507,6 +507,7 @@ console.log({{$pricesLimits[0]['max_price']}})
 
     $('.data_sort').click(function(){
         console.log(444)
+		remove_hash_from_url()
         var url=$(location).attr('href');
         var url=removeParams(url,'sort_by_date')
         console.log('clear=>',url)
@@ -536,10 +537,19 @@ console.log('final=>',url+param)
         window.location.href=url+param
     })
 
-
+  function remove_hash_from_url()
+  {
+    console.log(555)
+    var uri = window.location.toString();
+    if (uri.indexOf("#") > 0) {
+      var clean_uri = uri.substring(0, uri.indexOf("#"));
+      window.history.replaceState({}, document.title, clean_uri);
+    }
+  }
 
     $('.price_sort').click(function(){
         console.log(444)
+		remove_hash_from_url()
         var url=$(location).attr('href');
         var url=removeParams(url,'sort_by_price')
         console.log('clear=>',url)

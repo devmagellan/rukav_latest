@@ -325,6 +325,7 @@
               <div class="form-group" style="width:100%">
                 <?
                 $languages=json_decode($ad->language_filter);
+				if(is_array($languages)){
                 ?>
                 <select class="select2-placeholder-language-multiple form-control" data-maximum-selection-length="4" name="language_filter[]" multiple="multiple" id="multiple-filter-placeholder">
                   >
@@ -347,6 +348,9 @@
                   <option value="тур" @if(in_array('тур',$languages)) selected="selected"  @endif>Турецкий</option>
                   <option value="др." @if(in_array('др.',$languages)) selected="selected"  @endif>Другие</option>
                 </select>
+				<?
+				}
+				?>
               </div>
             </div>
 
