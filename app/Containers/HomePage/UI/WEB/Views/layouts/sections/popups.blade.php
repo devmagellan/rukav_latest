@@ -482,8 +482,8 @@
             $text =  "Sign in"
                 ;
 		@endphp
-		
-		
+
+
 		<style>
     @font-face {
         font-family: "SF Pro Text";
@@ -497,9 +497,9 @@
 >
      SignIn with Apple
 </a>
-		
-		
-		
+
+
+
 		</div>
 
       <p class="privatpolitica">
@@ -1281,7 +1281,7 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <img src="{{asset('img/close-icon.svg')}}" alt="">
       </button>
-      <h6 class="modalTitle">Сообщение</h6>
+      <h6 class="modalTitle">Сообщение 2</h6>
       <form class="formModal needs-validation" action="/connects/store" method="get" id="contact"  novalidate >
         <input type="hidden" name="message_id" value="{{\Request::segment(2)}}">
        @if(isset($receiver))

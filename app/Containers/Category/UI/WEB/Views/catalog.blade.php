@@ -147,7 +147,7 @@
 		  @endif
           <div class="col-4 col-sm-1" style="text-align: center"><button class="data_sort   @if( Request::get('sort_by_date')=='lo_to_high') lo_to_high @elseif(Request::get('sort_by_date')=='high_to_low') high_to_low @else low_to_high @endif">Дата @if( Request::get('sort_by_date')=='low_to_high') <img src="/img/play_button_img.svg" alt=""> @elseif(Request::get('sort_by_date')=='high_to_low') <img style="width:9px;" src="/img/play_button_img_down.svg" alt=""> @else <img style="width:9px;" src="/img/play_button_img.svg" alt=""> @endif</button></div>
 			@if(isset($currentFilters))
-			@if(count($currentFilters )==3)	
+			@if(count($currentFilters )==3)
             @foreach($currentFilters as $filter)
                 <div class="col-md-2" style="text-align: center;max-width:170px">
                 <input type="hidden" class="filter_variant" value="{{$filter->filter->id}}">
@@ -291,7 +291,7 @@
               @endif
             </div>
           @endforeach
-	@else	  
+	@else
 		@foreach($currentFilters as $key=>$filter)
             <?
             $filterValue[$key]=\App\Containers\Filter\Models\AddFilter::where('add_id',$product->id)->where('filter_id',$filter->filter_id)->first();
@@ -324,7 +324,7 @@
 				@if(count($currentFilters)<3 && count($currentFilters)>0)
 <div>
 				@else
-				<div>	
+				<div>
 				@endif
 				@elseif(count($currentFilters)==3)
 
@@ -391,7 +391,7 @@
 		       </div>
         </div>
 
-   
+
 
           @endforeach
 
@@ -536,10 +536,19 @@ console.log('final=>',url+param)
         window.location.href=url+param
     })
 
-
+  function remove_hash_from_url()
+  {
+    console.log(555)
+    var uri = window.location.toString();
+    if (uri.indexOf("#") > 0) {
+      var clean_uri = uri.substring(0, uri.indexOf("#"));
+      window.history.replaceState({}, document.title, clean_uri);
+    }
+  }
 
     $('.price_sort').click(function(){
         console.log(444)
+      remove_hash_from_url()
         var url=$(location).attr('href');
         var url=removeParams(url,'sort_by_price')
         console.log('clear=>',url)
@@ -609,6 +618,11 @@ console.log('final=>',url+param)
       var url = new URL(url);
       console.log(url)
       var search_params = url.searchParams;
+      if(search_params.has('#')){
+        console.log('323')
+        search_params.delete('#')
+        console.log(url)
+      }
       search_params.delete(sParam);
       console.log(url)
       return url.href

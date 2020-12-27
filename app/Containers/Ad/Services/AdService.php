@@ -30,6 +30,8 @@ class AdService
     $modifiedMutable = $mutable->add($data->select_time, 'day');
     \Log::info('date_information'.$modifiedMutable);
       DB::transaction(function () use ($data,$user,$modifiedMutable) {
+
+        try {
           if (null!=(session()->get('deletedImgsToSession')) && count(session()->get('deletedImgsToSession')) > 0) {
               foreach (session()->get('deletedImgsToSession') as $key=>$value) {
                   \Log::info('IMG=>'.$value['img']);
@@ -70,6 +72,12 @@ class AdService
               'show_name' => $user->name,
               'address' => $data->address,
           ]);
+
+        } catch (\Throwable $e) {
+          \Log::info('DbTransactionExceprion',array($e));
+          DB::rollback();
+          throw $e;
+        }
       });
       return $this->ad;
 
