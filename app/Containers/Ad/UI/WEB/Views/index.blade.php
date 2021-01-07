@@ -113,7 +113,7 @@
 
 .external-scroll_x.scroll-scrollx_visible {
     display: block;
-    height: 10px;
+    height: 20px;
     bottom: auto;
     width: 200px;
     top: 122px;
@@ -923,7 +923,7 @@ function reloadWithoutSetState(){
         });
         }
         else{
-          $(this).html('<input type="checkbox" class="form-control form-control-sm check_all" />');
+          $(this).html('<input style="width:17px;height:17px" type="checkbox" class="form-control form-control-sm check_all" />');
         }
       });
 
@@ -1171,6 +1171,7 @@ function reloadWithoutSetState(){
 
     $('.ad_edit_rest_submit').click(function(){
       var status=$('#status-result').val();
+	  console.log('status',status);
       var author=$('#author-result').val();
       $.ajax({
         method: 'POST',
@@ -1182,7 +1183,19 @@ function reloadWithoutSetState(){
           $('#loader').show();
         },
         complete: function() {
+			console.log('Needs Reload');
+			
           $('#loader').hide();
+		  //console.log(window.dt.rows( { selected: true } ).data()[0][2]);
+		  console.log(window.dt.settings()[0].aaSorting[0][1])
+
+		   if(status!=1){
+			window.dt.order( [ 1, 'desc' ] ).draw();  
+		  }
+		  else{
+			 window.dt.order( [ 1, 'asc' ] ).draw();  
+		  } 
+		  
         },
         success: function (data) {
 

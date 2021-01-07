@@ -113,7 +113,7 @@
 
     .external-scroll_x.scroll-scrollx_visible {
       display: block;
-      height: 10px;
+      height: 20px;
       bottom: auto;
       width: 200px;
       top: 122px;
