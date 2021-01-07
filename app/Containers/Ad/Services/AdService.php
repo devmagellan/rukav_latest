@@ -30,7 +30,6 @@ class AdService
     $modifiedMutable = $mutable->add($data->select_time, 'day');
     \Log::info('date_information'.$modifiedMutable);
       DB::transaction(function () use ($data,$user,$modifiedMutable) {
-
         try {
           if (null!=(session()->get('deletedImgsToSession')) && count(session()->get('deletedImgsToSession')) > 0) {
               foreach (session()->get('deletedImgsToSession') as $key=>$value) {
@@ -48,7 +47,7 @@ class AdService
                 Picture::where('ads_id',$id)->where('photo',$picturePath[3])->forceDelete();
               }
               session()->forget('deletedImgsToSession');
-          }
+        }
         \Log::info('data_address_information'.$data->address);
           $this->ad = Ad::updateOrCreate(['id' => $data->add_id], [
               'title' => $data->name_ad,

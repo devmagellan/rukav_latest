@@ -444,7 +444,7 @@ class Controller extends WebController
       $rubrik = \App\Containers\Site\Models\ProductCategory::where('id', $ad->category_id)->first();
         $qnt = \App\Containers\Ad\Models\Ad::where('sender', $ad->sender)->get()->count();
       $nestedData = array();
-      $nestedData [0] = '<div><div style="display:inline-block;"><input type="hidden" class="ad_id" value="' . $ad->id . '"><input class="ad_check" type="checkbox" value="0"></div>
+      $nestedData [0] = '<div><div style="display:inline-block;"><input type="hidden" class="ad_id" value="' . $ad->id . '"><input class="ad_check" style="height:17px;width:17px" type="checkbox" value="0"></div>
  <span class="photoAdsModalOpen" style="display:inline-block;cursor:pointer" ><i class="fal fa-image"></i></span><div style="display:inline-block;"><a href="/admin/user_edit/adv/'.$ad->id.'" class="btn btn-primary btn-sm btn-icon waves-effect waves-themed"> <i class="fa fa-pencil"></i></a></div></div>';
 
       if($ad->getSender && $ad->getSender['id']==3){\Log::info('USER=>=>',array($ad));}
