@@ -256,13 +256,13 @@
                     <label for="no_hide_location">Не показывать</label>
                   </div>
                   <div class="select_location_block">
-                    <input type="radio" name="select_addres" value="Полыний адрес" id="all_adress" checked="">
+                    <input type="radio" name="select_addres" class="full_address" value="Полыний адрес" id="all_adress" checked="">
                     <label for="all_adress">Полный адрес</label>
-                    <input type="radio" name="select_addres" value="Только Postcode" id="postcode">
+                    <input type="radio" name="select_addres" class="only_postcode" value="Только Postcode" id="postcode">
                     <label for="postcode">Только Postcode</label>
-                    <input type="radio" name="select_addres" value="Выбрать местоположение" id="select_adress">
+                    <input type="radio" name="select_addres" class="select_adress" value="Выбрать местоположение" id="select_adress">
                     <label for="select_adress">Выбрать местоположение</label>
-                    <input type="radio" name="select_addres" value="Вне UK" id="out_uk">
+                    <input type="radio" name="select_addres" class="out_uk" value="Вне UK" id="out_uk">
                     <label for="out_uk">Вне UK</label>
                   </div>
                   <div class="postcode_block" style="display:none">
@@ -1092,5 +1092,46 @@
 
   </script>
 
+  @if($ad->select_addres=='Полыний адрес')
+    <script>
+      $(document).ready(function() {
+        $('.full_address').trigger('click');
+      })
+    </script>
+  @endif
+  @if($ad->select_addres=='Только посткод')
+    <script>
+      $(document).ready(function() {
+        $('.only_postcode').trigger('click');
+      })
+    </script>
+  @endif
+  @if($ad->select_addres=='Выбрать местоположение')
+    <script>
+      $(document).ready(function(){
+        $('#select_adress').click();
+        console.log('Выбрать местоположение 333')
+      })
+
+    </script>
+  @endif
+  @if($ad->select_addres=='Becь UK')
+    <script>
+      $(document).ready(function(){
+        $('.all_uk').click();
+        console.log('All UK')
+      })
+
+    </script>
+  @endif
+  @if($ad->select_addres=='Вне UK')
+    <script>
+      $(document).ready(function(){
+        $('.out_uk').click();
+        console.log('Out Uk')
+      })
+
+    </script>
+  @endif
 
 @endsection

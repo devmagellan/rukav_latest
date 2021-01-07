@@ -932,10 +932,10 @@ function reloadWithoutSetState(){
         {
         "scrollY": '500',
         "scrollX": true,
-		"paging": true, // Allow data to be paged
+		    "paging": true, // Allow data to be paged
                     "lengthChange": true,
                     "orderCellsTop": true,
-					"searching": true, // Search box and search function will be actived
+					          "searching": true, // Search box and search function will be actived
                     "ordering": true,
                     "info": true,
                     "autoWidth": true,

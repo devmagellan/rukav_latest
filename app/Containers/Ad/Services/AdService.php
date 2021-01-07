@@ -50,6 +50,7 @@ class AdService
               session()->forget('deletedImgsToSession');
           }
         \Log::info('data_address_information'.$data->address);
+          \Log::info('selsect_addres'.$data->select_addres);
           $this->ad = Ad::updateOrCreate(['id' => $data->add_id], [
               'title' => $data->name_ad,
               'email' => $user->email,
@@ -65,7 +66,8 @@ class AdService
               'category_id' => $data->category_id,
               'sender' => (isset($data->sender)) ? $data->sender : $user->id,
               'is_tmp' => (isset($data->save)) ? false : true,
-              'select_time' => $data->select_time,
+              'select_time' => (isset($data->select_time)) ? $data->select_time : '',
+               'select_addres'=>(isset($data->select_addres)) ? $data->select_addres : '',
               'expired' => ($data->select_time==0) ? null : $modifiedMutable->toDateTimeString(),
               'administrative' => $data->administrative,
               'visibility' => false,
