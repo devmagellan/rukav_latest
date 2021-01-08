@@ -449,7 +449,7 @@
 
                 </div>
                 <div class="place_in_UK" style="display:none">
-                  <input type="text" name="address" placeholder="Страна" class="add_advert_input_location InputControl" id="clntInfoEditAddrPlaceUk1" value="{{old('address')}}">
+                  <input type="text" name="address2" placeholder="Страна" class="add_advert_input_location InputControl" id="clntInfoEditAddrPlaceUk1" value="{{old('address')}}">
                   @error('address')
                   <div class="alert errorBlock">{{ $message }}</div>
                   @enderror
