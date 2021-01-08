@@ -154,7 +154,7 @@ class Controller extends WebController
             '1000615',
             $options
         );
-        $pusher->trigger('login-channel', /* 'my-event' */'login-event',['id'=>$user->id]);
+        //$pusher->trigger('login-channel', /* 'my-event' */'login-event',['id'=>$user->id]);
 
         return redirect('/')
             ->with('success', 'Your e-mail is verified. You can now login.');
