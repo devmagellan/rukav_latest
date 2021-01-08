@@ -262,6 +262,10 @@
                     <label for="postcode">Только Postcode</label>
                     <input type="radio" name="select_addres" class="select_adress" value="Выбрать местоположение" id="select_adress">
                     <label for="select_adress">Выбрать местоположение</label>
+                    <input type="radio" name="select_addres" class="all_uk" value="Весь UK" id="all_uk" >
+                    <label for="all_uk">Весь UK</label>
+                    <input type="hidden" name="place_id" value="{{$ad->place_id}}">
+
                     <input type="radio" name="select_addres" class="out_uk" value="Вне UK" id="out_uk">
                     <label for="out_uk">Вне UK</label>
                   </div>
@@ -1099,7 +1103,7 @@
       })
     </script>
   @endif
-  @if($ad->select_addres=='Только посткод')
+  @if($ad->select_addres=='Только посткод' || $ad->select_addres=='Только Postcode')
     <script>
       $(document).ready(function() {
         $('.only_postcode').trigger('click');
