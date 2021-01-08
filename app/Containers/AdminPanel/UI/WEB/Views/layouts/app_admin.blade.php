@@ -1268,7 +1268,7 @@ else{
               console.log('zipcode',zipcode)
               $('#allUsersClntInfoEditZip').val(zipcode);
               $('#clntInfoEditZip').val(zipcode);
-
+              getCity(latlng)
             }
           }
         }
