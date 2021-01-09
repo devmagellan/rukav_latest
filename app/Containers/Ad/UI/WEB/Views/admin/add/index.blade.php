@@ -1473,7 +1473,7 @@
             });
 
             $('#default-example-modal-lg').modal('hide');
-          window.location.reload()
+          //window.location.reload()
 
         })
 

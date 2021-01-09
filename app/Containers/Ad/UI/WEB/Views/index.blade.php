@@ -1184,18 +1184,18 @@ function reloadWithoutSetState(){
         },
         complete: function() {
 			console.log('Needs Reload');
-			
+
           $('#loader').hide();
 		  //console.log(window.dt.rows( { selected: true } ).data()[0][2]);
 		  console.log(window.dt.settings()[0].aaSorting[0][1])
 
 		   if(status!=1){
-			window.dt.order( [ 1, 'desc' ] ).draw();  
+			window.dt.order( [ 1, 'desc' ] ).draw();
 		  }
 		  else{
-			 window.dt.order( [ 1, 'asc' ] ).draw();  
-		  } 
-		  
+			 window.dt.order( [ 1, 'asc' ] ).draw();
+		  }
+
         },
         success: function (data) {
 
@@ -1233,7 +1233,9 @@ function reloadWithoutSetState(){
       });
 
       $('#default-example-modal-lg').modal('hide');
-      window.location.reload()
+      console.log('change_rubric')
+      //window.location.reload()
+      window.dt.columns.adjust().draw();
     })
 
     $('.delete_ads').click(function(){
