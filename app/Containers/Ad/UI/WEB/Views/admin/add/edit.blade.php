@@ -241,6 +241,15 @@
                 </div>
               </div>
               <input type="hidden" id="category_id" name="category_id" value="{{$ad->category_id}}">
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+              <div class="filters_block"></div>
+
+              <div class="filter_deals_block"></div>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-sm-12">
                 <div class="add_advert_block_wrapper">
                   <h6 class="add_advert_block_wrapper_title">
@@ -460,6 +469,7 @@
                 </div>
               </div>
             </div>
+          <div class="row">
             <div class="col-sm-12">
               <div class="add_advert_block_wrapper">
                 <h6 class="add_advert_block_wrapper_title">
@@ -501,6 +511,8 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="row">
             <div class="col-sm-12">
               <div class="add_advert_block_wrapper">
                 <h6 class="add_advert_block_wrapper_title">
@@ -576,7 +588,8 @@
               </div>
               <a href="/static/policies#photo" target="_blank" class="add_advert_rolls_foto">Привила добавления фото</a>
             </div>
-
+          </div>
+            <div class="row">
             <div class="col-sm-12">
               <div class="add_advert_block_wrapper">
                 <h6 class="add_advert_block_wrapper_title">
@@ -596,7 +609,8 @@
                 </div>
               </div>
             </div>
-
+            </div>
+          <div class="row">
             <div class="col-sm-12">
               <div class="add_advert_block_wrapper">
                 <h6 class="add_advert_block_wrapper_title">
@@ -615,11 +629,12 @@
               </div>
             </div>
           </div>
-    </div>
-      </div>
+          </div>
       </form>
       </article>
       </div>
+
+    </main>
       <div class="modal fade modalCatalog" id="mainCatalog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -661,34 +676,6 @@
         </div>
       </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-    </main>
 
     <div class="modal fade modalCatalog" id="mainCatalog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -747,6 +734,32 @@
 
 
       $(document).ready(function() {
+
+        window.cat_id='{{$ad->category_id}}';
+        var add_id='{{$ad->id}}';
+        console.log('filters_category',window.cat_id);
+        $.ajax({
+          type: "POST",
+          dataType: 'html',
+          async: false,
+          url: '/search_for_filters',
+          data: {cat_id:window.cat_id,add_id:add_id}, // serializes the form's elements.
+          beforeSend: function() {
+
+          },
+          complete:function(){
+
+          },
+          success: function (data) {
+            console.log()
+            $('.filters_block').html(data)
+          }
+
+
+        });
+
+
+
           $('#clntInfoEditZip').removeAttr("required");
           $('#clntInfoEditOutUk').removeAttr("required");
           $('#clntInfoEditAddrOutUk1').removeAttr("required");

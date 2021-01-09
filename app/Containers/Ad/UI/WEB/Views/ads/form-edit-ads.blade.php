@@ -325,7 +325,7 @@
               <div class="form-group" style="width:100%">
                 <?
                 $languages=json_decode($ad->language_filter);
-				if(is_array($languages)){
+				        if(is_array($languages)){
                 ?>
                 <select class="select2-placeholder-language-multiple form-control" data-maximum-selection-length="4" name="language_filter[]" multiple="multiple" id="multiple-filter-placeholder">
                   >
@@ -808,8 +808,8 @@
                           </div>
                         @endforeach
                     </div>
-<div class="swiper-button-next swiper-button swiper-button-white"></div>
-<div class="swiper-button-prev swiper-button swiper-button-white"></div>
+              <div class="swiper-button-next swiper-button swiper-button-white"></div>
+              <div class="swiper-button-prev swiper-button swiper-button-white"></div>
               </div>
 
               <div class="product_slider_nav swiper-container">
