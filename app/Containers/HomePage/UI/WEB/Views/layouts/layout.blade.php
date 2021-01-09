@@ -177,9 +177,11 @@
           for (var k = 0; k < results[i].address_components[j].types.length; k++) {
             if (results[i].address_components[j].types[k] == "postal_code") {
               zipcode = results[i].address_components[j].short_name;
-              console.log('zipcode',zipcode)
+              var url      = window.location.pathname;
+              console.log('zipcode',zipcode, url)
+            if(url!='/ads/create'){
               $('#allUsersClntInfoEditZip').val(zipcode);
-              $('#clntInfoEditZip').val(zipcode);
+              $('#clntInfoEditZip').val(zipcode);}
 
             }
             else if(results[i].address_components[j].types[k]=='postal_town'){
