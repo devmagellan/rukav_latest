@@ -937,15 +937,15 @@
                   Длительность
                 </h6>
                 <div class="add_advert_block_btn_wrapper">
-                    <input type="radio" name="select_time" value="7" id="7day" @if(old('select_time')==7) checked="" @endif>
+                    <input type="radio" name="select_time" value="7" id="7day" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==7) checked="" @endif>
                     <label for="7day">7 дней</label>
-                    <input type="radio" name="select_time" value="14" id="14day" @if(old('select_time')==14) checked="" @endif>
+                    <input type="radio" name="select_time" value="14" id="14day" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==14) checked="" @endif>
                     <label for="14day">14 дней</label>
-                    <input type="radio" name="select_time" value="30" id="1mon" @if(old('select_time')==30) checked="" @elseif(null==(\Session::get('ad'))) checked="" @endif>
+                    <input type="radio" name="select_time" value="30" id="1mon" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==30) checked="" @endif>
                     <label for="1mon">1 месяц</label>
-                    <input type="radio" name="select_time" value="180" id="6mon" @if(old('select_time')==180) checked="" @endif>
+                    <input type="radio" name="select_time" value="180" id="6mon" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==180) checked="" @endif>
                     <label for="6mon">6 месяц</label>
-                    <input type="radio" name="select_time" value="0" id="always" @if(old('select_time')==0) checked="" @endif>
+                    <input type="radio" name="select_time" value="0" id="always" @if(null!=(\Session::get('ad')) && \Session::get('ad')->select_time==0) checked="" @endif>
                     <label for="always">вечно</label>
                 </div>
             </div>
