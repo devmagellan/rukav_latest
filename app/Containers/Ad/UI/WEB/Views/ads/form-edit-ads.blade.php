@@ -380,9 +380,6 @@
             </div>
             <div class="select_location_block">
 
-              <?
-              dump($ad->select_addres);
-              ?>
               <input type="radio" name="select_addres" class="full_address" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Полыний адрес @endif" id="all_adress" >
               <label for="all_adress">Полный адрес</label>
               <input type="radio" name="select_addres" class="only_postcode" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Только посткод @endif" id="postcode" >
