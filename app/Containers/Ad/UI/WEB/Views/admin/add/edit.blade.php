@@ -199,6 +199,7 @@
                   <div class="add_advert_block_input1">
                     <input type="hidden" name="add_id" value="{{$ad->id}}">
                     <input type="hidden" name="sender" value="{{$ad->sender}}">
+                    <input type="hidden" id="place_id" name="place_id" value="{{$ad->place_id}}">
                     <input type="text" name="name_ad" maxlength="70" placeholder="Название объявления" required value="{{$ad->title}}">
                     <span class="required">*</span>
                     @error('name_ad')
@@ -272,7 +273,7 @@
                     <label for="select_adress">Выбрать местоположение</label>
                     <input type="radio" name="select_addres" class="all_uk" value="Весь UK" id="all_uk" >
                     <label for="all_uk">Весь UK</label>
-                    <input type="hidden" id="place_id" name="place_id" value="{{$ad->place_id}}">
+
 
                     <input type="radio" name="select_addres" class="out_uk" value="Вне UK" id="out_uk">
                     <label for="out_uk">Вне UK</label>
