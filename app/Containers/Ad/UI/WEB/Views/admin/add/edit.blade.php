@@ -200,6 +200,7 @@
                     <input type="hidden" name="add_id" value="{{$ad->id}}">
                     <input type="hidden" name="sender" value="{{$ad->sender}}">
                     <input type="hidden" id="place_id" name="place_id" value="{{$ad->place_id}}">
+                    <input type="hidden" name="city"  id="city" value="{{$ad->city}}">
                     <input type="text" name="name_ad" maxlength="70" placeholder="Название объявления" required value="{{$ad->title}}">
                     <span class="required">*</span>
                     @error('name_ad')
@@ -256,7 +257,7 @@
                   <h6 class="add_advert_block_wrapper_title">
                     Местоположение
                   </h6>
-                  <input type="hidden" name="city"  id="city">
+
                   <input type="hidden" name="administrative"  id="administrative">
                   <div class="hide_location_radio">
                     <input type="radio" name="hide_location" value="1" id="hide_location" checked="">
@@ -918,7 +919,9 @@
                       $('#administrative').val(realValue)
 
                       // $('.cat_name').val(window.inpText+'/'+realValue)
+
                       $('#city').val(realValue)
+                    console.log('City',realValue)
                   }
 
               });
@@ -950,6 +953,7 @@
                       console.log(realValue)
                       //$('.cat_name').val(window.inpText+'/'+realValue)
                       $('#city').val(realValue)
+                    console.log('City',realValue)
                   }
 
               });
@@ -981,6 +985,7 @@
                       console.log(realValue)
                       //$('.cat_name').val(window.inpText+'/'+realValue)
                       $('#city').val(realValue)
+                    console.log('City',realValue)
                   }
 
               });
@@ -1011,6 +1016,7 @@
                       console.log(realValue)
                       //$('.cat_name').val(window.inpText+'/'+realValue)
                       $('#city').val(realValue)
+                    console.log('City',realValue)
                   }
 
               });
