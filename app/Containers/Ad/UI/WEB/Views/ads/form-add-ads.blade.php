@@ -365,15 +365,15 @@
               <label for="no_hide_location">Не показывать</label>
             </div-->
             <div class="select_location_block">
-              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Полыний адрес @endif" id="all_adress" checked="">
+              <input type="radio" name="select_addres" class="full_address" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Полыний адрес @endif" id="all_adress" checked="">
               <label for="all_adress">Полный адрес</label>
-              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Только посткод @endif" id="postcode">
+              <input type="radio" name="select_addres" class="only_postcode" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Только посткод @endif" id="postcode">
               <label for="postcode">Только Postcode</label>
-              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Выбрать местоположение @endif" id="select_adress">
+              <input type="radio" name="select_addres" class="select_adress" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Выбрать местоположение @endif" id="select_adress">
               <label for="select_adress">Выбрать место</label>
-              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Весь UK @endif" id="all_uk">
+              <input type="radio" name="select_addres" class="all_uk" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Весь UK @endif" id="all_uk">
               <label for="all_uk">Весь UK</label>
-              <input type="radio" name="select_addres" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Вне UK @endif" id="out_uk">
+              <input type="radio" name="select_addres" class="out_uk" value="@if(null!=(old('select_addres'))) {{old('select_addres')}} @else Вне UK @endif" id="out_uk">
               <label for="out_uk">Вне UK</label>
             </div>
             <div class="postcode_block" style="display:none">
@@ -1876,6 +1876,48 @@ $('.cat_name').click(function(){
 </script>
   <script src="/js/preloader/vendor/modernizr-2.6.2.min.js"></script>
   <script src="/js/preloader/main.js"></script>
+  @if(null!=\Session::get('ad') && (is_object(\Session::get('ad')) && \Session::get('ad')->select_addres=='Полыний адрес'))
+    <script>
+      $(document).ready(function() {
+        $('.full_address').trigger('click');
+      })
+    </script>
+  @endif
+  @if(null!=\Session::get('ad') && (is_object(\Session::get('ad'))  && \Session::get('ad')->select_addres=='Только посткод' || \Session::get('ad')->select_addres=='Только Postcode'))
+    <script>
+      $(document).ready(function() {
+        $('.only_postcode').trigger('click');
+      })
+    </script>
+  @endif
+  @if(null!=\Session::get('ad') && (is_object(\Session::get('ad'))  && \Session::get('ad')->select_addres=='Выбрать местоположение'))
+    <script>
+      $(document).ready(function(){
+        $('#select_adress').click();
+        console.log('Выбрать местоположение 333')
+      })
+
+    </script>
+  @endif
+  @if(null!=\Session::get('ad') && (is_object(\Session::get('ad'))  && \Session::get('ad')->select_addres=='Becь UK'))
+    <script>
+      $(document).ready(function(){
+        $('.all_uk').click();
+        console.log('All UK')
+      })
+
+    </script>
+  @endif
+  @if(null!=\Session::get('ad') && (is_object(\Session::get('ad'))  && \Session::get('ad')->select_addres=='Вне UK'))
+    <script>
+      $(document).ready(function(){
+        $('.out_uk').click();
+        console.log('Out Uk')
+      })
+
+    </script>
+  @endif
+
 
 
   @endsection

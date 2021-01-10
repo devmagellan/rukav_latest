@@ -179,9 +179,9 @@
               zipcode = results[i].address_components[j].short_name;
               var url      = window.location.pathname;
               console.log('zipcode',zipcode, url)
-            if(url!='/ads/create'){
+            /*if(url!='/ads/create'){*/
               $('#allUsersClntInfoEditZip').val(zipcode);
-              $('#clntInfoEditZip').val(zipcode);}
+              $('#clntInfoEditZip').val(zipcode);/*}*/
 
             }
             else if(results[i].address_components[j].types[k]=='postal_town'){
@@ -258,11 +258,11 @@ $initAutoComplete = function(){
 <div id="map" style="display:none"></div>
 
 @php
-  if(isset($ad) ){
-    $placeId=$ad->place_id;
+  if(null!=(\Session::get('ad'))){
+    $placeId=\Session::get('ad')->place_id;
 }
 else{
-    $placeId='ChIJod7tSseifDUR9hXHLFNGMIs';
+    $placeId=null;
 }
 @endphp
 @include('homepage::layouts.sections.footer')
@@ -364,7 +364,8 @@ else{
 
 
 		 var service = new google.maps.places.PlacesService(map);
-    console.log('{{$placeId}}')
+		 if('{{$placeId}}'!=undefined){}
+    console.log('Place_ID'+'{{$placeId}}')
     service.getDetails({
       placeId: '{{$placeId}}'
     }, function (place, status) {
