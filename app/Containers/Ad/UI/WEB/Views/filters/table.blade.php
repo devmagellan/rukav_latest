@@ -15,11 +15,14 @@ $ad=session()->get('AdEdit#');
       @if($filter->filter->active==1)
         @if($filter->filter->format=='input')
 
-          <? 
+          <?
 		  \Log::info('$filter_ad_value',array($filter->filter));
+
 		  \Log::info('$filter_ad_valueAD',array($ad));
+		  if(null!=$ad){
 		  $filter_ad_value=\App\Containers\Filter\Models\AddFilter::where('filter_id',$filter->filter->id)->where('add_id',$ad->id)->pluck('value');
 		  \Log::info('$filter_ad_value',array($filter_ad_value));
+      }
           ?>
       <div class="add_advert_block_input1">
         <input type="text" name="filter_value[{{$key}}]" maxlength="20" pattern="^[A-Za-zА-Яа-я\s]+$" placeholder="@if(is_object($ad) && $ad->id && isset($filter_ad_value[0])) {{$filter_ad_value[0]}} @else {{$filter->filter->default_value}} @endif" >

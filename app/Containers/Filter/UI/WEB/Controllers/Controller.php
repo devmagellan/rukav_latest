@@ -234,6 +234,7 @@ return json_encode(['result'=>'success']);
 
 
   public function searchForFilters(GetAllFiltersRequest $request){
+
       $data['filters']=\App\Containers\Filter\Models\CategoryFilter::where('category_id',$request->input('cat_id'))->with('filter')->get();
     $ad=\App\Containers\Ad\Models\Ad::where('id',$request->input('add_id'))->with('pictures')->first();
     session()->put('AdEdit#',$ad);
