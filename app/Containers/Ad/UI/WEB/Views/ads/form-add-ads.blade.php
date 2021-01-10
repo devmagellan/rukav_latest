@@ -618,13 +618,13 @@
             </div-->
             <div class="contact_info_wrapper">
             <div class="price_section">
-				    <div class="input_price_icon">£</div><input type="number" step=".01" name="price" placeholder="Цена (не обязательно)" value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->price}} @endif">
+				    <div class="input_price_icon">£</div><input type="number" step=".01" name="price" placeholder="Цена (не обязательно)" value="@if(null!=(\Session::get('ad'))){{(\Session::get('ad')->price)}}@endif">
             </div>
               <div class="payment_section" style="display:none">
-                <div class="input_price_icon">£</div><input type="number" step=".01" name="payment" placeholder="Оплата (не обязательно)" value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->price}} @endif">
+                <div class="input_price_icon">£</div><input type="number" step=".01" name="payment" placeholder="Оплата (не обязательно)" value="@if(null!=(\Session::get('ad'))){{\Session::get('ad')->price}}@endif">
               </div>
               <div class="age_section" style="display:none">
-                <input type="number" step="1" name="age" placeholder="Возраст (не обязательно)" value="@if(null!=(\Session::get('ad'))) {{\Session::get('ad')->price}} @endif">
+                <input type="number" step="1" name="age" placeholder="Возраст (не обязательно)" value="@if(null!=(\Session::get('ad'))){{\Session::get('ad')->price}}@endif">
               </div>
           </div>
             <!--label for="checkAgreement">Договорная</label>
