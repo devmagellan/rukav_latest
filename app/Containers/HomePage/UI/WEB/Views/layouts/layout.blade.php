@@ -167,6 +167,7 @@
 
 
     function getPostcode(latlng) {
+    console.log('getPostcode');
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({'latLng': latlng}, function (results) {
       var result = [];
@@ -179,9 +180,9 @@
               zipcode = results[i].address_components[j].short_name;
               var url      = window.location.pathname;
               console.log('zipcode',zipcode, url)
-            /*if(url!='/ads/create'){*/
+            if(url!='/ads/create'){
               $('#allUsersClntInfoEditZip').val(zipcode);
-              $('#clntInfoEditZip').val(zipcode);/*}*/
+              $('#clntInfoEditZip').val(zipcode);}
 
             }
             else if(results[i].address_components[j].types[k]=='postal_town'){
@@ -260,6 +261,9 @@ $initAutoComplete = function(){
 @php
   if(null!=(\Session::get('ad'))){
     $placeId=\Session::get('ad')->place_id;
+}
+elseif(isset($ad)){
+    $placeId=$ad->place_id;
 }
 else{
     $placeId=null;
@@ -379,6 +383,7 @@ else{
         console.log('lng4',lat,lng)
 
         var latlng = new google.maps.LatLng(lat,lng);
+        console.log('initMap')
         getPostcode(latlng)
       }
 
