@@ -223,6 +223,9 @@
       z-index: 104;
       width: 1740px;
     }
+    body{
+        overflow-y: hidden;
+    }
     .dataTables_scrollHeadInner{
     //      margin-left: 0px;
     //      width: 100% !important;

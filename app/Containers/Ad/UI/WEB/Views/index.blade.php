@@ -151,6 +151,7 @@
       height: 100px;
     }
 
+
   </style>
 
     <style>
@@ -222,6 +223,9 @@
       left: -3.65625px;
       z-index: 104;
       width: 1740px;
+    }
+    body{
+        overflow-y: hidden;
     }
     .dataTables_scrollHeadInner{
 //      margin-left: 0px;
@@ -1316,7 +1320,13 @@ function reloadWithoutSetState(){
     window.onscroll = function() {myFunction()};
 
     var header = document.getElementById("stickEdits");
+    // var header_table = document.getElementsByClassName("dataTables_scrollHead");
+    // var header_table_w = document.getElementsByClassName("dataTables_scroll");
+
+
+
     var sticky = header.offsetTop;
+
 
     function myFunction() {
       console.log('..')
@@ -1325,8 +1335,13 @@ function reloadWithoutSetState(){
 
       if (window.pageYOffset > sticky) {
         header.classList.add("sticky");
+        // header.append(header_table[0]);
       } else {
+
         header.classList.remove("sticky");
+
+          // header_table_w[0].prepend(header_table[0]);
+
       }
     }
 
