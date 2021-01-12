@@ -851,7 +851,22 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 <script type="text/javascript">
     /* Activate smart panels */
     $('#js-page-content').smartPanel();
+    $('.add_foto_file_item_load2').on("click", function(){
+      var add_id=$(this).parent().parent().find('.add_id').val();
+      var current_img=$(this).parent().parent().find('.add_foto_file_img').attr('src');
+      console.log('event',current_img);
+      $.ajax({
+        type: "POST",
+        dataType: 'json',
+        async: false,
+        url: '/add_deleted_imgs_to_session',
+        data: {img:current_img,id:add_id},
+        success: function (wata) {
 
+        }
+
+      });
+    })
     $(".add_foto_file_delete_present").on("click", function(){
         var current_img=$(this).parent().parent().find('.add_foto_file_img').attr('src');
         console.log('event',current_img);

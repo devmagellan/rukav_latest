@@ -490,10 +490,12 @@ console.log('CNT=>',window.cnt)
         }
     }
 
-    $("#imgInput").change(function(){
+    $("#imgInput1").change(function(){
+      console.log(111)
         readURL(this);
     });
     $("#imgInput2").change(function(){
+      console.log(222)
         readURL(this);
     });
     $("#imgInput3").change(function(){
