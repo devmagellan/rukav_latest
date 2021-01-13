@@ -547,6 +547,7 @@
                         </label>
                         <div class="add_foto_file_img_wrapper" style="display:inline-block">
                           <input type="hidden" class="add_id" value="{{$ad->id}}">
+                          <input type="hidden" value="{{$realPic->id}}" class="photo_id">
                           <img class="add_foto_file_img" src="/storage/messages/{{$realPic->photo}}" alt="">
                           <div class="add_foto_file_block_hover">
                             <label id="present_{{$key+1}}" for="imgInput{{$key+1}}" class="add_foto_file_item_load2">

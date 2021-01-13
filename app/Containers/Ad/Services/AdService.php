@@ -93,13 +93,41 @@ class AdService
           'files' => 'max:500',
       ]);
       \Log::info('AfterbeforeValidation');
+    \Log::info('BeforeFiles3=>', array($data));
       \Log::info('Files3=>', array($data->file('files')));
       if ($data->file('files')){
+        $n=0;
+        $value=[];
           foreach ($data->file('files') as $file) {
 
               $filePath = Storage::disk('public')->put('', $file);
 
-            $this->createPicture($filePath, $adId);
+            if (null!=(session()->get('updatedImgsToSession')) && count(session()->get('updatedImgsToSession')) > 0) {
+              \Log::info('updatedImgsToSession',session()->get('updatedImgsToSession'));
+              $value[$n]=session()->get('updatedImgsToSession')[$n];
+            /*  foreach ( as $key=>$value) {*/
+              \Log::info('IMG=>1'.$n);
+                \Log::info('IMG=>'.$value[$n]['img']);
+           /*     if(is_array($value)){
+                  $picturePath=explode("/", $value[$n]['img']);
+                  $id=$value[$n]['id'];
+                }
+                else{*/
+                  $picturePath=explode("/", $value[$n]['img']);
+              $photo_id=$value[$n]['photo_id'];
+                  $id=$value[$n]['id'];
+                /*}*/
+                \Log::info('IMG2=>',$value[$n]);
+                \Log::info('$picturePath[3]=>'.$picturePath[3]);
+              \Log::info('$filePath=>'.$filePath);
+                $this->updatePicture($filePath, $adId,$photo_id);
+             /* }*/
+
+
+            }else{
+              $this->createPicture($filePath, $adId);
+            }
+
 
             \Log::info('ImgWithLogo' . $filePath);
             \Log::info('filepath1' . $file);
@@ -128,8 +156,9 @@ class AdService
 
             \Session::push('ad_photos',$newPath);
             \Log::info('SessionPhotosInArray' , \Session::get('ad_photos'));
-
+$n++;
           }
+        session()->forget('updatedImgsToSession');
   }
 
 
@@ -198,6 +227,13 @@ class AdService
     ]);
   }
 
+  public function updatePicture($path, $adId,$photo_id)
+  {
+    Picture::where('id',$photo_id)->update([
+      'ads_id' => $adId,
+      'photo' => $path,
+    ]);
+  }
   public function createFilter($filterId,$filterValue, $adId)
   {
     \Log::info('Creation of FilterId'.$filterId.' Creation of FilterValue'.$filterValue.' Creation of AdId'.$adId );

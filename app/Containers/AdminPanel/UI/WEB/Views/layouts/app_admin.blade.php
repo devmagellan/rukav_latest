@@ -854,13 +854,15 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     $('.add_foto_file_item_load2').on("click", function(){
       var add_id=$(this).parent().parent().find('.add_id').val();
       var current_img=$(this).parent().parent().find('.add_foto_file_img').attr('src');
+      var photo_id=$(this).parent().parent().find('.photo_id').val();
       console.log('event',current_img);
+      console.log('event_photo_id',photo_id);
       $.ajax({
         type: "POST",
         dataType: 'json',
         async: false,
-        url: '/add_deleted_imgs_to_session',
-        data: {img:current_img,id:add_id},
+        url: '/add_updated_imgs_to_session',
+        data: {img:current_img,id:add_id,photo_id:photo_id},
         success: function (wata) {
 
         }

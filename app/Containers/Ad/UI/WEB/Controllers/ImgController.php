@@ -23,4 +23,11 @@ class ImgController extends WebController
         return json_encode(['result'=>'success']);
     }
 
+  public function addUpdatedImgsToSession(GetAllAdsDataTableRequest $request){
+
+    session()->push('updatedImgsToSession',['id'=>$request->input('id'),'img'=>$request->input('img'),'photo_id'=>$request->input('photo_id')]);
+    \Log::info('updatedImgsToSession',session()->get('updatedImgsToSession'));
+    return json_encode(['result'=>'success']);
+  }
+
 }
