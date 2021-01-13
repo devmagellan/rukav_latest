@@ -718,7 +718,7 @@
 
                 <div class="upload-file-container-text">
 
-                  <label for="imgInput" class="add_foto_file_item_load">
+                  <label for="imgInput1" class="add_foto_file_item_load">
                     <img src="/img/photo-camera-icon.svg" alt="">
                     <span>Добавить фото</span>
                   </label>
@@ -734,7 +734,7 @@
                       </div>
                     </div>
                   </div>
-                  <input type="file" name="files[]" class="photo" id="imgInput"/>
+                  <input type="file" name="files[]" class="photo" id="imgInput1"/>
                 </div>
               </div>
               <div class="add_foto_file_item">
