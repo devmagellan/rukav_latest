@@ -726,7 +726,7 @@
                   <div class="add_foto_file_img_wrapper">
                     <img  src="#" alt="" class="add_foto_file_img" />
                     <div class="add_foto_file_block_hover">
-                      <label for="imgInput" class="add_foto_file_item_load2">
+                      <label for="imgInput1" class="add_foto_file_item_load2">
                         <img src="/img/refresh_icon.svg" alt="">
                       </label>
                       <div class="add_foto_file_delete">
